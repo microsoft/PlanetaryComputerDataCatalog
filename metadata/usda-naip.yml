@@ -1,0 +1,5 @@
+name: usda-naip
+tags: [Aerial Imagery, AI For Eath, USDA]
+links:
+  - title: Azure Open Data
+    href: "https://azure.microsoft.com/en-us/services/open-datasets/catalog/naip/"
