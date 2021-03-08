@@ -3,31 +3,19 @@ import { useParams } from "react-router-dom";
 import { Text } from "@fluentui/react";
 import { useQuery } from "react-query";
 
-import {
-  getCollectionMetadata,
-  getCollections,
-  getCollectionsByUrl,
-} from "../utils/requests";
+import { getCollectionMetadata, getCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 
 const Collection = () => {
   let { id } = useParams();
 
-  const { data: collections } = useQuery("stac", getCollections);
+  const { isSuccess, data: collections } = useQuery("stac", getCollections);
+  const collection = isSuccess ? collections.find((c) => c.id === id) : null;
+  const metadataQuery = useQuery([id], getCollectionMetadata);
 
-  const url = collections?.links.find(
-    (l) => l.rel === "child" && l.href.endsWith(`collections/${id}`)
-  ).href;
-
-  const query = useQuery([url], getCollectionsByUrl, {
-    enabled: !!url,
-  });
-
-  const metadataQ = useQuery([id], getCollectionMetadata);
-
-  const tags = metadataQ.isSuccess ? (
+  const tags = metadataQuery.isSuccess ? (
     <div style={{ paddingBottom: 5, fontWeight: "bold" }}>
-      Tags: {metadataQ.data.tags.join(", ")}
+      Tags: {metadataQuery.data.tags.join(", ")}
     </div>
   ) : (
     <span>loading tags...</span>
@@ -35,15 +23,15 @@ const Collection = () => {
 
   return (
     <>
-      <SEO title={id} />
-      {query.isSuccess ? (
+      <SEO title={id} description={collection?.description} />
+      {isSuccess ? (
         <>
-          <h1>{query.data.title}</h1>
+          <h1>{collection.title}</h1>
           {tags}
-          <Text>{query.data.description}</Text>
+          <Text>{collection.description}</Text>
         </>
       ) : (
-        <span>loading...</span>
+        <span>Loading...</span>
       )}
     </>
   );

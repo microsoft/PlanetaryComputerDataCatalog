@@ -6,29 +6,20 @@ import { getCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 
 const Home = () => {
-  const query = useQuery("stac", getCollections);
+  const { isLoading, data: collections } = useQuery("stac", getCollections);
 
   const links = (
     <ul>
-      {query.isLoading ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
-        query.data.links
-          .filter((l) => l.rel === "child")
-          .map((c) => {
-            return (
-              <li key={c.href}>
-                <Link
-                  to={{
-                    pathname: `/collection/${c.href.split("/").pop()}`,
-                    state: { href: c.href },
-                  }}
-                >
-                  {c.title}
-                </Link>
-              </li>
-            );
-          })
+        collections.map((collection) => {
+          return (
+            <li key={collection.id}>
+              <Link to={`collection/${collection.id}`}>{collection.title}</Link>
+            </li>
+          );
+        })
       )}
     </ul>
   );

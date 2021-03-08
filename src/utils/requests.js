@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const getCollections = async () => {
-  const resp = await axios.get(process.env.REACT_APP_MQE_URL);
+  const resp = await axios.get(`${process.env.REACT_APP_MQE_URL}/collections`);
   return resp.data;
 };
 
