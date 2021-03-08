@@ -31,6 +31,7 @@ const Header = ({ siteProduct, siteTitle }) => (
       </Text>
       <Link to="/">Home</Link>
     </div>
+    <div id="cookie-banner"></div>
     <hr />
   </header>
 );
