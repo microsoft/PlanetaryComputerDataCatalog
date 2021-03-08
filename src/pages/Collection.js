@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Redirect, useParams } from "react-router-dom";
 import { Text } from "@fluentui/react";
 import { useQuery } from "react-query";
 
@@ -9,22 +9,39 @@ import SEO from "../components/Seo";
 const Collection = () => {
   let { id } = useParams();
 
+  const [collection, setCollection] = useState(null);
+  const [notFound, setNotFound] = useState(false);
   const { isSuccess, data: collections } = useQuery("stac", getCollections);
-  const collection = isSuccess ? collections.find((c) => c.id === id) : null;
-  const metadataQuery = useQuery([id], getCollectionMetadata);
+
+  useEffect(() => {
+    if (isSuccess) {
+      const collection = collections.find((c) => c.id === id);
+      if (collection) {
+        setCollection(collection);
+      } else {
+        setNotFound(true);
+      }
+    }
+  }, [id, collections, isSuccess]);
+
+  // Attempt to load static metadata for this collection. These are optional, so
+  // don't retry failures
+  const metadataQuery = useQuery([id], getCollectionMetadata, { retry: 0 });
+
+  if (notFound) {
+    return <Redirect to={"/404"} />;
+  }
 
   const tags = metadataQuery.isSuccess ? (
     <div style={{ paddingBottom: 5, fontWeight: "bold" }}>
       Tags: {metadataQuery.data.tags.join(", ")}
     </div>
-  ) : (
-    <span>loading tags...</span>
-  );
+  ) : null;
 
   return (
     <>
       <SEO title={id} description={collection?.description} />
-      {isSuccess ? (
+      {collection ? (
         <>
           <h1>{collection.title}</h1>
           {tags}
