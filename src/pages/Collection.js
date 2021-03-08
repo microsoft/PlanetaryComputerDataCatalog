@@ -8,6 +8,7 @@ import {
   getCollections,
   getCollectionsByUrl,
 } from "../utils/requests";
+import SEO from "../components/Seo";
 
 const Collection = () => {
   let { id } = useParams();
@@ -24,24 +25,27 @@ const Collection = () => {
 
   const metadataQ = useQuery([id], getCollectionMetadata);
 
+  const tags = metadataQ.isSuccess ? (
+    <div style={{ paddingBottom: 5, fontWeight: "bold" }}>
+      Tags: {metadataQ.data.tags.join(", ")}
+    </div>
+  ) : (
+    <span>loading tags...</span>
+  );
+
   return (
-    <div>
-      <h3>{id}</h3>
-      {metadataQ.isSuccess ? (
-        <div>Tags: {metadataQ.data.tags[0]}</div>
-      ) : (
-        <span>loading metadata...</span>
-      )}
+    <>
+      <SEO title={id} />
       {query.isSuccess ? (
         <>
           <h1>{query.data.title}</h1>
+          {tags}
           <Text>{query.data.description}</Text>
-          <hr />
         </>
       ) : (
         <span>loading...</span>
       )}
-    </div>
+    </>
   );
 };
 
