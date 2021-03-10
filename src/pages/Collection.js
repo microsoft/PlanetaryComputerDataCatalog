@@ -11,6 +11,7 @@ import Keywords from "../components/stac/Keywords";
 import License from "../components/stac/License";
 import Providers from "../components/stac/Providers";
 import TemporalExtent from "../components/stac/TemporalExtent";
+import ItemAssets from "../components/stac/ItemAssets";
 
 console.log(StacFields);
 const Collection = () => {
@@ -55,6 +56,7 @@ const Collection = () => {
           </Text>
           <Providers providers={collection.providers} />
           <CollectionSummary collection={collection} />
+          <ItemAssets itemAssets={collection.item_assets} />
         </>
       ) : (
         <span>Loading...</span>
