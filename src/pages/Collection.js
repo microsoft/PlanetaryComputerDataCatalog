@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Text } from "@fluentui/react";
 import { useQuery } from "react-query";
+import StacFields from "@radiantearth/stac-fields";
 
-import { getCollectionMetadata, getCollections } from "../utils/requests";
+import { getCollections } from "../utils/requests";
 import SEO from "../components/Seo";
+import CollectionSummary from "../components/stac/CollectionSummary";
+import Keywords from "../components/stac/Keywords";
+import License from "../components/stac/License";
+import Providers from "../components/stac/Providers";
+import TemporalExtent from "../components/stac/TemporalExtent";
 
+console.log(StacFields);
 const Collection = () => {
   let { id } = useParams();
 
@@ -15,7 +22,7 @@ const Collection = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const collection = collections.find((c) => c.id === id);
+      const collection = collections.find(c => c.id === id);
       if (collection) {
         setCollection(collection);
       } else {
@@ -24,19 +31,11 @@ const Collection = () => {
     }
   }, [id, collections, isSuccess]);
 
-  // Attempt to load static metadata for this collection. These are optional, so
-  // don't retry failures
-  const metadataQuery = useQuery([id], getCollectionMetadata, { retry: 0 });
-
   if (notFound) {
     return <Redirect to={"/404"} />;
   }
 
-  const tags = metadataQuery.isSuccess ? (
-    <div style={{ paddingBottom: 5, fontWeight: "bold" }}>
-      Tags: {metadataQuery.data.tags.join(", ")}
-    </div>
-  ) : null;
+  console.log("c", collection);
 
   return (
     <>
@@ -44,8 +43,18 @@ const Collection = () => {
       {collection ? (
         <>
           <h1>{collection.title}</h1>
-          {tags}
-          <Text>{collection.description}</Text>
+          <Keywords keywords={collection.keywords} />
+          <License collection={collection} />
+          <TemporalExtent extent={collection.extent?.temporal} />
+          <Text
+            block
+            variant="mediumPlus"
+            styles={{ root: { marginTop: "5px", marginBottom: "5px" } }}
+          >
+            {collection.description}
+          </Text>
+          <Providers providers={collection.providers} />
+          <CollectionSummary collection={collection} />
         </>
       ) : (
         <span>Loading...</span>
