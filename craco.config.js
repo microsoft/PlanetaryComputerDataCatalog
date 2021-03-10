@@ -32,6 +32,19 @@ const mdLoader = {
   ],
 };
 
+const prettierLoader = {
+  test: /\.jsx?$/,
+  use: [
+    {
+      loader: require.resolve("prettier-loader"),
+      options: {
+        exclude: /node_modules/,
+        enforce: "pre",
+      },
+    },
+  ],
+};
+
 module.exports = {
   webpack: {
     plugins: {
@@ -41,7 +54,7 @@ module.exports = {
             {
               from: "metadata/**/*.yml",
               to: "static/metadata/[name].json",
-              transform: (content) => {
+              transform: content => {
                 const jsonOut = JSON.stringify(
                   yaml.load(content.toString("utf8"), {
                     schema: yaml.JSON_SCHEMA,
@@ -55,9 +68,14 @@ module.exports = {
         }),
       ],
     },
-    configure: (webpackConfig) => {
+    configure: webpackConfig => {
       addBeforeLoader(webpackConfig, loaderByName("file-loader"), mdLoader);
       addBeforeLoader(webpackConfig, loaderByName("file-loader"), yamlLoader);
+      addBeforeLoader(
+        webpackConfig,
+        loaderByName("file-loader"),
+        prettierLoader
+      );
 
       return webpackConfig;
     },

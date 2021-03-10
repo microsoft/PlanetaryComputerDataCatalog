@@ -27,7 +27,7 @@ const Header = ({ siteProduct, siteTitle }) => (
         </Stack.Item>
       </Stack>
       <Text block variant="xLarge">
-        {siteTitle}
+        {siteTitle} (Limited Preview)
       </Text>
       <Link to="/">Home</Link>
     </div>

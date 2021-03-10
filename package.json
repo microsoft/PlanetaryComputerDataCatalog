@@ -23,6 +23,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "lint": "eslint ./src --ext .js --ext .jsx",
     "eject": "craco eject"
   },
   "eslintConfig": {
@@ -46,6 +47,8 @@
     "js-yaml": "^4.0.0",
     "json-loader": "^0.5.7",
     "markdown-loader": "^6.0.0",
+    "prettier": "^2.2.1",
+    "prettier-loader": "^3.3.0",
     "yaml-loader": "^0.6.0"
   }
 }
