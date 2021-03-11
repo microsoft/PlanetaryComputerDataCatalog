@@ -1,8 +1,18 @@
 import axios from "axios";
+import { useQuery } from "react-query";
+import { useSelector } from "react-redux";
+import { selectUrl } from "../features/catalog/catalogSlice";
 
-export const getCollections = async () => {
-  const resp = await axios.get(`${process.env.REACT_APP_MQE_URL}/collections`);
+const getCollections = async ({ queryKey }) => {
+  // eslint-disable-next-line
+  const [_key, collectionsUrl] = queryKey;
+  const resp = await axios.get(`${collectionsUrl}/collections`);
   return resp.data;
+};
+
+export const useCollections = () => {
+  const catalogUrl = useSelector(selectUrl);
+  return useQuery(["stac", catalogUrl], getCollections);
 };
 
 export const getCollectionsByUrl = async ({ queryKey }) => {

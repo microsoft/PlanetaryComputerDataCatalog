@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Text } from "@fluentui/react";
-import { useQuery } from "react-query";
-import StacFields from "@radiantearth/stac-fields";
 
-import { getCollections } from "../utils/requests";
+import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 import CollectionSummary from "../components/stac/CollectionSummary";
 import Keywords from "../components/stac/Keywords";
@@ -13,13 +11,12 @@ import Providers from "../components/stac/Providers";
 import TemporalExtent from "../components/stac/TemporalExtent";
 import ItemAssets from "../components/stac/ItemAssets";
 
-console.log(StacFields);
 const Collection = () => {
   let { id } = useParams();
 
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
-  const { isSuccess, data: collections } = useQuery("stac", getCollections);
+  const { isSuccess, data: collections } = useCollections();
 
   useEffect(() => {
     if (isSuccess) {
