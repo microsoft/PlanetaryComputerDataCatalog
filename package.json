@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:7071/",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@fluentui/react": "^8.1.5",
