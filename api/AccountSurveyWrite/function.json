@@ -4,7 +4,7 @@
     {
       "name": "survey",
       "type": "table",
-      "tableName": "AccountSurvey",
+      "tableName": "%SurveyTableName%",
       "partitionKey": "survey",
       "connection": "ConnectionString",
       "direction": "out"
