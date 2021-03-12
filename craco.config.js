@@ -60,7 +60,6 @@ module.exports = {
                     schema: yaml.JSON_SCHEMA,
                   })
                 );
-                console.log(jsonOut);
                 return Buffer.from(jsonOut, "utf8");
               },
             },

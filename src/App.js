@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Collection from "./pages/Collection";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import AccountSurvey from "./pages/AccountSurvey";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
             </Route>
             <Route path="/404">
               <NotFound />
+            </Route>
+            <Route path="/account/request">
+              <AccountSurvey />
             </Route>
             <Route>
               <NotFound />
