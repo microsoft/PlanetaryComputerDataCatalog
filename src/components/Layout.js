@@ -12,8 +12,11 @@ const Layout = ({ children }) => {
   // require consent so check for requirements before rendering the button.
   const [isConsentRequired, setIsConsentRequired] = useState(false);
   useTimeoutFn(() => {
-    setIsConsentRequired(window.siteConsent.isConsentRequired);
-  }, 500);
+    // Cookie consent is determined regionally. If it can't be determined, default
+    // to requiring consent.
+    const consent = window?.siteConsent?.isConsentRequired;
+    setIsConsentRequired(consent === undefined ? true : consent);
+  }, 600);
 
   const manageConsent = isConsentRequired ? (
     <ActionButton
