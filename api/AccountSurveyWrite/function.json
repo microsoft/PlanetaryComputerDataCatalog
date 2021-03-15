@@ -2,12 +2,19 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "authLevel": "anonymous",
+      "name": "survey",
+      "type": "table",
+      "tableName": "%SurveyTableName%",
+      "partitionKey": "survey",
+      "connection": "ConnectionString",
+      "direction": "out"
+    },
+    {
+      "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
       "methods": [
-        "get",
         "post"
       ]
     },
