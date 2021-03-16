@@ -9,7 +9,7 @@ import AccountSurvey from "./pages/AccountSurvey";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Layout>
         <div>
           <Switch>
