@@ -63,6 +63,10 @@ module.exports = {
                 return Buffer.from(jsonOut, "utf8");
               },
             },
+            {
+              from: "metadata/notebooks/*.html",
+              to: "static/metadata/[name].html",
+            },
           ],
         }),
       ],
