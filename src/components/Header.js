@@ -29,7 +29,12 @@ const Header = ({ siteProduct, siteTitle }) => (
       <Text block variant="xLarge">
         {siteTitle} (Limited Preview)
       </Text>
-      <Link to="/">Home</Link>
+      <Stack horizontal tokens={{ childrenGap: "9px" }}>
+        <Link to="/">Home</Link>
+        <Link to="/api-docs">API</Link>
+        <Link to="/compute-docs">Compute</Link>
+        <Link to="/apps">Apps</Link>
+      </Stack>
     </div>
     <div id="cookie-banner"></div>
     <hr />

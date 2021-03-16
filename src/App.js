@@ -6,6 +6,9 @@ import Collection from "./pages/Collection";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import AccountSurvey from "./pages/AccountSurvey";
+import Compute from "./pages/Compute";
+import ApiDocs from "./pages/ApiDocs";
+import AppList from "./pages/AppList";
 
 function App() {
   return (
@@ -15,6 +18,15 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="/compute-docs">
+              <Compute />
+            </Route>
+            <Route path="/api-docs">
+              <ApiDocs />
+            </Route>
+            <Route path="/apps">
+              <AppList />
             </Route>
             <Route path="/collection/:id">
               <Collection />

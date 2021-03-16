@@ -1,5 +1,6 @@
 import { Text } from "@fluentui/react";
 import React from "react";
+import { boldStyle } from "../../styles";
 //import StacFields from "@radiantearth/stac-fields";
 
 const TemporalExtent = ({ extent }) => {
@@ -11,14 +12,15 @@ const TemporalExtent = ({ extent }) => {
     const startFormat = new Date(start).toLocaleDateString();
     const endFormat = end ? new Date(end).toLocaleDateString() : "Present";
     return (
-      <Text
-        key={`temporal-${idx}`}
-        block
-      >{`${startFormat} - ${endFormat}`}</Text>
+      <Text key={`temporal-${idx}`}>{`${startFormat} - ${endFormat}`}</Text>
     );
   });
 
-  return <div>{formatted}</div>;
+  return (
+    <div>
+      <Text styles={boldStyle}>Temporal extent:</Text> {formatted}
+    </div>
+  );
 };
 
 export default TemporalExtent;

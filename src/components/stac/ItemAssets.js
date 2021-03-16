@@ -4,8 +4,6 @@ import { Stack } from "@fluentui/react";
 
 const ItemAssets = itemAssets => {
   const formatted = StacFields.formatAssets(itemAssets);
-  console.log(itemAssets);
-  console.log(formatted);
   const f = formatted.itemAssets.map(group => {
     return Object.entries(group.properties).map(([key, val]) => {
       return (
@@ -16,6 +14,7 @@ const ItemAssets = itemAssets => {
       );
     });
   });
+
   return (
     <>
       <h3>Assets</h3>
