@@ -9,8 +9,10 @@ import AccountSurvey from "./pages/AccountSurvey";
 import Compute from "./pages/Compute";
 import ApiDocs from "./pages/ApiDocs";
 import AppList from "./pages/AppList";
+import { usePrefetchContent } from "./utils/requests";
 
 function App() {
+  usePrefetchContent();
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Layout>

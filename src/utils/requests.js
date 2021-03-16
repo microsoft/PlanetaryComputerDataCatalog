@@ -1,18 +1,23 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { selectUrl } from "../features/catalog/catalogSlice";
+import { compute } from "../config/site.yml";
 
-const getCollections = async ({ queryKey }) => {
-  // eslint-disable-next-line
-  const [_key, collectionsUrl] = queryKey;
-  const resp = await axios.get(`${collectionsUrl}/collections`);
-  return resp.data;
+// Query content can be prefetched if it's likely to be used
+export const usePrefetchContent = () => {
+  const queryClient = useQueryClient();
+  // Prefetch the compute docs notebook
+  queryClient.prefetchQuery([compute.notebookSrc], getStaticMetadata);
 };
 
 export const useCollections = () => {
   const catalogUrl = useSelector(selectUrl);
   return useQuery(["stac", catalogUrl], getCollections);
+};
+
+export const useStaticMetadata = staticFileName => {
+  return useQuery([staticFileName], getStaticMetadata);
 };
 
 export const getCollectionsByUrl = async ({ queryKey }) => {
@@ -29,8 +34,15 @@ export const getCollectionsByUrl = async ({ queryKey }) => {
   return resp.data;
 };
 
-export const getCollectionMetadata = async ({ queryKey }) => {
-  const [id] = queryKey;
-  const resp = await axios.get(`/static/metadata/${id}.json`);
+const getCollections = async ({ queryKey }) => {
+  // eslint-disable-next-line
+  const [_key, collectionsUrl] = queryKey;
+  const resp = await axios.get(`${collectionsUrl}/collections`);
+  return resp.data;
+};
+
+const getStaticMetadata = async ({ queryKey }) => {
+  const [file] = queryKey;
+  const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
 };

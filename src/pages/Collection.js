@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import { Text } from "@fluentui/react";
+import { Pivot, PivotItem } from "@fluentui/react";
 
 import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
-import CollectionSummary from "../components/stac/CollectionSummary";
+import Notebook from "../components/Notebook";
 import Keywords from "../components/stac/Keywords";
-import License from "../components/stac/License";
-import Providers from "../components/stac/Providers";
-import TemporalExtent from "../components/stac/TemporalExtent";
+import CollectionDetail from "../components/stac/CollectionDetail";
 import ItemAssets from "../components/stac/ItemAssets";
+
+import { datasets } from "../config/site.yml";
 
 const Collection = () => {
   let { id } = useParams();
@@ -29,11 +29,17 @@ const Collection = () => {
     }
   }, [id, collections, isSuccess]);
 
+  const notebookTabs = datasets[id]?.notebooks.map(({ title, src }) => {
+    return (
+      <PivotItem key={title} headerText={title}>
+        <Notebook src={src} />
+      </PivotItem>
+    );
+  });
+
   if (notFound) {
     return <Redirect to={"/404"} />;
   }
-
-  console.log("c", collection);
 
   return (
     <>
@@ -42,18 +48,17 @@ const Collection = () => {
         <>
           <h1>{collection.title}</h1>
           <Keywords keywords={collection.keywords} />
-          <License collection={collection} />
-          <TemporalExtent extent={collection.extent?.temporal} />
-          <Text
-            block
-            variant="mediumPlus"
-            styles={{ root: { marginTop: "5px", marginBottom: "5px" } }}
-          >
-            {collection.description}
-          </Text>
-          <Providers providers={collection.providers} />
-          <CollectionSummary collection={collection} />
-          <ItemAssets itemAssets={collection.item_assets} />
+          <Pivot>
+            <PivotItem headerText="Details">
+              <CollectionDetail collection={collection} />
+            </PivotItem>
+            {collection.item_assets && (
+              <PivotItem headerText="Assets">
+                <ItemAssets itemAssets={collection.item_assets} />
+              </PivotItem>
+            )}
+            {notebookTabs}
+          </Pivot>
         </>
       ) : (
         <span>Loading...</span>
