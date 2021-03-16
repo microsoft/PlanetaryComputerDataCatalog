@@ -68,17 +68,22 @@ function SEO({ description, lang, meta, title }) {
 
         By default, this loads 4 cookies: MCC, MS0, MS1, and MSFPC - all deemed "essential"
         Cookie descriptions: https://osgwiki.com/wiki/JSLLv4#Cookies_Set.2FRead_by_JSLL
+
+        Executes within a timeout because WcpConsent is not always available immediately after
+        loading the script tag above.
       */}
       <script type="text/javascript">
         {`
-          var siteConsent = null;
           setTimeout(function() {
             // WCP initialization
-            WcpConsent.init("en-US", "cookie-banner", function (err, _siteConsent) {
+            WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
                 if (err != undefined) {
-                    return error;
+                    console.error("Unalbe to initialize the cookie consent library");
+                    return err;
                 } else {
-                    siteConsent = _siteConsent;  //siteConsent is used to get the current consent          
+                    // Track a global object for consent to make it available from the
+                    // application React components
+                    window.siteConsent = siteConsent;
                 }
             });
 
@@ -88,15 +93,12 @@ function SEO({ description, lang, meta, title }) {
                     appId: "${process.env.REACT_APP_JSLL_APP_ID}"
                 },
                 callback: {
-                    userConsentDetailsCallback: siteConsent ? siteConsent.getConsent : null
+                    userConsentDetailsCallback: window.siteConsent ? window.siteConsent.getConsent : null
                 },
             }
 
             awa.init(config);
 
-            // Track a global object for consent to make it available from the
-            // application React components
-            window.siteConsent = siteConsent;
         }, 500);
         `}
       </script>
