@@ -37,12 +37,8 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
+        <main style={{ minHeight: "80vh" }}>{children}</main>
+        <footer>
           {manageConsent} © Microsoft {new Date().getFullYear()}
         </footer>
       </div>
