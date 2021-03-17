@@ -22,7 +22,7 @@ const AccountSurvey = () => {
 
   const handleSubmit = async survey => {
     try {
-      const resp = await axios.post("./api/AccountSurveyWrite", survey);
+      const resp = await axios.post("./api/survey", survey);
       const respMsg = resp.status === 200 ? successMsg : failMsg;
       setMsg(respMsg);
     } catch {
