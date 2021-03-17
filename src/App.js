@@ -23,10 +23,10 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/compute-docs">
+            <Route path="/docs/compute">
               <Compute />
             </Route>
-            <Route path="/api-docs">
+            <Route path="/docs/api">
               <ApiDocs />
             </Route>
             <Route path="/apps">
@@ -35,11 +35,11 @@ function App() {
             <Route path="/collection/:id">
               <Collection />
             </Route>
-            <Route path="/404">
-              <NotFound />
-            </Route>
             <Route path="/account/request">
               <AccountSurvey />
+            </Route>
+            <Route path="/404">
+              <NotFound />
             </Route>
             <Route>
               <NotFound />

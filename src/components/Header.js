@@ -31,9 +31,10 @@ const Header = ({ siteProduct, siteTitle }) => (
       </Text>
       <Stack horizontal tokens={{ childrenGap: "9px" }}>
         <Link to="/">Home</Link>
-        <Link to="/api-docs">API</Link>
-        <Link to="/compute-docs">Compute</Link>
+        <Link to="/docs/api">API</Link>
+        <Link to="/docs/compute">Compute</Link>
         <Link to="/apps">Apps</Link>
+        <Link to="/account/request">Request an Account</Link>
       </Stack>
     </div>
     <div id="cookie-banner"></div>
