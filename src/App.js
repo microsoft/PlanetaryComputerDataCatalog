@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { initializeIcons } from "@uifabric/icons";
 
 import Home from "./pages/Home";
 import Collection from "./pages/Collection";
@@ -12,6 +13,7 @@ import AppList from "./pages/AppList";
 import { usePrefetchContent } from "./utils/requests";
 
 function App() {
+  initializeIcons();
   usePrefetchContent();
   return (
     <Router basename={process.env.PUBLIC_URL}>
