@@ -14,6 +14,7 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
     row_key = str(uuid.uuid4())
     required_keys = ["name", "email"]
     webhook_url = os.environ.get("NotificationHook")
+    portal_url = os.environ.get("StoragePortalLink")
     az_env = os.environ.get("AZURE_FUNCTIONS_ENVIRONMENT")
 
     try:
@@ -35,7 +36,10 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
         "Email": req_body.get("email"),
         "Affiliation": req_body.get("affiliation"),
         "Industry": req_body.get("industry"),
-        "Note": req_body.get("note"),
+        "Languages": ", ".join(req_body.get("languages")),
+        "Country": req_body.get("country"),
+        "Datasets": req_body.get("datasets"),
+        "StudyArea": req_body.get("studyArea"),
         "Processed": False,
         "PartitionKey": "survey",
         "RowKey": row_key,
@@ -48,7 +52,7 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
     if webhook_url:
         if az_env != "Development":
             logging.debug("Sending notification via webhook")
-            requests.post(webhook_url, json=make_card(short_key))
+            requests.post(webhook_url, json=make_card(short_key, portal_url))
     else:
         logging.warning("Notification web hook not configured")
 
