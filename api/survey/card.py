@@ -7,17 +7,27 @@ card_definition = {
     "summary": "A new Planetary Computer account request was recieved",
     "sections": [
         {
-            "activityTitle": "New Account Request Received",
+            "activityTitle": "New Account Request",
             "activitySubtitle": "Planetary Computer",
             "activityImage": "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE39jNE",
-            "facts": [{"name": "RowKey", "value": "<unset>"}],
+            "text": "**Please review**: A new Planetary Computer account request was recieved.",
+            "facts": [{"name": "Key:", "value": "<unset>"}],
             "markdown": True,
+            "potentialAction": [
+                {
+                    "@type": "OpenUri",
+                    "name": "View on Portal",
+                    "targets": [{"os": "default", "uri": ""}],
+                }
+            ],
         }
     ],
 }
 
 
-def make_card(row_code: str):
+def make_card(row_code: str, portal_url: str):
     card = copy.deepcopy(card_definition)
-    card["sections"][0]["facts"][0]["value"] = row_code
+    sections = card["sections"][0]
+    sections["facts"][0]["value"] = f"_{row_code}****_"
+    sections["potentialAction"][0]["targets"][0]["uri"] = portal_url
     return card
