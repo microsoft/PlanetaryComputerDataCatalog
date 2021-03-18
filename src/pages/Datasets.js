@@ -6,7 +6,7 @@ import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 import { updateUrl } from "../features/catalog/catalogSlice";
 
-const Home = () => {
+const Datasets = () => {
   const qs = useQueryString();
   const dispatch = useDispatch();
   const catalogUrl = qs.get("catalog");
@@ -36,11 +36,11 @@ const Home = () => {
   );
   return (
     <div>
-      <SEO title="Home" />
-      <h2>Home</h2>
+      <SEO title="Datasets" />
+      <h2>Datasets</h2>
       <section>{links}</section>
     </div>
   );
 };
 
-export default Home;
+export default Datasets;
