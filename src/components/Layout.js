@@ -1,32 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { name, product } from "../config/site.yml";
 
 import Header from "./Header";
-import { ActionButton } from "@fluentui/react";
-import { useTimeoutFn } from "react-use";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
-  // Allow users to manage their cookie consent preferences. Not all regions
-  // require consent so check for requirements before rendering the button.
-  const [isConsentRequired, setIsConsentRequired] = useState(false);
-  useTimeoutFn(() => {
-    // Cookie consent is determined regionally. If it can't be determined, default
-    // to requiring consent.
-    const consent = window?.siteConsent?.isConsentRequired;
-    setIsConsentRequired(consent === undefined ? true : consent);
-  }, 600);
-
-  const manageConsent = isConsentRequired ? (
-    <ActionButton
-      onClick={() => window.siteConsent.manageConsent()}
-      ariaDescription="Launch cookie consent form"
-    >
-      Manage Cookies
-    </ActionButton>
-  ) : null;
-
   return (
     <>
       <Header siteTitle={name} siteProduct={product} />
@@ -37,11 +17,9 @@ const Layout = ({ children }) => {
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
-        <main style={{ minHeight: "80vh" }}>{children}</main>
-        <footer>
-          {manageConsent} © Microsoft {new Date().getFullYear()}
-        </footer>
+        <main style={{ minHeight: "calc(100vh - 170px)" }}>{children}</main>
       </div>
+      <Footer />
     </>
   );
 };

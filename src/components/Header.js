@@ -1,10 +1,9 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import { Stack, Text } from "@fluentui/react";
-import Logo from "../images/Microsoft-logo_rgb_c-gray.png";
-import { Link } from "react-router-dom";
+import HeaderLink from "./controls/HeaderLink";
 
-const Header = ({ siteProduct, siteTitle }) => (
+const Header = ({ siteProduct }) => (
   <header
     style={{
       background: "#fff",
@@ -18,23 +17,44 @@ const Header = ({ siteProduct, siteTitle }) => (
         paddingLeft: "1.5rem",
       }}
     >
-      <Stack horizontal>
-        <img src={Logo} height={65} alt="Microsoft Logo" />
-        <Stack.Item align="center">
+      <Stack horizontal tokens={{ childrenGap: "16px" }}>
+        <a
+          id="uhfLogo"
+          itemProp="url"
+          href="https://www.microsoft.com"
+          aria-label="Microsoft"
+          style={{
+            padding: "16px 6px 16px 10px",
+            float: "left",
+            height: "100%",
+            marginTop: "10px",
+            width: "113px",
+            outlineOffset: "-2px",
+          }}
+        >
+          <img
+            alt=""
+            itemProp="logo"
+            src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31"
+            role="presentation"
+            aria-hidden="true"
+            style={{
+              marginTop: "-3px",
+              maxWidth: "none",
+              width: "108px",
+            }}
+          />
+        </a>
+        <Stack.Item align="center" style={{ marginLeft: "0" }}>
           <Text block variant="xLarge">
             | {siteProduct}
           </Text>
         </Stack.Item>
-      </Stack>
-      <Text block variant="xLarge">
-        {siteTitle} (Limited Preview)
-      </Text>
-      <Stack horizontal tokens={{ childrenGap: "9px" }}>
-        <Link to="/">Home</Link>
-        <Link to="/docs/api">API</Link>
-        <Link to="/docs/compute">Compute</Link>
-        <Link to="/apps">Apps</Link>
-        <Link to="/account/request">Request an Account</Link>
+        <HeaderLink to="/">Datasets</HeaderLink>
+        <HeaderLink to="/docs/api">API</HeaderLink>
+        <HeaderLink to="/docs/compute">Compute</HeaderLink>
+        <HeaderLink to="/apps">Apps</HeaderLink>
+        <HeaderLink to="/account/request">Request an Account</HeaderLink>
       </Stack>
     </div>
     <div id="cookie-banner"></div>

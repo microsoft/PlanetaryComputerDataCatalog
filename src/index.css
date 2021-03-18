@@ -11,3 +11,32 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Corporate footer styling from UHF */
+
+.c-uhff-base {
+    background: #f2f2f2;
+    margin: 0 auto;
+    max-width: calc(1600px + 10%);
+    padding: 5px 5% 5px;
+}
+
+.c-uhff-base ul.c-list {
+    font-size: 11px;
+    line-height: 16px;
+    color: #616161;
+}
+
+.c-list.f-bare {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.c-uhff-base ul.c-list li {
+    padding: 0 24px 4px 0;
+    display: inline-block;
+}
+.context-uhf a:link, .context-uhf a:focus, .context-uhf a:hover, .context-uhf a:active, .context-uhf a:visited {
+    text-decoration: none;
+    color: inherit;
+}
