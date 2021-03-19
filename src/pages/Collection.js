@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import { Pivot, PivotItem } from "@fluentui/react";
+import { Pivot, PivotItem, Stack } from "@fluentui/react";
 
 import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
@@ -10,6 +10,7 @@ import CollectionDetail from "../components/stac/CollectionDetail";
 import ItemAssets from "../components/stac/ItemAssets";
 
 import { datasets } from "../config/site.yml";
+import SpatialExtent from "../components/stac/SpatialExtent";
 
 const Collection = () => {
   let { id } = useParams();
@@ -41,6 +42,13 @@ const Collection = () => {
     return <Redirect to={"/404"} />;
   }
 
+  const stackItemStyles = {
+    root: {
+      display: "flex",
+      height: 50,
+      justifyContent: "center",
+    },
+  };
   return (
     <>
       <SEO title={id} description={collection?.description} />
@@ -50,7 +58,23 @@ const Collection = () => {
           <Keywords keywords={collection.keywords} />
           <Pivot>
             <PivotItem headerText="Details">
-              <CollectionDetail collection={collection} />
+              <Stack
+                horizontal
+                tokens={{
+                  childrenGap: 5,
+                  padding: 10,
+                }}
+              >
+                <Stack.Item grow={3}>
+                  <CollectionDetail
+                    collection={collection}
+                    styles={stackItemStyles}
+                  />
+                </Stack.Item>
+                <Stack.Item grow={2} styles={stackItemStyles}>
+                  <SpatialExtent extent={collection.extent?.spatial} />
+                </Stack.Item>
+              </Stack>
             </PivotItem>
             {collection.item_assets && (
               <PivotItem headerText="Assets">
