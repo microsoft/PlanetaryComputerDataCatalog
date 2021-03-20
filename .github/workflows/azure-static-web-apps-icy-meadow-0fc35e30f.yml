@@ -19,6 +19,7 @@ jobs:
       REACT_APP_MQE_URL: ${{ secrets.MQE_URL }}
       REACT_APP_JSLL_APP_ID: ${{ secrets.JSLL_APP_ID }}
       PUBLIC_URL: ''
+      REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
     steps:
       - uses: actions/checkout@v2
         with:
