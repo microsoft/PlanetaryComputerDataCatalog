@@ -17,7 +17,7 @@ const ItemAssets = itemAssets => {
 
   return (
     <>
-      <h3>Assets</h3>
+      <h2>Assets</h2>
       <Stack>{f}</Stack>
     </>
   );

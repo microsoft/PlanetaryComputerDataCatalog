@@ -5,6 +5,7 @@ import { useQueryString } from "../utils/hooks";
 import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 import { updateUrl } from "../features/catalog/catalogSlice";
+import Layout from "../components/Layout";
 
 const Datasets = () => {
   const qs = useQueryString();
@@ -35,11 +36,13 @@ const Datasets = () => {
     </ul>
   );
   return (
-    <div>
+    <Layout>
       <SEO title="Datasets" />
       <h2>Datasets</h2>
       <section>{links}</section>
-    </div>
+
+      <h3>Other datasets</h3>
+    </Layout>
   );
 };
 

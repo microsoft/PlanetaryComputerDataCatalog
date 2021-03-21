@@ -1277,10 +1277,10 @@
     "@fluentui/utilities" "^8.0.2"
     tslib "^1.10.0"
 
-"@fluentui/react-hooks@^8.0.2":
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.0.2.tgz#e2b7a8373891b75054e2e854198721b700f96cc9"
-  integrity sha512-6/ES+AakKfISMMV7GCI+UEDxuL84Se89SKwcIqCrnq79r0dyu4husvwM2QRXeNvnHerTyARg+yN+6MOmzqyQEA==
+"@fluentui/react-hooks@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.1.0.tgz#dbb46ac66212e4fc7a630719324d42a95629f965"
+  integrity sha512-D/6SUYfc9GFBXwCJz+35B4GoFrunaNBT8xcFNtOFUP1biTBejErcaDxBA3X++UieBza6xXYgl1r60nM+8EHXgg==
   dependencies:
     "@fluentui/react-window-provider" "^2.0.1"
     "@fluentui/set-version" "^8.0.1"
@@ -1302,17 +1302,17 @@
     "@fluentui/set-version" "^8.0.1"
     tslib "^1.10.0"
 
-"@fluentui/react@^8.3.2":
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.3.2.tgz#cdc71b7a3c89e2016dcac34f8b104c57b793a72a"
-  integrity sha512-qvYLoRBQx6lOlg5f2xthlgq/V079natowyOCHsLOE/DoqdBJHNYrlSw01MaIFYWyxD6H6Ba72LumOea6vRulfw==
+"@fluentui/react@^8.5.0":
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.5.0.tgz#9d080767c0fc4c54e603355ddd7e85f435d9f0ed"
+  integrity sha512-G7adnJNZFGKDOTxzqGfuv0J1h3em7j/6wi3rNMeLfp1aJJR8whZpBiGk1A0WWBeKr3P1ky+r9Q93fRo4Ltd0fQ==
   dependencies:
     "@fluentui/date-time-utilities" "^8.0.1"
     "@fluentui/font-icons-mdl2" "^8.0.2"
     "@fluentui/foundation-legacy" "^8.0.2"
     "@fluentui/merge-styles" "^8.0.2"
     "@fluentui/react-focus" "^8.0.4"
-    "@fluentui/react-hooks" "^8.0.2"
+    "@fluentui/react-hooks" "^8.1.0"
     "@fluentui/react-shared-contexts" "^1.0.0-beta.11"
     "@fluentui/react-window-provider" "^2.0.1"
     "@fluentui/set-version" "^8.0.1"
@@ -1660,10 +1660,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@radiantearth/stac-fields@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@radiantearth/stac-fields/-/stac-fields-1.0.0-beta.5.tgz#b095ad7f64c8428165f5811b235cdf22b1c7c287"
-  integrity sha512-Th9HIBKVbMhwwUHa/uxw/Etdrl1/73VhwPWcUjvGU5qFdT3Rx+Eb7nQ2ziQ8KXkV7fMGDdP9FQyXSYWGd0foBQ==
+"@radiantearth/stac-fields@1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@radiantearth/stac-fields/-/stac-fields-1.0.0-beta.6.tgz#7004e8d7324574e871fd740e32000a6a637a0b50"
+  integrity sha512-N6jE01pDeLZPogoQPCP8gRUdLwsUwCFSHtD6swimnMsjEzRiFEOkRodrLNDAyXu9b98qaD/ig6iPfajAFIJ5GQ==
   dependencies:
     commonmark "^0.29.3"
     multihashes "^3.1.2"
@@ -4616,6 +4616,11 @@ domhandler@^4.0.0:
   integrity sha512-KPTbnGQ1JeEMQyO1iYXoagsI6so/C96HZiFyByU3T6iAzpXn8EGEvct6unm1ZGoed8ByO2oirxgwxBmqKF9haA==
   dependencies:
     domelementtype "^2.1.0"
+
+dompurify@^2.2.7:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.2.7.tgz#a5f055a2a471638680e779bd08fc334962d11fd8"
+  integrity sha512-jdtDffdGNY+C76jvodNTu9jt5yYj59vuTUyx+wXdzcSwAGTYZDAQkQ7Iwx9zcGrA4ixC1syU4H3RZROqRxokxg==
 
 domutils@^1.5.1, domutils@^1.7.0:
   version "1.7.0"
@@ -7660,6 +7665,11 @@ marked@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
+
+marked@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-2.0.1.tgz#5e7ed7009bfa5c95182e4eb696f85e948cefcee3"
+  integrity sha512-5+/fKgMv2hARmMW7DOpykr2iLhl0NgjyELk5yn92iE7z8Se1IS9n3UsFm86hFXIkvMBmVxki8+ckcpjBeyo/hw==
 
 match-sorter@^6.0.2:
   version "6.3.0"

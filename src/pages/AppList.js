@@ -1,7 +1,12 @@
 import React from "react";
+import Layout from "../components/Layout";
 
 const AppList = () => {
-  return <h1>PC Applications</h1>;
+  return (
+    <Layout>
+      <h1>PC Applications</h1>
+    </Layout>
+  );
 };
 
 export default AppList;

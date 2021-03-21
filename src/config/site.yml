@@ -1,4 +1,4 @@
-product: Planetary Computer
+product: Planetary Computer (Preview)
 name: Data Catalog
 description: Explore the datasets and functionality of Microsoft's Planetary Computer
 author: AI for Earth <aiforearthdatasets@microsoft.com>
@@ -11,17 +11,17 @@ author: AI for Earth <aiforearthdatasets@microsoft.com>
 datasets:
   usda-naip:
     notebooks:
-      - title: Using NAIP
+      - title: Getting Started 
         src: naip.html
-      - title: Using NAIP on Esri Image Server
+      - title: Using Esri Image Server
         src: naip-image-server.html
   landsat-8-l1-c1:
     notebooks:
-      - title: Using landsat
+      - title: Getting Started 
         src: landsat.html
   sentinel-s2-l2a:
     notebooks:
-      - title: Using Sentinal
+      - title: Getting Started 
         src: sentinel-2.html
 
 # The compute API section uses a notebook for its main content

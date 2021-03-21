@@ -12,21 +12,17 @@ const SpatialExtent = ({ extent }) => {
 
       // This will remove layer labels from the basemap, which tend to
       // repeat in a overwhelming way at low zoom levels
-      for (var i = 0; i < layers.length; i++) {
+      layers.forEach(layer => {
         if (
-          layers[i].type === "symbol" &&
-          layers[i].source === "vectorTiles" &&
-          layers[i].layout &&
-          layers[i].layout["text-field"] &&
-          layers[i].layout["text-field"] !== ""
+          layer.type === "symbol" &&
+          layer.source === "vectorTiles" &&
+          layer.layout &&
+          layer.layout["text-field"] &&
+          layer.layout["text-field"] !== ""
         ) {
-          mapRef.current.map.setLayoutProperty(
-            layers[i].id,
-            "visibility",
-            "none"
-          );
+          mapRef.current.map.setLayoutProperty(layer.id, "visibility", "none");
         }
-      }
+      });
 
       // Add all bounding boxes to the datasource
       var source = new atlas.source.DataSource();
@@ -36,13 +32,14 @@ const SpatialExtent = ({ extent }) => {
         return new atlas.data.Feature(atlas.math.boundingBoxToPolygon(bb));
       });
 
-      const fc = new atlas.data.FeatureCollection(features);
-      source.add(fc);
+      const fcollection = new atlas.data.FeatureCollection(features);
+      const extentBbox = atlas.data.BoundingBox.fromData(fcollection);
+      source.add(fcollection);
 
       // Take a bounding box of the entire feature collection, which
       // could have non-contiguous extents
       mapRef.current.setCamera({
-        bounds: atlas.data.BoundingBox.fromData(fc),
+        bounds: extentBbox,
         padding: 20,
       });
 
@@ -67,7 +64,7 @@ const SpatialExtent = ({ extent }) => {
         language: "en-US",
         showFeedbackLink: false,
         style: "grayscale_light",
-        interactive: false,
+        // interactive: false,
         renderWorldCopies: true, // This setting may need adjusment for showing whole-world bounds
         authOptions: {
           authType: "subscriptionKey",
@@ -84,7 +81,7 @@ const SpatialExtent = ({ extent }) => {
   if (!extent) return null;
 
   return (
-    <div id="extent-map" style={{ width: "300px", height: "200px" }}></div>
+    <div id="extent-map" style={{ width: "330px", height: "150px" }}></div>
   );
 };
 
