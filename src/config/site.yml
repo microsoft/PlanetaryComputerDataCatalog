@@ -3,26 +3,6 @@ name: Data Catalog
 description: Explore the datasets and functionality of Microsoft's Planetary Computer
 author: AI for Earth <aiforearthdatasets@microsoft.com>
 
-# Any references to Notebook html files below require the .ipynb
-# file to be included in the etl/notebook_urls.txt file for processing
-
-# Use collection IDs to attach specific notebooks to a collection
-# detail page
-datasets:
-  usda-naip:
-    notebooks:
-      - title: Getting Started 
-        src: naip.html
-      - title: Using Esri Image Server
-        src: naip-image-server.html
-  landsat-8-l1-c1:
-    notebooks:
-      - title: Getting Started 
-        src: landsat.html
-  sentinel-s2-l2a:
-    notebooks:
-      - title: Getting Started 
-        src: sentinel-2.html
 
 # The compute API section uses a notebook for its main content
 compute:

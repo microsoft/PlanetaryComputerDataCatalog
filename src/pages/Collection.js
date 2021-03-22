@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Pivot, PivotItem } from "@fluentui/react";
 
-import { useCollections } from "../utils/requests";
-import { datasets } from "../config/site.yml";
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import Notebook from "../components/Notebook";
@@ -12,6 +10,9 @@ import Description from "../components/stac/Description";
 import CollectionDetail from "../components/stac/CollectionDetail";
 import ItemAssets from "../components/stac/ItemAssets";
 import Bands from "../components/stac/Bands";
+
+import { useCollections } from "../utils/requests";
+import { collections as notebookConfig } from "../config/datasets.yml";
 
 const Collection = () => {
   let { id } = useParams();
@@ -31,7 +32,7 @@ const Collection = () => {
     }
   }, [id, collections, isSuccess]);
 
-  const notebookTabs = datasets[id]?.notebooks.map(({ title, src }) => {
+  const notebookTabs = notebookConfig[id]?.notebooks.map(({ title, src }) => {
     return (
       <PivotItem key={title} headerText={title}>
         <Notebook src={src} />

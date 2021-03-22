@@ -1,3 +1,23 @@
+# Use STACT collection IDs to attach specific notebooks to a collection
+# detail page. Any references to Notebook html files below require the .ipynb
+# file to be included in the `etl/notebook_urls.txt` file for processing
+collections:
+  usda-naip:
+    notebooks:
+      - title: Getting Started 
+        src: naip.html
+      - title: Using Esri Image Server
+        src: naip-image-server.html
+  landsat-8-l1-c1:
+    notebooks:
+      - title: Getting Started 
+        src: landsat.html
+  sentinel-s2-l2a:
+    notebooks:
+      - title: Getting Started 
+        src: sentinel-2.html
+
+# Configuration for "other dataset" section
 ai4e: 
   - title: Daymet
     description: Gridded temperature data across North America
