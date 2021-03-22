@@ -11,6 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Generalized grid layouts */
+@media screen and (min-width: 800px) {
+  .ds-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .ds-item {
+    width: 400px;
+  }
+
+  .ds-item img {
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+
+.ds-item {
+  padding: 15px;
+  margin: 5px;
+}
 
 /* Corporate footer styling from UHF */
 
