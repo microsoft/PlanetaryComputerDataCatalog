@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
-import { Pivot, PivotItem, Stack } from "@fluentui/react";
+import { Pivot, PivotItem } from "@fluentui/react";
 
 import { useCollections } from "../utils/requests";
+import { datasets } from "../config/site.yml";
 import SEO from "../components/Seo";
+import Layout from "../components/Layout";
 import Notebook from "../components/Notebook";
-import Keywords from "../components/stac/Keywords";
+import Banner from "../components/stac/Banner";
+import Description from "../components/stac/Description";
 import CollectionDetail from "../components/stac/CollectionDetail";
 import ItemAssets from "../components/stac/ItemAssets";
-
-import { datasets } from "../config/site.yml";
-import SpatialExtent from "../components/stac/SpatialExtent";
+import Bands from "../components/stac/Bands";
 
 const Collection = () => {
   let { id } = useParams();
@@ -42,52 +43,35 @@ const Collection = () => {
     return <Redirect to={"/404"} />;
   }
 
-  const stackItemStyles = {
-    root: {
-      display: "flex",
-      height: 50,
-      justifyContent: "center",
-    },
-  };
+  const bannerHeader = <Banner collection={collection} />;
+
   return (
-    <>
+    <Layout bannerHeader={bannerHeader}>
       <SEO title={id} description={collection?.description} />
       {collection ? (
-        <>
-          <h1>{collection.title}</h1>
-          <Keywords keywords={collection.keywords} />
-          <Pivot>
-            <PivotItem headerText="Details">
-              <Stack
-                horizontal
-                tokens={{
-                  childrenGap: 5,
-                  padding: 10,
-                }}
-              >
-                <Stack.Item grow={3}>
-                  <CollectionDetail
-                    collection={collection}
-                    styles={stackItemStyles}
-                  />
-                </Stack.Item>
-                <Stack.Item grow={2} styles={stackItemStyles}>
-                  <SpatialExtent extent={collection.extent?.spatial} />
-                </Stack.Item>
-              </Stack>
-            </PivotItem>
+        <Pivot>
+          <PivotItem headerText="Overview">
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "70% 30%",
+                gridGap: "10px",
+              }}
+            >
+              <Description collection={collection} />
+              <CollectionDetail collection={collection} />
+            </div>
+            <Bands collection={collection} />
             {collection.item_assets && (
-              <PivotItem headerText="Assets">
-                <ItemAssets itemAssets={collection.item_assets} />
-              </PivotItem>
+              <ItemAssets itemAssets={collection.item_assets} />
             )}
-            {notebookTabs}
-          </Pivot>
-        </>
+          </PivotItem>
+          {notebookTabs}
+        </Pivot>
       ) : (
         <span>Loading...</span>
       )}
-    </>
+    </Layout>
   );
 };
 

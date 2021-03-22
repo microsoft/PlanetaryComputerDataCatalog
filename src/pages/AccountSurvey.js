@@ -5,6 +5,7 @@ import axios from "axios";
 import * as yup from "yup";
 
 import SEO from "../components/Seo";
+import Layout from "../components/Layout";
 import FormInput from "../components/forms/FormInput";
 import FormSelect from "../components/forms/FormSelect";
 import countries from "../config/countries.yml";
@@ -104,7 +105,7 @@ const AccountSurvey = () => {
     </form>
   );
   return (
-    <div>
+    <Layout>
       <SEO title="Account Request" />
       <h2>Request an account</h2>
       <Stack styles={paddingVStyle}>
@@ -114,7 +115,7 @@ const AccountSurvey = () => {
       </Stack>
       {form}
       <Stack style={paddingVStyle}>{msg}</Stack>
-    </div>
+    </Layout>
   );
 };
 

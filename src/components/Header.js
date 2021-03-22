@@ -13,7 +13,7 @@ const Header = ({ siteProduct }) => (
     <div
       style={{
         margin: "0 auto",
-        maxWidth: 960,
+        maxWidth: 1200,
         paddingLeft: "1.5rem",
       }}
     >
@@ -58,7 +58,6 @@ const Header = ({ siteProduct }) => (
       </Stack>
     </div>
     <div id="cookie-banner"></div>
-    <hr />
   </header>
 );
 

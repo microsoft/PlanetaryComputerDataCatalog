@@ -4,9 +4,11 @@ import { Text } from "@fluentui/react";
 const pillStyle = {
   root: {
     borderRadius: "4px",
-    border: "1px solid #ccc",
-    padding: "3px",
-    margin: "3px",
+    border: "0.5px solid #717171",
+    padding: "6px",
+    margin: "5px",
+    minWidth: "30px",
+    display: "inline-block",
   },
 };
 

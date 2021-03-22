@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@fluentui/react";
 import NewTabLink from "../controls/NewTabLink";
-import { boldStyle } from "../../styles";
+import LabeledValue from "../controls/LabeledValue";
 
 const License = ({ collection }) => {
   const { license, links } = collection;
@@ -15,12 +15,7 @@ const License = ({ collection }) => {
       <Text>{license || defaultText}</Text>
     );
 
-  return (
-    <div>
-      <Text styles={boldStyle}>License: </Text>
-      {formattedLicense}
-    </div>
-  );
+  return <LabeledValue label="License">{formattedLicense}</LabeledValue>;
 };
 
 export default License;

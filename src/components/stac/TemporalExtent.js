@@ -1,12 +1,8 @@
 import { Text } from "@fluentui/react";
 import React from "react";
-import { boldStyle } from "../../styles";
-//import StacFields from "@radiantearth/stac-fields";
+import LabeledValue from "../controls/LabeledValue";
 
 const TemporalExtent = ({ extent }) => {
-  // Awaiting a new release which fixes bugs in these formatters
-  //const formatted = StacFields.Formatters.formatExtent(extent.interval);
-  //const formatted = StacFields.Formatters.formatTemporalExtent(extent.interval);
   const formatted = extent.interval.map((period, idx) => {
     const [start, end] = period;
     const startFormat = new Date(start).toLocaleDateString();
@@ -16,11 +12,7 @@ const TemporalExtent = ({ extent }) => {
     );
   });
 
-  return (
-    <div>
-      <Text styles={boldStyle}>Temporal extent:</Text> {formatted}
-    </div>
-  );
+  return <LabeledValue label="Temporal extent">{formatted}</LabeledValue>;
 };
 
 export default TemporalExtent;
