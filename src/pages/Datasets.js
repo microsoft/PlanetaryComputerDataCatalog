@@ -9,9 +9,10 @@ import { updateUrl } from "../features/catalog/catalogSlice";
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import CollectionCard from "../components/stac/CollectionCard";
-import DatasetCard from "../components/DatasetCard";
+import ResourceCard from "../components/ResourceCard";
 
 import { ai4e as datasetsConfig } from "../config/datasets.yml";
+import DefaultBanner from "../components/DefaultBanner";
 
 const Datasets = () => {
   const qs = useQueryString();
@@ -25,25 +26,18 @@ const Datasets = () => {
   });
 
   const banner = (
-    <div
-      className="ds-list"
-      style={{
-        background: "#F0F0F0",
-        minHeight: "200px",
-      }}
-    >
-      <div className="ds-item">
-        <h1>Datasets</h1>
-      </div>
-      <div className="ds-item">
+    <DefaultBanner>
+      <h1>Datasets</h1>
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
         velit esse cillum dolore eu fugiat nulla pariatur.
-      </div>
-    </div>
+      </p>
+    </DefaultBanner>
   );
+
   const { isLoading, data: collections } = useCollections();
 
   const primaryDatasets = isLoading ? (
@@ -57,7 +51,9 @@ const Datasets = () => {
   );
 
   const otherDatasets = datasetsConfig.map(dataset => {
-    return <DatasetCard key={`card-${dataset.title}`} dataset={dataset} />;
+    return (
+      <ResourceCard key={`card-${dataset.title}`} resourceItem={dataset} />
+    );
   });
 
   return (
