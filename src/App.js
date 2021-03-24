@@ -7,7 +7,7 @@ import Collection from "./pages/Collection";
 import NotFound from "./pages/NotFound";
 import AccountSurvey from "./pages/AccountSurvey";
 import Docs from "./pages/Docs";
-import AppList from "./pages/AppList";
+import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
             <Docs />
           </Route>
           <Route path="/apps">
-            <AppList />
+            <Applications />
           </Route>
           <Route path="/collection/:id">
             <Collection />
