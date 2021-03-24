@@ -368,3 +368,9 @@ MigrationBackup/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Sphinx-built content that is moved into the application
+# source tree
+docs/_build
+src/docs/
+public/_images/
