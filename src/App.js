@@ -6,8 +6,7 @@ import Datasets from "./pages/Datasets";
 import Collection from "./pages/Collection";
 import NotFound from "./pages/NotFound";
 import AccountSurvey from "./pages/AccountSurvey";
-import Compute from "./pages/Compute";
-import ApiDocs from "./pages/ApiDocs";
+import Docs from "./pages/Docs";
 import AppList from "./pages/AppList";
 import { usePrefetchContent } from "./utils/requests";
 
@@ -21,11 +20,8 @@ function App() {
           <Route exact path="/">
             <Datasets />
           </Route>
-          <Route path="/docs/compute">
-            <Compute />
-          </Route>
-          <Route path="/docs/api">
-            <ApiDocs />
+          <Route path="/docs/">
+            <Docs />
           </Route>
           <Route path="/apps">
             <AppList />

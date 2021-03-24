@@ -1,14 +1,11 @@
 import axios from "axios";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { selectUrl } from "../features/catalog/catalogSlice";
-import { compute } from "../config/site.yml";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
-  const queryClient = useQueryClient();
-  // Prefetch the compute docs notebook
-  queryClient.prefetchQuery([compute.notebookSrc], getStaticMetadata);
+  // no-op
 };
 
 export const useCollections = () => {

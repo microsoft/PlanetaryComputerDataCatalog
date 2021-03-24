@@ -1,16 +1,33 @@
-.input_area {
+
+.input_area, .section .highlight-python {
     border: 1px solid #e0e0e0;
     background: #f5f5f5;
     padding: 0px 10px;
     border-radius: 3px;
 }
-a.anchor-link {
+
+.input_area .highlight pre {
+  margin-top: 1em;
+}
+
+.output_area .highlight pre {
+  margin: 1em;
+}
+
+.highlight pre {
+  margin-top: 0em;
+}
+
+a.anchor-link, a.headerlink {
     display: none;
 }
 
 .prompt.input_prompt {
     color: #616161;
     padding-bottom: 4px;
+}
+.nbinput .prompt {
+  display: none;
 }
 
 .output_png img {
@@ -23,7 +40,6 @@ span.linenos { color: inherit; background-color: transparent; padding-left: 5px;
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
-.highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
 .highlight .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
 .highlight .err { color: var(--jp-mirror-editor-error-color) } /* Error */
 .highlight .k { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword */
