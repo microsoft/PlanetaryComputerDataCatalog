@@ -8,7 +8,7 @@ const FormSelect = ({ formik, label, name, options, multiSelect = false }) => {
       label={label}
       multiSelect={multiSelect}
       selectedKey={multiSelect ? undefined : formik.values[name]}
-      selectedKeys={multiSelect ? formik.values[name] : name}
+      selectedKeys={multiSelect ? formik.values[name] : undefined}
       placeholder="Select an option"
       options={options}
       onChange={(_, option) => {
