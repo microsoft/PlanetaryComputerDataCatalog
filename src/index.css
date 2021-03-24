@@ -32,6 +32,17 @@ code {
   margin: 5px;
 }
 
+.toctree-wrapper ul {
+  list-style-type: none;
+  margin: 0 2px;
+  padding: 0;
+}
+
+.toctree-wrapper .caption {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
 /* Corporate footer styling from UHF */
 
 .c-uhff-base {

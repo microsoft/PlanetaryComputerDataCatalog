@@ -51,8 +51,7 @@ const Header = ({ siteProduct }) => (
           </Text>
         </Stack.Item>
         <HeaderLink to="/">Datasets</HeaderLink>
-        <HeaderLink to="/docs/api">API</HeaderLink>
-        <HeaderLink to="/docs/compute">Compute</HeaderLink>
+        <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink to="/apps">Apps</HeaderLink>
         <HeaderLink to="/account/request">Request an Account</HeaderLink>
       </Stack>
