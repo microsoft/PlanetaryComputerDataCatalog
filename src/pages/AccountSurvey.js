@@ -8,15 +8,17 @@ import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import FormInput from "../components/forms/FormInput";
 import FormSelect from "../components/forms/FormSelect";
-import countries from "../config/countries.yml";
+import DefaultBanner from "../components/DefaultBanner";
+
 import {
   successMsg,
   failMsg,
   languageOptions,
   industryOptions,
 } from "../config/account";
+import countries from "../config/countries.yml";
 
-import { marginVStyle, paddingVStyle } from "../styles";
+import { marginVStyle } from "../styles";
 
 const AccountSurvey = () => {
   const [msg, setMsg] = useState();
@@ -62,59 +64,72 @@ const AccountSurvey = () => {
 
   const form = (
     <form onSubmit={formik.handleSubmit} style={{ maxWidth: "500px" }}>
-      <FormInput required name="email" label="Email" formik={formik} />
-      <FormInput required name="name" label="Name" formik={formik} />
-      <FormInput
-        name="affiliation"
-        label="Affiliated Organization"
-        placeholder="Company, institution, university, etc."
-        formik={formik}
-      />
-      <FormSelect
-        name="industry"
-        label="Sector"
-        options={industryOptions}
-        formik={formik}
-      />
-      <FormSelect
-        multiSelect
-        name="languages"
-        label="Primary programming languages"
-        options={languageOptions}
-        formik={formik}
-      />
-      <FormSelect
-        name="country"
-        label="Country"
-        options={Object.values(countries).map(c => ({ key: c, text: c }))}
-        formik={formik}
-      />
-      <FormInput
-        name="datasets"
-        label="Describe the datasets you're interested in"
-        formik={formik}
-        multiline
-      />
-      <FormInput
-        name="studyArea"
-        label="Area of study"
-        formik={formik}
-        multiline
-      />
+      <Stack tokens={{ childrenGap: 8 }}>
+        <FormInput required name="email" label="Email" formik={formik} />
+        <FormInput required name="name" label="Name" formik={formik} />
+        <FormInput
+          name="affiliation"
+          label="Affiliated Organization"
+          placeholder="Company, institution, university, etc."
+          formik={formik}
+        />
+        <FormSelect
+          name="industry"
+          label="Sector"
+          options={industryOptions}
+          formik={formik}
+        />
+        <FormSelect
+          multiSelect
+          name="languages"
+          label="Primary programming languages"
+          options={languageOptions}
+          formik={formik}
+        />
+        <FormSelect
+          name="country"
+          label="Country"
+          options={Object.values(countries).map(c => ({ key: c, text: c }))}
+          formik={formik}
+        />
+        <FormInput
+          name="datasets"
+          label="Describe the datasets you're interested in"
+          formik={formik}
+          multiline
+        />
+        <FormInput
+          name="studyArea"
+          label="Area of study"
+          formik={formik}
+          multiline
+        />
+      </Stack>
       <PrimaryButton type="submit" text="Submit" styles={marginVStyle} />
     </form>
   );
+
+  const banner = (
+    <DefaultBanner>
+      <h1>Request an account</h1>
+      <p>
+        Planetary Computer users get access to our API and Compute resources.
+        The offering is currently in Limited Preview and is not ready for a
+        general audience. Please register your interest in using this service to
+        stay in touch.
+      </p>
+    </DefaultBanner>
+  );
+
   return (
-    <Layout>
+    <Layout bannerHeader={banner}>
       <SEO title="Account Request" />
-      <h2>Request an account</h2>
-      <Stack styles={paddingVStyle}>
-        The Planetary Computer is in Limited Preview and is not ready for a
-        general audience. Please register your interest in using this service
-        and we will follow up!
-      </Stack>
+      <p>
+        [TOS and details about why we are collecting this information, and what
+        we will do with it.]
+      </p>
       {form}
-      <Stack style={paddingVStyle}>{msg}</Stack>
+      {msg}
     </Layout>
   );
 };
