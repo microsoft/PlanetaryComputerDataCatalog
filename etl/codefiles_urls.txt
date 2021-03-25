@@ -12,3 +12,7 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/mtbs.ip
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/naip-image-server.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/naip.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/sentinel-2.ipynb
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/aster-storage.md
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/landsat-storage.md
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/naip-storage.md
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/sentinel-2-storage.md

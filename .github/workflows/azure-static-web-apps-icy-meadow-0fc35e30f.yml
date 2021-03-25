@@ -39,7 +39,7 @@ jobs:
           pip install -r etl/requirements.txt
       - name: Render notebooks
         run: |
-          (cd etl && ./process_notebooks.sh)
+          (cd etl && ./process_codefiles.sh)
       - name: Setup pandoc
         uses: r-lib/actions/setup-pandoc@v1
         with:

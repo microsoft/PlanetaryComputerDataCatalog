@@ -4,7 +4,7 @@ import { Pivot, PivotItem } from "@fluentui/react";
 
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
-import Notebook from "../components/Notebook";
+import MetadataHtmlContent from "../components/MetadataHtmlContent";
 import Banner from "../components/stac/Banner";
 import Description from "../components/stac/Description";
 import CollectionDetail from "../components/stac/CollectionDetail";
@@ -12,7 +12,7 @@ import ItemAssets from "../components/stac/ItemAssets";
 import Bands from "../components/stac/Bands";
 
 import { useCollections } from "../utils/requests";
-import { collections as notebookConfig } from "../config/datasets.yml";
+import { collections as tabConfig } from "../config/datasets.yml";
 
 const Collection = () => {
   let { id } = useParams();
@@ -32,10 +32,10 @@ const Collection = () => {
     }
   }, [id, collections, isSuccess]);
 
-  const notebookTabs = notebookConfig[id]?.notebooks.map(({ title, src }) => {
+  const tabs = tabConfig[id]?.tabs.map(({ title, src }) => {
     return (
       <PivotItem key={title} headerText={title}>
-        <Notebook src={src} />
+        <MetadataHtmlContent src={src} />
       </PivotItem>
     );
   });
@@ -67,7 +67,7 @@ const Collection = () => {
               <ItemAssets itemAssets={collection.item_assets} />
             )}
           </PivotItem>
-          {notebookTabs}
+          {tabs}
         </Pivot>
       ) : (
         <span>Loading...</span>
