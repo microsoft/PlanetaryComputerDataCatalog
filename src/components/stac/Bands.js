@@ -62,7 +62,6 @@ const Bands = ({ collection }) => {
         compact={false}
         columns={columns}
         selectionMode={SelectionMode.none}
-        setKey="none"
         layoutMode={DetailsListLayoutMode.justified}
         isHeaderVisible={true}
       />
