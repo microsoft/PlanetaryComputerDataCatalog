@@ -1,21 +1,27 @@
-# Use STACT collection IDs to attach specific notebooks to a collection
+# Use STAC collection IDs to attach specific notebooks/content to a collection
 # detail page. Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/notebook_urls.txt` file for processing
 collections:
   usda-naip:
-    notebooks:
+    tabs:
       - title: Getting Started 
         src: naip.html
       - title: Using Esri Image Server
         src: naip-image-server.html
+      - title: Using from blob storage
+        src: naip-storage.html
   landsat-8-l1-c1:
-    notebooks:
+    tabs:
       - title: Getting Started 
         src: landsat.html
   sentinel-s2-l2a:
-    notebooks:
+    tabs:
       - title: Getting Started 
         src: sentinel-2.html
+  aster-l1t:
+    tabs:
+      - title: Using from blob storage
+        src: aster-storage.html
 
 # Configuration for "other dataset" section
 ai4e: 

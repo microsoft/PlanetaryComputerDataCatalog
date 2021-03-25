@@ -359,7 +359,9 @@ MigrationBackup/
 
 # production
 /build
-/metadata/notebooks
+
+# etl
+etl/processing
 
 # misc
 .DS_Store
