@@ -17,6 +17,5 @@ api/read
 :maxdepth: 1
 :caption: Compute Docs 
 
-compute/daymet
-compute/nasdem
+compute/computing
 ```
