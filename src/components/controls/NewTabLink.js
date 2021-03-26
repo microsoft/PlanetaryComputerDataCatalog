@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "@fluentui/react";
 
-const NewTabLink = ({ href, children }) => {
+const NewTabLink = ({ href, children, As = Link }) => {
   return (
-    <Link href={href} target="_blank" rel="noopener noreferrer">
+    <As href={href} target="_blank" rel="noopener noreferrer">
       {children}
-    </Link>
+    </As>
   );
 };
 
