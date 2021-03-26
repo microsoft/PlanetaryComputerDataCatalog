@@ -10,6 +10,13 @@ collections:
         src: naip-image-server.html
       - title: Using from blob storage
         src: naip-storage.html
+      - title: Landuse classification model
+        src: landcover.html
+        launch: 
+          title: Launch in Compute
+          repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
+          branch: main
+          filePath: landcover.ipynb
   landsat-8-c2-l2:
     tabs:
       - title: Getting Started 

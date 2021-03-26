@@ -16,3 +16,4 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/landsat-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/naip-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/sentinel-2-storage.md
+https://raw.githubusercontent.com/TomAugspurger/landcover-demo-gtc-2021/main/landcover.ipynb

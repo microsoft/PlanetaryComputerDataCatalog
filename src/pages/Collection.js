@@ -36,6 +36,7 @@ const Collection = () => {
     return (
       <PivotItem key={title} headerText={title}>
         <MetadataHtmlContent src={src} />
+        <MetadataHtmlContent src={src} title={title} launch={launch} />
       </PivotItem>
     );
   });
