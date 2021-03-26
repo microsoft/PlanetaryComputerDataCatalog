@@ -23,7 +23,10 @@ const Banner = ({ collection }) => {
         <Keywords keywords={collection.keywords} />
       </div>
       <div>
-        <AssetThumbnail assets={collection.assets} />
+        <AssetThumbnail
+          style={{ maxHeight: "250px", objectFit: "contain" }}
+          assets={collection.assets}
+        />
       </div>
     </div>
   );

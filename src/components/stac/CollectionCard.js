@@ -9,12 +9,7 @@ const CollectionCard = ({ collection }) => {
     <div className="ds-item" key={collection.id}>
       <AssetThumbnail assets={collection.assets} />
       <h3>{collection.title}</h3>
-      <Text block>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </Text>
+      <Text block>{collection["msft:short_description"]}</Text>
       <RouterLink
         style={{ display: "inline-block", marginTop: "5px" }}
         to={`collection/${collection.id}`}
