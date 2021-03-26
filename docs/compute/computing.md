@@ -1,4 +1,4 @@
-# Compute
+# Using Compute resources
 
 The core of the Planetary Computer is the datasets and APIs for querying them. This document gives an overview of the various ways you can compute on data hosted by the Planetary Computer.
 
@@ -25,7 +25,7 @@ GatewayCluster<prod.fbfed27704fc4d1da027dad20471993b, status=running>
 
 With this setup, all of the computation happens on Azure, whether on a single node or on a cluster with Dask.
 
-![](jupyterhub-diagram.png)
+![Diagram showing compute components within Azure](images/jupyterhub-diagram.png)
 
 See [...] for more. The [Pangeo Cloud](https://pangeo.io/cloud.html) documention provides background on this type of setup.
 
@@ -36,7 +36,7 @@ We recommend this approach for users who value, and are comfortable with, managi
 
 1. Request a token from JupyterHub
 
-Visit https://planetarycomputer-staging.microsoft.com/compute/hub/token to generate a token. You'll be required to authenticate to generate a token.
+Visit <https://planetarycomputer-staging.microsoft.com/compute/hub/token> to generate a token. You'll be required to authenticate to generate a token.
 
 [image]
 
@@ -44,7 +44,7 @@ Substitute that token anywhere you see `<JUPYTERHUB_TOKEN>` below.
 
 2. Connect to the Gateway
 
-Similar to before, we'll use 
+Similar to before, we'll use
 
 ```python
 >>> from dask_gateway import Gateway, auth
@@ -70,7 +70,7 @@ Now that you're connected, create a cluster as usual.
 From here on, computations using Dask will take place on the cluster. When you `.compute()` a result and bring it back locally,
 it will come to the Python process running on your local machine.
 
-![](gateway-diagram.png)
+![Diagram showing Compute on Azure without JupyterHub](images/gateway-diagram.png)
 
 ## Use your own Compute
 
@@ -79,7 +79,7 @@ The previous two methods relied on compute provided by the AI for Earth Team. If
 
 We recommend this approach for users with high computation needs or require specialized software environments.
 
-In this example, we use `Dask Cloudprovider` to create a Dask Cluster with just an Azure subscription. After following the setup instructions at https://cloudprovider.dask.org/en/latest/azure.html, you can create your cluster:
+In this example, we use `Dask Cloudprovider` to create a Dask Cluster with just an Azure subscription. After following the setup instructions at <https://cloudprovider.dask.org/en/latest/azure.html>, you can create your cluster:
 
 ```python
 >>> from dask_cloudprovider.azure import AzureVMCluster
@@ -109,4 +109,4 @@ and connect to it
 
 Like the previous setup, the Dask scheduler and workers are running in Azure near the data. The local client might be outside of Azure.
 
-![](cloudprovider-diagram.png)
+![Diagram showing Compute with self-managed Dask cluster](images/cloudprovider-diagram.png)
