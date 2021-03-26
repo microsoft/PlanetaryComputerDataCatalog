@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import { Pivot, PivotItem } from "@fluentui/react";
 
 import SEO from "../components/Seo";
@@ -15,11 +15,18 @@ import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
 
 const Collection = () => {
-  let { id } = useParams();
+  const { id } = useParams();
+  const location = useLocation();
+  const history = useHistory();
 
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const { isSuccess, data: collections } = useCollections();
+  const [activeTab, setActiveTab] = useState("overview");
+
+  useEffect(() => {
+    setActiveTab(location.hash.replace("#", ""));
+  }, [location]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -32,10 +39,17 @@ const Collection = () => {
     }
   }, [id, collections, isSuccess]);
 
-  const tabs = tabConfig[id]?.tabs.map(({ title, src }) => {
+  const handleTabChange = pivotItem => {
+    const { itemKey } = pivotItem.props;
+    history.replace({ hash: itemKey });
+  };
+  const tabs = tabConfig[id]?.tabs.map(({ title, src, launch }) => {
     return (
-      <PivotItem key={title} headerText={title}>
-        <MetadataHtmlContent src={src} />
+      <PivotItem
+        key={title}
+        headerText={title}
+        itemKey={title.replace(/ /g, "-")}
+      >
         <MetadataHtmlContent src={src} title={title} launch={launch} />
       </PivotItem>
     );
@@ -51,8 +65,8 @@ const Collection = () => {
     <Layout bannerHeader={bannerHeader}>
       <SEO title={id} description={collection?.description} />
       {collection ? (
-        <Pivot>
-          <PivotItem headerText="Overview">
+        <Pivot selectedKey={activeTab} onLinkClick={handleTabChange}>
+          <PivotItem headerText="Overview" itemKey="overview">
             <div className="column-list">
               <div className="cl-item">
                 <Description collection={collection} />
