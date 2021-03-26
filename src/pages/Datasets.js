@@ -61,7 +61,7 @@ const Datasets = () => {
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Datasets" />
-      <section className="ds-list">{primaryDatasets}</section>
+      <section className="column-list">{primaryDatasets}</section>
 
       <h2>Additional datasets</h2>
       <Text block>
@@ -74,7 +74,7 @@ const Datasets = () => {
         </Link>
         .
       </Text>
-      <section className="ds-list">{otherDatasets}</section>
+      <section className="column-list">{otherDatasets}</section>
     </Layout>
   );
 };

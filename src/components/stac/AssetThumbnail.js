@@ -1,11 +1,12 @@
 import React from "react";
 
-const AssetThumbnail = ({ assets, placeholder = "400x181", style = {} }) => {
-  // TODO: remove placeholder service when all collections have a src href
-  const imgSrc =
-    assets?.thumbnail?.href || `https://via.placeholder.com/${placeholder}`;
+const AssetThumbnail = ({ assets, style = {} }) => {
+  const imgSrc = assets?.thumbnail?.href;
 
-  return <img style={style} src={imgSrc} alt="Dataset thumbnail" />;
+  if (imgSrc) {
+    return <img style={style} src={imgSrc} alt="Dataset thumbnail" />;
+  }
+  return null;
 };
 
 export default AssetThumbnail;

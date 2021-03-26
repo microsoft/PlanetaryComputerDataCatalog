@@ -52,20 +52,14 @@ const Collection = () => {
       {collection ? (
         <Pivot>
           <PivotItem headerText="Overview">
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "70% 30%",
-                gridGap: "10px",
-              }}
-            >
-              <Description collection={collection} />
+            <div className="column-list">
+              <div className="cl-item">
+                <Description collection={collection} />
+                <Bands collection={collection} />
+                <ItemAssets itemAssets={collection.item_assets} />
+              </div>
               <CollectionDetail collection={collection} />
             </div>
-            <Bands collection={collection} />
-            {collection.item_assets && (
-              <ItemAssets itemAssets={collection.item_assets} />
-            )}
           </PivotItem>
           {tabs}
         </Pivot>

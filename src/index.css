@@ -14,7 +14,7 @@ code {
 
 /* Generalized grid layouts */
 @media screen and (min-width: 800px) {
-  .ds-list {
+  .column-list {
     display: flex;
     flex-wrap: wrap;
   }
@@ -31,6 +31,15 @@ code {
   .toc-item {
     width: 200px;
   }
+
+  .cl-item {
+    width: 600px;
+    margin-right: 60px;
+  }
+}
+
+.cl-item {
+  margin-bottom: 30px;
 }
 
 .ds-item, .toc-item {

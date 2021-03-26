@@ -9,7 +9,7 @@ import { Stack } from "@fluentui/react";
 
 const CollectionDetail = ({ collection }) => {
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div>
       <Stack tokens={{ childrenGap: "10px" }}>
         <SpatialExtent extent={collection.extent?.spatial} />
         <TemporalExtent extent={collection.extent?.temporal} />
