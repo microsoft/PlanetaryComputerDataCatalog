@@ -9,7 +9,7 @@ const Topic = ({ topics }) => {
   const doc = topics[docsKey];
 
   if (doc?.body) {
-    return <RoutedHtml markup={doc.body} />;
+    return <RoutedHtml className="generated-docs" markup={doc.body} />;
   }
   return <Redirect to={"/404"} />;
 };

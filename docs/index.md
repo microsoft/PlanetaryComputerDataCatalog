@@ -15,7 +15,7 @@ api/read
 
 ```{toctree}
 :maxdepth: 1
-:caption: Compute Docs 
+:caption: Compute docs 
 
 compute/computing
 ```

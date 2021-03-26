@@ -26,9 +26,13 @@ code {
     max-width: 100%;
     object-fit: contain;
   }
+
+  .toc-item {
+    width: 200px;
+  }
 }
 
-.ds-item {
+.ds-item, .toc-item {
   padding: 15px;
   margin: 5px;
 }
@@ -44,6 +48,12 @@ code {
   margin-bottom: 2px;
 }
 
+/* Documentation markup from generated sources */
+.generated-docs img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
 /* Corporate footer styling from UHF */
 
 .c-uhff-base {

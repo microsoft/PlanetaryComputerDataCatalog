@@ -22,8 +22,8 @@ const Docs = () => {
         flexWrap: "wrap",
       }}
     >
-      <div style={{ flexBasis: "20rem", flexGrow: 1 }}>
-        <RoutedHtml className="ds-item" markup={toc} />
+      <div style={{ flexBasis: "10rem", flexGrow: 1 }}>
+        <RoutedHtml className="toc-item" markup={toc} />
       </div>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
