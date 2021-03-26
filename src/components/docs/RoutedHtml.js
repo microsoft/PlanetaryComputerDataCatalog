@@ -8,7 +8,7 @@ const imagePathRegex = /..\/..\/_images/gi;
 // Given a string of HTML markup generated from sphinx-build, rewrite
 // internal links and capture their events to process them through the
 // React Router system.
-const RoutedHtml = ({ markup }) => {
+const RoutedHtml = ({ className, markup }) => {
   const history = useHistory();
 
   const handleClick = e => {
@@ -21,6 +21,7 @@ const RoutedHtml = ({ markup }) => {
 
   const content = markup ? (
     <div
+      className={className}
       onClick={handleClick}
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(

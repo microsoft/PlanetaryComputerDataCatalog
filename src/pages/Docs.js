@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
+import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
 
@@ -22,8 +23,8 @@ const Docs = () => {
         flexWrap: "wrap",
       }}
     >
-      <div style={{ flexBasis: "20rem", flexGrow: 1 }}>
-        <RoutedHtml className="ds-item" markup={toc} />
+      <div style={{ flexBasis: "10rem", flexGrow: 1 }}>
+        <RoutedHtml className="toc-item" markup={toc} />
       </div>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
@@ -36,7 +37,7 @@ const Docs = () => {
             <h2>Documentation</h2>
             <p>
               The Planetary Computer consists of an API layer as well as
-              Computer. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              Compute. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -50,7 +51,15 @@ const Docs = () => {
     </div>
   );
 
-  return <Layout>{links}</Layout>;
+  return (
+    <Layout>
+      <SEO
+        title="Documentation"
+        description="User guides and reference material for using the Planetary Computer."
+      />
+      {links}
+    </Layout>
+  );
 };
 
 export default Docs;

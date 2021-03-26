@@ -15,8 +15,7 @@ api/read
 
 ```{toctree}
 :maxdepth: 1
-:caption: Compute Docs 
+:caption: Compute docs 
 
-compute/daymet
-compute/nasdem
+compute/computing
 ```
