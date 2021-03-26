@@ -14,6 +14,8 @@ import ResourceCard from "../components/ResourceCard";
 import { ai4e as datasetsConfig } from "../config/datasets.yml";
 import DefaultBanner from "../components/DefaultBanner";
 
+import { byKey } from "../utils";
+
 const Datasets = () => {
   const qs = useQueryString();
   const dispatch = useDispatch();
@@ -43,7 +45,7 @@ const Datasets = () => {
   const primaryDatasets = isLoading ? (
     <div>Loading...</div>
   ) : (
-    collections.map(collection => {
+    collections.sort(byKey("title")).map(collection => {
       return (
         <CollectionCard key={`card-${collection.id}`} collection={collection} />
       );
@@ -61,7 +63,7 @@ const Datasets = () => {
       <SEO title="Datasets" />
       <section className="ds-list">{primaryDatasets}</section>
 
-      <h2>Other datasets</h2>
+      <h2>Additional datasets</h2>
       <Text block>
         The Microsoft Planetary Computer has access to geospatial data and
         documentation for all the data that is managed by AI for Earth. If you

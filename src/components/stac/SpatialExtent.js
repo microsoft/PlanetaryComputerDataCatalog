@@ -81,7 +81,7 @@ const SpatialExtent = ({ extent }) => {
   if (!extent) return null;
 
   return (
-    <div id="extent-map" style={{ width: "330px", height: "150px" }}></div>
+    <div id="extent-map" style={{ width: "250px", height: "150px" }}></div>
   );
 };
 

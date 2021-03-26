@@ -6,6 +6,8 @@ import {
   SelectionMode,
 } from "@fluentui/react";
 
+import { renderItemColumn } from "../../utils/stac";
+
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
 // values, set the desired widths by key
@@ -20,19 +22,6 @@ const bandKey = "eo:bands";
 
 const ItemAssets = itemAssets => {
   const formatted = StacFields.formatAssets(itemAssets);
-
-  const renderItemColumn = (item, _, column) => {
-    const fieldContent = item[column.fieldName];
-
-    // Add tooltips to potentiall long cells
-    switch (column.key) {
-      case "type":
-      case "description":
-        return <span title={fieldContent}>{fieldContent}</span>;
-      default:
-        return fieldContent;
-    }
-  };
 
   // Item assets will be grouped by extension
   const assetsByExt = formatted.itemAssets.map(ia => {

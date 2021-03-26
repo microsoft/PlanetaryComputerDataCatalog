@@ -6,6 +6,8 @@ import {
 } from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
 
+import { renderItemColumn } from "../../utils/stac";
+
 const bandKey = "eo:bands";
 
 StacFields.Registry.addMetadataField("gsd", {
@@ -64,6 +66,7 @@ const Bands = ({ collection }) => {
         selectionMode={SelectionMode.none}
         layoutMode={DetailsListLayoutMode.justified}
         isHeaderVisible={true}
+        onRenderItemColumn={renderItemColumn}
       />
     </>
   );
