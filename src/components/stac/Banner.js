@@ -9,12 +9,11 @@ const Banner = ({ collection }) => {
 
   return (
     <div
+      className="column-list"
       style={{
-        display: "grid",
-        gridTemplateColumns: "70% 30%",
-        gridGap: "10px",
         background: "#F0F0F0",
         minHeight: "300px",
+        justifyContent: "space-between",
       }}
     >
       <div>

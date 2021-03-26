@@ -23,6 +23,8 @@ const bandKey = "eo:bands";
 const ItemAssets = itemAssets => {
   const formatted = StacFields.formatAssets(itemAssets);
 
+  if (!itemAssets) return null;
+
   // Item assets will be grouped by extension
   const assetsByExt = formatted.itemAssets.map(ia => {
     // Get a list of all unique value keys for assets in this extension, these
@@ -104,11 +106,11 @@ const ItemAssets = itemAssets => {
   );
 
   return (
-    <>
+    <div>
       <h2>Dataset Assets</h2>
       <p>Scenes in this dataset include the following assets:</p>
       {assetLists}
-    </>
+    </div>
   );
 };
 

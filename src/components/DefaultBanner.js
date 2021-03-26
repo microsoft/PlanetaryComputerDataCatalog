@@ -7,7 +7,7 @@ const DefaultBanner = ({ children }) => {
 
   const banner = (
     <div
-      className="ds-list"
+      className="column-list"
       style={{
         background: "#F0F0F0",
         minHeight: "200px",

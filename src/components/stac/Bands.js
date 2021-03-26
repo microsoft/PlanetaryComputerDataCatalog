@@ -57,7 +57,7 @@ const Bands = ({ collection }) => {
   });
 
   return (
-    <>
+    <div>
       <h2>Spectral Bands</h2>
       <DetailsList
         items={items}
@@ -68,7 +68,7 @@ const Bands = ({ collection }) => {
         isHeaderVisible={true}
         onRenderItemColumn={renderItemColumn}
       />
-    </>
+    </div>
   );
 };
 
