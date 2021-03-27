@@ -16,7 +16,13 @@ const Banner = ({ collection }) => {
         justifyContent: "space-between",
       }}
     >
-      <div>
+      <div
+        style={{
+          margin: "0 auto",
+          maxWidth: 1200,
+          paddingLeft: "1.5rem",
+        }}
+      >
         <Text block>Datasets</Text>
         <h1>{collection.title}</h1>
         <Keywords keywords={collection.keywords} />

@@ -2,9 +2,10 @@ import { Stack } from "@fluentui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HeaderLink = ({ to, children }) => {
+const HeaderLink = ({ to, children, style }) => {
+  const defaultStyle = { marginTop: "-5px" };
   return (
-    <Stack.Item align={"center"}>
+    <Stack.Item align={"center"} style={style || defaultStyle}>
       <Link
         to={to}
         style={{
