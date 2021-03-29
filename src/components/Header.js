@@ -51,6 +51,9 @@ const Header = ({ siteProduct }) => (
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink to="/apps">Apps</HeaderLink>
+        <HeaderLink external to="/compute">
+          Hub
+        </HeaderLink>
         <HeaderLink to="/account/request">Request access</HeaderLink>
       </Stack>
     </div>

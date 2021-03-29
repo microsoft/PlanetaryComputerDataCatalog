@@ -14,7 +14,6 @@ const Layout = ({ bannerHeader, bannerFooter, children }) => {
       <div>{bannerHeader}</div>
       <div
         style={{
-          maxWidth: 960,
           padding: "0 5%",
         }}
       >
