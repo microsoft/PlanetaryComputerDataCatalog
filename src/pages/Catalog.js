@@ -16,7 +16,7 @@ import DefaultBanner from "../components/DefaultBanner";
 
 import { byKey } from "../utils";
 
-const Datasets = () => {
+const Catalog = () => {
   const qs = useQueryString();
   const dispatch = useDispatch();
   const catalogUrl = qs.get("catalog");
@@ -66,7 +66,7 @@ const Datasets = () => {
         available through the API, and continuing to bring new data sets to
         Azure. If you are interested in seeing additional data on-boarded or
         published through our API – or if you have data you’d like to contribute
-        – <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>{" "}
+        – <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
         .
       </Text>
       <section className="column-list">{primaryDatasets}</section>
@@ -81,4 +81,4 @@ const Datasets = () => {
   );
 };
 
-export default Datasets;
+export default Catalog;
