@@ -1,6 +1,5 @@
-import { Text } from "@fluentui/react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Text } from "@fluentui/react";
 
 import DefaultBanner from "../components/DefaultBanner";
 import Resource from "../components/homepage/Resource";
