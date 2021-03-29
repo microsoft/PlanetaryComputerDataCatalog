@@ -56,7 +56,7 @@ const SpatialExtent = ({ extent }) => {
       // Add a line layer to render the outlines of the spatial extents
       mapRef.current.layers.add(
         new atlas.layer.LineLayer(source, "myLineLayer", {
-          strokeColor: "blue",
+          strokeColor: "#fff",
           strokeWidth: 1.5,
           strokeOpacity: 0.5,
         }),
@@ -69,11 +69,11 @@ const SpatialExtent = ({ extent }) => {
     if (!mapRef.current) {
       mapRef.current = new atlas.Map("extent-map", {
         view: "Auto",
-        center: [-122.33, 47.6],
+        center: [90, -90],
         zoom: 12,
         language: "en-US",
         showFeedbackLink: false,
-        style: "grayscale_light",
+        style: "grayscale_dark",
         renderWorldCopies: true, // This setting may need adjusment for showing whole-world bounds
         authOptions: {
           authType: "subscriptionKey",
