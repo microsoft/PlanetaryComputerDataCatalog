@@ -71,7 +71,10 @@ const Collection = () => {
           ariaLabel="Dataset detail tabs"
         >
           <PivotItem headerText="Overview" itemKey="overview">
-            <div className="column-list">
+            <div
+              className="column-list"
+              style={{ justifyContent: "space-between" }}
+            >
               <div className="cl-item">
                 <h2>Overview</h2>
                 <Description collection={collection} />
