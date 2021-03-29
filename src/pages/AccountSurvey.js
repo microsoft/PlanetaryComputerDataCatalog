@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { PrimaryButton, Stack, Text } from "@fluentui/react";
+import { useMutation } from "react-query";
 import axios from "axios";
 import * as yup from "yup";
 
@@ -114,12 +115,12 @@ const AccountSurvey = () => {
       <h1>Request an account</h1>
       <Text block>
         The Planetary Computer API and Planetary Computer Hub are currently in
-        preview, and we’re excited to expand our partner and developer network.
-        If you’re interested in being one of our first users, please provide the
-        following information. We will accommodate as many users as we can in
-        our preview, but we are excited to support the entire environmental
-        sustainability community when the Planetary Computer is publicly
-        available.
+        private preview, and we’re excited to expand our partner and developer
+        network. If you’re interested in being one of our first users, please
+        provide the following information. We will accommodate as many users as
+        we can in our preview, but we are excited to support the entire
+        environmental sustainability community when the Planetary Computer is
+        publicly available.
       </Text>
     </DefaultBanner>
   );
@@ -129,7 +130,7 @@ const AccountSurvey = () => {
       <SEO title="Account Request" />
       <p>
         [TOS and details about why we are collecting this information, and what
-        we will do with it.]
+        we will do with it]
       </p>
       {form}
       {msg}

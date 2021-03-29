@@ -60,7 +60,7 @@ const Home = () => {
           The Planetary Computer Data Catalog includes petabytes of
           environmental monitoring data, in consistent, analysis-ready formats,
           accessible through our APIs as well as directly available via Azure
-          Storage.j
+          Storage.
         </Resource>
         <Resource title="API">
           The Planetary Computer API makes it easy for users to find exactly the
