@@ -1,7 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
-import { PrimaryButton, Stack, Text } from "@fluentui/react";
+import {
+  Link,
+  PrimaryButton,
+  Spinner,
+  SpinnerSize,
+  Stack,
+  Text,
+} from "@fluentui/react";
 import { useMutation } from "react-query";
+import { useHistory } from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 
@@ -9,29 +17,29 @@ import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import FormInput from "../components/forms/FormInput";
 import FormSelect from "../components/forms/FormSelect";
+import FormCheckbox from "../components/forms/FormCheckbox";
 import DefaultBanner from "../components/DefaultBanner";
+import NewTabLink from "../components/controls/NewTabLink";
 
-import {
-  successMsg,
-  failMsg,
-  languageOptions,
-  industryOptions,
-} from "../config/account";
+import { languageOptions, industryOptions } from "../config/account.yml";
 import countries from "../config/countries.yml";
 
 import { marginVStyle } from "../styles";
+import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount";
+
+const rowProps = { horizontal: true, verticalAlign: "center" };
+const stackTokens = {
+  spinnerStack: {
+    childrenGap: 20,
+  },
+};
 
 const AccountSurvey = () => {
-  const [msg, setMsg] = useState();
+  const history = useHistory();
+  const mutation = useMutation(survey => axios.post("./api/survey", survey));
 
-  const handleSubmit = async survey => {
-    try {
-      const resp = await axios.post("./api/survey", survey);
-      const respMsg = resp.status === 200 ? successMsg : failMsg;
-      setMsg(respMsg);
-    } catch {
-      setMsg(failMsg);
-    }
+  const handleSubmit = survey => {
+    mutation.mutate(survey);
   };
 
   const validationSchema = yup.object({
@@ -46,6 +54,7 @@ const AccountSurvey = () => {
     country: yup.string(),
     datasets: yup.string(),
     areaOfStudy: yup.string(),
+    terms: yup.boolean().required(),
   });
 
   const formik = useFormik({
@@ -58,13 +67,28 @@ const AccountSurvey = () => {
       country: "",
       datasets: "",
       studyArea: "",
+      terms: false,
     },
     validationSchema: validationSchema,
     onSubmit: handleSubmit,
   });
 
+  const tosLabel = (
+    <span>
+      You have read and agree to our{" "}
+      <NewTabLink href="https://go.microsoft.com/fwlink/?LinkID=206977">
+        terms of use
+      </NewTabLink>
+      .
+    </span>
+  );
+
   const form = (
     <form onSubmit={formik.handleSubmit} style={{ maxWidth: "500px" }}>
+      <Text block>
+        [TOS and details about why we are collecting this information, and what
+        we will do with it]
+      </Text>
       <Stack tokens={{ childrenGap: 8 }}>
         <FormInput required name="email" label="Email" formik={formik} />
         <FormInput required name="name" label="Name" formik={formik} />
@@ -95,18 +119,32 @@ const AccountSurvey = () => {
         />
         <FormInput
           name="datasets"
-          label="Describe the datasets you're interested in"
+          label="What datasets are you interested in?"
           formik={formik}
           multiline
         />
         <FormInput
           name="studyArea"
-          label="Area of study"
+          label="What is your area of study?"
           formik={formik}
           multiline
         />
+        <FormCheckbox
+          name="terms"
+          label={tosLabel}
+          formik={formik}
+          required={true}
+        />
       </Stack>
-      <PrimaryButton type="submit" text="Submit" styles={marginVStyle} />
+      <Stack {...rowProps} tokens={stackTokens.spinnerStack}>
+        <PrimaryButton
+          disabled={mutation.isLoading}
+          type="submit"
+          text="Submit"
+          styles={marginVStyle}
+        />
+        {mutation.isLoading && <Spinner size={SpinnerSize.large} />}
+      </Stack>
     </form>
   );
 
@@ -125,15 +163,38 @@ const AccountSurvey = () => {
     </DefaultBanner>
   );
 
+  const successMsg = (
+    <>
+      <h2>Thank you for your interest!</h2>
+      <Text block>
+        You've been added to our waiting list, and we'll follow up with
+        additional information as we develop the service.
+      </Text>
+      <ScrollToTopOnMount />
+    </>
+  );
+
+  const failMsg = (
+    <>
+      <h2>Something went wrong...</h2>
+      <Text block>
+        Sorry, we seem to be having trouble with our signups at the moment.
+        Please <Link onClick={() => history.go(0)}>try again</Link> or email{" "}
+        <Link href="mailto:planetarycomputer@microsoft.com">
+          planetarycomputer@microsoft.com
+        </Link>{" "}
+        for support.
+      </Text>
+      <ScrollToTopOnMount />
+    </>
+  );
+
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Account Request" />
-      <p>
-        [TOS and details about why we are collecting this information, and what
-        we will do with it]
-      </p>
-      {form}
-      {msg}
+      {mutation.isError && failMsg}
+      {(mutation.isLoading || mutation.isIdle) && form}
+      {mutation.isSuccess && successMsg}
     </Layout>
   );
 };
