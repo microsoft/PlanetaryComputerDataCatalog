@@ -2,21 +2,26 @@ import { Stack } from "@fluentui/react";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HeaderLink = ({ to, children, style }) => {
+const HeaderLink = ({ to, external = false, style, children }) => {
   const defaultStyle = { marginTop: "-5px" };
+  const linkStyle = {
+    fontSize: "14px",
+    lineHeight: "16px",
+    color: "#000",
+    textDecoration: "none",
+  };
+  const link = external ? (
+    <a href={to} style={linkStyle}>
+      {children}
+    </a>
+  ) : (
+    <Link to={to} style={linkStyle}>
+      {children}
+    </Link>
+  );
   return (
     <Stack.Item align={"center"} style={style || defaultStyle}>
-      <Link
-        to={to}
-        style={{
-          fontSize: "14px",
-          lineHeight: "16px",
-          color: "#000",
-          textDecoration: "none",
-        }}
-      >
-        {children}
-      </Link>
+      {link}
     </Stack.Item>
   );
 };
