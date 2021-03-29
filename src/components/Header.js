@@ -41,7 +41,6 @@ const Header = ({ siteProduct }) => (
               maxWidth: "none",
               width: "108px",
             }}
-            gg
           />
         </a>
         <HeaderLink to="/" style={{ marginTop: "-10px", marginLeft: 0 }}>

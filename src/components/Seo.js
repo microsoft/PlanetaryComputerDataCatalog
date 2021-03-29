@@ -6,7 +6,7 @@ import site from "../config/site.yml";
 
 function SEO({ description, lang, meta, title }) {
   const metaDescription = description || site.description;
-  const defaultTitle = `${site.product} ${site.name}`;
+  const defaultTitle = `${site.product}`;
 
   return (
     <Helmet

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { initializeIcons } from "@uifabric/icons";
 
-import Datasets from "./pages/Datasets";
+import Catalog from "./pages/Catalog";
 import Collection from "./pages/Collection";
 import NotFound from "./pages/NotFound";
 import AccountSurvey from "./pages/AccountSurvey";
@@ -22,7 +22,7 @@ function App() {
             <Home />
           </Route>
           <Route exact path="/catalog">
-            <Datasets />
+            <Catalog />
           </Route>
           <Route path="/docs/">
             <Docs />

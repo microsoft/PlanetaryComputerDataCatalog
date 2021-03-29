@@ -42,6 +42,7 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
         "StudyArea": req_body.get("studyArea"),
         "Processed": False,
         "PartitionKey": "survey",
+        "Terms": req_body.get("terms"),
         "RowKey": row_key,
     }
 
