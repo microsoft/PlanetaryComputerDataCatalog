@@ -41,17 +41,18 @@ const Header = ({ siteProduct }) => (
               maxWidth: "none",
               width: "108px",
             }}
+            gg
           />
         </a>
-        <HeaderLink to="/landing" style={{ marginTop: "-10px", marginLeft: 0 }}>
+        <HeaderLink to="/" style={{ marginTop: "-10px", marginLeft: 0 }}>
           <Text block variant="large">
             | {siteProduct}
           </Text>
         </HeaderLink>
-        <HeaderLink to="/">Datasets</HeaderLink>
+        <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink to="/apps">Apps</HeaderLink>
-        <HeaderLink to="/account/request">Request an Account</HeaderLink>
+        <HeaderLink to="/account/request">Request access</HeaderLink>
       </Stack>
     </div>
     <div id="cookie-banner"></div>

@@ -9,6 +9,7 @@ import AccountSurvey from "./pages/AccountSurvey";
 import Docs from "./pages/Docs";
 import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
+import Home from "./pages/Home";
 
 function App() {
   initializeIcons();
@@ -18,6 +19,9 @@ function App() {
       <div>
         <Switch>
           <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/catalog">
             <Datasets />
           </Route>
           <Route path="/docs/">
