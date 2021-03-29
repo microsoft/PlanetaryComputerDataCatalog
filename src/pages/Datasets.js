@@ -29,14 +29,9 @@ const Datasets = () => {
 
   const banner = (
     <DefaultBanner>
-      <h1>Datasets</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
-      </p>
+      <Text block variant="xxLarge">
+        Planetary Computer Data Catalog
+      </Text>
     </DefaultBanner>
   );
 
@@ -60,19 +55,26 @@ const Datasets = () => {
 
   return (
     <Layout bannerHeader={banner}>
-      <SEO title="Datasets" />
+      <SEO title="Data Catalog" />
+      <Text block variant="large" style={{ margin: "1.8rem 0" }}>
+        The Planetary Computer Data Catalog includes petabytes of environmental
+        monitoring data, in consistent, analysis-ready formats. All of the
+        datasets below can be accessed via Azure blob storage, and can be used
+        by developers whether you’re working within or outside of our Planetary
+        Computer Hub. Our largest data sets can be also queried and accessed
+        through our Planetary Computer API. We are continuing to expand the data
+        available through the API, and continuing to bring new data sets to
+        Azure. If you are interested in seeing additional data on-boarded or
+        published through our API – or if you have data you’d like to contribute
+        – <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>{" "}
+        .
+      </Text>
       <section className="column-list">{primaryDatasets}</section>
 
       <h2>Additional datasets</h2>
       <Text block>
-        The Microsoft Planetary Computer has access to geospatial data and
-        documentation for all the data that is managed by AI for Earth. If you
-        have feedback about any of this data, or want to request additions to
-        our data program, email us at{" "}
-        <Link href="mailto:aiforearthdatasets@microsoft.com">
-          aiforearthdatasets@microsoft.com
-        </Link>
-        .
+        The following datasets are available on Azure, for use within or outside
+        of the Planetary Computer Hub.
       </Text>
       <section className="column-list">{otherDatasets}</section>
     </Layout>

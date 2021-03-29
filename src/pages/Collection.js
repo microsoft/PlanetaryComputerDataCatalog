@@ -65,10 +65,15 @@ const Collection = () => {
     <Layout bannerHeader={bannerHeader}>
       <SEO title={id} description={collection?.description} />
       {collection ? (
-        <Pivot selectedKey={activeTab} onLinkClick={handleTabChange}>
+        <Pivot
+          selectedKey={activeTab}
+          onLinkClick={handleTabChange}
+          ariaLabel="Dataset detail tabs"
+        >
           <PivotItem headerText="Overview" itemKey="overview">
             <div className="column-list">
               <div className="cl-item">
+                <h2>Overview</h2>
                 <Description collection={collection} />
                 <Bands collection={collection} />
                 <ItemAssets itemAssets={collection.item_assets} />

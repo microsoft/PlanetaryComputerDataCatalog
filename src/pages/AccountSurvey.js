@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { PrimaryButton, Stack } from "@fluentui/react";
+import { PrimaryButton, Stack, Text } from "@fluentui/react";
 import axios from "axios";
 import * as yup from "yup";
 
@@ -112,12 +112,15 @@ const AccountSurvey = () => {
   const banner = (
     <DefaultBanner>
       <h1>Request an account</h1>
-      <p>
-        Planetary Computer users get access to our API and Compute resources.
-        The offering is currently in Limited Preview and is not ready for a
-        general audience. Please register your interest in using this service to
-        stay in touch.
-      </p>
+      <Text block>
+        The Planetary Computer API and Planetary Computer Hub are currently in
+        preview, and we’re excited to expand our partner and developer network.
+        If you’re interested in being one of our first users, please provide the
+        following information. We will accommodate as many users as we can in
+        our preview, but we are excited to support the entire environmental
+        sustainability community when the Planetary Computer is publicly
+        available.
+      </Text>
     </DefaultBanner>
   );
 

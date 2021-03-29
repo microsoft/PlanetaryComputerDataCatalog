@@ -7,14 +7,17 @@ import AssetThumbnail from "./AssetThumbnail";
 const CollectionCard = ({ collection }) => {
   return (
     <div className="ds-item" key={collection.id}>
-      <AssetThumbnail assets={collection.assets} />
-      <h3>{collection.title}</h3>
-      <Text block>{collection["msft:short_description"]}</Text>
       <RouterLink
-        style={{ display: "inline-block", marginTop: "5px" }}
+        style={{
+          display: "inline-block",
+          marginTop: "5px",
+          textDecoration: "none",
+        }}
         to={`collection/${collection.id}`}
       >
-        {collection.title}
+        <AssetThumbnail assets={collection.assets} />
+        <h3>{collection.title}</h3>
+        <Text block>{collection["msft:short_description"]}</Text>
       </RouterLink>
     </div>
   );

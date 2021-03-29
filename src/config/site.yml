@@ -1,9 +1,4 @@
-product: Planetary Computer (Preview)
+product: Planetary Computer
 name: Data Catalog
 description: Explore the datasets and functionality of Microsoft's Planetary Computer
 author: AI for Earth <aiforearthdatasets@microsoft.com>
-
-
-# The compute API section uses a notebook for its main content
-compute:
-  notebookSrc: ghe.html

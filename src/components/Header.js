@@ -7,14 +7,13 @@ const Header = ({ siteProduct }) => (
   <header
     style={{
       background: "#fff",
-      marginBottom: "1.45rem",
+      marginBottom: "0.4rem",
     }}
   >
     <div
       style={{
-        margin: "0 auto",
         maxWidth: 1200,
-        paddingLeft: "1.5rem",
+        padding: "0 5%",
       }}
     >
       <Stack horizontal tokens={{ childrenGap: "16px" }}>
@@ -27,7 +26,6 @@ const Header = ({ siteProduct }) => (
             padding: "16px 6px 16px 10px",
             float: "left",
             height: "100%",
-            marginTop: "10px",
             width: "113px",
             outlineOffset: "-2px",
           }}
@@ -43,17 +41,18 @@ const Header = ({ siteProduct }) => (
               maxWidth: "none",
               width: "108px",
             }}
+            gg
           />
         </a>
-        <Stack.Item align="center" style={{ marginLeft: "0" }}>
-          <Text block variant="xLarge">
+        <HeaderLink to="/" style={{ marginTop: "-10px", marginLeft: 0 }}>
+          <Text block variant="large">
             | {siteProduct}
           </Text>
-        </Stack.Item>
-        <HeaderLink to="/">Datasets</HeaderLink>
+        </HeaderLink>
+        <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink to="/apps">Apps</HeaderLink>
-        <HeaderLink to="/account/request">Request an Account</HeaderLink>
+        <HeaderLink to="/account/request">Request access</HeaderLink>
       </Stack>
     </div>
     <div id="cookie-banner"></div>

@@ -38,98 +38,84 @@ collections:
 ai4e: 
   - title: Daymet
     description: Gridded temperature data across North America
-    sourceUrl: https://daymet.ornl.gov/
     infoUrl: http://aka.ms/ai4edata-daymet
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3CbUs?ver=b6c7&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Map showing color-coded temperature data.
 
   - title: Global Hydro Estimator
     description: Global precipitation estimates
-    sourceUrl: https://www.ospo.noaa.gov/Products/atmosphere/ghe/
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4ucH7?ver=9bbe&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Clouds at sunset
 
   - title: LILA BC
     description: Labeled images related to wildlife conservation
-    sourceUrl: http://lila.science/
-    infoUrl: 
+    infoUrl: http://lila.science/
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BWhq?ver=a3ee&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Fox pup stands on a rock.
 
   - title: MODIS Surface Reflectance
     description: 500m-resolution global daily surface reflectance dating back to 2000
-    sourceUrl:  
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BTDt?ver=3fe9&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: View of Earth from space.
 
   - title: Monitoring Trends in Burn Severity Mosaics
     description: Annual burn severity for the US
-    sourceUrl: https://www.mtbs.gov/
     infoUrl: https://aka.ms/ai4edata-mtbs
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Yt?ver=28e7&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Forest fire.
 
   - title: NASADEM
     description: Global topographic survey
-    sourceUrl: https://earthdata.nasa.gov/esds/competitive-programs/measures/nasadem
     infoUrl: https://aka.ms/ai4edata-nasadem
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4sQYP?ver=5623&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Topographic map showing contour lines
 
   - title: National Land Cover Database
     description: US-wide data on land cover and land cover change
-    sourceUrl: https://www.mrlc.gov/
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Zh?ver=8e3e&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Landcover map of the United States
 
   - title: NEXRAD
     description: Radar data from 159 stations across the US
-    sourceUrl: https://www.ncdc.noaa.gov/data-access/radar-data/nexrad
     infoUrl: https://aka.ms/ai4edata-nexrad
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3CbUp?ver=eb55&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Map of the US showing radar data.
 
   - title: NOAA Global Forecast System
     description: 15-day US hourly weather forecast data
-    sourceUrl: https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4rvnx?ver=7332&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Earth viewed from space station with a satellite
 
   - title: NOAA GFS Warm Start Conditions
     description: Six-hourly initial conditions for the NOAA Global Forecast System
-    sourceUrl: https://www.ncdc.noaa.gov/data-access/model-data/model-datasets/global-forcast-system-gfs
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4MHyn?ver=a18e&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: High altitude view of cloud cover with moon
 
   - title: NOAA Integrated Surface Data
     description: Worldwide hourly weather history data
-    sourceUrl: https://www.ncdc.noaa.gov/isd
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4rsOQ?ver=8870&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: High altitude view of clouds
 
   - title: Ocean Observatories Initiative CAMHD 
     description: High-resolution video from the floor of the Pacific Ocean
-    sourceUrl: https://oceanobservatories.org/instrument-class/camhd/
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4KiKZ?ver=edc5&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Image from ocean floor video
 
   - title: TerraClimate
     description: Global monthly climate data from 1958-present
-    sourceUrl: http://www.climatologylab.org/terraclimate.html
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Zk?ver=cc7b&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Rain clouds viewed from space
 
   - title: USFS Forest Inventory and Analysis
     description: Trends in US forest health
-    sourceUrl: https://www.fia.fs.fed.us/
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz2Nt?ver=8060&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Evergreen forest with shrubbery

@@ -12,18 +12,29 @@ const Banner = ({ collection }) => {
       className="column-list"
       style={{
         background: "#F0F0F0",
-        minHeight: "300px",
+        // minHeight: "300px",
         justifyContent: "space-between",
       }}
     >
-      <div>
-        <Text block>Datasets</Text>
-        <h1>{collection.title}</h1>
+      <div
+        style={{
+          maxWidth: 1200,
+          padding: "0 5%",
+        }}
+      >
+        <Text block styles={{ root: { fontWeight: 500, marginTop: 5 } }}>
+          Datasets
+        </Text>
+        <h1 style={{ marginTop: 5 }}>{collection.title}</h1>
         <Keywords keywords={collection.keywords} />
       </div>
       <div>
         <AssetThumbnail
-          style={{ maxHeight: "250px", objectFit: "contain" }}
+          style={{
+            maxHeight: "250px",
+            objectFit: "contain",
+            margin: "0 15px",
+          }}
           assets={collection.assets}
         />
       </div>

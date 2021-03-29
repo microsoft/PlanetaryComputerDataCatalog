@@ -18,18 +18,12 @@ jobs:
     env:
       REACT_APP_MQE_URL: ${{ secrets.MQE_URL }}
       REACT_APP_JSLL_APP_ID: ${{ secrets.JSLL_APP_ID }}
-      PUBLIC_URL: ''
       REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: "Set PUBLIC_URL from branch"
-        if: ${{ endsWith(github.ref, 'develop') }}
-        run: |
-          echo "PUBLIC_URL=/catalog" >> $GITHUB_ENV 
-          echo "setting URL"
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
