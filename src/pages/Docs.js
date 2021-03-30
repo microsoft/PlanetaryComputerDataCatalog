@@ -52,7 +52,7 @@ const Docs = () => {
   );
 
   return (
-    <Layout>
+    <Layout isShort>
       <SEO
         title="Documentation"
         description="User guides and reference material for using the Planetary Computer."

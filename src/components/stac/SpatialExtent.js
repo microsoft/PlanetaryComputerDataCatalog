@@ -47,16 +47,23 @@ const SpatialExtent = ({ extent }) => {
       source.add(fcollection);
 
       // Take a bounding box of the entire feature collection, which
-      // could have non-contiguous extents
+      // could have non-contiguous extents. At "whole world" extents,
+      // the map doesn't center correctly, so adjust to map-center manually
+      const centeredOn = extentBbox.every(coord =>
+        [0, -90, -180, 90].includes(coord)
+      )
+        ? { center: [-6, 3] }
+        : { bounds: extentBbox };
+
       mapRef.current.setCamera({
-        bounds: extentBbox,
+        ...centeredOn,
         padding: 20,
       });
 
       // Add a line layer to render the outlines of the spatial extents
       mapRef.current.layers.add(
         new atlas.layer.LineLayer(source, "myLineLayer", {
-          strokeColor: "#fff",
+          strokeColor: "#003F87",
           strokeWidth: 1.5,
           strokeOpacity: 0.5,
         }),
@@ -73,7 +80,7 @@ const SpatialExtent = ({ extent }) => {
         zoom: 12,
         language: "en-US",
         showFeedbackLink: false,
-        style: "grayscale_dark",
+        style: "grayscale_light",
         renderWorldCopies: true, // This setting may need adjusment for showing whole-world bounds
         authOptions: {
           authType: "subscriptionKey",
@@ -90,7 +97,7 @@ const SpatialExtent = ({ extent }) => {
   if (!extent) return null;
 
   return (
-    <div id="extent-map" style={{ width: "250px", height: "150px" }}></div>
+    <div id="extent-map" style={{ width: "250px", height: "175px" }}></div>
   );
 };
 

@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import DefaultBanner from "../components/DefaultBanner";
-import ResourceCard from "../components/ResourceCard";
+import ApplicationCard from "../components/ApplicationCard";
 
 import appConfig from "../config/apps.yml";
 
@@ -11,31 +11,25 @@ const Applications = () => {
   const banner = (
     <DefaultBanner>
       <h1>Applications</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
+      <p style={{ margin: "1.8rem 0" }}>
+        The Planetary Computer puts global-scale geospatial data in the hands of
+        environmental scientists, application developers, and policy makers,
+        enabling data-driven decision making. Learn about some of the partners
+        who are building components of the Planetary Computer.
       </p>
     </DefaultBanner>
   );
 
   const appsList = appConfig.map(app => {
-    return (
-      <ResourceCard
-        key={`card-${app.title}`}
-        resourceItem={app}
-        sourceLabel="Homepage"
-        width={400}
-      />
-    );
+    return <ApplicationCard key={`card-${app.title}`} app={app} />;
   });
 
   return (
-    <Layout bannerHeader={banner}>
+    <Layout bannerHeader={banner} isShort>
       <SEO title="Applications" />
-      <section className="column-list">{appsList}</section>
+      <div className="layout-container">
+        <div className="layout-row">{appsList}</div>
+      </div>
     </Layout>
   );
 };

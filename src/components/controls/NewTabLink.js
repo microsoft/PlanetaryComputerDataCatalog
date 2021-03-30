@@ -3,7 +3,12 @@ import { Link } from "@fluentui/react";
 
 const NewTabLink = ({ href, children, As = Link }) => {
   return (
-    <As href={href} target="_blank" rel="noopener noreferrer">
+    <As
+      href={href}
+      aria-label="Link will open in new tab"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {children}
     </As>
   );

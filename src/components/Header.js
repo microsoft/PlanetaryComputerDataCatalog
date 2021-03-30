@@ -13,17 +13,17 @@ const Header = ({ siteProduct }) => (
     <div
       style={{
         maxWidth: 1200,
-        padding: "0 5%",
+        padding: "0 10%",
       }}
     >
-      <Stack horizontal tokens={{ childrenGap: "16px" }}>
+      <Stack horizontal wrap tokens={{ childrenGap: "10px" }}>
         <a
           id="uhfLogo"
           itemProp="url"
           href="https://www.microsoft.com"
           aria-label="Microsoft"
           style={{
-            padding: "16px 6px 16px 10px",
+            padding: "16px 0 16px 10px",
             float: "left",
             height: "100%",
             width: "113px",
@@ -43,18 +43,34 @@ const Header = ({ siteProduct }) => (
             }}
           />
         </a>
-        <HeaderLink to="/" style={{ marginTop: "-10px", marginLeft: 0 }}>
-          <Text block variant="large">
-            | {siteProduct}
+        <span
+          style={{
+            fontSize: 22,
+            fontWeight: 600,
+            marginTop: 13,
+            marginRight: 15,
+          }}
+        >
+          |
+        </span>
+        <HeaderLink to="/" style={{ marginTop: "-4px", marginLeft: 0 }}>
+          <Text block variant="large" style={{ fontWeight: 600 }}>
+            {siteProduct}
           </Text>
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/docs">Documentation</HeaderLink>
-        <HeaderLink to="/apps">Apps</HeaderLink>
+        <HeaderLink to="/docs">API</HeaderLink>
+        <HeaderLink to="/apps">Applications</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>
-        <HeaderLink to="/account/request">Request access</HeaderLink>
+        <HeaderLink
+          asButton
+          to="/account/request"
+          style={{ marginLeft: "auto" }}
+        >
+          Request access
+        </HeaderLink>
       </Stack>
     </div>
     <div id="cookie-banner"></div>

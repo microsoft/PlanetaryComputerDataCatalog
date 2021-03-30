@@ -4,7 +4,7 @@ import { boldStyle } from "../../styles";
 
 const LabeledValue = ({ label, children }) => {
   return (
-    <div>
+    <div className="collection-content-item">
       <Text block styles={boldStyle}>
         {label}:
       </Text>

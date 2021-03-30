@@ -1,120 +1,170 @@
 # Use STAC collection IDs to attach specific notebooks/content to a collection
 # detail page. Any references to Notebook html files below require the .ipynb
-# file to be included in the `etl/notebook_urls.txt` file for processing
+# file to be included in the `etl/codefiles_urls.txt` file for processing
 collections:
   naip:
+    shortTerm: NAIP
+    headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Getting Started 
         src: naip.html
       - title: Using Esri Image Server
         src: naip-image-server.html
-      - title: Using from blob storage
+      - title: Using Blob Storage
         src: naip-storage.html
-      - title: Landuse classification model
+      - title: Land Classification Demo
         src: landcover.html
         launch: 
-          title: Launch in Compute
+          title: Launch in Hub
           repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
           branch: main
           filePath: landcover.ipynb
   landsat-8-c2-l2:
+    shortTerm: Landsat 8
+    headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Getting Started 
         src: landsat.html
-      - title: Using from blob storage
+      - title: Using Blob Storage
         src: landsat-storage.html
   sentinel-2-l2a:
+    shortTerm: Sentinel-2
+    headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Getting Started 
         src: sentinel-2.html
-      - title: Using from blob storage
+      - title: Using Blob Storage
         src: sentinel-2-storage.html
   aster-l1t:
+    shortTerm: ASTER
+    headerImg: ./images/aster-hero.jpg
     tabs:
-      - title: Using from blob storage
+      - title: Using Blob Storage
         src: aster-storage.html
 
 # Configuration for "other dataset" section
 ai4e: 
   - title: Daymet
+    shortTerm: Daymet temperature
     description: Gridded temperature data across North America
     infoUrl: http://aka.ms/ai4edata-daymet
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3CbUs?ver=b6c7&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Map showing color-coded temperature data.
 
   - title: Global Hydro Estimator
+    shortTerm: global percipitation
     description: Global precipitation estimates
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4ucH7?ver=9bbe&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Clouds at sunset
 
+  - title: GEOS-16
+    shortTerm: GEOS-16 weather
+    description: Weather imagery of the Americas
+    infoUrl: http://aka.ms/ai4edata-goes16  
+    thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4ucH9?ver=0221&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
+    alt: Raindrops hitting water
+
+  - title: Harmonized Global Biomass
+    shortTerm: global biomass 
+    description: Global carbon density for 2010
+    infoUrl: https://aka.ms/ai4edata-hgb
+    thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Yf?ver=ac1c&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true 
+    alt: Shaded mossy forest
+
+  - title: Harmonized Landsat Sentinel-2
+    shortTerm: HLS 
+    description: 30m-resolution satellite imagery for North America
+    infoUrl: http://aka.ms/ai4edata-hls
+    thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3OM3E?ver=9517&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
+    alt: Map of Chesapeake Bay
+
+  - title: High Resolution Electricity Access
+    shortTerm: HREA
+    description: Settlement-level measures of electricity access and reliability
+    infoUrl: https://aka.ms/ai4edata-hrea
+    thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWAaNJ?ver=ce84&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
+    alt: City light grid viewed from above
+
   - title: LILA BC
+    shortTerm: LILA BC
     description: Labeled images related to wildlife conservation
     infoUrl: http://lila.science/
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BWhq?ver=a3ee&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Fox pup stands on a rock.
 
   - title: MODIS Surface Reflectance
+    shortTerm: MODIS
     description: 500m-resolution global daily surface reflectance dating back to 2000
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BTDt?ver=3fe9&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: View of Earth from space.
 
   - title: Monitoring Trends in Burn Severity Mosaics
+    shortTerm: burn severity
     description: Annual burn severity for the US
     infoUrl: https://aka.ms/ai4edata-mtbs
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Yt?ver=28e7&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Forest fire.
 
   - title: NASADEM
+    shortTerm: NASADEM
     description: Global topographic survey
     infoUrl: https://aka.ms/ai4edata-nasadem
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4sQYP?ver=5623&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Topographic map showing contour lines
 
   - title: National Land Cover Database
+    shortTerm: land cover
     description: US-wide data on land cover and land cover change
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Zh?ver=8e3e&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Landcover map of the United States
 
   - title: NEXRAD
+    shortTerm: NEXRAD
     description: Radar data from 159 stations across the US
     infoUrl: https://aka.ms/ai4edata-nexrad
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3CbUp?ver=eb55&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Map of the US showing radar data.
 
   - title: NOAA Global Forecast System
+    shortTerm: NOAA global forecast
     description: 15-day US hourly weather forecast data
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4rvnx?ver=7332&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Earth viewed from space station with a satellite
 
   - title: NOAA GFS Warm Start Conditions
+    shortTerm: NOAA warm start
     description: Six-hourly initial conditions for the NOAA Global Forecast System
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4MHyn?ver=a18e&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: High altitude view of cloud cover with moon
 
   - title: NOAA Integrated Surface Data
+    shortTerm: NOAA surface
     description: Worldwide hourly weather history data
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4rsOQ?ver=8870&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: High altitude view of clouds
 
   - title: Ocean Observatories Initiative CAMHD 
+    shortTerm: OOI
     description: High-resolution video from the floor of the Pacific Ocean
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4KiKZ?ver=edc5&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Image from ocean floor video
 
   - title: TerraClimate
+    shortTerm: global climate
     description: Global monthly climate data from 1958-present
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz0Zk?ver=cc7b&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Rain clouds viewed from space
 
   - title: USFS Forest Inventory and Analysis
+    shortTerm: forest health
     description: Trends in US forest health
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RWz2Nt?ver=8060&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true

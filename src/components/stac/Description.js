@@ -5,7 +5,8 @@ import DOMPurify from "dompurify";
 const Description = ({ collection }) => {
   return (
     <div
-      style={{ marginTop: "5px", marginBottom: "5px" }}
+      className="collection-content-item"
+      // style={{ marginTop: "5px", marginBottom: "5px" }}
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(marked(collection.description)),
       }}
