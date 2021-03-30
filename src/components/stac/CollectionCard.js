@@ -6,7 +6,13 @@ import AssetThumbnail from "./AssetThumbnail";
 
 const CollectionCard = ({ collection }) => {
   return (
-    <div className="ds-item" key={collection.id}>
+    <div
+      style={{
+        flex: "0 48%",
+        marginBottom: "5%",
+      }}
+      key={collection.id}
+    >
       <RouterLink
         style={{
           display: "inline-block",

@@ -5,19 +5,18 @@ const ResourceCard = ({ resourceItem, width = 200 }) => {
   const { alt, title, thumbnailUrl, description, infoUrl } = resourceItem;
 
   return (
-    <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
-      <div className="ds-item" style={{ width: width }}>
-        <img
-          alt={alt || `Screenshot of ${title}`}
-          src={thumbnailUrl}
-          style={{ minHeight: 112 }}
-        />
+    <div
+      style={{
+        flex: "0 32%",
+        marginBottom: "2%",
+      }}
+    >
+      <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
+        <img alt={alt || `Screenshot of ${title}`} src={thumbnailUrl} />
         <h3>{title}</h3>
-        <Text block styles={{ root: { marginBottom: 5 } }}>
-          {description}
-        </Text>
-      </div>
-    </Link>
+        <Text block>{description}</Text>
+      </Link>
+    </div>
   );
 };
 

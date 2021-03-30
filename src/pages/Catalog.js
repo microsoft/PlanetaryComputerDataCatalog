@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, Text } from "@fluentui/react";
+import { useMediaQuery } from "react-responsive";
 
 import { useQueryString } from "../utils/hooks";
 import { useCollections } from "../utils/requests";
@@ -26,6 +27,18 @@ const Catalog = () => {
       dispatch(updateUrl(catalogUrl));
     }
   });
+
+  const isLarge = useMediaQuery({
+    query: "(min-width: 800px)",
+  });
+
+  const collectionListStyle = isLarge
+    ? {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+      }
+    : undefined;
 
   const banner = (
     <DefaultBanner>
@@ -69,14 +82,14 @@ const Catalog = () => {
         – <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
         .
       </Text>
-      <section className="column-list">{primaryDatasets}</section>
+      <section style={collectionListStyle}>{primaryDatasets}</section>
 
       <h2>Additional datasets</h2>
       <Text block>
         The following datasets are available on Azure, for use within or outside
         of the Planetary Computer Hub.
       </Text>
-      <section className="column-list">{otherDatasets}</section>
+      <section style={collectionListStyle}>{otherDatasets}</section>
     </Layout>
   );
 };

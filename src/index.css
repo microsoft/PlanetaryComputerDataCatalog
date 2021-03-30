@@ -17,17 +17,9 @@ code {
   .column-list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 
-  .ds-item {
-    width: 400px;
-  }
-
-  .ds-item img {
-    max-width: 100%;
-    max-height: 180px;
-    object-fit: contain;
-  }
 
   .toc-item {
     width: 200px;
@@ -49,7 +41,7 @@ code {
   margin-bottom: 30px;
 }
 
-.ds-item, .toc-item {
+.xds-item, .toc-item {
   padding: 15px;
   margin: 5px;
 }
