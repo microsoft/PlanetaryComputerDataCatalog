@@ -1,9 +1,11 @@
 import React from "react";
 import { Link, Text } from "@fluentui/react";
+import { Link as RouterLink, Router } from "react-router-dom";
 
 import Resource from "../components/homepage/Resource";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
+import ImageStrip from "../components/homepage/ImageStrip";
 
 const whiteText = {
   root: { color: "#fff" },
@@ -44,59 +46,62 @@ const Home = () => {
   );
 
   const bannerFooter = (
-    <div className="home-footer-container">
-      <div className="home-footer-grid">
-        <Text
-          block
-          variant="xxLargePlus"
-          className="home-footer-item"
-          styles={{ root: { color: "#fff" } }}
-        >
-          Building a global environmental network
-        </Text>
-        <div className="home-footer-item">
+    <>
+      <ImageStrip />
+      <div className="home-footer-container">
+        <div className="home-footer-grid">
           <Text
             block
-            variant="large"
-            style={{
-              color: "#fff",
-              marginBottom: 20,
-            }}
+            variant="xxLargePlus"
+            className="home-footer-item"
+            styles={{ root: { color: "#fff" } }}
           >
-            The Planetary Computer is only as strong as the partner community
-            that is building applications on it. If you are interested in
-            scaling your environmental sustainability work with the power of the
-            Azure cloud,{" "}
-            <Link
-              underline
-              href="mailto:planetarycomputer@microsoft.com"
-              style={{ color: "#fff", fontWeight: "600" }}
-            >
-              contact us
-            </Link>
-            .
+            Building a global environmental network
           </Text>
-          <Text
-            block
-            variant="large"
-            style={{
-              color: "#fff",
-            }}
-          >
-            The Planetary Computer API and Hub are currently available in
-            private preview; if you’re interested in developing on our platform,{" "}
-            <Link
-              underline
-              to="/account/request"
-              style={{ color: "#fff", fontWeight: "600" }}
+          <div className="home-footer-item">
+            <Text
+              block
+              variant="large"
+              style={{
+                color: "#fff",
+                marginBottom: 20,
+              }}
             >
-              request access now
-            </Link>
-            .
-          </Text>
+              The Planetary Computer is only as strong as the partner community
+              that is building applications on it. If you are interested in
+              scaling your environmental sustainability work with the power of
+              the Azure cloud,{" "}
+              <Link
+                underline
+                href="mailto:planetarycomputer@microsoft.com"
+                style={{ color: "#fff", fontWeight: "600" }}
+              >
+                contact us
+              </Link>
+              .
+            </Text>
+            <Text
+              block
+              variant="large"
+              style={{
+                color: "#fff",
+              }}
+            >
+              The Planetary Computer API and Hub are currently available in
+              private preview. If you’re interested in developing on our
+              platform,{" "}
+              <RouterLink
+                to="/account/request"
+                style={{ color: "#fff", fontWeight: "600" }}
+              >
+                request access now
+              </RouterLink>
+              .
+            </Text>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 
   return (
