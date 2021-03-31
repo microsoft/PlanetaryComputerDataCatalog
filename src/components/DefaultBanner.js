@@ -11,7 +11,7 @@ const DefaultBanner = ({ children }) => {
       style={{
         background: "#F0F0F0",
         minHeight: "200px",
-        padding: "0 5%",
+        padding: "0 10%",
       }}
     >
       {wrapped}

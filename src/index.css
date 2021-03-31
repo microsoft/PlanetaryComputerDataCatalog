@@ -69,7 +69,7 @@ code {
     background: #f2f2f2;
     margin: 0 auto;
     max-width: calc(1600px + 10%);
-    padding: 5px 5% 5px;
+    padding: 5px 10% 5px;
 }
 
 .c-uhff-base ul.c-list {

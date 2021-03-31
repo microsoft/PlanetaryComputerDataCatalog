@@ -19,7 +19,7 @@ const Banner = ({ collection }) => {
       <div
         style={{
           maxWidth: 1200,
-          padding: "0 5%",
+          padding: "0 10%",
         }}
       >
         <Text block styles={{ root: { fontWeight: 500, marginTop: 5 } }}>

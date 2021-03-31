@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const HeaderLink = ({ to, external = false, style, children }) => {
-  const defaultStyle = { marginTop: "-5px" };
+  const defaultStyle = { marginTop: "-5px", marginLeft: "25px" };
   const linkStyle = {
     fontSize: "14px",
     lineHeight: "16px",

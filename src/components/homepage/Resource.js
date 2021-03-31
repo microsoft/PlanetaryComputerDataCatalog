@@ -3,7 +3,7 @@ import React from "react";
 
 const Resource = ({ title, children }) => {
   return (
-    <div style={{ flex: "0 49%", height: 200, marginBottom: "2%" }}>
+    <div style={{ flex: "0 250px", height: 200, marginBottom: "2%" }}>
       <Text
         block
         variant="large"

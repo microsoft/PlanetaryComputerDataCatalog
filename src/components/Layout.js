@@ -12,14 +12,10 @@ const Layout = ({ bannerHeader, bannerFooter, children }) => {
     <>
       <Header siteTitle={name} siteProduct={product} />
       <div>{bannerHeader}</div>
-      <div
-        style={{
-          padding: "0 5%",
-        }}
-      >
-        <ScrollToTopOnMount />
-        <main style={{ minHeight: "calc(100vh - 161px)" }}>{children}</main>
-      </div>
+      <ScrollToTopOnMount />
+      <main style={{ padding: "0 10%", minHeight: "calc(100vh - 161px)" }}>
+        {children}
+      </main>
       {bannerFooter}
       <Footer />
     </>

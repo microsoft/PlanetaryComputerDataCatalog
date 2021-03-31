@@ -13,7 +13,7 @@ const Header = ({ siteProduct }) => (
     <div
       style={{
         maxWidth: 1200,
-        padding: "0 5%",
+        padding: "0 10%",
       }}
     >
       <Stack horizontal tokens={{ childrenGap: "16px" }}>
@@ -50,7 +50,7 @@ const Header = ({ siteProduct }) => (
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
-        <HeaderLink to="/apps">Apps</HeaderLink>
+        <HeaderLink to="/apps">Applications</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>

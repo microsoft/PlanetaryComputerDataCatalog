@@ -1,24 +1,23 @@
 import { Text } from "@fluentui/react";
 import React from "react";
 
-const Section = ({ title, color = "#f0f0f0", children }) => {
+const Section = ({ title, color = "#258EDE", children }) => {
   return (
     <div
       style={{
         display: "flex",
-        minHeight: 175,
+        minHeight: 300,
         background: color,
-        padding: "20px 5%",
+        padding: "20px 10%",
+        alignItems: "center",
       }}
     >
-      <div>
-        <Text block variant="xLargePlus" styles={{ root: { width: 200 } }}>
+      <div style={{ width: "49%" }}>
+        <Text block variant="xxLargePlus" styles={{ root: { color: "#fff" } }}>
           {title}
         </Text>
       </div>
-      <div>
-        <Text block>{children}</Text>
-      </div>
+      <div style={{ width: "49%" }}>{children}</div>
     </div>
   );
 };

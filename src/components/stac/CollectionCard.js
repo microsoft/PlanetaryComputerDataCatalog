@@ -9,7 +9,7 @@ const CollectionCard = ({ collection }) => {
     <div
       style={{
         flex: "0 48%",
-        marginBottom: "5%",
+        marginBottom: "10%",
       }}
       key={collection.id}
     >

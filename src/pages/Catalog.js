@@ -36,7 +36,7 @@ const Catalog = () => {
     ? {
         display: "flex",
         flexWrap: "wrap",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
       }
     : undefined;
 
