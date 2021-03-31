@@ -2,7 +2,6 @@ import React from "react";
 import { Link, Text } from "@fluentui/react";
 
 import Resource from "../components/homepage/Resource";
-import Section from "../components/homepage/Section";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 
@@ -27,7 +26,13 @@ const Home = () => {
         <Text
           block
           variant="mega"
-          styles={{ root: { color: "#fff", maxWidth: 580, marginBottom: 40 } }}
+          styles={{
+            root: {
+              color: "#fff",
+              maxWidth: 580,
+              marginBottom: 40,
+            },
+          }}
         >
           A Planetary Computer for a Sustainable Future
         </Text>
@@ -37,49 +42,61 @@ const Home = () => {
       </div>
     </div>
   );
+
   const bannerFooter = (
-    <>
-      <Section title="Building a global environmental network">
+    <div className="home-footer-container">
+      <div className="home-footer-grid">
         <Text
           block
-          variant="large"
-          style={{
-            color: "#fff",
-            marginBottom: 20,
-          }}
+          variant="xxLargePlus"
+          className="home-footer-item"
+          styles={{ root: { color: "#fff" } }}
         >
-          The Planetary Computer is only as strong as the partner community that
-          is building applications on it. If you are interested in scaling your
-          environmental sustainability work with the power of the Azure cloud,{" "}
-          <Link
-            underline
-            href="mailto:planetarycomputer@microsoft.com"
-            style={{ color: "#fff", fontWeight: "600" }}
-          >
-            contact us
-          </Link>
-          .
+          Building a global environmental network
         </Text>
-        <Text
-          block
-          variant="large"
-          style={{
-            color: "#fff",
-          }}
-        >
-          The Planetary Computer API and Hub are currently available in private
-          preview; if you’re interested in developing on our platform,{" "}
-          <Link
-            underline
-            to="/account/request"
-            style={{ color: "#fff", fontWeight: "600" }}
+        <div className="home-footer-item">
+          <Text
+            block
+            variant="large"
+            style={{
+              color: "#fff",
+              marginBottom: 20,
+            }}
           >
-            request access now
-          </Link>
-          .
-        </Text>
-      </Section>
-    </>
+            The Planetary Computer is only as strong as the partner community
+            that is building applications on it. If you are interested in
+            scaling your environmental sustainability work with the power of the
+            Azure cloud,{" "}
+            <Link
+              underline
+              href="mailto:planetarycomputer@microsoft.com"
+              style={{ color: "#fff", fontWeight: "600" }}
+            >
+              contact us
+            </Link>
+            .
+          </Text>
+          <Text
+            block
+            variant="large"
+            style={{
+              color: "#fff",
+            }}
+          >
+            The Planetary Computer API and Hub are currently available in
+            private preview; if you’re interested in developing on our platform,{" "}
+            <Link
+              underline
+              to="/account/request"
+              style={{ color: "#fff", fontWeight: "600" }}
+            >
+              request access now
+            </Link>
+            .
+          </Text>
+        </div>
+      </div>
+    </div>
   );
 
   return (
@@ -112,37 +129,29 @@ const Home = () => {
           conservation stakeholders.
         </Text>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
-        <Resource title="Data Catalog">
-          The Planetary Computer Data Catalog includes petabytes of
-          environmental monitoring data, in consistent, analysis-ready formats,
-          accessible through our APIs as well as directly available via Azure
-          Storage.
-        </Resource>
-        <Resource title="API">
-          The Planetary Computer API makes it easy for users to find exactly the
-          data they need, simplifying search and discovery across our Data
-          Catalog.
-        </Resource>
-        <Resource title="Hub">
-          The Planetary Computer Hub is a development environment that makes our
-          data and APIs accessible through familiar, open-source tools, and
-          allows users to easily scale their analyses with the power of Azure
-          compute.
-        </Resource>
-        <Resource title="Applications">
-          Together with our partners in the conservation community, we are
-          putting the Planetary Computer in the hands of stakeholders through
-          applications that build on top of the Planetary Computer platform,
-          providing the actionable information that is critical to
-          sustainability practitioners.
-        </Resource>
+      <div className="datasource-container" style={{ marginTop: 55 }}>
+        <div className="datasource-row">
+          <Resource title="Data Catalog">
+            The Planetary Computer includes petabytes of environmental
+            monitoring data, in consistent, analysis-ready formats, accessible
+            through our APIs as well as directly available via Azure Storage.
+          </Resource>
+          <Resource title="API">
+            The Planetary Computer API makes it easy for users to find exactly
+            the data they need, simplifying search and discovery across our Data
+            Catalog.
+          </Resource>
+          <Resource title="Hub">
+            A development environment that makes our data and APIs accessible
+            through familiar, open-source tools, and allows users to easily
+            scale their analyses with the power of Azure compute.
+          </Resource>
+          <Resource title="Applications">
+            Explore applications that build on top of the Planetary Computer
+            platform, providing the actionable information that is critical to
+            sustainability practitioners.
+          </Resource>
+        </div>
       </div>
     </Layout>
   );

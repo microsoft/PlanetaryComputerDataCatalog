@@ -1,17 +1,31 @@
-import { Text } from "@fluentui/react";
 import React from "react";
+import { Text } from "@fluentui/react";
+import { FontIcon } from "@fluentui/react/lib/Icon";
+import { mergeStyles } from "@fluentui/react/lib/Styling";
+
+const iconClass = mergeStyles({
+  fontSize: 50,
+  height: 50,
+  width: "100%",
+  textAlign: "center",
+  marginBottom: 25,
+  color: "#258EDE",
+});
 
 const Resource = ({ title, children }) => {
   return (
-    <div style={{ flex: "0 250px", height: 200, marginBottom: "2%" }}>
+    <div className="home-resource-item">
+      <FontIcon aria-label={title} iconName="CompassNW" className={iconClass} />
       <Text
         block
         variant="large"
-        styles={{ root: { fontWeight: 700, marginBottom: ".5rem" } }}
+        style={{ fontWeight: 700, marginBottom: ".5rem", textAlign: "center" }}
       >
         {title}
       </Text>
-      <Text block>{children}</Text>
+      <Text block style={{ textAlign: "center" }}>
+        {children}
+      </Text>
     </div>
   );
 };

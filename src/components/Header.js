@@ -16,7 +16,7 @@ const Header = ({ siteProduct }) => (
         padding: "0 10%",
       }}
     >
-      <Stack horizontal tokens={{ childrenGap: "16px" }}>
+      <Stack horizontal wrap tokens={{ childrenGap: "10px" }}>
         <a
           id="uhfLogo"
           itemProp="url"

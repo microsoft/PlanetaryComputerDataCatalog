@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, Text } from "@fluentui/react";
+import { Link, Stack, Text } from "@fluentui/react";
 import { useMediaQuery } from "react-responsive";
 
 import { useQueryString } from "../utils/hooks";
@@ -14,6 +14,8 @@ import ResourceCard from "../components/ResourceCard";
 
 import { ai4e as datasetsConfig } from "../config/datasets.yml";
 import DefaultBanner from "../components/DefaultBanner";
+
+import "./catalog.css";
 
 import { byKey } from "../utils";
 
@@ -36,7 +38,7 @@ const Catalog = () => {
     ? {
         display: "flex",
         flexWrap: "wrap",
-        // justifyContent: "space-between",
+        justifyContent: "space-between",
       }
     : undefined;
 
@@ -44,6 +46,13 @@ const Catalog = () => {
     <DefaultBanner>
       <Text block variant="xxLarge">
         Planetary Computer Data Catalog
+      </Text>
+      <Text block style={{ margin: "1.8rem 0" }}>
+        The Planetary Computer Data Catalog includes petabytes of environmental
+        monitoring data, in consistent, analysis-ready formats. All of the
+        datasets below can be accessed via Azure blob storage, and can be used
+        by developers whether you’re working within or outside of our Planetary
+        Computer Hub.
       </Text>
     </DefaultBanner>
   );
@@ -69,27 +78,27 @@ const Catalog = () => {
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
-      <Text block variant="large" style={{ margin: "1.8rem 0" }}>
-        The Planetary Computer Data Catalog includes petabytes of environmental
-        monitoring data, in consistent, analysis-ready formats. All of the
-        datasets below can be accessed via Azure blob storage, and can be used
-        by developers whether you’re working within or outside of our Planetary
-        Computer Hub. Our largest data sets can be also queried and accessed
-        through our Planetary Computer API. We are continuing to expand the data
-        available through the API, and continuing to bring new data sets to
-        Azure. If you are interested in seeing additional data on-boarded or
-        published through our API – or if you have data you’d like to contribute
-        – <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
-        .
+      <h2>Datasets available through The Planetary Computer API</h2>
+      <Text block style={{ maxWidth: 800, marginBottom: 40 }}>
+        Our largest data sets can be queried and accessed through our Planetary
+        Computer API. We are continuing to expand the data available through the
+        API, and continuing to bring new data sets to Azure. If you are
+        interested in seeing additional data on-boarded or published through our
+        API – or if you have data you’d like to contribute –{" "}
+        <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
       </Text>
-      <section style={collectionListStyle}>{primaryDatasets}</section>
+      <div className="datasource-container">
+        <div className="datasource-row">{primaryDatasets}</div>
+      </div>
 
       <h2>Additional datasets</h2>
-      <Text block>
+      <Text block style={{ maxWidth: 800, marginBottom: 40 }}>
         The following datasets are available on Azure, for use within or outside
         of the Planetary Computer Hub.
       </Text>
-      <section style={collectionListStyle}>{otherDatasets}</section>
+      <div className="datasource-container">
+        <div className="datasource-row">{otherDatasets}</div>
+      </div>
     </Layout>
   );
 };

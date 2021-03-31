@@ -1,0 +1,132 @@
+.datasource-container {
+  max-width: 1335px;
+  margin: 0 auto;
+}
+.datasource-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.home-resource-item {
+  flex-basis: 24%;
+  width: 259px;
+  position: relative;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+@media(max-width: 1333px) {
+  .home-resource-item {
+    flex-basis: 33.33%;
+  }
+}
+@media(max-width: 1073px) {
+   .home-resource-item {
+    flex-basis: 33.33%;
+  }
+}
+@media(max-width: 815px) {
+  .home-resource-item {
+    flex-basis: 50%;
+  }
+}
+@media(max-width: 555px) {
+  .home-resource-item {
+    flex-basis: 100%;
+  }
+}
+
+.api-datasource-item {
+  flex-basis: 49%;
+  width: 500px;
+  position: relative;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+@media(max-width: 1333px) {
+  .api-datasource-item {
+    flex-basis: 49%;
+  }
+}
+@media(max-width: 815px) {
+  .api-datasource-item {
+    flex-basis: 100%;
+  }
+}
+
+
+/* Homepage resouce grid */
+
+.home-resource-item {
+  flex-basis: 24%;
+  width: 259px;
+  position: relative;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media(max-width: 1073px) {
+   .home-resource-item {
+    flex-basis: 49%;
+    padding-bottom: 50px;
+  }
+}
+
+@media(max-width: 555px) {
+  .home-resource-item {
+    flex-basis: 100%;
+  }
+}
+
+.api-datasource-item {
+  flex-basis: 49%;
+  width: 500px;
+  position: relative;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+@media(max-width: 1333px) {
+  .api-datasource-item {
+    flex-basis: 49%;
+  }
+}
+@media(max-width: 815px) {
+  .api-datasource-item {
+    flex-basis: 100%;
+  }
+}
+
+/* Home banner footer */
+.home-footer-container {
+  max-width: 1335px;
+  min-height: 300px;
+  margin: 0 auto;
+}
+.home-footer-grid{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10%;
+  background: #258EDE;
+}
+
+.home-footer-item {
+  flex-basis: 49%;
+  width: 259px;
+  position: relative;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+@media(max-width: 555px) {
+   .home-footer-item {
+    text-align: center;
+    flex-basis: 100%;
+  }
+}

@@ -7,10 +7,11 @@ import AssetThumbnail from "./AssetThumbnail";
 const CollectionCard = ({ collection }) => {
   return (
     <div
-      style={{
-        flex: "0 48%",
-        marginBottom: "10%",
-      }}
+      className="api-datasource-item"
+      // style={{
+      //   flex: "0 48%",
+      //   marginBottom: "10%",
+      // }}
       key={collection.id}
     >
       <RouterLink

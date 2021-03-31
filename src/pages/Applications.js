@@ -35,7 +35,9 @@ const Applications = () => {
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Applications" />
-      <section className="column-list">{appsList}</section>
+      <div className="datasource-container">
+        <div className="datasource-row">{appsList}</div>
+      </div>
     </Layout>
   );
 };
