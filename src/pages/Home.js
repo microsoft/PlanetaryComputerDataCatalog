@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Text } from "@fluentui/react";
-import { Link as RouterLink, Router } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import Resource from "../components/homepage/Resource";
 import Layout from "../components/Layout";
@@ -54,7 +54,7 @@ const Home = () => {
             block
             variant="xxLargePlus"
             className="home-footer-item"
-            styles={{ root: { color: "#fff" } }}
+            style={{ color: "#fff" }}
           >
             Building a global environmental network
           </Text>
@@ -134,7 +134,7 @@ const Home = () => {
           conservation stakeholders.
         </Text>
       </div>
-      <div className="datasource-container" style={{ marginTop: 55 }}>
+      <div className="datasource-container" style={{ margin: "100px 0" }}>
         <div className="datasource-row">
           <Resource title="Data Catalog">
             The Planetary Computer includes petabytes of environmental

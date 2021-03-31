@@ -101,6 +101,7 @@
 }
 
 /* Home banner footer */
+
 .home-footer-container {
   background: #258EDE;
 }
@@ -122,6 +123,9 @@
   padding-bottom: 20px;
   box-sizing: border-box;
 }
+.home-footer-item:first-child {
+  padding-right: 165px;
+}
 
 @media(max-width: 555px) {
    .home-footer-item {
@@ -130,11 +134,24 @@
   }
 }
 
+@media(max-width: 1285px) {
+  .home-footer-item:first-child {
+    padding-right: 20px;
+  }
+}
+
 /* Home image strip */
+
 .home-strip-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: stretch;
+}
+
+@media(max-width: 766px) {
+.home-strip-container {
+    display: none;
+  }
 }
 
 .home-strip-item {

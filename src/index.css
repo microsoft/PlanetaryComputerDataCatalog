@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+main.short {
+  min-height: calc(100vh - 161px);
+}
+
 /* Generalized grid layouts */
 @media screen and (min-width: 800px) {
   .column-list {

@@ -10,7 +10,12 @@ const ImageStrip = () => {
   return (
     <div className="home-strip-container">
       {images.map((url, idx) => (
-        <img key={`img-strip-${idx}`} className="home-strip-item" src={url} />
+        <img
+          key={`img-strip-${idx}`}
+          className="home-strip-item"
+          src={url}
+          alt="" // decorative images
+        />
       ))}
     </div>
   );
