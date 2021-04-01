@@ -1,17 +1,14 @@
 import React from "react";
-import { Text } from "@fluentui/react";
 import NewTabLink from "../controls/NewTabLink";
 import LabeledValue from "../controls/LabeledValue";
 
 const Providers = ({ providers }) => {
-  const providerList = providers.map(p => {
+  const providerList = providers.map((p, i) => {
     return (
-      <div key={`provider-${p.name}`}>
-        <NewTabLink href={p.url}>{p.name} </NewTabLink>
-        <Text block styles={{ root: { marginLeft: "5px" } }}>
-          ({p.roles.join(", ")})
-        </Text>
-      </div>
+      <span key={`provider-${p.name}`}>
+        <NewTabLink href={p.url}>{p.name} </NewTabLink>({p.roles.join(", ")})
+        {i < providers.length - 1 ? " | " : ""}
+      </span>
     );
   });
 

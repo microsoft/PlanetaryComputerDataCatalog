@@ -13,7 +13,7 @@ import { renderItemColumn } from "../../utils/stac";
 // values, set the desired widths by key
 const defaultWidth = 100;
 const columnWidths = {
-  title: 75,
+  title: 125,
   gsd: 25,
   description: 100,
 };
@@ -106,9 +106,8 @@ const ItemAssets = itemAssets => {
   );
 
   return (
-    <div>
+    <div style={{ marginTop: 40 }}>
       <h3>Dataset Assets</h3>
-      <p>Scenes in this dataset include the following assets:</p>
       {assetLists}
     </div>
   );

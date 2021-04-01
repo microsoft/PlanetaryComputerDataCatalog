@@ -135,10 +135,10 @@ const Home = () => {
         </Text>
       </div>
       <div
-        className="home-resources datasource-container"
+        className="home-resources pcdc-container"
         style={{ margin: "100px 0" }}
       >
-        <div className="datasource-row">
+        <div className="pcdc-row">
           <Resource title="Data Catalog" to="/catalog">
             The Planetary Computer includes petabytes of environmental
             monitoring data, in consistent, analysis-ready formats, accessible

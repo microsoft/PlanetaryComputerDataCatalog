@@ -20,8 +20,9 @@ StacFields.Registry.addMetadataField("gsd", {
 // values, set the desired widths by key
 const defaultWidth = 50;
 const columnWidths = {
+  name: 75,
   common_name: 100,
-  center_wavelength: 150,
+  center_wavelength: 125,
   full_width_half_max: 75,
   description: 100,
 };

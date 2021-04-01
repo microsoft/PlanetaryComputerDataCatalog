@@ -10,6 +10,8 @@ import Description from "../components/stac/Description";
 import CollectionDetail from "../components/stac/CollectionDetail";
 import ItemAssets from "../components/stac/ItemAssets";
 import Bands from "../components/stac/Bands";
+import Providers from "../components/stac/Providers";
+import License from "../components/stac/License";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
@@ -46,6 +48,7 @@ const Collection = () => {
   const tabs = tabConfig[id]?.tabs.map(({ title, src, launch }) => {
     return (
       <PivotItem
+        className="main-content"
         key={title}
         headerText={title}
         itemKey={title.replace(/ /g, "-")}
@@ -70,19 +73,26 @@ const Collection = () => {
           onLinkClick={handleTabChange}
           ariaLabel="Dataset detail tabs"
         >
-          <PivotItem headerText="Overview" itemKey="overview">
-            <div
-              className="column-list"
-              style={{ justifyContent: "space-between" }}
-            >
-              <div className="cl-item">
-                <h2>Overview</h2>
-                <Description collection={collection} />
-                <Bands collection={collection} />
-                <ItemAssets itemAssets={collection.item_assets} />
+          <PivotItem
+            className="main-content"
+            headerText="Overview"
+            itemKey="overview"
+          >
+            <div class="with-sidebar">
+              <div>
+                <section className="collection-content">
+                  <h2>Overview</h2>
+                  <Description collection={collection} />
+                  <Providers providers={collection.providers} />
+                  <License collection={collection} />
+                </section>
+                <div>
+                  <CollectionDetail collection={collection} />
+                </div>
               </div>
-              <CollectionDetail collection={collection} />
             </div>
+            <Bands collection={collection} />
+            <ItemAssets itemAssets={collection.item_assets} />
           </PivotItem>
           {tabs}
         </Pivot>

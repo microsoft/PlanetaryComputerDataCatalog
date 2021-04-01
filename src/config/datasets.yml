@@ -12,7 +12,7 @@ collections:
         src: naip-image-server.html
       - title: Using Blob Storage
         src: naip-storage.html
-      - title: Land classification demo
+      - title: Land Classification Demo
         src: landcover.html
         launch: 
           title: Launch in Compute

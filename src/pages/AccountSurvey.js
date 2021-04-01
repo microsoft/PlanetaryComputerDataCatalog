@@ -150,7 +150,7 @@ const AccountSurvey = () => {
 
   const banner = (
     <DefaultBanner>
-      <h1>Request an account</h1>
+      <h1>Request access</h1>
       <Text block>
         The Planetary Computer API and Planetary Computer Hub are currently in
         private preview, and we’re excited to expand our partner and developer

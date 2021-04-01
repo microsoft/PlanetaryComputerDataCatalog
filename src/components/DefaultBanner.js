@@ -5,7 +5,7 @@ const DefaultBanner = ({ children }) => {
     <div className="banner-item">{child}</div>
   ));
 
-  const banner = <div className="header-banner datasource-row">{wrapped}</div>;
+  const banner = <div className="header-banner pcdc-row">{wrapped}</div>;
 
   return banner;
 };

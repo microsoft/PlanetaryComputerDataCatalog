@@ -80,8 +80,8 @@ const Catalog = () => {
           through our API – or if you have data you’d like to contribute –{" "}
           <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
         </Text>
-        <div className="datasource-container">
-          <div className="datasource-row">{primaryDatasets}</div>
+        <div className="pcdc-container">
+          <div className="pcdc-row">{primaryDatasets}</div>
         </div>
       </section>
 
@@ -91,8 +91,8 @@ const Catalog = () => {
           The following datasets are available on Azure, for use within or
           outside of the Planetary Computer Hub.
         </Text>
-        <div className="datasource-container">
-          <div className="datasource-row">{otherDatasets}</div>
+        <div className="pcdc-container">
+          <div className="pcdc-row">{otherDatasets}</div>
         </div>
       </section>
     </Layout>
