@@ -8,14 +8,25 @@
   justify-content: flex-start;
 }
 
+.header-banner-item {
+  flex-basis: 49%;
+}
+
+/* Catalog datasets */
+
 .add-datasource-item {
   flex-basis: 24%;
   width: 259px;
   position: relative;
   padding-right: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   box-sizing: border-box;
 }
+
+.add-datasource-item:hover a {
+  text-decoration: underline;
+}
+
 @media(max-width: 1333px) {
   .add-datasource-item {
     flex-basis: 33.33%;
@@ -42,7 +53,7 @@
   width: 500px;
   position: relative;
   padding-right: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   box-sizing: border-box;
 }
 @media(max-width: 1333px) {
@@ -54,6 +65,13 @@
   .api-datasource-item {
     flex-basis: 100%;
   }
+}
+
+#catalog-additional-datasets {
+  /* TODO: enable when the main grid is in place */
+  /* background: #F9F9F9; */
+  margin-top: 40px;
+  padding-top: 20px;
 }
 
 
@@ -81,29 +99,40 @@
   }
 }
 
-.api-datasource-item {
+/* Header banner */
+.header-banner {
+  background: #F9F9F9;
+  min-height: 165px;
+  padding: 0 10%;
+  margin-bottom: 75px;
+}
+
+.banner-item {
   flex-basis: 49%;
-  width: 500px;
+  width: 259px;
   position: relative;
   padding-right: 20px;
   padding-bottom: 20px;
   box-sizing: border-box;
 }
-@media(max-width: 1333px) {
-  .api-datasource-item {
-    flex-basis: 49%;
-  }
+
+.banner-item:first-child {
+  display: flex;
+  align-items: center;
 }
-@media(max-width: 815px) {
-  .api-datasource-item {
+
+@media(max-width: 555px) {
+   .banner-item {
+    text-align: center;
     flex-basis: 100%;
+    justify-content: center;
   }
 }
 
 /* Home banner footer */
 
 .home-footer-container {
-  background: #258EDE;
+  background: #0078d4;
 }
 
 .home-footer-grid{

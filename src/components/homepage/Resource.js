@@ -10,7 +10,7 @@ const iconClass = mergeStyles({
   width: "100%",
   textAlign: "center",
   marginBottom: 25,
-  color: "#258EDE",
+  color: "#0078d4",
 });
 
 const Resource = ({ title, to, href, children }) => {

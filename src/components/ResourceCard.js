@@ -1,31 +1,47 @@
 import React from "react";
 import { Link, Text } from "@fluentui/react";
+import { FontIcon } from "@fluentui/react/lib/Icon";
+import { mergeStyles } from "@fluentui/react/lib/Styling";
 
-const ResourceCard = ({ resourceItem, width = 200 }) => {
-  const { alt, title, thumbnailUrl, description, infoUrl } = resourceItem;
+const iconClass = mergeStyles({
+  fontSize: 12,
+  marginTop: 3,
+});
 
+const ResourceCard = ({ resourceItem }) => {
+  const {
+    alt,
+    title,
+    shortTerm,
+    thumbnailUrl,
+    description,
+    infoUrl,
+  } = resourceItem;
+
+  const linkLabel = shortTerm || title;
   return (
-    <div
-      className="add-datasource-item"
-      // style={{
-      //   // marginBottom: "2%",
-      //   height: "100%",
-      //   width: "250px",
-      //   border: "1px solid gray",
-      //   display: "flex",
-      //   flexWrap: "wrap",
-      //   objectFit: "contain",
-      // }}
-    >
+    <div className="add-datasource-item">
       <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
         <img
           alt={alt || `Screenshot of ${title}`}
           src={thumbnailUrl}
           style={{ maxWidth: "100%", objectFit: "contain" }}
         />
-        <h3>{title}</h3>
-        <Text block>{description}</Text>
+        <h3 style={{ marginBottom: 2, color: "initial" }}>{title}</h3>
+        <Text block variant="medium" style={{ marginBottom: 10 }}>
+          {description}
+        </Text>
       </Link>
+      <Text block variant="medium" style={{ fontWeight: 600 }}>
+        <Link href={infoUrl}>
+          {`Get ${linkLabel} data `}
+          <FontIcon
+            aria-label={linkLabel}
+            iconName="ChevronRightSmall"
+            className={iconClass}
+          />
+        </Link>
+      </Text>
     </div>
   );
 };

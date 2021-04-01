@@ -59,7 +59,7 @@ const Header = ({ siteProduct }) => (
           </Text>
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/docs">Documentation</HeaderLink>
+        <HeaderLink to="/docs">API</HeaderLink>
         <HeaderLink to="/apps">Applications</HeaderLink>
         <HeaderLink external to="/compute">
           Hub

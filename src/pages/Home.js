@@ -39,7 +39,7 @@ const Home = () => {
           A Planetary Computer for a Sustainable Future
         </Text>
         <Text block variant="large" styles={whiteText}>
-          Empowering conservation with global-scale environmental data
+          Supporting global sustainability with decision-making data and tools
         </Text>
       </div>
     </div>
