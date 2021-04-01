@@ -4,6 +4,7 @@
 collections:
   naip:
     shortTerm: NAIP
+    headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Getting Started 
         src: naip.html
@@ -20,6 +21,7 @@ collections:
           filePath: landcover.ipynb
   landsat-8-c2-l2:
     shortTerm: Landsat 8
+    headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Getting Started 
         src: landsat.html
@@ -27,6 +29,7 @@ collections:
         src: landsat-storage.html
   sentinel-2-l2a:
     shortTerm: Sentinel-2
+    headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Getting Started 
         src: sentinel-2.html
@@ -34,6 +37,7 @@ collections:
         src: sentinel-2-storage.html
   aster-l1t:
     shortTerm: ASTER
+    headerImg: ./images/aster-hero.jpg
     tabs:
       - title: Using Blob Storage
         src: aster-storage.html

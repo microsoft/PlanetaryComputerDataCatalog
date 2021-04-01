@@ -12,10 +12,36 @@ code {
     monospace;
 }
 
+/* h2 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 1.2;
+} */
+
 main.short {
   min-height: calc(100vh - 161px);
 }
 
+.page-header { 
+  background-color: #f9f9f9;
+  padding: 80px 0;
+  /* background-size: cover; */
+}
+
+.page-header h1 {
+  max-width: 50%;
+  margin-top: 0px;
+}
 /* Generalized grid layouts */
 
 @media screen and (min-width: 800px) {
@@ -87,7 +113,6 @@ header a:hover {
 .c-uhff-base {
     background: #f2f2f2;
     margin: 0 auto;
-    max-width: calc(1600px + 10%);
     padding: 5px 10% 5px;
 }
 

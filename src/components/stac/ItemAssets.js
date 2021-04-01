@@ -107,7 +107,7 @@ const ItemAssets = itemAssets => {
 
   return (
     <div>
-      <h2>Dataset Assets</h2>
+      <h3>Dataset Assets</h3>
       <p>Scenes in this dataset include the following assets:</p>
       {assetLists}
     </div>

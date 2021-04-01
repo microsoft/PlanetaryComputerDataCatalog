@@ -58,7 +58,7 @@ const Bands = ({ collection }) => {
 
   return (
     <div>
-      <h2>Spectral Bands</h2>
+      <h3>Spectral Bands</h3>
       <DetailsList
         items={items}
         compact={false}
