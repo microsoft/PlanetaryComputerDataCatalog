@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link, Stack, Text } from "@fluentui/react";
-import { useMediaQuery } from "react-responsive";
+import { Link, Text } from "@fluentui/react";
 
 import { useQueryString } from "../utils/hooks";
 import { useCollections } from "../utils/requests";
@@ -29,18 +28,6 @@ const Catalog = () => {
       dispatch(updateUrl(catalogUrl));
     }
   });
-
-  const isLarge = useMediaQuery({
-    query: "(min-width: 800px)",
-  });
-
-  const collectionListStyle = isLarge
-    ? {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-between",
-      }
-    : undefined;
 
   const banner = (
     <DefaultBanner>

@@ -23,7 +23,7 @@ const Header = ({ siteProduct }) => (
           href="https://www.microsoft.com"
           aria-label="Microsoft"
           style={{
-            padding: "16px 6px 16px 10px",
+            padding: "16px 0 16px 10px",
             float: "left",
             height: "100%",
             width: "113px",
@@ -43,9 +43,19 @@ const Header = ({ siteProduct }) => (
             }}
           />
         </a>
-        <HeaderLink to="/" style={{ marginTop: "-10px", marginLeft: 0 }}>
-          <Text block variant="large">
-            | {siteProduct}
+        <span
+          style={{
+            fontSize: 22,
+            fontWeight: 600,
+            marginTop: 13,
+            marginRight: 15,
+          }}
+        >
+          |
+        </span>
+        <HeaderLink to="/" style={{ marginTop: "-4px", marginLeft: 0 }}>
+          <Text block variant="large" style={{ fontWeight: 600 }}>
+            {siteProduct}
           </Text>
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>

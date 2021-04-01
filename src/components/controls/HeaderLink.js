@@ -3,12 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const HeaderLink = ({ to, external = false, style, children }) => {
-  const defaultStyle = { marginTop: "-5px", marginLeft: "25px" };
+  const defaultStyle = { marginTop: "0px", marginLeft: "14px" };
   const linkStyle = {
     fontSize: "14px",
     lineHeight: "16px",
     color: "#000",
-    textDecoration: "none",
   };
   const link = external ? (
     <a href={to} style={linkStyle}>

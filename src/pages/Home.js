@@ -134,24 +134,27 @@ const Home = () => {
           conservation stakeholders.
         </Text>
       </div>
-      <div className="datasource-container" style={{ margin: "100px 0" }}>
+      <div
+        className="home-resources datasource-container"
+        style={{ margin: "100px 0" }}
+      >
         <div className="datasource-row">
-          <Resource title="Data Catalog">
+          <Resource title="Data Catalog" to="/catalog">
             The Planetary Computer includes petabytes of environmental
             monitoring data, in consistent, analysis-ready formats, accessible
             through our APIs as well as directly available via Azure Storage.
           </Resource>
-          <Resource title="API">
+          <Resource title="API" to="/docs/">
             The Planetary Computer API makes it easy for users to find exactly
             the data they need, simplifying search and discovery across our Data
             Catalog.
           </Resource>
-          <Resource title="Hub">
+          <Resource title="Hub" href="/compute">
             A development environment that makes our data and APIs accessible
             through familiar, open-source tools, and allows users to easily
             scale their analyses with the power of Azure compute.
           </Resource>
-          <Resource title="Applications">
+          <Resource title="Applications" to="/apps">
             Explore applications that build on top of the Planetary Computer
             platform, providing the actionable information that is critical to
             sustainability practitioners.

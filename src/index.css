@@ -17,13 +17,13 @@ main.short {
 }
 
 /* Generalized grid layouts */
+
 @media screen and (min-width: 800px) {
   .column-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-
 
   .toc-item {
     width: 200px;
@@ -45,7 +45,14 @@ main.short {
   margin-bottom: 30px;
 }
 
-.xds-item, .toc-item {
+.home-resources .home-resource-item a {
+  text-decoration: none;
+}
+.home-resource-item:hover .item-header{
+  text-decoration: underline;
+}
+
+.toc-item {
   padding: 15px;
   margin: 5px;
 }
@@ -68,6 +75,14 @@ main.short {
     width: 100%;
 }
 /* Corporate footer styling from UHF */
+
+header a {
+    text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
 
 .c-uhff-base {
     background: #f2f2f2;
