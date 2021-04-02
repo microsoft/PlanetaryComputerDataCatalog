@@ -85,10 +85,13 @@ const AccountSurvey = () => {
 
   const form = (
     <form onSubmit={formik.handleSubmit} style={{ maxWidth: "500px" }}>
-      <Text block>
-        [TOS and details about why we are collecting this information, and what
-        we will do with it]
-      </Text>
+      <p>
+        If you’re interested in being one of our first users, please provide the
+        following information. We will accommodate as many users as we can in
+        our preview, but we are excited to support the entire environmental
+        sustainability community when the Planetary Computer is publicly
+        available.
+      </p>
       <Stack tokens={{ childrenGap: 8 }}>
         <FormInput required name="email" label="Email" formik={formik} />
         <FormInput required name="name" label="Name" formik={formik} />
@@ -150,26 +153,22 @@ const AccountSurvey = () => {
 
   const banner = (
     <DefaultBanner>
-      <h1>Request an account</h1>
-      <Text block>
+      <h1>Request access</h1>
+      <p style={{ margin: "1.8rem 0" }}>
         The Planetary Computer API and Planetary Computer Hub are currently in
         private preview, and we’re excited to expand our partner and developer
-        network. If you’re interested in being one of our first users, please
-        provide the following information. We will accommodate as many users as
-        we can in our preview, but we are excited to support the entire
-        environmental sustainability community when the Planetary Computer is
-        publicly available.
-      </Text>
+        network.
+      </p>
     </DefaultBanner>
   );
 
   const successMsg = (
     <>
       <h2>Thank you for your interest!</h2>
-      <Text block>
+      <p>
         You've been added to our waiting list, and we'll follow up with
         additional information as we develop the service.
-      </Text>
+      </p>
       <ScrollToTopOnMount />
     </>
   );
@@ -190,7 +189,7 @@ const AccountSurvey = () => {
   );
 
   return (
-    <Layout bannerHeader={banner}>
+    <Layout bannerHeader={banner} isShort>
       <SEO title="Account Request" />
       {mutation.isError && failMsg}
       {(mutation.isLoading || mutation.isIdle) && form}

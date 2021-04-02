@@ -1,24 +1,44 @@
-- title: Application 1
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-  thumbnailUrl: https://via.placeholder.com/400x350?text=Application+1
-  infoUrl: http://example.com/app1
+- title: Conservation Science Partners 
+  description: The Analytics Lab team at Conservation Science Partners (CSP) is using the Planetary Computer to monitor forest change, habitat connectivity, and the impacts of human land use across the U.S., providing a range of project partners and stakeholders with the data they need to make better conservation decisions in near real time. 
+  thumbnailUrl: https://via.placeholder.com/1817x1024
+  links:
+    - title: Explore ecosystem monitoring
+      url: https://analytics-lab.org/
+    - title: Learn about CSP
+      url: https://www.csp-inc.org/
 
-- title: Application 2
-  description: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. 
-  thumbnailUrl: https://via.placeholder.com/400x350?text=Application+2
-  infoUrl: http://example.com/app2
+- title: The Nature Conservancy
+  description: The Nature Conservancy is using the Planetary Computer to protect and manage land, oceans, and biodiversity. In partnership with Microsoft and with development support from Vizzuality, TNC is accelerating conservation with Marxan, a cloud-based platform for data-driven spatial planning.
+  thumbnailUrl: https://via.placeholder.com/1817x1024
+  links:
+    - title: Explore conservation planning
+      url: http://aka.ms/marxanonazure
+    - title: Learn about The Nature Conservancy
+      url: https://www.nature.org/
 
-- title: Application 3
-  description: Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
-  thumbnailUrl: https://via.placeholder.com/400x350?text=Application+3
-  infoUrl: http://example.com/app3 
+- title: CarbonPlan
+  description: CarbonPlan is leveraging Planetary Computer resources to enable more transparent and scientifically rigorous evaluation of forest-based climate solutions. By shining a data-driven light on past and future carbon offset projects, this enables procurement programs to favor the highest-quality outcomes.
+  thumbnailUrl: https://via.placeholder.com/1817x1024
+  links: 
+    - title: Explore CarbonPlan’s carbon sequestration tool
+      url: https://carbonplan.org/research/forest-risks
+    - title: Learn about CarbonPlan
+      url: https://carbonplan.org/
 
-- title: Application 4
-  description: At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
-  thumbnailUrl: https://via.placeholder.com/400x350?text=Application+4
-  infoUrl: http://example.com/app4
+- title: Development Seed 
+  description: Development Seed is using the Planetary Computer to accelerate the critical work of the environmental scientists tasked with mapping the world's land use.  By combining Earth observation data and machine learning, this work is helping scientists spend more time planning conservation, and less time annotating imagery.
+  thumbnailUrl: ./images/apps/azure-land-cover.png
+  links:
+    - title: Explore land cover mapping
+      url: https://aka.ms/ai4e-landcover-app
+    - title: Learn about Development Seed
+      url: https://developmentseed.org/
 
-- title: Application 5
-  description: Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. 
-  thumbnailUrl: https://via.placeholder.com/400x350?text=Application+5
-  infoUrl: http://example.com/app5
+- title: World Mosquito Program
+  description: The World Mosquito Program (WMP) uses Microsoft Azure to model population areas and determine the best release sites for disease-fighting mosquitos to stop the spread of deadly dengue fever.
+  thumbnailUrl: https://via.placeholder.com/1817x1024
+  links:
+    - title: Explore the WMP app
+      url: https://www.worldmosquitoprogram.org/
+    - title: Learn about WMP
+      url: https://www.microsoft.com/en-us/ai/ai-for-earth-world-mosquito-program

@@ -7,19 +7,18 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
 
-const Layout = ({ bannerHeader, bannerFooter, children }) => {
+const Layout = ({ bannerHeader, bannerFooter, isShort = false, children }) => {
   return (
     <>
       <Header siteTitle={name} siteProduct={product} />
       <div>{bannerHeader}</div>
-      <div
-        style={{
-          padding: "0 5%",
-        }}
+      <ScrollToTopOnMount />
+      <main
+        className={isShort ? "short" : undefined}
+        style={{ padding: "0 10%" }}
       >
-        <ScrollToTopOnMount />
-        <main style={{ minHeight: "calc(100vh - 161px)" }}>{children}</main>
-      </div>
+        {children}
+      </main>
       {bannerFooter}
       <Footer />
     </>
