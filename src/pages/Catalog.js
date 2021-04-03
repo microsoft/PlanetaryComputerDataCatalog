@@ -50,7 +50,7 @@ const Catalog = () => {
     </DefaultBanner>
   );
 
-  const { isLoading, isError, data: collections } = useCollections();
+  const { isLoading, isError, data: stacResponse } = useCollections();
 
   const errorMsg = (
     <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
@@ -63,7 +63,7 @@ const Catalog = () => {
     ? loadingMsg
     : isError
     ? errorMsg
-    : collections.sort(byKey("title")).map(collection => {
+    : stacResponse.collections.sort(byKey("title")).map(collection => {
         const name = collectionsConfig[collection.id]?.shortTerm;
         return (
           <CollectionCard
