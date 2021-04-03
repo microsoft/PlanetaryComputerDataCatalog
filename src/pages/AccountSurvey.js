@@ -84,7 +84,10 @@ const AccountSurvey = () => {
   );
 
   const form = (
-    <form onSubmit={formik.handleSubmit} style={{ maxWidth: "500px" }}>
+    <form
+      onSubmit={formik.handleSubmit}
+      style={{ maxWidth: "500px", marginBottom: 80 }}
+    >
       <p>
         If you’re interested in being one of our first users, please provide the
         following information. We will accommodate as many users as we can in
@@ -154,7 +157,7 @@ const AccountSurvey = () => {
   const banner = (
     <DefaultBanner>
       <h1>Request access</h1>
-      <p style={{ margin: "1.8rem 0" }}>
+      <p>
         The Planetary Computer API and Planetary Computer Hub are currently in
         private preview, and we’re excited to expand our partner and developer
         network.

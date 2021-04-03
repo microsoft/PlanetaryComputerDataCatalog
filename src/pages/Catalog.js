@@ -40,7 +40,7 @@ const Catalog = () => {
   const banner = (
     <DefaultBanner>
       <h1>Data Catalog</h1>
-      <p style={{ margin: "1.8rem 0" }}>
+      <p>
         The Planetary Computer Data Catalog includes petabytes of environmental
         monitoring data, in consistent, analysis-ready formats. All of the
         datasets below can be accessed via Azure blob storage, and can be used

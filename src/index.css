@@ -60,6 +60,7 @@ a:hover img  {
   max-width: 50%;
   margin-top: 0px;
 }
+
 /* Generalized grid layouts */
 
 @media screen and (min-width: 800px) {
