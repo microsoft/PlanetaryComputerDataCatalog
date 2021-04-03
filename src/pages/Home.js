@@ -13,6 +13,7 @@ const whiteText = {
 const Home = () => {
   const banner = (
     <div
+      className="hero"
       style={{
         background: "url(./images/earth-space-clip.2.jpg)",
         backgroundSize: "cover",
@@ -28,6 +29,7 @@ const Home = () => {
         <Text
           block
           variant="mega"
+          className="title"
           styles={{
             root: {
               color: "#fff",

@@ -1,6 +1,6 @@
-# Using Compute resources
+# Using Hub resources
 
-The core of the Planetary Computer is the datasets and APIs for querying them. This document gives an overview of the various ways you can compute on data hosted by the Planetary Computer.
+The core of the Planetary Computer are the datasets and APIs for querying them. This document gives an overview of the various ways you can compute on data hosted by the Planetary Computer.
 
 Regardless of how you compute on the data, to ensure maximum efficiency you should locate your compute as close to the data as possible.
 All the data is hosted in Azure's **West Europe** region so your compute should be there too.

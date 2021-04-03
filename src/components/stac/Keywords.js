@@ -14,6 +14,7 @@ const Keywords = ({ keywords = [] }) => {
         display: "inline-block",
         color: "#fff",
         textTransform: transform,
+        textAlign: "center",
       },
     };
 

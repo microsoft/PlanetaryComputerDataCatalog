@@ -8,14 +8,14 @@ api/query
 
 ```{toctree}
 :maxdepth: 1
-:caption: Reading spatial data
+:caption: Reading data
 api/read
 
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: Compute docs 
+:caption: Hub docs 
 
-compute/computing
+hub/computing
 ```

@@ -30,7 +30,12 @@ const Collection = () => {
 
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
-  const { isError, isLoading, isSuccess, data: collections } = useCollections();
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    data: stacResponse,
+  } = useCollections();
   const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
@@ -39,14 +44,14 @@ const Collection = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const collection = collections.find(c => c.id === id);
+      const collection = stacResponse.collections.find(c => c.id === id);
       if (collection) {
         setCollection(collection);
       } else {
         setNotFound(true);
       }
     }
-  }, [id, collections, isSuccess]);
+  }, [id, stacResponse, isSuccess]);
 
   const handleTabChange = pivotItem => {
     const { itemKey } = pivotItem.props;

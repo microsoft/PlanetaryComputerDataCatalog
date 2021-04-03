@@ -17,7 +17,7 @@ import Layout from "../components/Layout";
 import CollectionCard from "../components/stac/CollectionCard";
 import ResourceCard from "../components/ResourceCard";
 
-import { byKey } from "../utils";
+import { sortSpecialByKey } from "../utils";
 import {
   ai4e as datasetsConfig,
   collections as collectionsConfig,
@@ -40,7 +40,7 @@ const Catalog = () => {
   const banner = (
     <DefaultBanner>
       <h1>Data Catalog</h1>
-      <p style={{ margin: "1.8rem 0" }}>
+      <p>
         The Planetary Computer Data Catalog includes petabytes of environmental
         monitoring data, in consistent, analysis-ready formats. All of the
         datasets below can be accessed via Azure blob storage, and can be used
@@ -50,7 +50,7 @@ const Catalog = () => {
     </DefaultBanner>
   );
 
-  const { isLoading, isError, data: collections } = useCollections();
+  const { isLoading, isError, data: stacResponse } = useCollections();
 
   const errorMsg = (
     <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
@@ -63,16 +63,18 @@ const Catalog = () => {
     ? loadingMsg
     : isError
     ? errorMsg
-    : collections.sort(byKey("title")).map(collection => {
-        const name = collectionsConfig[collection.id]?.shortTerm;
-        return (
-          <CollectionCard
-            key={`card-${collection.id}`}
-            collection={collection}
-            shortTerm={name}
-          />
-        );
-      });
+    : stacResponse.collections
+        .sort(sortSpecialByKey("title"))
+        .map(collection => {
+          const name = collectionsConfig[collection.id]?.shortTerm;
+          return (
+            <CollectionCard
+              key={`card-${collection.id}`}
+              collection={collection}
+              shortTerm={name}
+            />
+          );
+        });
 
   const otherDatasets = datasetsConfig.map(dataset => {
     return (
@@ -92,6 +94,7 @@ const Catalog = () => {
           you are interested in seeing additional data on-boarded or published
           through our API – or if you have data you’d like to contribute –{" "}
           <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
+          .
         </p>
         <div className="layout-container">
           <div className="layout-row">{primaryDatasets}</div>

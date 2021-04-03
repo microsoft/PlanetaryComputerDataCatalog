@@ -7,13 +7,11 @@ const Header = ({ siteProduct }) => (
   <header
     style={{
       background: "#fff",
-      marginBottom: "0.4rem",
     }}
   >
     <div
       style={{
-        maxWidth: 1200,
-        padding: "0 10%",
+        padding: "6px 10% 0 10%",
       }}
     >
       <Stack horizontal wrap tokens={{ childrenGap: "10px" }}>
@@ -23,7 +21,7 @@ const Header = ({ siteProduct }) => (
           href="https://www.microsoft.com"
           aria-label="Microsoft"
           style={{
-            padding: "16px 0 16px 10px",
+            padding: "16px 0 16px 0px",
             float: "left",
             height: "100%",
             width: "113px",
@@ -67,7 +65,7 @@ const Header = ({ siteProduct }) => (
         <HeaderLink
           asButton
           to="/account/request"
-          style={{ marginLeft: "auto" }}
+          style={{ marginLeft: "auto", marginTop: "inherit" }}
         >
           Request access
         </HeaderLink>
