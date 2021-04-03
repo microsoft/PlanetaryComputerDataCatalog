@@ -17,7 +17,7 @@ import Layout from "../components/Layout";
 import CollectionCard from "../components/stac/CollectionCard";
 import ResourceCard from "../components/ResourceCard";
 
-import { byKey } from "../utils";
+import { sortSpecialByKey } from "../utils";
 import {
   ai4e as datasetsConfig,
   collections as collectionsConfig,
@@ -63,16 +63,18 @@ const Catalog = () => {
     ? loadingMsg
     : isError
     ? errorMsg
-    : stacResponse.collections.sort(byKey("title")).map(collection => {
-        const name = collectionsConfig[collection.id]?.shortTerm;
-        return (
-          <CollectionCard
-            key={`card-${collection.id}`}
-            collection={collection}
-            shortTerm={name}
-          />
-        );
-      });
+    : stacResponse.collections
+        .sort(sortSpecialByKey("title"))
+        .map(collection => {
+          const name = collectionsConfig[collection.id]?.shortTerm;
+          return (
+            <CollectionCard
+              key={`card-${collection.id}`}
+              collection={collection}
+              shortTerm={name}
+            />
+          );
+        });
 
   const otherDatasets = datasetsConfig.map(dataset => {
     return (
