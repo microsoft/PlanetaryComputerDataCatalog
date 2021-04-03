@@ -7,12 +7,10 @@ const Header = ({ siteProduct }) => (
   <header
     style={{
       background: "#fff",
-      marginBottom: "0.4rem",
     }}
   >
     <div
       style={{
-        maxWidth: 1200,
         padding: "0 10%",
       }}
     >

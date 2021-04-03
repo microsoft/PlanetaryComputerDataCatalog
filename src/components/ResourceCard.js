@@ -5,7 +5,8 @@ import { mergeStyles } from "@fluentui/react/lib/Styling";
 
 const iconClass = mergeStyles({
   fontSize: 12,
-  marginTop: 3,
+  margin: 5,
+  position: "absolute",
 });
 
 const ResourceCard = ({ resourceItem }) => {
@@ -39,6 +40,7 @@ const ResourceCard = ({ resourceItem }) => {
       <Text block variant="medium" style={{ fontWeight: 600 }}>
         <Link href={infoUrl}>
           {`Get ${linkLabel} data `}
+
           <FontIcon
             aria-label={linkLabel}
             iconName="ChevronRightSmall"

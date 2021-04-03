@@ -19,7 +19,6 @@ const Banner = ({ collection }) => {
     >
       <div
         style={{
-          maxWidth: 1200,
           padding: "0 10%",
         }}
       >
