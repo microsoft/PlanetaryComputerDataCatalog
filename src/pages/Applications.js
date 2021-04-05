@@ -14,8 +14,9 @@ const Applications = () => {
       <p style={{ margin: "1.8rem 0" }}>
         The Planetary Computer puts global-scale geospatial data in the hands of
         environmental scientists, application developers, and policy makers,
-        enabling data-driven decision making. Learn about some of the partners
-        who are building components of the Planetary Computer.
+        enabling data-driven decision making. Learn about some of the
+        applications our partners are building as part of the Planetary
+        Computer.
       </p>
     </DefaultBanner>
   );

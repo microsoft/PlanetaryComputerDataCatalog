@@ -7,9 +7,6 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import ImageStrip from "../components/homepage/ImageStrip";
 
-const whiteText = {
-  root: { color: "#fff" },
-};
 const Home = () => {
   const banner = (
     <div
@@ -39,9 +36,6 @@ const Home = () => {
           }}
         >
           A Planetary Computer for a Sustainable Future
-        </Text>
-        <Text block variant="large" styles={whiteText}>
-          Supporting global sustainability with decision-making data and tools
         </Text>
       </div>
     </div>
@@ -120,9 +114,10 @@ const Home = () => {
         <Text
           block
           variant="xxLarge"
-          style={{ textAlign: "center", maxWidth: "515px" }}
+          style={{ textAlign: "center", maxWidth: "550px" }}
         >
-          Providing global environmental data for sustainability decision-making
+          Supporting sustainability decision-making with the power of the Azure
+          cloud
         </Text>
         <Text
           block
