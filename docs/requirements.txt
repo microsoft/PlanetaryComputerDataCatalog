@@ -1,6 +1,0 @@
-myst-parser>=0.13.5
-nbsphinx 
-nbconvert
-nbformat
-numpydoc
-sphinx

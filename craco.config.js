@@ -50,12 +50,12 @@ module.exports = {
           patterns: [
             // Copy html from converted notebooks into the static asset director at build
             {
-              from: "etl/processing/*.html",
+              from: "etl/_codefile_output/*.html",
               to: "static/metadata/[name].html",
             },
             // Transform .md to html and copy into the static asset director at build
             {
-              from: "etl/processing/*.md",
+              from: "etl/_codefile_output/*.md",
               to: "static/metadata/[name].html",
               transform: content => {
                 const htmlOut = marked(content.toString("utf8"));
