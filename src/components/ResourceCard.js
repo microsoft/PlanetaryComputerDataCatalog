@@ -1,13 +1,6 @@
 import React from "react";
 import { Link, Text } from "@fluentui/react";
-import { FontIcon } from "@fluentui/react/lib/Icon";
-import { mergeStyles } from "@fluentui/react/lib/Styling";
-
-const iconClass = mergeStyles({
-  fontSize: 12,
-  margin: 5,
-  position: "absolute",
-});
+import ChevronLink from "./controls/ChevronLink";
 
 const ResourceCard = ({ resourceItem }) => {
   const {
@@ -37,17 +30,7 @@ const ResourceCard = ({ resourceItem }) => {
           {description}
         </Text>
       </Link>
-      <Text block variant="medium" style={{ fontWeight: 600 }}>
-        <Link href={infoUrl}>
-          {`Get ${linkLabel} data `}
-
-          <FontIcon
-            aria-label={linkLabel}
-            iconName="ChevronRightSmall"
-            className={iconClass}
-          />
-        </Link>
-      </Text>
+      <ChevronLink href={infoUrl} label={`Get ${linkLabel} data `} />
     </div>
   );
 };
