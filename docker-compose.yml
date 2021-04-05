@@ -1,0 +1,9 @@
+version: "2.4"
+services:
+  etl:
+    build:
+      context: etl
+      dockerfile: Dockerfile
+    volumes:
+      - .:/opt/src
+    working_dir: /opt/src/etl

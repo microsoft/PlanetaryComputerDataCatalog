@@ -1,0 +1,189 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+a {
+  color: #0078d4;
+}
+
+p {
+  line-height: 1.6;
+}
+/* h2 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 1.2;
+} */
+
+main.short {
+  min-height: calc(100vh - 100px);
+}
+
+.page-header { 
+  background-color: #f9f9f9;
+  padding: 80px 0;
+  background-size: cover;
+}
+
+
+/* Light hover effect for link images */
+a img {
+  transition: .5s ease;
+  border-radius: 2px;
+}
+
+a:hover img  {
+    opacity: 0.8;
+}
+
+.page-header h1 {
+  max-width: 50%;
+  margin-top: 0px;
+}
+
+/* Generalized grid layouts */
+
+@media screen and (min-width: 800px) {
+  .toc-item {
+    width: 200px;
+  }
+}
+
+.home-resources .home-resource-item a {
+  text-decoration: none;
+}
+.home-resource-item:hover .item-header{
+  text-decoration: underline;
+}
+
+.toc-item {
+  padding: 15px;
+  margin: 5px;
+}
+
+.toctree-wrapper ul {
+  list-style-type: none;
+  margin: 0 2px;
+  padding: 0;
+}
+
+.toctree-wrapper .caption {
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+
+/* Documentation markup from generated sources */
+.generated-docs img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+/* Corporate footer styling from UHF */
+
+header a {
+    text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+.c-uhff-base {
+    background: #f2f2f2;
+    margin: 0 auto;
+    padding: 5px 10% 5px;
+}
+
+.c-uhff-base ul.c-list {
+    font-size: 11px;
+    line-height: 16px;
+    color: #616161;
+}
+
+.c-list.f-bare {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.c-uhff-base ul.c-list li {
+    padding: 0 24px 4px 0;
+    display: inline-block;
+}
+.context-uhf a:link, .context-uhf a:focus, .context-uhf a:hover, .context-uhf a:active, .context-uhf a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.with-sidebar {
+  overflow: hidden;
+}
+
+.with-sidebar > * {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(40px / 2 * -1);
+}
+
+.with-sidebar > * > * {
+  margin: calc(40px / 2);
+  flex-grow: 1;
+}
+
+/* Collection sidebar 
+
+https://every-layout.dev/layouts/sidebar/
+
+*/
+.with-sidebar > * > :first-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: calc(45% - 1rem);
+}
+  
+.collection-content .collection-content-item {
+  padding-bottom: 15px;
+}
+
+.main-content {
+  padding-bottom: 80px;
+}
+
+/* Convert collection detail <ul> to comma seperated list */
+
+.collection-content-item ul{
+  display: inline;
+  list-style: none;
+  padding-left: 0;
+}
+
+.collection-content-item li {
+  display: inline;
+}
+
+.collection-content-item li:after {
+  content: ", ";
+}
+
+.collection-content-item li:last-child:after {
+    content: "";
+}

@@ -1,0 +1,11 @@
+# Notebook ETL
+ipython==7.22.0
+nbconvert==6.0.*
+
+# Sphinx docs rendering
+myst-parser>=0.13.5
+nbsphinx 
+nbconvert
+nbformat
+numpydoc
+sphinx

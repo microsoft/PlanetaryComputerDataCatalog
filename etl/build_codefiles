@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if ! command -v jupyter nbconvert &> /dev/null
+then
+    echo "nbconvert could not be found. Did you install requirements.txt?"
+    exit
+fi
+
+# Clean up previous downloads
+rm _codefile_output/*.md
+
+# Download all the notebooks and markdown files specified
+wget -i codefiles_urls.txt -P ./_codefile_output
+
+# Convert the notebooks to a basic html output, without body or style tags
+jupyter nbconvert --to html --template basic ./_codefile_output/*.ipynb 
+
+# Clean up processed files
+rm _codefile_output/*.ipynb
