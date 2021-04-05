@@ -58,10 +58,10 @@ const Header = ({ siteProduct }) => (
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/docs">API</HeaderLink>
-        <HeaderLink to="/apps">Applications</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>
+        <HeaderLink to="/apps">Applications</HeaderLink>
         <HeaderLink
           asButton
           to="/account/request"
