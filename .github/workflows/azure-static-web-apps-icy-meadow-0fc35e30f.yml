@@ -24,27 +24,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-      - name: Install dependencies for ETL preprocessing
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r etl/requirements.txt
-      - name: Render notebooks
-        run: |
-          (cd etl && ./process_codefiles.sh)
-      - name: Setup pandoc
-        uses: r-lib/actions/setup-pandoc@v1
-        with:
-          pandoc-version: '2.5'
-      - name: Setup dependencies for docs preprocessing
-        run: |
-          pip install -r docs/requirements.txt
-      - name: Build docs and copy to source
-        run: |
-          (cd docs && ./build_docs.sh)
+      - name: Build docs and metadata
+        run: ./scripts/update
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
