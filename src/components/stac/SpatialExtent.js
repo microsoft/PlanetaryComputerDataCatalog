@@ -73,6 +73,8 @@ const SpatialExtent = ({ extent }) => {
   }, [mapLoaded, extent]);
 
   useEffect(() => {
+    const onReady = () => setMapLoaded(true);
+
     if (!mapRef.current) {
       mapRef.current = new atlas.Map("extent-map", {
         view: "Auto",
@@ -88,9 +90,10 @@ const SpatialExtent = ({ extent }) => {
         },
       });
 
-      mapRef.current.events.add("ready", () => setMapLoaded(true));
+      mapRef.current.events.add("ready", onReady);
 
-      // TODO unregister on cleanup
+      // Remove event handlers on unmount
+      return () => mapRef.current.events.remove("ready", onReady);
     }
   }, []);
 
