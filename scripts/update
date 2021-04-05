@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+function usage() {
+    echo -n "Usage: $(basename "$0")
+Build container images and run ETL jobs.
+"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [[ "${1:-}" == "--help" ]]; then
+        usage
+    else
+        # Ensure container images are current
+        docker-compose build
+        
+        # Run etl to build documentation and external notebook/md files
+        docker-compose run --rm --no-deps etl
+    fi
+fi

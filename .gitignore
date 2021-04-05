@@ -361,7 +361,8 @@ MigrationBackup/
 /build
 
 # etl
-etl/processing
+etl/_docs_output
+etl/_codefile_output
 
 # misc
 .DS_Store
