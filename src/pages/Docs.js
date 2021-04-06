@@ -1,10 +1,12 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
+import { Spinner, SpinnerSize } from "@fluentui/react";
+const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
 // from the documentation build step
@@ -14,6 +16,7 @@ const docTopics = Object.fromEntries(
 );
 
 const Docs = () => {
+  const openApiSpecRoute = "/docs/api/reference";
   const toc = docTopics["./index.json"].body;
 
   const links = (
@@ -23,13 +26,24 @@ const Docs = () => {
         flexWrap: "wrap",
       }}
     >
-      <div style={{ flexBasis: "10rem", flexGrow: 1 }}>
+      <div
+        style={{
+          flexBasis: "10rem",
+          flexGrow: 1,
+        }}
+      >
+        <Link to={openApiSpecRoute}>API Reference</Link>
         <RoutedHtml className="toc-item" markup={toc} />
       </div>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
         <Switch>
+          <Route path={openApiSpecRoute}>
+            <Suspense fallback={<Spinner size={SpinnerSize.large} />}>
+              <OpenApiSpec />
+            </Suspense>
+          </Route>
           <Route path={`/docs/:topicId/:fileId`}>
             <Topic topics={docTopics} />
           </Route>

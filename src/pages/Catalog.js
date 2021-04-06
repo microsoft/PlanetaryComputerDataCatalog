@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import {
   Link,
   MessageBar,
@@ -8,9 +7,7 @@ import {
   SpinnerSize,
 } from "@fluentui/react";
 
-import { useQueryString } from "../utils/hooks";
 import { useCollections } from "../utils/requests";
-import { updateUrl } from "../features/catalog/catalogSlice";
 
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
@@ -27,16 +24,6 @@ import DefaultBanner from "../components/DefaultBanner";
 import "./catalog.css";
 
 const Catalog = () => {
-  const qs = useQueryString();
-  const dispatch = useDispatch();
-  const catalogUrl = qs.get("catalog");
-
-  useEffect(() => {
-    if (catalogUrl) {
-      dispatch(updateUrl(catalogUrl));
-    }
-  });
-
   const banner = (
     <DefaultBanner>
       <h1>Data Catalog</h1>
