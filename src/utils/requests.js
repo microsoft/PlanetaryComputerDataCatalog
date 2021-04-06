@@ -1,7 +1,5 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
-import { selectUrl } from "../features/catalog/catalogSlice";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
@@ -9,8 +7,7 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  const catalogUrl = useSelector(selectUrl);
-  return useQuery(["stac", catalogUrl], getCollections);
+  return useQuery(["stac", process.env.REACT_APP_MQE_URL], getCollections);
 };
 
 export const useStaticMetadata = staticFileName => {
