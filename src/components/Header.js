@@ -57,11 +57,12 @@ const Header = ({ siteProduct }) => (
           </Text>
         </HeaderLink>
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/docs">API</HeaderLink>
+        <HeaderLink to="/api">API</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>
         <HeaderLink to="/apps">Applications</HeaderLink>
+        <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink
           asButton
           to="/account/request"
