@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import {
   Link,
   PrimaryButton,
+  Separator,
   Spinner,
   SpinnerSize,
   Stack,
@@ -94,6 +95,19 @@ const AccountSurvey = () => {
         our preview, but we are excited to support the entire environmental
         sustainability community when the Planetary Computer is publicly
         available.
+      </p>
+      <Separator />
+      <p>
+        Microsoft will use this information to communicate with you about the
+        Planetary Computer, to evaluate your eligibility to participate in our
+        private preview, to prioritize new features, and to communicate
+        non-indentifying information – both internally and externally – about
+        the geographic regions and focus areas that our users represent. For
+        more information on how we use your data please see{" "}
+        <Link href="https://go.microsoft.com/fwlink/?LinkId=521839">
+          Privacy &amp; Cookies
+        </Link>
+        .
       </p>
       <Stack tokens={{ childrenGap: 8 }}>
         <FormInput required name="email" label="Email" formik={formik} />

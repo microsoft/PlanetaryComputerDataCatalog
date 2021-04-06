@@ -75,13 +75,17 @@ a:hover img  {
 .home-resources .home-resource-item a {
   text-decoration: none;
 }
+
 .home-resource-item:hover .item-header{
   text-decoration: underline;
 }
 
+.caption-text {
+  font-weight: bold;
+}
+
 .toc-item {
-  /* padding: 15px;
-  margin: 5px; */
+  margin-right: 8px; 
 }
 
 .toctree-wrapper ul {
@@ -98,10 +102,14 @@ a:hover img  {
 /* Documentation markup from generated sources */
 .generated-docs img {
     object-fit: cover;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 /* Corporate footer styling from UHF */
+
+header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 
 header a {
     text-decoration: none;

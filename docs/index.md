@@ -4,6 +4,7 @@
 :caption: Querying data 
 
 api/query
+api/aster-test
 ```
 
 ```{toctree}
