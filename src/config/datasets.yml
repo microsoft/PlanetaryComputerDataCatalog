@@ -24,7 +24,7 @@ collections:
     headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Storage Documentation 
-        src: landsat-storage.html
+        src: landsat-8-storage.html
       - title: Example Notebook 
         src: landsat.html
   sentinel-2-l2a:
