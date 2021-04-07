@@ -7,6 +7,12 @@
   justify-content: flex-start;
 }
 
+.api-item {
+  flex-basis: 32%;
+  min-height: 100px;
+  margin-bottom: 2%; 
+}
+
 .header-banner-item {
   flex-basis: 49%;
 }
@@ -31,16 +37,23 @@
     flex-basis: 33.33%;
   }
 }
+
 @media(max-width: 1073px) {
    .add-datasource-item {
     flex-basis: 33.33%;
   }
 }
+
 @media(max-width: 815px) {
   .add-datasource-item {
     flex-basis: 50%;
   }
+
+  .api-item {
+    flex-basis: 100%;
+  }
 }
+
 @media(max-width: 555px) {
   .add-datasource-item {
     flex-basis: 100%;
