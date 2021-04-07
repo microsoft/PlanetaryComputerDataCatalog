@@ -235,3 +235,20 @@ https://every-layout.dev/layouts/sidebar/
 .collection-content-item li:last-child:after {
     content: "";
 }
+
+/* Swagger UI overrides */
+.swagger-ui .info h2.title {
+    font-size: 25px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui h4.opblock-tag {
+    font-size: 20px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui .info {
+    margin: 0 !important;
+}
