@@ -76,8 +76,19 @@ a:hover img  {
   text-decoration: none;
 }
 
-.home-resource-item:hover .item-header{
+.home-resource-item:hover .item-header {
   text-decoration: underline;
+}
+
+.home-resource-item i {
+
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.home-resource-item:hover i {
+  font-size: 53px;
 }
 
 .caption-text {
