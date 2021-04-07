@@ -13,8 +13,8 @@ import { renderItemColumn } from "../../utils/stac";
 // values, set the desired widths by key
 const defaultWidth = 100;
 const columnWidths = {
-  title: 125,
-  gsd: 25,
+  title: 150,
+  gsd: 30,
   description: 100,
 };
 
@@ -47,7 +47,7 @@ const ItemAssets = itemAssets => {
         if (typeof va === Array && !skipFormat.includes(key)) {
           return [key, val.join(", ")];
         }
-        return [key, val];
+        return [key, StacFields.format(val, key)];
       });
 
       // eo:bands are concatanated specially
