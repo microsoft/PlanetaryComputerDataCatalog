@@ -12,10 +12,11 @@ const Home = () => {
     <div
       className="hero"
       style={{
-        background: "url(./images/earth-space-clip.2.jpg)",
+        background: "url(./images/planet-sunrise-hero.jpg)",
         backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        height: "660px",
+        height: "627px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
