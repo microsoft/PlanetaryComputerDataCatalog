@@ -111,6 +111,10 @@ a:not(header a):hover img  {
   padding: 0;
 }
 
+.toctree-wrapper p {
+  margin: 10px 0 2px 0;
+}
+
 .toctree-wrapper .caption {
   font-weight: bold;
   margin-bottom: 2px;
