@@ -76,8 +76,19 @@ a:hover img  {
   text-decoration: none;
 }
 
-.home-resource-item:hover .item-header{
+.home-resource-item:hover .item-header {
   text-decoration: underline;
+}
+
+.home-resource-item i {
+
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.home-resource-item:hover i {
+  font-size: 53px;
 }
 
 .caption-text {
@@ -119,10 +130,47 @@ header a:hover {
   text-decoration: underline;
 }
 
+header .break {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+}
+
+/* All gridded content conforms to these margins */
+@media(min-width: 1080px) {
+  .grid-content {
+    padding-left: 10% !important;
+    padding-right: 10% !important;
+  }
+}
+
+/* Smaller screens ~ tablet size get very small margins */
+@media(max-width: 1079px) {
+  .grid-content {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* Tablet size main header will break on first header link to new line */
+@media(min-width: 1023px) {
+  header .break {
+    display: none;
+  }
+}
+
+/* When header links are on a new line, add some padding to the bottom of the header */
+@media(max-width: 1023px) {
+  header .inner-header {
+    padding-bottom: 10px;
+  }
+}
+
 .c-uhff-base {
     background: #f2f2f2;
     margin: 0 auto;
-    padding: 5px 10% 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .c-uhff-base ul.c-list {
@@ -197,4 +245,21 @@ https://every-layout.dev/layouts/sidebar/
 
 .collection-content-item li:last-child:after {
     content: "";
+}
+
+/* Swagger UI overrides */
+.swagger-ui .info h2.title {
+    font-size: 25px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui h4.opblock-tag {
+    font-size: 20px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui .info {
+    margin: 0 !important;
 }

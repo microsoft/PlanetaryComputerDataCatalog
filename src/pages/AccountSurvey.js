@@ -208,9 +208,11 @@ const AccountSurvey = () => {
   return (
     <Layout bannerHeader={banner} isShort>
       <SEO title="Account Request" />
-      {mutation.isError && failMsg}
-      {(mutation.isLoading || mutation.isIdle) && form}
-      {mutation.isSuccess && successMsg}
+      <div className="grid-content">
+        {mutation.isError && failMsg}
+        {(mutation.isLoading || mutation.isIdle) && form}
+        {mutation.isSuccess && successMsg}
+      </div>
     </Layout>
   );
 };

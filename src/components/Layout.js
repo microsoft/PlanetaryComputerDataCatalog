@@ -13,12 +13,7 @@ const Layout = ({ bannerHeader, bannerFooter, isShort = false, children }) => {
       <Header siteTitle={name} siteProduct={product} />
       <div>{bannerHeader}</div>
       <ScrollToTopOnMount />
-      <main
-        className={isShort ? "short" : undefined}
-        style={{ padding: "0 10%" }}
-      >
-        {children}
-      </main>
+      <main className={isShort ? "short" : undefined}>{children}</main>
       {bannerFooter}
       <Footer />
     </>

@@ -67,8 +67,7 @@
 }
 
 #catalog-additional-datasets {
-  /* TODO: enable when the main grid is in place */
-  /* background: #F9F9F9; */
+  background: #F9F9F9;
   margin-top: 40px;
   padding-top: 20px;
 }
@@ -102,7 +101,6 @@
 .header-banner {
   background: #F9F9F9;
   min-height: 165px;
-  padding: 0 10%;
   margin-bottom: 40px;
 }
 
@@ -139,7 +137,7 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  padding: 20px 10%;
+  padding: 20px initial;
   min-height: 300px;
 }
 

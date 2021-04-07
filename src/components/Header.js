@@ -9,12 +9,18 @@ const Header = ({ siteProduct }) => (
       background: "#fff",
     }}
   >
-    <div
+    <nav
+      className="grid-content"
       style={{
-        padding: "6px 10% 0 10%",
+        paddingTop: "6px",
       }}
     >
-      <Stack horizontal wrap tokens={{ childrenGap: "10px" }}>
+      <Stack
+        className="inner-header"
+        horizontal
+        wrap
+        tokens={{ childrenGap: "10px" }}
+      >
         <a
           id="uhfLogo"
           itemProp="url"
@@ -51,11 +57,12 @@ const Header = ({ siteProduct }) => (
         >
           |
         </span>
-        <HeaderLink to="/" style={{ marginTop: "-4px", marginLeft: 0 }}>
+        <HeaderLink to="/" style={{ marginTop: "-3px", marginLeft: 0 }}>
           <Text block variant="large" style={{ fontWeight: 600 }}>
             {siteProduct}
           </Text>
         </HeaderLink>
+        <div className="break" />
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
         <HeaderLink to="/api">API</HeaderLink>
         <HeaderLink external to="/compute">
@@ -66,12 +73,12 @@ const Header = ({ siteProduct }) => (
         <HeaderLink
           asButton
           to="/account/request"
-          style={{ marginLeft: "auto", marginTop: "inherit" }}
+          // style={{ marginLeft: "auto", marginTop: "inherit" }}
         >
           Request access
         </HeaderLink>
       </Stack>
-    </div>
+    </nav>
     <div id="cookie-banner"></div>
   </header>
 );

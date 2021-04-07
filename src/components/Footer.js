@@ -28,7 +28,7 @@ const Footer = () => {
 
   return (
     <footer className="context-uhf">
-      <div className="c-uhff-base">
+      <div className="c-uhff-base grid-content">
         <nav aria-label="Microsoft corporate links">
           <ul
             className="c-list f-bare"

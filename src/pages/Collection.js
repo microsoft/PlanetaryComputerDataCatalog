@@ -30,13 +30,14 @@ const Collection = () => {
 
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
+  const [activeTab, setActiveTab] = useState("overview");
+
   const {
     isError,
     isLoading,
     isSuccess,
     data: stacResponse,
   } = useCollections();
-  const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {
     setActiveTab(location.hash.replace("#", ""));
@@ -57,6 +58,7 @@ const Collection = () => {
     const { itemKey } = pivotItem.props;
     history.replace({ hash: itemKey });
   };
+
   const tabs = tabConfig[id]?.tabs.map(({ title, src, launch }) => {
     return (
       <PivotItem
@@ -109,6 +111,7 @@ const Collection = () => {
       <SEO title={id} description={collection?.description} />
       {collection ? (
         <Pivot
+          className="grid-content"
           selectedKey={activeTab}
           onLinkClick={handleTabChange}
           ariaLabel="Dataset detail tabs"

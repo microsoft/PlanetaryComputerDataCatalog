@@ -17,7 +17,7 @@ const Api = () => {
     <Layout bannerHeader={banner} isShort>
       <SEO title="API" />
       <div className="layout-container">
-        <div className="layout-row">Content for API tbd.</div>
+        <div className="layout-row grid-content">Content for API tbd.</div>
       </div>
     </Layout>
   );

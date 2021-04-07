@@ -5,7 +5,6 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
-import { Spinner, SpinnerSize } from "@fluentui/react";
 import TocTreeItem from "../components/docs/TocTreeItem";
 import { DQE_URL, MQE_URL } from "../utils/constants";
 
@@ -36,12 +35,13 @@ const Docs = () => {
 
   const documentationPane = (
     <div
+      className="grid-content"
       style={{
         display: "flex",
         flexWrap: "wrap",
       }}
     >
-      <div
+      <nav
         style={{
           flexBasis: "10rem",
           flexGrow: 1,
@@ -50,21 +50,18 @@ const Docs = () => {
         <RoutedHtml className="toc-item" markup={toc}>
           {apiRefTocItem}
         </RoutedHtml>
-      </div>
+      </nav>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
         <Switch>
           <Route exact path={openApiStacRoute}>
-            <Suspense fallback={<Spinner size={SpinnerSize.large} />}>
-              <OpenApiSpec
-                title="Metadata API Reference"
-                specUrl={`${MQE_URL}/openapi.json`}
-              />
+            <Suspense fallback={<div />}>
+              <OpenApiSpec specUrl={`${MQE_URL}/openapi.json`} />
             </Suspense>
           </Route>
           <Route title="Data API Reference" path={openApiDataRoute}>
-            <Suspense fallback={<Spinner size={SpinnerSize.large} />}>
+            <Suspense fallback={<div />}>
               <OpenApiSpec specUrl={`${DQE_URL}/openapi.json`} />
             </Suspense>
           </Route>
