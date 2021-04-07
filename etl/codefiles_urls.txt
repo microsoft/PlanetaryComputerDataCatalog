@@ -6,7 +6,7 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/ghe.ipy
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/goes-16-abi-l2-mcmipf.ipyn 
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/hgb.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/hls.ipynb
-https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/landsat.ipynb
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/landsat-8.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/modis-mcd43a4.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/mtbs.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/naip-image-server.ipynb
