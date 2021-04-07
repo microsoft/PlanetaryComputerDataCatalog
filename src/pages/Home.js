@@ -22,7 +22,7 @@ const Home = () => {
         alignItems: "flex-start",
       }}
     >
-      <div style={{ margin: "0 10%" }}>
+      <div className="grid-content">
         <Text
           block
           variant="mega"
@@ -45,7 +45,7 @@ const Home = () => {
     <>
       <ImageStrip />
       <div className="home-footer-container">
-        <div className="home-footer-grid">
+        <div className="home-footer-grid grid-content">
           <Text
             block
             variant="xxLargePlus"
@@ -104,6 +104,7 @@ const Home = () => {
     <Layout bannerHeader={banner} bannerFooter={bannerFooter}>
       <SEO title="Home" />
       <div
+        className="grid-content"
         style={{
           display: "flex",
           flexFlow: "column nowrap",
@@ -135,7 +136,7 @@ const Home = () => {
         className="home-resources layout-container"
         style={{ margin: "100px 0" }}
       >
-        <div className="layout-row">
+        <div className="layout-row grid-content">
           <Resource title="Data Catalog" iconName="addIn" to="/catalog">
             The Planetary Computer includes petabytes of environmental
             monitoring data, in consistent, analysis-ready formats, accessible

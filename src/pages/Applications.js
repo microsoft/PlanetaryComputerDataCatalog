@@ -29,7 +29,7 @@ const Applications = () => {
     <Layout bannerHeader={banner} isShort>
       <SEO title="Applications" />
       <div className="layout-container">
-        <div className="layout-row">{appsList}</div>
+        <div className="layout-row grid-content">{appsList}</div>
       </div>
     </Layout>
   );

@@ -73,29 +73,36 @@ const Catalog = () => {
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
       <section id="catalog-api-datasets">
-        <h2>Datasets available through the Planetary Computer API</h2>
-        <p style={{ maxWidth: 800, marginBottom: 40 }}>
-          Our largest data sets can be queried and accessed through our
-          Planetary Computer API. We are continuing to expand the data available
-          through the API, and continuing to bring new data sets to Azure. If
-          you are interested in seeing additional data on-boarded or published
-          through our API – or if you have data you’d like to contribute –{" "}
-          <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>
-          .
-        </p>
-        <div className="layout-container">
-          <div className="layout-row">{primaryDatasets}</div>
+        <div className="grid-content">
+          <h2>Datasets available through the Planetary Computer API</h2>
+          <p style={{ maxWidth: 800, marginBottom: 40 }}>
+            Our largest data sets can be queried and accessed through our
+            Planetary Computer API. We are continuing to expand the data
+            available through the API, and continuing to bring new data sets to
+            Azure. If you are interested in seeing additional data on-boarded or
+            published through our API – or if you have data you’d like to
+            contribute –{" "}
+            <Link href="mailto:aiforearthdatasets@microsoft.com">
+              contact us
+            </Link>
+            .
+          </p>
+          <div className="layout-container">
+            <div className="layout-row">{primaryDatasets}</div>
+          </div>
         </div>
       </section>
 
       <section id="catalog-additional-datasets">
-        <h2>Additional datasets</h2>
-        <p style={{ maxWidth: 800, marginBottom: 40 }}>
-          The following datasets are available on Azure, for use within or
-          outside of the Planetary Computer Hub.
-        </p>
-        <div className="layout-container">
-          <div className="layout-row">{otherDatasets}</div>
+        <div className="grid-content">
+          <h2>Additional datasets</h2>
+          <p style={{ maxWidth: 800, marginBottom: 40 }}>
+            The following datasets are available on Azure, for use within or
+            outside of the Planetary Computer Hub.
+          </p>
+          <div className="layout-container">
+            <div className="layout-row">{otherDatasets}</div>
+          </div>
         </div>
       </section>
     </Layout>
