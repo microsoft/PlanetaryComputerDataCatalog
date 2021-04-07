@@ -64,7 +64,7 @@ const Header = ({ siteProduct }) => (
         </HeaderLink>
         <div className="break" />
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/api">API</HeaderLink>
+        <HeaderLink to="/pcapi">API</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>

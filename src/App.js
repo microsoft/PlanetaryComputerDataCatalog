@@ -31,7 +31,7 @@ function App() {
           <Route path="/apps">
             <Applications />
           </Route>
-          <Route path="/api">
+          <Route path="/pcapi">
             <Api />
           </Route>
           <Route path="/collection/:id">
