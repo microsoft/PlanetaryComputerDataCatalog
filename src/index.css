@@ -47,7 +47,7 @@ main.short {
 
 
 /* Light hover effect for link images */
-a img {
+main a img {
   transition: .5s ease;
   border-radius: 2px;
 }
@@ -128,6 +128,8 @@ header a {
 
 header a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 header .break {
@@ -139,8 +141,8 @@ header .break {
 /* All gridded content conforms to these margins */
 @media(min-width: 1080px) {
   .grid-content {
-    padding-left: 10% !important;
-    padding-right: 10% !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
   }
 }
 
