@@ -14,6 +14,12 @@ code {
 
 a {
   color: #0078d4;
+    text-decoration: none;
+}
+
+a:not(header a):not(a.ms-Button):not(.home-resource-item a):hover {
+  text-decoration: underline;
+  color: #0078d4 !important;
 }
 
 p {
@@ -52,7 +58,7 @@ main a img {
   border-radius: 2px;
 }
 
-a:hover img  {
+a:not(header a):hover img  {
     opacity: 0.8;
 }
 
@@ -120,10 +126,6 @@ a:hover img  {
 
 header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-header a {
-    text-decoration: none;
 }
 
 header a:hover {
