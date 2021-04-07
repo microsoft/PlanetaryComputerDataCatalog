@@ -17,7 +17,7 @@ a {
     text-decoration: none;
 }
 
-a:not(header a):not(a.ms-Button):not(.home-resource-item a):hover {
+a:not(header a):not(a.ms-Button):hover {
   text-decoration: underline;
   color: #0078d4 !important;
 }
@@ -59,7 +59,7 @@ main a img {
 }
 
 a:not(header a):hover img  {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .page-header h1 {

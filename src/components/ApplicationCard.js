@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "@fluentui/react";
+import { Link, Text } from "@fluentui/react";
 import ChevronLink from "./controls/ChevronLink";
 
 const ApplicationCard = ({ app }) => {
@@ -8,12 +8,20 @@ const ApplicationCard = ({ app }) => {
   return (
     <div className="api-datasource-item">
       <h2 style={{ color: "initial" }}>{title}</h2>
-      <img
-        alt=""
-        src={thumbnailUrl}
-        style={{ maxWidth: "100%", objectFit: "contain" }}
-      />
-      <p style={{ marginBottom: 10, minHeight: 37 }}>{description}</p>
+      <Link
+        href={links[0].url}
+        underline={false}
+        style={{ textDecoration: "none" }}
+      >
+        <img
+          alt=""
+          src={thumbnailUrl}
+          style={{ maxWidth: "100%", objectFit: "contain" }}
+        />
+        <p style={{ color: "initial", marginBottom: 10, minHeight: 37 }}>
+          {description}
+        </p>
+      </Link>
       <Text block variant="medium" style={{ fontWeight: 600 }}>
         {links.map(({ title, url }) => {
           return (
