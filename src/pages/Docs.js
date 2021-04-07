@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
 import { Spinner, SpinnerSize } from "@fluentui/react";
+import TocTreeItem from "../components/docs/TocTreeItem";
+import { DQE_URL, MQE_URL } from "../utils/constants";
+
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
@@ -16,10 +19,22 @@ const docTopics = Object.fromEntries(
 );
 
 const Docs = () => {
-  const openApiSpecRoute = "/docs/api/reference";
+  // Generate Sphinx-like TOC items to inject into the generated TOC. Use these
+  // for OpenAPI/Swagger routes.
+  const openApiStacRoute = "/docs/api/spec/stac";
+  const openApiDataRoute = "/docs/api/spec/data";
+  const openApiLinks = [
+    { label: "Metadata API", href: openApiStacRoute },
+    { label: "Data API", href: openApiDataRoute },
+  ];
+
+  const apiRefTocItem = (
+    <TocTreeItem title="API Reference" links={openApiLinks} />
+  );
+
   const toc = docTopics["./index.json"].body;
 
-  const links = (
+  const documentationPane = (
     <div
       style={{
         display: "flex",
@@ -32,22 +47,31 @@ const Docs = () => {
           flexGrow: 1,
         }}
       >
-        <Link to={openApiSpecRoute}>API Reference</Link>
-        <RoutedHtml className="toc-item" markup={toc} />
+        <RoutedHtml className="toc-item" markup={toc}>
+          {apiRefTocItem}
+        </RoutedHtml>
       </div>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
         <Switch>
-          <Route path={openApiSpecRoute}>
+          <Route exact path={openApiStacRoute}>
             <Suspense fallback={<Spinner size={SpinnerSize.large} />}>
-              <OpenApiSpec />
+              <OpenApiSpec
+                title="Metadata API Reference"
+                specUrl={`${MQE_URL}/openapi.json`}
+              />
+            </Suspense>
+          </Route>
+          <Route title="Data API Reference" path={openApiDataRoute}>
+            <Suspense fallback={<Spinner size={SpinnerSize.large} />}>
+              <OpenApiSpec specUrl={`${DQE_URL}/openapi.json`} />
             </Suspense>
           </Route>
           <Route path={`/docs/:topicId/:fileId`}>
             <Topic topics={docTopics} />
           </Route>
-          <Route path={"/docs"}>
+          <Route exact path={"/docs"}>
             <h2>Documentation</h2>
             <p>
               The Planetary Computer consists of an API layer as well as
@@ -71,7 +95,7 @@ const Docs = () => {
         title="Documentation"
         description="User guides and reference material for using the Planetary Computer."
       />
-      {links}
+      {documentationPane}
     </Layout>
   );
 };

@@ -1,19 +1,12 @@
 import React from "react";
-import { RedocStandalone } from "redoc";
+import SwaggerUI from "swagger-ui-react";
+import "swagger-ui-react/swagger-ui.css";
 
-const OpenApiSpec = () => {
+const OpenApiSpec = ({ title, specUrl }) => {
   return (
     <>
-      <h2>API Reference</h2>
-      <RedocStandalone
-        specUrl={`${process.env.REACT_APP_MQE_URL}/openapi.json`}
-        options={{
-          hideDownloadButton: true,
-          theme: {
-            breakpoints: { small: "1000px", medium: "1700px", large: "2000px" },
-          },
-        }}
-      />
+      <h2>{title}</h2>
+      <SwaggerUI url={specUrl} docExpansion="list" />
     </>
   );
 };
