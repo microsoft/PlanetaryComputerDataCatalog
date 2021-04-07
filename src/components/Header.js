@@ -9,7 +9,7 @@ const Header = ({ siteProduct }) => (
       background: "#fff",
     }}
   >
-    <div
+    <nav
       className="grid-content"
       style={{
         paddingTop: "6px",
@@ -78,7 +78,7 @@ const Header = ({ siteProduct }) => (
           Request access
         </HeaderLink>
       </Stack>
-    </div>
+    </nav>
     <div id="cookie-banner"></div>
   </header>
 );

@@ -41,7 +41,7 @@ const Docs = () => {
         flexWrap: "wrap",
       }}
     >
-      <div
+      <nav
         style={{
           flexBasis: "10rem",
           flexGrow: 1,
@@ -50,7 +50,7 @@ const Docs = () => {
         <RoutedHtml className="toc-item" markup={toc}>
           {apiRefTocItem}
         </RoutedHtml>
-      </div>
+      </nav>
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
