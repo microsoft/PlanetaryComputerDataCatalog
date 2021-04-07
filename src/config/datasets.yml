@@ -26,7 +26,7 @@ collections:
       - title: Storage Documentation 
         src: landsat-8-storage.html
       - title: Example Notebook 
-        src: landsat.html
+        src: landsat-8.html
   sentinel-2-l2a:
     shortTerm: Sentinel-2
     headerImg: ./images/sentinel-hero.jpg
