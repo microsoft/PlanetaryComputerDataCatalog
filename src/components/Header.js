@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { Stack, Text } from "@fluentui/react";
 import HeaderLink from "./controls/HeaderLink";
 
-const Header = ({ siteProduct }) => (
+import { product as siteProduct } from "../config/site.yml";
+
+const Header = () => (
   <header
     style={{
       background: "#fff",
