@@ -1,44 +1,55 @@
 # Use STAC collection IDs to attach specific notebooks/content to a collection
 # detail page. Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/codefiles_urls.txt` file for processing
+
+# To include a button on a tab to launch the notebook in Hub, add the following
+# config to the tab item:
+
+# launch: 
+#   title: Launch in Hub
+#   repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
+#   branch: main
+#   filePath: landcover.ipynb
+
 collections:
   naip:
     shortTerm: NAIP
     headerImg: ./images/naip-hero.jpg
     tabs:
+      - title: Example Notebook 
+        src: 
+      - title: Blob Storage Notebook 
+        src: naip.html
       - title: Storage Documentation 
         src: naip-storage.html
-      - title: Example Notebook 
-        src: naip.html
-      - title: Using Esri Image Server
-        src: naip-image-server.html
-      - title: Land Classification Demo
-        src: landcover.html
-        launch: 
-          title: Launch in Hub
-          repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
-          branch: main
-          filePath: landcover.ipynb
   landsat-8-c2-l2:
     shortTerm: Landsat 8
     headerImg: ./images/landsat-hero.jpg
     tabs:
+      - title: Example Notebook 
+        src: 
+      - title: Blob Storage Notebook 
+        src: landsat-8.html
       - title: Storage Documentation 
         src: landsat-8-storage.html
-      - title: Example Notebook 
-        src: landsat-8.html
   sentinel-2-l2a:
     shortTerm: Sentinel-2
     headerImg: ./images/sentinel-hero.jpg
     tabs:
+      - title: Example Notebook 
+        src: 
+      - title: Blob Storage Notebook 
+        src: sentinel-2.html
       - title: Storage Documentation 
         src: sentinel-2-storage.html
-      - title: Example Notebook 
-        src: sentinel-2.html
   aster-l1t:
     shortTerm: ASTER
     headerImg: ./images/aster-hero.jpg
     tabs:
+      - title: Example Notebook 
+        src: 
+      - title: Blob Storage Notebook 
+        src: aster.html
       - title: Storage Documentation 
         src: aster-storage.html
 

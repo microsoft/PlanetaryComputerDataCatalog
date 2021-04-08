@@ -1,6 +1,8 @@
 import React from "react";
 import {
   DefaultButton,
+  MessageBar,
+  MessageBarType,
   PrimaryButton,
   Spinner,
   SpinnerSize,
@@ -14,22 +16,39 @@ import { buildGitHubUrl, buildHubLaunchUrl } from "../utils";
 import NewTabLink from "./controls/NewTabLink";
 
 // HTML rendered Notebooks and Markdown files are fetched async from the static dir
-const MetadataHtmlConent = ({ src, title, launch }) => {
-  const { isSuccess, data } = useStaticMetadata(src);
+const MetadataHtmlConent = ({ src, launch }) => {
+  const { isSuccess, isLoading, data } = useStaticMetadata(src);
   const ghLink = launch ? (
     <NewTabLink As={DefaultButton} href={buildGitHubUrl(launch)}>
       Edit on GitHub
     </NewTabLink>
   ) : null;
+
   const launcher = launch ? (
     <NewTabLink As={PrimaryButton} href={buildHubLaunchUrl(launch)}>
       {launch.title}
     </NewTabLink>
   ) : null;
 
+  const loadingMsg = (
+    <Spinner
+      styles={{ root: { marginTop: "275px" } }}
+      size={SpinnerSize.large}
+    />
+  );
+
+  const errorMsg = (
+    <MessageBar
+      messageBarType={MessageBarType.error}
+      isMultiline={false}
+      styles={{ root: { marginTop: 20 } }}
+    >
+      Sorry, we're having trouble loading this content right now.
+    </MessageBar>
+  );
+
   const metadata = isSuccess ? (
     <div>
-      {title && <h3>{title}</h3>}
       <Stack horizontalAlign="end">
         <div>
           <Stack horizontal tokens={{ childrenGap: 10 }}>
@@ -43,11 +62,10 @@ const MetadataHtmlConent = ({ src, title, launch }) => {
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data) }}
       ></div>
     </div>
+  ) : isLoading ? (
+    loadingMsg
   ) : (
-    <Spinner
-      styles={{ root: { marginTop: "275px" } }}
-      size={SpinnerSize.large}
-    />
+    errorMsg
   );
 
   return metadata;
