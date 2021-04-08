@@ -3,22 +3,20 @@ import PropTypes from "prop-types";
 import { Stack, Text } from "@fluentui/react";
 import HeaderLink from "./controls/HeaderLink";
 
-const Header = ({ siteProduct }) => (
+import { product as siteProduct } from "../config/site.yml";
+
+const Header = () => (
   <header
     style={{
       background: "#fff",
     }}
   >
-    <nav
-      className="grid-content"
-      style={{
-        paddingTop: "6px",
-      }}
-    >
+    <nav className="grid-content" style={{}}>
       <Stack
         className="inner-header"
         horizontal
         wrap
+        style={{ margin: "1px 0" }}
         tokens={{ childrenGap: "10px" }}
       >
         <a
@@ -27,7 +25,7 @@ const Header = ({ siteProduct }) => (
           href="https://www.microsoft.com"
           aria-label="Microsoft"
           style={{
-            padding: "16px 0 16px 0px",
+            padding: "16px 6px 16px 10px",
             float: "left",
             height: "100%",
             width: "113px",
@@ -49,22 +47,23 @@ const Header = ({ siteProduct }) => (
         </a>
         <span
           style={{
-            fontSize: 22,
+            fontSize: 24,
             fontWeight: 600,
-            marginTop: 13,
+            marginTop: 12,
             marginRight: 15,
+            marginLeft: 7,
           }}
         >
           |
         </span>
-        <HeaderLink to="/" style={{ marginTop: "-3px", marginLeft: 0 }}>
+        <HeaderLink to="/" style={{ marginTop: 0, marginLeft: 2 }}>
           <Text block variant="large" style={{ fontWeight: 600 }}>
             {siteProduct}
           </Text>
         </HeaderLink>
         <div className="break" />
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/api">API</HeaderLink>
+        <HeaderLink to="/pcapi">API</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>

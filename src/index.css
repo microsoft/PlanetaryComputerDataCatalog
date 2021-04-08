@@ -14,6 +14,12 @@ code {
 
 a {
   color: #0078d4;
+    text-decoration: none;
+}
+
+a:not(header a):not(a.ms-Button):not(.home-resource-item a):hover {
+  text-decoration: underline;
+  color: #0078d4 !important;
 }
 
 p {
@@ -47,13 +53,13 @@ main.short {
 
 
 /* Light hover effect for link images */
-a img {
+main a img {
   transition: .5s ease;
   border-radius: 2px;
 }
 
-a:hover img  {
-    opacity: 0.8;
+a:not(header a):hover img  {
+    opacity: 0.85;
 }
 
 .page-header h1 {
@@ -105,6 +111,10 @@ a:hover img  {
   padding: 0;
 }
 
+.toctree-wrapper p {
+  margin: 10px 0 2px 0;
+}
+
 .toctree-wrapper .caption {
   font-weight: bold;
   margin-bottom: 2px;
@@ -122,12 +132,10 @@ header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-header a {
-    text-decoration: none;
-}
-
 header a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
 }
 
 header .break {
@@ -139,8 +147,8 @@ header .break {
 /* All gridded content conforms to these margins */
 @media(min-width: 1080px) {
   .grid-content {
-    padding-left: 10% !important;
-    padding-right: 10% !important;
+    padding-left: 5% !important;
+    padding-right: 5% !important;
   }
 }
 

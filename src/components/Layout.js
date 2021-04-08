@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { name, product } from "../config/site.yml";
-
 import Header from "./Header";
 import Footer from "./Footer";
 import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
@@ -10,7 +8,7 @@ import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
 const Layout = ({ bannerHeader, bannerFooter, isShort = false, children }) => {
   return (
     <>
-      <Header siteTitle={name} siteProduct={product} />
+      <Header />
       <div>{bannerHeader}</div>
       <ScrollToTopOnMount />
       <main className={isShort ? "short" : undefined}>{children}</main>

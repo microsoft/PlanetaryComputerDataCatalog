@@ -10,11 +10,6 @@ import { renderItemColumn } from "../../utils/stac";
 
 const bandKey = "eo:bands";
 
-StacFields.Registry.addMetadataField("gsd", {
-  label: "GSD",
-  formatter: value => (value ? `${value}m` : "-"),
-});
-
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
 // values, set the desired widths by key
