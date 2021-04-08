@@ -63,7 +63,7 @@ ai4e:
     alt: Map showing color-coded temperature data.
 
   - title: Global Hydro Estimator
-    shortTerm: global percipitation
+    shortTerm: global precipitation
     description: Global precipitation estimates
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4ucH7?ver=9bbe&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
@@ -104,9 +104,9 @@ ai4e:
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BWhq?ver=a3ee&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: Fox pup stands on a rock.
 
-  - title: MODIS Surface Reflectance
+  - title: MODIS
     shortTerm: MODIS
-    description: 500m-resolution global daily surface reflectance dating back to 2000
+    description: Satellite imagery from the Moderate Resolution Imaging Spectroradiometer (MODIS)
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE3BTDt?ver=3fe9&q=90&m=6&h=201&w=358&b=%23FFFFFFFF&l=f&o=t&aim=true
     alt: View of Earth from space.

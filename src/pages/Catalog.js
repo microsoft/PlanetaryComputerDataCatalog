@@ -30,8 +30,8 @@ const Catalog = () => {
       <p>
         The Planetary Computer Data Catalog includes petabytes of environmental
         monitoring data, in consistent, analysis-ready formats. All of the
-        datasets below can be accessed via Azure blob storage, and can be used
-        by developers whether you’re working within or outside of our Planetary
+        datasets below can be accessed via Azure Blob Storage, and can be used
+        by developers whether you're working within or outside of our Planetary
         Computer Hub.
       </p>
     </DefaultBanner>
@@ -80,7 +80,7 @@ const Catalog = () => {
             Planetary Computer API. We are continuing to expand the data
             available through the API, and continuing to bring new data sets to
             Azure. If you are interested in seeing additional data on-boarded or
-            published through our API – or if you have data you’d like to
+            published through our API – or if you have data you'd like to
             contribute –{" "}
             <Link href="mailto:aiforearthdatasets@microsoft.com">
               contact us

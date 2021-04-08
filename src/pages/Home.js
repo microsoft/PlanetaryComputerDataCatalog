@@ -85,11 +85,15 @@ const Home = () => {
               }}
             >
               The Planetary Computer API and Hub are currently available in
-              private preview. If you’re interested in developing on our
+              private preview. If you're interested in developing on our
               platform,{" "}
               <RouterLink
                 to="/account/request"
-                style={{ color: "#fff", fontWeight: "600" }}
+                style={{
+                  color: "#fff",
+                  fontWeight: "600",
+                  textDecoration: "underline",
+                }}
               >
                 request access now
               </RouterLink>
@@ -149,18 +153,18 @@ const Home = () => {
             Catalog.
           </Resource>
           <Resource title="Hub" iconName="TableComputed" href="/compute">
-            A development environment that makes our data and APIs accessible
-            through familiar, open-source tools, and allows users to easily
-            scale their analyses with the power of Azure compute.
+            The Planetary Computer Hub is a development environment that makes
+            our data and APIs accessible through familiar, open-source tools,
+            and allows users to easily scale their analyses.
           </Resource>
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
             to="/apps"
           >
-            Explore applications that build on top of the Planetary Computer
-            platform, providing the actionable information that is critical to
-            sustainability practitioners.
+            Partners all over the world are building on top of the Planetary
+            Computer platform, providing the actionable information that is
+            critical to sustainability practitioners.
           </Resource>
         </div>
       </div>

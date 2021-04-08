@@ -90,7 +90,7 @@ const AccountSurvey = () => {
       style={{ maxWidth: "500px", marginBottom: 80 }}
     >
       <p>
-        If you’re interested in being one of our first users, please provide the
+        If you're interested in being one of our first users, please provide the
         following information. We will accommodate as many users as we can in
         our preview, but we are excited to support the entire environmental
         sustainability community when the Planetary Computer is publicly
@@ -173,7 +173,7 @@ const AccountSurvey = () => {
       <h1>Request access</h1>
       <p>
         The Planetary Computer API and Planetary Computer Hub are currently in
-        private preview, and we’re excited to expand our partner and developer
+        private preview, and we're excited to expand our partner and developer
         network.
       </p>
     </DefaultBanner>
