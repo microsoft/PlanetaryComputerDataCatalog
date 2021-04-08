@@ -12,8 +12,8 @@ const Applications = () => {
     <DefaultBanner>
       <h1>Applications</h1>
       <p style={{ margin: "1.8rem 0" }}>
-        The Planetary Computer puts global-scale geospatial data in the hands of
-        environmental scientists, application developers, and policy makers,
+        The Planetary Computer puts global-scale environmental monitoring
+        capabilities in the hands of scientists, developers, and policy makers,
         enabling data-driven decision making. Learn about some of the
         applications our partners are building as part of the Planetary
         Computer.
