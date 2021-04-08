@@ -7,6 +7,7 @@ import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
 import TocTreeItem from "../components/docs/TocTreeItem";
 import { DQE_URL, MQE_URL } from "../utils/constants";
+import ScrollToTop from "../components/ScrollToTop";
 
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
@@ -27,11 +28,19 @@ const Docs = () => {
     { label: "Data API", href: openApiDataRoute },
   ];
 
-  const apiRefTocItem = (
-    <TocTreeItem title="API Reference" links={openApiLinks} />
-  );
-
   const toc = docTopics["./index.json"].body;
+  const tocComponent = (
+    <nav
+      style={{
+        flexBasis: "10rem",
+        flexGrow: 1,
+      }}
+    >
+      <RoutedHtml className="toc-item" markup={toc}>
+        <TocTreeItem title="API Reference" links={openApiLinks} />
+      </RoutedHtml>
+    </nav>
+  );
 
   const documentationPane = (
     <div
@@ -41,19 +50,11 @@ const Docs = () => {
         flexWrap: "wrap",
       }}
     >
-      <nav
-        style={{
-          flexBasis: "10rem",
-          flexGrow: 1,
-        }}
-      >
-        <RoutedHtml className="toc-item" markup={toc}>
-          {apiRefTocItem}
-        </RoutedHtml>
-      </nav>
+      {tocComponent}
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
+        <ScrollToTop />
         <Switch>
           <Route exact path={openApiStacRoute}>
             <Suspense fallback={<div />}>

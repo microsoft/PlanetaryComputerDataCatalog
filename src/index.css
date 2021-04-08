@@ -76,6 +76,25 @@ a:not(header a):hover img  {
     position: sticky;
     top: 0;
   }
+
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media(max-width: 768px) {
+  .nav-internal {
+    display: none;
+  }
+  
+}
+.nav-internal {
+  min-width: 175px;
+  margin-left: 30px;
+  height: fit-content;
+  padding: 20px 0 25px 0;
 }
 
 .home-resources .home-resource-item a {
@@ -103,12 +122,18 @@ a:not(header a):hover img  {
 
 .toc-item {
   margin-right: 8px; 
+  padding-top: 15px;
 }
 
 .toctree-wrapper ul {
   list-style-type: none;
-  margin: 0 2px;
+  margin: 0 5px;
   padding: 0;
+}
+
+.toctree-wrapper li {
+  padding: 2px 0;
+  margin: 4px 0;
 }
 
 .toctree-wrapper p {
@@ -120,6 +145,10 @@ a:not(header a):hover img  {
   margin-bottom: 2px;
 }
 
+.generated-docs {
+  min-width: 75%;
+  margin-bottom: 40px;
+}
 /* Documentation markup from generated sources */
 .generated-docs img {
     object-fit: cover;
