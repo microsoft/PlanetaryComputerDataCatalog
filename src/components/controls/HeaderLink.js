@@ -10,7 +10,7 @@ const HeaderLink = ({
   style,
   children,
 }) => {
-  const defaultStyle = { marginTop: "0px", marginLeft: "14px" };
+  const defaultStyle = { marginTop: "0px", marginLeft: "16px" };
   const linkStyle = {
     fontSize: "13px",
     lineHeight: "16px",
