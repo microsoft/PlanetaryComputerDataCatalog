@@ -5,6 +5,7 @@ import uuid
 
 import requests
 import azure.functions as func
+from requests.models import HTTPBasicAuth
 
 from .card import make_card
 
@@ -16,6 +17,9 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
     webhook_url = os.environ.get("NotificationHook")
     portal_url = os.environ.get("StoragePortalLink")
     az_env = os.environ.get("AZURE_FUNCTIONS_ENVIRONMENT")
+    singup_url = os.environ.get("SignupUrl")
+    singup_user = os.environ.get("SignupAuthUser")
+    singup_pass = os.environ.get("SignupAuthPass")
 
     try:
         req_body = req.get_json()
@@ -31,6 +35,7 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
             f"Required keys: {', '.join(required_keys)}", status_code=400
         )
 
+    # Persist the survey data to survey storage
     row_data = {
         "Name": req_body.get("name"),
         "Email": req_body.get("email"),
@@ -49,6 +54,14 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
     short_key = row_key[:8]
     survey.set(json.dumps(row_data))
     logging.debug(f"Inserted record {short_key}")
+
+    # Send to user management system as well, but deactivated
+    try:
+        requests.post(singup_url, 
+                    auth=HTTPBasicAuth(singup_user, singup_pass), 
+                    data={"email": req_body.get("email"), "approved": False})
+    except:
+        logging.exception("Failed to submit to user management system")
 
     if webhook_url:
         if az_env != "Development":
