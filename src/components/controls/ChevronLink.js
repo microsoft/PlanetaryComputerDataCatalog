@@ -13,7 +13,7 @@ const iconClass = mergeStyles({
 const ChevronLink = ({ href, label }) => {
   return (
     <Text block variant="medium" style={{ fontWeight: 600 }}>
-      <NewTabLink href={href}>
+      <NewTabLink href={href} ariaLabel={`${label}, link will open in new tab`}>
         {label}
         <FontIcon iconName="ChevronRightSmall" className={iconClass} />
       </NewTabLink>
