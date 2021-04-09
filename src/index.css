@@ -14,12 +14,17 @@ code {
 
 a {
   color: #0078d4;
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a):hover {
   text-decoration: underline;
   color: #0078d4 !important;
+}
+
+/* a11y for gray background */
+#catalog-additional-datasets a.ms-Link {
+  color: #0060bd;
 }
 
 p {
@@ -299,4 +304,24 @@ https://every-layout.dev/layouts/sidebar/
 
 .swagger-ui .info {
     margin: 0 !important;
+}
+
+.swagger-ui .info .main .title small {
+  background-color: #333;
+} 
+
+.swagger-ui .info .main .title small.version-stamp {
+  background-color: #008000;
+}
+
+.swagger-ui .info a {
+  color: #0078d4 !important;
+}
+
+.opblock-summary-get span.opblock-summary-method {
+  background-color: #0078d4 !important;
+}
+
+.opblock-summary-post span.opblock-summary-method {
+  background-color: #008000 !important;
 }

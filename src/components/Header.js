@@ -11,7 +11,7 @@ const Header = () => (
       background: "#fff",
     }}
   >
-    <nav className="grid-content" style={{}}>
+    <nav className="grid-content" aria-label="Main header navigation links">
       <Stack
         className="inner-header"
         horizontal

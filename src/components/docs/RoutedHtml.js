@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import DOMPurify from "dompurify";
 
@@ -10,6 +10,23 @@ const imagePathRegex = /..\/..\/_images/gi;
 // React Router system.
 const RoutedHtml = ({ className, markup, children }) => {
   const history = useHistory();
+  const contentRef = useRef();
+
+  useEffect(() => {
+    // TODO: Unify with copy in MetadataHtmlContent
+
+    // Keyboard users needs a tabindex set on scrollable content if they
+    // otherwise do not have focusable content. These python codeblocks are
+    // brought over from nbconvert and must have a tabindex set to all keyboard
+    // scrolling.
+    if (contentRef.current) {
+      contentRef.current
+        .querySelectorAll(".docutils.container .highlight-ipython3 pre")
+        .forEach(element => {
+          element.setAttribute("tabindex", 0);
+        });
+    }
+  }, []);
 
   const handleClick = e => {
     if (e.target.getAttribute("class")?.includes("reference internal")) {
@@ -23,6 +40,7 @@ const RoutedHtml = ({ className, markup, children }) => {
     <div className={className}>
       {children}
       <div
+        ref={contentRef}
         onClick={handleClick}
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
