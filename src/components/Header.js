@@ -47,16 +47,16 @@ const Header = () => (
         </a>
         <span
           style={{
-            fontSize: 24,
-            fontWeight: 600,
-            marginTop: 12,
+            fontSize: 23.5,
+            fontWeight: 500,
+            marginTop: 11.5,
             marginRight: 15,
-            marginLeft: 7,
+            marginLeft: 7.5,
           }}
         >
           |
         </span>
-        <HeaderLink to="/" style={{ marginTop: 0, marginLeft: 2 }}>
+        <HeaderLink to="/" style={{ marginTop: "-1px", marginLeft: 2 }}>
           <Text block variant="large" style={{ fontWeight: 600 }}>
             {siteProduct}
           </Text>

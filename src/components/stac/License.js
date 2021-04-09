@@ -6,13 +6,19 @@ import LabeledValue from "../controls/LabeledValue";
 const License = ({ collection }) => {
   const { license, links } = collection;
   const licenseLink = links.find(l => l.rel === "license");
-  const defaultText = "None provided";
+  const defaultText = license || "None provided";
+
+  // Figure out the best license text from the link title, the license
+  // attribute, or the default text. Capitalize.
+  const licenseText = (licenseLink?.title || defaultText).replace(/\w\S*/g, w =>
+    w.replace(/^\w/, c => c.toUpperCase())
+  );
 
   const formattedLicense =
     license && licenseLink ? (
-      <NewTabLink href={licenseLink.href}>{license}</NewTabLink>
+      <NewTabLink href={licenseLink.href}>{licenseText}</NewTabLink>
     ) : (
-      <Text>{license || defaultText}</Text>
+      <Text>{licenseText}</Text>
     );
 
   return <LabeledValue label="License">{formattedLicense}</LabeledValue>;
