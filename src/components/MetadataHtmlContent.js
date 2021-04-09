@@ -14,6 +14,7 @@ import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
 import { buildGitHubUrl, buildHubLaunchUrl } from "../utils";
 import NewTabLink from "./controls/NewTabLink";
+import GeneratedInternalToc from "./docs/GeneratedInternalToc";
 
 // HTML rendered Notebooks and Markdown files are fetched async from the static dir
 const MetadataHtmlConent = ({ src, launch }) => {
@@ -47,6 +48,7 @@ const MetadataHtmlConent = ({ src, launch }) => {
     </MessageBar>
   );
 
+  const generatedToc = <GeneratedInternalToc nohash html={data} />;
   const metadata = isSuccess ? (
     <div>
       <Stack horizontalAlign="end">
@@ -57,10 +59,13 @@ const MetadataHtmlConent = ({ src, launch }) => {
           </Stack>
         </div>
       </Stack>
-      <div
-        className="markdown-source"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data) }}
-      ></div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          className="markdown-source"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data) }}
+        ></div>
+        {generatedToc}
+      </div>
     </div>
   ) : isLoading ? (
     loadingMsg
