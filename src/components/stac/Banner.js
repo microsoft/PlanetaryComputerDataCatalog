@@ -17,11 +17,7 @@ const Banner = ({ collection }) => {
         backgroundImage: `url(${imgUrl})`,
       }}
     >
-      <div
-        style={{
-          padding: "0 10%",
-        }}
-      >
+      <div className="grid-content">
         <Text
           block
           styles={{ root: { color: "#fff", fontWeight: 500, marginTop: 5 } }}

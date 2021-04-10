@@ -17,7 +17,9 @@ const CollectionCard = ({ collection, shortTerm }) => {
         <AssetThumbnail assets={collection.assets} />
 
         <h3 style={{ color: "initial" }}>{collection.title}</h3>
-        <p style={{ minHeight: 50 }}>{collection["msft:short_description"]}</p>
+        <p style={{ color: "initial", minHeight: 50 }}>
+          {collection["msft:short_description"]}
+        </p>
       </Link>
       <ButtonLink to={href} style={{ marginTop: 10 }}>
         {`Explore ${buttonLabel}`}

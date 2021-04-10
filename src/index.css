@@ -14,6 +14,17 @@ code {
 
 a {
   color: #0078d4;
+  text-decoration: none;
+}
+
+a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a):hover {
+  text-decoration: underline;
+  color: #0078d4 !important;
+}
+
+/* a11y for gray background */
+#catalog-additional-datasets a.ms-Link {
+  color: #0060bd;
 }
 
 p {
@@ -47,13 +58,13 @@ main.short {
 
 
 /* Light hover effect for link images */
-a img {
+main a img {
   transition: .5s ease;
   border-radius: 2px;
 }
 
-a:hover img  {
-    opacity: 0.8;
+a:not(header a):hover img  {
+    opacity: 0.85;
 }
 
 .page-header h1 {
@@ -66,25 +77,72 @@ a:hover img  {
 @media screen and (min-width: 800px) {
   .toc-item {
     width: 200px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
   }
+
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media(max-width: 768px) {
+  .nav-internal {
+    display: none;
+  }
+  
+}
+.nav-internal {
+  min-width: 175px;
+  margin-left: 30px;
+  height: fit-content;
+  padding: 20px 0 25px 0;
 }
 
 .home-resources .home-resource-item a {
   text-decoration: none;
 }
-.home-resource-item:hover .item-header{
+
+.home-resource-item:hover .item-header {
   text-decoration: underline;
 }
 
+.home-resource-item i {
+
+  transition-property: font-size;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.home-resource-item:hover i {
+  font-size: 53px;
+}
+
+.caption-text {
+  font-weight: bold;
+}
+
 .toc-item {
-  padding: 15px;
-  margin: 5px;
+  margin-right: 8px; 
+  padding-top: 15px;
 }
 
 .toctree-wrapper ul {
   list-style-type: none;
-  margin: 0 2px;
+  margin: 0 5px;
   padding: 0;
+}
+
+.toctree-wrapper li {
+  padding: 2px 0;
+  margin: 4px 0;
+}
+
+.toctree-wrapper p {
+  margin: 10px 0 2px 0;
 }
 
 .toctree-wrapper .caption {
@@ -92,26 +150,69 @@ a:hover img  {
   margin-bottom: 2px;
 }
 
+.generated-docs {
+  min-width: 75%;
+  margin-bottom: 40px;
+}
 /* Documentation markup from generated sources */
 .generated-docs img {
     object-fit: cover;
-    height: 100%;
-    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 /* Corporate footer styling from UHF */
 
-header a {
-    text-decoration: none;
+header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 header a:hover {
   text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+header .break {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+}
+
+/* All gridded content conforms to these margins */
+@media(min-width: 1080px) {
+  .grid-content {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+/* Smaller screens ~ tablet size get very small margins */
+@media(max-width: 1079px) {
+  .grid-content {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* Tablet size main header will break on first header link to new line */
+@media(min-width: 1023px) {
+  header .break {
+    display: none;
+  }
+}
+
+/* When header links are on a new line, add some padding to the bottom of the header */
+@media(max-width: 1023px) {
+  header .inner-header {
+    padding-bottom: 10px;
+  }
 }
 
 .c-uhff-base {
     background: #f2f2f2;
     margin: 0 auto;
-    padding: 5px 10% 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .c-uhff-base ul.c-list {
@@ -186,4 +287,41 @@ https://every-layout.dev/layouts/sidebar/
 
 .collection-content-item li:last-child:after {
     content: "";
+}
+
+/* Swagger UI overrides */
+.swagger-ui .info h2.title {
+    font-size: 25px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui h4.opblock-tag {
+    font-size: 20px;
+    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    color: rgb(50, 49, 48);
+}
+
+.swagger-ui .info {
+    margin: 0 !important;
+}
+
+.swagger-ui .info .main .title small {
+  background-color: #333;
+} 
+
+.swagger-ui .info .main .title small.version-stamp {
+  background-color: #008000;
+}
+
+.swagger-ui .info a {
+  color: #0078d4 !important;
+}
+
+.opblock-summary-get span.opblock-summary-method {
+  background-color: #0078d4 !important;
+}
+
+.opblock-summary-post span.opblock-summary-method {
+  background-color: #008000 !important;
 }

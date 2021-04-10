@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import {
   Link,
   PrimaryButton,
+  Separator,
   Spinner,
   SpinnerSize,
   Stack,
@@ -89,11 +90,24 @@ const AccountSurvey = () => {
       style={{ maxWidth: "500px", marginBottom: 80 }}
     >
       <p>
-        If you’re interested in being one of our first users, please provide the
+        If you're interested in being one of our first users, please provide the
         following information. We will accommodate as many users as we can in
         our preview, but we are excited to support the entire environmental
         sustainability community when the Planetary Computer is publicly
         available.
+      </p>
+      <Separator />
+      <p>
+        Microsoft will use this information to communicate with you about the
+        Planetary Computer, to evaluate your eligibility to participate in our
+        private preview, to prioritize new features, and to communicate
+        non-indentifying information – both internally and externally – about
+        the geographic regions and focus areas that our users represent. For
+        more information on how we use your data please see{" "}
+        <Link href="https://go.microsoft.com/fwlink/?LinkId=521839">
+          Privacy &amp; Cookies
+        </Link>
+        .
       </p>
       <Stack tokens={{ childrenGap: 8 }}>
         <FormInput required name="email" label="Email" formik={formik} />
@@ -159,7 +173,7 @@ const AccountSurvey = () => {
       <h1>Request access</h1>
       <p>
         The Planetary Computer API and Planetary Computer Hub are currently in
-        private preview, and we’re excited to expand our partner and developer
+        private preview, and we're excited to expand our partner and developer
         network.
       </p>
     </DefaultBanner>
@@ -194,9 +208,11 @@ const AccountSurvey = () => {
   return (
     <Layout bannerHeader={banner} isShort>
       <SEO title="Account Request" />
-      {mutation.isError && failMsg}
-      {(mutation.isLoading || mutation.isIdle) && form}
-      {mutation.isSuccess && successMsg}
+      <div className="grid-content">
+        {mutation.isError && failMsg}
+        {(mutation.isLoading || mutation.isIdle) && form}
+        {mutation.isSuccess && successMsg}
+      </div>
     </Layout>
   );
 };

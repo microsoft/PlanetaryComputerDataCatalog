@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { MQE_URL } from "../../utils/constants";
 
 export const catalogSlice = createSlice({
   name: "catalog",
   initialState: {
-    url: process.env.REACT_APP_MQE_URL,
+    url: MQE_URL,
   },
   reducers: {
     updateUrl: (state, action) => {

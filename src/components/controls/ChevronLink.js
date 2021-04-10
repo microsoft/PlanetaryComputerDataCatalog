@@ -1,6 +1,8 @@
 import React from "react";
-import { FontIcon, Link, Text } from "@fluentui/react";
+import { FontIcon, Text } from "@fluentui/react";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
+
+import NewTabLink from "../controls/NewTabLink";
 
 const iconClass = mergeStyles({
   fontSize: 12,
@@ -11,15 +13,10 @@ const iconClass = mergeStyles({
 const ChevronLink = ({ href, label }) => {
   return (
     <Text block variant="medium" style={{ fontWeight: 600 }}>
-      <Link href={href}>
+      <NewTabLink href={href} ariaLabel={`${label}, link will open in new tab`}>
         {label}
-
-        <FontIcon
-          aria-label={label}
-          iconName="ChevronRightSmall"
-          className={iconClass}
-        />
-      </Link>
+        <FontIcon iconName="ChevronRightSmall" className={iconClass} />
+      </NewTabLink>
     </Text>
   );
 };

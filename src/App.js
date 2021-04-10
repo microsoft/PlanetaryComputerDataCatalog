@@ -10,6 +10,7 @@ import Docs from "./pages/Docs";
 import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
 import Home from "./pages/Home";
+import Api from "./pages/Api";
 
 function App() {
   initializeIcons();
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/apps">
             <Applications />
+          </Route>
+          <Route path="/pcapi">
+            <Api />
           </Route>
           <Route path="/collection/:id">
             <Collection />

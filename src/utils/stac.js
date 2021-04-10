@@ -1,3 +1,12 @@
+import StacFields from "@radiantearth/stac-fields";
+
+StacFields.Registry.addMetadataField("gsd", {
+  label: "GSD",
+  formatter: value => (value ? `${value} m` : "-"),
+});
+
+export const stacFormatter = StacFields;
+
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;
   const url = new URL(href);

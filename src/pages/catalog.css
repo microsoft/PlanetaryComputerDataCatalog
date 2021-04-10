@@ -7,6 +7,12 @@
   justify-content: flex-start;
 }
 
+.api-item {
+  flex-basis: 32%;
+  min-height: 100px;
+  margin-bottom: 2%; 
+}
+
 .header-banner-item {
   flex-basis: 49%;
 }
@@ -31,16 +37,23 @@
     flex-basis: 33.33%;
   }
 }
+
 @media(max-width: 1073px) {
    .add-datasource-item {
     flex-basis: 33.33%;
   }
 }
+
 @media(max-width: 815px) {
   .add-datasource-item {
     flex-basis: 50%;
   }
+
+  .api-item {
+    flex-basis: 100%;
+  }
 }
+
 @media(max-width: 555px) {
   .add-datasource-item {
     flex-basis: 100%;
@@ -67,8 +80,7 @@
 }
 
 #catalog-additional-datasets {
-  /* TODO: enable when the main grid is in place */
-  /* background: #F9F9F9; */
+  background: #F9F9F9;
   margin-top: 40px;
   padding-top: 20px;
 }
@@ -102,7 +114,6 @@
 .header-banner {
   background: #F9F9F9;
   min-height: 165px;
-  padding: 0 10%;
   margin-bottom: 40px;
 }
 
@@ -139,7 +150,7 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  padding: 20px 10%;
+  padding: 20px initial;
   min-height: 300px;
 }
 
@@ -184,6 +195,8 @@
 
 .home-strip-item {
   width: 25%;
+  object-fit: contain;
+  height: 100%;
 }
 
 @media (max-width: 700px) {

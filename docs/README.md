@@ -28,6 +28,9 @@ process for production.
 
 ### Documentation tips
 
-- Add references to images at `images/<image-name>.png`
-- Add an alt text to all images
-- Don't use bare URLs; if not using an actual href, surround the url in brackets
+- Add references to images as relative paths at `images/<image-name>.png`
+- Add an alt text to all images (`![my alt text](example.com)`)
+- Don't use bare URLs; if not using an actual href, surround the url in
+brackets
+- Notebook files are supported. Make sure they are in an executed
+state, as the build process does not execute them. In-line base64 encoded images are acceptable, they will automatically be persisted to a file in the application build directory to keep the bundle size small.

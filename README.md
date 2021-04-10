@@ -13,14 +13,14 @@ project is in early stages of development.
 ### Developing
 
 Add a `.env` file based on the included `.env.sample` file. Set
-the `REACT_APP_MQE_URL` value to either your local instance of the Planetary
+the `REACT_APP_API_ROOT` value to either your local instance of the Planetary
 Computer, or a staging/production version exposed online.
 
 Run `yarn start` to launch a development server.
 
 ### Building
 
-Ensure the `REACT_APP_MQE_URL` environment variable is set for the environment
+Ensure the `REACT_APP_API_ROOT` environment variable is set for the environment
 being targeted.
 
 Run `yarn build` to assemble a production asset bundle, which

@@ -4,16 +4,10 @@ import {
   DetailsListLayoutMode,
   SelectionMode,
 } from "@fluentui/react";
-import StacFields from "@radiantearth/stac-fields";
 
-import { renderItemColumn } from "../../utils/stac";
+import { renderItemColumn, stacFormatter } from "../../utils/stac";
 
 const bandKey = "eo:bands";
-
-StacFields.Registry.addMetadataField("gsd", {
-  label: "GSD",
-  formatter: value => (value ? `${value}m` : "-"),
-});
 
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
@@ -28,7 +22,7 @@ const columnWidths = {
 };
 
 const Bands = ({ collection }) => {
-  const summaries = StacFields.formatSummaries(collection);
+  const summaries = stacFormatter.formatSummaries(collection);
   const eo = summaries.find(s => s.extension === "eo");
 
   // eo:bands not present, don't render a band section
@@ -39,7 +33,7 @@ const Bands = ({ collection }) => {
   const columns = bands.itemOrder.map((key, idx) => {
     return {
       key: key,
-      name: StacFields.label(key),
+      name: stacFormatter.label(key),
       minWidth: columnWidths[key] || defaultWidth,
       maxWidth: columnWidths[key] || defaultWidth,
       fieldName: key,

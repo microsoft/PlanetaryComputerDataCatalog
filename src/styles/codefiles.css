@@ -1,6 +1,9 @@
+.markdown-source {
+  min-width: 70%;
+}
 
 .markdown-source code {
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   padding: .2em .4em;
   border-radius: 6px;
 }
@@ -9,14 +12,14 @@
   margin-top: .4em;
 }
 
-.input_area, .section .highlight-python {
+.input_area, .section .highlight-python, .generated-docs .highlight-python {
     border: 1px solid #e0e0e0;
-    background: #f5f5f5;
+    background: #f9f9f9;
     padding: 0px 10px;
     border-radius: 3px;
 }
 
-.input_area .highlight pre {
+.input_area .highlight, .generated-docs .highlight {
   margin-top: 1em;
 }
 
@@ -405,7 +408,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
   --jp-mirror-editor-keyword-color: #008000;
   --jp-mirror-editor-atom-color: #88f;
-  --jp-mirror-editor-number-color: #080;
+  --jp-mirror-editor-number-color: rgb(7, 112, 7);
   --jp-mirror-editor-def-color: #00f;
   --jp-mirror-editor-variable-color: var(--md-grey-900);
   --jp-mirror-editor-variable-2-color: #05a;
@@ -413,10 +416,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-mirror-editor-punctuation-color: #05a;
   --jp-mirror-editor-property-color: #05a;
   --jp-mirror-editor-operator-color: #aa22ff;
-  --jp-mirror-editor-comment-color: #408080;
+  --jp-mirror-editor-comment-color: #276767;
   --jp-mirror-editor-string-color: #ba2121;
   --jp-mirror-editor-string-2-color: #708;
-  --jp-mirror-editor-meta-color: #aa22ff;
+  --jp-mirror-editor-meta-color: #901dd8;
   --jp-mirror-editor-qualifier-color: #555;
   --jp-mirror-editor-builtin-color: #008000;
   --jp-mirror-editor-bracket-color: #997;

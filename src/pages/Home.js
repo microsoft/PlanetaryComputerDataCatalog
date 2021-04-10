@@ -12,17 +12,18 @@ const Home = () => {
     <div
       className="hero"
       style={{
-        background: "url(./images/earth-space-clip.2.jpg)",
+        background: "url(./images/planet-sunrise-hero.jpg)",
         backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        height: "660px",
+        height: "627px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "flex-start",
       }}
     >
-      <div style={{ margin: "0 10%" }}>
+      <div className="grid-content">
         <Text
           block
           variant="mega"
@@ -45,7 +46,7 @@ const Home = () => {
     <>
       <ImageStrip />
       <div className="home-footer-container">
-        <div className="home-footer-grid">
+        <div className="home-footer-grid grid-content">
           <Text
             block
             variant="xxLargePlus"
@@ -84,11 +85,15 @@ const Home = () => {
               }}
             >
               The Planetary Computer API and Hub are currently available in
-              private preview. If you’re interested in developing on our
+              private preview. If you're interested in developing on our
               platform,{" "}
               <RouterLink
                 to="/account/request"
-                style={{ color: "#fff", fontWeight: "600" }}
+                style={{
+                  color: "#fff",
+                  fontWeight: "600",
+                  textDecoration: "underline",
+                }}
               >
                 request access now
               </RouterLink>
@@ -104,6 +109,7 @@ const Home = () => {
     <Layout bannerHeader={banner} bannerFooter={bannerFooter}>
       <SEO title="Home" />
       <div
+        className="grid-content"
         style={{
           display: "flex",
           flexFlow: "column nowrap",
@@ -135,30 +141,30 @@ const Home = () => {
         className="home-resources layout-container"
         style={{ margin: "100px 0" }}
       >
-        <div className="layout-row">
+        <div className="layout-row grid-content">
           <Resource title="Data Catalog" iconName="addIn" to="/catalog">
             The Planetary Computer includes petabytes of environmental
             monitoring data, in consistent, analysis-ready formats, accessible
             through our APIs as well as directly available via Azure Storage.
           </Resource>
-          <Resource title="API" iconName="Code" to="/docs/">
+          <Resource title="API" iconName="Code" to="/pcapi">
             The Planetary Computer API makes it easy for users to find exactly
             the data they need, simplifying search and discovery across our Data
             Catalog.
           </Resource>
           <Resource title="Hub" iconName="TableComputed" href="/compute">
-            A development environment that makes our data and APIs accessible
-            through familiar, open-source tools, and allows users to easily
-            scale their analyses with the power of Azure compute.
+            The Planetary Computer Hub is a development environment that makes
+            our data and APIs accessible through familiar, open-source tools,
+            and allows users to easily scale their analyses.
           </Resource>
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
             to="/apps"
           >
-            Explore applications that build on top of the Planetary Computer
-            platform, providing the actionable information that is critical to
-            sustainability practitioners.
+            Partners all over the world are building on top of the Planetary
+            Computer platform, providing the actionable information that is
+            critical to sustainability practitioners.
           </Resource>
         </div>
       </div>

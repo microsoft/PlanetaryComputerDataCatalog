@@ -10,11 +10,12 @@ const HeaderLink = ({
   style,
   children,
 }) => {
-  const defaultStyle = { marginTop: "0px", marginLeft: "14px" };
+  const defaultStyle = { marginTop: "0px", marginLeft: "16px" };
   const linkStyle = {
-    fontSize: "14px",
+    fontSize: "13px",
     lineHeight: "16px",
     color: "#000",
+    marginTop: "3px",
   };
   const link = external ? (
     <a href={to} style={linkStyle}>

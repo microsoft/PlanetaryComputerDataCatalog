@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
+import TocTreeItem from "../components/docs/TocTreeItem";
+import { DQE_URL, MQE_URL } from "../utils/constants";
+import ScrollToTop from "../components/ScrollToTop";
+
+const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
 // from the documentation build step
@@ -14,26 +19,57 @@ const docTopics = Object.fromEntries(
 );
 
 const Docs = () => {
-  const toc = docTopics["./index.json"].body;
+  // Generate Sphinx-like TOC items to inject into the generated TOC. Use these
+  // for OpenAPI/Swagger routes.
+  const openApiStacRoute = "/docs/api/spec/stac";
+  const openApiDataRoute = "/docs/api/spec/data";
+  const openApiLinks = [
+    { label: "Metadata API", href: openApiStacRoute },
+    { label: "Data API", href: openApiDataRoute },
+  ];
 
-  const links = (
+  const toc = docTopics["./index.json"].body;
+  const tocComponent = (
+    <nav
+      style={{
+        flexBasis: "10rem",
+        flexGrow: 1,
+      }}
+    >
+      <RoutedHtml className="toc-item" markup={toc}>
+        <TocTreeItem title="API Reference" links={openApiLinks} />
+      </RoutedHtml>
+    </nav>
+  );
+
+  const documentationPane = (
     <div
+      className="grid-content"
       style={{
         display: "flex",
         flexWrap: "wrap",
       }}
     >
-      <div style={{ flexBasis: "10rem", flexGrow: 1 }}>
-        <RoutedHtml className="toc-item" markup={toc} />
-      </div>
+      {tocComponent}
       <div
         style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
       >
+        <ScrollToTop />
         <Switch>
+          <Route exact path={openApiStacRoute}>
+            <Suspense fallback={<div />}>
+              <OpenApiSpec specUrl={`${MQE_URL}/openapi.json`} />
+            </Suspense>
+          </Route>
+          <Route title="Data API Reference" path={openApiDataRoute}>
+            <Suspense fallback={<div />}>
+              <OpenApiSpec specUrl={`${DQE_URL}/openapi.json`} />
+            </Suspense>
+          </Route>
           <Route path={`/docs/:topicId/:fileId`}>
             <Topic topics={docTopics} />
           </Route>
-          <Route path={"/docs"}>
+          <Route exact path={"/docs"}>
             <h2>Documentation</h2>
             <p>
               The Planetary Computer consists of an API layer as well as
@@ -57,7 +93,7 @@ const Docs = () => {
         title="Documentation"
         description="User guides and reference material for using the Planetary Computer."
       />
-      {links}
+      {documentationPane}
     </Layout>
   );
 };

@@ -4,12 +4,10 @@ import "react-app-polyfill/stable";
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { ThemeProvider } from "@fluentui/react";
+
 import "./index.css";
 import App from "./App";
-import store from "./app/store";
-import { Provider } from "react-redux";
-
-import { ThemeProvider } from "@fluentui/react";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -18,10 +16,21 @@ const queryClient = new QueryClient();
 ReactDOM.render(
   <ThemeProvider>
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
     </QueryClientProvider>
   </ThemeProvider>,
   document.getElementById("root")
 );
+
+// An example of how to build just the header component for embedding in other apps
+
+// import Header from "./components/Header";
+// import { BrowserRouter } from "react-router-dom";
+// ReactDOM.render(
+//   <ThemeProvider>
+//     <BrowserRouter forceRefresh>
+//       <Header />
+//     </BrowserRouter>
+//   </ThemeProvider>,
+//   document.getElementById("root")
+// );

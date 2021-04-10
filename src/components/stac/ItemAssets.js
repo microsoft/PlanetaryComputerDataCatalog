@@ -1,27 +1,26 @@
 import React from "react";
-import StacFields from "@radiantearth/stac-fields";
 import {
   DetailsList,
   DetailsListLayoutMode,
   SelectionMode,
 } from "@fluentui/react";
 
-import { renderItemColumn } from "../../utils/stac";
+import { renderItemColumn, stacFormatter } from "../../utils/stac";
 
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
 // values, set the desired widths by key
 const defaultWidth = 100;
 const columnWidths = {
-  title: 125,
-  gsd: 25,
+  title: 150,
+  gsd: 30,
   description: 100,
 };
 
 const bandKey = "eo:bands";
 
 const ItemAssets = itemAssets => {
-  const formatted = StacFields.formatAssets(itemAssets);
+  const formatted = stacFormatter.formatAssets(itemAssets);
 
   if (!itemAssets) return null;
 
@@ -47,7 +46,7 @@ const ItemAssets = itemAssets => {
         if (typeof va === Array && !skipFormat.includes(key)) {
           return [key, val.join(", ")];
         }
-        return [key, val];
+        return [key, stacFormatter.format(val, key)];
       });
 
       // eo:bands are concatanated specially
@@ -78,7 +77,7 @@ const ItemAssets = itemAssets => {
       const columns = columnKeys.map((key, idx) => {
         return {
           key: key,
-          name: StacFields.label(key),
+          name: stacFormatter.label(key),
           minWidth: columnWidths[key] || defaultWidth,
           maxWidth: columnWidths[key] || defaultWidth,
           fieldName: key,
