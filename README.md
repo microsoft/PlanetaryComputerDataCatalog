@@ -32,30 +32,37 @@ There are four main components to the application:
 3. [api](api/README.md) - an Azure Function app that provides a lightweight backend
 4. src - the main React application, bootstrapped from [Create React App](https://create-react-app.dev/)
 
+#### Frontend development
+
 First, copy `.env.sample` file to `.env`, and ensure the configuration values are set.
 
 |Name|Value|Description
 |---|---|---
 `REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
-|REACT_APP_AZMAPS_KEY| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
-|REACT_APP_HUB_URL| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.
+|`REACT_APP_AZMAPS_KEY`| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
+|`REACT_APP_HUB_URL`| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.
 
 Run `./scripts/server` to launch a development server.
 
+#### API development
+
+To debug or extend the small API backend, please read the (`api` README)[api/README.md].
+
 ## Ports
 
-|Service|Port|
-|-------|----|
-|Webpack Dev Server | 3000|
-|Functions App Dev Server | 7071|
+|Service                  |Port  |
+|-------------------------|------|
+|Webpack Dev Server       | 3000 |
+|Functions App Dev Server | 7071 |
 
 ## Scripts
 
-|Name| Description|
-|----| -----------|
-| `update` | Install dependencies and build etl and docs content
-| `server` | Run `yarn start` development server
-| `yarn *` | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc
+|Name      | Description|
+|----------| -----------|
+| `update` | Install dependencies and build etl and docs content |
+| `server` | Runs frontend development server |
+| `test`   | Runs unit tests and linter |
+| `yarn *` | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc |
 
 ## Deploying
 
