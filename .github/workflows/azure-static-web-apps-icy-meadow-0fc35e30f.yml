@@ -26,6 +26,8 @@ jobs:
           submodules: true
       - name: Build docs and metadata
         run: ./scripts/update
+      - name: Test and lint
+        run: ./scripts/test
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview

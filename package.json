@@ -34,6 +34,11 @@
     "lint": "eslint ./src --ext .js --ext .jsx",
     "eject": "craco eject"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "@fluentui/react/lib/(.*)$": "@fluentui/react/lib-commonjs/$1"
+    }
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
