@@ -98,9 +98,9 @@ const AccountSurvey = () => {
         Microsoft will use this information to communicate with you about the
         Planetary Computer, to evaluate your eligibility to participate in our
         private preview, to prioritize new features, and to communicate
-        non-indentifying information – both internally and externally – about
-        the geographic regions and focus areas that our users represent. For
-        more information on how we use your data please see{" "}
+        non-identifying information – both internally and externally – about the
+        geographic regions and focus areas that our users represent. For more
+        information on how we use your data please see{" "}
         <Link href="https://go.microsoft.com/fwlink/?LinkId=521839">
           Privacy &amp; Cookies
         </Link>
