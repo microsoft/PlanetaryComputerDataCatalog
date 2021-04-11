@@ -4,7 +4,7 @@ set -e
 
 function usage() {
     echo -n "Usage: $(basename "$0")
-Build container images and run ETL jobs.
+Update and install project dependencies and run ETL jobs.
 "
 }
 
@@ -12,6 +12,9 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
+        # Install JS dependencies on host
+        yarn 
+
         # Ensure container images are current
         docker-compose build
         
