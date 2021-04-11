@@ -77,10 +77,7 @@ const AccountSurvey = () => {
   const tosLabel = (
     <span>
       You have read and agree to our{" "}
-      <NewTabLink href="https://go.microsoft.com/fwlink/?LinkID=206977">
-        terms of use
-      </NewTabLink>
-      .
+      <NewTabLink href="/terms">terms of use</NewTabLink>.
     </span>
   );
 

@@ -11,6 +11,7 @@ import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
 import Home from "./pages/Home";
 import Api from "./pages/Api";
+import Terms from "./pages/Terms";
 
 function App() {
   initializeIcons();
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/terms">
+            <Terms />
           </Route>
           <Route exact path="/catalog">
             <Catalog />
