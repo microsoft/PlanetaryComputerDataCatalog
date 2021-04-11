@@ -182,9 +182,13 @@ const AccountSurvey = () => {
   const successMsg = (
     <>
       <h2>Thank you for your interest!</h2>
-      <p>
-        You've been added to our waiting list, and we'll follow up with
-        additional information as we develop the service.
+      <p style={{ maxWidth: "50%" }}>
+        You've been added to our waiting list. We'll follow up with additional
+        information as we expand access to the Planetary Computer. Please email{" "}
+        <Link href="mailto:planetarycomputer@microsoft.com">
+          planetarycomputer@microsoft.com
+        </Link>{" "}
+        if you have additional questions.
       </p>
       <ScrollToTopOnMount />
     </>
