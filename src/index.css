@@ -46,6 +46,22 @@ h4 {
   line-height: 1.2;
 } */
 
+
+.responsive-container-wide {
+    width: 100%;
+    padding-bottom: 56.25%; /* 9/16 = aspect ratio of image */
+    position: relative;
+}
+
+.responsive-container-wide img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 main.short {
   min-height: calc(100vh - 100px);
 }
