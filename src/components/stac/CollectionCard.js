@@ -7,6 +7,7 @@ import ButtonLink from "../controls/ButtonLink";
 const CollectionCard = ({ collection, shortTerm }) => {
   const buttonLabel = shortTerm || collection.title;
   const href = `collection/${collection.id}`;
+
   return (
     <div className="api-datasource-item" key={collection.id}>
       <Link
