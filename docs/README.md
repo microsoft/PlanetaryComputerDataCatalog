@@ -26,11 +26,23 @@ development, run `./scripts/update` script. The generated markup is not
 checked into the repository, but is build and bundled during the CI build
 process for production.
 
+## Adding preview documentation
+
+If you want some documentation to be available through the site, but not
+browsable through any table of content links, you can add .md or .ipynb files
+in the `docs/preview` directory. They will be accessible at the URL
+`docs/preview/your-file-name-no-ext`. These can be shared to previewed for
+layout questions. To suppress warnings in the Sphinx build process, include
+an `orphan` [file metadata
+field](https://myst-parser.readthedocs.io/en/latest/using/syntax.html#front-matter).
+
 ### Documentation tips
 
 - Add references to images as relative paths at `images/<image-name>.png`
 - Add an alt text to all images (`![my alt text](example.com)`)
 - Don't use bare URLs; if not using an actual href, surround the url in
 brackets
-- Notebook files are supported. Make sure they are in an executed
-state, as the build process does not execute them. In-line base64 encoded images are acceptable, they will automatically be persisted to a file in the application build directory to keep the bundle size small.
+- Notebook files are supported. Make sure they are in an executed state, as
+the build process does not execute them. In-line base64 encoded images are
+acceptable, they will automatically be persisted to a file in the application
+build directory to keep the bundle size small.

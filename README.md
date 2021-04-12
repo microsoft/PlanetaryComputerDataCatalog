@@ -71,7 +71,7 @@ There are 2 Azure Static Web App services enabled, one for staging and another f
 - `develop`: Deploys to staging (`pc-datacatalog`)
 - `main`: Deploys to production (`pc-datacatalog-production`)
 
-Opening a PR against either branch will also create an ephemeral staging envrionment, and a site link will be added to the PR comment section.
+Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
 
 ## Contributing
 

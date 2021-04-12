@@ -17,4 +17,4 @@ print('cloud_cover search: %s items' % search.found())
 
 ## API reference
 
-The OpenAPI docs are availabe at <https://example.com>
+The OpenAPI docs are available at <https://example.com>
