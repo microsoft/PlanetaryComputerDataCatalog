@@ -67,7 +67,7 @@ const Header = () => (
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>
-        <HeaderLink to="/apps">Applications</HeaderLink>
+        <HeaderLink to="/applications">Applications</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
         <HeaderLink
           asButton

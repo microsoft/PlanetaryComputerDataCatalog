@@ -1,15 +1,15 @@
 - title: Ecosystem Monitoring
-  description: The Analytics Lab team at Conservation Science Partners (CSP) is using the Planetary Computer to monitor forest change, habitat connectivity, and the impacts of human land use across the U.S., providing a range of project partners and stakeholders with the data they need to make better conservation decisions in near real time. 
-  thumbnailUrl: https://via.placeholder.com/1817x1024
+  description: The Analytics Lab team at Conservation Science Partners (CSP) is using the Planetary Computer to monitor forest change, habitat connectivity, and the impacts of human land use across the U.S., providing a range of project partners and stakeholders with the data they need to make better conservation decisions in near real time.
+  thumbnailUrl: ./images/apps/csp-wide-fs8.png
   links:
     - title: Explore ecosystem monitoring
-      url: https://analytics-lab.org/
+      url: https://aka.ms/CSPapplication
     - title: Learn about CSP
       url: https://www.csp-inc.org/
 
 - title: Conservation Planning
   description: The Nature Conservancy is using the Planetary Computer to protect and manage land, oceans, and biodiversity. In partnership with Microsoft and with development support from Vizzuality, TNC is accelerating conservation with Marxan, a cloud-based platform for data-driven spatial planning.
-  thumbnailUrl: https://via.placeholder.com/1817x1024
+  thumbnailUrl: ./images/apps/marxan-wide-fs8.png
   links:
     - title: Explore conservation planning
       url: http://aka.ms/marxanonazure
@@ -18,16 +18,16 @@
 
 - title: Forest Carbon Risk Assessment
   description: CarbonPlan is leveraging Planetary Computer resources to enable more transparent and scientifically rigorous evaluation of forest-based climate solutions. By shining a data-driven light on past and future carbon offset projects, this enables procurement programs to favor the highest-quality outcomes.
-  thumbnailUrl: https://via.placeholder.com/1817x1024
+  thumbnailUrl: ./images/apps/carbonplan-wide-fs8.png
   links: 
-    - title: Explore carbon sequestration tool 
+    - title: Explore forest carbon map 
       url: https://carbonplan.org/research/forest-risks
     - title: Learn about CarbonPlan
       url: https://carbonplan.org/
 
 - title: AI-Accelerated Land Cover Mapping
   description: Development Seed is using the Planetary Computer to accelerate the critical work of the environmental scientists tasked with mapping the world's land use.  By combining Earth observation data and machine learning, this work is helping scientists spend more time planning conservation, and less time annotating imagery.
-  thumbnailUrl: ./images/apps/azure-land-cover.png
+  thumbnailUrl: ./images/apps/azure-land-cover-fs8.png
   links:
     - title: Explore land cover mapping
       url: https://aka.ms/ai4e-landcover-app

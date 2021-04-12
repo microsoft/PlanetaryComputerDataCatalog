@@ -32,7 +32,7 @@ function App() {
           <Route path="/docs/">
             <Docs />
           </Route>
-          <Route path="/apps">
+          <Route path="/applications">
             <Applications />
           </Route>
           <Route path="/pcapi">
