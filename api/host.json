@@ -4,9 +4,7 @@
     "fileLoggingMode": "always",
     "logLevel": {
       "default": "Information",
-      "Host.Results": "Error",
-      "Function": "Error",
-      "Host.Aggregator": "Trace"
+      "Function": "Debug"
     },
     "applicationInsights": {
       "samplingSettings": {
