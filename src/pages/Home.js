@@ -160,7 +160,7 @@ const Home = () => {
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
-            to="/apps"
+            to="/applications"
           >
             Partners all over the world are building on top of the Planetary
             Computer platform, providing the actionable information that is
