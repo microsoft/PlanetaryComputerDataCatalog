@@ -17,7 +17,7 @@ a {
   text-decoration: none;
 }
 
-a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a):hover {
+a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a, footer a):hover {
   text-decoration: underline;
   color: #0078d4 !important;
 }
@@ -124,6 +124,10 @@ a:not(header a):hover img  {
 
 .home-resource-item:hover .item-header {
   text-decoration: underline;
+}
+
+.home-resources .layout-row {
+  justify-content: center;
 }
 
 .home-resource-item i {
@@ -247,7 +251,7 @@ header .break {
     padding: 0 24px 4px 0;
     display: inline-block;
 }
-.context-uhf a:link, .context-uhf a:focus, .context-uhf a:hover, .context-uhf a:active, .context-uhf a:visited {
+footer.context-uhf a:link, footer.context-uhf a:focus, footer.context-uhf a:hover, footer.context-uhf a:active, footer.context-uhf a:visited {
     text-decoration: none;
     color: inherit;
 }

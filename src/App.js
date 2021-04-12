@@ -34,7 +34,7 @@ function App() {
           <Route path="/applications">
             <Applications />
           </Route>
-          <Route path="/collection/:id">
+          <Route path="/dataset/:id">
             <Collection />
           </Route>
           <Route path="/account/request">
