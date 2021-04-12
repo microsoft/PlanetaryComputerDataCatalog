@@ -1,4 +1,3 @@
-
 # Reading data
 
 You can use the Planetary Data Endpoints to download data you've queried for. 

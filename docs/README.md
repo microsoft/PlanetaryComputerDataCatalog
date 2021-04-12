@@ -36,6 +36,14 @@ layout questions. To suppress warnings in the Sphinx build process, include
 an `orphan` [file metadata
 field](https://myst-parser.readthedocs.io/en/latest/using/syntax.html#front-matter).
 
+## Placeholder documentation
+
+There are two pieces of documentation that are included in the TOC, but
+rendered with content directly from the app. These are the
+`reference/[spec|sas].md` documents. They are included in the `index.md` TOC,
+but the corresponding route is registered for a particular React component.
+Content in the markdown files will not be rendered on the page.
+
 ### Documentation tips
 
 - Add references to images as relative paths at `images/<image-name>.png`
