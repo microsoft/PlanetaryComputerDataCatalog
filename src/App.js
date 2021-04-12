@@ -10,7 +10,6 @@ import Docs from "./pages/Docs";
 import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
 import Home from "./pages/Home";
-import Api from "./pages/Api";
 import Terms from "./pages/Terms";
 
 function App() {
@@ -34,9 +33,6 @@ function App() {
           </Route>
           <Route path="/applications">
             <Applications />
-          </Route>
-          <Route path="/pcapi">
-            <Api />
           </Route>
           <Route path="/collection/:id">
             <Collection />

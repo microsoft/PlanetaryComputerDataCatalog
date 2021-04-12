@@ -148,7 +148,7 @@ const Home = () => {
             monitoring data, in consistent, analysis-ready formats, accessible
             through our APIs as well as directly available via Azure Storage.
           </Resource>
-          <Resource title="API" iconName="Code" to="/pcapi">
+          <Resource title="API" iconName="Code" to="/docs">
             The Planetary Computer API makes it easy for users to find exactly
             the data they need, simplifying search and discovery across our Data
             Catalog.
