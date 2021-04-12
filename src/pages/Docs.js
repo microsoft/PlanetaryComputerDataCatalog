@@ -12,7 +12,11 @@ import ScrollToTop from "../components/ScrollToTop";
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
-// from the documentation build step
+// from the documentation build step.
+
+// TODO: Jest tests can't parse require.context, so this module cannot be tested
+// as a result. Resolve this by transforming the sphinx output into an actual
+// named import and remove the dynamic import.
 const jsonFileContexts = require.context("../docs/", true, /\.json$/);
 const docTopics = Object.fromEntries(
   jsonFileContexts.keys().map(key => [key, jsonFileContexts(key)])

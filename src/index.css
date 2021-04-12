@@ -151,9 +151,10 @@ a:not(header a):hover img  {
 }
 
 .generated-docs {
-  min-width: 75%;
+  width: 75%;
   margin-bottom: 40px;
 }
+
 /* Documentation markup from generated sources */
 .generated-docs img {
     object-fit: cover;
