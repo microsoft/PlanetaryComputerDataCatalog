@@ -63,7 +63,6 @@ const Header = () => (
         </HeaderLink>
         <div className="break" />
         <HeaderLink to="/catalog">Data Catalog</HeaderLink>
-        <HeaderLink to="/pcapi">API</HeaderLink>
         <HeaderLink external to="/compute">
           Hub
         </HeaderLink>

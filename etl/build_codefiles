@@ -10,7 +10,7 @@ fi
 rm _codefile_output/*.md
 
 # Download all the notebooks and markdown files specified
-wget -i codefiles_urls.txt -P ./_codefile_output
+wget -nv -i codefiles_urls.txt -P ./_codefile_output
 
 # Convert the notebooks to a basic html output, without body or style tags
 jupyter nbconvert --to html --template basic ./_codefile_output/*.ipynb 

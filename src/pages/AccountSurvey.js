@@ -101,9 +101,9 @@ const AccountSurvey = () => {
         non-identifying information – both internally and externally – about the
         geographic regions and focus areas that our users represent. For more
         information on how we use your data please see{" "}
-        <Link href="https://go.microsoft.com/fwlink/?LinkId=521839">
+        <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
           Privacy &amp; Cookies
-        </Link>
+        </NewTabLink>
         .
       </p>
       <Stack tokens={{ childrenGap: 8 }}>

@@ -5,12 +5,15 @@
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item:
 
-# launch: 
-#   title: Launch in Hub
-#   repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
-#   branch: main
-#   filePath: landcover.ipynb
-
+# tabs:
+#   - title: My title
+#     src: notebook.html
+#     launch: 
+#       title: Launch in Hub
+#       repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
+#       branch: main
+#       filePath: landcover.ipynb
+---
 collections:
   naip:
     shortTerm: NAIP
