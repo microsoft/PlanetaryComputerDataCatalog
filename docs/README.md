@@ -31,10 +31,11 @@ process for production.
 If you want some documentation to be available through the site, but not
 browsable through any table of content links, you can add .md or .ipynb files
 in the `docs/preview` directory. They will be accessible at the URL
-`docs/preview/your-file-name-no-ext`. These can be shared to previewed for
-layout questions. To suppress warnings in the Sphinx build process, include
-an `orphan` [file metadata
-field](https://myst-parser.readthedocs.io/en/latest/using/syntax.html#front-matter).
+`docs/preview/your-file-name-no-ext`. These can be shared to preview or
+review layout issues.
+
+To suppress warnings in the Sphinx build process, include
+an `orphan` [file metadata field](https://myst-parser.readthedocs.io/en/latest/using/syntax.html#front-matter).
 
 ## Placeholder documentation
 
