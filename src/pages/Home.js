@@ -12,11 +12,11 @@ const Home = () => {
     <div
       className="hero"
       style={{
-        background: "url(./images/planet-sunrise-hero.jpg)",
+        background: "url(./images/planet-sunrise-wide@1.jpg)",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        height: "627px",
+        height: "650px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -33,6 +33,7 @@ const Home = () => {
               color: "#fff",
               maxWidth: 580,
               marginBottom: 40,
+              fontWeight: 100,
             },
           }}
         >

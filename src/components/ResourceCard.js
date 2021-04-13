@@ -16,11 +16,9 @@ const ResourceCard = ({ resourceItem }) => {
   return (
     <div className="add-datasource-item">
       <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
-        <img
-          alt={alt || `Screenshot of ${title}`}
-          src={thumbnailUrl}
-          style={{ maxWidth: "100%", objectFit: "contain" }}
-        />
+        <div className="responsive-container-wide">
+          <img alt={alt || `Screenshot of ${title}`} src={thumbnailUrl} />
+        </div>
         <h3 style={{ marginBottom: 2, color: "initial" }}>{title}</h3>
         <Text
           block

@@ -6,7 +6,7 @@ import { mergeStyles } from "@fluentui/react/lib/Styling";
 const iconClass = mergeStyles({
   fontSize: 12,
   margin: 5,
-  paddingTop: 3,
+  paddingTop: 2,
 });
 
 const baseUrl = "../../";
@@ -49,7 +49,7 @@ const TopicNav = ({ topic, prev, next }) => {
           to={reformatHref(prev?.link)}
           title={`Previous: ${prev?.title}`}
         >
-          <FontIcon iconName="DoubleChevronLeft8" className={iconClass} />
+          <FontIcon iconName="ChevronLeft" className={iconClass} />
           {prev?.title}
         </ButtonLink>
       </div>
@@ -59,7 +59,7 @@ const TopicNav = ({ topic, prev, next }) => {
           title={`Next: ${next?.title}`}
         >
           {next?.title}
-          <FontIcon iconName="DoubleChevronRight8" className={iconClass} />
+          <FontIcon iconName="ChevronRight" className={iconClass} />
         </ButtonLink>
       </div>
     </div>
