@@ -6,3 +6,7 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/naip.ip
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/naip-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/sentinel-2.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/sentinel-2-storage.md
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
