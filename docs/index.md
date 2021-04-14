@@ -11,30 +11,28 @@ About <overview/about>
 
 ```{toctree}
 :maxdepth: 1
-:caption: Querying data 
+:caption: Quickstarts
 
-api/query
-Example Notebook <api/aster-test>
+quickstarts/empty
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: Reading data
+:caption: Tutorials
 
-api/read
-
+tutorials/empty
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: Hub docs 
+:caption: Concepts
 
-hub/computing
+concepts/computing
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: API Reference
+:caption: Reference
 
 Metadata API <reference/stac>
 SAS API <reference/sas>
