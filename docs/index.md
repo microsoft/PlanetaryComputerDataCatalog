@@ -22,7 +22,8 @@ Example Notebook <api/aster-test>
 :caption: Reading data
 
 api/read
-
+api/reading-zarr-data
+api/reading-tabular-data
 ```
 
 ```{toctree}

@@ -377,3 +377,6 @@ yarn-error.log*
 docs/_build
 src/docs/
 public/_images/
+
+# jupyter cache
+.ipynb_checkpoints
