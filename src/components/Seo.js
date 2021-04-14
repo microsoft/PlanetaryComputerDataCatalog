@@ -50,15 +50,6 @@ function SEO({ description, lang, meta, title }) {
         },
       ].concat(meta)}
     >
-      {/* MS cookie consent library */}
-      <script src="https://consentdeliveryfd.azurefd.net/mscc/lib/v2/wcp-consent.js"></script>
-
-      {/* Microsoft analytics tracking library*/}
-      <script
-        src="https://az725175.vo.msecnd.net/scripts/jsll-4.js"
-        type="text/javascript"
-      ></script>
-
       {/* 
         Initialize the analytics library in the default configuration. This
         allows us to initialize _before_ user consent. DO NOT change configuration
@@ -70,40 +61,68 @@ function SEO({ description, lang, meta, title }) {
         Cookie descriptions: https://osgwiki.com/wiki/JSLLv4#Cookies_Set.2FRead_by_JSLL
 
         Executes within a timeout because WcpConsent is not always available immediately after
-        loading the script tag above.
+        loading the script tag.
+
       */}
-      <script type="text/javascript">
+      <script key="consent-manager" type="text/javascript">
         {`
-          setTimeout(function() {
-            // WCP initialization
-            WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
-                if (err != undefined) {
-                    console.error("Unalbe to initialize the cookie consent library");
-                    return err;
-                } else {
-                    // Track a global object for consent to make it available from the
-                    // application React components
-                    window.siteConsent = siteConsent;
-                    if (siteConsent?.isConsentRequired) {
-                      // Scroll to top to ensure that the cookie banner is visible
-                      window.scrollTo(0,0);
-                    }
-                }
-            });
+          let retries = 0;
+          const maxRetries = 20;
+          const retryInterval = 50; //ms
 
-            // JSLL initialization
-            var config = {
-                coreData: {
-                    appId: "${process.env.REACT_APP_JSLL_APP_ID}"
-                },
-                callback: {
-                    userConsentDetailsCallback: window.siteConsent ? window.siteConsent.getConsent : null
-                },
+          // Try loading consent immediately, in case the script is already loaded
+          loadConsent();
+
+          // Retry loading the consent library as a fallback in case it was
+          // not loaded when this script first executes
+          const intervalId = setInterval(() => { 
+            // Don't continue to retry if we exceeded our retry count or the consent library
+            // has already attached to window.
+            if (retries++ > maxRetries || window.siteConsent) {
+              return clearInterval(intervalId);
             }
+            console.log(retries)
+            loadConsent();
 
-            awa.init(config);
+          }, retryInterval);
 
-        }, 500);
+          function loadConsent() {
+              if (!WcpConsent) {
+                // Exit early, it will retry maxRetries times
+                return;
+              }
+
+              // WCP initialization
+              WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
+                  if (err != undefined) {
+                      console.error("Unalbe to initialize the cookie consent library");
+                      return err;
+                  } else {
+                      // Track a global object for consent to make it available from the
+                      // application React components
+                      window.siteConsent = siteConsent;
+                      
+                      if (siteConsent?.isConsentRequired) {
+                        // Scroll to top to ensure that the cookie banner is visible
+                        window.scrollTo(0,0);
+                      }
+                  }
+              });
+
+              // JSLL initialization
+              var config = {
+                  coreData: {
+                      appId: "${process.env.REACT_APP_JSLL_APP_ID}"
+                  },
+                  callback: {
+                      userConsentDetailsCallback: window.siteConsent ? window.siteConsent.getConsent : null
+                  },
+              }
+
+              awa.init(config);
+
+
+          }
         `}
       </script>
     </Helmet>

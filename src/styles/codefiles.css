@@ -17,10 +17,15 @@
     background: #f9f9f9;
     padding: 0px 10px;
     border-radius: 3px;
+    margin-top: 15px;
 }
 
 .input_area .highlight, .generated-docs .highlight {
   margin-top: 1em;
+}
+
+.output_area {
+  margin-top: 15px;
 }
 
 .output_area .highlight pre {
@@ -45,6 +50,11 @@ a.anchor-link, a.headerlink {
 
 .output_png img {
     max-width: 100%;
+}
+
+/* Turn off In/Out prompts */
+div.nbinput div.prompt, div.nboutput div.prompt, div.prompt.input_prompt, div.prompt.output_prompt {
+  display: none;
 }
 
 pre { line-height: 125%; white-space: pre-wrap; overflow: auto;}
