@@ -6,6 +6,7 @@ import {
 } from "@fluentui/react";
 
 import { renderItemColumn, stacFormatter } from "../../utils/stac";
+import { sortByLookup } from "../../utils";
 
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
@@ -14,6 +15,16 @@ const defaultWidth = 100;
 const columnWidths = {
   title: 150,
   gsd: 30,
+  description: 100,
+};
+
+// Use for consistent ordering
+const columnOrders = {
+  title: 0,
+  roles: 10,
+  type: 20,
+  gsd: 30,
+  "eo:bands": 40,
   description: 100,
 };
 
@@ -36,17 +47,24 @@ const ItemAssets = itemAssets => {
       )
     );
 
+    // Use specified, consistent ordering for columns
+    columnKeys.sort(sortByLookup(columnOrders));
+
     // Create objects with keys matching the column keys above.
     const items = Object.values(ia.properties).map(({ value }) => {
       // Convert arrays to joined strings, unless there is special handling for
       // certain keys defined.
-      const skipFormat = [bandKey];
+      const skipFormat = [bandKey, "description"];
 
       const entries = Object.entries(value).map(([key, val]) => {
         if (typeof va === Array && !skipFormat.includes(key)) {
           return [key, val.join(", ")];
         }
-        return [key, stacFormatter.format(val, key)];
+        const formattedVal = skipFormat.includes(key)
+          ? val
+          : stacFormatter.format(val, key);
+
+        return [key, formattedVal];
       });
 
       // eo:bands are concatanated specially

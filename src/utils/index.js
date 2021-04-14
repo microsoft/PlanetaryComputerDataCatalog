@@ -31,6 +31,20 @@ export const sortSpecialByKey = key => {
   };
 };
 
+export const sortByLookup = lookup => {
+  const get = k => lookup[k] ?? 50;
+
+  return (a, b) => {
+    if (get(a) < get(b)) {
+      return -1;
+    }
+    if (get(a) > get(b)) {
+      return 1;
+    }
+    return 0;
+  };
+};
+
 export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
