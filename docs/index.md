@@ -15,6 +15,7 @@ About <overview/about>
 
 quickstarts/reading-zarr-data
 quickstarts/reading-tabular-data
+quickstarts/scale-with-dask
 ```
 
 ```{toctree}
