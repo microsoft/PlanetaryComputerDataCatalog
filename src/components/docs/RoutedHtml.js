@@ -26,7 +26,7 @@ const RoutedHtml = ({ className, markup, children }) => {
           element.setAttribute("tabindex", 0);
         });
     }
-  }, []);
+  });
 
   const handleClick = e => {
     if (e.target.getAttribute("class")?.includes("reference internal")) {
