@@ -84,6 +84,10 @@ function SEO({ description, lang, meta, title }) {
                     // Track a global object for consent to make it available from the
                     // application React components
                     window.siteConsent = siteConsent;
+                    if (siteConsent?.isConsentRequired) {
+                      // Scroll to top to ensure that the cookie banner is visible
+                      window.scrollTo(0,0);
+                    }
                 }
             });
 
