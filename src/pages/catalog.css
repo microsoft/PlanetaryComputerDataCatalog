@@ -215,17 +215,15 @@
 }
 
 table {
-    /* margin-left: auto; */
     margin-right: auto;
     border: none;
     border-collapse: collapse;
     border-spacing: 0;
-    /* color: @rendered_html_border_color; */
     font-size: 12px;
     table-layout: fixed;
 }
 thead {
-    /* border-bottom: 1px solid @rendered_html_border_color; */
+    border-bottom: 1px solid #e0e0e0;
     vertical-align: bottom;
 }
 tr, th, td {
