@@ -68,16 +68,11 @@ const Header = () => (
         </HeaderLink>
         <HeaderLink to="/applications">Applications</HeaderLink>
         <HeaderLink to="/docs">Documentation</HeaderLink>
-        <HeaderLink
-          asButton
-          to="/account/request"
-          // style={{ marginLeft: "auto", marginTop: "inherit" }}
-        >
+        <HeaderLink asButton to="/account/request">
           Request access
         </HeaderLink>
       </Stack>
     </nav>
-    <div id="cookie-banner"></div>
   </header>
 );
 
