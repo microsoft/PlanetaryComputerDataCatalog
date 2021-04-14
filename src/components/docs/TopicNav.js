@@ -7,6 +7,7 @@ const iconClass = mergeStyles({
   fontSize: 12,
   margin: 5,
   paddingTop: 2,
+  fontWeight: "600 !important",
 });
 
 const baseUrl = "../../";
