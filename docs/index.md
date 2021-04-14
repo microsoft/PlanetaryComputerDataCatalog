@@ -13,7 +13,8 @@ About <overview/about>
 :maxdepth: 1
 :caption: Quickstarts
 
-quickstarts/empty
+quickstarts/reading-zarr-data
+quickstarts/reading-tabular-data
 ```
 
 ```{toctree}
