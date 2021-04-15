@@ -36,8 +36,8 @@ concepts/sas
 
 ```{toctree}
 :maxdepth: 1
-:caption: Reference
+:caption: API Reference
 
-Metadata API <reference/stac>
-SAS API <reference/sas>
+STAC API <reference/stac>
+Data Authentication API <reference/sas>
 ```
