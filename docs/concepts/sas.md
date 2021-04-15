@@ -18,7 +18,7 @@ A SAS token is needed whenever you want to access Planetary Computer data at an 
 
 The `token` endpoint allows for the generation of a SAS token for a given dataset identified by it's STAC collection ID. If you know the Azure Blob storage account and container where the data is located, you can also use the endpoint that takes that information in its path.
 
-The token generated with these endpoints can then be used for all requests for that same dataset. For example, to obtain a SAS token for the `naip` dataset, a request can be made to: <https://planetarycomputer.microsoft.com/data/v1/token/naip>. If you click on that link, you should see something like:
+The token generated with these endpoints can then be used for all requests for that same dataset. For example, to obtain a SAS token for the `naip` dataset, a request can be made to: <https://planetarycomputer.microsoft.com/api/sas/v1/token/naip>. If you click on that link, you should see something like:
 
 ```json
 {
@@ -37,7 +37,7 @@ You can also use the `sign` endpoint to directly construct a readable URL.
 
 > [https://planetarycomputer.microsoft.com/api/sas/v1/sign?href={url}](../reference/sas.md)
 
-The `sign` endpoint makes it easy to convert an unsigned blob URL to a signed URL by passing the URL directly into the endpoint with the `href` parameter. For example: `https://planetarycomputer.microsoft.com/data/v1/sign?href=https://naipeuwest.blob.core.windows.net/naip/01.tif` returns JSON such as:
+The `sign` endpoint makes it easy to convert an unsigned blob URL to a signed URL by passing the URL directly into the endpoint with the `href` parameter. For example: `https://planetarycomputer.microsoft.com/api/sas/v1/sign?href=https://naipeuwest.blob.core.windows.net/naip/01.tif` returns JSON such as:
 
 ```json
 {
@@ -64,12 +64,12 @@ You can supply you subscription key in an HTTP request in two ways:
   * Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
 
 ```bash
-curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/data/v1/token/naip?subscription-key=123456789
+curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
 ```
   * Supply it in a `subscription-key` query parameter, for example:
 
 ```bash
-curl https://planetarycomputer.microsoft.com/data/v1/token/naip?subscription-key=123456789
+curl https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
 ```
 
 ### `planetary-computer` Python package
