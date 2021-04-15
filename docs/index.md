@@ -13,6 +13,7 @@ About <overview/about>
 :maxdepth: 1
 :caption: Quickstarts
 
+Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-zarr-data
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
@@ -30,12 +31,13 @@ tutorials/empty
 :caption: Concepts
 
 concepts/computing
+concepts/sas
 ```
 
 ```{toctree}
 :maxdepth: 1
-:caption: Reference
+:caption: API Reference
 
-Metadata API <reference/stac>
-SAS API <reference/sas>
+STAC API <reference/stac>
+Data Authentication API <reference/sas>
 ```
