@@ -13,6 +13,7 @@ About <overview/about>
 :maxdepth: 1
 :caption: Quickstarts
 
+Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-zarr-data
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
