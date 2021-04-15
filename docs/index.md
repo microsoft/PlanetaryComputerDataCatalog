@@ -30,6 +30,7 @@ tutorials/empty
 :maxdepth: 1
 :caption: Concepts
 
+concepts/data-catalog
 concepts/computing
 concepts/sas
 ```
