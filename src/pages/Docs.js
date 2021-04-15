@@ -27,7 +27,7 @@ const Docs = () => {
   const openApiStacRoute = "/docs/reference/stac";
   const openApiDataRoute = "/docs/reference/sas";
 
-  const toc = docTopics["./index.json"].body;
+  const toc = docTopics["./index.json"];
   const tocComponent = (
     <nav
       style={{
@@ -35,7 +35,7 @@ const Docs = () => {
         flexGrow: 1,
       }}
     >
-      <RoutedHtml className="toc-item" markup={toc} />
+      <RoutedHtml className="toc-item" markupJson={toc} />
     </nav>
   );
 
