@@ -1,16 +1,13 @@
 # Computing on the Planetary Computer
 
-The core of the Planetary Computer are the datasets and APIs for querying them. This document gives an overview of the various ways you can compute on data hosted by the Planetary Computer.
+The core components of the Planetary Computer are the datasets and APIs for querying them. This document provides an overview of the various ways you can compute on data hosted by the Planetary Computer.
 
-Regardless of how you compute on the data, to ensure maximum efficiency you should locate your compute as close to the data as possible.
-All the data is hosted in Azure's **West Europe** region so your compute should be there too.
+Regardless of how you compute on the data, to ensure maximum efficiency you should locate your compute as close to the data as possible.  The Planetary Computer Data Catalog is hosted in Azure's **West Europe** region, so your compute should be there too.
 
 ## Use our JupyterHub
 
-The [Planetary Computer Hub](https://planetarycomputer-staging.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the **West Europe** Azure region. This is the easiest way to get started with computing on the Planetary Computer.
+The [Planetary Computer Hub](https://planetarycomputer-staging.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.  Fill out [this form](https://planetarycomputer-staging.microsoft.com/account/request) to request access to the Planetary Computer Hub.
 
-```{note} Fill out [this form](https://planetarycomputer-staging.microsoft.com/account/request) to request access to the Planetary Computer Hub.
-```
 Once approved, you can log into the JupyterHub with your credentials. You'll get a computing environment that includes standard scientific and geospatial packages from one of the [Pangeo Docker Images](https://github.com/pangeo-data/pangeo-docker-images#pangeo-docker-images).
 
 For scalable computation, the JupyterHub is also configured with [Dask Gateway](https://gateway.dask.org/). To create a Dask Cluster:
@@ -36,7 +33,7 @@ See [Scaling with Dask](../quickstarts/scale-with-dask.md) for an introduction t
 In this setup, you only use the Planetary Computer's scalable compute. You don't log into JupyterHub. Instead, your local machine drives the computation.
 We recommend this approach for users who value, and are comfortable with, managing a local development environment. This setup requires a bit more care on your part: You need to ensure that the versions of libraries in your local environment are compatible with the versions running in Azure.
 
-1. Request a token from JupyterHub
+### Request a token from JupyterHub
 
 Visit <https://planetarycomputer-staging.microsoft.com/compute/hub/token> to generate a token. You'll be required to authenticate to generate a token.
 
@@ -44,7 +41,7 @@ Visit <https://planetarycomputer-staging.microsoft.com/compute/hub/token> to gen
 
 Substitute that token anywhere you see `<JUPYTERHUB_TOKEN>` below.
 
-2. Connect to the Gateway
+### Connect to the Gateway
 
 Similar to before, we'll use `dask_gateway` to connect. Only now we need to provide the URLs explicitly.
 
@@ -75,27 +72,27 @@ lower bandwidth between Azure and your local machine aren't a bottleneck.
 
 ![Diagram showing Compute on Azure without JupyterHub](images/gateway-diagram.png)
 
-## Use your own Compute
+## Use your own compute
 
-The previous two methods relied on compute provided by the Planetary Computer. If you have your own Azure reasources you can use those to access the Planetary Computer's Datasets. There's nothing special about the compute provided by the Planetary Computer.
-That said, **make sure your resources are in the West Europe Azure Region.** Putting your compute in the same region as the data is the most efficient way to do your computation.
+The previous two methods relied on compute provided by the Planetary Computer. If you have your own Azure resources you can use those to access the Planetary Computer's Datasets.  
+That said, make sure your resources are in the **West Europe** Azure Region.  Putting your compute in the same region as the data is the most efficient way to do your computation.
 
 ### Using Azure Machine Learning
 
 If you have an existing [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/) workspace, you can use it to access data and APIs hosted by the Planetary Computer.
-Here we show accessing the Planetary Computer's Metadata API from Azure Machine Learning studio.
+Here we show accessing the Planetary Computer's Metadata API from Azure Machine Learning Studio.
 
 ![Image showing Azure ML Studio accessing Planetary Computer metadata](images/aml.png)
 
-Under this scenario, we're using Azure Machine Learning studio to connect to a Virtual Machine running in Azure. That Virtual Machine has a high-bandwidth connection to the Planetary Computer Data and Metadata APIs.
+Under this scenario, we're using Azure Machine Learning Studio to connect to a virtual machine running in Azure. That virtual machine has a high-bandwidth connection to the Planetary Computer Data and Metadata APIs.
 
 ![Diagram showing Azure ML](images/aml-diagram.png)
 
-### Using Dask Cloudprovider
+### Using Dask Cloud Provider
 
 Users with requiring specialized software environments or a lot of compute can use their own resources to access the Planetary Computer's Data and Metadata APIs.
 
-In this example, we use `Dask Cloudprovider` to create a Dask Cluster with just an Azure subscription. After following the setup instructions at <https://cloudprovider.dask.org/en/latest/azure.html>, you can create your cluster:
+In this example, we use `Dask Cloud Provider` to create a Dask cluster with just an Azure subscription. After following the setup instructions at <https://cloudprovider.dask.org/en/latest/azure.html>, you can create your cluster:
 
 ```python
 >>> from dask_cloudprovider.azure import AzureVMCluster
@@ -125,4 +122,4 @@ and connect to it
 
 Like the previous setup, the Dask scheduler and workers are running in Azure near the data. The local client might be outside of Azure.
 
-![Diagram showing Compute with self-managed Dask cluster](images/cloudprovider-diagram.png)
+![Diagram showing compute with self-managed Dask cluster](images/cloudprovider-diagram.png)
