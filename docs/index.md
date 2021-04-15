@@ -23,7 +23,7 @@ quickstarts/scale-with-dask
 :maxdepth: 1
 :caption: Tutorials
 
-tutorials/empty
+tutorials/landcover
 ```
 
 ```{toctree}
