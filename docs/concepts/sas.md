@@ -1,6 +1,6 @@
 ## Using tokens for data access
 
-The data hosted by the Planetary Computer is free for anyone to use. We do require that users utilize a [Shared Access Signature (SAS) Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) to authorize requests to [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/), which stores and serves all of our data assets. This enables the AI for Earth team to monitor and control rate of egress from our West Europe data center, where our data is located.
+The data hosted by the Planetary Computer is free for anyone to use. For some data sets, we do require that users utilize a [Shared Access Signature (SAS) Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) to authorize requests to [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/), which stores and serves all of our data assets.
 
 The Data Authentication API enables users to create access tokens that can be used to read Planetary Computer data. Getting a token is a simple HTTP GET request or a single method call to the [planetary-computer](https://github.com/microsoft/planetary-computer-sdk-for-python) Python package. Anyone can get a token from our Data Authentication API - you don't have to be a registered Planetary Computer user to get an access token. If you are a registered user, and/or if you are requesting data inside the West Europe Azure Region, the rate limiting and token expiry will be more favorable to doing large-scale work with our data.
 
@@ -52,7 +52,7 @@ The `href` field here contains the full, signed URL which may be used directly.
 
 The token has an expiry time, and when the token has expired a new token must be issued. Rate limiting is put into place in certain cases to limit the amount of egress against our datasets. These limits should be generous - if you find they are getting in the way of your work, please let us know!
 
-Rate limiting and token expiry are dependant on two aspects of each requests:
+Rate limiting and token expiry are dependent on two aspects of each requests:
   * Whether or not the request is originating from within the same data center as the Planetary Computer service (West Europe)
   * Whether or not a valid API subscription key has been supplied on the request
 
@@ -60,7 +60,7 @@ These two variables are used to determine the tier of rate limiting which is app
 
 #### Supplying a subscription key
 
-You can supply you subscription keyin an HTTP request in two ways:
+You can supply you subscription key in an HTTP request in two ways:
   * Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
 
 ```bash
