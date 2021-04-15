@@ -29,7 +29,7 @@ With this setup, all of the computation happens on Azure, whether on a single no
 
 ![Diagram showing compute components within Azure](images/jupyterhub-diagram.png)
 
-See [Scaling with Dask](quickstarts/scale-with-dask) for an introduction to Dask. This setup was pioneered by the [Pangeo Community](https://pangeo.io/). The [Pangeo Cloud](https://pangeo.io/cloud.html) documention provides additional background on how to use Dask-enabled JupyterHubs.
+See [Scaling with Dask](../quickstarts/scale-with-dask.md) for an introduction to Dask. This setup was pioneered by the [Pangeo Community](https://pangeo.io/). The [Pangeo Cloud](https://pangeo.io/cloud.html) documention provides additional background on how to use Dask-enabled JupyterHubs.
 
 ## Use our Dask Gateway
 

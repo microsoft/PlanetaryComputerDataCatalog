@@ -47,6 +47,7 @@ Content in the markdown files will not be rendered on the page.
 
 ### Documentation tips
 
+- Add links to other doc pages with relative paths `[link text](../overview/about.md)` or `[peer file](in-the-same-dir.ipynb)` so they will parsed by the frontend router. Be sure to include the original file extension so that Sphinx knows it's an internal reference.
 - Add references to images as relative paths at `images/<image-name>.png`
 - Add an alt text to all images (`![my alt text](example.com)`)
 - Don't use bare URLs; if not using an actual href, surround the url in

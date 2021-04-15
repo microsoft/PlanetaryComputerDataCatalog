@@ -22,7 +22,7 @@ const Topic = ({ topics }) => {
     return (
       <>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <RoutedHtml className="generated-docs" markup={doc.body}></RoutedHtml>
+          <RoutedHtml className="generated-docs" markupJson={doc} />
           {generatedToc}
         </div>
         <Separator styles={{ root: { width: centerPanelWidth } }} />
