@@ -1,36 +1,113 @@
 # Planetary Computer Data Catalog
 
-A homepage and catalog of datasets provided by the Planetary Computer. This
-project is in early stages of development.
+A homepage and catalog of datasets provided by the Planetary Computer.
 
-## Development setup
+## Requirements
 
-### Requirements
-
-- Node v14
+- Node v14.15 (LTS)
 - Yarn
+- Docker
+- docker-compose
+
+## Getting started
+
+The easiest way to ensure your node environment matches the requirements is to use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), and in the project root, run:
+
+```sh
+nvm use
+```
+
+You can install `yarn` globally for that node version with:
+
+```sh
+npm install -g yarn
+```
 
 ### Developing
 
-Add a `.env` file based on the included `.env.sample` file. Set
-the `REACT_APP_API_ROOT` value to either your local instance of the Planetary
-Computer, or a staging/production version exposed online.
+There are four main components to the application:
 
-Run `yarn start` to launch a development server.
+1. [etl](etl/README.md) - downloads and processes external files to be included in the application build
+2. [docs](docs/README.md) - a [sphinx](https://www.sphinx-doc.org/en/master/)-powered, markdown based documentation system
+3. [api](api/README.md) - an Azure Function app that provides a lightweight backend
+4. src - the main React application, bootstrapped from [Create React App](https://create-react-app.dev/)
 
-### Building
+#### Frontend development
 
-Ensure the `REACT_APP_API_ROOT` environment variable is set for the environment
-being targeted.
+First, copy `.env.sample` file to `.env`, and ensure the configuration values are set.
 
-Run `yarn build` to assemble a production asset bundle, which
-will be availalbe in `/build`.
+|Name|Value|Description
+|---|---|---
+`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
+|`REACT_APP_AZMAPS_KEY`| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
+|`REACT_APP_HUB_URL`| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.
+
+Run `./scripts/server` to launch a development server.
+
+#### API development
+
+To debug or extend the small API backend, please read the (`api` README)[api/README.md].
+
+## Ports
+
+|Service                  |Port  |
+|-------------------------|------|
+|Webpack Dev Server       | 3000 |
+|Functions App Dev Server | 7071 |
+
+## Scripts
+
+|Name      | Description|
+|----------| -----------|
+| `update` | Install dependencies and build etl and docs content |
+| `server` | Runs frontend development server |
+| `test`   | Runs unit tests and linter |
+| `yarn *` | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc |
+
+## Deploying
+
+There are 2 Azure Static Web App services enabled, one for staging and another for production. They are configured via [the GitHub workflow files](.github/workflows). Generally, merging to deployment branches will initiate a build and deploy with the service framework:
+
+- `develop`: Deploys to staging (`pc-datacatalog`)
+- `main`: Deploys to production (`pc-datacatalog-production`)
+
+Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
+
+The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, follow these steps:
+
+- Start a release
+
+```bash
+git flow release start X.Y.Z
+```
+
+- Bump the version number in `package.json` and check it in
+
+```bash
+git status # check staging area is clean
+git add package.json
+git commit -m "X.Y.Z"
+```
+
+- Publish the release
+
+```bash
+git flow release publish X.Y.Z
+```
+
+- Finish and push the release branch
+  - When prompted, keep default commit messages
+  - Use `X.Y.Z` as the tag message
+
+```bash
+git flow release finish -p X.Y.Z
+```
 
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+the rights to use your contribution. For details, visit <https://cla.opensource.microsoft.com>.
 
 When you submit a pull request, a CLA bot will automatically determine whether you need to provide
 a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions

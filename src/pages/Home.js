@@ -12,11 +12,11 @@ const Home = () => {
     <div
       className="hero"
       style={{
-        background: "url(./images/planet-sunrise-hero.jpg)",
+        background: "url(./images/planet-sunrise-wide@1.jpg)",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
-        height: "627px",
+        height: "650px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -33,6 +33,7 @@ const Home = () => {
               color: "#fff",
               maxWidth: 580,
               marginBottom: 40,
+              fontWeight: 100,
             },
           }}
         >
@@ -147,7 +148,7 @@ const Home = () => {
             monitoring data, in consistent, analysis-ready formats, accessible
             through our APIs as well as directly available via Azure Storage.
           </Resource>
-          <Resource title="API" iconName="Code" to="/pcapi">
+          <Resource title="API" iconName="Code" to="/docs">
             The Planetary Computer API makes it easy for users to find exactly
             the data they need, simplifying search and discovery across our Data
             Catalog.
@@ -160,7 +161,7 @@ const Home = () => {
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
-            to="/apps"
+            to="/applications"
           >
             Partners all over the world are building on top of the Planetary
             Computer platform, providing the actionable information that is

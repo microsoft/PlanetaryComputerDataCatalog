@@ -31,12 +31,37 @@ export const sortSpecialByKey = key => {
   };
 };
 
+export const sortByLookup = lookup => {
+  const get = k => lookup[k] ?? 50;
+
+  return (a, b) => {
+    if (get(a) < get(b)) {
+      return -1;
+    }
+    if (get(a) > get(b)) {
+      return 1;
+    }
+    return 0;
+  };
+};
+
 export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
 
   const repoName = repo.split("/").pop();
-  const pathPrefix = filePath.endsWith(".ipynb") ? "lab/tree" : "rstudio";
+
+  // Get a unique but arbitrary string for the workspace path. This works
+  // around in issue where nbgitpuller workspace may conflict with JupyterHub.
+  // The workspace can't contain / so substitue a - for any.
+  const fileWorkspace = filePath
+    .substring(filePath.indexOf("/") + 1, filePath.lastIndexOf("."))
+    .replace(/\//g, "-");
+
+  const pathPrefix = filePath.endsWith(".ipynb")
+    ? `lab/workspaces/${fileWorkspace}/tree`
+    : "rstudio";
+
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
   return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;

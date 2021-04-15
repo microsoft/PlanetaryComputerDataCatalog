@@ -1,4 +1,6 @@
 industryOptions:
+  - key: "none"
+    text: "Not specified"
   - key: "public"
     text: "Public sector"
   - key: "private"

@@ -5,19 +5,27 @@
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item:
 
-# launch: 
-#   title: Launch in Hub
-#   repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
-#   branch: main
-#   filePath: landcover.ipynb
-
+# tabs:
+#   - title: My title
+#     src: notebook.html
+#     launch: 
+#       title: Launch in Hub
+#       repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
+#       branch: main
+#       filePath: landcover.ipynb
+---
 collections:
   naip:
     shortTerm: NAIP
     headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Example Notebook 
-        src: 
+        src: naip-example.html 
+        launch: 
+          title: Launch in Hub
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: datasets/naip/naip-example.ipynb
       - title: Blob Storage Notebook 
         src: naip.html
       - title: Storage Documentation 
@@ -27,7 +35,12 @@ collections:
     headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Example Notebook 
-        src: 
+        src: landsat-8-c2-l2-example.html
+        launch: 
+          title: Launch in Hub
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
       - title: Blob Storage Notebook 
         src: landsat-8.html
       - title: Storage Documentation 
@@ -37,7 +50,12 @@ collections:
     headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Example Notebook 
-        src: 
+        src: sentinel-2-l2a-example.html
+        launch: 
+          title: Launch in Hub
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
       - title: Blob Storage Notebook 
         src: sentinel-2.html
       - title: Storage Documentation 
@@ -47,7 +65,12 @@ collections:
     headerImg: ./images/aster-hero.jpg
     tabs:
       - title: Example Notebook 
-        src: 
+        src: aster-l1t-example.html
+        launch: 
+          title: Launch in Hub
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: datasets/aster-l1t/aster-l1t-example.ipynb
       - title: Blob Storage Notebook 
         src: aster.html
       - title: Storage Documentation 

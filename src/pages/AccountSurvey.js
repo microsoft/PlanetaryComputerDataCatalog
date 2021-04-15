@@ -77,10 +77,7 @@ const AccountSurvey = () => {
   const tosLabel = (
     <span>
       You have read and agree to our{" "}
-      <NewTabLink href="https://go.microsoft.com/fwlink/?LinkID=206977">
-        terms of use
-      </NewTabLink>
-      .
+      <NewTabLink href="/terms">terms of use</NewTabLink>.
     </span>
   );
 
@@ -101,12 +98,12 @@ const AccountSurvey = () => {
         Microsoft will use this information to communicate with you about the
         Planetary Computer, to evaluate your eligibility to participate in our
         private preview, to prioritize new features, and to communicate
-        non-indentifying information – both internally and externally – about
-        the geographic regions and focus areas that our users represent. For
-        more information on how we use your data please see{" "}
-        <Link href="https://go.microsoft.com/fwlink/?LinkId=521839">
+        non-identifying information – both internally and externally – about the
+        geographic regions and focus areas that our users represent. For more
+        information on how we use your data please see{" "}
+        <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
           Privacy &amp; Cookies
-        </Link>
+        </NewTabLink>
         .
       </p>
       <Stack tokens={{ childrenGap: 8 }}>
@@ -182,9 +179,13 @@ const AccountSurvey = () => {
   const successMsg = (
     <>
       <h2>Thank you for your interest!</h2>
-      <p>
-        You've been added to our waiting list, and we'll follow up with
-        additional information as we develop the service.
+      <p style={{ maxWidth: "50%" }}>
+        You've been added to our waiting list. We'll follow up with additional
+        information as we expand access to the Planetary Computer. Please email{" "}
+        <Link href="mailto:planetarycomputer@microsoft.com">
+          planetarycomputer@microsoft.com
+        </Link>{" "}
+        if you have additional questions.
       </p>
       <ScrollToTopOnMount />
     </>

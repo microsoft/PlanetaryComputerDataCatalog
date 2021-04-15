@@ -5,7 +5,6 @@ import uuid
 
 import requests
 import azure.functions as func
-from requests.models import HTTPBasicAuth
 
 from .card import make_card
 
@@ -18,8 +17,7 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
     portal_url = os.environ.get("StoragePortalLink")
     az_env = os.environ.get("AZURE_FUNCTIONS_ENVIRONMENT")
     singup_url = os.environ.get("SignupUrl")
-    singup_user = os.environ.get("SignupAuthUser")
-    singup_pass = os.environ.get("SignupAuthPass")
+    signup_token = os.environ.get("SignupToken")
 
     try:
         req_body = req.get_json()
@@ -57,9 +55,11 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
 
     # Send to user management system as well, but deactivated
     try:
-        requests.post(singup_url, 
-                    auth=HTTPBasicAuth(singup_user, singup_pass), 
-                    data={"email": req_body.get("email"), "approved": False})
+        headers = {"Authorization": f"Token {signup_token}"}
+        data = {"email": req_body.get("email"), "is_approved": False}
+
+        resp = requests.post(singup_url, headers=headers, data=data)
+        resp.raise_for_status()
     except:
         logging.exception("Failed to submit to user management system")
 

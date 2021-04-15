@@ -2,7 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { DefaultButton } from "@fluentui/react";
 
-const ButtonLink = ({ to, style, children }) => {
+const ButtonLink = ({ to, style, title = "", children }) => {
   const history = useHistory();
 
   const handleClick = e => {
@@ -10,7 +10,7 @@ const ButtonLink = ({ to, style, children }) => {
     history.push(to);
   };
   return (
-    <DefaultButton href={to} style={style} onClick={handleClick}>
+    <DefaultButton href={to} style={style} title={title} onClick={handleClick}>
       {children}
     </DefaultButton>
   );

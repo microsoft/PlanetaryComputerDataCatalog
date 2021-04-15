@@ -67,7 +67,7 @@ const Footer = () => {
             <li id="c-uhff-footer_termsofuse">
               <a
                 className="c-uhff-link"
-                href="https://go.microsoft.com/fwlink/?LinkID=206977"
+                href="/terms"
                 data-mscc-ic="false"
                 data-m='{"cN":"Footer_TermsOfUse_nav","id":"n5c7c1c1m1r1a2","sN":5,"aN":"c7c1c1m1r1a2"}'
               >

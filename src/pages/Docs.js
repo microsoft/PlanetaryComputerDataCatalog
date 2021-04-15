@@ -1,34 +1,33 @@
 import React, { Suspense } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import RoutedHtml from "../components/docs/RoutedHtml";
 import Topic from "../components/docs/Topic";
-import TocTreeItem from "../components/docs/TocTreeItem";
 import { DQE_URL, MQE_URL } from "../utils/constants";
 import ScrollToTop from "../components/ScrollToTop";
 
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
-// from the documentation build step
+// from the documentation build step.
+
+// TODO: Jest tests can't parse require.context, so this module cannot be tested
+// as a result. Resolve this by transforming the sphinx output into an actual
+// named import and remove the dynamic import.
 const jsonFileContexts = require.context("../docs/", true, /\.json$/);
 const docTopics = Object.fromEntries(
   jsonFileContexts.keys().map(key => [key, jsonFileContexts(key)])
 );
 
 const Docs = () => {
-  // Generate Sphinx-like TOC items to inject into the generated TOC. Use these
-  // for OpenAPI/Swagger routes.
-  const openApiStacRoute = "/docs/api/spec/stac";
-  const openApiDataRoute = "/docs/api/spec/data";
-  const openApiLinks = [
-    { label: "Metadata API", href: openApiStacRoute },
-    { label: "Data API", href: openApiDataRoute },
-  ];
+  // Routes that are generated via the docs build system, but are matched with
+  // specialized React components for OpenAPI/Swagger routes.
+  const openApiStacRoute = "/docs/reference/stac";
+  const openApiDataRoute = "/docs/reference/sas";
 
-  const toc = docTopics["./index.json"].body;
+  const toc = docTopics["./index.json"];
   const tocComponent = (
     <nav
       style={{
@@ -36,9 +35,7 @@ const Docs = () => {
         flexGrow: 1,
       }}
     >
-      <RoutedHtml className="toc-item" markup={toc}>
-        <TocTreeItem title="API Reference" links={openApiLinks} />
-      </RoutedHtml>
+      <RoutedHtml className="toc-item" markupJson={toc} />
     </nav>
   );
 
@@ -70,17 +67,7 @@ const Docs = () => {
             <Topic topics={docTopics} />
           </Route>
           <Route exact path={"/docs"}>
-            <h2>Documentation</h2>
-            <p>
-              The Planetary Computer consists of an API layer as well as
-              Compute. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <Redirect to="/docs/overview/about" />
           </Route>
         </Switch>
       </div>

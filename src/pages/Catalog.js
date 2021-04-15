@@ -44,7 +44,18 @@ const Catalog = () => {
       Sorry, we're having trouble loading these datasets right now
     </MessageBar>
   );
-  const loadingMsg = <Spinner size={SpinnerSize.large} />;
+  const loadingMsg = (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        minHeight: 300,
+        justifyContent: "center",
+      }}
+    >
+      <Spinner size={SpinnerSize.large} />
+    </div>
+  );
 
   const primaryDatasets = isLoading
     ? loadingMsg

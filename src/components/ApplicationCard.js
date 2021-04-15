@@ -13,11 +13,9 @@ const ApplicationCard = ({ app }) => {
         underline={false}
         style={{ textDecoration: "none" }}
       >
-        <img
-          alt=""
-          src={thumbnailUrl}
-          style={{ maxWidth: "100%", objectFit: "contain" }}
-        />
+        <div className="responsive-container-wide">
+          <img alt="" src={thumbnailUrl} />
+        </div>
         <p style={{ color: "initial", marginBottom: 10, minHeight: 37 }}>
           {description}
         </p>

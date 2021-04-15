@@ -1,11 +1,16 @@
 #!/bin/bash
 
+DOCS_OUTPUT=_docs_output
+
+# TODO: Add a clean flag:
+# if [ -d "$DOCS_OUTPUT" ]; then rm -rf "${DOCS_OUTPUT}"; fi
+
 # Build the docs directory with the JSON output type.
-sphinx-build -b json ../docs _docs_output -v
+sphinx-build -b json ../docs "${DOCS_OUTPUT}" -v
 
 # Copy over all of the *.fjson files to our src/docs directory,
 # preserving the directory structure.
-pushd _docs_output
+pushd $DOCS_OUTPUT
 find . -name '*.fjson' -exec cp --parents \{\} ../../src/docs \;
 popd
 
@@ -13,7 +18,6 @@ popd
 # into the app.
 rm ../src/docs/genindex.fjson
 rm ../src/docs/search.fjson
-rm ../src/docs/README.json
 
 # Rename all fjson files to json.
 # See: https://mywiki.wooledge.org/BashFAQ/030
@@ -24,6 +28,6 @@ done
 # We also need the contents of the _images directory moved to the static build
 # directory. Since these aren't imported into the app, they are not put in the
 # src tree.
-pushd _docs_output
+pushd $DOCS_OUTPUT
 cp --parents _images/*.png ../../public
 popd
