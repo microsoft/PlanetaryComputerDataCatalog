@@ -31,6 +31,7 @@ tutorials/empty
 :caption: Concepts
 
 concepts/computing
+concepts/sas
 ```
 
 ```{toctree}
