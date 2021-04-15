@@ -6,7 +6,9 @@ Regardless of how you compute on the data, to ensure maximum efficiency you shou
 
 ## Use our JupyterHub
 
-The [Planetary Computer Hub](https://planetarycomputer-staging.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.  Fill out [this form](https://planetarycomputer-staging.microsoft.com/account/request) to request access to the Planetary Computer Hub.
+The [Planetary Computer Hub](https://planetarycomputer-staging.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.  
+
+Fill out [this form](https://planetarycomputer-staging.microsoft.com/account/request) to request access to the Planetary Computer Hub.
 
 Once approved, you can log into the JupyterHub with your credentials. You'll get a computing environment that includes standard scientific and geospatial packages from one of the [Pangeo Docker Images](https://github.com/pangeo-data/pangeo-docker-images#pangeo-docker-images).
 
@@ -35,7 +37,7 @@ We recommend this approach for users who value, and are comfortable with, managi
 
 ### Request a token from JupyterHub
 
-Visit <https://planetarycomputer-staging.microsoft.com/compute/hub/token> to generate a token. You'll be required to authenticate to generate a token.
+Visit <https://planetarycomputer.microsoft.com/compute/hub/token> to generate a token. You'll be required to authenticate to generate a token.
 
 ![JupyterHub Admin page to generate a token.](images/hub-token.png)
 
@@ -50,8 +52,8 @@ Similar to before, we'll use `dask_gateway` to connect. Only now we need to prov
 
 >>> jupyterhub_auth = auth.JupyterHubAuth(api_token="<JUPYTERHUB_TOKEN>")  # from step 1
 >>> gateway = Gateway(
-...     "https://pcc-staging.westeurope.cloudapp.azure.com/compute/services/dask-gateway/",
-...     proxy_address="gateway://pcc-dask-staging.westeurope.cloudapp.azure.com",
+...     "https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway/",
+...     proxy_address="gateway://pccompute-dask.westeurope.cloudapp.azure.com",
 ...     auth=jupyterhub_auth,
 ... )
 >>> gateway.list_clusters()

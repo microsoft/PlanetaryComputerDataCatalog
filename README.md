@@ -73,6 +73,36 @@ There are 2 Azure Static Web App services enabled, one for staging and another f
 
 Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
 
+The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, follow these steps:
+
+- Start a release
+
+```bash
+git flow release start X.Y.Z
+```
+
+- Bump the version number in `package.json` and check it in
+
+```bash
+git status # check staging area is clean
+git add package.json
+git commit -m "X.Y.Z"
+```
+
+- Publish the release
+
+```bash
+git flow release publish X.Y.Z
+```
+
+- Finish and push the release branch
+  - When prompted, keep default commit messages
+  - Use `X.Y.Z` as the tag message
+
+```bash
+git flow release finish -p X.Y.Z
+```
+
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a
