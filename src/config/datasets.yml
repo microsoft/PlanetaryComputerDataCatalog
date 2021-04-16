@@ -78,6 +78,13 @@ collections:
 
 # Configuration for "other dataset" section
 ai4e: 
+  - title: GBIF
+    shortTerm: GBIF occurrence 
+    description: Species occurrences shared through the Global Biodiversity Information Facility
+    infoUrl: http://aka.ms/ai4edata-gbif/
+    thumbnailUrl: gbif.jpg
+    alt: Colorful frog on a leaf
+
   - title: Daymet
     shortTerm: Daymet temperature
     description: Gridded temperature data across North America
