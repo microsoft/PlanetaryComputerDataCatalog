@@ -8,7 +8,8 @@ Regardless of how you compute on the data, to ensure maximum efficiency you shou
 
 The [Planetary Computer Hub](https://planetarycomputer-staging.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.  
 
-Fill out [this form](https://planetarycomputer-staging.microsoft.com/account/request) to request access to the Planetary Computer Hub.
+```{note} You'll need to [request access](https://planetarycomputer.microsoft.com/account/request) to use the Planetary Computer Hub.
+```
 
 Once approved, you can log into the JupyterHub with your credentials. You'll get a computing environment that includes standard scientific and geospatial packages from one of the [Pangeo Docker Images](https://github.com/pangeo-data/pangeo-docker-images#pangeo-docker-images).
 
