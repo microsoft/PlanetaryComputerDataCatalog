@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, Text } from "@fluentui/react";
+import { Text } from "@fluentui/react";
 import ChevronLink from "./controls/ChevronLink";
+import NewTabLink from "./controls/NewTabLink";
 
 const DatasetCard = ({ resourceItem }) => {
   const {
@@ -17,7 +18,7 @@ const DatasetCard = ({ resourceItem }) => {
 
   return (
     <div className="add-datasource-item">
-      <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
+      <NewTabLink href={infoUrl} style={{ textDecoration: "none" }}>
         <div className="responsive-container-wide">
           <img alt={alt || `Screenshot of ${title}`} src={thumbnailHref} />
         </div>
@@ -29,7 +30,7 @@ const DatasetCard = ({ resourceItem }) => {
         >
           {description}
         </Text>
-      </Link>
+      </NewTabLink>
       <ChevronLink href={infoUrl} label={`Get ${linkLabel} data `} />
     </div>
   );
