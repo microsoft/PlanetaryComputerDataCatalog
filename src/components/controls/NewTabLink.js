@@ -5,6 +5,7 @@ const NewTabLink = ({
   href,
   ariaLabel = "Link will open in new tab",
   children,
+  style,
   As = Link,
 }) => {
   return (
@@ -13,6 +14,7 @@ const NewTabLink = ({
       aria-label={ariaLabel}
       target="_blank"
       rel="noopener noreferrer"
+      style={style}
     >
       {children}
     </As>
