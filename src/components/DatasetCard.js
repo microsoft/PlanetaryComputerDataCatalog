@@ -1,8 +1,9 @@
 import React from "react";
-import { Link, Text } from "@fluentui/react";
+import { Text } from "@fluentui/react";
 import ChevronLink from "./controls/ChevronLink";
+import NewTabLink from "./controls/NewTabLink";
 
-const ResourceCard = ({ resourceItem }) => {
+const DatasetCard = ({ resourceItem }) => {
   const {
     alt,
     title,
@@ -13,11 +14,13 @@ const ResourceCard = ({ resourceItem }) => {
   } = resourceItem;
 
   const linkLabel = shortTerm || title;
+  const thumbnailHref = `https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/additional_datasets/${thumbnailUrl}`;
+
   return (
     <div className="add-datasource-item">
-      <Link href={infoUrl} underline={false} style={{ textDecoration: "none" }}>
+      <NewTabLink href={infoUrl} style={{ textDecoration: "none" }}>
         <div className="responsive-container-wide">
-          <img alt={alt || `Screenshot of ${title}`} src={thumbnailUrl} />
+          <img alt={alt || `Screenshot of ${title}`} src={thumbnailHref} />
         </div>
         <h3 style={{ marginBottom: 2, color: "initial" }}>{title}</h3>
         <Text
@@ -27,10 +30,10 @@ const ResourceCard = ({ resourceItem }) => {
         >
           {description}
         </Text>
-      </Link>
+      </NewTabLink>
       <ChevronLink href={infoUrl} label={`Get ${linkLabel} data `} />
     </div>
   );
 };
 
-export default ResourceCard;
+export default DatasetCard;

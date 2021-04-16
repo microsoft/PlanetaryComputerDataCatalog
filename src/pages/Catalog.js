@@ -12,7 +12,7 @@ import { useCollections } from "../utils/requests";
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import CollectionCard from "../components/stac/CollectionCard";
-import ResourceCard from "../components/ResourceCard";
+import DatasetCard from "../components/DatasetCard";
 
 import { sortSpecialByKey } from "../utils";
 import {
@@ -75,9 +75,7 @@ const Catalog = () => {
         });
 
   const otherDatasets = datasetsConfig.map(dataset => {
-    return (
-      <ResourceCard key={`card-${dataset.title}`} resourceItem={dataset} />
-    );
+    return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
   });
 
   return (
