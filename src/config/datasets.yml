@@ -76,7 +76,9 @@ collections:
       - title: Storage Documentation 
         src: aster-storage.html
 
-# Configuration for "other dataset" section
+# Configuration for "other dataset" section. This list is rendered
+# in the order represented here, which is mostly alphabetical, with
+# some custom prioritization.
 ai4e: 
   - title: GBIF
     shortTerm: GBIF occurrence 
@@ -162,13 +164,6 @@ ai4e:
     thumbnailUrl: RWz0Zh.jpg
     alt: Landcover map of the United States
 
-  - title: NEXRAD
-    shortTerm: NEXRAD
-    description: Radar data from 159 stations across the US
-    infoUrl: https://aka.ms/ai4edata-nexrad
-    thumbnailUrl: RE3CbUp.jpg
-    alt: Map of the US showing radar data.
-
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
     description: 15-day US hourly weather forecast data
@@ -197,12 +192,26 @@ ai4e:
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
 
+  - title: Sentinel-1 GRD
+    shortTerm: Sentinel-1 GRD
+    description: Global synthetic aperture radar (SAR) data from 2017-present
+    infoUrl: https://aka.ms/ai4edata-sentinel-1
+    thumbnailUrl: sentinel-1-grd.jpg
+    alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
+
   - title: TerraClimate
     shortTerm: global climate
     description: Global monthly climate data from 1958-present
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: RWz0Zk.jpg
     alt: Rain clouds viewed from space
+
+  - title: UK Met Office CSSP China 20CRDS
+    shortTerm: CSSP China 20CRDS
+    description: Historical climate data for China, from 1851-2010
+    infoUrl: https://aka.ms/ai4edata-uk-met-20crds 
+    thumbnailUrl: cssp-china.jpg
+    alt: Sky and clouds over mountain range
 
   - title: USFS Forest Inventory and Analysis
     shortTerm: forest health
