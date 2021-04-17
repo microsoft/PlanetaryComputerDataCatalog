@@ -46,7 +46,7 @@ Run `./scripts/server` to launch a development server.
 
 #### API development
 
-To debug or extend the small API backend, please read the (`api` README)[api/README.md].
+To debug or extend the small API backend, please read the [API README](api/README.md).
 
 ## Ports
 
