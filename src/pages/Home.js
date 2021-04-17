@@ -68,7 +68,7 @@ const Home = () => {
               The Planetary Computer is only as strong as the partner community
               that is building applications on it. If you are interested in
               scaling your environmental sustainability work with the power of
-              the Azure cloud,{" "}
+              the cloud,{" "}
               <Link
                 underline
                 href="mailto:planetarycomputer@microsoft.com"
@@ -123,7 +123,7 @@ const Home = () => {
           variant="xxLarge"
           style={{ textAlign: "center", maxWidth: "550px" }}
         >
-          Supporting sustainability decision-making with the power of the Azure
+          Supporting sustainability decision-making with the power of the
           cloud
         </Text>
         <Text
