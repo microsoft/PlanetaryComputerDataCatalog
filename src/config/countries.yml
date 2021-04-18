@@ -1,6 +1,4 @@
 00: None
-US: 'United States'
-GB: 'United Kingdom'
 AF: Afghanistan
 AX: 'Åland Islands'
 AL: Albania
@@ -237,6 +235,8 @@ VI: 'U.S. Virgin Islands'
 UG: Uganda
 UA: Ukraine
 AE: 'United Arab Emirates'
+GB: 'United Kingdom'
+US: 'United States'
 UY: Uruguay
 UZ: Uzbekistan
 VU: Vanuatu
