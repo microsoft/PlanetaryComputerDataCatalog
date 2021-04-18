@@ -2,14 +2,6 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "name": "survey",
-      "type": "table",
-      "tableName": "%SurveyTableName%",
-      "partitionKey": "survey",
-      "connection": "ConnectionString",
-      "direction": "out"
-    },
-    {
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",

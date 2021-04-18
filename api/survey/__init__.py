@@ -9,9 +9,8 @@ import azure.functions as func
 from .card import make_card
 
 
-def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
+def main(req: func.HttpRequest) -> func.HttpResponse:
 
-    row_key = str(uuid.uuid4())
     required_keys = ["name", "email"]
     webhook_url = os.environ.get("NotificationHook")
     portal_url = os.environ.get("StoragePortalLink")
@@ -34,39 +33,32 @@ def main(req: func.HttpRequest, survey: func.Out[str]) -> func.HttpResponse:
         )
 
     # Persist the survey data to survey storage
-    row_data = {
-        "Name": req_body.get("name"),
-        "Email": req_body.get("email"),
-        "Affiliation": req_body.get("affiliation"),
-        "Industry": req_body.get("industry"),
-        "Languages": ", ".join(req_body.get("languages")),
-        "Country": req_body.get("country"),
-        "Datasets": req_body.get("datasets"),
-        "StudyArea": req_body.get("studyArea"),
-        "Processed": False,
-        "PartitionKey": "survey",
-        "Terms": req_body.get("terms"),
-        "RowKey": row_key,
+    row = {
+        "name": req_body.get("name"),
+        "email": req_body.get("email"),
+        "is_approved": False,
+        "organization": req_body.get("affiliation"),
+        "sector": req_body.get("industry"),
+        "programming_languages": req_body.get("languages"),
+        "country": req_body.get("country"),
+        "area_of_study": req_body.get("studyArea"),
+        "dataset_interest": req_body.get("datasets"),
+        "is_tos_approved": req_body.get("terms"),
     }
 
-    short_key = row_key[:8]
-    survey.set(json.dumps(row_data))
-    logging.debug(f"Inserted record {short_key}")
-
-    # Send to user management system as well, but deactivated
+    # Send to user management system, unapproved
     try:
         headers = {"Authorization": f"Token {signup_token}"}
-        data = {"email": req_body.get("email"), "is_approved": False}
-
-        resp = requests.post(singup_url, headers=headers, data=data)
+        resp = requests.post(singup_url, headers=headers, data=row)
         resp.raise_for_status()
     except:
         logging.exception("Failed to submit to user management system")
+        logging.error(resp.text)
 
     if webhook_url:
         if az_env != "Development":
             logging.debug("Sending notification via webhook")
-            requests.post(webhook_url, json=make_card(short_key, portal_url))
+            requests.post(webhook_url, json=make_card(portal_url))
     else:
         logging.warning("Notification web hook not configured")
 
