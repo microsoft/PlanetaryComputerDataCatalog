@@ -64,7 +64,7 @@ export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
 
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
-  return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
+  return `${process.env.REACT_APP_HUB_URL}/hub/user-redirect/git-pull?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
 };
 
 export const buildGitHubUrl = ({ repo, filePath, branch }) => {
