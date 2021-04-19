@@ -1,4 +1,4 @@
-## Using tokens for data access
+## Using Tokens for Data Access
 
 The data hosted by the Planetary Computer is free for anyone to use. For some data sets, we do require that users utilize a [Shared Access Signature (SAS) Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works) to authorize requests to [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/), which stores and serves all of our data assets.
 
