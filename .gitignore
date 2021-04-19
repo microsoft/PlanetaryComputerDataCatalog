@@ -380,3 +380,7 @@ public/_images/
 
 # jupyter cache
 .ipynb_checkpoints
+
+# yarn intermediate files
+.package-lock.json
+
