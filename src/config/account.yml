@@ -1,3 +1,7 @@
+# Note: These options are used in the frontend "account request" form
+# and the keys must match the Django choice fields used for the `signups`
+# model in the pc-id app. Before making any changes here, make sure they
+# are synced with that app, otherwise requests may fail.
 industryOptions:
   - key: "not_specified"
     text: "Not specified"
