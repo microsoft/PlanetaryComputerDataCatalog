@@ -10,7 +10,7 @@ The Planetary Computer consists of four major components:
 
 ## Built on Open
 
-The Planetary Computer is uses open-source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open-source community. For example, our Hub builds on the work done by the [Pangeo](http://pangeo.io/) community to put the tools of data science to work for the Earth science community, and our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.
+The Planetary Computer uses open-source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open-source community. For example, our Hub builds on the work done by the [Pangeo](http://pangeo.io/) community to put the tools of data science to work for the Earth science community, and our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.
 
 ## About Private Preview
 
