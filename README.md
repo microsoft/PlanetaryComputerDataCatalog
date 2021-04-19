@@ -23,6 +23,21 @@ You can install `yarn` globally for that node version with:
 npm install -g yarn
 ```
 
+Now install the app dependencies and build the docs and external notebooks for the project:
+
+```sh
+./scripts/update
+
+```
+
+Now you can start the development server, and the site should be accessible at <http://localhost:3000>.
+
+```sh
+./scripts/server
+```
+
+To build the latest docs or external notebook, or if any new dependencies have been added, re-run `./scripts/update` (you may need to refresh the app in your browser if the site was running).
+
 ### Developing
 
 There are four main components to the application:
