@@ -15,13 +15,11 @@ The `local.settings.json` file has the following keys in the Values section:
 |Key|KeyVault Key|Purpose|
 |---|---|---|
 |`NotificationHook`|  | URL to send Teams notification on new Account Request
-|`SurveyTableName`| `AccountSurveyTest` | Azure Table Storage table name to save new requests to
-|`ConnectionString` | | Table Storage API connection string to connect to survey table (use SAS Connection String: Allowed Services - Table; Allowed Resource Types: Object; Allowed Permissions: Add)
 |`StoragePortalLink`| | URL to the Azure Portal Storage Account which contains the table. Used in the Teams notification message.
 |`SignupUrl`| | URL to POST new user content to on submission
 |`SignupToken` | `pc-id--request-auth-token` | Bearer token required to make the above POST request
 
 ### Production
 
-These values, or their production equivilents, are configured in the Static
+These values, or their production equivalents, are configured in the Static
 Web App `App Configuration` section.
