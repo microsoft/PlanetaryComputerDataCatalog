@@ -211,10 +211,9 @@
   .hero .title {
     font-size: 40px;
   }
-  
 }
 
-table {
+.generated-docs table {
     margin-right: auto;
     border: none;
     border-collapse: collapse;
@@ -222,11 +221,11 @@ table {
     font-size: 12px;
     table-layout: fixed;
 }
-thead {
+.generated-docs thead {
     border-bottom: 1px solid #e0e0e0;
     vertical-align: bottom;
 }
-tr, th, td {
+.generated-docs tr, .generated-docs th, .generated-docs td {
     text-align: right;
     vertical-align: middle;
     padding: 0.5em 0.5em;
@@ -235,13 +234,13 @@ tr, th, td {
     max-width: none;
     border: none;
 }
-th {
+.generated-docs th {
     font-weight: bold;
 }
-tbody tr:nth-child(odd) {
+.generated-docs tbody tr:nth-child(odd) {
     background: #f5f5f5;
 }
-tbody tr:hover {
+.generated-docs tbody tr:hover {
     background: rgba(66, 165, 245, 0.2);
 }
 * + table {margin-top: 1em;}
