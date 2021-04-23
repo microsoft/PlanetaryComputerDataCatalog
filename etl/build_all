@@ -1,7 +1,0 @@
-#!/bin/bash
-
-echo "===Building documentation"
-./build_docs
-
-echo "===Building codefile metadata"
-./build_codefiles

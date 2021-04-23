@@ -8,10 +8,11 @@ by the [`etl Dockerfile`](../etl/Dockerfile).
 ## Understanding the documentation system
 
 1. Source files for the documentation are .md and .ipynb files stored in the `/docs` directory
-2. The `/build_docs` script uses `sphinx` to generate JSON documents containing the converted HTML docs
-3. The script copies the JSON documents to this `/src/docs` directory
-4. When the application in built, all `*.json` files are imported via Webpack
-5. The JSON/HTML is rendered within the application, and any `reference internal` links are handled by React Router
+1. Notebook files for the docs site are developed in the [PlanetaryComputerExamples](https://github.com/microsoft/PlanetaryComputerExamples) repository. These can be configured to be downloaded from GitHub prior to being built into the docs site.
+1. The `/build_docs` script uses `sphinx` to generate JSON documents containing the converted HTML docs
+1. The script copies the JSON documents to this `/src/docs` directory
+1. When the application in built, all `*.json` files are imported via Webpack
+1. The JSON/HTML is rendered within the application, and any `reference internal` links are handled by React Router
 
 ## Adding documentation
 
@@ -25,6 +26,18 @@ To generate the rendered docs and incorporate them into the application for
 development, run `./scripts/update` script. The generated markup is not
 checked into the repository, but is build and bundled during the CI build
 process for production.
+
+## Adding external documentation
+
+To include notebooks from the PC Examples repo, add configuration for the
+desired file and place a reference in the TOC (`index.md`) using the path
+used in the source repository. For example, to add a TOC reference for the
+Example repo file `tutorials/landcover.ipynb`, add a reference to
+`tutorials/landcover`. The configured external documents will be merged with
+the checked-in files prior to building, and those references will become
+valid. For more information on how to configure external files, or configure
+the dev environment to fetch them locally, see the
+[`etl` README](../etl/README.md).
 
 ## Adding preview documentation
 

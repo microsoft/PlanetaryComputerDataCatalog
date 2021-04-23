@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+params=()
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [[ "${1:-}" == "--devdocs" ]]; then
+        params+=("--devdocs")
+    fi
+fi
+
+echo "===Building documentation"
+./scripts/build_docs "${params[@]}"
+
+echo "===Building codefile metadata"
+./scripts/build_codefiles

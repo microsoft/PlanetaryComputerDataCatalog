@@ -5,20 +5,35 @@ set -e
 function usage() {
     echo -n "Usage: $(basename "$0")
 Update and install project dependencies and run ETL jobs.
+
+Options:
+--devdocs: Build documentation site using a local server for external notebooks
 "
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    if [[ "${1:-}" == "--help" ]]; then
-        usage
-    else
-        # Install JS dependencies on host
-        yarn 
+function run() {
 
-        # Ensure container images are current
-        docker-compose build
-        
-        # Run etl to build documentation and external notebook/md files
-        docker-compose run --rm --no-deps etl
-    fi
+    # Install JS dependencies on host
+    yarn
+
+    # Ensure container images are current
+    docker-compose build
+
+    # Run etl to build documentation and external notebook/md files
+    docker-compose run --rm --no-deps etl "${params[@]}"
+}
+
+params=()
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    case "${1}" in
+        --help)
+            usage
+            ;;
+        --devdocs)
+            params+=("--devdocs")
+            run
+            ;;
+        *)
+            run ;;
+    esac
 fi
