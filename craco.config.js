@@ -52,6 +52,7 @@ module.exports = {
             {
               from: "etl/_codefile_output/*.html",
               to: "static/metadata/[name].html",
+              noErrorOnMissing: true,
             },
             // Transform .md to html and copy into the static asset director at build
             {
@@ -61,6 +62,7 @@ module.exports = {
                 const htmlOut = marked(content.toString("utf8"));
                 return Buffer.from(htmlOut, "utf8");
               },
+              noErrorOnMissing: true,
             },
           ],
         }),
