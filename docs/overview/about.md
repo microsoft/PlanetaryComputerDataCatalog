@@ -1,8 +1,9 @@
 # About the Microsoft Planetary Computer
 
-The Microsoft Planetary Computer is a platform that lets users leverage the power of the cloud to accelerate environmental sustainability and Earth science.
+The Microsoft Planetary Computer is a platform that lets users leverage the power of the cloud to accelerate environmental sustainability and Earth science. Learn more about Microsoft's [commitment to sustainability](https://www.microsoft.com/en-us/corporate-responsibility/sustainability).
 
 The Planetary Computer consists of four major components:
+
 - The [Data Catalog](https://planetarycomputer.microsoft.com/catalog), which includes petabytes of data about Earth systems, hosted on Azure and made available to users for free.
 - [APIs](../concepts/stac.md) that allow users to search for the data they need across space and time.
 - The [Hub](../concepts/computing.md), a fully managed computing environment that allows scientists to process massive geospatial datasets.
