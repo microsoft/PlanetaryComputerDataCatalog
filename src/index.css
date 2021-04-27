@@ -19,7 +19,7 @@ a {
 
 a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a, footer a):hover {
   text-decoration: underline;
-  color: #0078d4 !important;
+  color: #0078d4;
 }
 
 /* a11y for gray background */
@@ -46,6 +46,74 @@ h4 {
   line-height: 1.2;
 } */
 
+/* The documentation site adds a header for buttons
+   on external notebooks that launch the file in the Hub.
+   This is done via sphinx config and is not injecting React
+   components. Instead, style the buttons to mimic the fluentui
+   buttons used elsewhere in the project.
+*/
+.docs-launcher {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.manual-ms-button {
+  outline: transparent;
+  position: relative;
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  border: 1px solid;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0px 16px;
+  border-radius: 2px;
+  min-width: 80px;
+  height: 32px;
+  margin-left: 10px;
+}
+
+.manual-ms-button.manual-ms-primary {
+  border-color: rgb(0, 120, 212);
+  background-color: rgb(0, 120, 212);
+  color: rgb(255, 255, 255);
+}
+
+.docs-launcher a.manual-ms-button.manual-ms-primary:hover {
+  background-color: rgb(16, 110, 190);
+  border: 1px solid rgb(16, 110, 190);
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+
+.manual-ms-button.manual-ms-secondary {
+  border-color: rgb(138, 136, 134);
+  background-color:rgb(255, 255, 255);
+  color: rgb(50, 49, 48);
+}
+
+.docs-launcher a.manual-ms-button.manual-ms-secondary:hover {
+  background-color: rgb(243, 242, 241);
+  color: rgb(32, 31, 30);
+  text-decoration: none;
+}
+
+.manual-ms-button .flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.manual-ms-button .flex-container span {
+  line-height: 100%;
+  display: block;
+  margin: 0px 4px;
+}
 
 .responsive-container-wide {
     width: 100%;
