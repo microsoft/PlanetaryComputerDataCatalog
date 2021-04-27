@@ -363,6 +363,12 @@ MigrationBackup/
 # etl
 etl/_docs_output
 etl/_codefile_output
+etl/_docs_working_dir
+
+# Sphinx-built content that is moved into the application
+# source tree
+src/docs/
+public/_images/
 
 # misc
 .DS_Store
@@ -371,12 +377,6 @@ etl/_codefile_output
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Sphinx-built content that is moved into the application
-# source tree
-docs/_build
-src/docs/
-public/_images/
 
 # jupyter cache
 .ipynb_checkpoints

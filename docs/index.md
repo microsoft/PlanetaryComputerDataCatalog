@@ -1,6 +1,11 @@
 % Each `{toctree}` block will be rendered as a heading with specified by :caption
 % Override a document's heading title with the syntax: Custom Title <path/to/file>
 % You can add new toctree elements, or combine files from different directories under one.
+% The relative paths to documents needs to be valid at build-time. Some documents are synced
+% from external sources and merged into a working directory at build-time. The paths here
+% represent their post-merge location, and may not refer to files that are checked-in to this
+% repository.
+
 
 ```{toctree}
 :maxdepth: 1

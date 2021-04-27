@@ -74,9 +74,10 @@ To debug or extend the small API backend, please read the [API README](api/READM
 
 |Name      | Description|
 |----------| -----------|
-| `update` | Install dependencies and build etl and docs content |
+| `clean`  | Removes intermediate build files from docs and dataset codefiles |
 | `server` | Runs frontend development server |
 | `test`   | Runs unit tests and linter |
+| `update` | Install dependencies and build etl and docs content. Use `--devdocs` to develop against a local notebook repo. |
 | `yarn *` | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc |
 
 ## Deploying

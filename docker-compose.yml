@@ -4,6 +4,8 @@ services:
     build:
       context: etl
       dockerfile: Dockerfile
+    ports:
+      - "8889:8889"
     volumes:
       - .:/opt/src
     working_dir: /opt/src/etl

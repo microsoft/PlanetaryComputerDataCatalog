@@ -8,4 +8,6 @@ nbsphinx
 nbconvert
 nbformat
 numpydoc
+pyyaml==5.4.1
+requests
 sphinx

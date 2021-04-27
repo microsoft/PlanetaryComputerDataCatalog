@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+DOCS_OUTPUT="_docs_output"
+CODEFILE_OUTPUT="_codefile_output"
+DOCS_WORKING_DIR="_docs_working_dir"
+
+echo "Removing previously synced external doc files"
+if [ -d "${DOCS_WORKING_DIR}" ]; then rm -rf "${DOCS_WORKING_DIR}"; fi
+
+echo "Removing public _images content"
+rm ../public/_images/*.{png,jpg} || true
+
+echo "Removing built docs JSON files"
+shopt -s extglob
+rm -r ../src/docs/!("README.md") || true
+shopt -u extglob
+
+echo "Removing docs and codefiles intermidate build output"
+if [ -d "$DOCS_OUTPUT" ]; then rm -rf "${DOCS_OUTPUT}"; fi
+if [ -d "$CODEFILE_OUTPUT" ]; then rm -rf "${CODEFILE_OUTPUT}"; fi

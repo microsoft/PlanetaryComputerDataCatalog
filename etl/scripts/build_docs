@@ -1,12 +1,29 @@
 #!/bin/bash
 
-DOCS_OUTPUT=_docs_output
+set -e
 
-# TODO: Add a clean flag:
-# if [ -d "$DOCS_OUTPUT" ]; then rm -rf "${DOCS_OUTPUT}"; fi
+params=()
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [[ "${1:-}" == "--devdocs" ]]; then
+        params+=("http://host.docker.internal:8889")
+    fi
+fi
+
+DOCS_OUTPUT="_docs_output"
+DOCS_SOURCE="../docs/"
+DOCS_WORKING_DIR="_docs_working_dir"
+
+# Sync external documentation notebooks locally before building
+# and override the root external doc URL if in devdocs mode
+rm -rf "${DOCS_WORKING_DIR:?}"/* || true
+python3 ./scripts/external_docs_sync.py "${params[@]}"
+
+# Copy the local-sourced doc files to the working directory, which
+# contain the externally synced doc files
+rsync -r "${DOCS_SOURCE}" "${DOCS_WORKING_DIR}"
 
 # Build the docs directory with the JSON output type.
-sphinx-build -b json ../docs "${DOCS_OUTPUT}" -v
+sphinx-build -b json "${DOCS_WORKING_DIR}" "${DOCS_OUTPUT}" -v
 
 # Copy over all of the *.fjson files to our src/docs directory,
 # preserving the directory structure.
@@ -29,5 +46,5 @@ done
 # directory. Since these aren't imported into the app, they are not put in the
 # src tree.
 pushd $DOCS_OUTPUT
-cp --parents _images/*.png ../../public
+cp --parents _images/*.{png,jpg} ../../public || true
 popd
