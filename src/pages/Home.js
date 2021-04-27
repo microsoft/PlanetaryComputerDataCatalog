@@ -99,6 +99,17 @@ const Home = () => {
                 request access now
               </RouterLink>
               .
+              <p>
+                Learn more about Microsoft's{" "}
+                <Link
+                  underline
+                  href="https://www.microsoft.com/en-us/corporate-responsibility/sustainability"
+                  style={{ color: "#fff", fontWeight: "600" }}
+                >
+                  commitment to sustainability
+                </Link>
+                .
+              </p>
             </Text>
           </div>
         </div>
@@ -123,8 +134,7 @@ const Home = () => {
           variant="xxLarge"
           style={{ textAlign: "center", maxWidth: "550px" }}
         >
-          Supporting sustainability decision-making with the power of the
-          cloud
+          Supporting sustainability decision-making with the power of the cloud
         </Text>
         <Text
           block
