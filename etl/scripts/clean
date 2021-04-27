@@ -5,7 +5,6 @@ set -e
 DOCS_OUTPUT="_docs_output"
 CODEFILE_OUTPUT="_codefile_output"
 DOCS_WORKING_DIR="_docs_working_dir"
-DOCS_SOURCE="../docs"
 
 echo "Removing previously synced external doc files"
 if [ -d "${DOCS_WORKING_DIR}" ]; then rm -rf "${DOCS_WORKING_DIR}"; fi
