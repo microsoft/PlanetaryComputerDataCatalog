@@ -94,20 +94,24 @@
   width: 259px;
   position: relative;
   padding-right: 20px;
-  padding-bottom: 20px;
   box-sizing: border-box;
 }
 
 @media(max-width: 1073px) {
    .home-resource-item {
     flex-basis: 49%;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
+  }
+
+  .home-resource-item:last-child {
+    padding-bottom: 0;
   }
 }
 
 @media(max-width: 555px) {
   .home-resource-item {
     flex-basis: 100%;
+    padding-right: 0;
   }
 }
 
@@ -168,8 +172,7 @@
 }
 
 @media(max-width: 555px) {
-   .home-footer-item {
-    text-align: center;
+  .home-footer-item {
     flex-basis: 100%;
   }
 }
@@ -203,13 +206,12 @@
 @media (max-width: 700px) {
   .hero {
     text-align: center;
-    background-image: none !important;
-    background-color: #000 !important;
     height: 400px !important;
   }
 
   .hero .title {
     font-size: 40px;
+    text-shadow: 1px 1px black;
   }
 }
 

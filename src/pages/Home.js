@@ -148,10 +148,7 @@ const Home = () => {
           conservation stakeholders.
         </Text>
       </div>
-      <div
-        className="home-resources layout-container"
-        style={{ margin: "100px 0" }}
-      >
+      <div className="home-resources layout-container">
         <div className="layout-row grid-content">
           <Resource title="Data Catalog" iconName="addIn" to="/catalog">
             The Planetary Computer includes petabytes of environmental
