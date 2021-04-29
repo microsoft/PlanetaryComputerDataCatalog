@@ -30,6 +30,7 @@ a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a,
 p {
   line-height: 1.6;
 }
+
 /* h2 {
   font-size: 48px;
   line-height: 1.2;
@@ -174,16 +175,22 @@ a:not(header a):hover img  {
 }
 
 @media(max-width: 768px) {
+  form button {
+    width: 100%;
+  }
+
   .nav-internal {
     display: none;
   }
-  
 }
 .nav-internal {
   min-width: 175px;
   margin-left: 30px;
   height: fit-content;
   padding: 20px 0 25px 0;
+}
+.home-resources.layout-container {
+  margin: 80px 0;
 }
 
 .home-resources .home-resource-item a {
