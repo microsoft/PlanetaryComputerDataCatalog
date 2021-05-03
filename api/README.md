@@ -15,7 +15,7 @@ The `local.settings.json` file has the following keys in the Values section:
 |Key|KeyVault Key|Purpose|
 |---|---|---|
 |`NotificationHook`|  | URL to send Teams notification on new Account Request
-|`StoragePortalLink`| | URL to the Azure Portal Storage Account which contains the table. Used in the Teams notification message.
+|`AuthAdminUrl`| | URL to the PC ID admin page which contains the signup table. Used in the Teams notification message.
 |`SignupUrl`| | URL to POST new user content to on submission
 |`SignupToken` | `pc-id--request-auth-token` | Bearer token required to make the above POST request
 
