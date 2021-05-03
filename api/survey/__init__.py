@@ -1,7 +1,5 @@
-import json
 import logging
 import os
-import uuid
 
 import requests
 import azure.functions as func
@@ -13,15 +11,15 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     required_keys = ["name", "email"]
     webhook_url = os.environ.get("NotificationHook")
-    portal_url = os.environ.get("StoragePortalLink")
+    admin_url = os.environ.get("AuthAdminUrl")
     az_env = os.environ.get("AZURE_FUNCTIONS_ENVIRONMENT")
-    singup_url = os.environ.get("SignupUrl")
+    signup_url = os.environ.get("SignupUrl")
     signup_token = os.environ.get("SignupToken")
 
     try:
         req_body = req.get_json()
     except ValueError:
-        logging.error("Recieved non-JSON payload")
+        logging.error("Received non-JSON payload")
         return func.HttpResponse("Unexpected input format", status_code=422)
 
     valid = all(key in req_body.keys() for key in required_keys)
@@ -49,7 +47,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # Send to user management system, unapproved
     try:
         headers = {"Authorization": f"Token {signup_token}"}
-        resp = requests.post(singup_url, headers=headers, data=row)
+        resp = requests.post(signup_url, headers=headers, data=row)
         resp.raise_for_status()
     except:
         logging.exception("Failed to submit to user management system")
@@ -58,7 +56,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     if webhook_url:
         if az_env != "Development":
             logging.debug("Sending notification via webhook")
-            requests.post(webhook_url, json=make_card(portal_url))
+            requests.post(webhook_url, json=make_card(admin_url))
     else:
         logging.warning("Notification web hook not configured")
 
