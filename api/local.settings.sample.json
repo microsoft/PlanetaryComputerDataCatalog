@@ -2,9 +2,7 @@
   "IsEncrypted": false,
   "Values": {
     "NotificationHook": "",
-    "SurveyTableName": "AccountSurveyTest",
-    "ConnectionString": "",
-    "StoragePortalLink": "",
+    "AuthAdminUrl": "",
     "SignupUrl": "",
     "SignupToken": "",
     "FUNCTIONS_WORKER_RUNTIME": "python"
