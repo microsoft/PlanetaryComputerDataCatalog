@@ -8,8 +8,7 @@
 # tabs:
 #   - title: My title
 #     src: notebook.html
-#     launch: 
-#       title: Launch in Hub
+#     launch:
 #       repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
 #       branch: main
 #       filePath: landcover.ipynb
@@ -19,69 +18,65 @@ collections:
     shortTerm: NAIP
     headerImg: ./images/naip-hero.jpg
     tabs:
-      - title: Example Notebook 
-        src: naip-example.html 
-        launch: 
-          title: Launch in Hub
+      - title: Example Notebook
+        src: naip-example.html
+        launch:
           repo: https://github.com/microsoft/PlanetaryComputerExamples
           branch: main
           filePath: datasets/naip/naip-example.ipynb
-      - title: Blob Storage Notebook 
+      - title: Blob Storage Notebook
         src: naip.html
-      - title: Storage Documentation 
+      - title: Storage Documentation
         src: naip-storage.html
   landsat-8-c2-l2:
     shortTerm: Landsat 8
     headerImg: ./images/landsat-hero.jpg
     tabs:
-      - title: Example Notebook 
+      - title: Example Notebook
         src: landsat-8-c2-l2-example.html
-        launch: 
-          title: Launch in Hub
+        launch:
           repo: https://github.com/microsoft/PlanetaryComputerExamples
           branch: main
           filePath: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
-      - title: Blob Storage Notebook 
+      - title: Blob Storage Notebook
         src: landsat-8.html
-      - title: Storage Documentation 
+      - title: Storage Documentation
         src: landsat-8-storage.html
   sentinel-2-l2a:
     shortTerm: Sentinel-2
     headerImg: ./images/sentinel-hero.jpg
     tabs:
-      - title: Example Notebook 
+      - title: Example Notebook
         src: sentinel-2-l2a-example.html
-        launch: 
-          title: Launch in Hub
+        launch:
           repo: https://github.com/microsoft/PlanetaryComputerExamples
           branch: main
           filePath: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
-      - title: Blob Storage Notebook 
+      - title: Blob Storage Notebook
         src: sentinel-2.html
-      - title: Storage Documentation 
+      - title: Storage Documentation
         src: sentinel-2-storage.html
   aster-l1t:
     shortTerm: ASTER
     headerImg: ./images/aster-hero.jpg
     tabs:
-      - title: Example Notebook 
+      - title: Example Notebook
         src: aster-l1t-example.html
-        launch: 
-          title: Launch in Hub
+        launch:
           repo: https://github.com/microsoft/PlanetaryComputerExamples
           branch: main
           filePath: datasets/aster-l1t/aster-l1t-example.ipynb
-      - title: Blob Storage Notebook 
+      - title: Blob Storage Notebook
         src: aster.html
-      - title: Storage Documentation 
+      - title: Storage Documentation
         src: aster-storage.html
 
 # Configuration for "other dataset" section. This list is rendered
 # in the order represented here, which is mostly alphabetical, with
 # some custom prioritization.
-ai4e: 
+ai4e:
   - title: GBIF
-    shortTerm: GBIF occurrence 
+    shortTerm: GBIF occurrence
     description: Species occurrences shared through the Global Biodiversity Information Facility
     infoUrl: http://aka.ms/ai4edata-gbif/
     thumbnailUrl: gbif.jpg
@@ -104,19 +99,19 @@ ai4e:
   - title: GOES-16
     shortTerm: GOES-16 weather
     description: Weather imagery of the Americas
-    infoUrl: http://aka.ms/ai4edata-goes16  
+    infoUrl: http://aka.ms/ai4edata-goes16
     thumbnailUrl: RE4ucH9.jpg
     alt: Raindrops hitting water
 
   - title: Harmonized Global Biomass
-    shortTerm: global biomass 
+    shortTerm: global biomass
     description: Global carbon density for 2010
     infoUrl: https://aka.ms/ai4edata-hgb
     thumbnailUrl: RWz0Yf.jpg
     alt: Shaded mossy forest
 
   - title: Harmonized Landsat Sentinel-2
-    shortTerm: HLS 
+    shortTerm: HLS
     description: 30m-resolution satellite imagery for North America
     infoUrl: http://aka.ms/ai4edata-hls
     thumbnailUrl: RE3OM3E.jpg
@@ -185,7 +180,7 @@ ai4e:
     thumbnailUrl: RE4rsOQ.jpg
     alt: High altitude view of clouds
 
-  - title: Ocean Observatories Initiative CAMHD 
+  - title: Ocean Observatories Initiative CAMHD
     shortTerm: OOI
     description: High-resolution video from the floor of the Pacific Ocean
     infoUrl: https://aka.ms/ai4edata-ooi-camhd

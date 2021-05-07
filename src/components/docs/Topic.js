@@ -4,7 +4,7 @@ import { Redirect, useParams } from "react-router-dom";
 import GeneratedInternalToc from "./GeneratedInternalToc";
 import TopicNav from "./TopicNav";
 
-import RoutedHtml from "./RoutedHtml";
+import DocsHtmlContent from "./DocsHtmlContent";
 
 const centerPanelWidth = "75%";
 
@@ -22,7 +22,7 @@ const Topic = ({ topics }) => {
     return (
       <>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <RoutedHtml className="generated-docs" markupJson={doc} />
+          <DocsHtmlContent className="generated-docs" markupJson={doc} />
           {generatedToc}
         </div>
         <Separator styles={{ root: { width: centerPanelWidth } }} />
