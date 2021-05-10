@@ -16,7 +16,7 @@ export const getRelativeSelfPath = links => {
 export const renderItemColumn = (item, _, column) => {
   const fieldContent = item[column.fieldName];
 
-  // Add tooltips to potentiall long cells
+  // Add tooltips to potentially long cells
   switch (column.key) {
     case "title":
     case "name":

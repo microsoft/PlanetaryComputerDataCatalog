@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import {
   DefaultButton,
   MessageBar,
@@ -17,49 +17,26 @@ import NewTabLink from "./controls/NewTabLink";
 import GeneratedInternalToc from "./docs/GeneratedInternalToc";
 
 // HTML rendered Notebooks and Markdown files are fetched async from the static dir
-const MetadataHtmlConent = ({ src, launch }) => {
+const MetadataHtmlContent = ({ src, launch }) => {
   const { isSuccess, isLoading, data } = useStaticMetadata(src);
-  const contentRef = useRef();
-
-  useEffect(() => {
-    // TODO: Unify with copy in RoutedHtml. Note in this implementation,
-    // the dependency array is empty so it applies on every render, due
-    // to the tab changes.
-
-    // Keyboard users needs a tabindex set on scrollable content if they
-    // otherwise do not have focusable content. These python codeblocks are
-    // brought over from nbconvert and must have a tabindex set to all keyboard
-    // scrolling.
-    if (contentRef.current) {
-      contentRef.current
-        .querySelectorAll(".highlight.hl-ipython3 pre")
-        .forEach(element => {
-          element.setAttribute("tabindex", 0);
-        });
-
-      // Add an alt text for any images that don't otherwise have it
-      contentRef.current
-        .querySelectorAll(".output_png img")
-        .forEach(element => {
-          if (!element.getAttribute("alt")) {
-            element.setAttribute(
-              "alt",
-              "Rendered output from previous code snippet"
-            );
-          }
-        });
-    }
-  });
 
   const ghLink = launch ? (
-    <NewTabLink As={DefaultButton} href={buildGitHubUrl(launch)}>
-      Edit on GitHub
+    <NewTabLink
+      As={DefaultButton}
+      href={buildGitHubUrl(launch)}
+      title="Suggest edits to this document"
+    >
+      Edit
     </NewTabLink>
   ) : null;
 
   const launcher = launch ? (
-    <NewTabLink As={PrimaryButton} href={buildHubLaunchUrl(launch)}>
-      {launch.title}
+    <NewTabLink
+      As={PrimaryButton}
+      href={buildHubLaunchUrl(launch)}
+      title="This example can be launched in the Planetary Computer Hub"
+    >
+      Launch in Hub
     </NewTabLink>
   ) : null;
 
@@ -80,23 +57,65 @@ const MetadataHtmlConent = ({ src, launch }) => {
     </MessageBar>
   );
 
-  const generatedToc = <GeneratedInternalToc nohash html={data} />;
-  const metadata = isSuccess ? (
-    <div>
-      <Stack horizontalAlign="end">
+  // Load the markup fetched from the server. This was generated via nbconvert
+  // and needs some preprocessing before it can be rendered
+  const metadataDoc = new DOMParser().parseFromString(data, "text/html");
+  let title = "";
+
+  if (launch && isSuccess) {
+    // Remove the title element so it can be placed in a React component header
+    const titleEl = metadataDoc.querySelector("h2");
+    title = titleEl?.innerText.replace("¶", "");
+    titleEl?.remove();
+  }
+
+  // Keyboard users needs a tabindex set on scrollable content if they
+  // otherwise do not have focusable content. These python codeblocks are
+  // brought over from nbconvert and must have a tabindex set to all keyboard
+  // scrolling.
+  metadataDoc
+    .querySelectorAll(".highlight.hl-ipython3 pre")
+    .forEach(element => {
+      element.setAttribute("tabindex", 0);
+    });
+
+  // Images need an alt text property if one wasn't provided in the source doc
+  metadataDoc.querySelectorAll(".output_png img").forEach(element => {
+    if (!element.getAttribute("alt")) {
+      element.setAttribute("alt", "Rendered output from previous code snippet");
+    }
+  });
+
+  // Serialize the content back to a string so it can be injected
+  const processedMarkup = new XMLSerializer().serializeToString(metadataDoc);
+
+  const launchBar = launch ? (
+    <>
+      <h2 id={title.replace(/ /g, "-")}>{title}</h2>
+      <Stack horizontalAlign="start">
         <div>
           <Stack horizontal tokens={{ childrenGap: 10 }}>
-            {ghLink}
             {launcher}
+            {ghLink}
           </Stack>
         </div>
       </Stack>
+    </>
+  ) : null;
+
+  const generatedToc = <GeneratedInternalToc nohash html={data} />;
+  const metadata = isSuccess ? (
+    <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div
-          ref={contentRef}
-          className="markdown-source"
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data) }}
-        ></div>
+        <div>
+          {launchBar}
+          <div
+            className="markdown-source"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(processedMarkup),
+            }}
+          ></div>
+        </div>
         {generatedToc}
       </div>
     </div>
@@ -109,4 +128,4 @@ const MetadataHtmlConent = ({ src, launch }) => {
   return metadata;
 };
 
-export default MetadataHtmlConent;
+export default MetadataHtmlContent;

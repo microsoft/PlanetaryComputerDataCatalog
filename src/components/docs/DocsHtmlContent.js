@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import DOMPurify from "dompurify";
 
 // Given a Json object of HTML markup generated from sphinx-build, rewrite
 // internal links and capture their events to process them through the
 // React Router system.
-const RoutedHtml = ({ className, markupJson, children }) => {
+const DocsHtmlContent = ({ className, markupJson, children }) => {
   const history = useHistory();
   const contentRef = useRef();
 
@@ -31,21 +31,30 @@ const RoutedHtml = ({ className, markupJson, children }) => {
 
   const imagePathRegex = /..\/..\/_images/gi;
 
-  useEffect(() => {
-    // TODO: Unify with copy in MetadataHtmlContent
+  // Load the markup fetched from the server. This was generated via nbconvert
+  // and needs some preprocessing before it can be rendered
+  const docsDoc = new DOMParser().parseFromString(body, "text/html");
 
-    // Keyboard users needs a tabindex set on scrollable content if they
-    // otherwise do not have focusable content. These python codeblocks are
-    // brought over from nbconvert and must have a tabindex set to all keyboard
-    // scrolling.
-    if (contentRef.current) {
-      contentRef.current
-        .querySelectorAll(".docutils.container .highlight-ipython3 pre")
-        .forEach(element => {
-          element.setAttribute("tabindex", 0);
-        });
-    }
-  });
+  // Keyboard users needs a tabindex set on scrollable content if they
+  // otherwise do not have focusable content. These python codeblocks are
+  // brought over from nbconvert and must have a tabindex set to all keyboard
+  // scrolling.
+  docsDoc
+    .querySelectorAll(".docutils.container .highlight-ipython3 pre")
+    .forEach(el => {
+      el.setAttribute("tabindex", 0);
+    });
+
+  // Move the Hub launcher buttons under the main header so it matches their
+  // placement in non-Sphinx generate documents
+  const launcherEl = docsDoc.querySelector(".docs-launcher");
+
+  if (launcherEl) {
+    docsDoc.querySelector("h1").insertAdjacentElement("afterend", launcherEl);
+  }
+
+  // Serialize the content back to a string so it can be injected
+  const processedMarkup = new XMLSerializer().serializeToString(docsDoc);
 
   const handleClick = e => {
     const anchor = e.target.closest("a.reference.internal");
@@ -57,7 +66,10 @@ const RoutedHtml = ({ className, markupJson, children }) => {
   };
 
   // Replace any sibling links (shares a parent dir) with /docs/
-  let bodyWithRoutedLinks = body.replace(anchorPeerRegex, anchorPeerReplace);
+  let bodyWithRoutedLinks = processedMarkup.replace(
+    anchorPeerRegex,
+    anchorPeerReplace
+  );
 
   // If the current doc is not at root, replace peer links (in the same dir)
   // with /docs/{pwd}/
@@ -75,19 +87,28 @@ const RoutedHtml = ({ className, markupJson, children }) => {
       anchorRootReplace
     );
   }
-  const content = body ? (
+
+  bodyWithRoutedLinks = bodyWithRoutedLinks.replace(
+    imagePathRegex,
+    `${process.env.PUBLIC_URL}/_images`
+  );
+
+  // Allow sanitization to safely set new tab targets
+  DOMPurify.addHook("afterSanitizeAttributes", node => {
+    if ("target" in node) {
+      node.setAttribute("target", "_blank");
+      node.setAttribute("rel", "noopener noreferrer");
+    }
+  });
+
+  const content = processedMarkup ? (
     <div className={className}>
       {children}
       <div
         ref={contentRef}
         onClick={handleClick}
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(
-            bodyWithRoutedLinks.replace(
-              imagePathRegex,
-              `${process.env.PUBLIC_URL}/_images`
-            )
-          ),
+          __html: DOMPurify.sanitize(bodyWithRoutedLinks),
         }}
       />
     </div>
@@ -96,4 +117,4 @@ const RoutedHtml = ({ className, markupJson, children }) => {
   return content;
 };
 
-export default RoutedHtml;
+export default DocsHtmlContent;

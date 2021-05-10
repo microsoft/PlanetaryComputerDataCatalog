@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
-import RoutedHtml from "../components/docs/RoutedHtml";
+import DocsHtmlContent from "../components/docs/DocsHtmlContent";
 import Topic from "../components/docs/Topic";
 import { DQE_URL, MQE_URL } from "../utils/constants";
 import ScrollToTop from "../components/ScrollToTop";
@@ -35,7 +35,7 @@ const Docs = () => {
         flexGrow: 1,
       }}
     >
-      <RoutedHtml className="toc-item" markupJson={toc} />
+      <DocsHtmlContent className="toc-item" markupJson={toc} />
     </nav>
   );
 
