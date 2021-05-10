@@ -74,15 +74,23 @@ div.nbinput div.prompt, div.nboutput div.prompt, div.prompt.input_prompt, div.pr
   display: none;
 }
 
-.admonition.note .admonition-title {
+.admonition-title {
   margin: 0;
-  background: #0078d4;
   color: #fff;
   font-weight: 600;
   padding: 6px;
 }
 
-.admonition.note p:not(.admonition-title) {
+.admonition.note .admonition-title {
+  background: #0078d4;
+}
+
+.admonition.warning .admonition-title {
+  background: #fed9cc;
+  color: #000;
+}
+
+.admonition p:not(.admonition-title) {
   margin: 0;
   border: 1px solid #e0e0e0;
   border-top: 0;
@@ -499,4 +507,3 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-icon-contrast-color2: var(--md-pink-600);
   --jp-icon-contrast-color3: var(--md-blue-600);
 }
-
