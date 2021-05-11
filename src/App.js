@@ -11,10 +11,13 @@ import Applications from "./pages/Applications";
 import { usePrefetchContent } from "./utils/requests";
 import Home from "./pages/Home";
 import Terms from "./pages/Terms";
+import { initializeFeatures } from "./utils/featureFlags";
 
 function App() {
   initializeIcons();
+  initializeFeatures();
   usePrefetchContent();
+
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div>

@@ -24,6 +24,7 @@ import {
 } from "../config/datasets.yml";
 
 import "./catalog.css";
+import Feature from "../components/Feature";
 
 const Catalog = () => {
   // Load STAC Collections from API
@@ -105,12 +106,14 @@ const Catalog = () => {
   );
 
   const dataFilter = !isLoading ? (
-    <DatasetFilter
-      stacCollection={stacResponse.collections}
-      datasets={datasetsConfig}
-      onStacMatch={setFilteredCollections}
-      onDatasetMatch={setFilteredDatasets}
-    />
+    <Feature name="dataset-filter">
+      <DatasetFilter
+        stacCollection={stacResponse.collections}
+        datasets={datasetsConfig}
+        onStacMatch={setFilteredCollections}
+        onDatasetMatch={setFilteredDatasets}
+      />
+    </Feature>
   ) : null;
 
   return (
