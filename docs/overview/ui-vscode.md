@@ -16,7 +16,7 @@ Before you can work with the Planetary Computer Hub with VS Code, you need to st
 
 1. **[Log into the Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/spawn)** to start a notebook server prior to connecting from VS Code.
 
-2. **[Create a JupyterHub API Token]((http://planetarycomputer.microsoft.com/compute/hub/token))** so that JupyterHub knows who you are when you try to connect from VS Code. This token is private and should not be shared publicly!
+2. **[Create a JupyterHub API Token](http://planetarycomputer.microsoft.com/compute/hub/token)** so that JupyterHub knows who you are when you try to connect from VS Code. This token is private and should not be shared publicly!
 
 ## Setting up your local environment 
 
