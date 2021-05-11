@@ -10,7 +10,7 @@ const sortAlphaByKey = key => {
   };
 };
 
-// Alpha sort, except favor special terms to the begining
+// Alpha sort, except favor special terms to the beginning
 export const sortSpecialByKey = key => {
   const specialKeys = ["landsat", "sentinel"];
   const isSpecial = val =>
@@ -53,7 +53,7 @@ export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
 
   // Get a unique but arbitrary string for the workspace path. This works
   // around in issue where nbgitpuller workspace may conflict with JupyterHub.
-  // The workspace can't contain / so substitue a - for any.
+  // The workspace can't contain / so substitute a - for any.
   const fileWorkspace = filePath
     .substring(filePath.indexOf("/") + 1, filePath.lastIndexOf("."))
     .replace(/\//g, "-");

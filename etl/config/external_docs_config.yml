@@ -10,6 +10,7 @@
 #     - tutorials/images/another.png
 ---
 
+- file_url: tutorials/cloudless-mosaic-sentinel2.ipynb
 - file_url: tutorials/landcover.ipynb
   image_urls:
     - tutorials/images/change.png

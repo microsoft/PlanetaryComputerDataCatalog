@@ -28,6 +28,7 @@ quickstarts/scale-with-dask
 :maxdepth: 1
 :caption: Tutorials
 
+tutorials/cloudless-mosaic-sentinel2
 tutorials/landcover
 ```
 
