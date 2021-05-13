@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Link,
   MessageBar,
@@ -11,19 +11,35 @@ import { useCollections } from "../utils/requests";
 
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
+import DefaultBanner from "../components/DefaultBanner";
 import CollectionCard from "../components/stac/CollectionCard";
-import DatasetCard from "../components/DatasetCard";
+import DatasetCard from "../components/catalog/DatasetCard";
+import DatasetFilter from "../components/catalog/DatasetFilter";
+import NoResults from "../components/catalog/NoResults";
 
 import { sortSpecialByKey } from "../utils";
 import {
   ai4e as datasetsConfig,
   collections as collectionsConfig,
 } from "../config/datasets.yml";
-import DefaultBanner from "../components/DefaultBanner";
 
 import "./catalog.css";
+import Feature from "../components/Feature";
 
 const Catalog = () => {
+  // Load STAC Collections from API
+  const { isLoading, isError, data: stacResponse } = useCollections();
+
+  // Setup collections + "other" datasets
+  const [filteredCollections, setFilteredCollections] = useState();
+  const [filteredDatasets, setFilteredDatasets] = useState(datasetsConfig);
+
+  useEffect(() => {
+    if (stacResponse) {
+      setFilteredCollections(stacResponse.collections);
+    }
+  }, [stacResponse]);
+
   const banner = (
     <DefaultBanner>
       <h1>Data Catalog</h1>
@@ -36,8 +52,6 @@ const Catalog = () => {
       </p>
     </DefaultBanner>
   );
-
-  const { isLoading, isError, data: stacResponse } = useCollections();
 
   const errorMsg = (
     <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
@@ -57,32 +71,57 @@ const Catalog = () => {
     </div>
   );
 
+  const getStacCollections = () => {
+    if (!filteredCollections) return null;
+    if (filteredCollections.length === 0) return <NoResults typeText="API" />;
+
+    return filteredCollections
+      .sort(sortSpecialByKey("title"))
+      .map(collection => {
+        const name = collectionsConfig[collection.id]?.shortTerm;
+        return (
+          <CollectionCard
+            key={`card-${collection.id}`}
+            collection={collection}
+            shortTerm={name}
+          />
+        );
+      });
+  };
+
   const primaryDatasets = isLoading
     ? loadingMsg
     : isError
     ? errorMsg
-    : stacResponse.collections
-        .sort(sortSpecialByKey("title"))
-        .map(collection => {
-          const name = collectionsConfig[collection.id]?.shortTerm;
-          return (
-            <CollectionCard
-              key={`card-${collection.id}`}
-              collection={collection}
-              shortTerm={name}
-            />
-          );
-        });
+    : getStacCollections();
 
-  const otherDatasets = datasetsConfig.map(dataset => {
-    return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
-  });
+  const otherDatasets = filteredDatasets.length ? (
+    filteredDatasets.map(dataset => {
+      return (
+        <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />
+      );
+    })
+  ) : (
+    <NoResults typeText="Azure" />
+  );
+
+  const dataFilter = !isLoading ? (
+    <Feature name="dataset-filter">
+      <DatasetFilter
+        stacCollection={stacResponse.collections}
+        datasets={datasetsConfig}
+        onStacMatch={setFilteredCollections}
+        onDatasetMatch={setFilteredDatasets}
+      />
+    </Feature>
+  ) : null;
 
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
       <section id="catalog-api-datasets">
         <div className="grid-content">
+          {dataFilter}
           <h2>Datasets available through the Planetary Computer API</h2>
           <p style={{ maxWidth: 800, marginBottom: 40 }}>
             Our largest data sets can be queried and accessed through our

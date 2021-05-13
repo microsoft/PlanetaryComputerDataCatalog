@@ -12,6 +12,8 @@
 :caption: Overview
 
 About <overview/about>
+The Hub <overview/environment>
+Using VS Code <overview/ui-vscode>
 ```
 
 ```{toctree}

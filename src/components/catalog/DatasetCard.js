@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@fluentui/react";
-import ChevronLink from "./controls/ChevronLink";
-import NewTabLink from "./controls/NewTabLink";
+import ChevronLink from "../controls/ChevronLink";
+import NewTabLink from "../controls/NewTabLink";
 
 const DatasetCard = ({ resourceItem }) => {
   const {

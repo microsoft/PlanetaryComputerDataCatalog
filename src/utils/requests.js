@@ -8,7 +8,9 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  return useQuery(["stac", MQE_URL], getCollections);
+  return useQuery(["stac", MQE_URL], getCollections, {
+    refetchOnWindowFocus: false,
+  });
 };
 
 export const useStaticMetadata = staticFileName => {

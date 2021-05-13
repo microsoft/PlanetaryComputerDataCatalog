@@ -59,6 +59,18 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 
 Run `./scripts/server` to launch a development server.
 
+#### Feature flags
+
+A simple feature flag system is included in the application. To add a flagged feature during development:
+
+1. Wrap the component to be shown or hidden with a `Feature` component, providing a `name`.
+2. In `/utils/featureFlags.js` add an object to the list with `name`, `description`, and `active` (`bool`)
+3. Use the script in `/extra/ff-bookmarklet.js` to toggle features on a running site
+   1. Use a JS minifier like <https://javascript-minifier.com/> to minimize the file
+   2. Add a new bookmark, and paste the minified JS as the URL. You'll likely need add the `javascript:` label back to the front of the screen.
+4. Toggle feature flags on or off. Be sure that the site works in both states.
+5. Remove the `Feature` component and the flag entry when the feature is mature enough to be included.
+
 #### API development
 
 To debug or extend the small API backend, please read the [API README](api/README.md).
