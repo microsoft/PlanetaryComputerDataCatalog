@@ -14,6 +14,17 @@
 #       filePath: landcover.ipynb
 ---
 collections:
+  daymet:
+    shortTerm: daymet
+    headerImg: ./images/naip-hero.jpg
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: quickstarts/reading-zarr-data.ipynb
+
   naip:
     shortTerm: NAIP
     headerImg: ./images/naip-hero.jpg
