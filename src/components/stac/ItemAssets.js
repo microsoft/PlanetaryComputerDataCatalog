@@ -31,9 +31,9 @@ const columnOrders = {
 const bandKey = "eo:bands";
 
 const ItemAssets = itemAssets => {
-  const formatted = stacFormatter.formatAssets(itemAssets);
+  if (!itemAssets?.itemAssets) return null;
 
-  if (!itemAssets) return null;
+  const formatted = stacFormatter.formatAssets(itemAssets);
 
   // Item assets will be grouped by extension
   const assetsByExt = formatted.itemAssets.map(ia => {

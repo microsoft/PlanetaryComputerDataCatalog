@@ -85,7 +85,7 @@
         },
         "nv": {
           "type": "count",
-          "description": "Size of the time_bnds variable.",
+          "description": "Size of the `time_bnds` variable.",
           "values": [
             0,
             1
@@ -189,7 +189,7 @@
         },
         "srad": {
           "type": "data",
-          "description": "**Daily frequency only**. Incident shortwave radiation flux density in watts per square meter, taken as an average over the daylight period of the day. Note: Daily total radiation (MJ/m2/day) can be calculated as follows: ((srad (W/m2) * dayl (s/day)) / l,000,000)",
+          "description": "**Daily frequency only**. Incident shortwave radiation flux density in watts per square meter, taken as an average over the daylight period of the day. Note: Daily total radiation (MJ/m2/day) can be calculated as follows: `((srad (W/m2) * dayl (s/day)) / l,000,000)`",
           "unit": "W/m2",
           "dimensions": [
             "time",

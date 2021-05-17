@@ -22,6 +22,8 @@ import License from "../components/stac/License";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
+import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
+import { CollectionProvider } from "../components/stac/CollectionContext";
 
 const Collection = () => {
   const { id } = useParams();
@@ -89,23 +91,28 @@ const Collection = () => {
       headerText="Overview"
       itemKey="overview"
     >
-      <div className="with-sidebar">
-        <div>
-          <section className="collection-content">
-            <h2>Overview</h2>
-            <Description collection={collection} />
-            <Providers providers={collection.providers} />
-            <License collection={collection} />
-          </section>
+      <CollectionProvider collection={collection}>
+        <div className="with-sidebar">
           <div>
-            <CollectionDetail collection={collection} />
+            <section className="collection-content">
+              <h2>Overview</h2>
+              <Description collection={collection} />
+              <Providers providers={collection.providers} />
+              <License collection={collection} />
+            </section>
+            <div>
+              <CollectionDetail collection={collection} />
+            </div>
           </div>
         </div>
-      </div>
-      <Bands collection={collection} />
-      <ItemAssets itemAssets={collection.item_assets} />
+        <Bands collection={collection} />
+        <ItemAssets itemAssets={collection.item_assets} />
+        <CubeDimensions />
+        <CubeVariables />
+      </CollectionProvider>
     </PivotItem>
   );
+
   return (
     <Layout bannerHeader={bannerHeader} isShort>
       <SEO title={id} description={collection?.description} />
