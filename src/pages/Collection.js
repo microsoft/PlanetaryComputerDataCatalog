@@ -106,7 +106,7 @@ const Collection = () => {
           </div>
         </div>
         <Bands />
-        <ItemAssets itemAssets={collection.item_assets} />
+        <ItemAssets />
         <CubeDimensions />
         <CubeVariables />
       </CollectionProvider>

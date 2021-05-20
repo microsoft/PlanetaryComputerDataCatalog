@@ -7,6 +7,28 @@ StacFields.Registry.addMetadataField("gsd", {
   formatter: value => (value ? `${value} m` : "-"),
 });
 
+StacFields.Registry.addMetadataField("description", {
+  label: "Description",
+  formatter: value => marked.parseInline(value || "", { smartypants: true }),
+});
+
+export const mediaTypeOverride = value => {
+  if (value === "image/tiff; application=geotiff; profile=cloud-optimized") {
+    return "GeoTIFF (COG)";
+  }
+
+  return StacFields.Formatters.formatMediaType(value);
+};
+
+export const bandOverrideList = bands => {
+  return bands
+    .map(({ name, common_name }) => {
+      const common = common_name ? `(${common_name})` : "";
+      return `${name} ${common}`.trim();
+    })
+    .join(", ");
+};
+
 export const stacFormatter = StacFields;
 
 export const getRelativeSelfPath = links => {
@@ -41,6 +63,8 @@ export const renderItemColumn = (item, _, column) => {
           }}
         />
       );
+    case "key":
+      return <code>{fieldContent}</code>;
     default:
       return fieldContent;
   }

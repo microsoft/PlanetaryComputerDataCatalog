@@ -5,22 +5,30 @@ import {
   SelectionMode,
 } from "@fluentui/react";
 
-import { renderItemColumn, stacFormatter } from "../../utils/stac";
+import {
+  bandOverrideList,
+  mediaTypeOverride,
+  renderItemColumn,
+  stacFormatter,
+} from "../../utils/stac";
 import { sortByLookup } from "../../utils";
+import { useStac } from "./CollectionContext";
 
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
 // values, set the desired widths by key
 const defaultWidth = 100;
 const columnWidths = {
-  title: 150,
+  title: 200,
   gsd: 30,
+  roles: 50,
   description: 100,
 };
 
 // Use for consistent ordering
 const columnOrders = {
   title: 0,
+  key: 5,
   roles: 10,
   type: 20,
   gsd: 30,
@@ -28,104 +36,85 @@ const columnOrders = {
   description: 100,
 };
 
-const bandKey = "eo:bands";
+const ItemAssets = () => {
+  const { item_assets: itemAssets } = useStac();
 
-const ItemAssets = itemAssets => {
-  if (!itemAssets?.itemAssets) return null;
+  if (!itemAssets) return null;
 
   const formatted = stacFormatter.formatAssets(itemAssets);
 
-  // Item assets will be grouped by extension
-  const assetsByExt = formatted.itemAssets.map(ia => {
-    // Get a list of all unique value keys for assets in this extension, these
-    // will become column headers
-    const columnKeys = Array.from(
-      new Set(
-        Object.values(ia.properties)
-          .map(asset => Object.keys(asset.value))
-          .flat()
-      )
-    );
+  // Get a unique list of asset properties, which will become columns. Add a
+  // special "key" column which will hold the asset key from the asset object.
+  const columnKeys = Array.from(
+    new Set(
+      Object.values(formatted)
+        .map(extensions => {
+          return extensions
+            .map(({ properties }) => Object.keys(properties))
+            .flat();
+        })
+        .flat()
+    )
+  ).concat(["key"]);
 
-    // Use specified, consistent ordering for columns
-    columnKeys.sort(sortByLookup(columnOrders));
+  // Use specified, consistent ordering for columns
+  columnKeys.sort(sortByLookup(columnOrders));
 
-    // Create objects with keys matching the column keys above.
-    const items = Object.values(ia.properties).map(({ value }) => {
-      // Convert arrays to joined strings, unless there is special handling for
-      // certain keys defined.
-      const skipFormat = [bandKey, "description"];
-
-      const entries = Object.entries(value).map(([key, val]) => {
-        if (typeof va === Array && !skipFormat.includes(key)) {
-          return [key, val.join(", ")];
-        }
-        const formattedVal = skipFormat.includes(key)
-          ? val
-          : stacFormatter.format(val, key);
-
-        return [key, formattedVal];
-      });
-
-      // eo:bands are concatanated specially
-      const formattedBands = value[bandKey]
-        ? value[bandKey]
-            .map(({ name, common_name }) => {
-              const common = common_name ? `(${common_name})` : "";
-              return `${name} ${common}`.trim();
-            })
-            .join(", ")
-        : null;
-
-      // Reassemble an item object for the list
-      if (formattedBands) {
-        entries.push([bandKey, formattedBands]);
-      }
-
-      return Object.fromEntries(entries);
-    });
-
-    // An extension has a label, column keys, and a list of item objects
-    // pre-formatted
-    return { sectionLabel: ia.label, columnKeys, items };
+  const columns = columnKeys.map(key => {
+    return {
+      key: key,
+      name: stacFormatter.label(key),
+      minWidth: columnWidths[key] || defaultWidth,
+      maxWidth: columnWidths[key] || defaultWidth,
+      fieldName: key,
+      isResizable: true,
+      isPadded: true,
+      isMultiline: key === "description",
+    };
   });
 
-  const assetLists = assetsByExt.map(
-    ({ sectionLabel, columnKeys, items }, idx) => {
-      const columns = columnKeys.map((key, idx) => {
-        return {
-          key: key,
-          name: stacFormatter.label(key),
-          minWidth: columnWidths[key] || defaultWidth,
-          maxWidth: columnWidths[key] || defaultWidth,
-          fieldName: key,
-          isRowHeader: idx > 0 ? false : true,
-          isResizable: true,
-          isPadded: true,
-        };
-      });
+  // Make the rows
+  const items = Object.entries(formatted).map(([assetKey, extensions]) => {
+    // Flatten all extension property attributres to a single list
+    const item = extensions
+      .map(({ properties }) => {
+        return Object.entries(properties).map(([key, property]) => {
+          // Allow for overriding specific values of various property types
+          let formattedValue;
+          switch (key) {
+            case "eo:bands":
+              // Rather than a table, rener a string of "name (common name)" bands
+              formattedValue = bandOverrideList(property.value);
+              break;
+            case "type":
+              // Shorten COG GeoTIFF type
+              formattedValue = mediaTypeOverride(property.value);
+              break;
+            default:
+              // Just use the default format
+              formattedValue = property.formatted;
+          }
+          return [key, formattedValue];
+        });
+      })
+      .flat();
 
-      return (
-        <section key={`assetlist-${idx}`}>
-          {sectionLabel && <h3>{sectionLabel}</h3>}
-          <DetailsList
-            items={items}
-            compact={false}
-            columns={columns}
-            selectionMode={SelectionMode.none}
-            layoutMode={DetailsListLayoutMode.justified}
-            isHeaderVisible={true}
-            onRenderItemColumn={renderItemColumn}
-          />
-        </section>
-      );
-    }
-  );
+    // Make a new object with all asset attributes, including the key of the asset
+    return { key: assetKey, ...Object.fromEntries(item) };
+  });
 
   return (
     <div style={{ marginTop: 40 }}>
       <h3>Dataset Assets</h3>
-      {assetLists}
+      <DetailsList
+        items={items}
+        compact={false}
+        columns={columns}
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        onRenderItemColumn={renderItemColumn}
+      />
     </div>
   );
 };
