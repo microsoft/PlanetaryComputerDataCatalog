@@ -1,6 +1,7 @@
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
 import marked from "marked";
+import { capitalize } from ".";
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
@@ -9,7 +10,13 @@ StacFields.Registry.addMetadataField("gsd", {
 
 StacFields.Registry.addMetadataField("description", {
   label: "Description",
-  formatter: value => marked.parseInline(value || "", { smartypants: true }),
+  formatter: value =>
+    marked.parseInline(capitalize(value) || "", { smartypants: true }),
+});
+
+StacFields.Registry.addMetadataField("stac_key", {
+  label: "STAC Key",
+  formatter: value => value,
 });
 
 export const mediaTypeOverride = value => {
@@ -31,6 +38,19 @@ export const bandOverrideList = bands => {
 
 export const stacFormatter = StacFields;
 
+// Use for consistent column orders across table types
+export const columnOrders = {
+  title: 0,
+  name: 1,
+  common_name: 2,
+  stac_key: 5,
+  roles: 10,
+  type: 20,
+  gsd: 30,
+  "eo:bands": 40,
+  description: 100,
+};
+
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;
   const url = new URL(href);
@@ -49,6 +69,7 @@ export const renderItemColumn = (item, _, column) => {
     case "title":
     case "name":
     case "type":
+    case "roles":
       return <span title={fieldContent}>{fieldContent}</span>;
     case "description":
       return (
@@ -63,8 +84,8 @@ export const renderItemColumn = (item, _, column) => {
           }}
         />
       );
-    case "key":
-      return <code>{fieldContent}</code>;
+    case "stac_key":
+      return <code title={fieldContent}>{fieldContent}</code>;
     default:
       return fieldContent;
   }

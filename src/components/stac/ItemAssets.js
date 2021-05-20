@@ -7,6 +7,7 @@ import {
 
 import {
   bandOverrideList,
+  columnOrders,
   mediaTypeOverride,
   renderItemColumn,
   stacFormatter,
@@ -22,17 +23,6 @@ const columnWidths = {
   title: 200,
   gsd: 30,
   roles: 50,
-  description: 100,
-};
-
-// Use for consistent ordering
-const columnOrders = {
-  title: 0,
-  key: 5,
-  roles: 10,
-  type: 20,
-  gsd: 30,
-  "eo:bands": 40,
   description: 100,
 };
 
@@ -55,7 +45,7 @@ const ItemAssets = () => {
         })
         .flat()
     )
-  ).concat(["key"]);
+  ).concat(["stac_key"]);
 
   // Use specified, consistent ordering for columns
   columnKeys.sort(sortByLookup(columnOrders));
@@ -100,7 +90,7 @@ const ItemAssets = () => {
       .flat();
 
     // Make a new object with all asset attributes, including the key of the asset
-    return { key: assetKey, ...Object.fromEntries(item) };
+    return { stac_key: assetKey, ...Object.fromEntries(item) };
   });
 
   return (
