@@ -96,17 +96,17 @@ const Collection = () => {
           <div>
             <section className="collection-content">
               <h2>Overview</h2>
-              <Description collection={collection} />
-              <Providers providers={collection.providers} />
-              <License collection={collection} />
+              <Description />
+              <Providers />
+              <License />
             </section>
             <div>
-              <CollectionDetail collection={collection} />
+              <CollectionDetail />
             </div>
           </div>
         </div>
-        <Bands collection={collection} />
-        <ItemAssets itemAssets={collection.item_assets} />
+        <Bands />
+        <ItemAssets />
         <CubeDimensions />
         <CubeVariables />
       </CollectionProvider>

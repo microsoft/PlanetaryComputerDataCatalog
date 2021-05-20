@@ -17,6 +17,12 @@
   flex-basis: 49%;
 }
 
+/* Collection table header resize element override */
+.ms-DetailsHeader-cell:hover + .ms-DetailsHeader-cellSizer::after {
+    opacity: 1;
+    background: darkgray;
+}
+
 /* Catalog datasets */
 
 .add-datasource-item {

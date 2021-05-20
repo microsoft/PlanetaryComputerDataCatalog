@@ -1,8 +1,12 @@
 import React from "react";
+
 import NewTabLink from "../controls/NewTabLink";
 import LabeledValue from "../controls/LabeledValue";
+import { useStac } from "./CollectionContext";
 
-const Providers = ({ providers }) => {
+const Providers = () => {
+  const { providers } = useStac();
+
   const providerList = providers.map((p, i) => {
     return (
       <span key={`provider-${p.name}`}>

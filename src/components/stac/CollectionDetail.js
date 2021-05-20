@@ -1,12 +1,15 @@
 import React, { Suspense } from "react";
+import { Stack } from "@fluentui/react";
 
 import Summaries from "./Summaries";
 import TemporalExtent from "./TemporalExtent";
-import { Stack } from "@fluentui/react";
+import { useStac } from "./CollectionContext";
 
 const SpatialExtent = React.lazy(() => import("./SpatialExtent"));
 
-const CollectionDetail = ({ collection }) => {
+const CollectionDetail = () => {
+  const collection = useStac();
+
   return (
     <div>
       <Stack tokens={{ childrenGap: "10px" }}>
