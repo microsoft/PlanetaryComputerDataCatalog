@@ -10,3 +10,4 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
