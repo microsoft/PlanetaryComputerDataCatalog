@@ -2,7 +2,11 @@ import React from "react";
 import marked from "marked";
 import DOMPurify from "dompurify";
 
-const Description = ({ collection }) => {
+import { useStac } from "./CollectionContext";
+
+const Description = () => {
+  const collection = useStac();
+
   return (
     <div
       className="collection-content-item"

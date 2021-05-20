@@ -6,6 +6,7 @@ import {
 } from "@fluentui/react";
 
 import { renderItemColumn, stacFormatter } from "../../utils/stac";
+import { useStac } from "./CollectionContext";
 
 const bandKey = "eo:bands";
 
@@ -21,7 +22,8 @@ const columnWidths = {
   description: 100,
 };
 
-const Bands = ({ collection }) => {
+const Bands = () => {
+  const collection = useStac();
   const summaries = stacFormatter.formatSummaries(collection);
   const eo = summaries.find(s => s.extension === "eo");
 
@@ -37,7 +39,6 @@ const Bands = ({ collection }) => {
       minWidth: columnWidths[key] || defaultWidth,
       maxWidth: columnWidths[key] || defaultWidth,
       fieldName: key,
-      isRowHeader: idx > 0 ? false : true,
       isResizable: true,
       isPadded: true,
     };

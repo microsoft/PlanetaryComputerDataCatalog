@@ -96,16 +96,16 @@ const Collection = () => {
           <div>
             <section className="collection-content">
               <h2>Overview</h2>
-              <Description collection={collection} />
-              <Providers providers={collection.providers} />
-              <License collection={collection} />
+              <Description />
+              <Providers />
+              <License />
             </section>
             <div>
-              <CollectionDetail collection={collection} />
+              <CollectionDetail />
             </div>
           </div>
         </div>
-        <Bands collection={collection} />
+        <Bands />
         <ItemAssets itemAssets={collection.item_assets} />
         <CubeDimensions />
         <CubeVariables />

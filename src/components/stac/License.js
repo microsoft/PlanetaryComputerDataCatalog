@@ -1,9 +1,12 @@
 import React from "react";
 import { Text } from "@fluentui/react";
+
 import NewTabLink from "../controls/NewTabLink";
 import LabeledValue from "../controls/LabeledValue";
+import { useStac } from "./CollectionContext";
 
-const License = ({ collection }) => {
+const License = () => {
+  const collection = useStac();
   const { license, links } = collection;
   const licenseLink = links.find(l => l.rel === "license");
   const defaultText = license || "None provided";

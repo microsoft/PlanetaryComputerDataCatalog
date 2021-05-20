@@ -34,7 +34,7 @@ const CubeTable = ({ stacKey, title }) => {
       isRowHeader: idx > 0 ? false : true,
       isResizable: true,
       isPadded: true,
-      isMultiline: key === "description" ? true : false,
+      isMultiline: key === "description",
     };
   });
 
