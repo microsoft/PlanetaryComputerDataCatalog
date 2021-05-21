@@ -12,6 +12,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
-        docker-compose up mockstac
+        docker-compose up mockstac && docker-compose rm -fs
     fi
 fi
