@@ -31,7 +31,6 @@ const CubeTable = ({ stacKey, title }) => {
       minWidth: columnWidths[key] || defaultWidth,
       maxWidth: columnWidths[key] || defaultWidth,
       fieldName: key,
-      isRowHeader: idx > 0 ? false : true,
       isResizable: true,
       isPadded: true,
       isMultiline: key === "description",
