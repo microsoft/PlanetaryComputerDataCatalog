@@ -51,13 +51,22 @@ There are four main components to the application:
 
 First, copy `.env.sample` file to `.env`, and ensure the configuration values are set.
 
-|Name|Value|Description
-|---|---|---
+| Name | Value | Description |
+|---|---|---|
 `REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
 |`REACT_APP_AZMAPS_KEY`| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
-|`REACT_APP_HUB_URL`| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.
+|`REACT_APP_HUB_URL`| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.|
 
 Run `./scripts/server` to launch a development server.
+
+#### Developing against local STAC assets
+
+The `REACT_APP_API_ROOT` can be set to a local instance of the MQE if you are
+prototyping changes to collections. However, as a shortcut, you can also run the
+`./scripts/mockstac` script in order to locally serve a static json file from
+`/mockstac/collections`. Simply alter the contents of the JSON file as you need,
+and set your `REACT_APP_API_ROOT` value to `http://localhost:8866` and restart
+your dev server.
 
 #### Feature flags
 
@@ -77,20 +86,22 @@ To debug or extend the small API backend, please read the [API README](api/READM
 
 ## Ports
 
-|Service                  |Port  |
-|-------------------------|------|
-|Webpack Dev Server       | 3000 |
-|Functions App Dev Server | 7071 |
+| Service                  | Port |
+|--------------------------|------|
+| Webpack Dev Server       | 3000 |
+| Functions App Dev Server | 7071 |
+| Mock STAC API Server     | 8866 |
 
 ## Scripts
 
-|Name      | Description|
-|----------| -----------|
-| `clean`  | Removes intermediate build files from docs and dataset codefiles |
-| `server` | Runs frontend development server |
-| `test`   | Runs unit tests and linter |
-| `update` | Install dependencies and build etl and docs content. Use `--devdocs` to develop against a local notebook repo. |
-| `yarn *` | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc |
+| Name       | Description                                                                                                    |
+|------------|----------------------------------------------------------------------------------------------------------------|
+| `clean`    | Removes intermediate build files from docs and dataset codefiles                                               |
+| `mockstac` | Serves contents of `/mockstac/collections` at http://localhost:8866                                            |
+| `server`   | Runs frontend development server                                                                               |
+| `test`     | Runs unit tests and linter                                                                                     |
+| `update`   | Install dependencies and build etl and docs content. Use `--devdocs` to develop against a local notebook repo. |
+| `yarn *`   | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc                                  |
 
 ## Deploying
 

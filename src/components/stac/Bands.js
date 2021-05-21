@@ -5,7 +5,14 @@ import {
   SelectionMode,
 } from "@fluentui/react";
 
-import { renderItemColumn, stacFormatter } from "../../utils/stac";
+import {
+  columnOrders,
+  renderItemColumn,
+  stacFormatter,
+} from "../../utils/stac";
+import { useStac } from "./CollectionContext";
+import marked from "marked";
+import { capitalize, sortByLookup } from "../../utils";
 
 const bandKey = "eo:bands";
 
@@ -17,11 +24,12 @@ const columnWidths = {
   name: 75,
   common_name: 100,
   center_wavelength: 125,
-  full_width_half_max: 75,
+  full_width_half_max: 90,
   description: 100,
 };
 
-const Bands = ({ collection }) => {
+const Bands = () => {
+  const collection = useStac();
   const summaries = stacFormatter.formatSummaries(collection);
   const eo = summaries.find(s => s.extension === "eo");
 
@@ -30,23 +38,29 @@ const Bands = ({ collection }) => {
 
   const bands = eo.properties[bandKey];
 
-  const columns = bands.itemOrder.map((key, idx) => {
+  bands.itemOrder.sort(sortByLookup(columnOrders));
+
+  const columns = bands.itemOrder.map(key => {
     return {
       key: key,
       name: stacFormatter.label(key),
       minWidth: columnWidths[key] || defaultWidth,
       maxWidth: columnWidths[key] || defaultWidth,
       fieldName: key,
-      isRowHeader: idx > 0 ? false : true,
       isResizable: true,
       isPadded: true,
+      isMultiline: key === "description",
     };
   });
 
   const items = bands.value.map(band => {
     const formattedEntries = Object.keys(band).map(key => {
       const spec = bands.spec.items[key];
-      return [key, `${band[key]} ${spec.unit ?? ""}`];
+      const formattedVal =
+        spec.format === "CommonMark"
+          ? marked.parseInline(capitalize(band[key]), { smartypants: true })
+          : band[key];
+      return [key, `${formattedVal} ${spec.unit ?? ""}`];
     });
     return Object.fromEntries(formattedEntries);
   });

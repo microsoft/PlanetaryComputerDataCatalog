@@ -9,3 +9,12 @@ services:
     volumes:
       - .:/opt/src
     working_dir: /opt/src/etl
+
+  mockstac:
+    image: node:14-slim
+    ports:
+      - "8866:8866"
+    volumes:
+      - ./mockstac:/opt/src/api/stac/v1/
+    working_dir: /opt/src
+    entrypoint: npx serve -p 8866 --cors
