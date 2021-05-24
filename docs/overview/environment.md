@@ -46,9 +46,11 @@ Notably, you shouldn't store large amounts of data in your home directory. Inste
 
 We set several environment variables when your server is started.
 
-Variable                | Value         | Description
------------------------ | ------------- | -----------
-PC_SDK_SUBSCRIPTION_KEY | unique to you | Used to [sign assets](../concepts/sas) to download data.
+Variable                           | Value         | Description
+---------------------------------- | ------------- | -----------
+PC_SDK_SUBSCRIPTION_KEY            | unique to you | Used to [sign assets](../concepts/sas) to download data.
+GDAL_DISABLE_READDIR_ON_OPEN       | EMPTY_DIR     | [Improves GDAL performance](https://trac.osgeo.org/gdal/wiki/ConfigOptions#GDAL_DISABLE_READDIR_ON_OPEN) when opening single COGs with GDAL.
+GDAL_HTTP_MERGE_CONSECUTIVE_RANGES | YES           | [Improves GDAL performance](https://trac.osgeo.org/gdal/wiki/ConfigOptions#GDAL_HTTP_MERGE_CONSECUTIVE_RANGES) by merging consecutive HTTP requests.
 
 ## Understanding the software environment
 
