@@ -4,6 +4,7 @@ import { Stack } from "@fluentui/react";
 import Summaries from "./Summaries";
 import TemporalExtent from "./TemporalExtent";
 import { useStac } from "./CollectionContext";
+import Crs from "./Crs";
 
 const SpatialExtent = React.lazy(() => import("./SpatialExtent"));
 
@@ -22,6 +23,7 @@ const CollectionDetail = () => {
         </div>
         <TemporalExtent extent={collection.extent?.temporal} />
         <Summaries collection={collection} />
+        <Crs />
       </Stack>
     </div>
   );
