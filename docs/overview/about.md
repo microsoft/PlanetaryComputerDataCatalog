@@ -17,6 +17,11 @@ The Planetary Computer uses open source tools and supports open standards. In fa
 
 While the Planetary Computer data and APIs are publicly accessible, certain features of the Planetary Computer are in Private Preview and require access be granted. Use the [request access form](https://planetarycomputer.microsoft.com/account/request) to express your interest in becoming an early user.
 
+In the meantime, the core components of the Planetary Computer are usable without an account:
+
+* The [STAC API](../reference/stac) is public and can be accessed anonymously.
+* Data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
+ 
 We're just getting started. Check back for updated documentation and new features!
 
 ## Next steps
