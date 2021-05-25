@@ -24,7 +24,7 @@ Select *Stop My Server* to stop your server and release all of the resources you
 
 ![JupyterHub menu to stop the server](images/hub-home.png)
 
-Note that we will automatically stop servers that seem to be idle.
+Note that we will automatically stop servers that seem to be idle for twenty minutes.
 
 ## Using JupyterLab
 
