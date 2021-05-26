@@ -19,9 +19,18 @@ const CubeTable = ({ stacKey, title }) => {
   if (!dims) return null;
 
   // Get a set of unique attributes for each dimension, these will be columns.
-  // Add the key of the object as the "name" column.
-  const columnKeys = ["name"].concat(
-    Array.from(new Set(Object.values(dims).map(Object.keys).flat()))
+  // The list is modified to include/remove keys in the table
+  const removeList = ["reference_system"];
+  const addList = ["name"];
+  const columnKeys = addList.concat(
+    Array.from(
+      new Set(
+        Object.values(dims)
+          .map(Object.keys)
+          .flat()
+          .filter(k => !removeList.includes(k))
+      )
+    )
   );
 
   const columns = columnKeys.map((key, idx) => {

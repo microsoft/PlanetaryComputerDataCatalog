@@ -61,8 +61,8 @@
           ]
         },
         "thumbnail": {
-          "title": "Daymet Homepage Map",
-          "href": "https://daymet.ornl.gov/static/graphics/homepage_map.png",
+          "title": "Daymet North America Temperature Map",
+          "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg",
           "media_type": "image/png"
         }
       },

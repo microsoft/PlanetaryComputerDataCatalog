@@ -82,6 +82,7 @@ const SpatialExtent = ({ extent }) => {
         zoom: 12,
         language: "en-US",
         showFeedbackLink: false,
+        showLogo: false,
         style: "grayscale_light",
         renderWorldCopies: true, // This setting may need adjusment for showing whole-world bounds
         authOptions: {
