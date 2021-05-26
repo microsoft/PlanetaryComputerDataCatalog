@@ -24,6 +24,7 @@ Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-zarr-data
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
+quickstarts/storage
 ```
 
 ```{toctree}
