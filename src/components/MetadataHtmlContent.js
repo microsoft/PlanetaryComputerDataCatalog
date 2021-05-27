@@ -12,7 +12,11 @@ import DOMPurify from "dompurify";
 
 import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
-import { buildGitHubUrl, buildHubLaunchUrl } from "../utils";
+import {
+  a11yPostProcessDom,
+  buildGitHubUrl,
+  buildHubLaunchUrl,
+} from "../utils";
 import NewTabLink from "./controls/NewTabLink";
 import GeneratedInternalToc from "./docs/GeneratedInternalToc";
 
@@ -69,22 +73,7 @@ const MetadataHtmlContent = ({ src, launch }) => {
     titleEl?.remove();
   }
 
-  // Keyboard users needs a tabindex set on scrollable content if they
-  // otherwise do not have focusable content. These python codeblocks are
-  // brought over from nbconvert and must have a tabindex set to all keyboard
-  // scrolling.
-  metadataDoc
-    .querySelectorAll(".highlight.hl-ipython3 pre")
-    .forEach(element => {
-      element.setAttribute("tabindex", 0);
-    });
-
-  // Images need an alt text property if one wasn't provided in the source doc
-  metadataDoc.querySelectorAll(".output_png img").forEach(element => {
-    if (!element.getAttribute("alt")) {
-      element.setAttribute("alt", "Rendered output from previous code snippet");
-    }
-  });
+  a11yPostProcessDom(metadataDoc);
 
   // Serialize the content back to a string so it can be injected
   const processedMarkup = new XMLSerializer().serializeToString(metadataDoc);

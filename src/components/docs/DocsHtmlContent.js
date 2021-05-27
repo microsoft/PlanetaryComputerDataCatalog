@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { a11yPostProcessDom } from "../../utils";
 
 // Given a Json object of HTML markup generated from sphinx-build, rewrite
 // internal links and capture their events to process them through the
@@ -35,16 +36,6 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   // and needs some preprocessing before it can be rendered
   const docsDoc = new DOMParser().parseFromString(body, "text/html");
 
-  // Keyboard users needs a tabindex set on scrollable content if they
-  // otherwise do not have focusable content. These python codeblocks are
-  // brought over from nbconvert and must have a tabindex set to all keyboard
-  // scrolling.
-  docsDoc
-    .querySelectorAll(".docutils.container .highlight-ipython3 pre")
-    .forEach(el => {
-      el.setAttribute("tabindex", 0);
-    });
-
   // Move the Hub launcher buttons under the main header so it matches their
   // placement in non-Sphinx generate documents
   const launcherEl = docsDoc.querySelector(".docs-launcher");
@@ -52,6 +43,8 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   if (launcherEl) {
     docsDoc.querySelector("h1").insertAdjacentElement("afterend", launcherEl);
   }
+
+  a11yPostProcessDom(docsDoc);
 
   // Serialize the content back to a string so it can be injected
   const processedMarkup = new XMLSerializer().serializeToString(docsDoc);
