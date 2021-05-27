@@ -16,7 +16,7 @@
 collections:
   daymet:
     shortTerm: daymet
-    headerImg: ./images/naip-hero.jpg
+    headerImg: ./images/daymet-hero.jpg
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html

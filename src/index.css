@@ -31,6 +31,10 @@ p {
   line-height: 1.6;
 }
 
+li p {
+    margin: 6px 0;
+}
+
 /* h2 {
   font-size: 48px;
   line-height: 1.2;
@@ -332,7 +336,7 @@ footer.context-uhf a:link, footer.context-uhf a:focus, footer.context-uhf a:hove
 }
 
 .with-sidebar {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .with-sidebar > * {

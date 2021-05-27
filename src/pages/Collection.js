@@ -94,12 +94,12 @@ const Collection = () => {
       <CollectionProvider collection={collection}>
         <div className="with-sidebar">
           <div>
-            <section className="collection-content">
+            <div className="collection-content">
               <h2>Overview</h2>
               <Description />
               <Providers />
               <License />
-            </section>
+            </div>
             <div>
               <CollectionDetail />
             </div>

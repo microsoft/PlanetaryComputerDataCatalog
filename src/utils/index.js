@@ -74,3 +74,22 @@ export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
 export const buildGitHubUrl = ({ repo, filePath, branch }) => {
   return `${repo}/blob/${branch}/${filePath}`;
 };
+
+/*
+  For markup that was generated from external tools (marked, nbconvert, etc) run through
+  some DOM manipulations to alter the structure for accessibility reasons
+*/
+export const a11yPostProcessDom = dom => {
+  // Find img tags without an alt tag, and add one
+  dom
+    .querySelectorAll("img:not([alt]")
+    .forEach(el => el.setAttribute("alt", "Calculated image output"));
+
+  // Keyboard users needs a tabindex set on scrollable content if they
+  // otherwise do not have focusable content. These python codeblocks are
+  // brought over from nbconvert and must have a tabindex set to all keyboard
+  // scrolling.
+  dom.querySelectorAll(".highlight pre").forEach(el => {
+    el.setAttribute("tabindex", 0);
+  });
+};
