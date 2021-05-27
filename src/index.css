@@ -336,7 +336,7 @@ footer.context-uhf a:link, footer.context-uhf a:focus, footer.context-uhf a:hove
 }
 
 .with-sidebar {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .with-sidebar > * {
