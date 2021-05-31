@@ -56,6 +56,7 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 `REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
 |`REACT_APP_AZMAPS_KEY`| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
 |`REACT_APP_HUB_URL`| Optional. URL ending with `user-redirect/git-pull` | Used to enable a request to launch the Hub with a specific git hosted file.|
+|`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 
 Run `./scripts/server` to launch a development server.
 
