@@ -93,3 +93,15 @@ export const a11yPostProcessDom = dom => {
     el.setAttribute("tabindex", 0);
   });
 };
+
+export const scrollToHash = (elementId, behavior = "smooth") => {
+  // Remove the hash
+  const id = elementId.substring(elementId.lastIndexOf("#") + 1);
+
+  return () => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: behavior });
+    }
+  };
+};

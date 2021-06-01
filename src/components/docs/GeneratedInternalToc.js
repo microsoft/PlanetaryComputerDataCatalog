@@ -1,6 +1,7 @@
 import { Link } from "@fluentui/react";
 import React, { useEffect, useState } from "react";
 import { HashLink } from "react-router-hash-link";
+import { scrollToHash } from "../../utils";
 
 const getHeadingId = heading => {
   if (heading.id) {
@@ -12,18 +13,6 @@ const getHeadingId = heading => {
     const href = childAnchor.href;
     return href.substring(href.lastIndexOf("#"), href.length);
   }
-};
-
-const scrollTo = elementId => {
-  // Remove the hash
-  const id = elementId.substring(elementId.lastIndexOf("#") + 1);
-
-  return () => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 };
 
 // nohash: don't use the URL hash, as it may already be in use (ie, tabs).
@@ -45,7 +34,7 @@ const GeneratedInternalToc = ({ nohash = false, html }) => {
     return (
       <li key={hash} className="toctree-l1">
         {nohash ? (
-          <Link onClick={scrollTo(hash)}>{text}</Link>
+          <Link onClick={scrollToHash(hash)}>{text}</Link>
         ) : (
           <HashLink smooth to={hash}>
             {text}
