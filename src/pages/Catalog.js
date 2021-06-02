@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Link,
   MessageBar,
@@ -49,12 +49,6 @@ const Catalog = () => {
     () => computeTags(stacResponse?.collections, datasetsConfig),
     [stacResponse?.collections]
   );
-
-  useEffect(() => {
-    if (stacResponse) {
-      setFilteredCollections(stacResponse.collections);
-    }
-  }, [stacResponse]);
 
   const banner = (
     <DefaultBanner>

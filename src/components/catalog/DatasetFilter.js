@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { SearchBox, TagPicker } from "@fluentui/react";
 import { filter } from "../../utils/filter";
+import { useQueryString } from "../../utils/hooks";
 
 const stacKeys = ["title", "msft:short_description", "description", "keywords"];
 const datasetKeys = ["title", "description", "tags"];
@@ -13,6 +14,7 @@ const DatasetFilter = ({
   onDatasetMatch,
 }) => {
   const [filterTerm, setFilterTerm] = useState("");
+  const qsTags = useQueryString().get("tags");
 
   // Index the stac collection results for filtering
   const stacFilter = useMemo(() => {
@@ -30,20 +32,9 @@ const DatasetFilter = ({
     return newValue.length === 0 ? defaultDataObj : result;
   };
 
-  const filterSuggestedTags = useCallback(
-    // Offer list of suggested tags based on input text and non-existance
-    // in the list of existing items. Use the key property for all comparisons.
-    (inputText, selectedTags) => {
-      return inputText
-        ? tags.filter(
-            ({ key }) =>
-              key.includes(inputText.toLowerCase()) &&
-              !selectedTags.some(({ key: existingKey }) => existingKey === key)
-          )
-        : [];
-    },
-    [tags]
-  );
+  const preselectedTags = useMemo(() => {
+    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: t })) : [];
+  }, [qsTags]);
 
   const handleTextChange = useCallback(
     (_, newValue) => {
@@ -77,6 +68,25 @@ const DatasetFilter = ({
     [onDatasetMatch, onStacMatch, datasets, stacCollection]
   );
 
+  const filterSuggestedTags = useCallback(
+    // Offer list of suggested tags based on input text and non-existance
+    // in the list of existing items. Use the key property for all comparisons.
+    (inputText, selectedTags) => {
+      return inputText
+        ? tags.filter(
+            ({ key }) =>
+              key.includes(inputText.toLowerCase()) &&
+              !selectedTags.some(({ key: existingKey }) => existingKey === key)
+          )
+        : [];
+    },
+    [tags]
+  );
+
+  useEffect(() => {
+    handleTagsChange(preselectedTags);
+  }, [preselectedTags, handleTagsChange]);
+
   return (
     <>
       <TagPicker
@@ -92,6 +102,7 @@ const DatasetFilter = ({
           noResultsFoundText: "No matching tags found",
         }}
         onChange={handleTagsChange}
+        defaultSelectedItems={preselectedTags}
       />
       <SearchBox
         placeholder="Filter datasets"
