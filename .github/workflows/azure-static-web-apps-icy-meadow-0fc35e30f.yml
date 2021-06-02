@@ -18,6 +18,7 @@ jobs:
     env:
       REACT_APP_API_ROOT: ${{ secrets.API_ROOT }}
       REACT_APP_JSLL_APP_ID: ${{ secrets.JSLL_APP_ID }}
+      REACT_APP_ONEDS_TENANT_KEY: ${{ secrets.ONEDS_TENANT_KEY }}
       REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
     steps:
