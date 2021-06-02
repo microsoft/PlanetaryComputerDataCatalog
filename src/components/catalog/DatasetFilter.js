@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { SearchBox, TagPicker } from "@fluentui/react";
 import { filter } from "../../utils/filter";
 import { useQueryString } from "../../utils/hooks";
+import { useHistory } from "react-router-dom";
 
 const stacKeys = ["title", "msft:short_description", "description", "keywords"];
 const datasetKeys = ["title", "description", "tags"];
@@ -13,6 +14,7 @@ const DatasetFilter = ({
   onStacMatch,
   onDatasetMatch,
 }) => {
+  const history = useHistory();
   const [filterTerm, setFilterTerm] = useState("");
   const qsTags = useQueryString().get("tags");
 
@@ -64,8 +66,14 @@ const DatasetFilter = ({
           selectedTags.every(({ key }) => d.tags?.includes(key))
         )
       );
+
+      // Persist the tags to the querystring for browser navigation and link sharing
+      const qs = selectedTags.length
+        ? `tags=${selectedTags.map(({ key }) => key)}`
+        : null;
+      history.push({ search: qs });
     },
-    [onDatasetMatch, onStacMatch, datasets, stacCollection]
+    [history, onDatasetMatch, onStacMatch, datasets, stacCollection]
   );
 
   const filterSuggestedTags = useCallback(
@@ -93,7 +101,7 @@ const DatasetFilter = ({
         inputProps={{
           placeholder: "Filter by tags",
         }}
-        removeButtonAriaLabel="Remove"
+        removeButtonAriaLabel="Remove tag"
         selectionAriaLabel="Selected tags"
         onResolveSuggestions={filterSuggestedTags}
         getTextFromItem={({ name }) => name}
@@ -104,11 +112,13 @@ const DatasetFilter = ({
         onChange={handleTagsChange}
         defaultSelectedItems={preselectedTags}
       />
-      <SearchBox
-        placeholder="Filter datasets"
-        value={filterTerm}
-        onChange={handleTextChange}
-      />
+      {false && (
+        <SearchBox
+          placeholder="Filter datasets"
+          value={filterTerm}
+          onChange={handleTextChange}
+        />
+      )}
     </>
   );
 };
