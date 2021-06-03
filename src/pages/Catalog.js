@@ -17,7 +17,7 @@ import DatasetCard from "../components/catalog/DatasetCard";
 import DatasetFilter from "../components/catalog/DatasetFilter";
 import NoResults from "../components/catalog/NoResults";
 
-import { sortSpecialByKey } from "../utils";
+import { sortSpecialByKey, tagCase } from "../utils";
 import {
   ai4e as datasetsConfig,
   collections as collectionsConfig,
@@ -35,7 +35,7 @@ const computeTags = (collections, datasetsConfig) => {
   return Array.from(new Set(collTags.concat(dsTags)))
     .filter(t => !!t)
     .sort()
-    .map(item => ({ key: item, name: item }));
+    .map(item => ({ key: item, name: tagCase(item) }));
 };
 
 const Catalog = () => {

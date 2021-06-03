@@ -3,6 +3,7 @@ import { SearchBox, TagPicker } from "@fluentui/react";
 import { filter } from "../../utils/filter";
 import { useQueryString } from "../../utils/hooks";
 import { useHistory } from "react-router-dom";
+import { tagCase } from "../../utils";
 
 const stacKeys = ["title", "msft:short_description", "description", "keywords"];
 const datasetKeys = ["title", "description", "tags"];
@@ -20,7 +21,9 @@ const DatasetFilter = ({
 
   // Turn a querystring representation of tags into tag items to be preset on the picker
   const preselectedTags = useMemo(() => {
-    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: t })) : [];
+    return qsTags
+      ? qsTags.split(",").map(t => ({ key: t, name: tagCase(t) }))
+      : [];
   }, [qsTags]);
 
   // Index the stac collection results for filtering
@@ -99,7 +102,7 @@ const DatasetFilter = ({
 
   // Return the first 5 tags in alpha order which aren't already selected
   const topUnselectedTags = selectedTags =>
-    tags.filter(({ key }) => !keySelected(key, selectedTags)).slice(0, 10);
+    tags.filter(({ key }) => !keySelected(key, selectedTags)).slice(0, 50);
 
   // When tags are first parsed from the querystring, initiate the filter mechanism
   useEffect(() => {
@@ -116,6 +119,7 @@ const DatasetFilter = ({
         getTextFromItem={({ name }) => name}
         inputProps={{
           placeholder: "Filter by tags",
+          "aria-label": "Filter by tags",
         }}
         pickerSuggestionsProps={{
           suggestionsHeaderText: "Suggested tags",
@@ -125,6 +129,7 @@ const DatasetFilter = ({
         selectionAriaLabel="Selected tags"
       />
       {false && (
+        // TODO: Remove this and related when we are sure we don't want it
         <SearchBox
           placeholder="Filter datasets"
           value={filterTerm}

@@ -11,23 +11,20 @@ const CollectionCard = ({ collection }) => {
 
   return (
     <div className="api-datasource-item" key={collection.id}>
-      <Link
-        to={href}
-        aria-label={`Navigate to ${collection.id}`}
-        style={{ textDecoration: "none", color: "initial" }}
-      >
+      <Link to={href} aria-label={`Navigate to ${collection.id}`}>
         <AssetThumbnail assets={collection.assets} />
 
-        <h3 style={{ color: "initial" }}>{collection.title}</h3>
-        <p style={{ color: "initial", minHeight: 50 }}>
-          {collection["msft:short_description"]}
-        </p>
+        <h3>{collection.title}</h3>
       </Link>
+      <p style={{ color: "initial", minHeight: 50 }}>
+        {collection["msft:short_description"]}
+      </p>
       <Keywords
         keywords={collection.keywords}
         color="#4C4C51"
         onClick={keyword => {
           history.push({ search: `tags=${keyword}` });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
     </div>

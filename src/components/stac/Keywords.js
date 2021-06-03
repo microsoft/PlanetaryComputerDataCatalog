@@ -1,9 +1,9 @@
 import React from "react";
 import { Text } from "@fluentui/react";
+import { tagCase } from "../../utils";
 
 const Keywords = ({ keywords = [], onClick = () => {}, color = "#fff" }) => {
   const sections = keywords.map(keyword => {
-    const transform = keyword.length > 4 ? "capitalize" : "uppercase";
     const pillStyle = {
       root: {
         backgroundColor: "transparent",
@@ -14,20 +14,20 @@ const Keywords = ({ keywords = [], onClick = () => {}, color = "#fff" }) => {
         minWidth: "30px",
         display: "inline-block",
         color: color,
-        textTransform: transform,
         textAlign: "center",
       },
     };
 
+    const formatted = tagCase(keyword);
     return (
       <Text
         as="button"
-        title={`Filter datasets by "${keyword}"`}
+        title={`Filter datasets by "${formatted}"`}
         key={`kw-${keyword}`}
         styles={pillStyle}
         onClick={() => onClick(keyword)}
       >
-        {keyword}
+        {formatted}
       </Text>
     );
   });
