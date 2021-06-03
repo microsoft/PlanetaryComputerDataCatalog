@@ -18,6 +18,11 @@ const DatasetFilter = ({
   const [filterTerm, setFilterTerm] = useState("");
   const qsTags = useQueryString().get("tags");
 
+  // Turn a querystring representation of tags into tag items to be preset on the picker
+  const preselectedTags = useMemo(() => {
+    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: t })) : [];
+  }, [qsTags]);
+
   // Index the stac collection results for filtering
   const stacFilter = useMemo(() => {
     return filter(stacCollection, stacKeys);
@@ -33,10 +38,6 @@ const DatasetFilter = ({
     const result = filterFn(newValue);
     return newValue.length === 0 ? defaultDataObj : result;
   };
-
-  const preselectedTags = useMemo(() => {
-    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: t })) : [];
-  }, [qsTags]);
 
   const handleTextChange = useCallback(
     (_, newValue) => {
@@ -54,6 +55,7 @@ const DatasetFilter = ({
     ]
   );
 
+  // Filter collections and datasets with the selected tags
   const handleTagsChange = useCallback(
     selectedTags => {
       onStacMatch(
@@ -76,21 +78,30 @@ const DatasetFilter = ({
     [history, onDatasetMatch, onStacMatch, datasets, stacCollection]
   );
 
+  // Is a key present in selectedTags
+  const keySelected = (key, selectedTags) =>
+    selectedTags.some(({ key: existingKey }) => existingKey === key);
+
+  // Offer list of suggested tags based on input text and non-existance
+  // in the list of existing items. Use the key property for all comparisons.
   const filterSuggestedTags = useCallback(
-    // Offer list of suggested tags based on input text and non-existance
-    // in the list of existing items. Use the key property for all comparisons.
     (inputText, selectedTags) => {
       return inputText
         ? tags.filter(
             ({ key }) =>
               key.includes(inputText.toLowerCase()) &&
-              !selectedTags.some(({ key: existingKey }) => existingKey === key)
+              !keySelected(key, selectedTags)
           )
         : [];
     },
     [tags]
   );
 
+  // Return the first 5 tags in alpha order which aren't already selected
+  const topUnselectedTags = selectedTags =>
+    tags.filter(({ key }) => !keySelected(key, selectedTags)).slice(0, 10);
+
+  // When tags are first parsed from the querystring, initiate the filter mechanism
   useEffect(() => {
     handleTagsChange(preselectedTags);
   }, [preselectedTags, handleTagsChange]);
@@ -98,19 +109,20 @@ const DatasetFilter = ({
   return (
     <>
       <TagPicker
+        selectedItems={preselectedTags}
+        onChange={handleTagsChange}
+        onEmptyInputFocus={topUnselectedTags}
+        onResolveSuggestions={filterSuggestedTags}
+        getTextFromItem={({ name }) => name}
         inputProps={{
           placeholder: "Filter by tags",
         }}
-        removeButtonAriaLabel="Remove tag"
-        selectionAriaLabel="Selected tags"
-        onResolveSuggestions={filterSuggestedTags}
-        getTextFromItem={({ name }) => name}
         pickerSuggestionsProps={{
           suggestionsHeaderText: "Suggested tags",
           noResultsFoundText: "No matching tags found",
         }}
-        onChange={handleTagsChange}
-        defaultSelectedItems={preselectedTags}
+        removeButtonAriaLabel="Remove tag"
+        selectionAriaLabel="Selected tags"
       />
       {false && (
         <SearchBox

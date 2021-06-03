@@ -34,6 +34,7 @@ const computeTags = (collections, datasetsConfig) => {
   // Filter out any falsy elements
   return Array.from(new Set(collTags.concat(dsTags)))
     .filter(t => !!t)
+    .sort()
     .map(item => ({ key: item, name: item }));
 };
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import AssetThumbnail from "./AssetThumbnail";
-import ButtonLink from "../controls/ButtonLink";
+import Keywords from "./Keywords";
 
-const CollectionCard = ({ collection, shortTerm }) => {
-  const buttonLabel = shortTerm || collection.title;
+const CollectionCard = ({ collection }) => {
+  const history = useHistory();
   const href = `dataset/${collection.id}`;
 
   return (
@@ -22,9 +23,13 @@ const CollectionCard = ({ collection, shortTerm }) => {
           {collection["msft:short_description"]}
         </p>
       </Link>
-      <ButtonLink to={href} style={{ marginTop: 10 }}>
-        {`Explore ${buttonLabel}`}
-      </ButtonLink>
+      <Keywords
+        keywords={collection.keywords}
+        color="#4C4C51"
+        onClick={keyword => {
+          history.push({ search: `tags=${keyword}` });
+        }}
+      />
     </div>
   );
 };
