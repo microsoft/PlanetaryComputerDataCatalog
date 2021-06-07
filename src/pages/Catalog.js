@@ -24,7 +24,6 @@ import {
 } from "../config/datasets.yml";
 
 import "./catalog.css";
-import Feature from "../components/Feature";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
@@ -117,15 +116,13 @@ const Catalog = () => {
   );
 
   const dataFilter = !isLoading ? (
-    <Feature name="dataset-filter">
-      <DatasetFilter
-        tags={allTags}
-        stacCollection={stacResponse.collections}
-        datasets={datasetsConfig}
-        onStacMatch={setFilteredCollections}
-        onDatasetMatch={setFilteredDatasets}
-      />
-    </Feature>
+    <DatasetFilter
+      tags={allTags}
+      stacCollection={stacResponse.collections}
+      datasets={datasetsConfig}
+      onStacMatch={setFilteredCollections}
+      onDatasetMatch={setFilteredDatasets}
+    />
   ) : null;
 
   return (
