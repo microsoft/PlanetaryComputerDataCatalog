@@ -10,7 +10,7 @@
 .api-item {
   flex-basis: 32%;
   min-height: 100px;
-  margin-bottom: 2%; 
+  margin-bottom: 2%;
 }
 
 .header-banner-item {
@@ -93,8 +93,31 @@
   padding-top: 20px;
 }
 
+.keywords-bar button:first-child{
+  margin-left: 0;
+}
 
-/* Homepage resouce grid */
+.keywords-bar button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .03);
+}
+
+.ms-TagItem ,.ms-TagItem:hover {
+    background-color: #0078d4;
+    color: #fff;
+}
+
+.ms-TagItem i.ms-Button-icon {
+    color: #fff;
+}
+
+.ms-TagItem-close:hover {
+    background-color: #005a9e;
+    color: #fff;
+
+}
+
+/* Homepage resource grid */
 
 .home-resource-item {
   flex-basis: 24%;

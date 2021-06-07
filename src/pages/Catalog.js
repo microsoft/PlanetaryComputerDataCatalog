@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Link,
   MessageBar,
@@ -17,14 +17,25 @@ import DatasetCard from "../components/catalog/DatasetCard";
 import DatasetFilter from "../components/catalog/DatasetFilter";
 import NoResults from "../components/catalog/NoResults";
 
-import { sortSpecialByKey } from "../utils";
+import { sortSpecialByKey, tagCase } from "../utils";
 import {
   ai4e as datasetsConfig,
   collections as collectionsConfig,
 } from "../config/datasets.yml";
 
 import "./catalog.css";
-import Feature from "../components/Feature";
+
+const computeTags = (collections, datasetsConfig) => {
+  if (!collections) return null;
+  const collTags = collections.map(c => c.keywords).flat();
+  const dsTags = datasetsConfig.map(d => d.tags || []).flat();
+
+  // Filter out any falsy elements
+  return Array.from(new Set(collTags.concat(dsTags)))
+    .filter(t => !!t)
+    .sort()
+    .map(item => ({ key: item, name: tagCase(item) }));
+};
 
 const Catalog = () => {
   // Load STAC Collections from API
@@ -34,11 +45,10 @@ const Catalog = () => {
   const [filteredCollections, setFilteredCollections] = useState();
   const [filteredDatasets, setFilteredDatasets] = useState(datasetsConfig);
 
-  useEffect(() => {
-    if (stacResponse) {
-      setFilteredCollections(stacResponse.collections);
-    }
-  }, [stacResponse]);
+  const allTags = useMemo(
+    () => computeTags(stacResponse?.collections, datasetsConfig),
+    [stacResponse?.collections]
+  );
 
   const banner = (
     <DefaultBanner>
@@ -106,14 +116,13 @@ const Catalog = () => {
   );
 
   const dataFilter = !isLoading ? (
-    <Feature name="dataset-filter">
-      <DatasetFilter
-        stacCollection={stacResponse.collections}
-        datasets={datasetsConfig}
-        onStacMatch={setFilteredCollections}
-        onDatasetMatch={setFilteredDatasets}
-      />
-    </Feature>
+    <DatasetFilter
+      tags={allTags}
+      stacCollection={stacResponse.collections}
+      datasets={datasetsConfig}
+      onStacMatch={setFilteredCollections}
+      onDatasetMatch={setFilteredDatasets}
+    />
   ) : null;
 
   return (

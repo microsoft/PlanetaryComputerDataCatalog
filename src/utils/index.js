@@ -2,6 +2,17 @@ export const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+export const titleCase = str => {
+  return str.split(" ").map(capitalize).join(" ");
+};
+
+export const tagCase = str => {
+  if (str.length <= 4) {
+    return str.toUpperCase();
+  }
+  return titleCase(str);
+};
+
 const sortAlphaByKey = key => {
   return (a, b) => {
     if (a[key] < b[key]) {

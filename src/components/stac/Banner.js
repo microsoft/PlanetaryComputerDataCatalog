@@ -3,9 +3,16 @@ import { Text } from "@fluentui/react";
 
 import Keywords from "./Keywords";
 import { collections as collectionsConfig } from "../../config/datasets.yml";
+import { useHistory } from "react-router";
 
 const Banner = ({ collection }) => {
+  const history = useHistory();
+  const handleClick = keyword => {
+    history.push({ pathname: "/catalog", search: `tags=${keyword}` });
+  };
+
   if (!collection) return null;
+
   const imgUrl =
     collectionsConfig[collection.id].headerImg ||
     collection.assets?.thumbnail?.href;
@@ -25,7 +32,7 @@ const Banner = ({ collection }) => {
           Datasets
         </Text>
         <h1 style={{ color: "#fff" }}>{collection.title}</h1>
-        <Keywords keywords={collection.keywords} />
+        <Keywords keywords={collection.keywords} onClick={handleClick} />
       </div>
       <div></div>
     </div>

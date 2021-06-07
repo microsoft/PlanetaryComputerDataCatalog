@@ -83,7 +83,9 @@
         };
 
         //Initialize SDK
-        analytics.initialize(config, []);
+        if('%NODE_ENV%' !== 'development') {
+          analytics.initialize(config, []);
+        }
     </script>
   </body>
 </html>
