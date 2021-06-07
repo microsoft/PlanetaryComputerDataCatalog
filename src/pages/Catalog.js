@@ -18,17 +18,15 @@ import DatasetFilter from "../components/catalog/DatasetFilter";
 import NoResults from "../components/catalog/NoResults";
 
 import { sortSpecialByKey, tagCase } from "../utils";
-import {
-  ai4e as datasetsConfig,
-  collections as collectionsConfig,
-} from "../config/datasets.yml";
+import { ai4e as datasetsConfig } from "../config/datasets.yml";
 
 import "./catalog.css";
+import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
   const collTags = collections.map(c => c.keywords).flat();
-  const dsTags = datasetsConfig.map(d => d.tags || []).flat();
+  const dsTags = datasetsConfig.map(d => d.keywords || []).flat();
 
   // Filter out any falsy elements
   return Array.from(new Set(collTags.concat(dsTags)))
@@ -88,12 +86,15 @@ const Catalog = () => {
     return filteredCollections
       .sort(sortSpecialByKey("title"))
       .map(collection => {
-        const name = collectionsConfig[collection.id]?.shortTerm;
-        return (
+        return collection.groupId ? (
+          <GroupedCollectionCard
+            key={`card-${collection.groupId}`}
+            group={collection}
+          />
+        ) : (
           <CollectionCard
             key={`card-${collection.id}`}
             collection={collection}
-            shortTerm={name}
           />
         );
       });

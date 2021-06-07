@@ -8,18 +8,1107 @@
   ],
   "collections": [
     {
-      "stac_version": "1.0.0-rc.3",
+  "type": "Collection",
+  "id": "daymet-annual-na",
+  "stac_version": "1.0.0-rc.4",
+  "description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.\n\n[Daymet](https://daymet.ornl.gov/) provides measurements of near-surface meteorological conditions; the main purpose of Daymet is provide data estimates where no instrumentation exists.\n\nThis dataset provides Daymet Version 4 data for North America, including the island areas of Hawaii and Puerto Rico (which are available as files separate from the continental land mass). Daymet output variables include minimum temperature, maximum temperature, precipitation, shortwave radiation, vapor pressure, snow water equivalent, and day length. The dataset covers the period from January 1, 1980 to the present. Each year is processed individually at the close of a calendar year. Daymet variables are continuous surfaces  at 1-kilometer spatial resolution and daily temporal resolution. Data are in a Lambert Conformal Conic projection for North America and are distributed in Zarr format and netCDF format compliant with [Climate and Forecast (CF) metadata conventions (version 1.6)](http://cfconventions.org/).",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://science.nasa.gov/earth-science/earth-science-data/data-information-policy"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/datacube/v1.0.0/schema.json"
+  ],
+  "cube:dimensions": {
+    "time": {
+      "type": "temporal",
+      "description": "24-hour day based on local time",
+      "extent": [
+        "1980-07-01T12:00:00Z",
+        "2019-07-02T12:00:00Z"
+      ]
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "description": "x coordinate of projection",
+      "extent": [
+        -4560250.0,
+        3252750.0
+      ],
+      "step": 1000.0,
+      "reference_system": {
+        "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+        "type": "ProjectedCRS",
+        "name": "undefined",
+        "base_crs": {
+          "name": "undefined",
+          "datum": {
+            "type": "GeodeticReferenceFrame",
+            "name": "undefined",
+            "ellipsoid": {
+              "name": "undefined",
+              "semi_major_axis": 6378137,
+              "inverse_flattening": 298.257223563
+            }
+          },
+          "coordinate_system": {
+            "subtype": "ellipsoidal",
+            "axis": [
+              {
+                "name": "Longitude",
+                "abbreviation": "lon",
+                "direction": "east",
+                "unit": "degree"
+              },
+              {
+                "name": "Latitude",
+                "abbreviation": "lat",
+                "direction": "north",
+                "unit": "degree"
+              }
+            ]
+          }
+        },
+        "conversion": {
+          "name": "unknown",
+          "method": {
+            "name": "Lambert Conic Conformal (2SP)",
+            "id": {
+              "authority": "EPSG",
+              "code": 9802
+            }
+          },
+          "parameters": [
+            {
+              "name": "Latitude of 1st standard parallel",
+              "value": 25,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8823
+              }
+            },
+            {
+              "name": "Latitude of 2nd standard parallel",
+              "value": 60,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8824
+              }
+            },
+            {
+              "name": "Latitude of false origin",
+              "value": 42.5,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8821
+                }
+              },
+              {
+                "name": "Longitude of false origin",
+                "value": -100,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8822
+                }
+              },
+              {
+                "name": "Easting at false origin",
+                "value": 0,
+                "unit": "metre",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8826
+                }
+              },
+              {
+                "name": "Northing at false origin",
+                "value": 0,
+                "unit": "metre",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8827
+                }
+              }
+            ]
+          },
+          "coordinate_system": {
+            "subtype": "Cartesian",
+            "axis": [
+              {
+                "name": "Easting",
+                "abbreviation": "E",
+                "direction": "east",
+                "unit": "metre"
+              },
+              {
+                "name": "Northing",
+                "abbreviation": "N",
+                "direction": "north",
+                "unit": "metre"
+              }
+            ]
+          }
+        }
+      },
+      "y": {
+        "type": "spatial",
+        "axis": "y",
+        "description": "y coordinate of projection",
+        "extent": [
+          -3090000.0,
+          4984000.0
+        ],
+        "step": -1000.0,
+        "reference_system": {
+          "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+          "type": "ProjectedCRS",
+          "name": "undefined",
+          "base_crs": {
+            "name": "undefined",
+            "datum": {
+              "type": "GeodeticReferenceFrame",
+              "name": "undefined",
+              "ellipsoid": {
+                "name": "undefined",
+                "semi_major_axis": 6378137,
+                "inverse_flattening": 298.257223563
+              }
+            },
+            "coordinate_system": {
+              "subtype": "ellipsoidal",
+              "axis": [
+                {
+                  "name": "Longitude",
+                  "abbreviation": "lon",
+                  "direction": "east",
+                  "unit": "degree"
+                },
+                {
+                  "name": "Latitude",
+                  "abbreviation": "lat",
+                  "direction": "north",
+                  "unit": "degree"
+                }
+              ]
+            }
+          },
+          "conversion": {
+            "name": "unknown",
+            "method": {
+              "name": "Lambert Conic Conformal (2SP)",
+              "id": {
+                "authority": "EPSG",
+                "code": 9802
+              }
+            },
+            "parameters": [
+              {
+                "name": "Latitude of 1st standard parallel",
+                "value": 25,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8823
+                }
+              },
+              {
+                "name": "Latitude of 2nd standard parallel",
+                "value": 60,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8824
+                }
+              },
+              {
+                "name": "Latitude of false origin",
+                "value": 42.5,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8821
+                }
+              },
+              {
+                "name": "Longitude of false origin",
+                "value": -100,
+                "unit": "degree",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8822
+                }
+              },
+              {
+                "name": "Easting at false origin",
+                "value": 0,
+                "unit": "metre",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8826
+                }
+              },
+              {
+                "name": "Northing at false origin",
+                "value": 0,
+                "unit": "metre",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 8827
+                }
+              }
+            ]
+          },
+          "coordinate_system": {
+            "subtype": "Cartesian",
+            "axis": [
+              {
+                "name": "Easting",
+                "abbreviation": "E",
+                "direction": "east",
+                "unit": "metre"
+              },
+              {
+                "name": "Northing",
+                "abbreviation": "N",
+                "direction": "north",
+                "unit": "metre"
+              }
+            ]
+          }
+        }
+      },
+      "nv": {
+        "type": "count",
+        "description": "Size of the 'time_bnds' variable.",
+        "values": [
+          0,
+          1
+        ]
+      }
+    },
+    "cube:variables": {
+      "lambert_conformal_conic": {
+        "type": "data",
+        "dimensions": [],
+        "shape": [],
+        "attrs": {
+          "false_easting": 0.0,
+          "false_northing": 0.0,
+          "grid_mapping_name": "lambert_conformal_conic",
+          "inverse_flattening": 298.257223563,
+          "latitude_of_projection_origin": 42.5,
+          "longitude_of_central_meridian": -100.0,
+          "semi_major_axis": 6378137.0,
+          "standard_parallel": [
+            25.0,
+            60.0
+          ]
+        }
+      },
+      "lat": {
+        "type": "auxiliary",
+        "description": "latitude coordinate",
+        "dimensions": [
+          "y",
+          "x"
+        ],
+        "unit": "degrees_north",
+        "shape": [
+          8075,
+          7814
+        ],
+        "chunks": [
+          505,
+          977
+        ],
+        "attrs": {
+          "long_name": "latitude coordinate",
+          "standard_name": "latitude",
+          "units": "degrees_north"
+        }
+      },
+      "lon": {
+        "type": "auxiliary",
+        "description": "longitude coordinate",
+        "dimensions": [
+          "y",
+          "x"
+        ],
+        "unit": "degrees_east",
+        "shape": [
+          8075,
+          7814
+        ],
+        "chunks": [
+          505,
+          977
+        ],
+        "attrs": {
+          "long_name": "longitude coordinate",
+          "standard_name": "longitude",
+          "units": "degrees_east"
+        }
+      },
+      "prcp": {
+        "type": "data",
+        "description": "annual total precipitation",
+        "dimensions": [
+          "time",
+          "y",
+          "x"
+        ],
+        "unit": "mm",
+        "shape": [
+          40,
+          8075,
+          7814
+        ],
+        "chunks": [
+          1,
+          4000,
+          4000
+        ],
+        "attrs": {
+          "cell_methods": "area: mean time: sum within days time: sum over days",
+          "grid_mapping": "lambert_conformal_conic",
+          "long_name": "annual total precipitation",
+          "units": "mm"
+        }
+      },
+      "swe": {
+        "type": "data",
+        "description": "annual average snow water equivalent",
+        "dimensions": [
+          "time",
+          "y",
+          "x"
+        ],
+        "unit": "kg/m2",
+        "shape": [
+          40,
+          8075,
+          7814
+        ],
+        "chunks": [
+          1,
+          4000,
+          4000
+        ],
+        "attrs": {
+          "cell_methods": "area: mean time: sum within days time: mean over days",
+          "grid_mapping": "lambert_conformal_conic",
+          "long_name": "annual average snow water equivalent",
+          "units": "kg/m2"
+        }
+      },
+      "time_bnds": {
+        "type": "data",
+        "dimensions": [
+          "time",
+          "nv"
+        ],
+        "shape": [
+          40,
+          2
+        ],
+        "chunks": [
+          40,
+          2
+        ],
+        "attrs": {
+          "time": "days since 1950-01-01 00:00:00"
+        }
+      },
+      "tmax": {
+        "type": "data",
+        "description": "annual average of daily maximum temperature",
+        "dimensions": [
+          "time",
+          "y",
+          "x"
+        ],
+        "unit": "degrees C",
+        "shape": [
+          40,
+          8075,
+          7814
+        ],
+        "chunks": [
+          1,
+          4000,
+          4000
+        ],
+        "attrs": {
+          "cell_methods": "area: mean time: maximum within days time: mean over days",
+          "grid_mapping": "lambert_conformal_conic",
+          "long_name": "annual average of daily maximum temperature",
+          "units": "degrees C"
+        }
+      },
+      "tmin": {
+        "type": "data",
+        "description": "annual average of daily minimum temperature",
+        "dimensions": [
+          "time",
+          "y",
+          "x"
+        ],
+        "unit": "degrees C",
+        "shape": [
+          40,
+          8075,
+          7814
+        ],
+        "chunks": [
+          1,
+          4000,
+          4000
+        ],
+        "attrs": {
+          "cell_methods": "area: mean time: minimum within days time: mean over days",
+          "grid_mapping": "lambert_conformal_conic",
+          "long_name": "annual average of daily minimum temperature",
+          "units": "degrees C"
+        }
+      },
+      "vp": {
+        "type": "data",
+        "description": "annual average of daily average vapor pressure",
+        "dimensions": [
+          "time",
+          "y",
+          "x"
+        ],
+        "unit": "Pa",
+        "shape": [
+          40,
+          8075,
+          7814
+        ],
+        "chunks": [
+          1,
+          4000,
+          4000
+        ],
+        "attrs": {
+          "cell_methods": "area: mean time: mean within days time: mean over days",
+          "grid_mapping": "lambert_conformal_conic",
+          "long_name": "annual average of daily average vapor pressure",
+          "units": "Pa"
+        }
+      }
+    },
+    "title": "Daymet Annual North America",
+    "extent": {
+      "spatial": {
+        "bbox": [
+          [
+            -178.1333,
+            14.0749,
+            -53.0567,
+            82.9143
+          ]
+        ]
+      },
+      "temporal": {
+        "interval": [
+          [
+            "1980-07-01T12:00:00Z",
+            "2019-07-02T12:00:00Z"
+          ]
+        ]
+      }
+    },
+    "license": "proprietary",
+    "providers": [
+      {
+        "name": "Microsoft",
+        "roles": [
+          "host",
+          "processor"
+        ],
+        "url": "https://planetarycomputer.microsoft.com"
+      },
+      {
+        "name": "ORNL DAAC",
+        "roles": [
+          "producer"
+        ],
+        "url": "https://doi.org/10.3334/ORNLDAAC/1852"
+      }
+    ],
+    "assets": {
+      "zarr-https": {
+        "href": "https://daymeteuwest.blob.core.windows.net/daymet-zarr/annual/na.zarr",
+        "type": "application/vnd+zarr",
+        "title": "Annual North America Daymet HTTPS Zarr root",
+        "description": "HTTPS URI of the annual North America Daymet Zarr Group on Azure Blob Storage.",
+        "roles": [
+          "data",
+          "zarr",
+          "https"
+        ]
+      },
+      "zarr-abfs": {
+        "href": "abfs://daymet-zarr/annual/na.zarr",
+        "type": "application/vnd+zarr",
+        "title": "Annual North America Daymet Azure Blob File System Zarr root",
+        "description": "Azure Blob File System of the annual North America Daymet Zarr Group on Azure Blob Storage for use with adlfs.",
+        "roles": [
+          "data",
+          "zarr",
+          "abfs"
+        ]
+      },
+      "thumbnail": {
+        "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg",
+        "type": "image/png",
+        "title": "Daymet North America Temperature Map"
+      }
+    },
+    "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
+    "msft:storage_account": "daymeteuwest",
+    "msft:container": "daymet-zarr",
+    "msft:group_id": "daymet",
+    "keywords": ["daymet", "north america", "weather"]
+  }
+    ,
+    {
+      "type": "Collection",
+      "id": "daymet-annual-hi",
+      "stac_version": "1.0.0-rc.4",
+      "description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.\n\n[Daymet](https://daymet.ornl.gov/) provides measurements of near-surface meteorological conditions; the main purpose of Daymet is provide data estimates where no instrumentation exists.\n\nThis dataset provides Daymet Version 4 data for North America, including the island areas of Hawaii and Puerto Rico (which are available as files separate from the continental land mass). Daymet output variables include minimum temperature, maximum temperature, precipitation, shortwave radiation, vapor pressure, snow water equivalent, and day length. The dataset covers the period from January 1, 1980 to the present. Each year is processed individually at the close of a calendar year. Daymet variables are continuous surfaces  at 1-kilometer spatial resolution and daily temporal resolution. Data are in a Lambert Conformal Conic projection for North America and are distributed in Zarr format and netCDF format compliant with [Climate and Forecast (CF) metadata conventions (version 1.6)](http://cfconventions.org/).",
+      "links": [
+        {
+          "rel": "root",
+          "href": "../catalog.json",
+          "type": "application/json"
+        },
+        {
+          "rel": "license",
+          "href": "https://science.nasa.gov/earth-science/earth-science-data/data-information-policy"
+        }
+      ],
       "stac_extensions": [
         "https://stac-extensions.github.io/datacube/v1.0.0/schema.json"
       ],
-      "type": "Collection",
-      "id": "daymet",
-      "title": "Daymet",
-      "keywords": ["daymet", "weather", "conus"],
-      "description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.\n\n[Daymet](https://daymet.ornl.gov/) provides measurements of near-surface meteorological conditions; the main purpose of Daymet is provide data estimates where no instrumentation exists.\n\nThis dataset provides Daymet Version 4 data for North America, including the island areas of Hawaii and Puerto Rico (which are available as files separate from the continental land mass). Daymet output variables include minimum temperature, maximum temperature, precipitation, shortwave radiation, vapor pressure, snow water equivalent, and day length. The dataset covers the period from January 1, 1980 to the present. Each year is processed individually at the close of a calendar year. Daymet variables are continuous surfaces  at 1-kilometer spatial resolution and daily temporal resolution. Data are in a Lambert Conformal Conic projection for North America and are distributed in Zarr format and netCDF format compliant with [Climate and Forecast (CF) metadata conventions (version 1.6)](http://cfconventions.org/).",
-      "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
-      "msft:storage_account": "daymeteuwest",
-      "msft:container": "daymet-zarr",
+      "cube:dimensions": {
+        "time": {
+          "type": "temporal",
+          "description": "24-hour day based on local time",
+          "extent": [
+            "1980-07-01T12:00:00Z",
+            "2019-07-02T12:00:00Z"
+          ]
+        },
+        "x": {
+          "type": "spatial",
+          "axis": "x",
+          "description": "x coordinate of projection",
+          "extent": [
+            -5802250.0,
+            -5519250.0
+          ],
+          "step": 1000.0,
+          "reference_system": {
+            "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+            "type": "ProjectedCRS",
+            "name": "undefined",
+            "base_crs": {
+              "name": "undefined",
+              "datum": {
+                "type": "GeodeticReferenceFrame",
+                "name": "undefined",
+                "ellipsoid": {
+                  "name": "undefined",
+                  "semi_major_axis": 6378137,
+                  "inverse_flattening": 298.257223563
+                }
+              },
+              "coordinate_system": {
+                "subtype": "ellipsoidal",
+                "axis": [
+                  {
+                    "name": "Longitude",
+                    "abbreviation": "lon",
+                    "direction": "east",
+                    "unit": "degree"
+                  },
+                  {
+                    "name": "Latitude",
+                    "abbreviation": "lat",
+                    "direction": "north",
+                    "unit": "degree"
+                  }
+                ]
+              }
+            },
+            "conversion": {
+              "name": "unknown",
+              "method": {
+                "name": "Lambert Conic Conformal (2SP)",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 9802
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Latitude of 1st standard parallel",
+                  "value": 25,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8823
+                  }
+                },
+                {
+                  "name": "Latitude of 2nd standard parallel",
+                  "value": 60,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8824
+                  }
+                },
+                {
+                  "name": "Latitude of false origin",
+                  "value": 42.5,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8821
+                  }
+                },
+                {
+                  "name": "Longitude of false origin",
+                  "value": -100,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8822
+                  }
+                },
+                {
+                  "name": "Easting at false origin",
+                  "value": 0,
+                  "unit": "metre",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8826
+                  }
+                },
+                {
+                  "name": "Northing at false origin",
+                  "value": 0,
+                  "unit": "metre",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8827
+                  }
+                }
+              ]
+            },
+            "coordinate_system": {
+              "subtype": "Cartesian",
+              "axis": [
+                {
+                  "name": "Easting",
+                  "abbreviation": "E",
+                  "direction": "east",
+                  "unit": "metre"
+                },
+                {
+                  "name": "Northing",
+                  "abbreviation": "N",
+                  "direction": "north",
+                  "unit": "metre"
+                }
+              ]
+            }
+          }
+        },
+        "y": {
+          "type": "spatial",
+          "axis": "y",
+          "description": "y coordinate of projection",
+          "extent": [
+            -622000.0,
+            -39000.0
+          ],
+          "step": -1000.0,
+          "reference_system": {
+            "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+            "type": "ProjectedCRS",
+            "name": "undefined",
+            "base_crs": {
+              "name": "undefined",
+              "datum": {
+                "type": "GeodeticReferenceFrame",
+                "name": "undefined",
+                "ellipsoid": {
+                  "name": "undefined",
+                  "semi_major_axis": 6378137,
+                  "inverse_flattening": 298.257223563
+                }
+              },
+              "coordinate_system": {
+                "subtype": "ellipsoidal",
+                "axis": [
+                  {
+                    "name": "Longitude",
+                    "abbreviation": "lon",
+                    "direction": "east",
+                    "unit": "degree"
+                  },
+                  {
+                    "name": "Latitude",
+                    "abbreviation": "lat",
+                    "direction": "north",
+                    "unit": "degree"
+                  }
+                ]
+              }
+            },
+            "conversion": {
+              "name": "unknown",
+              "method": {
+                "name": "Lambert Conic Conformal (2SP)",
+                "id": {
+                  "authority": "EPSG",
+                  "code": 9802
+                }
+              },
+              "parameters": [
+                {
+                  "name": "Latitude of 1st standard parallel",
+                  "value": 25,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8823
+                  }
+                },
+                {
+                  "name": "Latitude of 2nd standard parallel",
+                  "value": 60,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8824
+                  }
+                },
+                {
+                  "name": "Latitude of false origin",
+                  "value": 42.5,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8821
+                  }
+                },
+                {
+                  "name": "Longitude of false origin",
+                  "value": -100,
+                  "unit": "degree",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8822
+                  }
+                },
+                {
+                  "name": "Easting at false origin",
+                  "value": 0,
+                  "unit": "metre",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8826
+                  }
+                },
+                {
+                  "name": "Northing at false origin",
+                  "value": 0,
+                  "unit": "metre",
+                  "id": {
+                    "authority": "EPSG",
+                    "code": 8827
+                  }
+                }
+              ]
+            },
+            "coordinate_system": {
+              "subtype": "Cartesian",
+              "axis": [
+                {
+                  "name": "Easting",
+                  "abbreviation": "E",
+                  "direction": "east",
+                  "unit": "metre"
+                },
+                {
+                  "name": "Northing",
+                  "abbreviation": "N",
+                  "direction": "north",
+                  "unit": "metre"
+                }
+              ]
+            }
+          }
+        },
+        "nv": {
+          "type": "count",
+          "description": "Size of the 'time_bnds' variable.",
+          "values": [
+            0,
+            1
+          ]
+        }
+      },
+      "cube:variables": {
+        "lambert_conformal_conic": {
+          "type": "data",
+          "dimensions": [],
+          "shape": [],
+          "attrs": {
+            "false_easting": 0.0,
+            "false_northing": 0.0,
+            "grid_mapping_name": "lambert_conformal_conic",
+            "inverse_flattening": 298.257223563,
+            "latitude_of_projection_origin": 42.5,
+            "longitude_of_central_meridian": -100.0,
+            "semi_major_axis": 6378137.0,
+            "standard_parallel": [
+              25.0,
+              60.0
+            ]
+          }
+        },
+        "lat": {
+          "type": "auxiliary",
+          "description": "latitude coordinate",
+          "dimensions": [
+            "y",
+            "x"
+          ],
+          "unit": "degrees_north",
+          "shape": [
+            584,
+            284
+          ],
+          "chunks": [
+            292,
+            284
+          ],
+          "attrs": {
+            "long_name": "latitude coordinate",
+            "standard_name": "latitude",
+            "units": "degrees_north"
+          }
+        },
+        "lon": {
+          "type": "auxiliary",
+          "description": "longitude coordinate",
+          "dimensions": [
+            "y",
+            "x"
+          ],
+          "unit": "degrees_east",
+          "shape": [
+            584,
+            284
+          ],
+          "chunks": [
+            292,
+            284
+          ],
+          "attrs": {
+            "long_name": "longitude coordinate",
+            "standard_name": "longitude",
+            "units": "degrees_east"
+          }
+        },
+        "prcp": {
+          "type": "data",
+          "description": "annual total precipitation",
+          "dimensions": [
+            "time",
+            "y",
+            "x"
+          ],
+          "unit": "mm",
+          "shape": [
+            40,
+            584,
+            284
+          ],
+          "chunks": [
+            1,
+            584,
+            284
+          ],
+          "attrs": {
+            "cell_methods": "area: mean time: sum within days time: sum over days",
+            "grid_mapping": "lambert_conformal_conic",
+            "long_name": "annual total precipitation",
+            "units": "mm"
+          }
+        },
+        "swe": {
+          "type": "data",
+          "description": "annual average snow water equivalent",
+          "dimensions": [
+            "time",
+            "y",
+            "x"
+          ],
+          "unit": "kg/m2",
+          "shape": [
+            40,
+            584,
+            284
+          ],
+          "chunks": [
+            1,
+            584,
+            284
+          ],
+          "attrs": {
+            "cell_methods": "area: mean time: sum within days time: mean over days",
+            "grid_mapping": "lambert_conformal_conic",
+            "long_name": "annual average snow water equivalent",
+            "units": "kg/m2"
+          }
+        },
+        "time_bnds": {
+          "type": "data",
+          "dimensions": [
+            "time",
+            "nv"
+          ],
+          "shape": [
+            40,
+            2
+          ],
+          "chunks": [
+            40,
+            2
+          ],
+          "attrs": {
+            "time": "days since 1950-01-01 00:00:00"
+          }
+        },
+        "tmax": {
+          "type": "data",
+          "description": "annual average of daily maximum temperature",
+          "dimensions": [
+            "time",
+            "y",
+            "x"
+          ],
+          "unit": "degrees C",
+          "shape": [
+            40,
+            584,
+            284
+          ],
+          "chunks": [
+            1,
+            584,
+            284
+          ],
+          "attrs": {
+            "cell_methods": "area: mean time: maximum within days time: mean over days",
+            "grid_mapping": "lambert_conformal_conic",
+            "long_name": "annual average of daily maximum temperature",
+            "units": "degrees C"
+          }
+        },
+        "tmin": {
+          "type": "data",
+          "description": "annual average of daily minimum temperature",
+          "dimensions": [
+            "time",
+            "y",
+            "x"
+          ],
+          "unit": "degrees C",
+          "shape": [
+            40,
+            584,
+            284
+          ],
+          "chunks": [
+            1,
+            584,
+            284
+          ],
+          "attrs": {
+            "cell_methods": "area: mean time: minimum within days time: mean over days",
+            "grid_mapping": "lambert_conformal_conic",
+            "long_name": "annual average of daily minimum temperature",
+            "units": "degrees C"
+          }
+        },
+        "vp": {
+          "type": "data",
+          "description": "annual average of daily average vapor pressure",
+          "dimensions": [
+            "time",
+            "y",
+            "x"
+          ],
+          "unit": "Pa",
+          "shape": [
+            40,
+            584,
+            284
+          ],
+          "chunks": [
+            1,
+            584,
+            284
+          ],
+          "attrs": {
+            "cell_methods": "area: mean time: mean within days time: mean over days",
+            "grid_mapping": "lambert_conformal_conic",
+            "long_name": "annual average of daily average vapor pressure",
+            "units": "Pa"
+          }
+        }
+      },
+      "title": "Daymet Annual Hawaii",
+      "extent": {
+        "spatial": {
+          "bbox": [
+            [
+              -160.3056,
+              17.9539,
+              -154.772,
+              23.5186
+            ]
+          ]
+        },
+        "temporal": {
+          "interval": [
+            [
+              "1980-07-01T12:00:00Z",
+              "2019-07-02T12:00:00Z"
+            ]
+          ]
+        }
+      },
       "license": "proprietary",
       "providers": [
         {
@@ -29,185 +1118,627 @@
             "processor"
           ],
           "url": "https://planetarycomputer.microsoft.com"
+        },
+        {
+          "name": "ORNL DAAC",
+          "roles": [
+            "producer"
+          ],
+          "url": "https://doi.org/10.3334/ORNLDAAC/1852"
         }
       ],
-      "extent": {
-        "spatial": {
-          "bbox": [
-            [-178.1333, 14.0749, -53.0567, 82.9143],
-            [-178.1333, 14.0749, -53.0567, 82.9143],
-            [-67.9927, 16.8444, -64.1196, 19.9382],
-            [-160.3056, 17.9539, -154.772, 23.5186]
-          ]
-        },
-        "temporal": {
-          "interval": [
-            [
-              "1980-01-01T12:00:00Z",
-              null
-            ]
-          ]
-        }
-      },
-      "links": [],
       "assets": {
-        "hi-annual": {
-          "href": "abfs://daymet-zarr/annual/hi.zarr",
-          "title": "Annual Hawaii Daymet zarr root",
-          "description": "The root of the annual Hawaii Daymet Zarr Group on Azure Blob Storage.",
+        "zarr-https": {
+          "href": "https://daymeteuwest.blob.core.windows.net/daymet-zarr/annual/hi.zarr",
+          "type": "application/vnd+zarr",
+          "title": "Annual Hawaii Daymet HTTPS Zarr root",
+          "description": "HTTPS URI of the annual Hawaii Daymet Zarr Group on Azure Blob Storage.",
           "roles": [
             "data",
-            "zarr-root",
-            "azure-blob-storage"
+            "zarr",
+            "https"
+          ]
+        },
+        "zarr-abfs": {
+          "href": "abfs://daymet-zarr/annual/hi.zarr",
+          "type": "application/vnd+zarr",
+          "title": "Annual Hawaii Daymet Azure Blob File System Zarr root",
+          "description": "Azure Blob File System of the annual Hawaii Daymet Zarr Group on Azure Blob Storage for use with adlfs.",
+          "roles": [
+            "data",
+            "zarr",
+            "abfs"
           ]
         },
         "thumbnail": {
-          "title": "Daymet North America Temperature Map",
           "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg",
-          "media_type": "image/png"
+          "type": "image/png",
+          "title": "Daymet North America Temperature Map"
         }
       },
-      "cube:dimensions": {
-        "time": {
-          "type": "temporal",
-          "description": "The Daymet calendar is based on a standard calendar year. All Daymet years have 1 - 365 days, including leap years. For leap years, the Daymet database includes leap day. Values for December 31 are discarded from leap years to maintain a 365-day year."
+      "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
+      "msft:storage_account": "daymeteuwest",
+      "msft:container": "daymet-zarr",
+      "msft:group_id": "daymet",
+      "keywords": ["daymet", "hawaii", "weather"]
+    },
+    {
+  "type": "Collection",
+  "id": "daymet-annual-pr",
+  "stac_version": "1.0.0-rc.4",
+  "description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.\n\n[Daymet](https://daymet.ornl.gov/) provides measurements of near-surface meteorological conditions; the main purpose of Daymet is provide data estimates where no instrumentation exists.\n\nThis dataset provides Daymet Version 4 data for North America, including the island areas of Hawaii and Puerto Rico (which are available as files separate from the continental land mass). Daymet output variables include minimum temperature, maximum temperature, precipitation, shortwave radiation, vapor pressure, snow water equivalent, and day length. The dataset covers the period from January 1, 1980 to the present. Each year is processed individually at the close of a calendar year. Daymet variables are continuous surfaces  at 1-kilometer spatial resolution and daily temporal resolution. Data are in a Lambert Conformal Conic projection for North America and are distributed in Zarr format and netCDF format compliant with [Climate and Forecast (CF) metadata conventions (version 1.6)](http://cfconventions.org/).",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "license",
+      "href": "https://science.nasa.gov/earth-science/earth-science-data/data-information-policy"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/datacube/v1.0.0/schema.json"
+  ],
+  "cube:dimensions": {
+    "time": {
+      "type": "temporal",
+      "description": "24-hour day based on local time",
+      "extent": [
+        "1950-07-02T12:00:00Z",
+        "2019-07-02T12:00:00Z"
+      ]
+    },
+    "x": {
+      "type": "spatial",
+      "axis": "x",
+      "description": "x coordinate of projection",
+      "extent": [
+        3445750.0,
+        3808750.0
+      ],
+      "step": 1000.0,
+      "reference_system": {
+        "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+        "type": "ProjectedCRS",
+        "name": "undefined",
+        "base_crs": {
+          "name": "undefined",
+          "datum": {
+            "type": "GeodeticReferenceFrame",
+            "name": "undefined",
+            "ellipsoid": {
+              "name": "undefined",
+              "semi_major_axis": 6378137,
+              "inverse_flattening": 298.257223563
+            }
+          },
+          "coordinate_system": {
+            "subtype": "ellipsoidal",
+            "axis": [
+              {
+                "name": "Longitude",
+                "abbreviation": "lon",
+                "direction": "east",
+                "unit": "degree"
+              },
+              {
+                "name": "Latitude",
+                "abbreviation": "lat",
+                "direction": "north",
+                "unit": "degree"
+              }
+            ]
+          }
         },
-        "x": {
-          "type": "spatial",
-          "axis": "x",
-          "description": "North American Lambert Conformal Conic, 1KM grid.",
-          "reference_system": "PROJCRS[\"undefined\",BASEGEOGCRS[\"undefined\",DATUM[\"undefined\",ELLIPSOID[\"undefined\",6378137,298.257223563,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Lambert Conic Conformal (2SP)\",ID[\"EPSG\",9802]],PARAMETER[\"Latitude of 1st standard parallel\",25,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of 2nd standard parallel\",60,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8824]],PARAMETER[\"Latitude of false origin\",42.5,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8821]],PARAMETER[\"Longitude of false origin\",-100,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8822]],PARAMETER[\"Easting at false origin\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8826]],PARAMETER[\"Northing at false origin\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8827]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
-        },
-        "y": {
-          "type": "spatial",
-          "axis": "y",
-          "description": "North American Lambert Conformal Conic, 1KM grid.",
-          "reference_system": "PROJCRS[\"undefined\",BASEGEOGCRS[\"undefined\",DATUM[\"undefined\",ELLIPSOID[\"undefined\",6378137,298.257223563,LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Lambert Conic Conformal (2SP)\",ID[\"EPSG\",9802]],PARAMETER[\"Latitude of 1st standard parallel\",25,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8823]],PARAMETER[\"Latitude of 2nd standard parallel\",60,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8824]],PARAMETER[\"Latitude of false origin\",42.5,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8821]],PARAMETER[\"Longitude of false origin\",-100,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8822]],PARAMETER[\"Easting at false origin\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8826]],PARAMETER[\"Northing at false origin\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8827]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]"
-        },
-        "nv": {
-          "type": "count",
-          "description": "Size of the `time_bnds` variable.",
-          "values": [
-            0,
-            1
+        "conversion": {
+          "name": "unknown",
+          "method": {
+            "name": "Lambert Conic Conformal (2SP)",
+            "id": {
+              "authority": "EPSG",
+              "code": 9802
+            }
+          },
+          "parameters": [
+            {
+              "name": "Latitude of 1st standard parallel",
+              "value": 25,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8823
+              }
+            },
+            {
+              "name": "Latitude of 2nd standard parallel",
+              "value": 60,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8824
+              }
+            },
+            {
+              "name": "Latitude of false origin",
+              "value": 42.5,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8821
+              }
+            },
+            {
+              "name": "Longitude of false origin",
+              "value": -100,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8822
+              }
+            },
+            {
+              "name": "Easting at false origin",
+              "value": 0,
+              "unit": "metre",
+              "id": {
+                "authority": "EPSG",
+                "code": 8826
+              }
+            },
+            {
+              "name": "Northing at false origin",
+              "value": 0,
+              "unit": "metre",
+              "id": {
+                "authority": "EPSG",
+                "code": 8827
+              }
+            }
           ]
-        }
-      },
-      "cube:variables": {
-        "lat": {
-          "type": "auxiliary",
-          "description": "latitude coordinate",
-          "unit": "degrees_north",
-          "dimensions": [
-            "y",
-            "x"
-          ]
         },
-        "lon": {
-          "type": "auxiliary",
-          "description": "longitude coordinate",
-          "unit": "degrees_east",
-          "dimensions": [
-            "y",
-            "x"
+        "coordinate_system": {
+          "subtype": "Cartesian",
+          "axis": [
+            {
+              "name": "Easting",
+              "abbreviation": "E",
+              "direction": "east",
+              "unit": "metre"
+            },
+            {
+              "name": "Northing",
+              "abbreviation": "N",
+              "direction": "north",
+              "unit": "metre"
+            }
           ]
-        },
-        "prcp": {
-          "type": "data",
-          "description": "The total accumulated precipitation over the time period. For monthly and annual summaries, this is the sum of the daily total precipitation. Sum of all forms of precipitation converted to a water-equivalent depth.",
-          "extent": [
-            0,
-            null
-          ],
-          "unit": "mm",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "swe": {
-          "type": "data",
-          "description": "Snow water equivalent in kilograms per square meter. The amount of water contained within the snowpack. For monthly and annual summaries, this is average of the daily snow water equivalent (the amount of water contained within the snowpack) in kilograms per square meter over the period.",
-          "extent": [
-            0,
-            null
-          ],
-          "unit": "kg/m2",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "tmin": {
-          "type": "data",
-          "description": "Daily minimum 2 m air temperature in degrees Celsius. For monthly and annual summaries, this is the average minimum temperature for a daily period over the entire period.",
-          "unit": "degrees C",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "tmax": {
-          "type": "data",
-          "description": "Daily maximum 2 m air temperature in degrees Celsius. For monthly and annual summaries, this is the average maximum temperature for a daily period over the entire period.",
-          "unit": "degrees C",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "vp": {
-          "type": "data",
-          "description": "Water vapor pressure in pascals. Daily average partial pressure of water vapor. For monthly and annual summaries, this is the average of the daily average partial pressure of water vapor over the entire period.",
-          "unit": "Pa",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "time_bnds": {
-          "type": "data",
-          "description": "A 2-dimensional variable that defines the start and end time points of each measurement.",
-          "dimensions": [
-            "time",
-            "nv"
-          ]
-        },
-        "dayl": {
-          "type": "data",
-          "description": "**Daily frequency only**. Duration of the daylight period in seconds per day. This calculation is based on the period of the day during which the sun is above a hypothetical flat horizon.",
-          "unit": "s/day",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "srad": {
-          "type": "data",
-          "description": "**Daily frequency only**. Incident shortwave radiation flux density in watts per square meter, taken as an average over the daylight period of the day. Note: Daily total radiation (MJ/m2/day) can be calculated as follows: `((srad (W/m2) * dayl (s/day)) / l,000,000)`",
-          "unit": "W/m2",
-          "dimensions": [
-            "time",
-            "y",
-            "x"
-          ]
-        },
-        "lambert_conformal_conic": {
-          "type": "data",
-          "description": "Lambert Conformal Conic.",
-          "values": [
-            -32767
-          ],
-          "dimensions": []
         }
       }
     },
+    "y": {
+      "type": "spatial",
+      "axis": "y",
+      "description": "y coordinate of projection",
+      "extent": [
+        -1995000.0,
+        -1765000.0
+      ],
+      "step": -1000.0,
+      "reference_system": {
+        "$schema": "https://proj.org/schemas/v0.2/projjson.schema.json",
+        "type": "ProjectedCRS",
+        "name": "undefined",
+        "base_crs": {
+          "name": "undefined",
+          "datum": {
+            "type": "GeodeticReferenceFrame",
+            "name": "undefined",
+            "ellipsoid": {
+              "name": "undefined",
+              "semi_major_axis": 6378137,
+              "inverse_flattening": 298.257223563
+            }
+          },
+          "coordinate_system": {
+            "subtype": "ellipsoidal",
+            "axis": [
+              {
+                "name": "Longitude",
+                "abbreviation": "lon",
+                "direction": "east",
+                "unit": "degree"
+              },
+              {
+                "name": "Latitude",
+                "abbreviation": "lat",
+                "direction": "north",
+                "unit": "degree"
+              }
+            ]
+          }
+        },
+        "conversion": {
+          "name": "unknown",
+          "method": {
+            "name": "Lambert Conic Conformal (2SP)",
+            "id": {
+              "authority": "EPSG",
+              "code": 9802
+            }
+          },
+          "parameters": [
+            {
+              "name": "Latitude of 1st standard parallel",
+              "value": 25,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8823
+              }
+            },
+            {
+              "name": "Latitude of 2nd standard parallel",
+              "value": 60,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8824
+              }
+            },
+            {
+              "name": "Latitude of false origin",
+              "value": 42.5,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8821
+              }
+            },
+            {
+              "name": "Longitude of false origin",
+              "value": -100,
+              "unit": "degree",
+              "id": {
+                "authority": "EPSG",
+                "code": 8822
+              }
+            },
+            {
+              "name": "Easting at false origin",
+              "value": 0,
+              "unit": "metre",
+              "id": {
+                "authority": "EPSG",
+                "code": 8826
+              }
+            },
+            {
+              "name": "Northing at false origin",
+              "value": 0,
+              "unit": "metre",
+              "id": {
+                "authority": "EPSG",
+                "code": 8827
+              }
+            }
+          ]
+        },
+        "coordinate_system": {
+          "subtype": "Cartesian",
+          "axis": [
+            {
+              "name": "Easting",
+              "abbreviation": "E",
+              "direction": "east",
+              "unit": "metre"
+            },
+            {
+              "name": "Northing",
+              "abbreviation": "N",
+              "direction": "north",
+              "unit": "metre"
+            }
+          ]
+        }
+      }
+    },
+    "nv": {
+      "type": "count",
+      "description": "Size of the 'time_bnds' variable.",
+      "values": [
+        0,
+        1
+      ]
+    }
+  },
+  "cube:variables": {
+    "lambert_conformal_conic": {
+      "type": "data",
+      "dimensions": [],
+      "shape": [],
+      "attrs": {
+        "false_easting": 0.0,
+        "false_northing": 0.0,
+        "grid_mapping_name": "lambert_conformal_conic",
+        "inverse_flattening": 298.257223563,
+        "latitude_of_projection_origin": 42.5,
+        "longitude_of_central_meridian": -100.0,
+        "semi_major_axis": 6378137.0,
+        "standard_parallel": [
+          25.0,
+          60.0
+        ]
+      }
+    },
+    "lat": {
+      "type": "auxiliary",
+      "description": "latitude coordinate",
+      "dimensions": [
+        "y",
+        "x"
+      ],
+      "unit": "degrees_north",
+      "shape": [
+        231,
+        364
+      ],
+      "chunks": [
+        116,
+        364
+      ],
+      "attrs": {
+        "long_name": "latitude coordinate",
+        "standard_name": "latitude",
+        "units": "degrees_north"
+      }
+    },
+    "lon": {
+      "type": "auxiliary",
+      "description": "longitude coordinate",
+      "dimensions": [
+        "y",
+        "x"
+      ],
+      "unit": "degrees_east",
+      "shape": [
+        231,
+        364
+      ],
+      "chunks": [
+        116,
+        364
+      ],
+      "attrs": {
+        "long_name": "longitude coordinate",
+        "standard_name": "longitude",
+        "units": "degrees_east"
+      }
+    },
+    "prcp": {
+      "type": "data",
+      "description": "annual total precipitation",
+      "dimensions": [
+        "time",
+        "y",
+        "x"
+      ],
+      "unit": "mm",
+      "shape": [
+        70,
+        231,
+        364
+      ],
+      "chunks": [
+        1,
+        231,
+        364
+      ],
+      "attrs": {
+        "cell_methods": "area: mean time: sum within days time: sum over days",
+        "grid_mapping": "lambert_conformal_conic",
+        "long_name": "annual total precipitation",
+        "units": "mm"
+      }
+    },
+    "swe": {
+      "type": "data",
+      "description": "annual average snow water equivalent",
+      "dimensions": [
+        "time",
+        "y",
+        "x"
+      ],
+      "unit": "kg/m2",
+      "shape": [
+        70,
+        231,
+        364
+      ],
+      "chunks": [
+        1,
+        231,
+        364
+      ],
+      "attrs": {
+        "cell_methods": "area: mean time: sum within days time: mean over days",
+        "grid_mapping": "lambert_conformal_conic",
+        "long_name": "annual average snow water equivalent",
+        "units": "kg/m2"
+      }
+    },
+    "time_bnds": {
+      "type": "data",
+      "dimensions": [
+        "time",
+        "nv"
+      ],
+      "shape": [
+        70,
+        2
+      ],
+      "chunks": [
+        70,
+        2
+      ],
+      "attrs": {
+        "time": "days since 1950-01-01 00:00:00"
+      }
+    },
+    "tmax": {
+      "type": "data",
+      "description": "annual average of daily maximum temperature",
+      "dimensions": [
+        "time",
+        "y",
+        "x"
+      ],
+      "unit": "degrees C",
+      "shape": [
+        70,
+        231,
+        364
+      ],
+      "chunks": [
+        1,
+        231,
+        364
+      ],
+      "attrs": {
+        "cell_methods": "area: mean time: maximum within days time: mean over days",
+        "grid_mapping": "lambert_conformal_conic",
+        "long_name": "annual average of daily maximum temperature",
+        "units": "degrees C"
+      }
+    },
+    "tmin": {
+      "type": "data",
+      "description": "annual average of daily minimum temperature",
+      "dimensions": [
+        "time",
+        "y",
+        "x"
+      ],
+      "unit": "degrees C",
+      "shape": [
+        70,
+        231,
+        364
+      ],
+      "chunks": [
+        1,
+        231,
+        364
+      ],
+      "attrs": {
+        "cell_methods": "area: mean time: minimum within days time: mean over days",
+        "grid_mapping": "lambert_conformal_conic",
+        "long_name": "annual average of daily minimum temperature",
+        "units": "degrees C"
+      }
+    },
+    "vp": {
+      "type": "data",
+      "description": "annual average of daily average vapor pressure",
+      "dimensions": [
+        "time",
+        "y",
+        "x"
+      ],
+      "unit": "Pa",
+      "shape": [
+        70,
+        231,
+        364
+      ],
+      "chunks": [
+        1,
+        231,
+        364
+      ],
+      "attrs": {
+        "cell_methods": "area: mean time: mean within days time: mean over days",
+        "grid_mapping": "lambert_conformal_conic",
+        "long_name": "annual average of daily average vapor pressure",
+        "units": "Pa"
+      }
+    }
+  },
+  "title": "Daymet Annual Puerto Rico",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -67.9927,
+          16.8444,
+          -64.1196,
+          19.9382
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1950-07-02T12:00:00Z",
+          "2019-07-02T12:00:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "providers": [
+    {
+      "name": "Microsoft",
+      "roles": [
+        "host",
+        "processor"
+      ],
+      "url": "https://planetarycomputer.microsoft.com"
+    },
+    {
+      "name": "ORNL DAAC",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://doi.org/10.3334/ORNLDAAC/1852"
+    }
+  ],
+  "assets": {
+    "zarr-https": {
+      "href": "https://daymeteuwest.blob.core.windows.net/daymet-zarr/annual/pr.zarr",
+      "type": "application/vnd+zarr",
+      "title": "Annual Puerto Rico Daymet HTTPS Zarr root",
+      "description": "HTTPS URI of the annual Puerto Rico Daymet Zarr Group on Azure Blob Storage.",
+      "roles": [
+        "data",
+        "zarr",
+        "https"
+      ]
+    },
+    "zarr-abfs": {
+      "href": "abfs://daymet-zarr/annual/pr.zarr",
+      "type": "application/vnd+zarr",
+      "title": "Annual Puerto Rico Daymet Azure Blob File System Zarr root",
+      "description": "Azure Blob File System of the annual Puerto Rico Daymet Zarr Group on Azure Blob Storage for use with adlfs.",
+      "roles": [
+        "data",
+        "zarr",
+        "abfs"
+      ]
+    },
+    "thumbnail": {
+      "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg",
+      "type": "image/png",
+      "title": "Daymet North America Temperature Map"
+    }
+  },
+  "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
+  "msft:storage_account": "daymeteuwest",
+  "msft:container": "daymet-zarr",
+  "msft:group_id": "daymet",
+  "keywords": ["daymet", "puerto rico", "weather"]
+},
     {
       "id": "aster-l1t",
       "description": "The [ASTER](https://terra.nasa.gov/about/terra-instruments/aster) instrument, launched on-board NASA's [Terra](https://terra.nasa.gov/) satellite in 1999, provides multispectral images of the Earth at 15m-90m resolution.  ASTER images provide information about land surface temperature, color, elevation, and mineral composition.\n\nThis dataset represents ASTER [L1T](https://lpdaac.usgs.gov/products/ast_l1tv003/) data from 2000-2006.  L1T images have been terrain-corrected and rotated to a north-up UTM projection.  Images are in [cloud-optimized GeoTIFF](https://www.cogeo.org/) format.\n",
