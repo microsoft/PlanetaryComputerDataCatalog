@@ -62,6 +62,9 @@ export const renderItemColumn = (item, _, column) => {
 
   if (Array.isArray(fieldContent)) {
     fieldContent = fieldContent.join(", ");
+  } else if (typeof fieldContent === "object") {
+    // TODO: specialized renderers for items that are complex objects
+    fieldContent = JSON.stringify(fieldContent);
   }
 
   // Add tooltips to potentially long cells
