@@ -9,21 +9,21 @@ import {
   SpinnerSize,
 } from "@fluentui/react";
 
-import SEO from "../components/Seo";
-import Layout from "../components/Layout";
-import MetadataHtmlContent from "../components/MetadataHtmlContent";
-import Banner from "../components/stac/Banner";
-import Description from "../components/stac/Description";
-import CollectionDetail from "../components/stac/CollectionDetail";
-import ItemAssets from "../components/stac/ItemAssets";
 import Bands from "../components/stac/Bands";
-import Providers from "../components/stac/Providers";
+import Banner from "../components/stac/Banner";
+import CollectionDetail from "../components/stac/CollectionDetail";
+import Description from "../components/stac/Description";
+import ItemAssets from "../components/stac/ItemAssets";
+import Layout from "../components/Layout";
 import License from "../components/stac/License";
+import MetadataHtmlContent from "../components/MetadataHtmlContent";
+import Providers from "../components/stac/Providers";
+import SEO from "../components/Seo";
+import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
+import { CollectionProvider } from "../components/stac/CollectionContext";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
-import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
-import { CollectionProvider } from "../components/stac/CollectionContext";
 
 const Collection = () => {
   const { id } = useParams();

@@ -1,27 +1,21 @@
 import React, { useState, useMemo } from "react";
-import {
-  Link,
-  MessageBar,
-  MessageBarType,
-  Spinner,
-  SpinnerSize,
-} from "@fluentui/react";
+import { Link } from "@fluentui/react";
 
-import { useCollections } from "../utils/requests";
-
-import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import DefaultBanner from "../components/DefaultBanner";
 import CollectionCard from "../components/stac/CollectionCard";
 import DatasetCard from "../components/catalog/DatasetCard";
 import DatasetFilter from "../components/catalog/DatasetFilter";
+import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
 import NoResults from "../components/catalog/NoResults";
+import SEO from "../components/Seo";
+import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
 
 import { sortSpecialByKey, tagCase } from "../utils";
+import { useCollections } from "../utils/requests";
 import { ai4e as datasetsConfig } from "../config/datasets.yml";
 
 import "./catalog.css";
-import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
@@ -59,24 +53,6 @@ const Catalog = () => {
         Computer Hub.
       </p>
     </DefaultBanner>
-  );
-
-  const errorMsg = (
-    <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
-      Sorry, we're having trouble loading these datasets right now
-    </MessageBar>
-  );
-  const loadingMsg = (
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        minHeight: 300,
-        justifyContent: "center",
-      }}
-    >
-      <Spinner size={SpinnerSize.large} />
-    </div>
   );
 
   const getStacCollections = () => {
