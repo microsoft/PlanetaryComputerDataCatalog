@@ -578,11 +578,12 @@
         "title": "Daymet North America Temperature Map"
       }
     },
+    "keywords": ["daymet", "north america", "weather"],
     "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
     "msft:storage_account": "daymeteuwest",
     "msft:container": "daymet-zarr",
     "msft:group_id": "daymet",
-    "keywords": ["daymet", "north america", "weather"]
+    "msft:group_keys": ["daily", "north america"]
   }
     ,
     {
@@ -1156,11 +1157,12 @@
           "title": "Daymet North America Temperature Map"
         }
       },
+      "keywords": ["daymet", "hawaii", "weather"],
       "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
       "msft:storage_account": "daymeteuwest",
       "msft:container": "daymet-zarr",
       "msft:group_id": "daymet",
-      "keywords": ["daymet", "hawaii", "weather"]
+      "msft:group_keys": ["daily", "hawaii"]
     },
     {
   "type": "Collection",
@@ -1733,11 +1735,12 @@
       "title": "Daymet North America Temperature Map"
     }
   },
+  "keywords": ["daymet", "puerto rico", "weather"],
   "msft:short_description": "Estimates of daily weather parameters in North America on a one-kilometer grid, with monthly and annual summaries.",
   "msft:storage_account": "daymeteuwest",
   "msft:container": "daymet-zarr",
   "msft:group_id": "daymet",
-  "keywords": ["daymet", "puerto rico", "weather"]
+  "msft:group_keys": ["daily", "puerto rico"]
 },
     {
       "id": "aster-l1t",
