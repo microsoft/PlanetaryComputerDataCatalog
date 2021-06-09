@@ -14,8 +14,8 @@
 #       filePath: landcover.ipynb
 ---
 collections:
-  daymet:
-    headerImg: ./images/daymet-hero.jpg
+  daymet-daily-na:
+    headerImg: 
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
