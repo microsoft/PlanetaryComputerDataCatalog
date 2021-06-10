@@ -60,6 +60,10 @@ export const sortByLookup = lookup => {
   };
 };
 
+export const sortByPosition = list => {
+  return sortByLookup(Object.fromEntries(list.map((item, idx) => [item, idx])));
+};
+
 export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);

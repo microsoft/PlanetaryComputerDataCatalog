@@ -24,6 +24,7 @@ import { CollectionProvider } from "../components/stac/CollectionContext";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
+import Assets from "../components/stac/Assets";
 
 const Collection = () => {
   const { id } = useParams();
@@ -109,6 +110,7 @@ const Collection = () => {
         <ItemAssets />
         <CubeDimensions />
         <CubeVariables />
+        <Assets />
       </CollectionProvider>
     </PivotItem>
   );

@@ -23,6 +23,14 @@
     background: darkgray;
 }
 
+.json-list span {
+  font-size: inherit;
+}
+
+.json-list .collection-content-item {
+    margin-top: 5px;
+}
+
 /* Catalog datasets */
 
 .add-datasource-item {
