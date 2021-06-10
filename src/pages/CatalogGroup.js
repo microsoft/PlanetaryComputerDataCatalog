@@ -97,6 +97,7 @@ const CatalogGroup = () => {
   const groupedKeys = collections
     .map(c => c[GROUP_KEYS])
     .flat()
+    .sort()
     .reduce((accum, groupKey) => {
       if (groupKey in accum) {
         accum[groupKey] += 1;
