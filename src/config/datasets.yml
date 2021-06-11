@@ -103,7 +103,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
-    keywords: [global, precipitation]
+    keywords: [noaa, global, precipitation]
 
   - title: GOES-16
     shortTerm: GOES-16 weather
@@ -111,6 +111,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-goes16
     thumbnailUrl: RE4ucH9.jpg
     alt: Raindrops hitting water
+    keywords: [goes, weather, americas, imagery]
 
   - title: Harmonized Global Biomass
     shortTerm: global biomass
@@ -142,7 +143,7 @@ ai4e:
     infoUrl: http://lila.science/
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
-    keywords: [labels, wildlife, biodiversity]
+    keywords: [lila, labels, wildlife, biodiversity]
 
   - title: MODIS
     shortTerm: MODIS
@@ -150,6 +151,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
+    keywords: [modis, satellite, imagery, global]
 
   - title: Monitoring Trends in Burn Severity Mosaics
     shortTerm: burn severity
@@ -157,6 +159,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-mtbs
     thumbnailUrl: RWz0Yt.jpg
     alt: Forest fire.
+    keywords: [mtbs, burn severity, fires, united states]
 
   - title: NASADEM
     shortTerm: NASADEM
@@ -172,7 +175,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
     alt: Landcover map of the United States
-    keywords: [land cover, conus]
+    keywords: [land cover, united states]
 
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
@@ -204,7 +207,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
-    keywords: [video, ocean]
+    keywords: [ooi, video, ocean, pacific]
 
   - title: Sentinel-1 GRD
     shortTerm: Sentinel-1 GRD
@@ -212,7 +215,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-sentinel-1
     thumbnailUrl: sentinel-1-grd.jpg
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    keywords: [global, sentinel, satellite, esa]
+    keywords: [global, sentinel, satellite, esa, sar, radar]
 
   - title: TerraClimate
     shortTerm: global climate
@@ -220,7 +223,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: RWz0Zk.jpg
     alt: Rain clouds viewed from space
-    keywords: [global, climate, temperature]
+    keywords: [global, climate, temperature, weather]
 
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
@@ -228,7 +231,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-uk-met-20crds 
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
-    keywords: [china, climate]
+    keywords: [china, climate, historical]
 
   - title: USFS Forest Inventory and Analysis
     shortTerm: forest health
@@ -236,4 +239,4 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: RWz2Nt.jpg
     alt: Evergreen forest with shrubbery
-    keywords: [conus, forest, biomass]
+    keywords: [united states, forest, biomass]
