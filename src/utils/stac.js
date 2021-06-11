@@ -2,6 +2,9 @@ import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
 import marked from "marked";
 import { capitalize } from ".";
+import NewTabLink from "../components/controls/NewTabLink";
+import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
+import Revealer from "../components/Revealer";
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
@@ -16,6 +19,11 @@ StacFields.Registry.addMetadataField("description", {
 
 StacFields.Registry.addMetadataField("stac_key", {
   label: "STAC Key",
+  formatter: value => value,
+});
+
+StacFields.Registry.addMetadataField("attrs", {
+  label: "Attributes",
   formatter: value => value,
 });
 
@@ -51,6 +59,17 @@ export const columnOrders = {
   description: 100,
 };
 
+export const cubeColumOrders = [
+  "name",
+  "type",
+  "description",
+  "unit",
+  "dimensions",
+  "shape",
+  "chunks",
+  "attrs",
+];
+
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;
   const url = new URL(href);
@@ -64,22 +83,43 @@ export const renderItemColumn = (item, _, column) => {
     fieldContent = fieldContent.join(", ");
   }
 
+  if (!fieldContent || !Object.keys(fieldContent).length) {
+    return null;
+  }
+
   // Add tooltips to potentially long cells
   switch (column.key) {
-    case "title":
+    case "asset":
+      return (
+        <NewTabLink href={fieldContent.href}>{fieldContent.name}</NewTabLink>
+      );
     case "name":
+      return <span title={fieldContent}>{fieldContent}</span>;
+    case "title":
     case "type":
     case "roles":
-      return <span title={fieldContent}>{fieldContent}</span>;
+      return <span title={fieldContent}>{capitalize(fieldContent)}</span>;
+    case "attrs":
+      return (
+        <Revealer>
+          <SimpleKeyValueList object={fieldContent} />
+        </Revealer>
+      );
+    case "dimensions":
+    case "shape":
+    case "chunks":
+      return <span>({fieldContent})</span>;
     case "description":
       return (
         <span
           title={fieldContent}
           dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              marked.parseInline(fieldContent || "", {
-                smartypants: true,
-              })
+            __html: capitalize(
+              DOMPurify.sanitize(
+                marked.parseInline(fieldContent || "", {
+                  smartypants: true,
+                })
+              )
             ),
           }}
         />

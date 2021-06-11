@@ -6,12 +6,19 @@ import {
 } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
-import { renderItemColumn, stacFormatter } from "../../utils/stac";
+import {
+  cubeColumOrders,
+  renderItemColumn,
+  stacFormatter,
+} from "../../utils/stac";
+import { sortByPosition } from "../../utils";
 
-const defaultWidth = 100;
+const defaultWidth = 95;
 const columnWidths = {
   title: 150,
-  description: 300,
+  description: 200,
+  type: 55,
+  attrs: 200,
 };
 
 const CubeTable = ({ stacKey, title }) => {
@@ -33,7 +40,7 @@ const CubeTable = ({ stacKey, title }) => {
     )
   );
 
-  const columns = columnKeys.map((key, idx) => {
+  const columns = columnKeys.sort(sortByPosition(cubeColumOrders)).map(key => {
     return {
       key: key,
       name: stacFormatter.label(key),
@@ -42,7 +49,7 @@ const CubeTable = ({ stacKey, title }) => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: key === "description",
+      isMultiline: ["description", "attrs"].includes(key),
     };
   });
 

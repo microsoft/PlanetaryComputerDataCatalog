@@ -1,4 +1,4 @@
-import { capitalize, titleCase, tagCase } from "./index";
+import { sortByPosition, capitalize, titleCase, tagCase } from "./index";
 
 test("capitalizes a single word", () => {
   expect(capitalize("word")).toStrictEqual("Word");
@@ -22,4 +22,12 @@ test("upper cases a short word", () => {
 
 test("titleCases a long word", () => {
   expect(tagCase("united states")).toStrictEqual("United States");
+});
+
+test("sorts by positions in reference list", () => {
+  const ref = ["c", "b", "a"];
+  const test = ["a", "b", "c"];
+
+  const out = test.sort(sortByPosition(ref));
+  expect(out).toEqual(expect.arrayContaining(ref));
 });

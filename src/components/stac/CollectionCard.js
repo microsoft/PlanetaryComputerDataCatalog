@@ -7,7 +7,7 @@ import Keywords from "./Keywords";
 
 const CollectionCard = ({ collection }) => {
   const history = useHistory();
-  const href = `dataset/${collection.id}`;
+  const href = `/dataset/${collection.id}`;
 
   return (
     <div className="api-datasource-item" key={collection.id}>
@@ -23,7 +23,7 @@ const CollectionCard = ({ collection }) => {
         keywords={collection.keywords}
         color="#4C4C51"
         onClick={keyword => {
-          history.push({ search: `tags=${keyword}` });
+          history.push({ pathname: "/catalog", search: `tags=${keyword}` });
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />

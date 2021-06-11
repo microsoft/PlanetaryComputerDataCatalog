@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { SearchBox, TagPicker } from "@fluentui/react";
-import { filter } from "../../utils/filter";
+import { filter, stacTagFilter, tagFilter } from "../../utils/filter";
 import { useQueryString } from "../../utils/hooks";
 import { useHistory } from "react-router-dom";
 import { tagCase } from "../../utils";
@@ -61,16 +61,8 @@ const DatasetFilter = ({
   // Filter collections and datasets with the selected tags
   const handleTagsChange = useCallback(
     selectedTags => {
-      onStacMatch(
-        stacCollection.filter(c =>
-          selectedTags.every(({ key }) => c.keywords?.includes(key))
-        )
-      );
-      onDatasetMatch(
-        datasets.filter(d =>
-          selectedTags.every(({ key }) => d.tags?.includes(key))
-        )
-      );
+      onStacMatch(stacTagFilter(stacCollection, selectedTags));
+      onDatasetMatch(tagFilter(datasets, selectedTags));
 
       // Persist the tags to the querystring for browser navigation and link sharing
       const qs = selectedTags.length
@@ -85,7 +77,7 @@ const DatasetFilter = ({
   const keySelected = (key, selectedTags) =>
     selectedTags.some(({ key: existingKey }) => existingKey === key);
 
-  // Offer list of suggested tags based on input text and non-existance
+  // Offer list of suggested tags based on input text and non-existence
   // in the list of existing items. Use the key property for all comparisons.
   const filterSuggestedTags = useCallback(
     (inputText, selectedTags) => {
@@ -100,7 +92,7 @@ const DatasetFilter = ({
     [tags]
   );
 
-  // Return the first 5 tags in alpha order which aren't already selected
+  // Return the first n tags in alpha order which aren't already selected
   const topUnselectedTags = selectedTags =>
     tags.filter(({ key }) => !keySelected(key, selectedTags)).slice(0, 50);
 

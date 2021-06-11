@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
+import LabeledValue from "../controls/LabeledValue";
 
 const SpatialExtent = ({ extent }) => {
   const mapRef = useRef();
@@ -84,7 +85,7 @@ const SpatialExtent = ({ extent }) => {
         showFeedbackLink: false,
         showLogo: false,
         style: "grayscale_light",
-        renderWorldCopies: true, // This setting may need adjusment for showing whole-world bounds
+        renderWorldCopies: true, // This setting may need adjustment for showing whole-world bounds
         authOptions: {
           authType: "subscriptionKey",
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
@@ -101,7 +102,13 @@ const SpatialExtent = ({ extent }) => {
   if (!extent) return null;
 
   return (
-    <div id="extent-map" style={{ width: "250px", height: "175px" }}></div>
+    <div>
+      <LabeledValue label="Spatial Extent" />
+      <div
+        id="extent-map"
+        style={{ width: "250px", height: "160px", border: "0.5px solid #ccc" }}
+      ></div>
+    </div>
   );
 };
 

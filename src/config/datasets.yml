@@ -14,8 +14,8 @@
 #       filePath: landcover.ipynb
 ---
 collections:
-  daymet:
-    headerImg: ./images/daymet-hero.jpg
+  daymet-daily-na:
+    headerImg: 
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
@@ -87,7 +87,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-gbif/
     thumbnailUrl: gbif.jpg
     alt: Colorful frog on a leaf
-    tags: [global, biodiversity, species, gbif]
+    keywords: [global, biodiversity, species, gbif]
 
   - title: Daymet
     shortTerm: Daymet temperature
@@ -95,6 +95,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-daymet
     thumbnailUrl: RE3CbUs.jpg
     alt: Map showing color-coded temperature data.
+    keywords: ["weather", "daymet", "north america", "hawaii", "puerto rico"]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation
@@ -102,7 +103,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
-    tags: [global, precipitation]
+    keywords: [noaa, global, precipitation]
 
   - title: GOES-16
     shortTerm: GOES-16 weather
@@ -110,6 +111,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-goes16
     thumbnailUrl: RE4ucH9.jpg
     alt: Raindrops hitting water
+    keywords: [goes, weather, americas, imagery]
 
   - title: Harmonized Global Biomass
     shortTerm: global biomass
@@ -117,7 +119,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-hgb
     thumbnailUrl: RWz0Yf.jpg
     alt: Shaded mossy forest
-    tags: [global, carbon, biomass]
+    keywords: [global, carbon, biomass]
 
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
@@ -125,7 +127,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-hls
     thumbnailUrl: RE3OM3E.jpg
     alt: Map of Chesapeake Bay
-    tags: [landsat, sentinel, satellite, north america]
+    keywords: [landsat, sentinel, satellite, north america]
 
   - title: High Resolution Electricity Access
     shortTerm: HREA
@@ -133,7 +135,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-hrea
     thumbnailUrl: RWAaNJ.jpg
     alt: City light grid viewed from above
-    tags: [global, electricity]
+    keywords: [global, electricity]
 
   - title: LILA BC
     shortTerm: LILA BC
@@ -141,7 +143,7 @@ ai4e:
     infoUrl: http://lila.science/
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
-    tags: [labels, wildlife, biodiversity]
+    keywords: [lila, labels, wildlife, biodiversity]
 
   - title: MODIS
     shortTerm: MODIS
@@ -149,6 +151,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
+    keywords: [modis, satellite, imagery, global]
 
   - title: Monitoring Trends in Burn Severity Mosaics
     shortTerm: burn severity
@@ -156,6 +159,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-mtbs
     thumbnailUrl: RWz0Yt.jpg
     alt: Forest fire.
+    keywords: [mtbs, burn severity, fires, united states]
 
   - title: NASADEM
     shortTerm: NASADEM
@@ -163,7 +167,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nasadem
     thumbnailUrl: RE4sQYP.jpg
     alt: Topographic map showing contour lines
-    tags: [global, dem]
+    keywords: [global, dem]
 
   - title: National Land Cover Database
     shortTerm: land cover
@@ -171,7 +175,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
     alt: Landcover map of the United States
-    tags: [land cover, conus]
+    keywords: [land cover, united states]
 
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
@@ -179,7 +183,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: RE4rvnx.jpg
     alt: Earth viewed from space station with a satellite
-    tags: [global, noaa, weather, temperature, precipitation]
+    keywords: [global, noaa, weather, temperature, precipitation]
 
   - title: NOAA GFS Warm Start Conditions
     shortTerm: NOAA warm start
@@ -187,7 +191,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: RE4MHyn.jpg
     alt: High altitude view of cloud cover with moon
-    tags: [global, noaa, weather, temperature, precipitation]
+    keywords: [global, noaa, weather, temperature, precipitation]
 
   - title: NOAA Integrated Surface Data
     shortTerm: NOAA surface
@@ -195,7 +199,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: RE4rsOQ.jpg
     alt: High altitude view of clouds
-    tags: [global, noaa, weather, temperature, precipitation]
+    keywords: [global, noaa, weather, temperature, precipitation]
 
   - title: Ocean Observatories Initiative CAMHD
     shortTerm: OOI
@@ -203,7 +207,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
-    tags: [video, ocean]
+    keywords: [ooi, video, ocean, pacific]
 
   - title: Sentinel-1 GRD
     shortTerm: Sentinel-1 GRD
@@ -211,7 +215,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-sentinel-1
     thumbnailUrl: sentinel-1-grd.jpg
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    tags: [global, sentinel, satellite, esa]
+    keywords: [global, sentinel, satellite, esa, sar, radar]
 
   - title: TerraClimate
     shortTerm: global climate
@@ -219,7 +223,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: RWz0Zk.jpg
     alt: Rain clouds viewed from space
-    tags: [global, climate, temperature]
+    keywords: [global, climate, temperature, weather]
 
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
@@ -227,7 +231,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-uk-met-20crds 
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
-    tags: [china, climate]
+    keywords: [china, climate, historical]
 
   - title: USFS Forest Inventory and Analysis
     shortTerm: forest health
@@ -235,4 +239,4 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: RWz2Nt.jpg
     alt: Evergreen forest with shrubbery
-    tags: [conus, forest, biomass]
+    keywords: [united states, forest, biomass]
