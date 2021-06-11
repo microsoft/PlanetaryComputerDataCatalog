@@ -2,6 +2,17 @@ export const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
+export const titleCase = str => {
+  return str.split(" ").map(capitalize).join(" ");
+};
+
+export const tagCase = str => {
+  if (str.length <= 4) {
+    return str.toUpperCase();
+  }
+  return titleCase(str);
+};
+
 const sortAlphaByKey = key => {
   return (a, b) => {
     if (a[key] < b[key]) {
@@ -49,6 +60,10 @@ export const sortByLookup = lookup => {
   };
 };
 
+export const sortByPosition = list => {
+  return sortByLookup(Object.fromEntries(list.map((item, idx) => [item, idx])));
+};
+
 export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
@@ -92,4 +107,16 @@ export const a11yPostProcessDom = dom => {
   dom.querySelectorAll(".highlight pre").forEach(el => {
     el.setAttribute("tabindex", 0);
   });
+};
+
+export const scrollToHash = (elementId, behavior = "smooth") => {
+  // Remove the hash
+  const id = elementId.substring(elementId.lastIndexOf("#") + 1);
+
+  return () => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: behavior });
+    }
+  };
 };

@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from "react";
-import {
-  Link,
-  MessageBar,
-  MessageBarType,
-  Spinner,
-  SpinnerSize,
-} from "@fluentui/react";
+import React, { useState, useMemo } from "react";
+import { Link } from "@fluentui/react";
 
-import { useCollections } from "../utils/requests";
-
-import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import DefaultBanner from "../components/DefaultBanner";
 import CollectionCard from "../components/stac/CollectionCard";
 import DatasetCard from "../components/catalog/DatasetCard";
 import DatasetFilter from "../components/catalog/DatasetFilter";
+import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
 import NoResults from "../components/catalog/NoResults";
+import SEO from "../components/Seo";
+import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
 
-import { sortSpecialByKey } from "../utils";
-import {
-  ai4e as datasetsConfig,
-  collections as collectionsConfig,
-} from "../config/datasets.yml";
+import { sortSpecialByKey, tagCase } from "../utils";
+import { useCollections } from "../utils/requests";
+import { ai4e as datasetsConfig } from "../config/datasets.yml";
 
 import "./catalog.css";
-import Feature from "../components/Feature";
+
+const computeTags = (collections, datasetsConfig) => {
+  if (!collections) return null;
+  const collTags = collections.map(c => c.keywords).flat();
+  const dsTags = datasetsConfig.map(d => d.keywords || []).flat();
+
+  // Filter out any falsy elements
+  return Array.from(new Set(collTags.concat(dsTags)))
+    .filter(t => !!t)
+    .sort()
+    .map(item => ({ key: item, name: tagCase(item) }));
+};
 
 const Catalog = () => {
   // Load STAC Collections from API
@@ -34,11 +37,10 @@ const Catalog = () => {
   const [filteredCollections, setFilteredCollections] = useState();
   const [filteredDatasets, setFilteredDatasets] = useState(datasetsConfig);
 
-  useEffect(() => {
-    if (stacResponse) {
-      setFilteredCollections(stacResponse.collections);
-    }
-  }, [stacResponse]);
+  const allTags = useMemo(
+    () => computeTags(stacResponse?.collections, datasetsConfig),
+    [stacResponse?.collections]
+  );
 
   const banner = (
     <DefaultBanner>
@@ -53,24 +55,6 @@ const Catalog = () => {
     </DefaultBanner>
   );
 
-  const errorMsg = (
-    <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
-      Sorry, we're having trouble loading these datasets right now
-    </MessageBar>
-  );
-  const loadingMsg = (
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        minHeight: 300,
-        justifyContent: "center",
-      }}
-    >
-      <Spinner size={SpinnerSize.large} />
-    </div>
-  );
-
   const getStacCollections = () => {
     if (!filteredCollections) return null;
     if (filteredCollections.length === 0) return <NoResults typeText="API" />;
@@ -78,12 +62,15 @@ const Catalog = () => {
     return filteredCollections
       .sort(sortSpecialByKey("title"))
       .map(collection => {
-        const name = collectionsConfig[collection.id]?.shortTerm;
-        return (
+        return collection.groupId ? (
+          <GroupedCollectionCard
+            key={`card-${collection.groupId}`}
+            group={collection}
+          />
+        ) : (
           <CollectionCard
             key={`card-${collection.id}`}
             collection={collection}
-            shortTerm={name}
           />
         );
       });
@@ -106,14 +93,13 @@ const Catalog = () => {
   );
 
   const dataFilter = !isLoading ? (
-    <Feature name="dataset-filter">
-      <DatasetFilter
-        stacCollection={stacResponse.collections}
-        datasets={datasetsConfig}
-        onStacMatch={setFilteredCollections}
-        onDatasetMatch={setFilteredDatasets}
-      />
-    </Feature>
+    <DatasetFilter
+      tags={allTags}
+      stacCollection={stacResponse.collections}
+      datasets={datasetsConfig}
+      onStacMatch={setFilteredCollections}
+      onDatasetMatch={setFilteredDatasets}
+    />
   ) : null;
 
   return (

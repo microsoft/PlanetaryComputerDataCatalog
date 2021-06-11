@@ -1,12 +1,11 @@
 export const initializeFeatures = () => {
   const flags = getFlags();
-  const initialFlags = [
-    {
-      name: "dataset-filter",
-      description: "Show filter box on dataset page",
-      active: false,
-    },
-  ];
+  // {
+  //   name:,
+  //   description:,
+  //   active:
+  // }
+  const initialFlags = [];
 
   // Merge old flags with new flags, keeping the existing `active` setting
   const updatedFlags = initialFlags.map(f => {

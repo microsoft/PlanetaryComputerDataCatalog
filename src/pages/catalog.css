@@ -10,7 +10,7 @@
 .api-item {
   flex-basis: 32%;
   min-height: 100px;
-  margin-bottom: 2%; 
+  margin-bottom: 2%;
 }
 
 .header-banner-item {
@@ -21,6 +21,14 @@
 .ms-DetailsHeader-cell:hover + .ms-DetailsHeader-cellSizer::after {
     opacity: 1;
     background: darkgray;
+}
+
+.json-list span {
+  font-size: inherit;
+}
+
+.json-list .collection-content-item {
+    margin-top: 5px;
 }
 
 /* Catalog datasets */
@@ -93,8 +101,31 @@
   padding-top: 20px;
 }
 
+.keywords-bar button:first-child{
+  margin-left: 0;
+}
 
-/* Homepage resouce grid */
+.keywords-bar button:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, .03);
+}
+
+.ms-TagItem ,.ms-TagItem:hover {
+    background-color: #0078d4;
+    color: #fff;
+}
+
+.ms-TagItem i.ms-Button-icon {
+    color: #fff;
+}
+
+.ms-TagItem-close:hover {
+    background-color: #005a9e;
+    color: #fff;
+
+}
+
+/* Homepage resource grid */
 
 .home-resource-item {
   flex-basis: 24%;
@@ -222,19 +253,36 @@
   }
 }
 
+/* docs general table style */
 .generated-docs table {
     margin-right: auto;
     border: none;
     border-collapse: collapse;
     border-spacing: 0;
-    font-size: 12px;
     table-layout: fixed;
 }
+
+.generated-docs table td {
+    padding: 5px 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th.head {
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* xarray dataframe table output */
+.generated-docs table.dataframe {
+    font-size: 12px;
+}
+
 .generated-docs thead {
     border-bottom: 1px solid #e0e0e0;
     vertical-align: bottom;
 }
-.generated-docs tr, .generated-docs th, .generated-docs td {
+.generated-docs .dataframe tr, .generated-docs .dataframe th, .generated-docs .dataframe td {
     text-align: right;
     vertical-align: middle;
     padding: 0.5em 0.5em;
@@ -243,13 +291,13 @@
     max-width: none;
     border: none;
 }
-.generated-docs th {
+.generated-docs .dataframe th {
     font-weight: bold;
 }
-.generated-docs tbody tr:nth-child(odd) {
+.generated-docs .dataframe tbody tr:nth-child(odd) {
     background: #f5f5f5;
 }
-.generated-docs tbody tr:hover {
+.generated-docs .dataframe tbody tr:hover {
     background: rgba(66, 165, 245, 0.2);
 }
 * + table {margin-top: 1em;}

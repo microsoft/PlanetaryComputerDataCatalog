@@ -1,9 +1,6 @@
 import React from "react";
 
-const AssetThumbnail = ({
-  assets,
-  // style = { maxWidth: "100%", maxHeight: "100%", objectFit: "contain" },
-}) => {
+const AssetThumbnail = ({ assets }) => {
   const imgSrc = assets?.thumbnail?.href;
 
   if (imgSrc) {

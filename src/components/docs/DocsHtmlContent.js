@@ -49,6 +49,7 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   // Serialize the content back to a string so it can be injected
   const processedMarkup = new XMLSerializer().serializeToString(docsDoc);
 
+  // Handle any internal links as an SPA style route, not a full reload
   const handleClick = e => {
     const anchor = e.target.closest("a.reference.internal");
     if (anchor) {

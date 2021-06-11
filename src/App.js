@@ -12,6 +12,7 @@ import { usePrefetchContent } from "./utils/requests";
 import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
+import CatalogGroup from "./pages/CatalogGroup";
 
 function App() {
   initializeIcons();
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/applications">
             <Applications />
+          </Route>
+          <Route path="/dataset/group/:groupId">
+            <CatalogGroup />
           </Route>
           <Route path="/dataset/:id">
             <Collection />
