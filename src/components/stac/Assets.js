@@ -6,12 +6,12 @@ import {
 } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
-import { renderItemColumn } from "../../utils/stac";
-import { titleCase } from "../../utils";
+import { renderItemColumn, stacFormatter } from "../../utils/stac";
 
 const columnWidths = {
-  asset: 300,
+  asset: 475,
   content_type: 75,
+  stac_key: 75,
   roles: 75,
   description: 200,
 };
@@ -19,12 +19,18 @@ const columnWidths = {
 const Assets = () => {
   const { assets } = useStac();
 
-  const columnNames = ["asset", "description", "roles", "content_type"];
+  const columnNames = [
+    "asset",
+    "stac_key",
+    "description",
+    "roles",
+    "content_type",
+  ];
 
   const columns = columnNames.map(key => {
     return {
       key: key,
-      name: titleCase(key.replace(/_/, " ")),
+      name: stacFormatter.label(key),
       minWidth: columnWidths[key],
       maxWidth: columnWidths[key],
       fieldName: key.toLowerCase(),
@@ -38,20 +44,20 @@ const Assets = () => {
     .map(key => {
       const asset = assets[key];
       return {
-        asset: { name: asset.title, href: asset.href },
-        key: key,
+        asset: { name: asset.title, href: asset.href, contentType: asset.type },
+        stac_key: key,
         description: asset.description,
         roles: asset?.roles?.join(", "),
         content_type: asset.type,
       };
     })
-    .filter(item => item.key !== "thumbnail");
+    .filter(item => item.stac_key !== "thumbnail");
 
   if (!items.length) return null;
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h3>Dataset Files</h3>
+      <h3>Assets</h3>
       <DetailsList
         items={items}
         compact={false}

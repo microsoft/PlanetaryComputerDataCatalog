@@ -73,7 +73,7 @@ const ItemAssets = () => {
           let formattedValue;
           switch (key) {
             case "eo:bands":
-              // Rather than a table, rener a string of "name (common name)" bands
+              // Rather than a table, render a string of "name (common name)" bands
               formattedValue = bandOverrideList(property.value);
               break;
             case "type":
