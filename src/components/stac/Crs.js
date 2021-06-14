@@ -59,7 +59,7 @@ const Crs = () => {
     },
   });
 
-  const expandingCardProps = {
+  const plainCardProps = {
     onRenderPlainCard: item => {
       const itemStr = JSON.stringify(item, null, 2);
       return (
@@ -74,7 +74,7 @@ const Crs = () => {
               title="Copy to clipboard"
               style={{ float: "right" }}
             />
-            <LabeledValue label="projJSON:" />
+            <LabeledValue label="projJSON" />
             <div className="input_area">
               <pre>{itemStr}</pre>
             </div>
@@ -88,11 +88,10 @@ const Crs = () => {
   return (
     <LabeledValue label="CRS">
       <HoverCard
-        plainCardProps={expandingCardProps}
+        plainCardProps={plainCardProps}
         instantOpenOnClick={true}
         cardDismissDelay={300}
-        cardOpenDelay={0}
-        expandedCardOpenDelay={100}
+        cardOpenDelay={300}
         type={HoverCardType.plain}
       >
         <div className={classNames.item}>
