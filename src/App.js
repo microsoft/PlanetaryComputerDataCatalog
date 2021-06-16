@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { initializeIcons } from "@uifabric/icons";
 
@@ -13,6 +13,8 @@ import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
 import CatalogGroup from "./pages/CatalogGroup";
+
+const Viewer = React.lazy(() => import("./pages/Viewer"));
 
 function App() {
   initializeIcons();
@@ -46,6 +48,11 @@ function App() {
           </Route>
           <Route path="/account/request">
             <AccountSurvey />
+          </Route>
+          <Route path="/viewer">
+            <Suspense fallback={null}>
+              <Viewer />
+            </Suspense>
           </Route>
           <Route path="/404">
             <NotFound />

@@ -15,7 +15,7 @@
 ---
 collections:
   daymet-daily-na:
-    headerImg: 
+    headerImg: ./images/daymet-na-vp-header.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
@@ -23,6 +23,17 @@ collections:
           repo: https://github.com/microsoft/PlanetaryComputerExamples
           branch: main
           filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-annual-hi:
+    headerImg: ./images/daymet-hi-temp-header3.png
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          repo: https://github.com/microsoft/PlanetaryComputerExamples
+          branch: main
+          filePath: quickstarts/reading-zarr-data.ipynb
+
 
   naip:
     headerImg: ./images/naip-hero.jpg

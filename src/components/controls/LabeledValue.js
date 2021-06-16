@@ -1,5 +1,4 @@
 import { Text } from "@fluentui/react";
-import React from "react";
 import { boldStyle } from "../../styles";
 
 const LabeledValue = ({ label, children }) => {
