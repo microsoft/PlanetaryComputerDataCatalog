@@ -1,10 +1,10 @@
 daymet:
   title: Daymet Collection
   short_description: Gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries.
-  description: Daymet is a data product derived from a collection of algorithms and computer software designed to interpolate and extrapolate from daily meteorological observations to produce gridded estimates of daily weather parameters. Weather parameters generated include daily surfaces of minimum and maximum temperature, precipitation, vapor pressure, radiation, snow water equivalent, and day length produced on a 1 km x 1 km gridded surface. The motivation for producing Daymet is to provide measurements of near-surface meteorological conditions where no instrumentation exists. Having estimates of these surfaces is critical to understanding many processes in the terrestrial biogeochemical system.
+  description: Daymet provides long-term, continuous, gridded estimates of daily weather and climatology variables by interpolating and extrapolating ground-based observations through statistical modeling techniques. The Daymet data products provide driver data for biogeochemical terrestrial modeling and have myriad applications in many Earth science, natural resource, biodiversity, and agricultural research areas. Daymet weather variables include daily minimum and maximum temperature, precipitation, vapor pressure, shortwave radiation, snow water equivalent, and day length produced on a 1 km x 1 km gridded surface over continental North America and Hawaii from 1980 and over Puerto Rico from 1950 through the end of the most recent full calendar year.
   assets:
     headerImg:
       href: ./images/daymet-hero.png
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg
-  keywords: [daymet, weather, north america, puerto rico, hawaii]
+  keywords: [daymet, weather, climate, north america, puerto rico, hawaii]
