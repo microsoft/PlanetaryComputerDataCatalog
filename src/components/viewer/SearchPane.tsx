@@ -16,6 +16,7 @@ import { IStacCollection, IStacSearch, IStacSearchResult } from "../../types/sta
 import { useCollections } from "../../utils/requests";
 import { useStacSearch } from "../../utils/stacSearch";
 import SearchResults from "./SearchResults";
+import QueryPane from "./QueryPane";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;
@@ -148,7 +149,6 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
         selectedKey={`limit${limit}`}
         onChange={(_, option) => option?.data && setLimit(parseInt(option.data))}
       />
-
       <Stack horizontal tokens={{ childrenGap: 10 }}>
         <PrimaryButton
           text="Search"
@@ -159,6 +159,9 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
           <Spinner size={SpinnerSize.large} styles={{ root: { marginTop: 10 } }} />
         )}
       </Stack>
+      {selectedCollection && (
+        <QueryPane collectionId={selectedCollection.key.toString()} />
+      )}
 
       <SearchResults results={searchResponse} isError={isSearchError} />
     </div>
