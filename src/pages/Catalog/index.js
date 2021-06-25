@@ -1,21 +1,22 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "@fluentui/react";
 
-import Layout from "../components/Layout";
-import DefaultBanner from "../components/DefaultBanner";
-import CollectionCard from "../components/stac/CollectionCard";
-import DatasetCard from "../components/catalog/DatasetCard";
-import DatasetFilter from "../components/catalog/DatasetFilter";
-import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
-import NoResults from "../components/catalog/NoResults";
-import SEO from "../components/Seo";
-import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
+import Layout from "components/Layout";
+import CollectionCard from "components/stac/CollectionCard";
+import DefaultBanner from "components/DefaultBanner";
+import SEO from "components/Seo";
+import { errorMsg, loadingMsg } from "components/stac/CollectionLoaders";
 
-import { sortSpecialByKey, tagCase } from "../utils";
-import { useCollections } from "../utils/requests";
-import { ai4e as datasetsConfig } from "../config/datasets.yml";
+import DatasetCard from "./components/DatasetCard";
+import DatasetFilter from "./components/DatasetFilter";
+import GroupedCollectionCard from "./components/GroupedCollectionCard";
+import NoResults from "./components/NoResults";
 
-import "./catalog.css";
+import { sortSpecialByKey, tagCase } from "utils";
+import { useCollections } from "utils/requests";
+import { ai4e as datasetsConfig } from "config/datasets.yml";
+
+import "styles/catalog.css";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
@@ -47,10 +48,9 @@ const Catalog = () => {
       <h1>Data Catalog</h1>
       <p>
         The Planetary Computer Data Catalog includes petabytes of environmental
-        monitoring data, in consistent, analysis-ready formats. All of the
-        datasets below can be accessed via Azure Blob Storage, and can be used
-        by developers whether you're working within or outside of our Planetary
-        Computer Hub.
+        monitoring data, in consistent, analysis-ready formats. All of the datasets
+        below can be accessed via Azure Blob Storage, and can be used by developers
+        whether you're working within or outside of our Planetary Computer Hub.
       </p>
     </DefaultBanner>
   );
@@ -59,21 +59,16 @@ const Catalog = () => {
     if (!filteredCollections) return null;
     if (filteredCollections.length === 0) return <NoResults typeText="API" />;
 
-    return filteredCollections
-      .sort(sortSpecialByKey("title"))
-      .map(collection => {
-        return collection.groupId ? (
-          <GroupedCollectionCard
-            key={`card-${collection.groupId}`}
-            group={collection}
-          />
-        ) : (
-          <CollectionCard
-            key={`card-${collection.id}`}
-            collection={collection}
-          />
-        );
-      });
+    return filteredCollections.sort(sortSpecialByKey("title")).map(collection => {
+      return collection.groupId ? (
+        <GroupedCollectionCard
+          key={`card-${collection.groupId}`}
+          group={collection}
+        />
+      ) : (
+        <CollectionCard key={`card-${collection.id}`} collection={collection} />
+      );
+    });
   };
 
   const primaryDatasets = isLoading
@@ -84,9 +79,7 @@ const Catalog = () => {
 
   const otherDatasets = filteredDatasets.length ? (
     filteredDatasets.map(dataset => {
-      return (
-        <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />
-      );
+      return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
     })
   ) : (
     <NoResults typeText="Azure" />
@@ -110,16 +103,12 @@ const Catalog = () => {
           {dataFilter}
           <h2>Datasets available through the Planetary Computer API</h2>
           <p style={{ maxWidth: 800, marginBottom: 40 }}>
-            Our largest data sets can be queried and accessed through our
-            Planetary Computer API. We are continuing to expand the data
-            available through the API, and continuing to bring new data sets to
-            Azure. If you are interested in seeing additional data on-boarded or
-            published through our API – or if you have data you'd like to
-            contribute –{" "}
-            <Link href="mailto:aiforearthdatasets@microsoft.com">
-              contact us
-            </Link>
-            .
+            Our largest data sets can be queried and accessed through our Planetary
+            Computer API. We are continuing to expand the data available through the
+            API, and continuing to bring new data sets to Azure. If you are
+            interested in seeing additional data on-boarded or published through our
+            API – or if you have data you'd like to contribute –{" "}
+            <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>.
           </p>
           <div className="layout-container">
             <div className="layout-row">{primaryDatasets}</div>
@@ -131,8 +120,8 @@ const Catalog = () => {
         <div className="grid-content">
           <h2>Additional datasets</h2>
           <p style={{ maxWidth: 800, marginBottom: 40 }}>
-            The following datasets are available on Azure, for use within or
-            outside of the Planetary Computer Hub.
+            The following datasets are available on Azure, for use within or outside
+            of the Planetary Computer Hub.
           </p>
           <div className="layout-container">
             <div className="layout-row">{otherDatasets}</div>

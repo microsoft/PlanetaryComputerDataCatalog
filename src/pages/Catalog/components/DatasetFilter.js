@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { SearchBox, TagPicker } from "@fluentui/react";
-import { filter, stacTagFilter, tagFilter } from "../../utils/filter";
-import { useQueryString } from "../../utils/hooks";
+import { filter, stacTagFilter, tagFilter } from "utils/filter";
+import { useQueryString } from "utils/hooks";
 import { useHistory } from "react-router-dom";
-import { tagCase } from "../../utils";
+import { tagCase } from "utils";
 
 const stacKeys = ["title", "msft:short_description", "description", "keywords"];
 const datasetKeys = ["title", "description", "tags"];
@@ -21,9 +21,7 @@ const DatasetFilter = ({
 
   // Turn a querystring representation of tags into tag items to be preset on the picker
   const preselectedTags = useMemo(() => {
-    return qsTags
-      ? qsTags.split(",").map(t => ({ key: t, name: tagCase(t) }))
-      : [];
+    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: tagCase(t) })) : [];
   }, [qsTags]);
 
   // Index the stac collection results for filtering
