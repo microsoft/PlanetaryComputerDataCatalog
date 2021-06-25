@@ -1,9 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-import AssetThumbnail from "../stac/AssetThumbnail";
-import Keywords from "../stac/Keywords";
+import AssetThumbnail from "components/stac/AssetThumbnail";
+import Keywords from "components/stac/Keywords";
 
 const GroupedCollectionCard = ({ group }) => {
   const history = useHistory();

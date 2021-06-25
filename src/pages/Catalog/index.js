@@ -1,21 +1,22 @@
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "@fluentui/react";
 
-import Layout from "../components/Layout";
-import DefaultBanner from "../components/DefaultBanner";
-import CollectionCard from "../components/stac/CollectionCard";
-import DatasetCard from "../components/catalog/DatasetCard";
-import DatasetFilter from "../components/catalog/DatasetFilter";
-import GroupedCollectionCard from "../components/catalog/GroupedCollectionCard";
-import NoResults from "../components/catalog/NoResults";
-import SEO from "../components/Seo";
-import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
+import Layout from "components/Layout";
+import CollectionCard from "components/stac/CollectionCard";
+import DefaultBanner from "components/DefaultBanner";
+import SEO from "components/Seo";
+import { errorMsg, loadingMsg } from "components/stac/CollectionLoaders";
 
-import { sortSpecialByKey, tagCase } from "../utils";
-import { useCollections } from "../utils/requests";
-import { ai4e as datasetsConfig } from "../config/datasets.yml";
+import DatasetCard from "./components/DatasetCard";
+import DatasetFilter from "./components/DatasetFilter";
+import GroupedCollectionCard from "./components/GroupedCollectionCard";
+import NoResults from "./components/NoResults";
 
-import "../styles/catalog.css";
+import { sortSpecialByKey, tagCase } from "utils";
+import { useCollections } from "utils/requests";
+import { ai4e as datasetsConfig } from "config/datasets.yml";
+
+import "styles/catalog.css";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
