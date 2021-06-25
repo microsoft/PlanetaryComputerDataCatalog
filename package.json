@@ -38,7 +38,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "lint": "eslint ./src --ext .js --ext .jsx",
+    "lint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx",
     "eject": "craco eject"
   },
   "jest": {
