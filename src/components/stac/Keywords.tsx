@@ -1,10 +1,19 @@
-import React from "react";
-import { Text } from "@fluentui/react";
-import { tagCase } from "../../utils";
+import { ITextStyles, Text } from "@fluentui/react";
+import { tagCase } from "utils";
 
-const Keywords = ({ keywords = [], onClick = () => {}, color = "#fff" }) => {
+interface IKeywordsProp {
+  keywords: string[];
+  onClick?: (keyword: string) => void;
+  color: string;
+}
+
+const Keywords = ({
+  keywords = [],
+  onClick = _ => {},
+  color = "#fff",
+}: IKeywordsProp) => {
   const sections = keywords.map(keyword => {
-    const pillStyle = {
+    const pillStyle: ITextStyles = {
       root: {
         backgroundColor: "transparent",
         borderRadius: "4px",
@@ -25,7 +34,7 @@ const Keywords = ({ keywords = [], onClick = () => {}, color = "#fff" }) => {
         title={`Filter datasets by "${formatted}"`}
         key={`kw-${keyword}`}
         styles={pillStyle}
-        onClick={() => onClick(keyword)}
+        onClick={() => onClick(keyword.toLowerCase())}
       >
         {formatted}
       </Text>
