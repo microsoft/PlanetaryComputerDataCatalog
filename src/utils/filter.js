@@ -67,6 +67,6 @@ export const stacTagFilter = (collections, tags) => {
 
 export const tagFilter = (datasets, tags) => {
   return datasets.filter(c =>
-    tags.every(({ key }) => c.keywords?.includes(key))
+    tags.every(({ key }) => c.keywords?.map(k => k.toLowerCase()).includes(key))
   );
 };

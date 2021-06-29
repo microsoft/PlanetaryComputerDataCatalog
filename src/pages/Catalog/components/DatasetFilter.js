@@ -21,7 +21,11 @@ const DatasetFilter = ({
 
   // Turn a querystring representation of tags into tag items to be preset on the picker
   const preselectedTags = useMemo(() => {
-    return qsTags ? qsTags.split(",").map(t => ({ key: t, name: tagCase(t) })) : [];
+    return qsTags
+      ? qsTags
+          .split(",")
+          .map(t => ({ key: t.toLocaleLowerCase(), name: tagCase(t) }))
+      : [];
   }, [qsTags]);
 
   // Index the stac collection results for filtering
