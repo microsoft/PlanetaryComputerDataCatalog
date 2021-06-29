@@ -1,3 +1,5 @@
+import acronyms from "config/acronyms.yml";
+
 export const capitalize = str => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
@@ -7,7 +9,7 @@ export const titleCase = str => {
 };
 
 export const tagCase = str => {
-  if (str.length <= 4) {
+  if (str.length <= 4 || acronyms.includes(str)) {
     return str.toUpperCase();
   }
   return titleCase(str);
