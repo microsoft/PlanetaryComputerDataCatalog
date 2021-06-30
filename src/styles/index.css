@@ -1,15 +1,13 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 a {
@@ -17,7 +15,8 @@ a {
   text-decoration: none;
 }
 
-a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a, footer a):hover {
+a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item
+    a, footer a):hover {
   text-decoration: underline;
   color: #0078d4;
 }
@@ -37,7 +36,7 @@ p {
 }
 
 li p {
-    margin: 6px 0;
+  margin: 6px 0;
 }
 
 /* h2 {
@@ -102,7 +101,7 @@ h4 {
 
 .manual-ms-button.manual-ms-secondary {
   border-color: rgb(138, 136, 134);
-  background-color:rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
   color: rgb(50, 49, 48);
 }
 
@@ -126,9 +125,9 @@ h4 {
 }
 
 .responsive-container-wide {
-    width: 100%;
-    padding-bottom: 56.25%; /* 9/16 = aspect ratio of image */
-    position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 9/16 = aspect ratio of image */
+  position: relative;
 }
 
 .responsive-container-wide img {
@@ -144,21 +143,20 @@ main.short {
   min-height: calc(100vh - 100px);
 }
 
-.page-header { 
+.page-header {
   background-color: #f9f9f9;
   padding: 80px 0;
   background-size: cover;
 }
 
-
 /* Light hover effect for link images */
 main a img {
-  transition: .5s ease;
+  transition: 0.5s ease;
   border-radius: 2px;
 }
 
-a:not(header a):hover img  {
-    opacity: 0.85;
+a:not(header a):hover img {
+  opacity: 0.85;
 }
 
 .page-header h1 {
@@ -183,7 +181,7 @@ a:not(header a):hover img  {
   }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   form button {
     width: 100%;
   }
@@ -215,7 +213,6 @@ a:not(header a):hover img  {
 }
 
 .home-resource-item i {
-
   transition-property: font-size;
   transition-duration: 0.3s;
   transition-timing-function: ease-out;
@@ -230,7 +227,7 @@ a:not(header a):hover img  {
 }
 
 .toc-item {
-  margin-right: 8px; 
+  margin-right: 8px;
   padding-top: 15px;
 }
 
@@ -261,9 +258,9 @@ a:not(header a):hover img  {
 
 /* Documentation markup from generated sources */
 .generated-docs img {
-    object-fit: cover;
-    max-height: 100%;
-    max-width: 100%;
+  object-fit: cover;
+  max-height: 100%;
+  max-width: 100%;
 }
 /* Corporate footer styling from UHF */
 
@@ -284,7 +281,7 @@ header .break {
 }
 
 /* All gridded content conforms to these margins */
-@media(min-width: 1080px) {
+@media (min-width: 1080px) {
   .grid-content {
     padding-left: 5% !important;
     padding-right: 5% !important;
@@ -292,7 +289,7 @@ header .break {
 }
 
 /* Smaller screens ~ tablet size get very small margins */
-@media(max-width: 1079px) {
+@media (max-width: 1079px) {
   .grid-content {
     padding-left: 20px !important;
     padding-right: 20px !important;
@@ -300,44 +297,48 @@ header .break {
 }
 
 /* Tablet size main header will break on first header link to new line */
-@media(min-width: 1023px) {
+@media (min-width: 1023px) {
   header .break {
     display: none;
   }
 }
 
 /* When header links are on a new line, add some padding to the bottom of the header */
-@media(max-width: 1023px) {
+@media (max-width: 1023px) {
   header .inner-header {
     padding-bottom: 10px;
   }
 }
 
 .c-uhff-base {
-    background: #f2f2f2;
-    margin: 0 auto;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  background: #f2f2f2;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .c-uhff-base ul.c-list {
-    font-size: 11px;
-    line-height: 16px;
-    color: #616161;
+  font-size: 11px;
+  line-height: 16px;
+  color: #616161;
 }
 
 .c-list.f-bare {
-    padding-left: 0;
-    list-style-type: none;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .c-uhff-base ul.c-list li {
-    padding: 0 24px 4px 0;
-    display: inline-block;
+  padding: 0 24px 4px 0;
+  display: inline-block;
 }
-footer.context-uhf a:link, footer.context-uhf a:focus, footer.context-uhf a:hover, footer.context-uhf a:active, footer.context-uhf a:visited {
-    text-decoration: none;
-    color: inherit;
+footer.context-uhf a:link,
+footer.context-uhf a:focus,
+footer.context-uhf a:hover,
+footer.context-uhf a:active,
+footer.context-uhf a:visited {
+  text-decoration: none;
+  color: inherit;
 }
 
 .with-sidebar {
@@ -365,7 +366,7 @@ https://every-layout.dev/layouts/sidebar/
   flex-grow: 999;
   min-width: calc(45% - 1rem);
 }
-  
+
 .collection-content .collection-content-item {
   padding-bottom: 15px;
 }
@@ -376,7 +377,7 @@ https://every-layout.dev/layouts/sidebar/
 
 /* Convert collection detail <ul> to comma seperated list */
 
-.collection-content-item ul{
+.collection-content-item ul {
   display: inline;
   list-style: none;
   padding-left: 0;
@@ -391,29 +392,31 @@ https://every-layout.dev/layouts/sidebar/
 }
 
 .collection-content-item li:last-child:after {
-    content: "";
+  content: "";
 }
 
 /* Swagger UI overrides */
 .swagger-ui .info h2.title {
-    font-size: 25px;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-    color: rgb(50, 49, 48);
+  font-size: 25px;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  color: rgb(50, 49, 48);
 }
 
 .swagger-ui h4.opblock-tag {
-    font-size: 20px;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-    color: rgb(50, 49, 48);
+  font-size: 20px;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  color: rgb(50, 49, 48);
 }
 
 .swagger-ui .info {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .swagger-ui .info .main .title small {
   background-color: #333;
-} 
+}
 
 .swagger-ui .info .main .title small.version-stamp {
   background-color: #008000;
