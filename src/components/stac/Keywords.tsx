@@ -5,17 +5,19 @@ interface IKeywordsProp {
   keywords: string[];
   onClick?: (keyword: string) => void;
   color: string;
+  dark: boolean;
 }
 
 const Keywords = ({
   keywords = [],
   onClick = _ => {},
   color = "#fff",
+  dark = false,
 }: IKeywordsProp) => {
   const sections = keywords.map(keyword => {
     const pillStyle: ITextStyles = {
       root: {
-        backgroundColor: "transparent",
+        backgroundColor: dark ? "rgba(0,0,0,0.05)" : "transparent",
         borderRadius: "4px",
         border: `0.5px solid ${color}`,
         padding: "6px",
@@ -23,6 +25,7 @@ const Keywords = ({
         minWidth: "30px",
         display: "inline-block",
         color: color,
+        fontWeight: dark ? 500 : 400,
         textAlign: "center",
       },
     };
