@@ -66,7 +66,11 @@ export const sortByPosition = list => {
   return sortByLookup(Object.fromEntries(list.map((item, idx) => [item, idx])));
 };
 
-export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
+export const buildHubLaunchUrl = ({
+  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
+  branch = "main",
+  filePath,
+}) => {
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
 
@@ -88,7 +92,11 @@ export const buildHubLaunchUrl = ({ repo, filePath, branch }) => {
   return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
 };
 
-export const buildGitHubUrl = ({ repo, filePath, branch }) => {
+export const buildGitHubUrl = ({
+  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
+  branch = "main",
+  filePath,
+}) => {
   return `${repo}/blob/${branch}/${filePath}`;
 };
 

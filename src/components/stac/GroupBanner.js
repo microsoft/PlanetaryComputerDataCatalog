@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import { Text } from "@fluentui/react";
 
 const GroupBanner = ({ group }) => {
@@ -14,9 +14,10 @@ const GroupBanner = ({ group }) => {
       <div className="grid-content">
         <Text
           block
+          className="breadcrumbs"
           styles={{ root: { color: "#fff", fontWeight: 500, marginTop: 5 } }}
         >
-          Datasets
+          <Link to="/catalog">Datasets</Link>
         </Text>
         <h1 style={{ color: "#fff" }}>{group.title}</h1>
       </div>
