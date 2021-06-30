@@ -27,6 +27,11 @@ a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item a,
   color: #0060bd;
 }
 
+.page-header .breadcrumbs a,
+.page-header .breadcrumbs a:hover {
+  color: #fff !important;
+}
+
 p {
   line-height: 1.6;
 }
