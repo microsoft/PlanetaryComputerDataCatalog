@@ -2,38 +2,86 @@
 # detail page. Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/codefiles_urls.txt` file for processing
 
+# Omitting headerImg will reuse and stretch the collection thumbnail
+
 # To include a button on a tab to launch the notebook in Hub, add the following
-# config to the tab item:
+# config to the tab item. Assumes PlanetaryComputerExamples/main.
 
 # tabs:
 #   - title: My title
 #     src: notebook.html
 #     launch:
-#       repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
-#       branch: main
 #       filePath: landcover.ipynb
 ---
 collections:
-  daymet-daily-na:
-    headerImg: ./images/daymet-na-vp-header.png
+  daymet-daily-pr:
+    headerImg: ./images/daymet-daily-pr-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-monthly-pr:
+    headerImg: ./images/daymet-monthly-pr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-annual-pr:
+    headerImg: ./images/daymet-annual-pr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-daily-hi:
+    headerImg: ./images/daymet-daily-hi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-monthly-hi:
+    headerImg: ./images/daymet-monthly-hi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
           filePath: quickstarts/reading-zarr-data.ipynb
 
   daymet-annual-hi:
-    headerImg: ./images/daymet-hi-temp-header3.png
+    headerImg: ./images/daymet-annual-hi-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
           filePath: quickstarts/reading-zarr-data.ipynb
 
+  daymet-daily-na:
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-monthly-na:
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
+
+  daymet-annual-na:
+    tabs:
+      - title: Example Notebook
+        src: reading-zarr-data.html
+        launch:
+          filePath: quickstarts/reading-zarr-data.ipynb
 
   naip:
     headerImg: ./images/naip-hero.jpg
@@ -41,47 +89,42 @@ collections:
       - title: Example Notebook
         src: naip-example.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
           filePath: datasets/naip/naip-example.ipynb
       - title: Blob Storage Notebook
         src: naip.html
       - title: Storage Documentation
         src: naip-storage.html
+
   landsat-8-c2-l2:
     headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Example Notebook
         src: landsat-8-c2-l2-example.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
           filePath: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
       - title: Blob Storage Notebook
         src: landsat-8.html
       - title: Storage Documentation
         src: landsat-8-storage.html
+
   sentinel-2-l2a:
     headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Example Notebook
         src: sentinel-2-l2a-example.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
           filePath: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
       - title: Blob Storage Notebook
         src: sentinel-2.html
       - title: Storage Documentation
         src: sentinel-2-storage.html
+
   aster-l1t:
     headerImg: ./images/aster-hero.jpg
     tabs:
       - title: Example Notebook
         src: aster-l1t-example.html
         launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
           filePath: datasets/aster-l1t/aster-l1t-example.ipynb
       - title: Blob Storage Notebook
         src: aster.html
@@ -94,7 +137,8 @@ collections:
 ai4e:
   - title: GBIF
     shortTerm: GBIF occurrence
-    description: Species occurrences shared through the Global Biodiversity Information Facility
+    description:
+      Species occurrences shared through the Global Biodiversity Information Facility
     infoUrl: http://aka.ms/ai4edata-gbif/
     thumbnailUrl: gbif.jpg
     alt: Colorful frog on a leaf
@@ -158,7 +202,9 @@ ai4e:
 
   - title: MODIS
     shortTerm: MODIS
-    description: Satellite imagery from the Moderate Resolution Imaging Spectroradiometer (MODIS)
+    description:
+      Satellite imagery from the Moderate Resolution Imaging Spectroradiometer
+      (MODIS)
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
@@ -239,7 +285,7 @@ ai4e:
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
     description: Historical climate data for China, from 1851-2010
-    infoUrl: https://aka.ms/ai4edata-uk-met-20crds 
+    infoUrl: https://aka.ms/ai4edata-uk-met-20crds
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
     keywords: [china, climate, historical]
