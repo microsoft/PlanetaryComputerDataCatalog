@@ -32,7 +32,7 @@ const computeTags = (collections, datasetsConfig) => {
 
 const Catalog = () => {
   // Load STAC Collections from API
-  const { isLoading, isError, data: stacResponse } = useCollections();
+  const { isLoading, isSuccess, isError, data: stacResponse } = useCollections();
 
   // Setup collections + "other" datasets
   const [filteredCollections, setFilteredCollections] = useState();
@@ -85,7 +85,7 @@ const Catalog = () => {
     <NoResults typeText="Azure" />
   );
 
-  const dataFilter = !isLoading ? (
+  const dataFilter = isSuccess ? (
     <DatasetFilter
       tags={allTags}
       stacCollection={stacResponse.collections}

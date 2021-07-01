@@ -75,7 +75,12 @@ const Collection = () => {
   }
 
   const bannerHeader = <Banner collection={collection} />;
-  const loadingMsg = <Spinner size={SpinnerSize.large} />;
+  const loadingMsg = (
+    <Spinner
+      size={SpinnerSize.large}
+      styles={{ screenReaderText: "Loading dataset", root: { marginTop: 100 } }}
+    />
+  );
   const errorMsg = (
     <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
       Sorry, we're having trouble loading this dataset right now
