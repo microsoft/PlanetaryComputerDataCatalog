@@ -1,4 +1,3 @@
-import React from "react";
 import marked from "marked";
 import DOMPurify from "dompurify";
 
@@ -10,9 +9,10 @@ const Description = () => {
   return (
     <div
       className="collection-content-item"
-      // style={{ marginTop: "5px", marginBottom: "5px" }}
       dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(marked(collection.description)),
+        __html: DOMPurify.sanitize(
+          marked(collection.description.replace(/\\n/g, "<br/>"))
+        ),
       }}
     ></div>
   );

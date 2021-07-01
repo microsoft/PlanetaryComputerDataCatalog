@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
 
@@ -11,7 +11,7 @@ import { useCollections } from "../utils/requests";
 import groups from "../config/datasetGroups.yml";
 import CollectionCard from "../components/stac/CollectionCard";
 import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
-import { capitalize, tagCase } from "../utils";
+import { capitalize, titleCase } from "../utils";
 
 const ALL = "all";
 const GROUP_ID = "msft:group_id";
@@ -39,12 +39,7 @@ const CatalogGroup = () => {
 
   const group = groups[groupId];
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    data: stacResponse,
-  } = useCollections();
+  const { isError, isLoading, isSuccess, data: stacResponse } = useCollections();
 
   // When collections are loaded, filter down to the ones in the current group
   useEffect(() => {
@@ -113,7 +108,7 @@ const CatalogGroup = () => {
       <PivotItem
         key={groupKey}
         itemKey={keyFormatter(groupKey)}
-        headerText={tagCase(groupKey)}
+        headerText={titleCase(groupKey)}
         itemCount={count}
       />
     );

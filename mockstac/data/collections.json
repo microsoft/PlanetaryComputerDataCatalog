@@ -1651,6 +1651,1156 @@
           "media_type": "image/png"
         }
       }
+    },
+    {
+	"id": "mobi",
+    "type":"Collection",
+    "stac_version": "1.0.0",
+    "title": "MoBI: Map of Biodiversity Importance",
+    "description": "long description...",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://aka.ms/mobi-license",
+            "title": "NatureServe MoBI license"
+        }
+    ],
+    "stac_extensions": [
+		"https://stac-extensions.github.io/projection/v1.0.0/schema.json"        
+    ],
+    "keywords": [
+        "mobi","natureserve","united states","biodiversity"
+    ],
+    "msft:short_description": "Habitat information for 2,216 imperiled species occurring in the conterminous United States",
+    "msft:storage_account": "ai4edataeuwest",
+    "msft:container": "mobi",
+    "providers": [
+        {
+            "name": "NatureServe",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "http://natureserve.org/"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "assets": {
+        "thumbnail": {
+            "title": "MoBI",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/mobi.png",
+            "media_type": "image/png"
+        }
+    },
+       
+    "item_assets": {
+        "PWRSR_GAP12_SUM_All": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "PWRSR_GAP12_SUM_All",
+		  "description": "Protection-weighted range-size rarity for all species",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"PWRSR_GAP12_SUM_AquaticInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "PWRSR_GAP12_SUM_AquaticInverts",
+		  "description": "Protection-weighted range-size rarity for aquatic invertebrates",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"PWRSR_GAP12_SUM_Plants": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "PWRSR_GAP12_SUM_Plants",
+		  "description": "Protection-weighted range-size rarity for vascular plants",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"PWRSR_GAP12_SUM_PollinatorInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "PWRSR_GAP12_SUM_PollinatorInverts",
+		  "description": "Protection-weighted range-size rarity for pollinators",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"PWRSR_GAP12_SUM_Vertebrates": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "PWRSR_GAP12_SUM_Vertebrates",
+		  "description": "Protection-weighted range-size rarity for vertebrates",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"RSR_All": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "RSR_All",
+		  "description": "Range-size rarity for species",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"RSR_AquaticInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "RSR_AquaticInverts",
+		  "description": "Range-size rarity for aquatic invertebrates",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"RSR_Plants": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "RSR_Plants",
+		  "description": "Range-size rarity for vascular plants",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"RSR_PollinatorInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "RSR_PollinatorInverts",
+		  "description": "Range-size rarity for pollinators",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"RSR_Vertebrates": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "RSR_Vertebrates",
+		  "description": "Range-size rarity for vertebrates",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"SpeciesRichness_All": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "SpeciesRichness_All",
+		  "description": "Species richness for species",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"SpeciesRichness_AquaticInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "SpeciesRichness_AquaticInverts",
+		  "description": "Species richness for aquatic invertebrates",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"SpeciesRichness_Plants": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "SpeciesRichness_Plants",
+		  "description": "Species richness for vascular plants",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"SpeciesRichness_PollinatorInverts": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "SpeciesRichness_PollinatorInverts",
+		  "description": "Species richness for pollinators",
+		  "roles": [
+			"data"
+		  ]
+		},
+		"SpeciesRichness_Vertebrates": {
+		  "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+		  "title": "SpeciesRichness_Vertebrates",
+		  "description": "Species richness for vertebrates",
+		  "roles": [
+			"data"
+		  ]
+		}
+    },
+	
+	"summaries": {
+        "gsd": [
+            990
+        ]
+    },
+	
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [-130.23751729209377, 21.736663926419077, -63.66198266211968, 49.184200486300604]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2020-04-14T00:00:00",
+                    "2020-04-14T00:00:00"
+                ]
+            ]
+        }
     }
+},
+{
+	"id": "hrea",
+    "type":"Collection",
+    "stac_version": "1.0.0",
+    "title": "HREA: High Resolution Electricity Access",
+    "description": "{{ collection.description }}",
+    "license": "CC-BY-4.0",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "CC BY 4.0"
+        }
+    ],	
+    "stac_extensions": [
+		"https://stac-extensions.github.io/projection/v1.0.0/schema.json"        
+    ],	
+    "keywords": [
+        "hrea","electricity","VIIRS"
+    ],	
+    "msft:short_description": "Settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery",
+    "msft:storage_account": "hreadatasa",
+    "msft:container": "hrea",
+    "providers": [
+        {
+            "name": "University of Michigan",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "http://www-personal.umich.edu/~brianmin/HREA/index.html/"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],	
+    "assets": {
+        "thumbnail": {
+            "title": "HREA",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hrea.png",
+            "media_type": "image/png"
+        }
+    },       
+    "item_assets": {
+        "light-composite": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Nighttime light annual composite",
+            "roles": [
+                "data"
+            ]
+        },
+		"estimated-brightness": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Estimated brightness levels",
+            "roles": [
+                "data"
+            ]
+        },
+		"lightscore": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Probability of electrification",
+            "roles": [
+                "data"
+            ]
+        },
+		"night-proportion": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Proportion of nights a settlement is brighter than uninhabited areas",
+            "roles": [
+                "data"
+            ]
+        }
+    },	
+	"summaries": {
+        "gsd": [
+            30,
+			460
+        ]
+    },	
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [-92.008545, -34.838027, 50.759908, 37.169709]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-12-31T00:00:00",
+                    "2019-12-31T00:00:00"
+                ]
+            ]
+        }
+    }
+},
+{
+  "type": "Collection",
+  "id": "terraclimate",
+  "stac_version": "1.0.0",
+  "description": "{{ collection.description }}",
+  "links": [],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/datacube/v1.0.0/schema.json"
+  ],
+  "cube:dimensions": {
+    "time": {
+      "type": "temporal",
+      "description": "time",
+      "extent": [
+        "1958-01-01T00:00:00Z",
+        "2019-12-01T00:00:00Z"
+      ]
+    },
+    "lon": {
+      "type": "spatial",
+      "axis": "x",
+      "description": "longitude",
+      "extent": [
+        -179.97916666666666,
+        179.97916666666666
+      ],
+      "reference_system": "4326"
+    },
+    "lat": {
+      "type": "spatial",
+      "axis": "y",
+      "description": "latitude",
+      "extent": [
+        -89.97916666666664,
+        89.97916666666667
+      ],
+      "reference_system": "4326"
+    }
+  },
+  "cube:variables": {
+    "aet": {
+      "type": "data",
+      "description": "water_evaporation_amount",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Actual Evapotranspiration",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "water_evaporation_amount",
+        "standard_name": "water_evaporation_amount",
+        "units": "mm"
+      }
+    },
+    "def": {
+      "type": "data",
+      "description": "water_potential_evaporation_amount_minus_water_evaporation_amount",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Climatic Water Deficit",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "water_potential_evaporation_amount_minus_water_evaporation_amount",
+        "standard_name": "water_potential_evaporation_amount_minus_water_evaporation_amount",
+        "units": "mm"
+      }
+    },
+    "pdsi": {
+      "type": "data",
+      "description": "palmer_drought_severity_index",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "unitless",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Palmer Drought Severity Index",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "palmer_drought_severity_index",
+        "standard_name": "palmer_drought_severity_index",
+        "units": "unitless"
+      }
+    },
+    "pet": {
+      "type": "data",
+      "description": "water_potential_evaporation_amount",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Reference Evapotranspiration",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "water_potential_evaporation_amount",
+        "standard_name": "water_potential_evaporation_amount",
+        "units": "mm"
+      }
+    },
+    "ppt": {
+      "type": "data",
+      "description": "precipitation_amount",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Accumulated Precipitation",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "precipitation_amount",
+        "standard_name": "precipitation_amount",
+        "units": "mm"
+      }
+    },
+    "ppt_station_influence": {
+      "type": "data",
+      "description": "station_influence",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "none",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "A number between 0 and 8, indicating the number of stations contributing to each grid value directly from CRU and interpolated to the TerraClimate grid. When this value is greater than 1, CRU data is used for the anomalies in the method. When this value is 0, JRA-55/ERA-20C/ERA-INTERIM is used for anomalies in the method.",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "station_influence",
+        "standard_name": "station_influence",
+        "units": "none"
+      }
+    },
+    "q": {
+      "type": "data",
+      "description": "runoff_amount",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Runoff",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "runoff_amount",
+        "standard_name": "runoff_amount",
+        "units": "mm"
+      }
+    },
+    "soil": {
+      "type": "data",
+      "description": "soil_moisture_content",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Soil Moisture at End of Month",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "soil_moisture_content",
+        "standard_name": "soil_moisture_content",
+        "units": "mm"
+      }
+    },
+    "srad": {
+      "type": "data",
+      "description": "downwelling_shortwave_flux_in_air",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "W/m2",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Downward Shortwave Radiation Flux at the Surface",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "downwelling_shortwave_flux_in_air",
+        "standard_name": "downwelling_shortwave_flux_in_air",
+        "units": "W/m2"
+      }
+    },
+    "swe": {
+      "type": "data",
+      "description": "liquid_water_content_of_surface_snow",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "mm",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Snow Water Equivalent at End of Month",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "liquid_water_content_of_surface_snow",
+        "standard_name": "liquid_water_content_of_surface_snow",
+        "units": "mm"
+      }
+    },
+    "tmax": {
+      "type": "data",
+      "description": "air_temperature",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "deg C",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Maximum 2-m Temperature",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "air_temperature",
+        "standard_name": "air_temperature",
+        "units": "deg C"
+      }
+    },
+    "tmax_station_influence": {
+      "type": "data",
+      "description": "station_influence",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "none",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "A number between 0 and 8, indicating the number of stations contributing to each grid value directly from CRU and interpolated to the TerraClimate grid. When this value is greater than 1, CRU data is used for the anomalies in the method. When this value is 0, JRA-55/ERA-20C/ERA-INTERIM is used for anomalies in the method.",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "station_influence",
+        "standard_name": "station_influence",
+        "units": "none"
+      }
+    },
+    "tmin": {
+      "type": "data",
+      "description": "air_temperature",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "deg C",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Minimum 2-m Temperature",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "air_temperature",
+        "standard_name": "air_temperature",
+        "units": "deg C"
+      }
+    },
+    "tmin_station_influence": {
+      "type": "data",
+      "description": "station_influence",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "none",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "A number between 0 and 8, indicating the number of stations contributing to each grid value directly from CRU and interpolated to the TerraClimate grid. When this value is greater than 1, CRU data is used for the anomalies in the method. When this value is 0, JRA-55/ERA-20C/ERA-INTERIM is used for anomalies in the method.",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "station_influence",
+        "standard_name": "station_influence",
+        "units": "none"
+      }
+    },
+    "vap": {
+      "type": "data",
+      "description": "water_vapor_partial_pressure_in_air",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "kPa",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "2-m Vapor Pressure",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "water_vapor_partial_pressure_in_air",
+        "standard_name": "water_vapor_partial_pressure_in_air",
+        "units": "kPa"
+      }
+    },
+    "vap_station_influence": {
+      "type": "data",
+      "description": "station_influence",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "none",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "A number between 0 and 8, indicating the number of stations contributing to each grid value directly from CRU and interpolated to the TerraClimate grid. When this value is greater than 1, CRU data is used for the anomalies in the method. When this value is 0, JRA-55/ERA-20C/ERA-INTERIM is used for anomalies in the method.",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "station_influence",
+        "standard_name": "station_influence",
+        "units": "none"
+      }
+    },
+    "vpd": {
+      "type": "data",
+      "description": "vapor_pressure_deficit",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "kPa",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "Mean Vapor Pressure Deficit",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "vapor_pressure_deficit",
+        "standard_name": "vapor_pressure_deficit",
+        "units": "kPa"
+      }
+    },
+    "ws": {
+      "type": "data",
+      "description": "wind_speed",
+      "dimensions": [
+        "time",
+        "lat",
+        "lon"
+      ],
+      "unit": "m/s",
+      "shape": [
+        744,
+        4320,
+        8640
+      ],
+      "chunks": [
+        12,
+        1440,
+        1440
+      ],
+      "attrs": {
+        "coordinate_system": "WGS84,EPSG:4326",
+        "description": "10-m Wind Speed",
+        "dimensions": "lon lat time",
+        "grid_mapping": "crs",
+        "long_name": "wind_speed",
+        "standard_name": "wind_speed",
+        "units": "m/s"
+      }
+    }
+  },
+  "title": "Terraclimate",
+  "providers": [
+    {
+      "name": "Microsoft",
+      "roles": [
+        "host",
+        "processor"
+      ],
+      "url": "https://planetarycomputer.microsoft.com"
+    },
+    {
+      "name": "Climatology Lab",
+      "roles": [
+        "producer"
+      ],
+      "url": "http://www.climatologylab.org/terraclimate.html"
+    },
+    {
+      "name": "Abatzoglou, J.T., S.Z. Dobrowski, S.A. Parks, K.C. Hegewisch",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.nature.com/articles/sdata2017191"
+    }
+  ],
+  "assets": {
+    "zarr-https": {
+      "href": "https://cpdataeuwest.blob.core.windows.net/cpdata/raw/terraclimate/4000m/raster.zarr",
+      "type": "application/vnd+zarr",
+      "title": "Terraclimate HTTPS Zarr root",
+      "description": "HTTPS URI of the Terraclimate Zarr Group on Azure Blob Storage.",
+      "xarray_kwargs": {
+        "consolidated": true
+      },
+      "roles": [
+        "data",
+        "zarr",
+        "https"
+      ]
+    },
+    "zarr-abfs": {
+      "href": "az://cpdata/raw/terraclimate/4000m/raster.zarr",
+      "type": "application/vnd+zarr",
+      "title": "Terraclimate Azure Blob File System Zarr root",
+      "description": "Azure Blob File System URI of the Terraclimate Zarr Group on Azure Blob Storage for use with adlfs.",
+      "storage_options": {
+        "account_name": "cpdataeuwest"
+      },
+      "roles": [
+        "data",
+        "zarr",
+        "abfs"
+      ]
+    },
+    "thumbnail": {
+      "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/additional_datasets/RWz0Zk.jpg",
+      "title": "Terraclimate thumbnail",
+      "media_type": "image/png"
+    }
+  },
+  "keywords": [
+    "terraclimate",
+    "evapotransporation",
+    "water",
+    "drought",
+    "precipitation",
+    "runoff",
+    "soil moisture",
+    "shortwave radiation",
+    "snow water equivalent",
+    "temperature",
+    "vapor pressure",
+    "wind"
+  ],
+  "msft:short_description": "High-resolution global dataset of monthly climate and climatic water balance.",
+  "msfs:msft:storage_account": "cpdataeuwest",
+  "msft:container": "cpdata",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "1958-01-01T00:00:00Z",
+          "2019-12-01T00:00:00Z"
+        ]
+      ]
+    }
+  },
+  "license": "proprietary"
+},
+{
+	"id": "mtbs",
+    "type":"Collection",
+    "stac_version": "1.0.0",
+    "title": "MTBS: Monitoring Trends in Burn Severity",
+    "description": "{{ collection.description }}",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+            "title": "public domain"
+        }
+    ],
+    "stac_extensions": [
+		"https://stac-extensions.github.io/projection/v1.0.0/schema.json"        
+    ],	
+    "keywords": [
+        "mtbs","USGS","USFS","USDA","forest","fire"
+    ],	
+    "msft:short_description": "Annual burn severity mosaics for the continental United States and Alaska",
+    "msft:storage_account": "cpdataeuwest",
+    "msft:container": "cpdata",
+    "providers": [
+        {
+            "name": "MTBS program",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://www.mtbs.gov/"
+        },
+		{
+            "name": "CarbonPlan",
+            "roles": [
+                "processor"
+            ],
+            "url": "https://carbonplan.org"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],	
+    "assets": {
+        "thumbnail": {
+            "title": "MTBS",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/mtbs.png",
+            "type": "image/png"
+        }
+    },       
+    "item_assets": {
+        "burn-severity": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Burn severity",
+            "roles": [
+                "data"
+            ]
+        },
+		"metadata": {
+            "type": "text/html",
+            "title": "Metadata",
+            "roles": [
+                "metadata"
+            ]
+        }
+    },	
+	"summaries": {
+        "gsd": [
+            30			
+        ]
+    },	
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [-166.705027, 23.680916, -65.871833, 69.980073]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "1984-12-31T00:00:00",
+                    "2018-12-31T00:00:00"
+                ]
+            ]
+        }
+    }
+},
+{
+	"id": "nasadem",
+    "type":"Collection",
+    "stac_version": "1.0.0",
+    "title": "NASADEM HGT v001",
+    "description": "{{ collection.description }}",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+            "title": "public domain"
+        }
+    ],	
+    "stac_extensions": [
+		"https://stac-extensions.github.io/projection/v1.0.0/schema.json"        
+    ],	
+    "keywords": [
+        "NASA","JPL","elevation","DEM","USGS","NGA","SRTM"
+    ],	
+    "msft:short_description": "Global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission",
+    "msft:storage_account": "nasademeuwest",
+    "msft:container": "nasadem-cog",
+    "providers": [
+        {
+            "name": "NASA",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://earthdata.nasa.gov/esds/competitive-programs/measures/nasadem"
+        },
+        {
+            "name": "JPL",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://trs.jpl.nasa.gov/handle/2014/46123"
+        },
+        {
+            "name": "USGS",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://lpdaac.usgs.gov/products/nasadem_hgtv001/"
+        },
+		{
+            "name": "OpenTopography",
+            "roles": [
+                "processor"
+            ],
+            "url": "https://portal.opentopography.org/datasetMetadata?otCollectionID=OT.032021.4326.2"
+        },
+		{
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],	
+    "assets": {
+        "thumbnail": {
+            "title": "NASADEM",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/nasadem.png",
+            "type": "image/png"
+        }
+    },       
+    "item_assets": {
+        "elevation": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Elevation",
+            "roles": [
+                "data"
+            ]
+        }
+    },	
+	"summaries": {
+        "gsd": [
+            30
+        ]
+    },	
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [-179.000139, -56.000139, 179.000139, 61.000139]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2000-02-20T00:00:00", 
+                    "2000-02-20T00:00:00"
+                ]
+            ]
+        }
+    }
+}
+
   ]
 }

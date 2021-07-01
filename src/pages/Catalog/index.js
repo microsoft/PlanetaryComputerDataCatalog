@@ -12,7 +12,7 @@ import DatasetFilter from "./components/DatasetFilter";
 import GroupedCollectionCard from "./components/GroupedCollectionCard";
 import NoResults from "./components/NoResults";
 
-import { sortSpecialByKey, tagCase } from "utils";
+import { isort, sortSpecialByKey } from "utils";
 import { useCollections } from "utils/requests";
 import { ai4e as datasetsConfig } from "config/datasets.yml";
 
@@ -26,13 +26,13 @@ const computeTags = (collections, datasetsConfig) => {
   // Filter out any falsy elements
   return Array.from(new Set(collTags.concat(dsTags)))
     .filter(t => !!t)
-    .sort()
-    .map(item => ({ key: item, name: tagCase(item) }));
+    .sort(isort)
+    .map(item => ({ key: item.toLocaleLowerCase(), name: item }));
 };
 
 const Catalog = () => {
   // Load STAC Collections from API
-  const { isLoading, isError, data: stacResponse } = useCollections();
+  const { isLoading, isSuccess, isError, data: stacResponse } = useCollections();
 
   // Setup collections + "other" datasets
   const [filteredCollections, setFilteredCollections] = useState();
@@ -85,7 +85,7 @@ const Catalog = () => {
     <NoResults typeText="Azure" />
   );
 
-  const dataFilter = !isLoading ? (
+  const dataFilter = isSuccess ? (
     <DatasetFilter
       tags={allTags}
       stacCollection={stacResponse.collections}

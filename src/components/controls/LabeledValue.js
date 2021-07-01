@@ -1,7 +1,7 @@
 import { Text } from "@fluentui/react";
 import { boldStyle } from "../../styles";
 
-const LabeledValue = ({ label, children }) => {
+const LabeledValue = ({ label, children = null }) => {
   return (
     <div className="collection-content-item">
       <Text block styles={boldStyle}>

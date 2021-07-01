@@ -101,10 +101,6 @@
   padding-top: 20px;
 }
 
-.keywords-bar button:first-child {
-  margin-left: 0;
-}
-
 .keywords-bar button:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.15);
