@@ -35,12 +35,7 @@ const Collection = () => {
   const [notFound, setNotFound] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    data: stacResponse,
-  } = useCollections();
+  const { isError, isLoading, isSuccess, data: stacResponse } = useCollections();
 
   useEffect(() => {
     setActiveTab(location.hash.replace("#", ""));
@@ -62,7 +57,7 @@ const Collection = () => {
     history.replace({ hash: itemKey });
   };
 
-  const tabs = tabConfig[id]?.tabs.map(({ title, src, launch }) => {
+  const tabs = tabConfig[id]?.tabs?.map(({ title, src, launch }) => {
     return (
       <PivotItem
         className="main-content"
@@ -87,11 +82,7 @@ const Collection = () => {
     </MessageBar>
   );
   const overviewPivot = collection && (
-    <PivotItem
-      className="main-content"
-      headerText="Overview"
-      itemKey="overview"
-    >
+    <PivotItem className="main-content" headerText="Overview" itemKey="overview">
       <CollectionProvider collection={collection}>
         <div className="with-sidebar">
           <div>
