@@ -1,5 +1,4 @@
 import { ITextStyles, Text } from "@fluentui/react";
-import { tagCase } from "utils";
 
 interface IKeywordsProp {
   keywords: string[];
@@ -21,7 +20,7 @@ const Keywords = ({
         borderRadius: "4px",
         border: `0.5px solid ${color}`,
         padding: "6px",
-        margin: "5px",
+        margin: "5px 10px 5px 0px",
         minWidth: "30px",
         display: "inline-block",
         color: color,
@@ -30,16 +29,15 @@ const Keywords = ({
       },
     };
 
-    const formatted = tagCase(keyword);
     return (
       <Text
         as="button"
-        title={`Filter datasets by "${formatted}"`}
+        title={`Filter datasets by "${keyword}"`}
         key={`kw-${keyword}`}
         styles={pillStyle}
         onClick={() => onClick(keyword.toLowerCase())}
       >
-        {formatted}
+        {keyword}
       </Text>
     );
   });
