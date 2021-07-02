@@ -142,7 +142,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-gbif/
     thumbnailUrl: gbif.jpg
     alt: Colorful frog on a leaf
-    keywords: [global, biodiversity, species, gbif]
+    keywords: [Global, Biodiversity, Species, GBIF]
 
   - title: Daymet
     shortTerm: Daymet temperature
@@ -150,7 +150,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-daymet
     thumbnailUrl: RE3CbUs.jpg
     alt: Map showing color-coded temperature data.
-    keywords: ["weather", "daymet", "north america", "hawaii", "puerto rico"]
+    keywords: ["Weather", "Daymet", "North America", "Hawaii", "Puerto Rico"]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation
@@ -158,7 +158,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
-    keywords: [noaa, global, precipitation]
+    keywords: [Noaa, Global, Precipitation]
 
   - title: GOES-16
     shortTerm: GOES-16 weather
@@ -166,7 +166,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-goes16
     thumbnailUrl: RE4ucH9.jpg
     alt: Raindrops hitting water
-    keywords: [goes, weather, americas, imagery]
+    keywords: [GOES, Weather, Americas, Imagery]
 
   - title: Harmonized Global Biomass
     shortTerm: global biomass
@@ -174,7 +174,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-hgb
     thumbnailUrl: RWz0Yf.jpg
     alt: Shaded mossy forest
-    keywords: [global, carbon, biomass]
+    keywords: [Global, Carbon, Biomass]
 
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
@@ -182,7 +182,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-hls
     thumbnailUrl: RE3OM3E.jpg
     alt: Map of Chesapeake Bay
-    keywords: [landsat, sentinel, satellite, north america]
+    keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
   - title: High Resolution Electricity Access
     shortTerm: HREA
@@ -190,7 +190,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-hrea
     thumbnailUrl: RWAaNJ.jpg
     alt: City light grid viewed from above
-    keywords: [global, electricity]
+    keywords: [Global, Electricity]
 
   - title: LILA BC
     shortTerm: LILA BC
@@ -198,7 +198,7 @@ ai4e:
     infoUrl: http://lila.science/
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
-    keywords: [lila, labels, wildlife, biodiversity]
+    keywords: [LILA, Labels, Wildlife, Biodiversity]
 
   - title: MODIS
     shortTerm: MODIS
@@ -208,7 +208,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
-    keywords: [modis, satellite, imagery, global]
+    keywords: [MODIS, Satellite, Imagery, Global]
 
   - title: Monitoring Trends in Burn Severity Mosaics
     shortTerm: burn severity
@@ -216,7 +216,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-mtbs
     thumbnailUrl: RWz0Yt.jpg
     alt: Forest fire.
-    keywords: [mtbs, burn severity, fires, united states]
+    keywords: [MTBS, Burn Severity, Fires, United States]
 
   - title: NASADEM
     shortTerm: NASADEM
@@ -224,7 +224,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nasadem
     thumbnailUrl: RE4sQYP.jpg
     alt: Topographic map showing contour lines
-    keywords: [global, dem]
+    keywords: [Global, DEM]
 
   - title: National Land Cover Database
     shortTerm: land cover
@@ -232,7 +232,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
     alt: Landcover map of the United States
-    keywords: [land cover, united states]
+    keywords: [Land Cover, United States]
 
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
@@ -240,7 +240,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: RE4rvnx.jpg
     alt: Earth viewed from space station with a satellite
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
   - title: NOAA GFS Warm Start Conditions
     shortTerm: NOAA warm start
@@ -248,7 +248,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: RE4MHyn.jpg
     alt: High altitude view of cloud cover with moon
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
   - title: NOAA Integrated Surface Data
     shortTerm: NOAA surface
@@ -256,7 +256,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: RE4rsOQ.jpg
     alt: High altitude view of clouds
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, Noaa, Weather, Temperature, Precipitation]
 
   - title: Ocean Observatories Initiative CAMHD
     shortTerm: OOI
@@ -264,7 +264,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
-    keywords: [ooi, video, ocean, pacific]
+    keywords: [OOI, Video, Ocean, Pacific]
 
   - title: Sentinel-1 GRD
     shortTerm: Sentinel-1 GRD
@@ -272,7 +272,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-sentinel-1
     thumbnailUrl: sentinel-1-grd.jpg
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    keywords: [global, sentinel, satellite, esa, sar, radar]
+    keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
 
   - title: TerraClimate
     shortTerm: global climate
@@ -280,7 +280,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-terraclimate
     thumbnailUrl: RWz0Zk.jpg
     alt: Rain clouds viewed from space
-    keywords: [global, climate, temperature, weather]
+    keywords: [Global, Climate, Temperature, Weather]
 
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
@@ -288,7 +288,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-uk-met-20crds
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
-    keywords: [china, climate, historical]
+    keywords: [China, Climate, Historical]
 
   - title: USFS Forest Inventory and Analysis
     shortTerm: forest health
@@ -296,4 +296,4 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: RWz2Nt.jpg
     alt: Evergreen forest with shrubbery
-    keywords: [united states, forest, biomass]
+    keywords: [United States, Forest, Biomass]
