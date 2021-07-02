@@ -90,11 +90,10 @@ collections:
   terraclimate:
     headerImg: ./images/terraclimate-hero.jpg
     # Blocked by https://github.com/microsoft/PlanetaryComputerExamples/pull/27
-    # tabs:
-    #   - title: Example Notebook
-    #     src: terraclimate-example.html
-    #     launch:
-    #       datasets/terraclimate/terraclimate-example.ipynb
+    tabs:
+      - title: Example Notebook
+        src: terraclimate-example.html
+        launch: datasets/terraclimate/terraclimate-example.ipynb
 
   naip:
     headerImg: ./images/naip-hero.jpg
