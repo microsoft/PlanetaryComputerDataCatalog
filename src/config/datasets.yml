@@ -87,6 +87,14 @@ collections:
         src: reading-zarr-data.html
         launch: quickstarts/reading-zarr-data.ipynb
 
+  terraclimate:
+    headerImg: ./images/terraclimate-hero.png
+    # Blocked by https://github.com/microsoft/PlanetaryComputerExamples/pull/27
+    tabs:
+      - title: Example Notebook
+        src: terraclimate-example.html
+        launch: datasets/terraclimate/terraclimate-example.ipynb
+
   naip:
     headerImg: ./images/naip-hero.jpg
     tabs:
@@ -273,14 +281,6 @@ ai4e:
     thumbnailUrl: sentinel-1-grd.jpg
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
     keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
-
-  - title: TerraClimate
-    shortTerm: global climate
-    description: Global monthly climate data from 1958-present
-    infoUrl: https://aka.ms/ai4edata-terraclimate
-    thumbnailUrl: RWz0Zk.jpg
-    alt: Rain clouds viewed from space
-    keywords: [Global, Climate, Temperature, Weather]
 
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
