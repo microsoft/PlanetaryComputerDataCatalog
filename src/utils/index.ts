@@ -1,22 +1,16 @@
-import acronyms from "config/acronyms.yml";
-
-export const capitalize = str => {
+export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const titleCase = str => {
+export const titleCase = (str: string) => {
   return str.split(" ").map(capitalize).join(" ");
 };
 
-export const tagCase = str => {
-  if (str.length <= 4 || acronyms.includes(str)) {
-    return str.toUpperCase();
-  }
-  return titleCase(str);
-};
+export const isort = (a: string, b: string) =>
+  a.localeCompare(b, undefined, { sensitivity: "base" });
 
-const sortAlphaByKey = key => {
-  return (a, b) => {
+const sortAlphaByKey = (key: string) => {
+  return (a: any, b: any) => {
     if (a[key] < b[key]) {
       return -1;
     }
@@ -28,12 +22,12 @@ const sortAlphaByKey = key => {
 };
 
 // Alpha sort, except favor special terms to the beginning
-export const sortSpecialByKey = key => {
+export const sortSpecialByKey = (key: string) => {
   const specialKeys = ["landsat", "sentinel"];
-  const isSpecial = val =>
+  const isSpecial = (val: any) =>
     specialKeys.some(term => val[key].toLowerCase().includes(term));
 
-  return (a, b) => {
+  return (a: any, b: any) => {
     const aSpecial = isSpecial(a);
     const bSpecial = isSpecial(b);
 
@@ -48,10 +42,10 @@ export const sortSpecialByKey = key => {
   };
 };
 
-export const sortByLookup = lookup => {
-  const get = k => lookup[k] ?? 50;
+export const sortByLookup = (lookup: any) => {
+  const get = (k: string) => lookup[k] ?? 50;
 
-  return (a, b) => {
+  return (a: string, b: string) => {
     if (get(a) < get(b)) {
       return -1;
     }
@@ -62,18 +56,38 @@ export const sortByLookup = lookup => {
   };
 };
 
-export const sortByPosition = list => {
-  return sortByLookup(Object.fromEntries(list.map((item, idx) => [item, idx])));
+export const sortByPosition = (list: any) => {
+  return sortByLookup(
+    Object.fromEntries(list.map((item: any, idx: number) => [item, idx]))
+  );
 };
 
-export const buildHubLaunchUrl = ({
-  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
-  branch = "main",
-  filePath,
-}) => {
+interface ILauncherConfig {
+  repo: string;
+  branch: string;
+  filePath: string;
+}
+
+const configFromLauncher = (launcher: ILauncherConfig | string): ILauncherConfig => {
+  let config: ILauncherConfig;
+  if (typeof launcher === "string") {
+    config = {
+      branch: "main",
+      filePath: launcher,
+      repo: "https://github.com/microsoft/PlanetaryComputerExamples",
+    };
+  } else {
+    config = launcher;
+  }
+  return config;
+};
+
+export function buildHubLaunchUrl(filePath: string): string;
+export function buildHubLaunchUrl(launchConfig: ILauncherConfig): string;
+export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
+  const { repo, branch, filePath } = configFromLauncher(launcher);
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
-
   const repoName = repo.split("/").pop();
 
   // Get a unique but arbitrary string for the workspace path. This works
@@ -90,21 +104,20 @@ export const buildHubLaunchUrl = ({
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
   return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
-};
+}
 
-export const buildGitHubUrl = ({
-  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
-  branch = "main",
-  filePath,
-}) => {
+export function buildGitHubUrl(launcher: ILauncherConfig): string;
+export function buildGitHubUrl(launcher: string): string;
+export function buildGitHubUrl(launcher: ILauncherConfig | string): string {
+  const { repo, branch, filePath } = configFromLauncher(launcher);
   return `${repo}/blob/${branch}/${filePath}`;
-};
+}
 
 /*
   For markup that was generated from external tools (marked, nbconvert, etc) run through
   some DOM manipulations to alter the structure for accessibility reasons
 */
-export const a11yPostProcessDom = dom => {
+export const a11yPostProcessDom = (dom: Document) => {
   // Find img tags without an alt tag, and add one
   dom
     .querySelectorAll("img:not([alt]")
@@ -115,11 +128,14 @@ export const a11yPostProcessDom = dom => {
   // brought over from nbconvert and must have a tabindex set to all keyboard
   // scrolling.
   dom.querySelectorAll(".highlight pre").forEach(el => {
-    el.setAttribute("tabindex", 0);
+    el.setAttribute("tabindex", "0");
   });
 };
 
-export const scrollToHash = (elementId, behavior = "smooth") => {
+export const scrollToHash = (
+  elementId: string,
+  behavior: ScrollBehavior = "smooth"
+) => {
   // Remove the hash
   const id = elementId.substring(elementId.lastIndexOf("#") + 1);
 
