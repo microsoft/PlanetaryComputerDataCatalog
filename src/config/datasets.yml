@@ -10,88 +10,89 @@
 # tabs:
 #   - title: My title
 #     src: notebook.html
+#     launch: tutorials/notebook.ipynb
+#
+# or, if you need to specify a different repo or branch, the full config is:
+#
+# tabs:
+#   - title: My title
+#     src: notebook.html
 #     launch:
-#       filePath: landcover.ipynb
+#       - repo: http://github.com/exampleorg/myrepo
+#         branch: v1
+#         filePath: tutorials/notebook.ipynb
+
 ---
 collections:
   3dep-seamless:
     headerImg: ./images/threedep-seamless-hero.png
+
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-monthly-pr:
     headerImg: ./images/daymet-monthly-pr-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-annual-pr:
     headerImg: ./images/daymet-annual-pr-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-daily-hi:
     headerImg: ./images/daymet-daily-hi-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-monthly-hi:
     headerImg: ./images/daymet-monthly-hi-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-annual-hi:
     headerImg: ./images/daymet-annual-hi-hero.png
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-daily-na:
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-monthly-na:
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   daymet-annual-na:
     tabs:
       - title: Example Notebook
         src: reading-zarr-data.html
-        launch:
-          filePath: quickstarts/reading-zarr-data.ipynb
+        launch: quickstarts/reading-zarr-data.ipynb
 
   naip:
     headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Example Notebook
         src: naip-example.html
-        launch:
-          filePath: datasets/naip/naip-example.ipynb
+        launch: datasets/naip/naip-example.ipynb
       - title: Blob Storage Notebook
         src: naip.html
       - title: Storage Documentation
@@ -102,8 +103,7 @@ collections:
     tabs:
       - title: Example Notebook
         src: landsat-8-c2-l2-example.html
-        launch:
-          filePath: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
+        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
       - title: Blob Storage Notebook
         src: landsat-8.html
       - title: Storage Documentation
@@ -114,8 +114,7 @@ collections:
     tabs:
       - title: Example Notebook
         src: sentinel-2-l2a-example.html
-        launch:
-          filePath: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+        launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
       - title: Blob Storage Notebook
         src: sentinel-2.html
       - title: Storage Documentation
@@ -126,8 +125,7 @@ collections:
     tabs:
       - title: Example Notebook
         src: aster-l1t-example.html
-        launch:
-          filePath: datasets/aster-l1t/aster-l1t-example.ipynb
+        launch: datasets/aster-l1t/aster-l1t-example.ipynb
       - title: Blob Storage Notebook
         src: aster.html
       - title: Storage Documentation

@@ -62,18 +62,32 @@ export const sortByPosition = (list: any) => {
   );
 };
 
-export const buildHubLaunchUrl = ({
-  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
-  branch = "main",
-  filePath,
-}: {
+interface ILauncherConfig {
   repo: string;
   branch: string;
   filePath: string;
-}) => {
+}
+
+const configFromLauncher = (launcher: ILauncherConfig | string): ILauncherConfig => {
+  let config: ILauncherConfig;
+  if (typeof launcher === "string") {
+    config = {
+      branch: "main",
+      filePath: launcher,
+      repo: "https://github.com/microsoft/PlanetaryComputerExamples",
+    };
+  } else {
+    config = launcher;
+  }
+  return config;
+};
+
+export function buildHubLaunchUrl(filePath: string): string;
+export function buildHubLaunchUrl(launchConfig: ILauncherConfig): string;
+export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
+  const { repo, branch, filePath } = configFromLauncher(launcher);
   const urlRepo = encodeURIComponent(repo);
   const urlBranch = encodeURIComponent(branch);
-
   const repoName = repo.split("/").pop();
 
   // Get a unique but arbitrary string for the workspace path. This works
@@ -90,19 +104,14 @@ export const buildHubLaunchUrl = ({
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
   return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
-};
+}
 
-export const buildGitHubUrl = ({
-  repo = "https://github.com/microsoft/PlanetaryComputerExamples",
-  branch = "main",
-  filePath,
-}: {
-  repo: string;
-  branch: string;
-  filePath: string;
-}) => {
+export function buildGitHubUrl(launcher: ILauncherConfig): string;
+export function buildGitHubUrl(launcher: string): string;
+export function buildGitHubUrl(launcher: ILauncherConfig | string): string {
+  const { repo, branch, filePath } = configFromLauncher(launcher);
   return `${repo}/blob/${branch}/${filePath}`;
-};
+}
 
 /*
   For markup that was generated from external tools (marked, nbconvert, etc) run through
