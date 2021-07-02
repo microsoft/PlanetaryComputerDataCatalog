@@ -89,7 +89,6 @@ collections:
 
   terraclimate:
     headerImg: ./images/terraclimate-hero.png
-    headerImg: ./images/naip-hero.jpg
     # Blocked by https://github.com/microsoft/PlanetaryComputerExamples/pull/27
     tabs:
       - title: Example Notebook
