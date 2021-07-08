@@ -1,6 +1,6 @@
 # Changelog
 
-This document highlights the new features and breaking changes for each release of the Planetary Computer.
+This document highlights the new features and breaking changes between each release of the Planetary Computer.
 
 ## July 9th, 2021
 
