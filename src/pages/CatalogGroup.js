@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
+import marked from "marked";
 
 import GroupBanner from "../components/stac/GroupBanner";
 import Layout from "../components/Layout";
@@ -147,7 +148,11 @@ const CatalogGroup = () => {
       <section id="catalog-api-datasets">
         <div className="grid-content">
           <h2>Overview</h2>
-          <p style={{ maxWidth: 800, marginBottom: 40 }}>{group.description}</p>
+          <p style={{ maxWidth: 800, marginBottom: 40 }}>
+            <div
+              dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
+            />
+          </p>
           <div className="layout-container">
             {<Separator />}
             {pivot}

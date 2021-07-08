@@ -1,9 +1,4 @@
-import React from "react";
-import {
-  DetailsList,
-  DetailsListLayoutMode,
-  SelectionMode,
-} from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
 import { renderItemColumn, stacFormatter } from "../../utils/stac";
@@ -19,13 +14,7 @@ const columnWidths = {
 const Assets = () => {
   const { assets } = useStac();
 
-  const columnNames = [
-    "asset",
-    "stac_key",
-    "description",
-    "roles",
-    "content_type",
-  ];
+  const columnNames = ["asset", "stac_key", "description", "roles", "content_type"];
 
   const columns = columnNames.map(key => {
     return {
@@ -57,7 +46,7 @@ const Assets = () => {
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h3>Assets</h3>
+      <h3>Dataset Assets</h3>
       <DetailsList
         items={items}
         compact={false}

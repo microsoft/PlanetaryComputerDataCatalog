@@ -1,9 +1,4 @@
-import React from "react";
-import {
-  DetailsList,
-  DetailsListLayoutMode,
-  SelectionMode,
-} from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import {
   bandOverrideList,
@@ -39,9 +34,7 @@ const ItemAssets = () => {
     new Set(
       Object.values(formatted)
         .map(extensions => {
-          return extensions
-            .map(({ properties }) => Object.keys(properties))
-            .flat();
+          return extensions.map(({ properties }) => Object.keys(properties)).flat();
         })
         .flat()
     )
@@ -95,7 +88,8 @@ const ItemAssets = () => {
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h3>Dataset Assets</h3>
+      <h3>Item-level Assets</h3>
+      <p>Dataset items contain the following assets.</p>
       <DetailsList
         items={items}
         compact={false}
