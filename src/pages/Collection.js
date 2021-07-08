@@ -116,7 +116,7 @@ const Collection = () => {
 
   return (
     <Layout bannerHeader={bannerHeader} isShort>
-      <SEO title={id} description={collection?.description} />
+      <SEO title={collection?.title || id} description={collection?.description} />
       {collection ? (
         <Pivot
           className="grid-content"
