@@ -5,6 +5,7 @@ export interface IStacCollection {
   title: string;
   description: string;
   license: string;
+  assets: Record<string, IStacAsset>;
   extent: {
     spatial: {
       bbox: Array<Array<number>>;
@@ -19,6 +20,14 @@ export interface IStacCollection {
 export interface IStacItem extends Feature {
   collection: string;
   assets: {};
+}
+
+export interface IStacAsset {
+  href: string;
+  title?: string;
+  description?: string;
+  type?: string;
+  roles?: string[];
 }
 
 export interface IStacSearch {
