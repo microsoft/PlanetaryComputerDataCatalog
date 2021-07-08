@@ -4,7 +4,7 @@ import { useStac } from "./CollectionContext";
 import { renderItemColumn, stacFormatter } from "../../utils/stac";
 
 const columnWidths = {
-  asset: 475,
+  asset: 300,
   content_type: 75,
   stac_key: 75,
   roles: 75,
