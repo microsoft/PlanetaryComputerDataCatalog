@@ -18,6 +18,7 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/nasadem
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/nasadem-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/terraclimate.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/terraclimate-storage.md
+
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
@@ -34,3 +35,4 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/staging/da
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/staging/datasets/daymet/daymet-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/staging/datasets/io-lulc/io-lulc-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/staging/datasets/3dep/3dep-seamless-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/staging/datasets/gap/gap-example.ipynb

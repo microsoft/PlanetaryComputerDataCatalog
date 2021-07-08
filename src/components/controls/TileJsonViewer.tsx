@@ -55,7 +55,7 @@ const TileJsonViewer = ({ href }: TileJsonViewerProps) => {
         showFeedbackLink: false,
         showLogo: true,
         style: "grayscale_dark",
-        renderWorldCopies: false,
+        renderWorldCopies: true,
         authOptions: {
           authType: atlas.AuthenticationType.subscriptionKey,
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
@@ -85,7 +85,7 @@ const TileJsonViewer = ({ href }: TileJsonViewerProps) => {
         valueFormat={(value: number) => `${value}%`}
         styles={{ root: { maxWidth: 250 } }}
       />
-      <div id={mapContainerId} style={{ width: "100%", height: "70vh" }}></div>;
+      <div id={mapContainerId} style={{ width: "100%", height: "70vh" }}></div>
     </div>
   );
 };
