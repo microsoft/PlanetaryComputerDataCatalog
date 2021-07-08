@@ -2,9 +2,13 @@ import React from "react";
 
 const images = [
   "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/sentinel-2.png",
-  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/naip.png",
+  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hgb.png",
   "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png",
+  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/terraclimate.png",
   "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/aster.png",
+  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hrea.png",
+  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/naip.png",
+  "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/nasadem.png",
 ];
 const ImageStrip = () => {
   return (

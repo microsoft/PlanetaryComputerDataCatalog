@@ -15,9 +15,8 @@ const SearchResults = ({ results, isError }: SearchResultsProps) => {
   return (
     <div>
       <p>
-        Showing <strong>{results.numberReturned}</strong> of{" "}
-        <strong>{results.numberMatched.toLocaleString()}</strong> items that
-        matched your search.
+        Showing <strong>{results.features.length}</strong> items that matched your
+        search.
       </p>
     </div>
   );
