@@ -26,66 +26,131 @@
 collections:
   3dep-seamless:
     headerImg: ./images/threedep-seamless-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-seamless-example.html
+        launch: datasets/3dep-seamless-example.ipynb
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-monthly-pr:
     headerImg: ./images/daymet-monthly-pr-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-annual-pr:
     headerImg: ./images/daymet-annual-pr-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-daily-hi:
     headerImg: ./images/daymet-daily-hi-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-monthly-hi:
     headerImg: ./images/daymet-monthly-hi-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-annual-hi:
     headerImg: ./images/daymet-annual-hi-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-daily-na:
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-monthly-na:
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
 
   daymet-annual-na:
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch: quickstarts/reading-zarr-data.ipynb
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  hgb:
+    headerImg: ./images/hgb-hero.png
+    tabs:
+      - title: Example Notebook
+        src: hgb-example.html
+        launch: datasets/hgb/hgb-example.ipynb
+      - title: Blob Storage Notebook
+        src: hgb.html
+      - title: Storage Documentation
+        src: hgb-storage.html
+
+  hrea:
+    headerImg: ./images/hrea-hero.png
+    tabs:
+      - title: Example Notebook
+        src: hrea-example.html
+        launch: datasets/hrea/hrea-example.ipynb
+      - title: Blob Storage Notebook
+        src: hrea.html
+      - title: Storage Documentation
+        src: hrea-storage.html
+
+  io-lulc:
+    tabs:
+      - title: Example Notebook
+        src: io-lulc-example.html
+        launch: datasets/io-lulc/io-lulc-example.ipynb
+
+  mobi:
+    headerImg: ./images/mobi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: mobi-example.html
+        launch: datasets/mobi/mobi-example.ipynb
+      - title: Blob Storage Notebook
+        src: mobi.html
+      - title: Storage Documentation
+        src: mobi-storage.html
+
+  mtbs:
+    headerImg: ./images/mtbs-hero.png
+    tabs:
+      - title: Example Notebook
+        src: mtbs-example.html
+        launch: datasets/mtbs/mtbs-example.ipynb
+      - title: Blob Storage Notebook
+        src: mtbs.html
+      - title: Storage Documentation
+        src: mtbs-storage.html
+
+  nasadem:
+    headerImg: ./images/nasadem-hero.png
+    tabs:
+      - title: Example Notebook
+        src: nasadem-example.html
+        launch: datasets/nasadem/nasadem-example.ipynb
+      - title: Blob Storage Notebook
+        src: nasadem.html
+      - title: Storage Documentation
+        src: nasadem-storage.html
 
   terraclimate:
     headerImg: ./images/terraclimate-hero.png
@@ -94,6 +159,10 @@ collections:
       - title: Example Notebook
         src: terraclimate-example.html
         launch: datasets/terraclimate/terraclimate-example.ipynb
+      - title: Blob Storage Notebook
+        src: terraclimate.html
+      - title: Storage Documentation
+        src: terraclimate-storage.html
 
   naip:
     headerImg: ./images/naip-hero.jpg
@@ -152,14 +221,6 @@ ai4e:
     alt: Colorful frog on a leaf
     keywords: [Global, Biodiversity, Species, GBIF]
 
-  - title: Daymet
-    shortTerm: Daymet temperature
-    description: Gridded temperature data across North America
-    infoUrl: http://aka.ms/ai4edata-daymet
-    thumbnailUrl: RE3CbUs.jpg
-    alt: Map showing color-coded temperature data.
-    keywords: ["Weather", "Daymet", "North America", "Hawaii", "Puerto Rico"]
-
   - title: Global Hydro Estimator
     shortTerm: global precipitation
     description: Global precipitation estimates
@@ -176,14 +237,6 @@ ai4e:
     alt: Raindrops hitting water
     keywords: [GOES, Weather, Americas, Imagery]
 
-  - title: Harmonized Global Biomass
-    shortTerm: global biomass
-    description: Global carbon density for 2010
-    infoUrl: https://aka.ms/ai4edata-hgb
-    thumbnailUrl: RWz0Yf.jpg
-    alt: Shaded mossy forest
-    keywords: [Global, Carbon, Biomass]
-
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
     description: 30m-resolution satellite imagery for North America
@@ -191,14 +244,6 @@ ai4e:
     thumbnailUrl: RE3OM3E.jpg
     alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
-
-  - title: High Resolution Electricity Access
-    shortTerm: HREA
-    description: Settlement-level measures of electricity access and reliability
-    infoUrl: https://aka.ms/ai4edata-hrea
-    thumbnailUrl: RWAaNJ.jpg
-    alt: City light grid viewed from above
-    keywords: [Global, Electricity]
 
   - title: LILA BC
     shortTerm: LILA BC
@@ -217,22 +262,6 @@ ai4e:
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
     keywords: [MODIS, Satellite, Imagery, Global]
-
-  - title: Monitoring Trends in Burn Severity Mosaics
-    shortTerm: burn severity
-    description: Annual burn severity for the US
-    infoUrl: https://aka.ms/ai4edata-mtbs
-    thumbnailUrl: RWz0Yt.jpg
-    alt: Forest fire.
-    keywords: [MTBS, Burn Severity, Fires, United States]
-
-  - title: NASADEM
-    shortTerm: NASADEM
-    description: Global topographic survey
-    infoUrl: https://aka.ms/ai4edata-nasadem
-    thumbnailUrl: RE4sQYP.jpg
-    alt: Topographic map showing contour lines
-    keywords: [Global, DEM]
 
   - title: National Land Cover Database
     shortTerm: land cover
