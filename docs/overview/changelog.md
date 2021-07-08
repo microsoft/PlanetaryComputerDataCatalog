@@ -24,13 +24,13 @@ The full list of new datasets is provided below, but we wanted to highlight that
 
 * [Daymet Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries
 * [Esri 10-Meter Land Cover](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc): a 10-meter resolution map of Earth’s land surface from 2020
-* [High Resolution Electricity Access](https://planetarycomputer-staging.microsoft.com/dataset/hrea): Settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
-* [Monitoring Trends in Burn Severity](https://planetarycomputer-staging.microsoft.com/dataset/mtbs): Annual burn severity mosaics for the continental United States and Alaska
-* [Map of Biodiversity Importance](https://planetarycomputer-staging.microsoft.com/dataset/mobi): Habitat information for 2,216 imperiled species occurring in the conterminous United States
-* [NASADEM HGT v001](https://planetarycomputer-staging.microsoft.com/dataset/nasadem): Global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission
-* [TerraClimate](https://planetarycomputer-staging.microsoft.com/dataset/terraclimate): High-resolution global dataset of monthly climate and climatic water balance
+* [HREA — High Resolution Electricity Access](https://planetarycomputer-staging.microsoft.com/dataset/hrea): settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
+* [MTBS — Monitoring Trends in Burn Severity](https://planetarycomputer-staging.microsoft.com/dataset/mtbs): annual burn severity mosaics for the continental United States and Alaska
+* [MoBI — Map of Biodiversity Importance](https://planetarycomputer-staging.microsoft.com/dataset/mobi): habitat information for 2,216 imperiled species occurring in the conterminous United States
+* [NASADEM HGT v001](https://planetarycomputer-staging.microsoft.com/dataset/nasadem): global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission
+* [TerraClimate](https://planetarycomputer-staging.microsoft.com/dataset/terraclimate): high-resolution global dataset of monthly climate and climatic water balance
 * [USGS 3DEP Seamless DEMs](https://planetarycomputer-staging.microsoft.com/dataset/3dep-seamless): high-quality topographic data and for a wide range of other three-dimensional (3D) representations of the Nation's natural and constructed features
-* [USGS Gap Analysis Project](https://planetarycomputer-staging.microsoft.com/dataset/gap): The foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
+* [USGS Gap Analysis Project](https://planetarycomputer-staging.microsoft.com/dataset/gap): the foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
 
 #### Changes to existing datasets
 
