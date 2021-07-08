@@ -35,7 +35,7 @@ const Keywords = ({
         title={`Filter datasets by "${keyword}"`}
         key={`kw-${keyword}`}
         styles={pillStyle}
-        onClick={() => onClick(keyword.toLowerCase())}
+        onClick={() => onClick(keyword)}
       >
         {keyword}
       </Text>

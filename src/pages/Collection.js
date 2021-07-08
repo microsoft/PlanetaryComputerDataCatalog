@@ -97,7 +97,7 @@ const Collection = () => {
               <Providers />
               <License />
             </div>
-            <div>
+            <div style={{ maxWidth: 250 }}>
               <CollectionDetail />
             </div>
           </div>

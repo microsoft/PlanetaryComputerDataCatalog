@@ -27,6 +27,11 @@ StacFields.Registry.addMetadataField("attrs", {
   formatter: value => value,
 });
 
+StacFields.Registry.addMetadataField("label:classes", {
+  label: "Classes",
+  formatter: value => value.classes.join(", "),
+});
+
 export const mediaTypeOverride = value => {
   if (value === "image/tiff; application=geotiff; profile=cloud-optimized") {
     return "GeoTIFF (COG)";
