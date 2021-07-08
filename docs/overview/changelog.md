@@ -9,15 +9,17 @@ This document highlights the new features and breaking changes for each release 
 * The [STAC API][stac-api] is now compliant with STAC 1.0. 
 * The Hub environment Dockerfiles and images are now publicly available. See [#hub-environments] below for more.
 
-### STAC API
+### APIs
 
 #### New features
 
 #### Breaking changes
 
-### New datasets
+### Datasets
 
-### Changes to existing datasets
+#### New datasets
+
+#### Changes to existing datasets
 
 ### Hub environments
 
@@ -43,3 +45,6 @@ Some of these package updates include API breaking changes. We recommend reading
 * [pystac](https://github.com/stac-utils/pystac/blob/main/CHANGELOG.md)
 * [pystac-client](https://github.com/stac-utils/pystac-client/blob/main/CHANGELOG.md)
 * [planetary-computer](https://github.com/microsoft/planetary-computer-sdk-for-python/blob/main/CHANGELOG.md)
+
+[catalog](https://planetarycomputer.microsoft.com/catalog)
+[stac-api](https://planetarycomputer.microsoft.com/api/stac/v1)

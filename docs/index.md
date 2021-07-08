@@ -14,7 +14,7 @@
 About <overview/about>
 The Hub <overview/environment>
 Using VS Code <overview/ui-vscode>
-Changelog
+Changelog <overview/changelog>
 ```
 
 ```{toctree}
