@@ -7,8 +7,8 @@ This document highlights the new features and breaking changes between each rele
 ### Highlights
 
 * The [STAC API][stac-api] is now compliant with STAC 1.0. 
-* Added support for earth-systems datasets in our STAC catalog. See [Datasets](#datasets) below for more.
-* The Hub environment Dockerfiles and images are now publicly available. See [Hub environments](#hub-environments) below for more.
+* Added support for earth-systems datasets in our STAC catalog. See [Datasets](docs/overview/changelog/#datasets) below for more.
+* The Hub environment Dockerfiles and images are now publicly available. See [Hub environments](docs/overview/changelog/#hub-environments) below for more.
 
 ### APIs
 
