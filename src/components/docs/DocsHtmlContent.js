@@ -87,6 +87,15 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
     `${process.env.PUBLIC_URL}/_images`
   );
 
+  // Allow sanitization to safely set new tab targets. This could occur
+  // when Sphinx generated content has a target attribute set which is
+  // stripped out by the sanitizer.
+  DOMPurify.addHook("afterSanitizeAttributes", node => {
+    if (node.getAttribute("rel") === "noopener noreferrer") {
+      node.setAttribute("target", "_blank");
+    }
+  });
+
   const content = processedMarkup ? (
     <div className={className}>
       {children}

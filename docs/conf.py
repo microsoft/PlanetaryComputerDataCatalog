@@ -53,6 +53,8 @@ nbsphinx_prolog = """
            href="https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/workspaces/{{ workspace }}/tree/PlanetaryComputerExamples/{{ docname }}&branch=main"
            aria-label="Link will open in new tab" target="_blank" rel="noopener noreferrer"
            title="This example can be launched in the Planetary Computer Hub"
+           target="_blank"
+           rel="noopener noreferrer"
         >
         <span class="flex-container">
             <span>Launch in Hub</span>
@@ -63,6 +65,8 @@ nbsphinx_prolog = """
            href="https://github.com/microsoft/PlanetaryComputerExamples/blob/main/{{ docname }}"
            aria-label="Link will open in new tab" target="_blank" rel="noopener noreferrer"
            title="Suggest edits to this document"
+           target="_blank"
+           rel="noopener noreferrer"
         >
         <span class="flex-container">
             <span>Edit</span>
