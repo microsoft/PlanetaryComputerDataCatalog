@@ -49,7 +49,7 @@ The packages used in the Hub's environments have been upgraded. The following ta
 #### New package versions
 
 Package            | Previous version | New version
------------------- | ---------------- | -----------
+-------------------|------------------|------------
 pystac             | 0.5.6            | 1.0.0rc3
 pystac-client      | 0.1.1            | 0.2.0b2
 dask               | 2021.5.0         | 2021.6.2
@@ -64,3 +64,7 @@ Some of these package updates include API breaking changes. We recommend reading
 [catalog]: https://planetarycomputer.microsoft.com/catalog
 [stac-api]: https://planetarycomputer.microsoft.com/api/stac/v1
 [zarr]: https://zarr.readthedocs.io/en/stable/
+
+### Website
+
+Some datasets now have a built-in map viewer. Check it out on [Esri 10m Land Cover](/dataset/io-lulc#viewer).
