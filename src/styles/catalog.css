@@ -210,6 +210,10 @@
   .home-footer-item {
     flex-basis: 100%;
   }
+
+  .home-strip-container {
+    display: none !important;
+  }
 }
 
 @media (max-width: 1285px) {
@@ -227,15 +231,21 @@
 }
 
 @media (max-width: 766px) {
-  .home-strip-container {
+  .home-strip-item {
+    width: 50%;
+  }
+
+  img.home-strip-item:nth-child(-n + 4) {
     display: none;
   }
 }
 
-.home-strip-item {
-  width: 25%;
-  object-fit: contain;
-  height: 100%;
+@media (min-width: 766px) {
+  .home-strip-item {
+    width: 25%;
+    object-fit: contain;
+    height: 100%;
+  }
 }
 
 @media (max-width: 700px) {

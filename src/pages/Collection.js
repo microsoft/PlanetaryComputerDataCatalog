@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import {
   MessageBar,
@@ -21,6 +21,7 @@ import Providers from "../components/stac/Providers";
 import SEO from "../components/Seo";
 import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
 import { CollectionProvider } from "../components/stac/CollectionContext";
+import { viewerPivot } from "components/stac/viewerPivot";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
@@ -111,9 +112,11 @@ const Collection = () => {
     </PivotItem>
   );
 
+  const viewerTab = viewerPivot(collection);
+
   return (
     <Layout bannerHeader={bannerHeader} isShort>
-      <SEO title={id} description={collection?.description} />
+      <SEO title={collection?.title || id} description={collection?.description} />
       {collection ? (
         <Pivot
           className="grid-content"
@@ -122,6 +125,7 @@ const Collection = () => {
           ariaLabel="Dataset detail tabs"
         >
           {overviewPivot}
+          {viewerTab}
           {tabs}
         </Pivot>
       ) : isLoading ? (
