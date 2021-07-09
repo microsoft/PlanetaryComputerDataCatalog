@@ -15,8 +15,13 @@ a {
   text-decoration: none;
 }
 
+.announcements a {
+  color: white;
+  text-decoration: underline;
+}
+
 a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item
-    a, footer a):hover {
+    a, footer a, .announcements a):hover {
   text-decoration: underline;
   color: #0078d4;
 }
