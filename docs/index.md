@@ -51,4 +51,5 @@ concepts/sas
 
 STAC API <reference/stac>
 Data Authentication API <reference/sas>
+Data API <reference/data>
 ```
