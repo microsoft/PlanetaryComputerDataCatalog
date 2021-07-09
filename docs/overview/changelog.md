@@ -1,13 +1,13 @@
 # Changelog
 
-This document highlights the new features and breaking changes between each release of the Planetary Computer.
+This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
-## July 9th, 2021
+## July 2021
 
 ### Highlights
 
-* The [STAC API][stac-api] is now compliant with STAC 1.0. 
-* Added support for earth-systems datasets in our STAC catalog. See [Datasets](docs/overview/changelog/#datasets) below for more.
+* The [STAC API][stac-api] is now compliant with [STAC 1.0](https://medium.com/radiant-earth-insights/stac-specification-1-0-0-released-c59e8c848077).
+* Added support for earth-systems datasets in our STAC catalog. See [Datasets](./docs/overview/changelog/#datasets) below for more.
 * The Hub environment Dockerfiles and images are now publicly available. See [Hub environments](docs/overview/changelog/#hub-environments) below for more.
 
 ### APIs
@@ -18,9 +18,11 @@ This document highlights the new features and breaking changes between each rele
 
 ### Datasets
 
-The full list of new datasets is provided below, but we wanted to highlight that that a new *kind* of dataset are now available through our STAC API. In addition to our remote sensing datasets stored as Cloud Optimized GeoTIFFs, we're also hosting and cataloging data stored in [Zarr][zarr] format. See [this Daymet](https://planetarycomputer-staging.microsoft.com/dataset/daymet-monthly-hi) dataset for an example. This work was done with the [STAC](https://stacspec.org/) and [Pangeo](https://pangeo.io/) communities, and spurred improvements to the [datacube](https://github.com/stac-extensions/datacube) STAC extension and the creation of the [xarray-assets](https://github.com/stac-extensions/xarray-assets) STAC extension.
+The full list of new datasets is provided below, but we wanted to highlight that that a new *kind* of dataset is now available through our STAC API. In addition to our remote sensing datasets stored as Cloud Optimized GeoTIFFs, we're also hosting and cataloging data stored in [Zarr][zarr] format. See [this Daymet dataset](https://planetarycomputer-staging.microsoft.com/dataset/daymet-monthly-hi) for an example. This work was done with the [STAC](https://stacspec.org/) and [Pangeo](https://pangeo.io/) communities, and spurred improvements to the [datacube](https://github.com/stac-extensions/datacube) STAC extension and the creation of the [xarray-assets](https://github.com/stac-extensions/xarray-assets) STAC extension.
 
 #### New datasets
+
+The following datasets are now available in our [data catalog][catalog] and [STAC API][stac-api]:
 
 * [Daymet Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries
 * [Esri 10-Meter Land Cover](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc): a 10-meter resolution map of Earth’s land surface from 2020
@@ -48,10 +50,10 @@ The packages used in the Hub's environments have been upgraded. The following ta
 
 Package            | Previous version | New version
 ------------------ | ---------------- | -----------
-pystac             | ...              | 1.0.0rc3
-pystac-client      | ...              | 0.2.0b2
-dask               | ...              | 2021.6.2
-planetary-computer | ...              | 0.3.0rc2
+pystac             | 0.5.6            | 1.0.0rc3
+pystac-client      | 0.1.1            | 0.2.0b2
+dask               | 2021.5.0         | 2021.6.2
+planetary-computer | 0.2.2            | 0.3.0rc2
 
 Some of these package updates include API breaking changes. We recommend reading through the relevant changelogs:
 
