@@ -1,7 +1,7 @@
 import axios from "axios";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { IStacSearch, IStacSearchResult } from "../types/stac";
-import { MQE_URL } from "./constants";
+import { STAC_URL } from "./constants";
 
 const getStacItems = async (
   queryParam: QueryFunctionContext<[string, IStacSearch | undefined]>
@@ -22,7 +22,7 @@ const getStacItems = async (
     ids: search.items?.length ? search.items.join(",") : undefined,
   };
 
-  const resp = await axios.get(`${MQE_URL}/search`, {
+  const resp = await axios.get(`${STAC_URL}/search`, {
     params: serializedParams,
   });
 

@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import { Link, PivotItem } from "@fluentui/react";
 
 import { IStacCollection } from "types/stac";
@@ -19,12 +20,14 @@ export const viewerPivot = (collection: IStacCollection | null) => {
       <div>
         <div style={{ maxWidth: 800 }}>
           The {collection.title} dataset contains a{" "}
-          <Link to="https://github.com/mapbox/tilejson-spec/tree/master/2.2.0">
+          <Link href="https://github.com/mapbox/tilejson-spec/tree/master/2.2.0">
             TileJSON
           </Link>{" "}
           asset that can be included in common web mapping libraries to render visual
           tiles. You can explore this dataset using the map viewer below, or use in
-          your own project with the following URL:
+          your own project with the following URL (see{" "}
+          <RouterLink to="/terms">terms</RouterLink>
+          ):
         </div>
         <div className="input_area">
           <div className="highlight">
@@ -32,9 +35,8 @@ export const viewerPivot = (collection: IStacCollection | null) => {
           </div>
         </div>
       </div>
-      <br />
       <Suspense fallback={<div />}>
-        <TileJsonViewer href={tilejsonAsset.href} />
+        <TileJsonViewer href={tilejsonAsset.href} collectionId={collection.id} />
       </Suspense>
     </PivotItem>
   );
