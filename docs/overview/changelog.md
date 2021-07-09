@@ -12,9 +12,25 @@ This document highlights the new features, datasets, and breaking changes betwee
 
 ### APIs
 
-#### New features
+#### STAC API
 
-#### Breaking changes
+##### New features
+
+- Supports STAC 1.0
+- Supports the [Query extension](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/query)
+- Utilizes the latest [stac-fastapi](https://github.com/stac-utils/stac-fastapi) backed by [pgstac](https://github.com/stac-utils/pgstac)
+
+##### Breaking changes
+
+- Users will need to use tools that work with STAC 1.0 with the STAC API. As STAC 1.0 was recently released, the state of the tools ecosystem is still catching up. See [the new Hub package versions](docs/overview/changelog/#new-package-versions) below for packages that will work with the STAC API.
+
+#### Data API
+
+This is a new API that provides [titiler](https://developmentseed.org/titiler/) endpoints for our
+STAC Items. There are also collection tile endpoints for
+some datasets. See the [Data API docs](../reference/data.md) for a list of endpoints available. These endpoints are not available for all Collections and Items. For Collections and Items that have visualization endpoints, assets are added for [TileJSON](https://github.com/mapbox/tilejson-spec) and links for simple Leaflet map previews are added by the STAC API.
+
+The Data API should be considered in an alpha state - expect updates and breaking changes in the future.
 
 ### Datasets
 
