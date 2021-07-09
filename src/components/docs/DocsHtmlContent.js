@@ -87,14 +87,6 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
     `${process.env.PUBLIC_URL}/_images`
   );
 
-  // Allow sanitization to safely set new tab targets
-  DOMPurify.addHook("afterSanitizeAttributes", node => {
-    if ("target" in node) {
-      node.setAttribute("target", "_blank");
-      node.setAttribute("rel", "noopener noreferrer");
-    }
-  });
-
   const content = processedMarkup ? (
     <div className={className}>
       {children}
