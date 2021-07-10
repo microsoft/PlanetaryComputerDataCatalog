@@ -1,0 +1,16 @@
+# Announcement format:
+#
+# - id: my-internal-name   <- not displayed to user, but used for key to check previous dismissal
+#   startDate: 2021-07-09  <- inclusive
+#   endDate: 2021-07-19    <- exclusive
+#   content: >             <- keep it a single line, can be markdown
+#     New datasets, features, and upgrades. [Check it out >](/docs/overview/changelog)
+#
+# Multiple announcements within a date range will be stacked on the UI
+
+- id: july-release-notes
+  startDate: 2021-07-09
+  endDate: 2021-07-19
+  content: >
+    New datasets, features, and upgrades! [Check it out
+    &rarr;](/docs/overview/changelog)

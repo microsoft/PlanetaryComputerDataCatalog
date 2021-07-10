@@ -1,4 +1,3 @@
-import React from "react";
 import { FontIcon, Link } from "@fluentui/react";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
 

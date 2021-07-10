@@ -12,11 +12,7 @@ import DOMPurify from "dompurify";
 
 import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
-import {
-  a11yPostProcessDom,
-  buildGitHubUrl,
-  buildHubLaunchUrl,
-} from "../utils";
+import { a11yPostProcessDom, buildGitHubUrl, buildHubLaunchUrl } from "../utils";
 import NewTabLink from "./controls/NewTabLink";
 import GeneratedInternalToc from "./docs/GeneratedInternalToc";
 
@@ -45,10 +41,7 @@ const MetadataHtmlContent = ({ src, launch }) => {
   ) : null;
 
   const loadingMsg = (
-    <Spinner
-      styles={{ root: { marginTop: "275px" } }}
-      size={SpinnerSize.large}
-    />
+    <Spinner styles={{ root: { marginTop: "275px" } }} size={SpinnerSize.large} />
   );
 
   const errorMsg = (
@@ -69,7 +62,7 @@ const MetadataHtmlContent = ({ src, launch }) => {
   if (launch && isSuccess) {
     // Remove the title element so it can be placed in a React component header
     const titleEl = metadataDoc.querySelector("h2");
-    title = titleEl?.innerText.replace("¶", "");
+    title = titleEl?.innerText.replace("¶", "") || "";
     titleEl?.remove();
   }
 

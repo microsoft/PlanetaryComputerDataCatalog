@@ -11,10 +11,9 @@ services:
     working_dir: /opt/src/etl
 
   mockstac:
-    image: node:14-slim
+    image: tiangolo/uvicorn-gunicorn-fastapi:python3.7
     ports:
-      - "8866:8866"
+      - "8866:80"
     volumes:
-      - ./mockstac:/opt/src/api/stac/v1/
-    working_dir: /opt/src
-    entrypoint: npx serve -p 8866 --cors
+      - ./mockstac/app:/app
+      - ./mockstac/data:/data

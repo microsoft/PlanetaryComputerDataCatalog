@@ -2,76 +2,213 @@
 # detail page. Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/codefiles_urls.txt` file for processing
 
+# Omitting headerImg will reuse and stretch the collection thumbnail
+
 # To include a button on a tab to launch the notebook in Hub, add the following
-# config to the tab item:
+# config to the tab item. Assumes PlanetaryComputerExamples/main.
 
 # tabs:
 #   - title: My title
 #     src: notebook.html
+#     launch: tutorials/notebook.ipynb
+#
+# or, if you need to specify a different repo or branch, the full config is:
+#
+# tabs:
+#   - title: My title
+#     src: notebook.html
 #     launch:
-#       repo: https://github.com/TomAugspurger/landcover-demo-gtc-2021
-#       branch: main
-#       filePath: landcover.ipynb
+#       - repo: http://github.com/exampleorg/myrepo
+#         branch: v1
+#         filePath: tutorials/notebook.ipynb
+
 ---
 collections:
-  daymet-daily-na:
-    headerImg: 
+  3dep-seamless:
+    headerImg: ./images/threedep-seamless-hero.png
     tabs:
       - title: Example Notebook
-        src: reading-zarr-data.html
-        launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
-          filePath: quickstarts/reading-zarr-data.ipynb
+        src: 3dep-seamless-example.html
+        launch: datasets/3dep-seamless-example.ipynb
+
+  daymet-daily-pr:
+    headerImg: ./images/daymet-daily-pr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-monthly-pr:
+    headerImg: ./images/daymet-monthly-pr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-annual-pr:
+    headerImg: ./images/daymet-annual-pr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-daily-hi:
+    headerImg: ./images/daymet-daily-hi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-monthly-hi:
+    headerImg: ./images/daymet-monthly-hi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-annual-hi:
+    headerImg: ./images/daymet-annual-hi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-daily-na:
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-monthly-na:
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  daymet-annual-na:
+    tabs:
+      - title: Example Notebook
+        src: daymet-example.html
+        launch: datasets/daymet-example.ipynb
+
+  gap:
+    headerImg: ./images/gap-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gap-example.html
+        launch: datasets/gap/gap-example.ipynb
+
+  hgb:
+    headerImg: ./images/hgb-hero.png
+    tabs:
+      - title: Example Notebook
+        src: hgb-example.html
+        launch: datasets/hgb/hgb-example.ipynb
+      - title: Blob Storage Notebook
+        src: hgb.html
+      - title: Storage Documentation
+        src: hgb-storage.html
+
+  hrea:
+    headerImg: ./images/hrea-hero.png
+    tabs:
+      - title: Example Notebook
+        src: hrea-example.html
+        launch: datasets/hrea/hrea-example.ipynb
+      - title: Blob Storage Notebook
+        src: hrea.html
+      - title: Storage Documentation
+        src: hrea-storage.html
+
+  io-lulc:
+    tabs:
+      - title: Example Notebook
+        src: io-lulc-example.html
+        launch: datasets/io-lulc/io-lulc-example.ipynb
+
+  mobi:
+    headerImg: ./images/mobi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: mobi-example.html
+        launch: datasets/mobi/mobi-example.ipynb
+      - title: Blob Storage Notebook
+        src: mobi.html
+      - title: Storage Documentation
+        src: mobi-storage.html
+
+  mtbs:
+    headerImg: ./images/mtbs-hero.png
+    tabs:
+      - title: Example Notebook
+        src: mtbs-example.html
+        launch: datasets/mtbs/mtbs-example.ipynb
+      - title: Blob Storage Notebook
+        src: mtbs.html
+      - title: Storage Documentation
+        src: mtbs-storage.html
+
+  nasadem:
+    headerImg: ./images/nasadem-hero.png
+    tabs:
+      - title: Example Notebook
+        src: nasadem-example.html
+        launch: datasets/nasadem/nasadem-example.ipynb
+      - title: Blob Storage Notebook
+        src: nasadem-cog.html
+      - title: Storage Documentation
+        src: nasadem-storage.html
+
+  terraclimate:
+    headerImg: ./images/terraclimate-hero.png
+    tabs:
+      - title: Example Notebook
+        src: terraclimate-example.html
+        launch: datasets/terraclimate/terraclimate-example.ipynb
+      - title: Blob Storage Notebook
+        src: terraclimate.html
+      - title: Storage Documentation
+        src: terraclimate-storage.html
 
   naip:
     headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Example Notebook
         src: naip-example.html
-        launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
-          filePath: datasets/naip/naip-example.ipynb
+        launch: datasets/naip/naip-example.ipynb
       - title: Blob Storage Notebook
         src: naip.html
       - title: Storage Documentation
         src: naip-storage.html
+
   landsat-8-c2-l2:
     headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Example Notebook
         src: landsat-8-c2-l2-example.html
-        launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
-          filePath: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
+        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
       - title: Blob Storage Notebook
         src: landsat-8.html
       - title: Storage Documentation
         src: landsat-8-storage.html
+
   sentinel-2-l2a:
     headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Example Notebook
         src: sentinel-2-l2a-example.html
-        launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
-          filePath: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+        launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
       - title: Blob Storage Notebook
         src: sentinel-2.html
       - title: Storage Documentation
         src: sentinel-2-storage.html
+
   aster-l1t:
     headerImg: ./images/aster-hero.jpg
     tabs:
       - title: Example Notebook
         src: aster-l1t-example.html
-        launch:
-          repo: https://github.com/microsoft/PlanetaryComputerExamples
-          branch: main
-          filePath: datasets/aster-l1t/aster-l1t-example.ipynb
+        launch: datasets/aster-l1t/aster-l1t-example.ipynb
       - title: Blob Storage Notebook
         src: aster.html
       - title: Storage Documentation
@@ -83,19 +220,12 @@ collections:
 ai4e:
   - title: GBIF
     shortTerm: GBIF occurrence
-    description: Species occurrences shared through the Global Biodiversity Information Facility
+    description:
+      Species occurrences shared through the Global Biodiversity Information Facility
     infoUrl: http://aka.ms/ai4edata-gbif/
     thumbnailUrl: gbif.jpg
     alt: Colorful frog on a leaf
-    keywords: [global, biodiversity, species, gbif]
-
-  - title: Daymet
-    shortTerm: Daymet temperature
-    description: Gridded temperature data across North America
-    infoUrl: http://aka.ms/ai4edata-daymet
-    thumbnailUrl: RE3CbUs.jpg
-    alt: Map showing color-coded temperature data.
-    keywords: ["weather", "daymet", "north america", "hawaii", "puerto rico"]
+    keywords: [Global, Biodiversity, Species, GBIF]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation
@@ -103,7 +233,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
-    keywords: [noaa, global, precipitation]
+    keywords: [Noaa, Global, Precipitation]
 
   - title: GOES-16
     shortTerm: GOES-16 weather
@@ -111,15 +241,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-goes16
     thumbnailUrl: RE4ucH9.jpg
     alt: Raindrops hitting water
-    keywords: [goes, weather, americas, imagery]
-
-  - title: Harmonized Global Biomass
-    shortTerm: global biomass
-    description: Global carbon density for 2010
-    infoUrl: https://aka.ms/ai4edata-hgb
-    thumbnailUrl: RWz0Yf.jpg
-    alt: Shaded mossy forest
-    keywords: [global, carbon, biomass]
+    keywords: [GOES, Weather, Americas, Imagery]
 
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
@@ -127,15 +249,7 @@ ai4e:
     infoUrl: http://aka.ms/ai4edata-hls
     thumbnailUrl: RE3OM3E.jpg
     alt: Map of Chesapeake Bay
-    keywords: [landsat, sentinel, satellite, north america]
-
-  - title: High Resolution Electricity Access
-    shortTerm: HREA
-    description: Settlement-level measures of electricity access and reliability
-    infoUrl: https://aka.ms/ai4edata-hrea
-    thumbnailUrl: RWAaNJ.jpg
-    alt: City light grid viewed from above
-    keywords: [global, electricity]
+    keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
   - title: LILA BC
     shortTerm: LILA BC
@@ -143,31 +257,17 @@ ai4e:
     infoUrl: http://lila.science/
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
-    keywords: [lila, labels, wildlife, biodiversity]
+    keywords: [LILA, Labels, Wildlife, Biodiversity]
 
   - title: MODIS
     shortTerm: MODIS
-    description: Satellite imagery from the Moderate Resolution Imaging Spectroradiometer (MODIS)
+    description:
+      Satellite imagery from the Moderate Resolution Imaging Spectroradiometer
+      (MODIS)
     infoUrl: https://aka.ms/ai4edata-modis
     thumbnailUrl: RE3BTDt.jpg
     alt: View of Earth from space.
-    keywords: [modis, satellite, imagery, global]
-
-  - title: Monitoring Trends in Burn Severity Mosaics
-    shortTerm: burn severity
-    description: Annual burn severity for the US
-    infoUrl: https://aka.ms/ai4edata-mtbs
-    thumbnailUrl: RWz0Yt.jpg
-    alt: Forest fire.
-    keywords: [mtbs, burn severity, fires, united states]
-
-  - title: NASADEM
-    shortTerm: NASADEM
-    description: Global topographic survey
-    infoUrl: https://aka.ms/ai4edata-nasadem
-    thumbnailUrl: RE4sQYP.jpg
-    alt: Topographic map showing contour lines
-    keywords: [global, dem]
+    keywords: [MODIS, Satellite, Imagery, Global]
 
   - title: National Land Cover Database
     shortTerm: land cover
@@ -175,7 +275,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
     alt: Landcover map of the United States
-    keywords: [land cover, united states]
+    keywords: [Land Cover, United States]
 
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
@@ -183,7 +283,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: RE4rvnx.jpg
     alt: Earth viewed from space station with a satellite
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
   - title: NOAA GFS Warm Start Conditions
     shortTerm: NOAA warm start
@@ -191,7 +291,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: RE4MHyn.jpg
     alt: High altitude view of cloud cover with moon
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
   - title: NOAA Integrated Surface Data
     shortTerm: NOAA surface
@@ -199,7 +299,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: RE4rsOQ.jpg
     alt: High altitude view of clouds
-    keywords: [global, noaa, weather, temperature, precipitation]
+    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
   - title: Ocean Observatories Initiative CAMHD
     shortTerm: OOI
@@ -207,7 +307,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
-    keywords: [ooi, video, ocean, pacific]
+    keywords: [OOI, Video, Ocean, Pacific]
 
   - title: Sentinel-1 GRD
     shortTerm: Sentinel-1 GRD
@@ -215,23 +315,15 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-sentinel-1
     thumbnailUrl: sentinel-1-grd.jpg
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    keywords: [global, sentinel, satellite, esa, sar, radar]
-
-  - title: TerraClimate
-    shortTerm: global climate
-    description: Global monthly climate data from 1958-present
-    infoUrl: https://aka.ms/ai4edata-terraclimate
-    thumbnailUrl: RWz0Zk.jpg
-    alt: Rain clouds viewed from space
-    keywords: [global, climate, temperature, weather]
+    keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
 
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
     description: Historical climate data for China, from 1851-2010
-    infoUrl: https://aka.ms/ai4edata-uk-met-20crds 
+    infoUrl: https://aka.ms/ai4edata-uk-met-20crds
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
-    keywords: [china, climate, historical]
+    keywords: [China, Climate, Historical]
 
   - title: USFS Forest Inventory and Analysis
     shortTerm: forest health
@@ -239,4 +331,4 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-fia
     thumbnailUrl: RWz2Nt.jpg
     alt: Evergreen forest with shrubbery
-    keywords: [united states, forest, biomass]
+    keywords: [United States, Forest, Biomass]

@@ -14,6 +14,7 @@
 About <overview/about>
 The Hub <overview/environment>
 Using VS Code <overview/ui-vscode>
+Changelog <overview/changelog>
 ```
 
 ```{toctree}
@@ -50,4 +51,5 @@ concepts/sas
 
 STAC API <reference/stac>
 Data Authentication API <reference/sas>
+Data API <reference/data>
 ```

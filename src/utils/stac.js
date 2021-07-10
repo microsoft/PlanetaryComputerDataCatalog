@@ -27,6 +27,11 @@ StacFields.Registry.addMetadataField("attrs", {
   formatter: value => value,
 });
 
+StacFields.Registry.addMetadataField("label:classes", {
+  label: "Classes",
+  formatter: value => value.classes.join(", "),
+});
+
 export const mediaTypeOverride = value => {
   if (value === "image/tiff; application=geotiff; profile=cloud-optimized") {
     return "GeoTIFF (COG)";
@@ -90,7 +95,11 @@ export const renderItemColumn = (item, _, column) => {
   // Add tooltips to potentially long cells
   switch (column.key) {
     case "asset":
-      return (
+      // Assets are generally rendered as a link to download a file. However, Zarr types
+      // are really a root directory, and the href is more important than a link
+      return fieldContent.contentType === "application/vnd+zarr" ? (
+        <code title={fieldContent.name}>{fieldContent.href}</code>
+      ) : (
         <NewTabLink href={fieldContent.href}>{fieldContent.name}</NewTabLink>
       );
     case "name":

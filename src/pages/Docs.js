@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import DocsHtmlContent from "../components/docs/DocsHtmlContent";
 import Topic from "../components/docs/Topic";
-import { DQE_URL, MQE_URL } from "../utils/constants";
+import { DATA_URL, SAS_URL, STAC_URL } from "../utils/constants";
 import ScrollToTop from "../components/ScrollToTop";
 
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
@@ -25,7 +25,8 @@ const Docs = () => {
   // Routes that are generated via the docs build system, but are matched with
   // specialized React components for OpenAPI/Swagger routes.
   const openApiStacRoute = "/docs/reference/stac";
-  const openApiDataRoute = "/docs/reference/sas";
+  const openApiSasRoute = "/docs/reference/sas";
+  const openApiDataRoute = "/docs/reference/data";
 
   const toc = docTopics["./index.json"];
   const tocComponent = (
@@ -48,19 +49,22 @@ const Docs = () => {
       }}
     >
       {tocComponent}
-      <div
-        style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
-      >
+      <div style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}>
         <ScrollToTop />
         <Switch>
-          <Route exact path={openApiStacRoute}>
+          <Route title="STAC API Reference" exact path={openApiStacRoute}>
             <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${MQE_URL}/openapi.json`} />
+              <OpenApiSpec specUrl={`${STAC_URL}/openapi.json`} />
+            </Suspense>
+          </Route>
+          <Route title="SAS API Reference" path={openApiSasRoute}>
+            <Suspense fallback={<div />}>
+              <OpenApiSpec specUrl={`${SAS_URL}/openapi.json`} />
             </Suspense>
           </Route>
           <Route title="Data API Reference" path={openApiDataRoute}>
             <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${DQE_URL}/openapi.json`} />
+              <OpenApiSpec specUrl={`${DATA_URL}/openapi.json`} />
             </Suspense>
           </Route>
           <Route path={`/docs/:topicId/:fileId`}>

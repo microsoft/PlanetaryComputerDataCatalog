@@ -16,7 +16,7 @@ const CollectionCard = ({ collection }) => {
 
         <h3>{collection.title}</h3>
       </Link>
-      <p style={{ color: "initial", minHeight: 50 }}>
+      <p style={{ color: "initial", minHeight: 40 }}>
         {collection["msft:short_description"]}
       </p>
       <Keywords

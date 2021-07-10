@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@fluentui/react";
 
-import "./index.css";
+import "./styles/index.css";
 import App from "./App";
 
 import { QueryClient, QueryClientProvider } from "react-query";

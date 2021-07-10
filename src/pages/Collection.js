@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import {
   MessageBar,
@@ -21,6 +21,7 @@ import Providers from "../components/stac/Providers";
 import SEO from "../components/Seo";
 import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
 import { CollectionProvider } from "../components/stac/CollectionContext";
+import { viewerPivot } from "components/stac/viewerPivot";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
@@ -35,12 +36,7 @@ const Collection = () => {
   const [notFound, setNotFound] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    data: stacResponse,
-  } = useCollections();
+  const { isError, isLoading, isSuccess, data: stacResponse } = useCollections();
 
   useEffect(() => {
     setActiveTab(location.hash.replace("#", ""));
@@ -62,7 +58,7 @@ const Collection = () => {
     history.replace({ hash: itemKey });
   };
 
-  const tabs = tabConfig[id]?.tabs.map(({ title, src, launch }) => {
+  const tabs = tabConfig[id]?.tabs?.map(({ title, src, launch }) => {
     return (
       <PivotItem
         className="main-content"
@@ -80,18 +76,19 @@ const Collection = () => {
   }
 
   const bannerHeader = <Banner collection={collection} />;
-  const loadingMsg = <Spinner size={SpinnerSize.large} />;
+  const loadingMsg = (
+    <Spinner
+      size={SpinnerSize.large}
+      styles={{ screenReaderText: "Loading dataset", root: { marginTop: 100 } }}
+    />
+  );
   const errorMsg = (
     <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>
       Sorry, we're having trouble loading this dataset right now
     </MessageBar>
   );
   const overviewPivot = collection && (
-    <PivotItem
-      className="main-content"
-      headerText="Overview"
-      itemKey="overview"
-    >
+    <PivotItem className="main-content" headerText="Overview" itemKey="overview">
       <CollectionProvider collection={collection}>
         <div className="with-sidebar">
           <div>
@@ -101,7 +98,7 @@ const Collection = () => {
               <Providers />
               <License />
             </div>
-            <div>
+            <div style={{ maxWidth: 250 }}>
               <CollectionDetail />
             </div>
           </div>
@@ -115,9 +112,11 @@ const Collection = () => {
     </PivotItem>
   );
 
+  const viewerTab = viewerPivot(collection);
+
   return (
     <Layout bannerHeader={bannerHeader} isShort>
-      <SEO title={id} description={collection?.description} />
+      <SEO title={collection?.title || id} description={collection?.description} />
       {collection ? (
         <Pivot
           className="grid-content"
@@ -126,6 +125,7 @@ const Collection = () => {
           ariaLabel="Dataset detail tabs"
         >
           {overviewPivot}
+          {viewerTab}
           {tabs}
         </Pivot>
       ) : isLoading ? (

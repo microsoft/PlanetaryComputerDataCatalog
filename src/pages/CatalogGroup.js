@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
+import marked from "marked";
 
 import GroupBanner from "../components/stac/GroupBanner";
 import Layout from "../components/Layout";
@@ -11,7 +12,7 @@ import { useCollections } from "../utils/requests";
 import groups from "../config/datasetGroups.yml";
 import CollectionCard from "../components/stac/CollectionCard";
 import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
-import { capitalize, tagCase } from "../utils";
+import { capitalize, titleCase } from "../utils";
 
 const ALL = "all";
 const GROUP_ID = "msft:group_id";
@@ -39,12 +40,7 @@ const CatalogGroup = () => {
 
   const group = groups[groupId];
 
-  const {
-    isError,
-    isLoading,
-    isSuccess,
-    data: stacResponse,
-  } = useCollections();
+  const { isError, isLoading, isSuccess, data: stacResponse } = useCollections();
 
   // When collections are loaded, filter down to the ones in the current group
   useEffect(() => {
@@ -113,7 +109,7 @@ const CatalogGroup = () => {
       <PivotItem
         key={groupKey}
         itemKey={keyFormatter(groupKey)}
-        headerText={tagCase(groupKey)}
+        headerText={titleCase(groupKey)}
         itemCount={count}
       />
     );
@@ -152,7 +148,11 @@ const CatalogGroup = () => {
       <section id="catalog-api-datasets">
         <div className="grid-content">
           <h2>Overview</h2>
-          <p style={{ maxWidth: 800, marginBottom: 40 }}>{group.description}</p>
+          <p style={{ maxWidth: 800, marginBottom: 40 }}>
+            <div
+              dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
+            />
+          </p>
           <div className="layout-container">
             {<Separator />}
             {pivot}

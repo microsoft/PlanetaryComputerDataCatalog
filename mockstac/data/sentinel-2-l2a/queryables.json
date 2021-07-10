@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://example.org/queryables",
+  "type": "object",
+  "title": "Queryables for mock PC Sentinel-2-l2a STAC API",
+  "description": "Queryable properties for the mock STAC API Item Search filter.",
+  "properties": {
+    "eo:cloud_cover": {
+      "description": "Cloud Cover",
+      "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/definitions/fields/properties/eo:cloud_cover"
+    },
+    "s2:snow_ice_percentage": {
+      "description": "Snow/Ice Cover",
+      "type": "number",
+      "min": 0,
+      "max": 100
+    }
+  }
+}
