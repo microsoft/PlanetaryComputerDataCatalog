@@ -155,7 +155,7 @@ collections:
         src: nasadem-example.html
         launch: datasets/nasadem/nasadem-example.ipynb
       - title: Blob Storage Notebook
-        src: nasadem.html
+        src: nasadem-cog.html
       - title: Storage Documentation
         src: nasadem-storage.html
 
