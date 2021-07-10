@@ -34,21 +34,21 @@ The Data API should be considered in an alpha state - expect updates and breakin
 
 ### Datasets
 
-The full list of new datasets is provided below, but we wanted to highlight that that a new *kind* of dataset is now available through our STAC API. In addition to our remote sensing datasets stored as Cloud Optimized GeoTIFFs, we're also hosting and cataloging data stored in [Zarr][zarr] format. See [this Daymet dataset](https://planetarycomputer-staging.microsoft.com/dataset/daymet-monthly-hi) for an example. This work was done with the [STAC](https://stacspec.org/) and [Pangeo](https://pangeo.io/) communities, and spurred improvements to the [datacube](https://github.com/stac-extensions/datacube) STAC extension and the creation of the [xarray-assets](https://github.com/stac-extensions/xarray-assets) STAC extension.
+The full list of new datasets is provided below, but we wanted to highlight that that a new *kind* of dataset is now available through our STAC API. In addition to our remote sensing datasets stored as Cloud Optimized GeoTIFFs, we're also hosting and cataloging data stored in [Zarr][zarr] format. See [this Daymet dataset](https://planetarycomputer.microsoft.com/dataset/daymet-monthly-hi) for an example. This work was done with the [STAC](https://stacspec.org/) and [Pangeo](https://pangeo.io/) communities, and spurred improvements to the [datacube](https://github.com/stac-extensions/datacube) STAC extension and the creation of the [xarray-assets](https://github.com/stac-extensions/xarray-assets) STAC extension.
 
 #### New datasets
 
 The following datasets are now available in our [data catalog][catalog] and [STAC API][stac-api]:
 
-* [Daymet Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries
-* [Esri 10-Meter Land Cover](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc): a 10-meter resolution map of Earth’s land surface from 2020
-* [HREA — High Resolution Electricity Access](https://planetarycomputer-staging.microsoft.com/dataset/hrea): settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
-* [MTBS — Monitoring Trends in Burn Severity](https://planetarycomputer-staging.microsoft.com/dataset/mtbs): annual burn severity mosaics for the continental United States and Alaska
-* [MoBI — Map of Biodiversity Importance](https://planetarycomputer-staging.microsoft.com/dataset/mobi): habitat information for 2,216 imperiled species occurring in the conterminous United States
-* [NASADEM HGT v001](https://planetarycomputer-staging.microsoft.com/dataset/nasadem): global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission
-* [TerraClimate](https://planetarycomputer-staging.microsoft.com/dataset/terraclimate): high-resolution global dataset of monthly climate and climatic water balance
-* [USGS 3DEP Seamless DEMs](https://planetarycomputer-staging.microsoft.com/dataset/3dep-seamless): high-quality topographic data and for a wide range of other three-dimensional (3D) representations of the Nation's natural and constructed features
-* [USGS Gap Analysis Project](https://planetarycomputer-staging.microsoft.com/dataset/gap): the foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
+* [Daymet Collection](https://planetarycomputer.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries
+* [Esri 10-Meter Land Cover](https://planetarycomputer.microsoft.com/dataset/io-lulc): a 10-meter resolution map of Earth’s land surface from 2020
+* [HREA — High Resolution Electricity Access](https://planetarycomputer.microsoft.com/dataset/hrea): settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
+* [MTBS — Monitoring Trends in Burn Severity](https://planetarycomputer.microsoft.com/dataset/mtbs): annual burn severity mosaics for the continental United States and Alaska
+* [MoBI — Map of Biodiversity Importance](https://planetarycomputer.microsoft.com/dataset/mobi): habitat information for 2,216 imperiled species occurring in the conterminous United States
+* [NASADEM HGT v001](https://planetarycomputer.microsoft.com/dataset/nasadem): global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission
+* [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate): high-resolution global dataset of monthly climate and climatic water balance
+* [USGS 3DEP Seamless DEMs](https://planetarycomputer.microsoft.com/dataset/3dep-seamless): high-quality topographic data and for a wide range of other three-dimensional (3D) representations of the Nation's natural and constructed features
+* [USGS Gap Analysis Project](https://planetarycomputer.microsoft.com/dataset/gap): the foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
 
 #### Changes to existing datasets
 
