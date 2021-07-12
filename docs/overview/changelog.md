@@ -7,6 +7,7 @@ This document highlights the new features, datasets, and breaking changes betwee
 ### Highlights
 
 * The [STAC API][stac-api] is now compliant with [STAC 1.0](https://medium.com/radiant-earth-insights/stac-specification-1-0-0-released-c59e8c848077).
+* Added a new Data API with several features, including the ability to preview datasets and items. See [DATA API](docs/overview/changelog/#data-api) below for more.
 * Added support for earth-systems datasets in our STAC catalog. See [Datasets](./docs/overview/changelog/#datasets) below for more.
 * The Hub environment Dockerfiles and images are now publicly available. See [Hub environments](docs/overview/changelog/#hub-environments) below for more.
 
@@ -28,7 +29,7 @@ This document highlights the new features, datasets, and breaking changes betwee
 
 This is a new API that provides [titiler](https://developmentseed.org/titiler/) endpoints for our
 STAC Items. There are also collection tile endpoints for
-some datasets. See the [Data API docs](../reference/data.md) for a list of endpoints available. These endpoints are not available for all Collections and Items. For Collections and Items that have visualization endpoints, assets are added for [TileJSON](https://github.com/mapbox/tilejson-spec) and links for simple Leaflet map previews are added by the STAC API.
+some datasets. See the [Data API docs](../reference/data.md) for a list of endpoints available. These endpoints are not available for all Collections and Items. For Collections and Items that have visualization endpoints, assets are added for [TileJSON](https://github.com/mapbox/tilejson-spec) and links for simple Leaflet map previews are added by the STAC API. For example, <https://planetarycomputer.microsoft.com/api/data/v1/collection/map?collection=io-lulc> is the preview link for the new [Esri 10-Meter Land Cover](https://planetarycomputer.microsoft.com/api/data/v1/collection/map?collection=io-lulc) dataset.
 
 The Data API should be considered in an alpha state - expect updates and breaking changes in the future.
 
@@ -51,6 +52,12 @@ The following datasets are now available in our [data catalog][catalog] and [STA
 * [USGS Gap Analysis Project](https://planetarycomputer.microsoft.com/dataset/gap): the foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
 
 #### Changes to existing datasets
+
+* New items from Sentinel-2 and Landsat 8 are now continuously available through the STAC API
+* Changed the item IDs for [Sentinel-2 Level-2A](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a) and [Landsat 8 Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-8-c2-l2) to not include the processing date
+* Fixed issues with missing Sentinel 2 scenes due to failed Sen2Cor processing
+* Fixed various quality issues with some Landsat 8 scenes by updating to the most recently processed version available from USGS
+* Fixed Landsat 8 STAC item footprints being off by half a pixel
 
 ### Hub environments
 
