@@ -5,7 +5,7 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import DocsHtmlContent from "../components/docs/DocsHtmlContent";
 import Topic from "../components/docs/Topic";
-import { SAS_URL, MQE_URL, DATA_URL } from "../utils/constants";
+import { DATA_URL, SAS_URL, STAC_URL } from "../utils/constants";
 import ScrollToTop from "../components/ScrollToTop";
 
 const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
@@ -49,14 +49,12 @@ const Docs = () => {
       }}
     >
       {tocComponent}
-      <div
-        style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}
-      >
+      <div style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}>
         <ScrollToTop />
         <Switch>
-          <Route exact path={openApiStacRoute}>
+          <Route title="STAC API Reference" exact path={openApiStacRoute}>
             <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${MQE_URL}/openapi.json`} />
+              <OpenApiSpec specUrl={`${STAC_URL}/openapi.json`} />
             </Suspense>
           </Route>
           <Route title="SAS API Reference" path={openApiSasRoute}>
