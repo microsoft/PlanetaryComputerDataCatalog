@@ -55,6 +55,7 @@ The following datasets are now available in our [data catalog][catalog] and [STA
 
 * New items from Sentinel-2 and Landsat 8 are now continuously available through the STAC API
 * Changed the item IDs for [Sentinel-2 Level-2A](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a) and [Landsat 8 Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-8-c2-l2) to not include the processing date
+* Fixed issues with missing Sentinel 2 scenes due to failed Sen2Cor processing
 * Fixed various quality issues with some Landsat 8 scenes by updating to the most recently processed version available from USGS
 * Fixed Landsat 8 STAC item footprints being off by half a pixel
 
