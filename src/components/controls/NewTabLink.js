@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "@fluentui/react";
 
 const NewTabLink = ({
@@ -6,7 +5,7 @@ const NewTabLink = ({
   ariaLabel = "Link will open in new tab",
   title = null,
   children,
-  style,
+  style = null,
   As = Link,
 }) => {
   return (

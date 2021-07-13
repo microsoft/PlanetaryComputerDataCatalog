@@ -15,6 +15,14 @@ export interface IStacCollection {
     };
   };
   keywords: string[];
+  links: IStacLink[];
+}
+
+export interface IStacLink {
+  href: string;
+  rel: string;
+  title?: string;
+  type?: string;
 }
 
 export interface IStacItem extends Feature {
