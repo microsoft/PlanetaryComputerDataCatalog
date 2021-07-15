@@ -5,39 +5,40 @@
 .markdown-source code,
 .generated-docs code {
   background-color: #1b1f230d;
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   border-radius: 6px;
 }
 
 .generated-docs blockquote {
-    padding: 0 1.5em;
-    margin-left: 0;
-    border-left: .3em solid #e0e0e0;
+  padding: 0 1.5em;
+  margin-left: 0;
+  border-left: 0.3em solid #e0e0e0;
 }
 
 .markdown-source li {
-  margin-top: .4em;
+  margin-top: 0.4em;
 }
 
 .input_area,
 .section .highlight-python,
 .section .highlight-json,
 .section .highlight-bash,
-.generated-docs .highlight-bash, 
-.generated-docs .highlight-json, 
+.generated-docs .highlight-bash,
+.generated-docs .highlight-json,
 .generated-docs .highlight-python {
-    border: 1px solid #e0e0e0;
-    background: #f9f9f9;
-    padding: 0px 10px;
-    border-radius: 3px;
-    margin-top: 15px;
+  border: 1px solid #e0e0e0;
+  background: #f9f9f9;
+  padding: 0px 10px;
+  border-radius: 3px;
+  margin-top: 15px;
 }
 
 .generated-docs p {
   overflow-wrap: break-word;
 }
 
-.input_area .highlight, .generated-docs .highlight {
+.input_area .highlight,
+.generated-docs .highlight {
   margin-top: 1em;
 }
 
@@ -53,13 +54,14 @@
   margin-top: 0em;
 }
 
-a.anchor-link, a.headerlink {
-    display: none;
+a.anchor-link,
+a.headerlink {
+  display: none;
 }
 
 .prompt.input_prompt {
-    color: #616161;
-    padding-bottom: 4px;
+  color: #616161;
+  padding-bottom: 4px;
 }
 .nbinput .prompt {
   display: none;
@@ -71,7 +73,10 @@ a.anchor-link, a.headerlink {
 }
 
 /* Turn off In/Out prompts */
-div.nbinput div.prompt, div.nboutput div.prompt, div.prompt.input_prompt, div.prompt.output_prompt {
+div.nbinput div.prompt,
+div.nboutput div.prompt,
+div.prompt.input_prompt,
+div.prompt.output_prompt {
   display: none;
 }
 
@@ -99,57 +104,179 @@ div.nbinput div.prompt, div.nboutput div.prompt, div.prompt.input_prompt, div.pr
 }
 
 /* Use darker text for accessible contrast for xarray output table columns */
-.xr-var-item .xr-preview, .xr-var-item .xr-var-dtype {
+.xr-var-item .xr-preview,
+.xr-var-item .xr-var-dtype {
   color: rgba(0, 0, 0, 0.6);
 }
 
-pre { line-height: 125%; white-space: pre-wrap; overflow: auto;}
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.highlight .hll { background-color: var(--jp-cell-editor-active-background) }
-.highlight .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
-.highlight .err { color: var(--jp-mirror-editor-error-color) } /* Error */
-.highlight .k { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword */
-.highlight .o { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator */
-.highlight .p { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation */
-.highlight .ch { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Hashbang */
-.highlight .cm { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Preproc */
-.highlight .cpf { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.PreprocFile */
-.highlight .c1 { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Single */
-.highlight .cs { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Special */
-.highlight .kc { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Constant */
-.highlight .kd { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Pseudo */
-.highlight .kr { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Reserved */
-.highlight .kt { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Type */
-.highlight .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
-.highlight .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
-.highlight .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
-.highlight .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
-.highlight .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
-.highlight .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
-.highlight .mh { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Hex */
-.highlight .mi { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer */
-.highlight .mo { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Oct */
-.highlight .sa { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Affix */
-.highlight .sb { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Backtick */
-.highlight .sc { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Char */
-.highlight .dl { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Delimiter */
-.highlight .sd { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Doc */
-.highlight .s2 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Double */
-.highlight .se { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Escape */
-.highlight .sh { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Heredoc */
-.highlight .si { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Interpol */
-.highlight .sx { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Other */
-.highlight .sr { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Regex */
-.highlight .s1 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Single */
-.highlight .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
-.highlight .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
-
+pre {
+  line-height: 125%;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+td.linenos .normal {
+  color: inherit;
+  background-color: transparent;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+span.linenos {
+  color: inherit;
+  background-color: transparent;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+td.linenos .special {
+  color: #000000;
+  background-color: #ffffc0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+span.linenos.special {
+  color: #000000;
+  background-color: #ffffc0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.highlight .hll {
+  background-color: var(--jp-cell-editor-active-background);
+}
+.highlight .c {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment */
+.highlight .err {
+  color: var(--jp-mirror-editor-error-color);
+} /* Error */
+.highlight .k {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword */
+.highlight .o {
+  color: var(--jp-mirror-editor-operator-color);
+  font-weight: bold;
+} /* Operator */
+.highlight .p {
+  color: var(--jp-mirror-editor-punctuation-color);
+} /* Punctuation */
+.highlight .ch {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.Hashbang */
+.highlight .cm {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.Multiline */
+.highlight .cp {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.Preproc */
+.highlight .cpf {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.PreprocFile */
+.highlight .c1 {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.Single */
+.highlight .cs {
+  color: var(--jp-mirror-editor-comment-color);
+  font-style: italic;
+} /* Comment.Special */
+.highlight .kc {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Constant */
+.highlight .kd {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Declaration */
+.highlight .kn {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Namespace */
+.highlight .kp {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Pseudo */
+.highlight .kr {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Reserved */
+.highlight .kt {
+  color: var(--jp-mirror-editor-keyword-color);
+  font-weight: bold;
+} /* Keyword.Type */
+.highlight .m {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number */
+.highlight .s {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String */
+.highlight .ow {
+  color: var(--jp-mirror-editor-operator-color);
+  font-weight: bold;
+} /* Operator.Word */
+.highlight .w {
+  color: var(--jp-mirror-editor-variable-color);
+} /* Text.Whitespace */
+.highlight .mb {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Bin */
+.highlight .mf {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Float */
+.highlight .mh {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Hex */
+.highlight .mi {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Integer */
+.highlight .mo {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Oct */
+.highlight .sa {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Affix */
+.highlight .sb {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Backtick */
+.highlight .sc {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Char */
+.highlight .dl {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Delimiter */
+.highlight .sd {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Doc */
+.highlight .s2 {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Double */
+.highlight .se {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Escape */
+.highlight .sh {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Heredoc */
+.highlight .si {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Interpol */
+.highlight .sx {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Other */
+.highlight .sr {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Regex */
+.highlight .s1 {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Single */
+.highlight .ss {
+  color: var(--jp-mirror-editor-string-color);
+} /* Literal.String.Symbol */
+.highlight .il {
+  color: var(--jp-mirror-editor-number-color);
+} /* Literal.Number.Integer.Long */
 
 :root {
   /* Elevation
@@ -236,8 +363,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-ui-font-size2: 1.2em;
   --jp-ui-font-size3: 1.44em;
 
-  --jp-ui-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --jp-ui-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   /*
    * Use these font colors against the corresponding main layout colors.
@@ -294,9 +421,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
   --jp-content-link-color: var(--md-blue-700);
 
-  --jp-content-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  --jp-content-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   /*
    * Code Fonts
@@ -307,7 +433,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-code-font-size: 13px;
   --jp-code-line-height: 1.3077; /* 17px for 13px base */
   --jp-code-padding: 5px; /* 5px for 13px base, codemirror highlighting needs integer px value */
-  --jp-code-font-family-default: Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  --jp-code-font-family-default: Menlo, Consolas, "DejaVu Sans Mono", monospace;
   --jp-code-font-family: var(--jp-code-font-family-default);
 
   /* This gives a magnification of about 125% in presentation mode over normal. */
@@ -392,7 +518,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-cell-editor-active-border-color: var(--jp-brand-color1);
 
   --jp-cell-prompt-width: 64px;
-  --jp-cell-prompt-font-family: 'Source Code Pro', monospace;
+  --jp-cell-prompt-font-family: "Source Code Pro", monospace;
   --jp-cell-prompt-letter-spacing: 0px;
   --jp-cell-prompt-opacity: 1;
   --jp-cell-prompt-not-active-opacity: 0.5;
@@ -502,9 +628,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   --jp-search-toggle-on-opacity: 1;
   --jp-search-selected-match-background-color: rgb(245, 200, 0);
   --jp-search-selected-match-color: black;
-  --jp-search-unselected-match-background-color: var(
-    --jp-inverse-layout-color0
-  );
+  --jp-search-unselected-match-background-color: var(--jp-inverse-layout-color0);
   --jp-search-unselected-match-color: var(--jp-ui-inverse-font-color0);
 
   /* Icon colors that work well with light or dark backgrounds */
