@@ -26,6 +26,7 @@ import { viewerPivot } from "components/stac/viewerPivot";
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
 import Assets from "../components/stac/Assets";
+import CollectionUrl from "components/stac/CollectionUrl";
 
 const Collection = () => {
   const { id } = useParams();
@@ -95,6 +96,7 @@ const Collection = () => {
             <div className="collection-content">
               <h2>Overview</h2>
               <Description />
+              <CollectionUrl />
               <Providers />
               <License />
             </div>
