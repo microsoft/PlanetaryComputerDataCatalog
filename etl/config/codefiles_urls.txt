@@ -17,6 +17,7 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/nasadem-cog.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/nasadem-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/terraclimate.ipynb
+https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/io-lulc-storage.md
 
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb

@@ -125,6 +125,8 @@ collections:
       - title: Example Notebook
         src: io-lulc-example.html
         launch: datasets/io-lulc/io-lulc-example.ipynb
+      - title: Storage Documentation
+        src: io-lulc-storage.html
 
   mobi:
     headerImg: ./images/mobi-hero.png
