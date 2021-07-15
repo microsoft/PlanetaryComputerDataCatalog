@@ -167,8 +167,6 @@ collections:
         launch: datasets/terraclimate/terraclimate-example.ipynb
       - title: Blob Storage Notebook
         src: terraclimate.html
-      - title: Storage Documentation
-        src: terraclimate-storage.html
 
   naip:
     headerImg: ./images/naip-hero.jpg
