@@ -8,7 +8,6 @@ import {
   SpinnerSize,
   Stack,
 } from "@fluentui/react";
-import DOMPurify from "dompurify";
 
 import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
@@ -94,7 +93,7 @@ const MetadataHtmlContent = ({ src, launch }) => {
           <div
             className="markdown-source"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(processedMarkup),
+              __html: processedMarkup,
             }}
           ></div>
         </div>

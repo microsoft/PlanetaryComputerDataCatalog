@@ -65,8 +65,9 @@ a.anchor-link, a.headerlink {
   display: none;
 }
 
-.output_png img {
-    max-width: 100%;
+.output_png img,
+.output_svg svg {
+  max-width: 100%;
 }
 
 /* Turn off In/Out prompts */
