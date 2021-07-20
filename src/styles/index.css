@@ -217,16 +217,6 @@ a:not(header a):hover img {
   justify-content: center;
 }
 
-.home-resource-item i {
-  transition-property: font-size;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-out;
-}
-
-.home-resource-item:hover i {
-  font-size: 53px;
-}
-
 .caption-text {
   font-weight: bold;
 }

@@ -65,10 +65,9 @@ const Home = () => {
                 marginBottom: 20,
               }}
             >
-              The Planetary Computer is only as strong as the partner community
-              that is building applications on it. If you are interested in
-              scaling your environmental sustainability work with the power of
-              the cloud,{" "}
+              The Planetary Computer is only as strong as the partner community that
+              is building applications on it. If you are interested in scaling your
+              environmental sustainability work with the power of the cloud,{" "}
               <Link
                 underline
                 href="mailto:planetarycomputer@microsoft.com"
@@ -85,9 +84,8 @@ const Home = () => {
                 color: "#fff",
               }}
             >
-              The Planetary Computer API and Hub are currently available in
-              private preview. If you're interested in developing on our
-              platform,{" "}
+              The Planetary Computer API and Hub are currently available in private
+              preview. If you're interested in developing on our platform,{" "}
               <RouterLink
                 to="/account/request"
                 style={{
@@ -142,37 +140,36 @@ const Home = () => {
           style={{ margin: "1.8rem 0", textAlign: "center", maxWidth: "815px" }}
         >
           The Planetary Computer combines a multi-petabyte catalog of global
-          environmental data with intuitive APIs, a flexible scientific
-          environment that allows users to answer global questions about that
-          data, and applications that put those answers in the hands of
-          conservation stakeholders.
+          environmental data with intuitive APIs, a flexible scientific environment
+          that allows users to answer global questions about that data, and
+          applications that put those answers in the hands of conservation
+          stakeholders.
         </Text>
       </div>
       <div className="home-resources layout-container">
         <div className="layout-row grid-content">
-          <Resource title="Data Catalog" iconName="addIn" to="/catalog">
-            The Planetary Computer includes petabytes of environmental
-            monitoring data, in consistent, analysis-ready formats, accessible
-            through our APIs as well as directly available via Azure Storage.
+          <Resource title="Data Catalog" iconName="ExploreData" to="/catalog">
+            The Planetary Computer includes petabytes of environmental monitoring
+            data, in consistent, analysis-ready formats, accessible through our APIs
+            as well as directly available via Azure Storage.
           </Resource>
           <Resource title="API" iconName="Code" to="/docs">
-            The Planetary Computer API makes it easy for users to find exactly
-            the data they need, simplifying search and discovery across our Data
-            Catalog.
+            The Planetary Computer API makes it easy for users to find exactly the
+            data they need, simplifying search and discovery across our Data Catalog.
           </Resource>
           <Resource title="Hub" iconName="TableComputed" href="/compute">
-            The Planetary Computer Hub is a development environment that makes
-            our data and APIs accessible through familiar, open-source tools,
-            and allows users to easily scale their analyses.
+            The Planetary Computer Hub is a development environment that makes our
+            data and APIs accessible through familiar, open-source tools, and allows
+            users to easily scale their analyses.
           </Resource>
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
             to="/applications"
           >
-            Partners all over the world are building on top of the Planetary
-            Computer platform, providing the actionable information that is
-            critical to sustainability practitioners.
+            Partners all over the world are building on top of the Planetary Computer
+            platform, providing the actionable information that is critical to
+            sustainability practitioners.
           </Resource>
         </div>
       </div>
