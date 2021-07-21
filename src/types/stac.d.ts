@@ -27,7 +27,7 @@ export interface IStacLink {
 
 export interface IStacItem extends Feature {
   collection: string;
-  assets: {};
+  assets: { [key: string]: IStacAsset };
 }
 
 export interface IStacAsset {

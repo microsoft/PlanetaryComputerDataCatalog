@@ -4,7 +4,7 @@ interface ItemPreviewProps {
   item: IStacItem;
 }
 
-const thumbnailImageTypes = ["image/png", "image/jpg"];
+const thumbnailImageTypes = ["image/png", "image/jpg", "image/jpeg"];
 
 const assetThumbCheck = (roleKey: string) => {
   return (asset: IStacAsset): boolean => {
@@ -27,7 +27,16 @@ const ItemPreview = ({ item }: ItemPreviewProps) => {
 
   if (thumbAsset?.href) {
     return (
-      <img src={thumbAsset.href} alt={`Rendered thumbnail for item: ${item.id}`} />
+      <img
+        src={thumbAsset.href}
+        alt={`Rendered thumbnail for item: ${item.id}`}
+        style={{
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          height: "100%",
+          width: "100%",
+        }}
+      />
     );
   }
   return null;

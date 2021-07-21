@@ -2,7 +2,7 @@ import * as React from "react";
 import { Dropdown } from "@fluentui/react";
 import { useFormikContext } from "formik";
 
-const FormSelect = ({ label, name, options, multiSelect = false }) => {
+const FormSelect = ({ label = "", name, options, multiSelect = false }) => {
   const { values, setFieldValue } = useFormikContext();
 
   return (

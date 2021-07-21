@@ -3,8 +3,8 @@ import { useFormikContext } from "formik";
 
 const FormInput = ({
   name,
-  label,
-  placeholder,
+  label = "",
+  placeholder = "",
   required = false,
   multiline = false,
 }) => {

@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
+import { QueryContext } from "./query/context";
+import Builder from "./query/Builder";
 
 // import { MQE_URL } from "../../utils/constants";
 
@@ -11,8 +13,10 @@ const QueryPane = ({ collectionId }: QueryPaneProps) => {
   const [schema, setSchema] = useState<any>();
 
   const fetchSchema = useCallback(async () => {
-    let schema = await $RefParser.dereference(
-      `http://localhost:8866/api/stac/v1/collections/${collectionId}/queryables`
+    setSchema(null);
+    // TODO: replace mock queryables
+    const schema = await $RefParser.dereference(
+      `/mock/${collectionId}/queryables.json`
     );
     setSchema(schema);
   }, [collectionId]);
@@ -23,7 +27,13 @@ const QueryPane = ({ collectionId }: QueryPaneProps) => {
 
   console.log(schema);
 
-  return <pre>{JSON.stringify(schema, null, 2)}</pre>;
+  return schema ? (
+    <QueryContext.Provider value={{ state: { schema } }}>
+      <Builder />
+    </QueryContext.Provider>
+  ) : (
+    <div>Filtering not enabled for this collection</div>
+  );
 };
 
 export default QueryPane;
