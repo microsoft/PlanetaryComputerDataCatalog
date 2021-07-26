@@ -1,33 +1,33 @@
 import * as React from "react";
 import { Dropdown } from "@fluentui/react";
+import { useFormikContext } from "formik";
 
-const FormSelect = ({ formik, label, name, options, multiSelect = false }) => {
+const FormSelect = ({ label = "", name, options, multiSelect = false }) => {
+  const { values, setFieldValue } = useFormikContext();
+
   return (
     <Dropdown
       name={name}
       label={label}
       multiSelect={multiSelect}
-      selectedKey={multiSelect ? undefined : formik.values[name]}
-      selectedKeys={multiSelect ? formik.values[name] : undefined}
+      selectedKey={multiSelect ? undefined : values[name]}
+      selectedKeys={multiSelect ? values[name] : undefined}
       placeholder="Select an option"
       options={options}
       onChange={(_, option) => {
         if (multiSelect) {
-          const values = formik.values[name];
+          const vals = values[name];
           if (option.selected) {
-            formik.setFieldValue(name, [...values, option.key]);
+            setFieldValue(name, [...vals, option.key]);
           } else {
-            const idx = values.indexOf(option.key);
+            const idx = vals.indexOf(option.key);
 
             if (idx !== -1) {
-              formik.setFieldValue(name, [
-                ...values.slice(0, idx),
-                ...values.slice(idx + 1),
-              ]);
+              setFieldValue(name, [...vals.slice(0, idx), ...vals.slice(idx + 1)]);
             }
           }
         } else {
-          formik.setFieldValue(name, option.key);
+          setFieldValue(name, option.key);
         }
       }}
     />

@@ -4,6 +4,7 @@ import { useBoolean } from "@fluentui/react-hooks";
 
 import { IStacItem } from "../../types/stac";
 import SimpleKeyValueList from "../controls/SimpleKeyValueList";
+import ItemPreview from "./ItemPreview";
 
 type ItemPanelProps = {
   selectedItems: Array<IStacItem> | undefined;
@@ -18,23 +19,16 @@ const ItemPanel = ({ selectedItems }: ItemPanelProps) => {
     }
   }, [selectedItems, openPanel]);
 
-  const thumbnail = selectedItems?.length
-    ? Object.values(selectedItems[0].assets)
-        .map((v: any) => (v.roles?.includes("thumbnail") ? v.href : null))
-        .filter(href => href !== null)
-    : null;
-
   const content = selectedItems?.length ? (
     <>
       <h3>{selectedItems[0].id}</h3>
       <Separator />
       <SimpleKeyValueList object={selectedItems[0]} />
-      {thumbnail?.length && (
-        <>
-          <Separator />
-          <img src={thumbnail[0]} style={{ maxHeight: 300 }} alt="Item thumbnail" />
-        </>
-      )}
+      <Separator />
+      <div style={{ maxWidth: 300 }}>
+        <ItemPreview item={selectedItems[0]} />
+      </div>
+
       <Separator />
       <SimpleKeyValueList object={selectedItems[0].properties} />
     </>

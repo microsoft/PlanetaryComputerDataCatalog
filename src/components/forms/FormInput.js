@@ -1,14 +1,15 @@
-import React from "react";
 import { TextField } from "@fluentui/react";
+import { useFormikContext } from "formik";
 
 const FormInput = ({
   name,
-  label,
-  placeholder,
-  formik,
+  label = "",
+  placeholder = "",
   required = false,
   multiline = false,
 }) => {
+  const { values, touched, errors, handleChange } = useFormikContext();
+
   return (
     <TextField
       data-bi-dnt
@@ -18,9 +19,9 @@ const FormInput = ({
       name={name}
       label={label}
       placeholder={placeholder}
-      value={formik.values[name]}
-      errorMessage={formik.touched[name] && formik.errors[name]}
-      onChange={formik.handleChange}
+      value={values[name]}
+      errorMessage={touched[name] && errors[name]}
+      onChange={handleChange}
     />
   );
 };
