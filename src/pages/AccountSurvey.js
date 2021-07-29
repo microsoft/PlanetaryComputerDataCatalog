@@ -1,5 +1,4 @@
-import React from "react";
-import { useFormik } from "formik";
+import { Formik, Form } from "formik";
 import {
   Link,
   PrimaryButton,
@@ -58,7 +57,7 @@ const AccountSurvey = () => {
     terms: yup.boolean().required(),
   });
 
-  const formik = useFormik({
+  const formikProps = {
     initialValues: {
       email: "",
       name: "",
@@ -72,7 +71,7 @@ const AccountSurvey = () => {
     },
     validationSchema: validationSchema,
     onSubmit: handleSubmit,
-  });
+  };
 
   const tosLabel = (
     <span>
@@ -82,87 +81,70 @@ const AccountSurvey = () => {
   );
 
   const form = (
-    <form
-      onSubmit={formik.handleSubmit}
-      style={{ maxWidth: "500px", marginBottom: 80 }}
-    >
-      <p>
-        If you're interested in being one of our first users, please provide the
-        following information. We will accommodate as many users as we can in
-        our preview, but we are excited to support the entire environmental
-        sustainability community when the Planetary Computer is publicly
-        available.
-      </p>
-      <Separator />
-      <p>
-        Microsoft will use this information to communicate with you about the
-        Planetary Computer, to evaluate your eligibility to participate in our
-        private preview, to prioritize new features, and to communicate
-        non-identifying information – both internally and externally – about the
-        geographic regions and focus areas that our users represent. For more
-        information on how we use your data please see{" "}
-        <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
-          Privacy &amp; Cookies
-        </NewTabLink>
-        .
-      </p>
-      <Stack tokens={{ childrenGap: 8 }}>
-        <FormInput required name="email" label="Email" formik={formik} />
-        <FormInput required name="name" label="Name" formik={formik} />
-        <FormInput
-          name="affiliation"
-          label="Affiliated Organization"
-          placeholder="Company, institution, university, etc."
-          formik={formik}
-        />
-        <FormSelect
-          name="industry"
-          label="Sector"
-          options={industryOptions}
-          formik={formik}
-        />
-        <FormSelect
-          multiSelect
-          name="languages"
-          label="Primary programming languages"
-          options={languageOptions}
-          formik={formik}
-        />
-        <FormSelect
-          name="country"
-          label="Country"
-          options={Object.values(countries).map(c => ({ key: c, text: c }))}
-          formik={formik}
-        />
-        <FormInput
-          name="datasets"
-          label="What datasets are you interested in?"
-          formik={formik}
-          multiline
-        />
-        <FormInput
-          name="studyArea"
-          label="What is your area of study?"
-          formik={formik}
-          multiline
-        />
-        <FormCheckbox
-          name="terms"
-          label={tosLabel}
-          formik={formik}
-          required={true}
-        />
-      </Stack>
-      <Stack {...rowProps} tokens={stackTokens.spinnerStack}>
-        <PrimaryButton
-          disabled={mutation.isLoading}
-          type="submit"
-          text="Submit"
-          styles={marginVStyle}
-        />
-        {mutation.isLoading && <Spinner size={SpinnerSize.large} />}
-      </Stack>
-    </form>
+    <Formik {...formikProps}>
+      <Form style={{ maxWidth: "500px", marginBottom: 80 }}>
+        <p>
+          If you're interested in being one of our first users, please provide the
+          following information. We will accommodate as many users as we can in our
+          preview, but we are excited to support the entire environmental
+          sustainability community when the Planetary Computer is publicly available.
+        </p>
+        <Separator />
+        <p>
+          Microsoft will use this information to communicate with you about the
+          Planetary Computer, to evaluate your eligibility to participate in our
+          private preview, to prioritize new features, and to communicate
+          non-identifying information – both internally and externally – about the
+          geographic regions and focus areas that our users represent. For more
+          information on how we use your data please see{" "}
+          <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
+            Privacy &amp; Cookies
+          </NewTabLink>
+          .
+        </p>
+        <Stack tokens={{ childrenGap: 8 }}>
+          <FormInput required name="email" label="Email" />
+          <FormInput required name="name" label="Name" />
+          <FormInput
+            name="affiliation"
+            label="Affiliated Organization"
+            placeholder="Company, institution, university, etc."
+          />
+          <FormSelect name="industry" label="Sector" options={industryOptions} />
+          <FormSelect
+            multiSelect
+            name="languages"
+            label="Primary programming languages"
+            options={languageOptions}
+          />
+          <FormSelect
+            name="country"
+            label="Country"
+            options={Object.values(countries).map(c => ({ key: c, text: c }))}
+          />
+          <FormInput
+            name="datasets"
+            label="What datasets are you interested in?"
+            multiline
+          />
+          <FormInput
+            name="studyArea"
+            label="What is your area of study?"
+            multiline
+          />
+          <FormCheckbox name="terms" label={tosLabel} required={true} />
+        </Stack>
+        <Stack {...rowProps} tokens={stackTokens.spinnerStack}>
+          <PrimaryButton
+            disabled={mutation.isLoading}
+            type="submit"
+            text="Submit"
+            styles={marginVStyle}
+          />
+          {mutation.isLoading && <Spinner size={SpinnerSize.large} />}
+        </Stack>
+      </Form>
+    </Formik>
   );
 
   const banner = (
@@ -195,8 +177,8 @@ const AccountSurvey = () => {
     <>
       <h2>Something went wrong...</h2>
       <Text block>
-        Sorry, we seem to be having trouble with our signups at the moment.
-        Please <Link onClick={() => history.go(0)}>try again</Link> or email{" "}
+        Sorry, we seem to be having trouble with our signups at the moment. Please{" "}
+        <Link onClick={() => history.go(0)}>try again</Link> or email{" "}
         <Link href="mailto:planetarycomputer@microsoft.com">
           planetarycomputer@microsoft.com
         </Link>{" "}

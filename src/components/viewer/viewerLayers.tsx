@@ -18,7 +18,7 @@ export const itemLineLayer = new atlas.layer.LineLayer(
   stacSearchDatasource,
   "stac-item-outline",
   {
-    strokeColor: "white",
+    strokeColor: "#FFAE42",
     filter: [
       "any",
       ["==", ["geometry-type"], "Polygon"],

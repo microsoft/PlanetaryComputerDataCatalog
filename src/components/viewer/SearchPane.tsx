@@ -32,7 +32,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
   const [start, setStart] = useState<Date>(defaultStart);
   const [end, setEnd] = useState<Date>(new Date());
   const [itemId, setItemId] = useState<string>();
-  const [limit, setLimit] = useState<number>(25);
+  const [limit, setLimit] = useState<number>(50);
   const [search, setSearch] = useState<IStacSearch | undefined>();
 
   const { isSuccess, data: stacResponse } = useCollections();
@@ -96,15 +96,16 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
       }
     }
 
+    onResults(undefined);
     setSelectedCollection(option);
   };
 
   const collectionOptions = isSuccess
-    ? stacResponse?.collections.map(
-        (collection: IStacCollection): IDropdownOption => {
+    ? (stacResponse?.collections as IStacCollection[])
+        .filter(collection => !("cube:variables" in collection))
+        .map((collection): IDropdownOption => {
           return { key: collection.id, text: collection.title };
-        }
-      )
+        })
     : [];
 
   return (

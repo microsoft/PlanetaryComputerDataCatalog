@@ -6,14 +6,17 @@ const Footer = () => {
   // Allow users to manage their cookie consent preferences. Not all regions
   // require consent, and the cookie library will do a no-op if the consent dialog is
   // launched in a non-required region. So check for requirements before rendering the button.
-  const [isConsentRequired, setIsConsentRequired] = useState(false);
+  // Defaulting to true is primarily to satisfy the compliance test, to ensure
+  // that manage button is rendered on first render, while the consent library
+  // may still be loading.
+  const [isConsentRequired, setIsConsentRequired] = useState(true);
 
   useTimeoutFn(() => {
     // Cookie consent is determined regionally. If it can't be determined, default
     // to requiring consent.
     const consent = window?.siteConsent?.isConsentRequired;
     setIsConsentRequired(consent === undefined ? true : consent);
-  }, 600);
+  }, 100);
 
   const manageConsent = isConsentRequired ? (
     // Button to launch consent form, styled to mimic the UHF links

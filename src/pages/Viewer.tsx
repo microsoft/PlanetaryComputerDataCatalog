@@ -61,12 +61,12 @@ const Viewer = () => {
     if (!mapRef.current) {
       const map = new atlas.Map(mapContainerId, {
         view: "Auto",
-        center: [-80, 40],
-        zoom: 2,
+        center: [-60, -20],
+        zoom: 4,
         language: "en-US",
         showFeedbackLink: false,
         showLogo: false,
-        style: "grayscale_dark",
+        style: "road_shaded_relief",
         renderWorldCopies: true,
         authOptions: {
           authType: atlas.AuthenticationType.subscriptionKey,
@@ -108,14 +108,14 @@ const Viewer = () => {
 
   return (
     <>
-      <h1>Experimental STAC Viewer</h1>
+      <h1>STAC Viewer Sandbox</h1>
       <ItemPanel selectedItems={selectedItems} />
-      <Stack horizontal tokens={stackTokens}>
+      <Stack horizontal tokens={stackTokens} styles={{ root: { height: "90vh" } }}>
         <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
           <SearchPane mapRef={mapRef} onResults={handleResults} />
         </StackItem>
         <StackItem grow={2}>
-          <div id={mapContainerId} style={{ width: "100%", height: "50vh" }}></div>
+          <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>
         </StackItem>
       </Stack>
     </>
