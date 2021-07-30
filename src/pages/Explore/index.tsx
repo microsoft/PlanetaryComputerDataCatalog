@@ -3,9 +3,9 @@ import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, IStackTokens } from "@fluentui/react";
 
-import SearchPane from "../components/viewer/SearchPane";
-import ItemPanel from "../components/viewer/ItemPanel";
-import { IStacItem, IStacSearchResult } from "../types/stac";
+import SearchPane from "./components/SearchPane";
+import ItemPanel from "./components/ItemPanel";
+import { IStacItem, IStacSearchResult } from "../../types/stac";
 
 import {
   stacSearchDatasource,
@@ -15,7 +15,9 @@ import {
   layerControl,
   getHighlightItemFn,
   getUnhighlightItemFn,
-} from "../components/viewer/viewerLayers";
+} from "./components/viewerLayers";
+import Layout from "components/Layout";
+import SEO from "components/Seo";
 
 const mapContainerId: string = "viewer-map";
 
@@ -46,7 +48,7 @@ const Viewer = () => {
   useEffect(() => {
     const map = mapRef.current;
 
-    if (mapReady && map) {
+    if (mapReady && map && map.sources.getSources().length === 0) {
       map.sources.add(stacSearchDatasource);
       map.layers.add([itemPolyLayer, itemLineLayer, itemHoverLayer]);
       map.controls.add(layerControl, {
@@ -103,14 +105,13 @@ const Viewer = () => {
 
   const stackTokens: IStackTokens = {
     childrenGap: 5,
-    padding: 10,
   };
 
   return (
-    <>
-      <h1>STAC Viewer Sandbox</h1>
+    <Layout>
+      <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <ItemPanel selectedItems={selectedItems} />
-      <Stack horizontal tokens={stackTokens} styles={{ root: { height: "90vh" } }}>
+      <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
         <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
           <SearchPane mapRef={mapRef} onResults={handleResults} />
         </StackItem>
@@ -118,7 +119,7 @@ const Viewer = () => {
           <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>
         </StackItem>
       </Stack>
-    </>
+    </Layout>
   );
 };
 

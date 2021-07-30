@@ -1,5 +1,5 @@
 import { Stack } from "@fluentui/react";
-import { IStacSearchResult } from "../../types/stac";
+import { IStacSearchResult } from "../../../types/stac";
 import ItemPreview from "./ItemPreview";
 
 type SearchResultsProps = {

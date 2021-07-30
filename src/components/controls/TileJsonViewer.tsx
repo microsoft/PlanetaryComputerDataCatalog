@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
-import { layerControl } from "components/viewer/viewerLayers";
+import { layerControl } from "pages/Explore/components/viewerLayers";
 import { useCollectionMapInfo } from "utils/requests";
 import { Slider, Stack, Toggle } from "@fluentui/react";
 

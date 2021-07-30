@@ -3,7 +3,9 @@ import * as atlas from "azure-maps-control";
 import {
   DatePicker,
   Dropdown,
+  Icon,
   IDropdownOption,
+  IDropdownProps,
   PrimaryButton,
   Spinner,
   SpinnerSize,
@@ -12,9 +14,9 @@ import {
 } from "@fluentui/react";
 import dayjs from "dayjs";
 
-import { IStacCollection, IStacSearch, IStacSearchResult } from "../../types/stac";
-import { useCollections } from "../../utils/requests";
-import { useStacSearch } from "../../utils/stacSearch";
+import { IStacCollection, IStacSearch, IStacSearchResult } from "types/stac";
+import { useCollections } from "utils/requests";
+import { useStacSearch } from "utils/stacSearch";
 import SearchResults from "./SearchResults";
 import QueryPane from "./QueryPane";
 
@@ -100,6 +102,35 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     setSelectedCollection(option);
   };
 
+  const iconStyles = { marginRight: "8px" };
+  const onRenderTitle = (
+    options: IDropdownOption[] | undefined
+  ): JSX.Element | null => {
+    if (!options) return null;
+
+    const option = options[0];
+
+    return (
+      <div>
+        <Icon
+          style={iconStyles}
+          iconName="AddOnlineMeeting"
+          aria-hidden="true"
+          title={option.title}
+        />
+        <span>{option.text}</span>
+      </div>
+    );
+  };
+  const onRenderPlaceholder = (props: IDropdownProps | undefined): JSX.Element => {
+    return (
+      <div>
+        <Icon style={iconStyles} iconName="AddOnlineMeeting" aria-hidden="true" />
+        <span>Select a dataset</span>
+      </div>
+    );
+  };
+
   const collectionOptions = isSuccess
     ? (stacResponse?.collections as IStacCollection[])
         .filter(collection => !("cube:variables" in collection))
@@ -110,11 +141,14 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
 
   return (
     <div>
+      <p>Explore Planetary Computer datasets.</p>
       <Dropdown
-        label="Dataset"
         options={collectionOptions}
         selectedKey={selectedCollection ? selectedCollection.key : undefined}
         onChange={collectionChange}
+        onRenderTitle={onRenderTitle}
+        onRenderPlaceholder={onRenderPlaceholder}
+        ariaLabel="Selected dataset"
       />
       <DatePicker
         label="Start"
