@@ -8,7 +8,7 @@ const LabeledValue = ({ label, children = null }) => {
       <Text block styles={boldStyle}>
         {label}:
       </Text>
-      <Text block style={{ maxHeight: 150, overflowY: "auto" }}>
+      <Text block style={{ maxHeight: 150, overflowY: "auto" }} tabIndex={0}>
         {children}
       </Text>
     </div>
