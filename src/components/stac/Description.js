@@ -8,10 +8,9 @@ const Description = () => {
 
   return (
     <div
-      className="collection-content-item"
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(
-          marked(collection.description.replace(/\\n/g, "<br/>"))
+          marked(collection.description.replace(/\\n/g, "\n"))
         ),
       }}
     ></div>
