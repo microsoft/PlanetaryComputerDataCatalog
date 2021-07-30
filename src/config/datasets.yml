@@ -224,7 +224,7 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-deltares-gfm
     thumbnailUrl: deltares-flood.png
     alt: Flood map of coastal Myanmar
-    keywords: [Global, Flood, Sea level rise]
+    keywords: [Global, Flood, Sea level rise, Water]
 
   - title: GBIF
     shortTerm: GBIF occurrence
