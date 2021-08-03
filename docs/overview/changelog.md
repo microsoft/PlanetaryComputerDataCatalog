@@ -11,7 +11,7 @@ This minor release has the following __breaking__ changes:
 
 #### New datasets
 
-- [JRC Global Surface Water](https://planetarycomputer-staging.microsoft.com/dataset/jrc-gsw): This collection presents surface water products between 1984-2020 from Landsat 5,7, and 8 sensors.
+- [JRC Global Surface Water](https://planetarycomputer.microsoft.com/dataset/jrc-gsw): This collection presents surface water products between 1984-2020 from Landsat 5,7, and 8 sensors.
 
 ## July 2021
 
