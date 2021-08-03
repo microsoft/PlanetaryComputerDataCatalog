@@ -128,6 +128,13 @@ collections:
       - title: Storage Documentation
         src: io-lulc-storage.html
 
+  jrc-gsw:
+    headerImg: ./images/jrc-gsw-hero.png
+    tabs:
+      - title: Example Notebook
+        src: jrc-gsw-example.html
+        launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
+
   mobi:
     headerImg: ./images/mobi-hero.png
     tabs:
