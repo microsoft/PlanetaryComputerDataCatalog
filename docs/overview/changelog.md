@@ -2,6 +2,17 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## August 2021
+
+This minor release has the following __breaking__ changes:
+
+- The `sentinel-2-l2a` Item IDs have been updated to include the Product Discriminator number. See [this stactools issue](https://github.com/stactools-packages/sentinel2/issues/5) for more information.
+- The `sentinel-2-l2a` Items have removed the downsampled version of assets. This includes renaming asset keys to no longer have the resolution; for example, `visual-10m` has been renamed to `visual` and `visual-20m` has been removed.
+
+#### New datasets
+
+- [JRC Global Surface Water](https://planetarycomputer.microsoft.com/dataset/jrc-gsw): This collection presents surface water products between 1984-2020 from Landsat 5,7, and 8 sensors.
+
 ## July 2021
 
 ### Highlights

@@ -113,7 +113,7 @@ There are 2 Azure Static Web App services enabled, one for staging and another f
 
 Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
 
-The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, follow these steps:
+The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, pull local `develop` and `main` to latest, and follow these steps:
 
 - Start a release
 

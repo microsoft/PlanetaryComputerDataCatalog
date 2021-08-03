@@ -1,8 +1,7 @@
 import axios from "axios";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { IStacSearch, IStacSearchResult } from "../types/stac";
-// TODO: see below, temporary hardcoded stac path
-//import { STAC_URL } from "./constants";
+import { STAC_URL } from "./constants";
 
 const getStacItems = async (
   queryParam: QueryFunctionContext<[string, IStacSearch | undefined]>
@@ -23,9 +22,7 @@ const getStacItems = async (
     ids: search.items?.length ? search.items.join(",") : undefined,
   };
 
-  // TODO: use config STAC, not prod (no items in staging)
-  const hcSTAC_URL = "https://planetarycomputer.microsoft.com/api/stac/v1";
-  const resp = await axios.get(`${hcSTAC_URL}/search`, {
+  const resp = await axios.get(`${STAC_URL}/search`, {
     params: serializedParams,
   });
 
