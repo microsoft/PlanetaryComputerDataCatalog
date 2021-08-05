@@ -38,7 +38,7 @@ See [Using VS Code](../overview/using-vscode.md) for how to use Visual Studio Co
 ## Use our Dask Gateway
 
 In this setup, you only use the Planetary Computer's scalable compute. You don't log into JupyterHub. Instead, your local machine drives the computation.
-We recommend this approach for users who value, and are comfortable with, managing a local development environment. This setup requires a bit more care on your part: You need to ensure that the versions of libraries in your local environment are compatible with the versions running in Azure.
+We recommend this approach for users who value, and are comfortable with, managing a local development environment. This setup requires a bit more care on your part: You need to ensure that the versions of libraries in your local environment are compatible with the versions running in Azure. While not required, we recommend using the container images published at [Microsoft/planetary-computer-containers](https://github.com/microsoft/planetary-computer-containers). The example here will create a local jupyterlab session using the `mcr.microsoft.com/planetary-computer/python` image.
 
 ### Request a token from JupyterHub
 
@@ -46,31 +46,37 @@ Visit <https://planetarycomputer.microsoft.com/compute/hub/token> to generate a 
 
 ![JupyterHub Admin page to generate a token.](images/hub-token.png)
 
-Substitute that token anywhere you see `<JUPYTERHUB_TOKEN>` below.
+Substitute that token anywhere you see `<JUPYTERHUB_API_TOKEN>` below.
 
 ### Connect to the Gateway
 
-Similar to before, we'll use `dask_gateway` to connect. Only now we need to provide the URLs explicitly.
+Similar to before, we'll use `dask_gateway` to connect. Only now we need to provide the URLs explicitly. You can specify them in code, or as environment variables.
 
-```python
->>> from dask_gateway import Gateway, auth
+This next snippet starts up jupyterlab at `localhost:8888` using the `mcr.microsoft.com/planetary-computer/python` container. It also mounts the current
+working directory as a volume, so you can access your local files.
 
->>> jupyterhub_auth = auth.JupyterHubAuth(api_token="<JUPYTERHUB_TOKEN>")  # from step 1
->>> gateway = Gateway(
-...     "https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway/",
-...     proxy_address="gateway://pccompute-dask.westeurope.cloudapp.azure.com",
-...     auth=jupyterhub_auth,
-... )
->>> gateway.list_clusters()
-[]
+```console
+$ export JUPYTERHUB_API_TOKEN=<JUPYTERHUB_API_TOKEN> from above
+$ docker run -it --rm \
+    -v $PWD:/home/jovyan \
+    -p 8888:8888 \
+    -e JUPYTERHUB_API_TOKEN=$JUPYTERHUB_API_TOKEN \
+    -e DASK_GATEWAY__CLUSTER__OPTIONS__IMAGE="mcr.microsoft.com/planetary-computer/python:latest" \
+    -e DASK_GATEWAY__ADDRESS="https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway" \
+    -e DASK_GATEWAY__PROXY_ADDRESS="https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway" \
+    mcr.microsoft.com/planetary-computer/python:latest \
+    jupyter lab --no-browser --ip="0.0.0.0"
 ```
 
-Now that you're connected, create a cluster as usual.
+That will print out a URL you can follow to access your local jupyterlab. From there, you can 
+
+
 
 ```python
->>> cluster = gateway.new_cluster()  # Creates the Dask Scheduler. Might take a minute.
+>>> import dask_gateway
+>>> gateway = dask_gateway.Gateway(auth="jupyterhub")  # uses DASK_GATEWAY environment variables set above
+>>> cluster = gateway.new_cluster()
 >>> client = cluster.get_client()
->>> cluster.adapt(minimum=1, maximum=100)
 ```
 
 From here on, computations using Dask will take place on the cluster. When you `.compute()` a result and bring it back locally,
