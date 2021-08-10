@@ -332,11 +332,11 @@ ai4e:
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
     keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
 
-  - title: Sentinel-3 L2 (preview)
+  - title: Sentinel-3 L2
     shortTerm: Sentinel-3 L2
     description:
       Global multispectral imagery at a resolution of 300m-500m from 2016-present
-    infoUrl: https://github.com/microsoft/AIforEarthDataSets#sentinel-3-l2-preview
+    infoUrl: https://github.com/microsoft/AIforEarthDataSets#sentinel-3-l2
     thumbnailUrl: sentinel-3-l2.png
     alt: Satellite image of Grand Canyon from Sentinel-3 L2
     keywords: [Global, Sentinel, Satellite, ESA, Temperature, SAR, Ocean, Imagery]
