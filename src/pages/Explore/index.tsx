@@ -4,6 +4,7 @@ import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, IStackTokens } from "@fluentui/react";
 
 import SearchPane from "./components/SearchPane";
+import CollectionSelector from "./components/CollectionSelector";
 import ItemPanel from "./components/ItemPanel";
 import { IStacItem, IStacSearchResult } from "../../types/stac";
 
@@ -18,6 +19,8 @@ import {
 } from "./components/viewerLayers";
 import Layout from "components/Layout";
 import SEO from "components/Seo";
+import { ExploreProvider } from "./components/state";
+import MosaicPresetSelector from "./components/MosaicPresetSelector";
 
 const mapContainerId: string = "viewer-map";
 
@@ -110,15 +113,20 @@ const Viewer = () => {
   return (
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
-      <ItemPanel selectedItems={selectedItems} />
-      <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
-        <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
-          <SearchPane mapRef={mapRef} onResults={handleResults} />
-        </StackItem>
-        <StackItem grow={2}>
-          <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>
-        </StackItem>
-      </Stack>
+      <ExploreProvider>
+        <ItemPanel selectedItems={selectedItems} />
+        <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
+          <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
+            <p>Explore Planetary Computer datasets.</p>
+            <CollectionSelector />
+            <MosaicPresetSelector />
+            <SearchPane mapRef={mapRef} onResults={handleResults} />
+          </StackItem>
+          <StackItem grow={2}>
+            <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>
+          </StackItem>
+        </Stack>
+      </ExploreProvider>
     </Layout>
   );
 };

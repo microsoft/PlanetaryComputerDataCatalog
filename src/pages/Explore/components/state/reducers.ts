@@ -40,9 +40,9 @@ export type Actions = ActionMap<PayloadTypes>[keyof ActionMap<PayloadTypes>];
 export const reducer = (state: State, action: Actions) => {
   switch (action.type) {
     case ActionTypes.dataset:
-      return Object.assign(state, { selectedDataset: action.payload });
+      return { ...state, selectedDataset: action.payload };
     case ActionTypes.mode:
-      return Object.assign(state, { mode: action.payload });
+      return { ...state, mode: action.payload };
     default:
       return state;
   }

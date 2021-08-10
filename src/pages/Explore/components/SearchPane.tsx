@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import * as atlas from "azure-maps-control";
 import {
   DatePicker,
   Dropdown,
-  Icon,
-  IDropdownOption,
-  IDropdownProps,
   PrimaryButton,
   Spinner,
   SpinnerSize,
@@ -14,11 +11,11 @@ import {
 } from "@fluentui/react";
 import dayjs from "dayjs";
 
-import { IStacCollection, IStacSearch, IStacSearchResult } from "types/stac";
-import { useCollections } from "utils/requests";
+import { IStacSearch, IStacSearchResult } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
 import SearchResults from "./SearchResults";
 import QueryPane from "./QueryPane";
+import { ExploreContext } from "./state";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;
@@ -28,16 +25,13 @@ type PickerPaneProps = {
 const defaultStart = dayjs().subtract(1, "year").toDate();
 
 const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
-  const [selectedCollection, setSelectedCollection] = useState<
-    IDropdownOption | undefined
-  >();
+  const { state } = useContext(ExploreContext);
   const [start, setStart] = useState<Date>(defaultStart);
   const [end, setEnd] = useState<Date>(new Date());
   const [itemId, setItemId] = useState<string>();
   const [limit, setLimit] = useState<number>(50);
   const [search, setSearch] = useState<IStacSearch | undefined>();
 
-  const { isSuccess, data: stacResponse } = useCollections();
   const {
     isError: isSearchError,
     isLoading: isSearchLoading,
@@ -62,12 +56,12 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     const e = dayjs(end);
     const bbox = mapRef.current?.getCamera().bounds;
 
-    if (bbox && selectedCollection) {
+    if (bbox && state.selectedDataset) {
       const sw = atlas.data.BoundingBox.getSouthWest(bbox);
       const ne = atlas.data.BoundingBox.getNorthEast(bbox);
 
       setSearch({
-        collections: [selectedCollection.key.toString() ?? ""],
+        collections: [state.selectedDataset ?? ""],
         bbox: [sw[0], sw[1], ne[0], ne[1]],
         datetime: `${s.format("YYYY-MM-DD")}/${e.format("YYYY-MM-DD")}`,
         items: itemId?.trim() ? itemId.split(",").map(i => i.trim()) : undefined,
@@ -76,80 +70,8 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     }
   };
 
-  const collectionChange = (_: any, option: IDropdownOption | undefined): void => {
-    if (option) {
-      const collections: IStacCollection[] = stacResponse.collections;
-      const collection = collections.find(c => c.id === option.key);
-
-      if (collection) {
-        const timeRange = collection?.extent.temporal.interval[0];
-        const collectionStart = dayjs(timeRange[0]);
-        const collectionEnd = dayjs(timeRange[1] ?? undefined);
-
-        if (
-          dayjs(start).isBefore(collectionStart) ||
-          dayjs(start).isAfter(collectionEnd)
-        ) {
-          setStart(collectionStart.toDate());
-        }
-        if (dayjs(end).isBefore(collectionStart)) {
-          setEnd(collectionEnd.toDate());
-        }
-      }
-    }
-
-    onResults(undefined);
-    setSelectedCollection(option);
-  };
-
-  const iconStyles = { marginRight: "8px" };
-  const onRenderTitle = (
-    options: IDropdownOption[] | undefined
-  ): JSX.Element | null => {
-    if (!options) return null;
-
-    const option = options[0];
-
-    return (
-      <div>
-        <Icon
-          style={iconStyles}
-          iconName="AddOnlineMeeting"
-          aria-hidden="true"
-          title={option.title}
-        />
-        <span>{option.text}</span>
-      </div>
-    );
-  };
-  const onRenderPlaceholder = (props: IDropdownProps | undefined): JSX.Element => {
-    return (
-      <div>
-        <Icon style={iconStyles} iconName="AddOnlineMeeting" aria-hidden="true" />
-        <span>Select a dataset</span>
-      </div>
-    );
-  };
-
-  const collectionOptions = isSuccess
-    ? (stacResponse?.collections as IStacCollection[])
-        .filter(collection => !("cube:variables" in collection))
-        .map((collection): IDropdownOption => {
-          return { key: collection.id, text: collection.title };
-        })
-    : [];
-
   return (
     <div>
-      <p>Explore Planetary Computer datasets.</p>
-      <Dropdown
-        options={collectionOptions}
-        selectedKey={selectedCollection ? selectedCollection.key : undefined}
-        onChange={collectionChange}
-        onRenderTitle={onRenderTitle}
-        onRenderPlaceholder={onRenderPlaceholder}
-        ariaLabel="Selected dataset"
-      />
       <DatePicker
         label="Start"
         value={start}
@@ -167,9 +89,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
 
       <TextField
         label="Item IDs (optional)"
-        placeholder={`STAC IDs from ${
-          selectedCollection ? selectedCollection.key : "collection"
-        }`}
+        placeholder={`STAC IDs from ${state.selectedDataset ?? "collection"}`}
         value={itemId}
         onChange={(_, newValue) => setItemId(newValue)}
       />
@@ -194,9 +114,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
           <Spinner size={SpinnerSize.large} styles={{ root: { marginTop: 10 } }} />
         )}
       </Stack>
-      {selectedCollection && (
-        <QueryPane collectionId={selectedCollection.key.toString()} />
-      )}
+      {state.selectedDataset && <QueryPane collectionId={state.selectedDataset} />}
 
       <SearchResults results={searchResponse} isError={isSearchError} />
     </div>
