@@ -11,15 +11,15 @@ This minor release has the following __breaking__ changes:
 
 #### New datasets
 
-- [JRC Global Surface Water](https://planetarycomputer.microsoft.com/dataset/jrc-gsw): This collection presents surface water products between 1984-2020 from Landsat 5,7, and 8 sensors.
+- [JRC Global Surface Water](https://planetarycomputer.microsoft.com/dataset/jrc-gsw): surface water distribution from 1984 to 2020, based on data from the Landsat 5, 7, and 8 sensors.
 
 ## July 2021
 
 ### Highlights
 
 * The [STAC API][stac-api] is now compliant with [STAC 1.0](https://medium.com/radiant-earth-insights/stac-specification-1-0-0-released-c59e8c848077).
-* Added a new Data API with several features, including the ability to preview datasets and items. See [DATA API](docs/overview/changelog/#data-api) below for more.
-* Added support for earth-systems datasets in our STAC catalog. See [Datasets](./docs/overview/changelog/#datasets) below for more.
+* Added a new Data API with several features, including the ability to preview datasets and items. See [Data API](docs/overview/changelog/#data-api) below for more.
+* Added support for Earth-systems datasets in our STAC catalog. See [Datasets](./docs/overview/changelog/#datasets) below for more.
 * The Hub environment Dockerfiles and images are now publicly available. See [Hub environments](docs/overview/changelog/#hub-environments) below for more.
 
 ### APIs
@@ -52,21 +52,21 @@ The full list of new datasets is provided below, but we wanted to highlight that
 
 The following datasets are now available in our [data catalog][catalog] and [STAC API][stac-api]:
 
-* [Daymet Collection](https://planetarycomputer.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual summaries
+* [Daymet Collection](https://planetarycomputer.microsoft.com/dataset/group/daymet): gridded estimates of weather parameters for North America, Hawaii, and Puerto Rico at daily, monthly, and annual temporal resolutions
 * [Esri 10-Meter Land Cover](https://planetarycomputer.microsoft.com/dataset/io-lulc): a 10-meter resolution map of Earth’s land surface from 2020
-* [HREA — High Resolution Electricity Access](https://planetarycomputer.microsoft.com/dataset/hrea): settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
-* [MTBS — Monitoring Trends in Burn Severity](https://planetarycomputer.microsoft.com/dataset/mtbs): annual burn severity mosaics for the continental United States and Alaska
-* [MoBI — Map of Biodiversity Importance](https://planetarycomputer.microsoft.com/dataset/mobi): habitat information for 2,216 imperiled species occurring in the conterminous United States
+* [HREA: High Resolution Electricity Access](https://planetarycomputer.microsoft.com/dataset/hrea): settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery
+* [MTBS: Monitoring Trends in Burn Severity](https://planetarycomputer.microsoft.com/dataset/mtbs): annual burn severity mosaics for the continental United States and Alaska
+* [MoBI: Map of Biodiversity Importance](https://planetarycomputer.microsoft.com/dataset/mobi): habitat information for 2,216 imperiled species occurring in the conterminous United States
 * [NASADEM HGT v001](https://planetarycomputer.microsoft.com/dataset/nasadem): global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission
-* [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate): high-resolution global dataset of monthly climate and climatic water balance
-* [USGS 3DEP Seamless DEMs](https://planetarycomputer.microsoft.com/dataset/3dep-seamless): high-quality topographic data and for a wide range of other three-dimensional (3D) representations of the Nation's natural and constructed features
-* [USGS Gap Analysis Project](https://planetarycomputer.microsoft.com/dataset/gap): the foundation of the most detailed, consistent map of vegetation available for the United States, based on the NatureServe Ecological Systems Classification
+* [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate): global monthly climate and climatic water balance
+* [USGS 3DEP Seamless DEMs](https://planetarycomputer.microsoft.com/dataset/3dep-seamless): high-quality topographic data and for a wide range of other three-dimensional (3D) representations of natural and constructed features in the United States
+* [USGS Gap Land Cover](https://planetarycomputer.microsoft.com/dataset/gap): US-wide land cover information for 2011
 
 #### Changes to existing datasets
 
 * New items from Sentinel-2 and Landsat 8 are now continuously available through the STAC API
 * Changed the item IDs for [Sentinel-2 Level-2A](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a) and [Landsat 8 Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-8-c2-l2) to not include the processing date
-* Fixed issues with missing Sentinel 2 scenes due to failed Sen2Cor processing
+* Fixed issues with missing Sentinel-2 scenes
 * Fixed various quality issues with some Landsat 8 scenes by updating to the most recently processed version available from USGS
 * Fixed Landsat 8 STAC item footprints being off by half a pixel
 
