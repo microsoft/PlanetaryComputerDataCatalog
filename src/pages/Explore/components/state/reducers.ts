@@ -43,6 +43,10 @@ export const reducer = (state: State, action: Actions) => {
       return { ...state, selectedDataset: action.payload };
     case ActionTypes.mode:
       return { ...state, mode: action.payload };
+    case ActionTypes.mosaic:
+      return { ...state, mosaicPresetId: action.payload };
+    case ActionTypes.bands:
+      return { ...state, bandsPresetId: action.payload };
     default:
       return state;
   }

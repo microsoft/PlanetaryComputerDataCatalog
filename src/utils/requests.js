@@ -29,6 +29,13 @@ export const useCollectionMapInfo = collectionId => {
   });
 };
 
+export const useCollectionMosaicInfo = collectionId => {
+  return useQuery([collectionId], getCollectionMosaicParams, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+};
+
 const getByUrl = async ({ queryKey }) => {
   const [url] = queryKey;
 
@@ -63,4 +70,22 @@ const getCollectionViewerParams = async ({ queryKey }) => {
   return {
     info: mapInfoResp.data,
   };
+};
+
+const getCollectionMosaicParams = async ({ queryKey }) => {
+  const [collectionId] = queryKey;
+  const faker = {
+    mosaics: [
+      { name: `Mosaic 1 (${collectionId})`, key: `${collectionId}-e32fha` },
+      { name: `Mosaic 2 (${collectionId})`, key: `${collectionId}-fadf3s` },
+      { name: `Mosaic 3 (${collectionId})`, key: `${collectionId}-beudhs` },
+    ],
+  };
+  const p = new Promise(resolve => {
+    setTimeout(resolve(faker), 2000);
+  });
+
+  const data = await p;
+
+  return data;
 };

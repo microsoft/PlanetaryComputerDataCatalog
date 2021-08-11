@@ -13,9 +13,9 @@ import dayjs from "dayjs";
 
 import { IStacSearch, IStacSearchResult } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
-import SearchResults from "./SearchResults";
+import SearchResults from "../SearchResults";
 import QueryPane from "./QueryPane";
-import { ExploreContext } from "./state";
+import { ExploreContext } from "../state";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;

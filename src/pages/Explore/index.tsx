@@ -3,11 +3,6 @@ import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, IStackTokens } from "@fluentui/react";
 
-import SearchPane from "./components/SearchPane";
-import CollectionSelector from "./components/CollectionSelector";
-import ItemPanel from "./components/ItemPanel";
-import { IStacItem, IStacSearchResult } from "../../types/stac";
-
 import {
   stacSearchDatasource,
   itemLineLayer,
@@ -17,10 +12,14 @@ import {
   getHighlightItemFn,
   getUnhighlightItemFn,
 } from "./components/viewerLayers";
+import { IStacItem, IStacSearchResult } from "../../types/stac";
 import Layout from "components/Layout";
 import SEO from "components/Seo";
 import { ExploreProvider } from "./components/state";
-import MosaicPresetSelector from "./components/MosaicPresetSelector";
+import ItemPanel from "./components/ItemPanel";
+import SearchPane from "./components/panes/SearchPane";
+import CollectionSelector from "./components/selectors/CollectionSelector";
+import MosaicPresetSelector from "./components/selectors/MosaicPresetSelector";
 
 const mapContainerId: string = "viewer-map";
 
