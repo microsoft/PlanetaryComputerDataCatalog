@@ -20,10 +20,11 @@ const MosaicPresetSelector = () => {
 
   return (
     <StateSelector
-      title="Mosaic preset"
-      icon="Sqaure"
+      title="Select mosaic preset"
+      icon="Nav2DMapView"
       action={ActionTypes.mosaic}
       options={mosaicOptions}
+      selectedKey={state.mosaicPresetId}
     />
   );
 };

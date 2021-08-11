@@ -19,7 +19,7 @@ import { ExploreProvider } from "./components/state";
 import ItemPanel from "./components/ItemPanel";
 import SearchPane from "./components/panes/SearchPane";
 import CollectionSelector from "./components/selectors/CollectionSelector";
-import MosaicPresetSelector from "./components/selectors/MosaicPresetSelector";
+import MosaicPane from "./components/panes/MosaicPane";
 
 const mapContainerId: string = "viewer-map";
 
@@ -116,10 +116,12 @@ const Viewer = () => {
         <ItemPanel selectedItems={selectedItems} />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
-            <p>Explore Planetary Computer datasets.</p>
-            <CollectionSelector />
-            <MosaicPresetSelector />
-            <SearchPane mapRef={mapRef} onResults={handleResults} />
+            <Stack tokens={stackTokens}>
+              <p>Explore Planetary Computer datasets.</p>
+              <CollectionSelector />
+              <MosaicPane />
+              <SearchPane mapRef={mapRef} onResults={handleResults} />
+            </Stack>
           </StackItem>
           <StackItem grow={2}>
             <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>

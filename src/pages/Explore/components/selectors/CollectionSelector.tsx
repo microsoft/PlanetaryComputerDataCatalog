@@ -1,11 +1,15 @@
-import { ActionTypes } from "../state/reducers";
 import { IDropdownOption } from "@fluentui/react";
+
+import { useContext } from "react";
+import { ExploreContext } from "../state";
+import { ActionTypes } from "../state/reducers";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
 
 const CollectionSelector = () => {
   const { isSuccess, data: stacResponse } = useCollections();
+  const { state } = useContext(ExploreContext);
 
   const collectionOptions = isSuccess
     ? (stacResponse?.collections as IStacCollection[])
@@ -18,9 +22,10 @@ const CollectionSelector = () => {
   return (
     <StateSelector
       title="Select a dataset"
-      icon="AddOnlineMeeting"
+      icon="World"
       action={ActionTypes.dataset}
       options={collectionOptions}
+      selectedKey={state.selectedDataset}
     />
   );
 };

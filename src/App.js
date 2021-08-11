@@ -14,7 +14,7 @@ import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
 import CatalogGroup from "./pages/CatalogGroup";
 
-const Viewer = React.lazy(() => import("./pages/Explore"));
+const Explore = React.lazy(() => import("./pages/Explore"));
 
 function App() {
   initializeIcons(undefined, { disableWarnings: true });
@@ -49,9 +49,9 @@ function App() {
           <Route path="/account/request">
             <AccountSurvey />
           </Route>
-          <Route path="/viewer">
+          <Route path="/explore">
             <Suspense fallback={null}>
-              <Viewer />
+              <Explore />
             </Suspense>
           </Route>
           <Route path="/404">

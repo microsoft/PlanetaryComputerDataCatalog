@@ -16,6 +16,7 @@ import { useStacSearch } from "utils/stacSearch";
 import SearchResults from "../SearchResults";
 import QueryPane from "./QueryPane";
 import { ExploreContext } from "../state";
+import { ViewerMode } from "../state/reducers";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;
@@ -50,6 +51,8 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     console.log("results:", searchResponse);
     onResults(searchResponse);
   }, [searchResponse, onResults]);
+
+  if (state.mode !== ViewerMode.scenes) return null;
 
   const handleSearch = (): void => {
     const s = dayjs(start);

@@ -39,12 +39,17 @@ export type Actions = ActionMap<PayloadTypes>[keyof ActionMap<PayloadTypes>];
 
 export const reducer = (state: State, action: Actions) => {
   switch (action.type) {
-    case ActionTypes.dataset:
-      return { ...state, selectedDataset: action.payload };
     case ActionTypes.mode:
       return { ...state, mode: action.payload };
+    case ActionTypes.dataset:
+      return {
+        ...state,
+        selectedDataset: action.payload,
+        mosaicPresetId: null,
+        bandsPresetId: null,
+      };
     case ActionTypes.mosaic:
-      return { ...state, mosaicPresetId: action.payload };
+      return { ...state, mosaicPresetId: action.payload, bandsPresetId: null };
     case ActionTypes.bands:
       return { ...state, bandsPresetId: action.payload };
     default:

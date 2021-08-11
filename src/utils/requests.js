@@ -76,10 +76,52 @@ const getCollectionMosaicParams = async ({ queryKey }) => {
   const [collectionId] = queryKey;
   const faker = {
     mosaics: [
-      { name: `Mosaic 1 (${collectionId})`, key: `${collectionId}-e32fha` },
-      { name: `Mosaic 2 (${collectionId})`, key: `${collectionId}-fadf3s` },
-      { name: `Mosaic 3 (${collectionId})`, key: `${collectionId}-beudhs` },
+      {
+        name: `Mosaic 1 (${collectionId})`,
+        key: `${collectionId}-abababa`,
+        renderers: ["foo", "bar", "baz"],
+      },
+      {
+        name: `Mosaic 2 (${collectionId})`,
+        key: `${collectionId}-cecece`,
+        renderers: ["foo", "bar"],
+      },
+      {
+        name: `Mosaic 3 (${collectionId})`,
+        key: `${collectionId}-eoeoeo`,
+        renderers: ["foo"],
+      },
     ],
+    renderOptions: {
+      foo: [
+        { key: "rgb", name: "True Color", options: "bidx=4,5,6" },
+        { key: "ndvi", name: "Agriculture", options: "bidx=1,5,6" },
+      ],
+      bar: [
+        {
+          key: "ro1",
+          name: "Render Option 1",
+          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
+        },
+        {
+          key: "ro2",
+          name: "Render Option 2",
+          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
+        },
+      ],
+      baz: [
+        {
+          key: "ro3",
+          name: "Render Option 3",
+          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
+        },
+        {
+          key: "ro4",
+          name: "Render Option 4",
+          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
+        },
+      ],
+    },
   };
   const p = new Promise(resolve => {
     setTimeout(resolve(faker), 2000);
