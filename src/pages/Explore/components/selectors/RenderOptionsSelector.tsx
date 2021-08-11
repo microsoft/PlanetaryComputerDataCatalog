@@ -20,7 +20,6 @@ const RenderOptionsSelector = () => {
   const options = renderers
     ? renderers.flatMap((renderer: string): IDropdownOption => {
         const renderOpts = mosaicInfo.renderOptions[renderer];
-
         return renderOpts.map((opt: any) => ({ key: opt.key, text: opt.name }));
       })
     : [];
