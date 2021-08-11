@@ -7,9 +7,9 @@ import StateSelector from "./StateSelector";
 
 const RenderOptionsSelector = () => {
   const { state } = useContext(ExploreContext);
-  const { selectedDataset, mosaicPresetId } = state;
+  const { collection, mosaicPresetId } = state;
 
-  const { data: mosaicInfo } = useCollectionMosaicInfo(selectedDataset);
+  const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   const renderers =
     mosaicInfo?.mosaics && mosaicPresetId
@@ -32,6 +32,7 @@ const RenderOptionsSelector = () => {
       action={ActionTypes.bands}
       options={options}
       selectedKey={state.bandsPresetId}
+      disabled={!state.mosaicPresetId}
     />
   );
 };

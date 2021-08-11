@@ -8,7 +8,7 @@ import StateSelector from "./StateSelector";
 const MosaicPresetSelector = () => {
   const { state } = useContext(ExploreContext);
   const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(
-    state.selectedDataset
+    state?.collection?.id
   );
 
   const mosaicOptions =
@@ -25,7 +25,9 @@ const MosaicPresetSelector = () => {
       action={ActionTypes.mosaic}
       options={mosaicOptions}
       selectedKey={state.mosaicPresetId}
+      disabled={!state?.collection?.id}
     />
   );
 };
+
 export default MosaicPresetSelector;

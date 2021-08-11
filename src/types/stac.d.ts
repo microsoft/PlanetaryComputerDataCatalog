@@ -16,6 +16,7 @@ export interface IStacCollection {
   };
   keywords: string[];
   links: IStacLink[];
+  "msft:short_description": string;
 }
 
 export interface IStacLink {

@@ -1,3 +1,5 @@
+import { IStacCollection } from "types/stac";
+
 type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -10,7 +12,7 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionTypes {
-  dataset = "Selected Collection Id",
+  collection = "Selected Collection",
   mode = "Selected view mode",
   mosaic = "Selected mosaic id",
   bands = "Selected band combination id",
@@ -22,14 +24,14 @@ export enum ViewerMode {
 }
 
 export type State = {
-  selectedDataset: string | null;
+  collection: IStacCollection | null;
   mode: ViewerMode;
   mosaicPresetId: string | null;
   bandsPresetId: string | null;
 };
 
 type PayloadTypes = {
-  [ActionTypes.dataset]: string;
+  [ActionTypes.collection]: IStacCollection;
   [ActionTypes.mosaic]: string;
   [ActionTypes.bands]: string;
   [ActionTypes.mode]: ViewerMode;
@@ -41,10 +43,10 @@ export const reducer = (state: State, action: Actions) => {
   switch (action.type) {
     case ActionTypes.mode:
       return { ...state, mode: action.payload };
-    case ActionTypes.dataset:
+    case ActionTypes.collection:
       return {
         ...state,
-        selectedDataset: action.payload,
+        collection: action.payload,
         mosaicPresetId: null,
         bandsPresetId: null,
       };

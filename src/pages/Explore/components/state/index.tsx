@@ -6,7 +6,7 @@ type Props = {
 };
 
 const initialState: State = {
-  selectedDataset: null,
+  collection: null,
   mode: ViewerMode.mosaic,
   mosaicPresetId: null,
   bandsPresetId: null,

@@ -59,12 +59,12 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     const e = dayjs(end);
     const bbox = mapRef.current?.getCamera().bounds;
 
-    if (bbox && state.selectedDataset) {
+    if (bbox && state.collection) {
       const sw = atlas.data.BoundingBox.getSouthWest(bbox);
       const ne = atlas.data.BoundingBox.getNorthEast(bbox);
 
       setSearch({
-        collections: [state.selectedDataset ?? ""],
+        collections: [state.collection?.id ?? ""],
         bbox: [sw[0], sw[1], ne[0], ne[1]],
         datetime: `${s.format("YYYY-MM-DD")}/${e.format("YYYY-MM-DD")}`,
         items: itemId?.trim() ? itemId.split(",").map(i => i.trim()) : undefined,
@@ -92,7 +92,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
 
       <TextField
         label="Item IDs (optional)"
-        placeholder={`STAC IDs from ${state.selectedDataset ?? "collection"}`}
+        placeholder={`STAC IDs from ${state?.collection?.id ?? "collection"}`}
         value={itemId}
         onChange={(_, newValue) => setItemId(newValue)}
       />
@@ -117,7 +117,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
           <Spinner size={SpinnerSize.large} styles={{ root: { marginTop: 10 } }} />
         )}
       </Stack>
-      {state.selectedDataset && <QueryPane collectionId={state.selectedDataset} />}
+      {state.collection && <QueryPane collectionId={state?.collection?.id} />}
 
       <SearchResults results={searchResponse} isError={isSearchError} />
     </div>

@@ -1,20 +1,17 @@
 import { useContext } from "react";
 import { ActionTypes, ViewerMode } from "../state/reducers";
 import { ExploreContext } from "../state";
-import {
-  Dropdown,
-  IDropdownOption,
-  IDropdownProps,
-  Icon,
-  useTheme,
-} from "@fluentui/react";
+import { Dropdown, IDropdownOption, Icon, useTheme } from "@fluentui/react";
+import { IStacCollection } from "types/stac";
 
 type StateSelectorProps = {
   options: IDropdownOption[];
   action: ActionTypes;
   title: string;
   icon: string;
-  selectedKey: string | null;
+  selectedKey: string | null | undefined;
+  disabled?: boolean;
+  getStateValFn?: (key: string | number) => IStacCollection | undefined;
 };
 
 const StateSelector = ({
@@ -23,6 +20,8 @@ const StateSelector = ({
   title,
   icon,
   selectedKey,
+  disabled = false,
+  getStateValFn,
 }: StateSelectorProps) => {
   const { state, dispatch } = useContext(ExploreContext);
   const { palette } = useTheme();
@@ -52,7 +51,7 @@ const StateSelector = ({
   };
 
   const renderPlaceholder = (iconName: string, title: string) => {
-    return (props: IDropdownProps | undefined): JSX.Element => {
+    return (): JSX.Element => {
       return (
         <div>
           <Icon style={iconStyles} iconName={iconName} aria-hidden="true" />
@@ -69,7 +68,7 @@ const StateSelector = ({
     if (option) {
       dispatch({
         type: action,
-        payload: option.key,
+        payload: getStateValFn ? getStateValFn(option.key) : option.key,
       });
     }
   };
@@ -83,6 +82,7 @@ const StateSelector = ({
         onRenderTitle={renderTitle(icon)}
         onRenderPlaceholder={renderPlaceholder(icon, title)}
         ariaLabel={title}
+        disabled={disabled}
       />
     </div>
   );

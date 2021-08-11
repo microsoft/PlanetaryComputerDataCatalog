@@ -19,13 +19,20 @@ const CollectionSelector = () => {
         })
     : [];
 
+  const getCollectionById = (key: string | number) => {
+    return (stacResponse.collections as IStacCollection[]).find(
+      c => c.id === key.toString()
+    );
+  };
+
   return (
     <StateSelector
       title="Select a dataset"
       icon="World"
-      action={ActionTypes.dataset}
+      action={ActionTypes.collection}
       options={collectionOptions}
-      selectedKey={state.selectedDataset}
+      selectedKey={state?.collection?.id}
+      getStateValFn={getCollectionById}
     />
   );
 };

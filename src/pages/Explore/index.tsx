@@ -20,6 +20,7 @@ import ItemPanel from "./components/ItemPanel";
 import SearchPane from "./components/panes/SearchPane";
 import CollectionSelector from "./components/selectors/CollectionSelector";
 import MosaicPane from "./components/panes/MosaicPane";
+import CollectionDetailPane from "./components/panes/CollectionDetailPane";
 
 const mapContainerId: string = "viewer-map";
 
@@ -120,6 +121,7 @@ const Viewer = () => {
               <p>Explore Planetary Computer datasets.</p>
               <CollectionSelector />
               <MosaicPane />
+              <CollectionDetailPane />
               <SearchPane mapRef={mapRef} onResults={handleResults} />
             </Stack>
           </StackItem>
