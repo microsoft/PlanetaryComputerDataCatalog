@@ -1,6 +1,6 @@
 import { Stack } from "@fluentui/react";
 import { IStacSearchResult } from "types/stac";
-import ItemPreview from "./ItemPreview";
+import ItemResult from "../ItemResult";
 
 type SearchResultsProps = {
   results: IStacSearchResult | undefined;
@@ -15,14 +15,14 @@ const SearchResults = ({ results, isError }: SearchResultsProps) => {
   }
 
   return (
-    <div>
+    <div style={{ height: "100%", overflowX: "scroll" }}>
       <p>
         Showing <strong>{results.features.length}</strong> items that matched your
         search.
       </p>
-      <Stack tokens={{ childrenGap: 20, maxWidth: 200 }}>
+      <Stack tokens={{ childrenGap: 10 }}>
         {results.features.map(item => (
-          <ItemPreview item={item} key={item.id} />
+          <ItemResult item={item} />
         ))}
       </Stack>
     </div>

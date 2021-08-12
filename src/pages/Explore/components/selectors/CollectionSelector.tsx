@@ -3,7 +3,7 @@ import { sortBy } from "lodash-es";
 
 import { useContext } from "react";
 import { ExploreContext } from "../state";
-import { ActionTypes } from "../state/reducers";
+import { ActionTypes, ViewerMode } from "../state/reducers";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
@@ -35,6 +35,7 @@ const CollectionSelector = () => {
       icon="World"
       action={ActionTypes.collection}
       options={collectionOptions}
+      allowedInModes={[ViewerMode.mosaic, ViewerMode.scenes]}
       selectedKey={state?.collection?.id}
       getStateValFn={getCollectionById}
     />

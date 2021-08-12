@@ -31,10 +31,9 @@ const ItemPreview = ({ item }: ItemPreviewProps) => {
         src={thumbAsset.href}
         alt={`Rendered thumbnail for item: ${item.id}`}
         style={{
-          border: "1px solid #ccc",
-          borderRadius: "4px",
+          borderRight: "1px solid #ccc",
           height: "100%",
-          width: "100%",
+          width: "50px",
         }}
       />
     );

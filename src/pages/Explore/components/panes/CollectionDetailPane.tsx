@@ -3,12 +3,15 @@ import NewTabLink from "components/controls/NewTabLink";
 import { useContext } from "react";
 
 import { ExploreContext } from "../state";
+import { ViewerMode } from "../state/reducers";
 
 const CollectionDetailPane = () => {
   const {
-    state: { collection },
+    state: { mode, collection },
   } = useContext(ExploreContext);
+
   if (!collection) return null;
+  if (mode === ViewerMode.scenes) return null;
 
   return (
     <>

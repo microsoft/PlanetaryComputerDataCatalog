@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 
 import { IStacSearch, IStacSearchResult } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
-import SearchResults from "../SearchResults";
+import SearchResults from "./SearchResultsPane";
 import QueryPane from "./QueryPane";
 import { ExploreContext } from "../state";
 import { ViewerMode } from "../state/reducers";
@@ -30,7 +30,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
   const [start, setStart] = useState<Date>(defaultStart);
   const [end, setEnd] = useState<Date>(new Date());
   const [itemId, setItemId] = useState<string>();
-  const [limit, setLimit] = useState<number>(50);
+  const [limit, setLimit] = useState<number>(25);
   const [search, setSearch] = useState<IStacSearch | undefined>();
 
   const {
@@ -74,53 +74,61 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
   };
 
   return (
-    <div>
-      <DatePicker
-        label="Start"
-        value={start}
-        onSelectDate={setStart as (date: Date | null | undefined) => void}
-        ariaLabel="Select a start date"
-        allowTextInput
-      />
-      <DatePicker
-        label="End"
-        value={end}
-        onSelectDate={setEnd as (date: Date | null | undefined) => void}
-        ariaLabel="Select a end date"
-        allowTextInput
-      />
-
-      <TextField
-        label="Item IDs (optional)"
-        placeholder={`STAC IDs from ${state?.collection?.id ?? "collection"}`}
-        value={itemId}
-        onChange={(_, newValue) => setItemId(newValue)}
-      />
-
-      <Dropdown
-        label="Limit"
-        options={[25, 50, 100, 250, 500, 1000].map(i => ({
-          key: `limit${i}`,
-          text: i.toLocaleString(),
-          data: i,
-        }))}
-        selectedKey={`limit${limit}`}
-        onChange={(_, option) => option?.data && setLimit(parseInt(option.data))}
-      />
-      <Stack horizontal tokens={{ childrenGap: 10 }}>
-        <PrimaryButton
-          text="Search"
-          onClick={handleSearch}
-          styles={{ root: { marginTop: 10 } }}
-        />
-        {isSearchLoading && (
-          <Spinner size={SpinnerSize.large} styles={{ root: { marginTop: 10 } }} />
+    <>
+      <div>
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          <DatePicker
+            label="Start"
+            value={start}
+            onSelectDate={setStart as (date: Date | null | undefined) => void}
+            ariaLabel="Select a start date"
+            allowTextInput
+          />
+          <DatePicker
+            label="End"
+            value={end}
+            onSelectDate={setEnd as (date: Date | null | undefined) => void}
+            ariaLabel="Select a end date"
+            allowTextInput
+          />
+        </Stack>
+        {false && (
+          <TextField
+            label="Item IDs (optional)"
+            placeholder={`STAC IDs from ${state?.collection?.id ?? "collection"}`}
+            value={itemId}
+            onChange={(_, newValue) => setItemId(newValue)}
+          />
         )}
-      </Stack>
-      {state.collection && <QueryPane collectionId={state?.collection?.id} />}
 
-      <SearchResults results={searchResponse} isError={isSearchError} />
-    </div>
+        {false && (
+          <Dropdown
+            label="Limit"
+            options={[25, 50, 100, 250, 500, 1000].map(i => ({
+              key: `limit${i}`,
+              text: i.toLocaleString(),
+              data: i,
+            }))}
+            selectedKey={`limit${limit}`}
+            onChange={(_, option) => option?.data && setLimit(parseInt(option.data))}
+          />
+        )}
+        {state.collection && <QueryPane collectionId={state?.collection?.id} />}
+        <Stack horizontal tokens={{ childrenGap: 10 }}>
+          <PrimaryButton
+            text="Search"
+            onClick={handleSearch}
+            styles={{ root: { marginTop: 10 } }}
+          />
+          {isSearchLoading && (
+            <Spinner size={SpinnerSize.large} styles={{ root: { marginTop: 10 } }} />
+          )}
+        </Stack>
+      </div>
+      <div style={{ height: "100%" }}>
+        <SearchResults results={searchResponse} isError={isSearchError} />
+      </div>
+    </>
   );
 };
 

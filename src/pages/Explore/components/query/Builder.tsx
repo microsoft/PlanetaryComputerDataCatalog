@@ -5,7 +5,7 @@ import { QueryContext } from "./context";
 import FormSelect from "components/forms/FormSelect";
 import { Operators } from "./constants";
 import ValueField from "./ValueField";
-import { DefaultButton, IconButton, PrimaryButton, Stack } from "@fluentui/react";
+import { DefaultButton, IconButton, Stack } from "@fluentui/react";
 
 const initialValues = {
   expressions: [
@@ -31,7 +31,6 @@ const Builder = () => {
 
   const form = (
     <div>
-      <h3>Filter</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={async values => {
@@ -87,9 +86,9 @@ const Builder = () => {
                       className="secondary"
                       onClick={() => push({ attribute: "", operator: "" })}
                     >
-                      Add Expression
+                      +
                     </DefaultButton>
-                    <PrimaryButton type="submit">Filter</PrimaryButton>
+                    <DefaultButton type="submit">?</DefaultButton>
                   </Stack>
                 </div>
               )}

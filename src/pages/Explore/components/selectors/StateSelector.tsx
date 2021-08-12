@@ -11,6 +11,7 @@ type StateSelectorProps = {
   icon: string;
   selectedKey: string | null | undefined;
   disabled?: boolean;
+  allowedInModes?: ViewerMode[];
   getStateValFn?: (key: string | number) => IStacCollection | undefined;
 };
 
@@ -20,13 +21,14 @@ const StateSelector = ({
   title,
   icon,
   selectedKey,
+  allowedInModes = [ViewerMode.mosaic],
   disabled = false,
   getStateValFn,
 }: StateSelectorProps) => {
   const { state, dispatch } = useContext(ExploreContext);
   const { palette } = useTheme();
 
-  if (state.mode !== ViewerMode.mosaic) return null;
+  if (!allowedInModes?.includes(state.mode)) return null;
 
   const iconStyles = { marginRight: "8px", color: palette.themePrimary };
 
