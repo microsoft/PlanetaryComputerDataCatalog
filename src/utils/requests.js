@@ -74,7 +74,19 @@ const getCollectionViewerParams = async ({ queryKey }) => {
 
 const getCollectionMosaicParams = async ({ queryKey }) => {
   const [collectionId] = queryKey;
-  const faker = {
+
+  try {
+    return await (
+      await axios.get(`mock/${collectionId}/mosaicInfo.json`)
+    ).data;
+  } catch {
+    return faker(collectionId);
+  }
+};
+
+// TODO: temp
+const faker = collectionId => {
+  return {
     mosaics: [
       {
         name: `Mosaic 1 (${collectionId})`,
@@ -123,11 +135,4 @@ const getCollectionMosaicParams = async ({ queryKey }) => {
       ],
     },
   };
-  const p = new Promise(resolve => {
-    setTimeout(resolve(faker), 2000);
-  });
-
-  const data = await p;
-
-  return data;
 };

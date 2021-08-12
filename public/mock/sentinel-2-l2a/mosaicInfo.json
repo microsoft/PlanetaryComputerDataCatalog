@@ -1,0 +1,36 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (low cloud)",
+      "key": "recent-lowcloud-md5",
+      "renderers": ["imagery"]
+    },
+    {
+      "name": "Spring 2021 (low cloud)",
+      "key": "spring-2021-md5",
+      "renderers": ["imagery"]
+    },
+    {
+      "name": "Winter 2021 (low cloud)",
+      "key": "winter-2021-md5",
+      "renderers": ["imagery"]
+    },
+    {
+      "name": "Fall 2020 (low cloud)",
+      "key": "fall-2020-md5",
+      "renderers": ["imagery"]
+    },
+    {
+      "name": "Summer 2020 (low cloud)",
+      "key": "summer-2020-md5",
+      "renderers": ["imagery"]
+    }
+  ],
+  "renderOptions": {
+    "imagery": [
+      { "key": "rgb", "name": "True Color", "options": "bidx=4,5,6" },
+      { "key": "ndvi", "name": "NDVI", "options": "bidx=1,5,6" },
+      { "key": "falsecolor", "name": "False Color", "options": "bidx=1,5,6" }
+    ]
+  }
+}

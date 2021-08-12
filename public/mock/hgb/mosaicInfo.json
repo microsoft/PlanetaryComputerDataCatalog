@@ -1,0 +1,18 @@
+{
+  "mosaics": [
+    {
+      "name": "Above ground biomass",
+      "key": "abovegroundbio",
+      "renderers": ["greens"]
+    },
+    {
+      "name": "Below ground biomass",
+      "key": "belowgroundbio",
+      "renderers": ["browns"]
+    }
+  ],
+  "renderOptions": {
+    "greens": [{ "key": "greens", "name": "Greens", "options": "bidx=4,5,6" }],
+    "browns": [{ "key": "browns", "name": "Browns", "options": "bidx=4,5,6" }]
+  }
+}

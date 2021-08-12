@@ -1,0 +1,12 @@
+{
+  "mosaics": [
+    {
+      "name": "Land Cover/Land Use",
+      "key": "lulc",
+      "renderers": ["lulc"]
+    }
+  ],
+  "renderOptions": {
+    "lulc": [{ "key": "lulc", "name": "LULC classes", "options": "bidx=4,5,6" }]
+  }
+}

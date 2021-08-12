@@ -66,8 +66,8 @@ const Viewer = () => {
     if (!mapRef.current) {
       const map = new atlas.Map(mapContainerId, {
         view: "Auto",
-        center: [-60, -20],
-        zoom: 4,
+        center: [-30, 10],
+        zoom: 2,
         language: "en-US",
         showFeedbackLink: false,
         showLogo: false,

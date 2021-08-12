@@ -1,4 +1,5 @@
 import { IDropdownOption } from "@fluentui/react";
+import { sortBy } from "lodash-es";
 
 import { useContext } from "react";
 import { ExploreContext } from "../state";
@@ -12,11 +13,14 @@ const CollectionSelector = () => {
   const { state } = useContext(ExploreContext);
 
   const collectionOptions = isSuccess
-    ? (stacResponse?.collections as IStacCollection[])
-        .filter(collection => !("cube:variables" in collection))
-        .map((collection): IDropdownOption => {
-          return { key: collection.id, text: collection.title };
-        })
+    ? sortBy(
+        (stacResponse?.collections as IStacCollection[])
+          .filter(collection => !("cube:variables" in collection))
+          .map((collection): IDropdownOption => {
+            return { key: collection.id, text: collection.title };
+          }),
+        "text"
+      )
     : [];
 
   const getCollectionById = (key: string | number) => {
