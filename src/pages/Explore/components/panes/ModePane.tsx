@@ -1,15 +1,17 @@
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import {
   ChoiceGroup,
   DefaultButton,
   IChoiceGroupOption,
   IChoiceGroupOptionProps,
 } from "@fluentui/react";
-import { ExploreContext } from "../state";
-import { ActionTypes, ViewerMode } from "../state/reducers";
+import { ViewerMode } from "../state/types";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
+import { setMode } from "../state/mosaicSlice";
 
 const ModePane = () => {
-  const { state, dispatch } = useContext(ExploreContext);
+  const mode = useExploreSelector(s => s.mosaic.mode);
+  const dispatch = useExploreDispatch();
 
   const buttonStyles = { root: { pointerEvents: "none" } };
   const onRenderField = (opt: IChoiceGroupOptionProps | undefined) => {
@@ -36,7 +38,7 @@ const ModePane = () => {
   const handleChange = useCallback(
     (_, option: IChoiceGroupOption | undefined) => {
       if (option) {
-        dispatch({ type: ActionTypes.mode, payload: option.key });
+        dispatch(setMode(ViewerMode[option.key as ViewerMode]));
       }
     },
     [dispatch]
@@ -60,7 +62,7 @@ const ModePane = () => {
   return (
     <ChoiceGroup
       aria-label="Select mode"
-      selectedKey={state.mode}
+      selectedKey={mode}
       onChange={handleChange}
       options={options}
       styles={{ flexContainer: { display: "flex" } }}

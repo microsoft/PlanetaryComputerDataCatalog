@@ -1,16 +1,16 @@
 import { IDropdownOption } from "@fluentui/react";
 import { sortBy } from "lodash-es";
 
-import { useContext } from "react";
-import { ExploreContext } from "../state";
-import { ActionTypes, ViewerMode } from "../state/reducers";
+import { ViewerMode } from "../state/types";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
+import { useExploreSelector } from "../state/hooks";
+import { setCollection } from "../state/mosaicSlice";
 
 const CollectionSelector = () => {
   const { isSuccess, data: stacResponse } = useCollections();
-  const { state } = useContext(ExploreContext);
+  const collection = useExploreSelector(state => state.mosaic.collection);
 
   const collectionOptions = isSuccess
     ? sortBy(
@@ -33,10 +33,10 @@ const CollectionSelector = () => {
     <StateSelector
       title="Select a dataset"
       icon="World"
-      action={ActionTypes.collection}
+      action={setCollection}
       options={collectionOptions}
       allowedInModes={[ViewerMode.mosaic, ViewerMode.scenes]}
-      selectedKey={state?.collection?.id}
+      selectedKey={collection?.id}
       getStateValFn={getCollectionById}
     />
   );

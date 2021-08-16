@@ -1,18 +1,16 @@
-import { useContext } from "react";
-import { ActionTypes, ViewerMode } from "../state/reducers";
-import { ExploreContext } from "../state";
+import { ViewerMode } from "../state/types";
 import { Dropdown, IDropdownOption, Icon, useTheme } from "@fluentui/react";
-import { IStacCollection } from "types/stac";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
 
 type StateSelectorProps = {
   options: IDropdownOption[];
-  action: ActionTypes;
+  action: Function;
   title: string;
   icon: string;
   selectedKey: string | null | undefined;
   disabled?: boolean;
   allowedInModes?: ViewerMode[];
-  getStateValFn?: (key: string | number) => IStacCollection | undefined;
+  getStateValFn?: (key: string | number) => any;
 };
 
 const StateSelector = ({
@@ -25,10 +23,11 @@ const StateSelector = ({
   disabled = false,
   getStateValFn,
 }: StateSelectorProps) => {
-  const { state, dispatch } = useContext(ExploreContext);
+  const mode = useExploreSelector(state => state.mosaic.mode);
+  const dispatch = useExploreDispatch();
   const { palette } = useTheme();
 
-  if (!allowedInModes?.includes(state.mode)) return null;
+  if (!allowedInModes?.includes(mode)) return null;
 
   const iconStyles = { marginRight: "8px", color: palette.themePrimary };
 
@@ -68,10 +67,8 @@ const StateSelector = ({
     option: IDropdownOption | undefined
   ): void => {
     if (option) {
-      dispatch({
-        type: action,
-        payload: getStateValFn ? getStateValFn(option.key) : option.key,
-      });
+      const payload = getStateValFn ? getStateValFn(option.key) : option.key;
+      dispatch(action(payload));
     }
   };
 

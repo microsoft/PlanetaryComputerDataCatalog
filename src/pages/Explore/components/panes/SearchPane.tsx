@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as atlas from "azure-maps-control";
 import {
   DatePicker,
@@ -12,11 +12,12 @@ import {
 import dayjs from "dayjs";
 
 import { IStacSearch, IStacSearchResult } from "types/stac";
+
 import { useStacSearch } from "utils/stacSearch";
 import SearchResults from "./SearchResultsPane";
 import QueryPane from "./QueryPane";
-import { ExploreContext } from "../state";
-import { ViewerMode } from "../state/reducers";
+import { useExploreSelector } from "../state/hooks";
+import { ViewerMode } from "../state/types";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;
@@ -26,12 +27,13 @@ type PickerPaneProps = {
 const defaultStart = dayjs().subtract(1, "year").toDate();
 
 const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
-  const { state } = useContext(ExploreContext);
   const [start, setStart] = useState<Date>(defaultStart);
   const [end, setEnd] = useState<Date>(new Date());
   const [itemId, setItemId] = useState<string>();
   const [limit, setLimit] = useState<number>(25);
   const [search, setSearch] = useState<IStacSearch | undefined>();
+
+  const { mode, collection } = useExploreSelector(s => s.mosaic);
 
   const {
     isError: isSearchError,
@@ -52,19 +54,19 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     onResults(searchResponse);
   }, [searchResponse, onResults]);
 
-  if (state.mode !== ViewerMode.scenes) return null;
+  if (mode !== ViewerMode.scenes) return null;
 
   const handleSearch = (): void => {
     const s = dayjs(start);
     const e = dayjs(end);
     const bbox = mapRef.current?.getCamera().bounds;
 
-    if (bbox && state.collection) {
+    if (bbox && collection) {
       const sw = atlas.data.BoundingBox.getSouthWest(bbox);
       const ne = atlas.data.BoundingBox.getNorthEast(bbox);
 
       setSearch({
-        collections: [state.collection?.id ?? ""],
+        collections: [collection?.id ?? ""],
         bbox: [sw[0], sw[1], ne[0], ne[1]],
         datetime: `${s.format("YYYY-MM-DD")}/${e.format("YYYY-MM-DD")}`,
         items: itemId?.trim() ? itemId.split(",").map(i => i.trim()) : undefined,
@@ -95,7 +97,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
         {false && (
           <TextField
             label="Item IDs (optional)"
-            placeholder={`STAC IDs from ${state?.collection?.id ?? "collection"}`}
+            placeholder={`STAC IDs from ${collection?.id ?? "collection"}`}
             value={itemId}
             onChange={(_, newValue) => setItemId(newValue)}
           />
@@ -113,7 +115,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
             onChange={(_, option) => option?.data && setLimit(parseInt(option.data))}
           />
         )}
-        {state.collection && <QueryPane collectionId={state?.collection?.id} />}
+        {collection && <QueryPane collectionId={collection?.id} />}
         <Stack horizontal tokens={{ childrenGap: 10 }}>
           <PrimaryButton
             text="Search"

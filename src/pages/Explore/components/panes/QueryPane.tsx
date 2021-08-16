@@ -6,7 +6,7 @@ import Builder from "../query/Builder";
 // import { MQE_URL } from "../../utils/constants";
 
 interface QueryPaneProps {
-  collectionId: string;
+  collectionId: string | null;
 }
 
 const QueryPane = ({ collectionId }: QueryPaneProps) => {

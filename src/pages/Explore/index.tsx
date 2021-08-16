@@ -1,7 +1,10 @@
 import { useEffect, useState, useRef, useCallback } from "react";
+import { Provider } from "react-redux";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, IStackTokens } from "@fluentui/react";
+
+import { store } from "./components/state/store";
 
 import {
   stacSearchDatasource,
@@ -15,7 +18,6 @@ import {
 import { IStacItem, IStacSearchResult } from "../../types/stac";
 import Layout from "components/Layout";
 import SEO from "components/Seo";
-import { ExploreProvider } from "./components/state";
 import ItemPanel from "./components/ItemPanel";
 import SearchPane from "./components/panes/SearchPane";
 import CollectionSelector from "./components/selectors/CollectionSelector";
@@ -113,7 +115,7 @@ const Viewer = () => {
   return (
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
-      <ExploreProvider>
+      <Provider store={store}>
         <ItemPanel selectedItems={selectedItems} />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
@@ -129,7 +131,7 @@ const Viewer = () => {
             <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>
           </StackItem>
         </Stack>
-      </ExploreProvider>
+      </Provider>
     </Layout>
   );
 };
