@@ -8,8 +8,8 @@ type Props = {
 const initialState: State = {
   collection: null,
   mode: ViewerMode.mosaic,
-  mosaicPresetId: null,
-  bandsPresetId: null,
+  queryName: null,
+  renderOptions: null,
 };
 
 export const ExploreContext = createContext<{

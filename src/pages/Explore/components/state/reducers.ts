@@ -12,10 +12,10 @@ type ActionMap<M extends { [index: string]: any }> = {
 };
 
 export enum ActionTypes {
-  collection = "Selected Collection",
   mode = "Selected view mode",
-  mosaic = "Selected mosaic id",
-  bands = "Selected band combination id",
+  collection = "Selected Collection",
+  queryOptions = "Selected mosaic query",
+  renderOptions = "Selected render options",
 }
 
 export enum ViewerMode {
@@ -24,16 +24,16 @@ export enum ViewerMode {
 }
 
 export type State = {
-  collection: IStacCollection | null;
   mode: ViewerMode;
-  mosaicPresetId: string | null;
-  bandsPresetId: string | null;
+  collection: IStacCollection | null;
+  queryName: string | null;
+  renderOptions: string | null;
 };
 
 type PayloadTypes = {
   [ActionTypes.collection]: IStacCollection;
-  [ActionTypes.mosaic]: string;
-  [ActionTypes.bands]: string;
+  [ActionTypes.queryOptions]: string;
+  [ActionTypes.renderOptions]: string;
   [ActionTypes.mode]: ViewerMode;
 };
 
@@ -50,10 +50,10 @@ export const reducer = (state: State, action: Actions) => {
         mosaicPresetId: null,
         bandsPresetId: null,
       };
-    case ActionTypes.mosaic:
-      return { ...state, mosaicPresetId: action.payload, bandsPresetId: null };
-    case ActionTypes.bands:
-      return { ...state, bandsPresetId: action.payload };
+    case ActionTypes.queryOptions:
+      return { ...state, queryName: action.payload, renderOptions: null };
+    case ActionTypes.renderOptions:
+      return { ...state, renderOptions: action.payload };
     default:
       return state;
   }

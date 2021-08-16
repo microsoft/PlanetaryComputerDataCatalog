@@ -21,7 +21,6 @@ import SearchPane from "./components/panes/SearchPane";
 import CollectionSelector from "./components/selectors/CollectionSelector";
 import MosaicPane from "./components/panes/MosaicPane";
 import CollectionDetailPane from "./components/panes/CollectionDetailPane";
-import ModePane from "./components/panes/ModePane";
 
 const mapContainerId: string = "viewer-map";
 
@@ -120,7 +119,6 @@ const Viewer = () => {
           <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
             <Stack tokens={stackTokens}>
               <p>Explore Planetary Computer datasets.</p>
-              <ModePane />
               <CollectionSelector />
               <MosaicPane />
               <CollectionDetailPane />

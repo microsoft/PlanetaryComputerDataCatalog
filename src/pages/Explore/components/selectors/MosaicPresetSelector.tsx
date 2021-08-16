@@ -14,17 +14,17 @@ const MosaicPresetSelector = () => {
   const mosaicOptions =
     isSuccess && mosaicInfo?.mosaics
       ? mosaicInfo.mosaics.map((mosaic: any): IDropdownOption => {
-          return { key: mosaic.key, text: mosaic.name };
+          return { key: mosaic.name, text: mosaic.name };
         })
       : [];
 
   return (
     <StateSelector
-      title="Select mosaic preset"
+      title="Select query preset"
       icon="Nav2DMapView"
-      action={ActionTypes.mosaic}
+      action={ActionTypes.queryOptions}
       options={mosaicOptions}
-      selectedKey={state.mosaicPresetId}
+      selectedKey={state.queryName}
       disabled={!state?.collection?.id}
     />
   );

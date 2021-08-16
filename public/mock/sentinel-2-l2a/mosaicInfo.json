@@ -2,35 +2,109 @@
   "mosaics": [
     {
       "name": "Most recent (low cloud)",
-      "key": "recent-lowcloud-md5",
-      "renderers": ["imagery"]
+      "description": "",
+      "cql": "eo:cloud_cover < 20 order by datetime desc",
+      "renderers": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=visual&bidx=1,2,3&nodata=0"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B08), Red (B04), Green (B03)",
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
     },
     {
       "name": "Spring 2021 (low cloud)",
-      "key": "spring-2021-md5",
-      "renderers": ["imagery"]
+      "cql": "datetime between '03-01-2021' and '06-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderers": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=visual&bidx=1,2,3&nodata=0"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B08), Red (B04), Green (B03)",
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
     },
     {
       "name": "Winter 2021 (low cloud)",
-      "key": "winter-2021-md5",
-      "renderers": ["imagery"]
+      "cql": "datetime between '12-01-2020' and '03-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderers": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=visual&bidx=1,2,3&nodata=0"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B08), Red (B04), Green (B03)",
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
     },
     {
       "name": "Fall 2020 (low cloud)",
-      "key": "fall-2020-md5",
-      "renderers": ["imagery"]
+      "cql": "datetime between '09-01-2020' and '12-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderers": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=visual&bidx=1,2,3&nodata=0"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B08), Red (B04), Green (B03)",
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
     },
     {
       "name": "Summer 2020 (low cloud)",
-      "key": "summer-2020-md5",
-      "renderers": ["imagery"]
+      "cql": "datetime between '06-01-2020' and '06-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderers": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=visual&bidx=1,2,3&nodata=0"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B08), Red (B04), Green (B03)",
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
     }
-  ],
-  "renderOptions": {
-    "imagery": [
-      { "key": "rgb", "name": "True Color", "options": "bidx=4,5,6" },
-      { "key": "ndvi", "name": "NDVI", "options": "bidx=1,5,6" },
-      { "key": "falsecolor", "name": "False Color", "options": "bidx=1,5,6" }
-    ]
-  }
+  ]
 }

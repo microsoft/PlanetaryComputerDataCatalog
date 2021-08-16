@@ -7,31 +7,30 @@ import StateSelector from "./StateSelector";
 
 const RenderOptionsSelector = () => {
   const { state } = useContext(ExploreContext);
-  const { collection, mosaicPresetId } = state;
+  const { collection, queryName } = state;
 
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   const renderers =
-    mosaicInfo?.mosaics && mosaicPresetId
-      ? mosaicInfo?.mosaics.find((mosaic: any) => mosaic.key === mosaicPresetId)
+    mosaicInfo?.mosaics && queryName
+      ? mosaicInfo?.mosaics.find((mosaic: any) => mosaic.name === queryName)
           .renderers
       : null;
 
   const options = renderers
-    ? renderers.flatMap((renderer: string): IDropdownOption => {
-        const renderOpts = mosaicInfo.renderOptions[renderer];
-        return renderOpts.map((opt: any) => ({ key: opt.key, text: opt.name }));
+    ? renderers.map((renderer: any): IDropdownOption => {
+        return { key: renderer.name, text: renderer.name };
       })
     : [];
 
   return (
     <StateSelector
-      title="Select render options"
+      title="Select render presets"
       icon="MapLayers"
-      action={ActionTypes.bands}
+      action={ActionTypes.renderOptions}
       options={options}
-      selectedKey={state.bandsPresetId}
-      disabled={!state.mosaicPresetId}
+      selectedKey={state.renderOptions}
+      disabled={!state.queryName}
     />
   );
 };

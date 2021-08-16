@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { DATA_URL, STAC_URL } from "./constants";
 
 // Query content can be prefetched if it's likely to be used
@@ -34,6 +34,10 @@ export const useCollectionMosaicInfo = collectionId => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
+};
+
+export const useMosaicQueryHashKey = async ({ cql }) => {
+  return useMutation(cql => axios.get(`/mock/mosaicHashkey.text?cql=${cql}`));
 };
 
 const getByUrl = async ({ queryKey }) => {

@@ -1,5 +1,4 @@
 import { Separator } from "@fluentui/react";
-import NewTabLink from "components/controls/NewTabLink";
 import { useContext } from "react";
 
 import { ExploreContext } from "../state";
@@ -17,10 +16,10 @@ const CollectionDetailPane = () => {
     <>
       <Separator />
       <h4>{collection?.title}</h4>
-      <p>
+      {/* <p>
         {collection?.["msft:short_description"]}{" "}
         <NewTabLink href={`/dataset/${collection.id}`}>Read more...</NewTabLink>
-      </p>
+      </p> */}
       <Separator />
     </>
   );
