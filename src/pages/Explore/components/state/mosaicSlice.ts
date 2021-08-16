@@ -1,19 +1,36 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IStacCollection } from "types/stac";
+import { getMosaicQueryHashKey } from "utils/requests";
 import { ViewerMode } from "./types";
 export interface MosaicState {
   mode: ViewerMode;
   collection: IStacCollection | null;
-  queryName: string | null;
+  query: {
+    name: string | null;
+    hash: string | null;
+  };
   renderOptions: string | null;
 }
 
 const initialState: MosaicState = {
   collection: null,
   mode: ViewerMode.mosaic,
-  queryName: null,
+  query: {
+    name: null,
+    hash: null,
+  },
   renderOptions: null,
 };
+
+export const setMosaicQuery = createAsyncThunk<string>(
+  "cql-api/createQueryHashkey",
+  async (queryInfo: any, { dispatch }) => {
+    dispatch(setQueryName(queryInfo.name));
+
+    const response = await getMosaicQueryHashKey(queryInfo.cql);
+    return response.data;
+  }
+);
 
 export const mosaicSlice = createSlice({
   name: "counter",
@@ -24,17 +41,23 @@ export const mosaicSlice = createSlice({
     },
     setCollection: (state, action: PayloadAction<IStacCollection | null>) => {
       state.collection = action.payload;
-      state.queryName = null;
+      state.query.name = null;
+      state.query.hash = null;
       state.renderOptions = null;
     },
     setQueryName: (state, action: PayloadAction<string>) => {
-      state.queryName = action.payload;
+      state.query.name = action.payload;
       // TODO: if the existing render option is still valid, don't reset it here.
       state.renderOptions = null;
     },
     setRenderOptions: (state, action: PayloadAction<string>) => {
       state.renderOptions = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(setMosaicQuery.fulfilled, (state, action) => {
+      state.query.hash = action.payload;
+    });
   },
 });
 

@@ -4,7 +4,7 @@
       "name": "Most recent (low cloud)",
       "description": "",
       "cql": "eo:cloud_cover < 20 order by datetime desc",
-      "renderers": [
+      "renderOptions": [
         {
           "name": "True Color",
           "description": "RGB from visual asset",
@@ -25,7 +25,7 @@
     {
       "name": "Spring 2021 (low cloud)",
       "cql": "datetime between '03-01-2021' and '06-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderers": [
+      "renderOptions": [
         {
           "name": "True Color",
           "description": "RGB from visual asset",
@@ -46,7 +46,7 @@
     {
       "name": "Winter 2021 (low cloud)",
       "cql": "datetime between '12-01-2020' and '03-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderers": [
+      "renderOptions": [
         {
           "name": "True Color",
           "description": "RGB from visual asset",
@@ -67,7 +67,7 @@
     {
       "name": "Fall 2020 (low cloud)",
       "cql": "datetime between '09-01-2020' and '12-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderers": [
+      "renderOptions": [
         {
           "name": "True Color",
           "description": "RGB from visual asset",
@@ -88,7 +88,7 @@
     {
       "name": "Summer 2020 (low cloud)",
       "cql": "datetime between '06-01-2020' and '06-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderers": [
+      "renderOptions": [
         {
           "name": "True Color",
           "description": "RGB from visual asset",

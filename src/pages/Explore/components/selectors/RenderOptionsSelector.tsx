@@ -5,23 +5,21 @@ import { setRenderOptions } from "../state/mosaicSlice";
 import { useExploreSelector } from "../state/hooks";
 
 const RenderOptionsSelector = () => {
-  const { collection, queryName, renderOptions } = useExploreSelector(
+  const { collection, query, renderOptions } = useExploreSelector(
     state => state.mosaic
   );
 
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   const renderers =
-    mosaicInfo?.mosaics && queryName
-      ? mosaicInfo?.mosaics.find((mosaic: any) => mosaic.name === queryName)
-          .renderers
-      : null;
+    mosaicInfo?.mosaics && query.name
+      ? mosaicInfo.mosaics.find((mosaic: any) => mosaic.name === query.name)
+          .renderOptions || []
+      : [];
 
-  const options = renderers
-    ? renderers.map((renderer: any): IDropdownOption => {
-        return { key: renderer.name, text: renderer.name };
-      })
-    : [];
+  const options = renderers.map((renderer: any): IDropdownOption => {
+    return { key: renderer.name, text: renderer.name };
+  });
 
   return (
     <StateSelector
@@ -30,7 +28,7 @@ const RenderOptionsSelector = () => {
       action={setRenderOptions}
       options={options}
       selectedKey={renderOptions}
-      disabled={!queryName}
+      disabled={!query.name}
     />
   );
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { DATA_URL, STAC_URL } from "./constants";
 
 // Query content can be prefetched if it's likely to be used
@@ -36,8 +36,8 @@ export const useCollectionMosaicInfo = collectionId => {
   });
 };
 
-export const useMosaicQueryHashKey = async ({ cql }) => {
-  return useMutation(cql => axios.get(`/mock/mosaicHashkey.text?cql=${cql}`));
+export const getMosaicQueryHashKey = async cql => {
+  return axios.get(`/mock/mosaicHashKey.txt?cql=${cql}`);
 };
 
 const getByUrl = async ({ queryKey }) => {
@@ -93,50 +93,29 @@ const faker = collectionId => {
   return {
     mosaics: [
       {
-        name: `Mosaic 1 (${collectionId})`,
-        key: `${collectionId}-abababa`,
-        renderers: ["foo", "bar", "baz"],
+        name: `Preset 1 (${collectionId})`,
+        description: `${collectionId}-abababa`,
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=4,5,6" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
       },
       {
-        name: `Mosaic 2 (${collectionId})`,
-        key: `${collectionId}-cecece`,
-        renderers: ["foo", "bar"],
+        name: `Preset 2 (${collectionId})`,
+        description: `${collectionId}-cecece`,
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=4,5,6" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
       },
       {
-        name: `Mosaic 3 (${collectionId})`,
-        key: `${collectionId}-eoeoeo`,
-        renderers: ["foo"],
+        name: `Preset 3 (${collectionId})`,
+        description: `${collectionId}-eoeoeo`,
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=4,5,6" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
       },
     ],
-    renderOptions: {
-      foo: [
-        { key: "rgb", name: "True Color", options: "bidx=4,5,6" },
-        { key: "ndvi", name: "Agriculture", options: "bidx=1,5,6" },
-      ],
-      bar: [
-        {
-          key: "ro1",
-          name: "Render Option 1",
-          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
-        },
-        {
-          key: "ro2",
-          name: "Render Option 2",
-          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
-        },
-      ],
-      baz: [
-        {
-          key: "ro3",
-          name: "Render Option 3",
-          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
-        },
-        {
-          key: "ro4",
-          name: "Render Option 4",
-          options: "bidx=1&rescale=0,1000&colormap_name=cfastie",
-        },
-      ],
-    },
   };
 };

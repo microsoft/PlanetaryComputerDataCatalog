@@ -1,11 +1,11 @@
 import { IDropdownOption } from "@fluentui/react";
 import { useCollectionMosaicInfo } from "utils/requests";
 import { useExploreSelector } from "../state/hooks";
-import { setQueryName } from "../state/mosaicSlice";
+import { setMosaicQuery } from "../state/mosaicSlice";
 import StateSelector from "./StateSelector";
 
 const MosaicPresetSelector = () => {
-  const { collection, queryName } = useExploreSelector(state => state.mosaic);
+  const { collection, query } = useExploreSelector(state => state.mosaic);
 
   const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
@@ -16,13 +16,18 @@ const MosaicPresetSelector = () => {
         })
       : [];
 
+  const getQueryPresetByName = (key: string | number) => {
+    return mosaicInfo.mosaics.find((m: any) => m.name === key);
+  };
+
   return (
     <StateSelector
       title="Select query preset"
       icon="Nav2DMapView"
-      action={setQueryName}
+      action={setMosaicQuery}
       options={mosaicOptions}
-      selectedKey={queryName}
+      selectedKey={query.name}
+      getStateValFn={getQueryPresetByName}
       disabled={!collection?.id}
     />
   );

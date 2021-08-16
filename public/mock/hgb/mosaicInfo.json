@@ -1,18 +1,21 @@
 {
   "mosaics": [
     {
-      "name": "Above ground biomass",
-      "key": "abovegroundbio",
-      "renderers": ["greens"]
-    },
-    {
-      "name": "Below ground biomass",
-      "key": "belowgroundbio",
-      "renderers": ["browns"]
+      "name": "Most recent - 2010",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Above ground biomass",
+          "description": "",
+          "options": "assets=aboveground&colormap_name=greens&nodata=0&rescale=0,255"
+        },
+        {
+          "name": "Below ground biomass",
+          "description": "",
+          "options": "assets=belowground&colormap_name=greens&nodata=0&rescale=0,255"
+        }
+      ]
     }
-  ],
-  "renderOptions": {
-    "greens": [{ "key": "greens", "name": "Greens", "options": "bidx=4,5,6" }],
-    "browns": [{ "key": "browns", "name": "Browns", "options": "bidx=4,5,6" }]
-  }
+  ]
 }
