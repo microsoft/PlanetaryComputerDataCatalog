@@ -17,7 +17,6 @@ const CollectionDetailPane = () => {
         {collection?.["msft:short_description"]}{" "}
         <NewTabLink href={`/dataset/${collection.id}`}>Read more...</NewTabLink>
       </p> */}
-      <Separator />
     </>
   );
 };
