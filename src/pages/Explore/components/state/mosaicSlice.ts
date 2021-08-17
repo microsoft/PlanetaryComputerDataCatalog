@@ -33,7 +33,7 @@ export const setMosaicQuery = createAsyncThunk<string>(
 );
 
 export const mosaicSlice = createSlice({
-  name: "counter",
+  name: "mosaic",
   initialState,
   reducers: {
     setMode: (state, action: PayloadAction<ViewerMode>) => {
@@ -55,13 +55,15 @@ export const mosaicSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setMosaicQuery.fulfilled, (state, action) => {
-      state.query.hash = action.payload;
-    });
+    builder.addCase(
+      setMosaicQuery.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.query.hash = action.payload;
+      }
+    );
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { setMode, setCollection, setQueryName, setRenderOptions } =
   mosaicSlice.actions;
 

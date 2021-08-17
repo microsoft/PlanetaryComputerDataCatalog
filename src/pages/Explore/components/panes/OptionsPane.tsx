@@ -15,14 +15,14 @@ const OptionsPane = () => {
   return (
     <Stack horizontal horizontalAlign="space-between">
       <Toggle
+        label={label("Edit filters", "Adjust the selected filter preset")}
+        inlineLabel
+      />
+      <Toggle
         label={label(
           "Show item results",
           "Show individual STAC items returned by this filter"
         )}
-        inlineLabel
-      />
-      <Toggle
-        label={label("Edit filter", "Adjust the selected filter preset")}
         inlineLabel
       />
     </Stack>
