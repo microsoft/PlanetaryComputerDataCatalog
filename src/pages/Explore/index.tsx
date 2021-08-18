@@ -12,6 +12,7 @@ import CollectionSelector from "./components/selectors/CollectionSelector";
 import MosaicPane from "./components/panes/MosaicPane";
 import CollectionDetailPane from "./components/panes/CollectionDetailPane";
 import ExploreMap from "./components/Map";
+import TemporarySearch from "./components/TemporarySearch";
 
 const Viewer = () => {
   const stackTokens: IStackTokens = {
@@ -33,6 +34,7 @@ const Viewer = () => {
               <MosaicPane />
               <CollectionDetailPane />
               {/* <SearchPane mapRef={mapRef} onResults={handleResults} /> */}
+              <TemporarySearch />
             </Stack>
           </StackItem>
           <StackItem grow={2}>

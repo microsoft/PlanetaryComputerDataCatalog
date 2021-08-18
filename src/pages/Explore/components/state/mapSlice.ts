@@ -11,7 +11,7 @@ const initialState: MapState = {
 };
 
 export const mapSlice = createSlice({
-  name: "counter",
+  name: "map",
   initialState,
   reducers: {
     setCenter: (state, action: PayloadAction<[number, number]>) => {

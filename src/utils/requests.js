@@ -95,6 +95,7 @@ const faker = collectionId => {
       {
         name: `Preset 1 (${collectionId})`,
         description: `${collectionId}-abababa`,
+        cql: "order by datetime desc",
         renderOptions: [
           { name: "Render Option 1", options: "bidx=4,5,6" },
           { name: "Render Option 2", options: "bidx=1,5,6" },
@@ -103,6 +104,7 @@ const faker = collectionId => {
       {
         name: `Preset 2 (${collectionId})`,
         description: `${collectionId}-cecece`,
+        cql: "order by datetime desc",
         renderOptions: [
           { name: "Render Option 1", options: "bidx=4,5,6" },
           { name: "Render Option 2", options: "bidx=1,5,6" },
@@ -111,6 +113,7 @@ const faker = collectionId => {
       {
         name: `Preset 3 (${collectionId})`,
         description: `${collectionId}-eoeoeo`,
+        cql: "order by datetime desc",
         renderOptions: [
           { name: "Render Option 1", options: "bidx=4,5,6" },
           { name: "Render Option 2", options: "bidx=1,5,6" },
