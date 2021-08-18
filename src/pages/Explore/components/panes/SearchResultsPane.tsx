@@ -1,32 +1,36 @@
-import { Stack } from "@fluentui/react";
+import { Spinner, SpinnerSize, Stack } from "@fluentui/react";
+import { UseQueryResult } from "react-query";
 import { IStacSearchResult } from "types/stac";
 import ItemResult from "../ItemResult";
 
-type SearchResultsProps = {
-  results: IStacSearchResult | undefined;
-  isError: boolean;
-};
+interface SearchResultsProps {
+  request: UseQueryResult<IStacSearchResult, Error>;
+}
 
-const SearchResults = ({ results, isError }: SearchResultsProps) => {
-  if (!results) return null;
-
-  if (isError) {
-    return <p>Unable to complete search</p>;
+const SearchResultsPane = ({
+  request: { data, isError, isLoading },
+}: SearchResultsProps) => {
+  if (isLoading) {
+    return <Spinner size={SpinnerSize.large} />;
   }
+  if (isError) {
+    return <p>Sorry, we're having trouble completing this search.</p>;
+  }
+  if (!data) return null;
 
   return (
-    <div style={{ height: "100%", overflowX: "scroll" }}>
+    <div style={{ height: "100%", overflowY: "auto" }}>
       <p>
-        Showing <strong>{results.features.length}</strong> items that matched your
+        Showing <strong>{data.features.length}</strong> items that matched your
         search.
       </p>
       <Stack tokens={{ childrenGap: 10 }}>
-        {results.features.map(item => (
-          <ItemResult item={item} />
+        {data.features.map(item => (
+          <ItemResult key={item.id} item={item} />
         ))}
       </Stack>
     </div>
   );
 };
 
-export default SearchResults;
+export default SearchResultsPane;

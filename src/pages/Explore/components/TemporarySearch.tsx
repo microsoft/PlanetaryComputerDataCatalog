@@ -1,6 +1,6 @@
 import { IStacSearch } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
-import SearchResults from "./panes/SearchResultsPane";
+import SearchResultsPane from "./panes/SearchResultsPane";
 import { useExploreSelector } from "./state/hooks";
 
 const TemporarySearch = () => {
@@ -21,9 +21,9 @@ const TemporarySearch = () => {
       } as IStacSearch)
     : undefined;
 
-  const { isError, data } = useStacSearch(search);
+  const request = useStacSearch(search);
 
-  return <SearchResults results={data} isError={isError} />;
+  return <SearchResultsPane request={request} />;
 };
 
 export default TemporarySearch;

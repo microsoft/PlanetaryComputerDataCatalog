@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import { IStacSearch, IStacSearchResult } from "types/stac";
 
 import { useStacSearch } from "utils/stacSearch";
-import SearchResults from "./SearchResultsPane";
+import SearchResultsPane from "./SearchResultsPane";
 import QueryPane from "./QueryPane";
 import { useExploreSelector } from "../state/hooks";
 import { ViewerMode } from "../state/types";
@@ -128,7 +128,7 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
         </Stack>
       </div>
       <div style={{ height: "100%" }}>
-        <SearchResults results={searchResponse} isError={isSearchError} />
+        {/* <SearchResults results={searchResponse} isError={isSearchError} /> */}
       </div>
     </>
   );
