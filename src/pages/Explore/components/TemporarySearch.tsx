@@ -4,7 +4,8 @@ import SearchResults from "./panes/SearchResultsPane";
 import { useExploreSelector } from "./state/hooks";
 
 const TemporarySearch = () => {
-  const { collection, query, options } = useExploreSelector(s => s.mosaic);
+  const { map, mosaic } = useExploreSelector(s => s);
+  const { collection, query, options } = mosaic;
 
   const shouldQuery = () => {
     console.log("should query");
@@ -15,7 +16,7 @@ const TemporarySearch = () => {
     ? ({
         collections: [collection?.id ?? ""],
         datetime: "",
-        bbox: [-180, -90, 180, 90],
+        bbox: map.bounds,
         limit: 25,
       } as IStacSearch)
     : undefined;

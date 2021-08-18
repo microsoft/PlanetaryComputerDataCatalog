@@ -1,25 +1,27 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
 import { stacSearchDatasource, layerControl } from "./viewerLayers";
-import { useExploreSelector } from "./state/hooks";
+import { useExploreDispatch, useExploreSelector } from "./state/hooks";
+import { setCamera } from "./state/mapSlice";
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
-  const mapRef = useRef<atlas.Map | null>(null);
-  // const mosaicLayerRef = useRef<atlas.layer.TileLayer | null>(null);
-  const [mapReady, setMapReady] = useState<boolean>(false);
+  const dispatch = useExploreDispatch();
   const {
     map: { center, zoom },
     mosaic,
   } = useExploreSelector(s => s);
 
+  const mapRef = useRef<atlas.Map | null>(null);
+  const [mapReady, setMapReady] = useState<boolean>(false);
+
   // Add a mosaic layer endpoint to the map
   useEffect(() => {
     const mosaicLayer = mapRef.current?.layers.getLayerById("stac-mosaic");
-    // TEMP: this is all fake. Just use the existing tilejson mosaic rather than the cql query based one.
+    // TODO: this is all fake. Just use the existing tilejson mosaic rather than the cql query based one.
     if (
       mosaic.collection &&
       mosaic.query.name &&
@@ -52,10 +54,9 @@ const ExploreMap = () => {
 
   useEffect(() => {
     mapRef.current?.setCamera({
-      center: center,
       zoom: zoom,
     });
-  }, [center, zoom]);
+  }, [zoom]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -67,6 +68,14 @@ const ExploreMap = () => {
       });
     }
   }, [mapReady]);
+
+  const handleCameraChange = useCallback(
+    (e: atlas.MapEvent) => {
+      const camera = e.map.getCamera();
+      dispatch(setCamera(camera));
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const onReady = () => setMapReady(true);
@@ -88,6 +97,7 @@ const ExploreMap = () => {
       });
 
       map.events.add("ready", onReady);
+      map.events.add("moveend", handleCameraChange);
       mapRef.current = map;
     }
 
@@ -95,15 +105,7 @@ const ExploreMap = () => {
 
     // Remove event handlers on unmount
     return () => map.events.remove("ready", onReady);
-  }, [center, zoom]);
-
-  // const handleMapClick = useCallback((e: atlas.MapMouseEvent) => {
-  //   if (e?.shapes?.length) {
-  //     const shapes = e.shapes as atlas.Shape[];
-  //     const ids = shapes.map(s => s.getId().toString());
-  //     setSelectedItemIds(ids);
-  //   }
-  // }, []);
+  }, [center, zoom, handleCameraChange]);
 
   return <div id={mapContainerId} style={{ width: "100%", height: "100%" }}></div>;
 };
