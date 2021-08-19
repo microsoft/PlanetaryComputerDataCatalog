@@ -1,7 +1,6 @@
 import { IDropdownOption } from "@fluentui/react";
 import { sortBy } from "lodash-es";
 
-import { ViewerMode } from "../state/types";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
@@ -35,7 +34,6 @@ const CollectionSelector = () => {
       icon="World"
       action={setCollection}
       options={collectionOptions}
-      allowedInModes={[ViewerMode.mosaic, ViewerMode.scenes]}
       selectedKey={collection?.id}
       getStateValFn={getCollectionById}
     />

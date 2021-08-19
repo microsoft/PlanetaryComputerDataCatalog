@@ -14,10 +14,8 @@ import dayjs from "dayjs";
 import { IStacSearch, IStacSearchResult } from "types/stac";
 
 import { useStacSearch } from "utils/stacSearch";
-import SearchResultsPane from "./SearchResultsPane";
 import QueryPane from "./QueryPane";
 import { useExploreSelector } from "../state/hooks";
-import { ViewerMode } from "../state/types";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;
@@ -33,13 +31,9 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
   const [limit, setLimit] = useState<number>(25);
   const [search, setSearch] = useState<IStacSearch | undefined>();
 
-  const { mode, collection } = useExploreSelector(s => s.mosaic);
+  const { collection } = useExploreSelector(s => s.mosaic);
 
-  const {
-    isError: isSearchError,
-    isLoading: isSearchLoading,
-    data: searchResponse,
-  } = useStacSearch(search);
+  const { isLoading: isSearchLoading, data: searchResponse } = useStacSearch(search);
 
   useEffect(() => {
     // Azure Maps styling is requring a field on properties to filter on for hover
@@ -53,8 +47,6 @@ const SearchPane = ({ mapRef, onResults }: PickerPaneProps) => {
     console.log("results:", searchResponse);
     onResults(searchResponse);
   }, [searchResponse, onResults]);
-
-  if (mode !== ViewerMode.scenes) return null;
 
   const handleSearch = (): void => {
     const s = dayjs(start);

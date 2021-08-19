@@ -1,23 +1,28 @@
 import { IDropdownOption } from "@fluentui/react";
-import { useCollectionMosaicInfo } from "utils/requests";
+
 import StateSelector from "./StateSelector";
-import { setRenderOptions } from "../state/mosaicSlice";
+import { useCollectionMosaicInfo } from "utils/requests";
+import { setRenderOption } from "../state/mosaicSlice";
 import { useExploreSelector } from "../state/hooks";
+import { IMosaicInfo } from "types";
 
 const RenderOptionsSelector = () => {
-  const { collection, query, renderOptions } = useExploreSelector(
-    state => state.mosaic
-  );
+  const {
+    collection,
+    query,
+    renderOption: renderOptions,
+  } = useExploreSelector(state => state.mosaic);
 
-  const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
+  const { data } = useCollectionMosaicInfo(collection?.id);
+  const mosaicInfo: IMosaicInfo = data;
 
   const renderers =
     mosaicInfo?.mosaics && query.name
-      ? mosaicInfo.mosaics.find((mosaic: any) => mosaic.name === query.name)
-          .renderOptions || []
+      ? mosaicInfo.mosaics.find(mosaic => mosaic.name === query.name)
+          ?.renderOptions || []
       : [];
 
-  const options = renderers.map((renderer: any): IDropdownOption => {
+  const options = renderers.map((renderer): IDropdownOption => {
     return { key: renderer.name, text: renderer.name };
   });
 
@@ -25,9 +30,9 @@ const RenderOptionsSelector = () => {
     <StateSelector
       title="Select render presets"
       icon="MapLayers"
-      action={setRenderOptions}
+      action={setRenderOption}
       options={options}
-      selectedKey={renderOptions}
+      selectedKey={renderOptions?.name}
       disabled={!query.name}
     />
   );

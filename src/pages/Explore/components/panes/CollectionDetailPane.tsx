@@ -1,13 +1,11 @@
 import { Separator } from "@fluentui/react";
 
-import { ViewerMode } from "../state/types";
 import { useExploreSelector } from "../state/hooks";
 
 const CollectionDetailPane = () => {
-  const { mode, collection } = useExploreSelector(s => s.mosaic);
+  const { collection } = useExploreSelector(s => s.mosaic);
 
   if (!collection) return null;
-  if (mode === ViewerMode.scenes) return null;
 
   return (
     <>

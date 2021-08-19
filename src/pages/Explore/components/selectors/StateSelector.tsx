@@ -1,6 +1,5 @@
-import { ViewerMode } from "../state/types";
 import { Dropdown, IDropdownOption, Icon, useTheme } from "@fluentui/react";
-import { useExploreDispatch, useExploreSelector } from "../state/hooks";
+import { useExploreDispatch } from "../state/hooks";
 
 type StateSelectorProps = {
   options: IDropdownOption[];
@@ -9,7 +8,6 @@ type StateSelectorProps = {
   icon: string;
   selectedKey: string | null | undefined;
   disabled?: boolean;
-  allowedInModes?: ViewerMode[];
   getStateValFn?: (key: string | number) => any;
 };
 
@@ -19,15 +17,11 @@ const StateSelector = ({
   title,
   icon,
   selectedKey,
-  allowedInModes = [ViewerMode.mosaic],
   disabled = false,
   getStateValFn,
 }: StateSelectorProps) => {
-  const mode = useExploreSelector(state => state.mosaic.mode);
   const dispatch = useExploreDispatch();
   const { palette } = useTheme();
-
-  if (!allowedInModes?.includes(mode)) return null;
 
   const iconStyles = { marginRight: "8px", color: palette.themePrimary };
 

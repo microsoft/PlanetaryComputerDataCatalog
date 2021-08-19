@@ -1,45 +1,56 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { some } from "lodash-es";
+
+import { IMosaic, IMosaicRenderOption } from "types";
 import { IStacCollection } from "types/stac";
 import { getMosaicQueryHashKey } from "utils/requests";
-import { ViewerMode } from "./types";
+
+interface IMosaicState extends IMosaic {
+  hash: string | null;
+}
 export interface MosaicState {
-  mode: ViewerMode;
   collection: IStacCollection | null;
-  query: {
-    name: string | null;
-    cql: string | null;
-    hash: string | null;
+  query: IMosaicState;
+  renderOption: IMosaicRenderOption | null;
+  layer: {
+    minZoom: number;
+    maxExtent: number[];
   };
-  renderOptions: string | null;
   options: {
     showEdit: boolean;
     showResults: boolean;
   };
 }
 
+const initialMosaicState = {
+  name: null,
+  description: null,
+  cql: null,
+  hash: null,
+  renderOptions: null,
+};
+
 const initialState: MosaicState = {
   collection: null,
-  mode: ViewerMode.mosaic,
-  query: {
-    name: null,
-    cql: null,
-    hash: null,
+  query: initialMosaicState,
+  renderOption: null,
+  layer: {
+    minZoom: 12,
+    maxExtent: [],
   },
-  renderOptions: null,
   options: {
     showEdit: false,
     showResults: false,
   },
 };
 
-export const setMosaicQuery = createAsyncThunk<string>(
+export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/createQueryHashkey",
-  async (queryInfo: any, { dispatch }) => {
+  async (queryInfo: IMosaic, { dispatch }) => {
     dispatch(setQuery(queryInfo));
 
     const response = await getMosaicQueryHashKey(queryInfo.cql);
-
-    return response.data;
+    return response.data + queryInfo.name;
   }
 );
 
@@ -47,26 +58,26 @@ export const mosaicSlice = createSlice({
   name: "mosaic",
   initialState,
   reducers: {
-    setMode: (state, action: PayloadAction<ViewerMode>) => {
-      state.mode = action.payload;
-    },
     setCollection: (state, action: PayloadAction<IStacCollection | null>) => {
       state.collection = action.payload;
-      state.query.name = null;
-      state.query.hash = null;
-      state.query.cql = null;
-      state.renderOptions = null;
+      state.query = initialMosaicState;
+      state.renderOption = null;
     },
-    // TODO: proper typing
-    setQuery: (state, action: PayloadAction<any>) => {
-      state.query.name = action.payload.name;
-      state.query.cql = action.payload.cql;
+    setQuery: (state, action: PayloadAction<IMosaic>) => {
+      const { renderOptions } = action.payload;
+      state.query = { ...action.payload, hash: null };
 
-      // TODO: if the existing render option is still valid, don't reset it here.
-      state.renderOptions = null;
+      if (!renderOptions) return;
+
+      if (!state.renderOption) {
+        state.renderOption = renderOptions[0];
+      } else if (!some(renderOptions, state.renderOption)) {
+        state.renderOption = renderOptions[0];
+      }
     },
-    setRenderOptions: (state, action: PayloadAction<string>) => {
-      state.renderOptions = action.payload;
+    setRenderOption: (state, action: PayloadAction<string>) => {
+      state.renderOption =
+        state.query.renderOptions?.find(r => r.name === action.payload) || null;
     },
     setShowResults: (state, action: PayloadAction<boolean>) => {
       state.options.showResults = action.payload;
@@ -86,10 +97,9 @@ export const mosaicSlice = createSlice({
 });
 
 export const {
-  setMode,
   setCollection,
   setQuery,
-  setRenderOptions,
+  setRenderOption,
   setShowEdit,
   setShowResults,
 } = mosaicSlice.actions;

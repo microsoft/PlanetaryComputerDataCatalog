@@ -26,7 +26,7 @@ const ExploreMap = () => {
       mosaic.collection &&
       mosaic.query.name &&
       mosaic.query.hash &&
-      mosaic.renderOptions
+      mosaic.renderOption
     ) {
       const tilejsonAsset = Object.values(mosaic.collection.assets).find(asset =>
         asset.roles?.includes("tiles")
