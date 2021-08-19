@@ -17,9 +17,8 @@ import { sortByPosition } from "../../utils";
 const defaultWidth = 95;
 const columnWidths = {
   title: 150,
-  description: 200,
+  description: 400,
   type: 55,
-  attrs: 200,
 };
 
 const TableTable = ({ stacKey, title }) => {
