@@ -2802,7 +2802,329 @@
             ]
         }
     }
-}
+},
+    {
+      "id": "gbif",
+      "description": "The Global Biodiversity Information Facility (GBIF) is an international network and data infrastructure funded by the world's governments providing global data that document the occurrence of species.",
+      "stac_version": "1.0.0",
+      "links": [
+        {
+          "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/gbif",
+          "rel": "self",
+          "type": "application/json"
+        },
+        {
+          "href": "https://planetarycomputer.microsoft.com/",
+          "rel": "parent",
+          "type": "application/json"
+        },
+        {
+          "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/gbif/items",
+          "rel": "item",
+          "type": "application/geo+json"
+        },
+        {
+          "href": "https://planetarycomputer.microsoft.com/api/stac/v1/",
+          "rel": "root",
+          "type": "application/json"
+        },
+        {
+          "href": "https://www.gbif.org/terms",
+          "rel": "license",
+          "title": "GBIF terms of use."
+        }
+      ],
+      "stac_extensions": [
+        "table"
+      ],
+      "title": "GBIF",
+      "license": "proprietary",
+      "extent": {
+        "spatial": {
+          "bbox": [
+            [
+              -180,
+              -90,
+              180,
+              90
+            ]
+          ]
+        },
+        "temporal": {
+          "interval": [
+            [
+              "2015-06-27T10:25:31.456000Z",
+              null
+            ]
+          ]
+        }
+      },
+      "keywords": [],
+      "providers": [],
+      "summaries": {},
+      "msft:storage_account": "ai4edataeuwest",
+      "msft:short_description": "The Global Biodiversity Information Facility (GBIF) is an international network and data infrastructure funded by the world's governments providing global data that document the occurrence of species.",
+      "msft:container": "gbif",
+      "assets": {
+        "thumbnail": {
+          "title": "Sentinel 2 L2A",
+          "href": "https://camo.githubusercontent.com/40dc57a0d4f7a365af940e1ce43b419dc12b173eea645907c28e2a2a50267324/68747470733a2f2f6c6162732e676269662e6f72672f7e6d626c6973736574742f323031392f31302f616e616c79746963732d6d6170732f776f726c642d323032312d30312d30312e706e67",
+          "media_type": "image/png"
+        }
+      },
+      "table:columns": [
+        {
+          "name": "gbifid",
+          "type": "int64",
+          "description": "GBIF's identifier for the occurrence"
+        },
+        {
+          "name": "datasetkey",
+          "type": "byte_array",
+          "description": "GBIF's UUID for the dataset containing this occurrence"
+        },
+        {
+          "name": "occurrenceid",
+          "type": "byte_array",
+          "description": "See dwc:occurrenceID."
+        },
+        {
+          "name": "kingdom",
+          "type": "byte_array",
+          "description": "See dwc:kingdom. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "phylum",
+          "type": "byte_array",
+          "description": "See dwc:phylum. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "class",
+          "type": "byte_array",
+          "description": "See dwc:class. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "order",
+          "type": "byte_array",
+          "description": "See dwc:order. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "family",
+          "type": "byte_array",
+          "description": "See dwc:family. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "genus",
+          "type": "byte_array",
+          "description": "See dwc:genus. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "species",
+          "type": "byte_array",
+          "description": "See dwc:species. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "infraspecificepithet",
+          "type": "byte_array",
+          "description": "See dwc:infraspecificEpithet. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "taxonrank",
+          "type": "byte_array",
+          "description": "See dwc:taxonRank. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "scientificname",
+          "type": "byte_array",
+          "description": "See dwc:scientificName. This field has been aligned with the GBIF backbone taxonomy."
+        },
+        {
+          "name": "verbatimscientificname",
+          "type": "byte_array",
+          "description": "The scientific name as provided by the data publisher"
+        },
+        {
+          "name": "verbatimscientificnameauthorship",
+          "type": "byte_array",
+          "description": "The scientific name authorship provided by the data publisher."
+        },
+        {
+          "name": "countrycode",
+          "type": "byte_array",
+          "description": "See dwc:countryCode. GBIF's interpretation has set this to an ISO 3166-2 code."
+        },
+        {
+          "name": "locality",
+          "type": "byte_array",
+          "description": "See dwc:locality."
+        },
+        {
+          "name": "stateprovince",
+          "type": "byte_array",
+          "description": "See dwc:stateProvince."
+        },
+        {
+          "name": "occurrencestatus",
+          "type": "byte_array",
+          "description": "See dwc:occurrenceStatus. Either the value PRESENT or ABSENT. Many users will wish to filter for PRESENT data."
+        },
+        {
+          "name": "individualcount",
+          "type": "int32",
+          "description": "See dwc:individualCount."
+        },
+        {
+          "name": "publishingorgkey",
+          "type": "byte_array",
+          "description": "GBIF's UUID for the organization publishing this occurrence."
+        },
+        {
+          "name": "decimallatitude",
+          "type": "double",
+          "description": "See dwc:decimalLatitude. GBIF's interpretation has normalized this to a WGS84 coordinate."
+        },
+        {
+          "name": "decimallongitude",
+          "type": "double",
+          "description": "See dwc:decimalLongitude. GBIF's interpretation has normalized this to a WGS84 coordinate."
+        },
+        {
+          "name": "coordinateuncertaintyinmeters",
+          "type": "double",
+          "description": "See dwc:coordinateUncertaintyInMeters."
+        },
+        {
+          "name": "coordinateprecision",
+          "type": "double",
+          "description": "See dwc:coordinatePrecision."
+        },
+        {
+          "name": "elevation",
+          "type": "double",
+          "description": "See dwc:elevation. If provided by the data publisher, GBIF's interpretation has normalized this value to metres."
+        },
+        {
+          "name": "elevationaccuracy",
+          "type": "double",
+          "description": "See dwc:elevationAccuracy. If provided by the data publisher, GBIF's interpretation has normalized this value to metres."
+        },
+        {
+          "name": "depth",
+          "type": "double",
+          "description": "See dwc:depth. If provided by the data publisher, GBIF's interpretation has normalized this value to metres."
+        },
+        {
+          "name": "depthaccuracy",
+          "type": "double",
+          "description": "See dwc:depthAccuracy. If provided by the data publisher, GBIF's interpretation has normalized this value to metres."
+        },
+        {
+          "name": "eventdate",
+          "type": "byte_array",
+          "description": "See dwc:eventDate. GBIF's interpretation has normalized this value to an ISO 8601 date with a local time."
+        },
+        {
+          "name": "day",
+          "type": "int32",
+          "description": "See dwc:day."
+        },
+        {
+          "name": "month",
+          "type": "int32",
+          "description": "See dwc:month."
+        },
+        {
+          "name": "year",
+          "type": "int32",
+          "description": "See dwc:year."
+        },
+        {
+          "name": "taxonkey",
+          "type": "int32",
+          "description": "The numeric identifier for the taxon in GBIF's backbone taxonomy corresponding to scientificname."
+        },
+        {
+          "name": "specieskey",
+          "type": "int32",
+          "description": "The numeric identifier for the taxon in GBIF's backbone taxonomy corresponding to species."
+        },
+        {
+          "name": "basisofrecord",
+          "type": "byte_array",
+          "description": "See dwc:basisOfRecord. One of PRESERVED_SPECIMEN, FOSSIL_SPECIMEN, LIVING_SPECIMEN, OBSERVATION, HUMAN_OBSERVATION, MACHINE_OBSERVATION, MATERIAL_SAMPLE, LITERATURE, UNKNOWN."
+        },
+        {
+          "name": "institutioncode",
+          "type": "byte_array",
+          "description": "See dwc:institutionCode."
+        },
+        {
+          "name": "collectioncode",
+          "type": "byte_array",
+          "description": "See dwc:collectionCode."
+        },
+        {
+          "name": "catalognumber",
+          "type": "byte_array",
+          "description": "See dwc:catalogNumber."
+        },
+        {
+          "name": "recordnumber",
+          "type": "byte_array",
+          "description": "See dwc:recordNumber."
+        },
+        {
+          "name": "identifiedby",
+          "type": "byte_array",
+          "description": "See dwc:identifiedBy."
+        },
+        {
+          "name": "dateidentified",
+          "type": "byte_array",
+          "description": "See dwc:dateIdentified. An ISO 8601 date."
+        },
+        {
+          "name": "license",
+          "type": "byte_array",
+          "description": "See dwc:license. Either CC0_1_0 or CC_BY_4_0. CC_BY_NC_4_0 records are not present in this snapshot."
+        },
+        {
+          "name": "rightsholder",
+          "type": "byte_array",
+          "description": "See dwc:rightsHolder."
+        },
+        {
+          "name": "recordedby",
+          "type": "byte_array",
+          "description": "See dwc:recordedBy."
+        },
+        {
+          "name": "typestatus",
+          "type": "byte_array",
+          "description": "See dwc:typeStatus."
+        },
+        {
+          "name": "establishmentmeans",
+          "type": "byte_array",
+          "description": "See dwc:establishmentMeans."
+        },
+        {
+          "name": "lastinterpreted",
+          "type": "byte_array",
+          "description": "The ISO 8601 date when the record was last processed by GBIF. Data are reprocessed for several reasons, including changes to the backbone taxonomy, so this date is not necessarily the date the occurrence record last changed."
+        },
+        {
+          "name": "mediatype",
+          "type": "byte_array",
+          "description": "See dwc:mediaType. May contain StillImage, MovingImage or Sound (from enumeration, detailing whether the occurrence has this media available."
+        },
+        {
+          "name": "issue",
+          "type": "byte_array",
+          "description": "A list of issues encountered by GBIF in processing this record. More details are available on these issues and flags in this blog post."
+        }
+      ]
+    }
 
   ]
 }
