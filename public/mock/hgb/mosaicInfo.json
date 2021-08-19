@@ -13,7 +13,7 @@
         {
           "name": "Below ground biomass",
           "description": "",
-          "options": "assets=belowground&colormap_name=greens&nodata=0&rescale=0,255"
+          "options": "assets=belowground&colormap_name=viridis&nodata=0&rescale=0,255"
         }
       ]
     }

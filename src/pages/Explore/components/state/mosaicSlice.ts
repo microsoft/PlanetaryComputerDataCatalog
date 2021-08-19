@@ -35,7 +35,7 @@ const initialState: MosaicState = {
   query: initialMosaicState,
   renderOption: null,
   layer: {
-    minZoom: 12,
+    minZoom: 8,
     maxExtent: [],
   },
   options: {
@@ -69,9 +69,9 @@ export const mosaicSlice = createSlice({
 
       if (!renderOptions) return;
 
-      if (!state.renderOption) {
-        state.renderOption = renderOptions[0];
-      } else if (!some(renderOptions, state.renderOption)) {
+      // Retain the current render option, unless the current option does not
+      // exist for the new mosaic preset
+      if (!state.renderOption || !some(renderOptions, state.renderOption)) {
         state.renderOption = renderOptions[0];
       }
     },
@@ -84,6 +84,9 @@ export const mosaicSlice = createSlice({
     },
     setShowEdit: (state, action: PayloadAction<boolean>) => {
       state.options.showEdit = action.payload;
+    },
+    setLayerMinZoom: (state, action: PayloadAction<number>) => {
+      state.layer.minZoom = action.payload;
     },
   },
   extraReducers: builder => {
@@ -102,6 +105,7 @@ export const {
   setRenderOption,
   setShowEdit,
   setShowResults,
+  setLayerMinZoom,
 } = mosaicSlice.actions;
 
 export default mosaicSlice.reducer;
