@@ -1,13 +1,23 @@
 import { IDropdownOption } from "@fluentui/react";
+import { useEffect } from "react";
+import { IMosaicInfo } from "types";
 import { useCollectionMosaicInfo } from "utils/requests";
-import { useExploreSelector } from "../state/hooks";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
 import { setMosaicQuery } from "../state/mosaicSlice";
 import StateSelector from "./StateSelector";
 
 const MosaicPresetSelector = () => {
   const { collection, query } = useExploreSelector(state => state.mosaic);
+  const dispatch = useExploreDispatch();
 
-  const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
+  const { isSuccess, data } = useCollectionMosaicInfo(collection?.id);
+  const mosaicInfo: IMosaicInfo = data;
+
+  useEffect(() => {
+    if (mosaicInfo && query.name === null) {
+      dispatch(setMosaicQuery(mosaicInfo.mosaics[0]));
+    }
+  }, [dispatch, mosaicInfo, query.name]);
 
   const mosaicOptions =
     isSuccess && mosaicInfo?.mosaics

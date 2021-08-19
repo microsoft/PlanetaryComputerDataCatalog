@@ -33,6 +33,7 @@ export const useCollectionMosaicInfo = collectionId => {
   return useQuery([collectionId], getCollectionMosaicParams, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    enabled: !!collectionId,
   });
 };
 
