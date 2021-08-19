@@ -41,8 +41,6 @@ const TableTable = ({ stacKey, title }) => {
       isMultiline: ["description"].includes(key),
     };
   });
-  console.log("columns")
-  console.log(columns)
 
   const items = Object.entries(table_columns).map(([key, values]) => {
     return { name: key, ...values };
