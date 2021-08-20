@@ -10,7 +10,7 @@ const CollectionDetailPane = () => {
   return (
     <>
       <Separator />
-      <h4>{collection?.title}</h4>
+      {/* <h4>{collection?.title}</h4> */}
       {/* <p>
         {collection?.["msft:short_description"]}{" "}
         <NewTabLink href={`/dataset/${collection.id}`}>Read more...</NewTabLink>
