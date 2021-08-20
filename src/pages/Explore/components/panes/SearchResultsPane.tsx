@@ -19,12 +19,12 @@ const SearchResultsPane = ({
   if (!data) return null;
 
   return (
-    <div style={{ height: "100%", overflowY: "auto" }}>
+    <div style={{ height: "100%", overflowY: "scroll", overflowX: "clip" }}>
       <p>
         Showing <strong>{data.features.length}</strong> items that matched your
         search.
       </p>
-      <Stack tokens={{ childrenGap: 10 }}>
+      <Stack tokens={{ childrenGap: 6 }}>
         {data.features.map(item => (
           <ItemResult key={item.id} item={item} />
         ))}

@@ -26,14 +26,13 @@ const Viewer = () => {
         {/* <ItemPanel selectedItems={selectedItems} /> */}
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
-            <Stack tokens={stackTokens}>
+            <Stack styles={{ root: { height: "100%" } }} tokens={stackTokens}>
               <p>
                 Explore Planetary Computer datasets. Explains filters and results.
               </p>
               <CollectionSelector />
               <MosaicPane />
               <CollectionDetailPane />
-              {/* <SearchPane mapRef={mapRef} onResults={handleResults} /> */}
               <TemporarySearch />
             </Stack>
           </StackItem>

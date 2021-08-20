@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
-import { stacSearchDatasource, layerControl } from "./viewerLayers";
+import { stacItemDatasource, layerControl, itemLineLayer } from "./viewerLayers";
 import { useExploreDispatch, useExploreSelector } from "./state/hooks";
 import { setCamera, setZoom } from "./state/mapSlice";
 import { Link, useTheme } from "@fluentui/react";
@@ -15,7 +15,7 @@ const mapContainerId: string = "viewer-map";
 const ExploreMap = () => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom },
+    map: { center, zoom, boundaryShape },
     mosaic,
   } = useExploreSelector(s => s);
 
@@ -23,6 +23,15 @@ const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const { data } = useTileJson(mosaic.collection?.id, mosaic.query.hash);
+
+  useEffect(() => {
+    if (boundaryShape === null) {
+      stacItemDatasource.clear();
+    } else {
+      stacItemDatasource.clear();
+      stacItemDatasource.add(boundaryShape as atlas.data.Geometry);
+    }
+  }, [boundaryShape]);
 
   useEffect(() => {
     console.log(data);
@@ -49,7 +58,7 @@ const ExploreMap = () => {
         if (mosaicLayer) {
           mapRef.current?.layers.remove(mosaicLayer);
         }
-        mapRef.current?.layers.add(layer, "labels");
+        mapRef.current?.layers.add(layer, "stac-item-outline");
       }
     } else {
       if (mosaicLayer) {
@@ -71,8 +80,9 @@ const ExploreMap = () => {
     const map = mapRef.current;
     if (!mapReady || !map) return;
 
-    if (map.sources.getSources().length === 0) {
-      map.sources.add(stacSearchDatasource);
+    if (!map.sources.getSources().includes(stacItemDatasource)) {
+      map.sources.add(stacItemDatasource);
+      map.layers.add(itemLineLayer, "labels");
     }
 
     if (!map.controls.getControls().includes(layerControl)) {

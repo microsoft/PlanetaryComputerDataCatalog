@@ -22,23 +22,25 @@ const ItemPreview = ({ item }: ItemPreviewProps) => {
   // Get a thumbnail asset, either a absolute url to an image or a preview
   // endpoint that will generate one on the fly
   const thumbAsset = Object.values(item.assets).find(
-    asset => isThumbnailAsset(asset) || isRenderedPreviewAsset(asset)
+    asset => isRenderedPreviewAsset(asset) || isThumbnailAsset(asset)
   );
 
-  if (thumbAsset?.href) {
-    return (
-      <img
-        src={thumbAsset.href}
-        alt={`Rendered thumbnail for item: ${item.id}`}
-        style={{
-          borderRight: "1px solid #ccc",
-          height: "100%",
-          width: "50px",
-        }}
-      />
-    );
-  }
-  return null;
+  if (!thumbAsset) return null;
+
+  const href = thumbAsset.href.includes("preview")
+    ? thumbAsset.href + "&max_size=100"
+    : thumbAsset.href;
+  return (
+    <img
+      src={href}
+      alt={`Rendered thumbnail for item: ${item.id}`}
+      style={{
+        borderRight: "1px solid #ccc",
+        height: "100%",
+        width: "50px",
+      }}
+    />
+  );
 };
 
 export default ItemPreview;

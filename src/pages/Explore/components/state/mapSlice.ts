@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as atlas from "azure-maps-control";
+import { GeoJsonObject } from "geojson";
 
 export interface MapState {
   center: [number, number];
   zoom: number;
   bounds: atlas.data.BoundingBox;
+  boundaryShape: GeoJsonObject | null;
 }
 
 const initialState: MapState = {
   center: [30, 30],
   zoom: 2,
   bounds: [-180, -89, 180, 90],
+  boundaryShape: null,
 };
 
 export const mapSlice = createSlice({
@@ -37,9 +40,21 @@ export const mapSlice = createSlice({
         state.bounds = action.payload.bounds;
       }
     },
+    setBoundaryShape: (state, action: PayloadAction<GeoJsonObject>) => {
+      state.boundaryShape = action.payload;
+    },
+    clearBoundaryShape: state => {
+      state.boundaryShape = null;
+    },
   },
 });
 
-export const { setCamera, setCenter, setZoom } = mapSlice.actions;
+export const {
+  setCamera,
+  setCenter,
+  setZoom,
+  setBoundaryShape,
+  clearBoundaryShape,
+} = mapSlice.actions;
 
 export default mapSlice.reducer;
