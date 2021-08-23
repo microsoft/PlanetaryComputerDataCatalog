@@ -5,10 +5,10 @@ import "azure-maps-control/dist/atlas.min.css";
 import { stacItemDatasource, layerControl, itemLineLayer } from "./viewerLayers";
 import { useExploreDispatch, useExploreSelector } from "./state/hooks";
 import { setCamera, setZoom } from "./state/mapSlice";
-import { Link, useTheme } from "@fluentui/react";
 import { useTileJson } from "utils/requests";
-import { DATA_URL } from "utils/constants";
 import { setLayerMinZoom } from "./state/mosaicSlice";
+import { useMosaicLayer, useShowBoundary } from "./hooks/map";
+import ZoomMessage from "./ZoomMessage";
 
 const mapContainerId: string = "viewer-map";
 
@@ -19,54 +19,22 @@ const ExploreMap = () => {
     mosaic,
   } = useExploreSelector(s => s);
 
-  const theme = useTheme();
   const mapRef = useRef<atlas.Map | null>(null);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const { data } = useTileJson(mosaic.collection?.id, mosaic.query.hash);
+  const layerMinZoom = data?.minzoom;
 
+  useShowBoundary(boundaryShape);
+  useMosaicLayer(mapRef, mosaic);
+
+  // Set the minzoom for the current layer
   useEffect(() => {
-    if (boundaryShape === null) {
-      stacItemDatasource.clear();
-    } else {
-      stacItemDatasource.clear();
-      stacItemDatasource.add(boundaryShape as atlas.data.Geometry);
+    if (layerMinZoom) {
+      dispatch(setLayerMinZoom(layerMinZoom));
     }
-  }, [boundaryShape]);
+  }, [dispatch, layerMinZoom]);
 
-  useEffect(() => {
-    console.log(data);
-    if (data?.minzoom) {
-      dispatch(setLayerMinZoom(data.minzoom));
-    }
-  }, [dispatch, data]);
-
-  // Add a mosaic layer endpoint to the map
-  useEffect(() => {
-    const mosaicLayer = mapRef.current?.layers.getLayerById("stac-mosaic");
-
-    if (mosaic.collection && mosaic.query.hash && mosaic.renderOption) {
-      const tilejsonAsset = Object.values(mosaic.collection.assets).find(asset =>
-        asset.roles?.includes("tiles")
-      );
-
-      if (tilejsonAsset) {
-        const tileLayer = {
-          tileUrl: `${DATA_URL}/collection/tilejson.json?hash=${mosaic.query.hash}&collection=${mosaic.collection.id}&${mosaic.renderOption.options}`,
-        };
-        const layer = new atlas.layer.TileLayer(tileLayer, "stac-mosaic");
-
-        if (mosaicLayer) {
-          mapRef.current?.layers.remove(mosaicLayer);
-        }
-        mapRef.current?.layers.add(layer, "stac-item-outline");
-      }
-    } else {
-      if (mosaicLayer) {
-        mapRef.current?.layers.remove(mosaicLayer);
-      }
-    }
-  }, [mosaic]);
-
+  // Zoom the map to the new level
   useEffect(() => {
     if (zoom !== mapRef.current?.getCamera().zoom)
       mapRef.current?.setCamera({
@@ -76,6 +44,7 @@ const ExploreMap = () => {
       });
   }, [zoom]);
 
+  // Setup tile layers and map controls
   useEffect(() => {
     const map = mapRef.current;
     if (!mapReady || !map) return;
@@ -95,7 +64,8 @@ const ExploreMap = () => {
     }
   }, [mapReady]);
 
-  const handleCameraChange = useCallback(
+  // Update state when map moves end
+  const handleMapMove = useCallback(
     (e: atlas.MapEvent) => {
       const camera = e.map.getCamera();
       dispatch(setCamera(camera));
@@ -103,6 +73,7 @@ const ExploreMap = () => {
     [dispatch]
   );
 
+  // Initialize the map
   useEffect(() => {
     const onReady = () => setMapReady(true);
 
@@ -123,7 +94,7 @@ const ExploreMap = () => {
       });
 
       map.events.add("ready", onReady);
-      map.events.add("moveend", handleCameraChange);
+      map.events.add("moveend", handleMapMove);
       mapRef.current = map;
     }
 
@@ -131,32 +102,14 @@ const ExploreMap = () => {
 
     // Remove event handlers on unmount
     return () => map.events.remove("ready", onReady);
-  }, [center, zoom, handleCameraChange]);
+  }, [center, zoom, handleMapMove]);
 
-  const zoomToLayer = () => {
+  // Handle zoom toast for layers with min zoom level
+  const zoomToLayer = useCallback(() => {
     dispatch(setZoom(mosaic.layer.minZoom));
-  };
-
+  }, [dispatch, mosaic.layer.minZoom]);
   const showZoomMsg = zoom + 0.5 <= mosaic.layer.minZoom && !!mosaic.query.hash;
-
-  const zoomMsg = (
-    <div
-      style={{
-        position: "absolute",
-        top: 10,
-        left: "50%",
-        transform: "translate(-50%, 0)",
-        zIndex: 1,
-        padding: "5px 10px",
-        borderRadius: 15,
-        border: "1px solid",
-        borderColor: theme.semanticColors.buttonBorder,
-        backgroundColor: theme.semanticColors.defaultStateBackground,
-      }}
-    >
-      <Link onClick={zoomToLayer}>Zoom in</Link> to see layer
-    </div>
-  );
+  const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
 
   return (
     <div style={{ width: "100%", height: "100%", position: "relative" }}>

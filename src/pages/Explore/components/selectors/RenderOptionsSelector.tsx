@@ -4,7 +4,7 @@ import StateSelector from "./StateSelector";
 import { useCollectionMosaicInfo } from "utils/requests";
 import { setRenderOption } from "../state/mosaicSlice";
 import { useExploreSelector } from "../state/hooks";
-import { IMosaicInfo } from "types";
+import { IMosaic } from "types";
 
 const RenderOptionsSelector = () => {
   const {
@@ -14,12 +14,11 @@ const RenderOptionsSelector = () => {
   } = useExploreSelector(state => state.mosaic);
 
   const { data } = useCollectionMosaicInfo(collection?.id);
-  const mosaicInfo: IMosaicInfo = data;
+  const mosaics: IMosaic[] = data?.mosaics;
 
   const renderers =
-    mosaicInfo?.mosaics && query.name
-      ? mosaicInfo.mosaics.find(mosaic => mosaic.name === query.name)
-          ?.renderOptions || []
+    mosaics && query.name
+      ? mosaics.find(mosaic => mosaic.name === query.name)?.renderOptions || []
       : [];
 
   const options = renderers.map((renderer): IDropdownOption => {

@@ -7,25 +7,25 @@ import StateSelector from "./StateSelector";
 import { useExploreSelector } from "../state/hooks";
 import { setCollection } from "../state/mosaicSlice";
 
+const isRenderable = (collection: IStacCollection) =>
+  !("cube:variables" in collection);
+
 const CollectionSelector = () => {
-  const { isSuccess, data: stacResponse } = useCollections();
+  const { isSuccess, data } = useCollections();
+  const collections: IStacCollection[] = data?.collections;
   const collection = useExploreSelector(state => state.mosaic.collection);
 
   const collectionOptions = isSuccess
     ? sortBy(
-        (stacResponse?.collections as IStacCollection[])
-          .filter(collection => !("cube:variables" in collection))
-          .map((collection): IDropdownOption => {
-            return { key: collection.id, text: collection.title };
-          }),
+        collections.filter(isRenderable).map((collection): IDropdownOption => {
+          return { key: collection.id, text: collection.title };
+        }),
         "text"
       )
     : [];
 
   const getCollectionById = (key: string | number) => {
-    return (stacResponse.collections as IStacCollection[]).find(
-      c => c.id === key.toString()
-    );
+    return collections.find(c => c.id === key.toString());
   };
 
   return (

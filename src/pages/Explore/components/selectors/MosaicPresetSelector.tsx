@@ -21,13 +21,13 @@ const MosaicPresetSelector = () => {
 
   const mosaicOptions =
     isSuccess && mosaicInfo?.mosaics
-      ? mosaicInfo.mosaics.map((mosaic: any): IDropdownOption => {
-          return { key: mosaic.name, text: mosaic.name };
+      ? mosaicInfo.mosaics.map((mosaic): IDropdownOption => {
+          return { key: mosaic.name || "", text: mosaic.name || "" };
         })
       : [];
 
   const getQueryPresetByName = (key: string | number) => {
-    return mosaicInfo.mosaics.find((m: any) => m.name === key);
+    return mosaicInfo.mosaics.find(mosaic => mosaic.name === key);
   };
 
   return (

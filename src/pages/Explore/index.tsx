@@ -7,7 +7,6 @@ import { store } from "./components/state/store";
 import Layout from "components/Layout";
 import SEO from "components/Seo";
 // import ItemPanel from "./components/ItemPanel";
-// import SearchPane from "./components/panes/SearchPane";
 import CollectionSelector from "./components/selectors/CollectionSelector";
 import MosaicPane from "./components/panes/MosaicPane";
 import CollectionDetailPane from "./components/panes/CollectionDetailPane";

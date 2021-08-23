@@ -8,7 +8,6 @@ const getStacItems = async (
 ): Promise<IStacSearchResult> => {
   // eslint-disable-next-line
   const [_, search] = queryParam.queryKey;
-  console.log(search);
 
   if (typeof search === "undefined") {
     return Promise.reject();
@@ -22,6 +21,7 @@ const getStacItems = async (
     ids: search.items?.length ? search.items.join(",") : undefined,
   };
 
+  console.log("Executed STAC search:", search);
   const resp = await axios.get(`${STAC_URL}/search`, {
     params: serializedParams,
   });

@@ -1,3 +1,8 @@
+import { IMosaicState } from "pages/Explore/components/state/mosaicSlice";
+import { IMosaicRenderOption } from "types";
+import { IStacCollection } from "types/stac";
+import { DATA_URL } from "./constants";
+
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
@@ -145,4 +150,12 @@ export const scrollToHash = (
       el.scrollIntoView({ behavior: behavior });
     }
   };
+};
+
+export const makeCollectionTileJsonUrl = (
+  collection: IStacCollection,
+  query: IMosaicState,
+  renderOption: IMosaicRenderOption
+) => {
+  return `${DATA_URL}/collection/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption.options}`;
 };

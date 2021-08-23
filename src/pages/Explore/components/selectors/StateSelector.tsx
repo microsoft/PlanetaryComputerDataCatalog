@@ -23,7 +23,7 @@ const StateSelector = ({
   const dispatch = useExploreDispatch();
   const { palette } = useTheme();
 
-  const iconStyles = { marginRight: "8px", color: palette.themePrimary };
+  const iconStyles = { marginRight: 8, color: palette.themePrimary };
 
   const renderTitle = (iconName: string) => {
     return (options: IDropdownOption[] | undefined): JSX.Element | null => {

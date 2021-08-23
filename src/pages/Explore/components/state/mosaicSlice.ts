@@ -5,7 +5,7 @@ import { IMosaic, IMosaicRenderOption } from "types";
 import { IStacCollection } from "types/stac";
 import { getMosaicQueryHashKey } from "utils/requests";
 
-interface IMosaicState extends IMosaic {
+export interface IMosaicState extends IMosaic {
   hash: string | null;
 }
 export interface MosaicState {

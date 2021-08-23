@@ -8,7 +8,6 @@ const TemporarySearch = () => {
   const { collection, query, options } = mosaic;
 
   const shouldQuery = () => {
-    console.log("should query");
     return collection && query.cql && options.showResults;
   };
 
