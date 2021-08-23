@@ -6,7 +6,7 @@ import { store } from "./components/state/store";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
-// import ItemPanel from "./components/ItemPanel";
+import ItemPanel from "./components/ItemPanel";
 import CollectionSelector from "./components/selectors/CollectionSelector";
 import MosaicPane from "./components/panes/MosaicPane";
 import CollectionDetailPane from "./components/panes/CollectionDetailPane";
@@ -22,7 +22,7 @@ const Viewer = () => {
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        {/* <ItemPanel selectedItems={selectedItems} /> */}
+        <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
             <Stack styles={{ root: { height: "100%" } }} tokens={stackTokens}>
