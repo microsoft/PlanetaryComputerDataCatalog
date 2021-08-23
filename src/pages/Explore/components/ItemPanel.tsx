@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Panel, PanelType, Separator } from "@fluentui/react";
 import { useBoolean } from "@fluentui/react-hooks";
 
-import { IStacItem } from "../../types/stac";
-import SimpleKeyValueList from "../controls/SimpleKeyValueList";
+import { IStacItem } from "types/stac";
+import SimpleKeyValueList from "components/controls/SimpleKeyValueList";
 import ItemPreview from "./ItemPreview";
 
 type ItemPanelProps = {

@@ -29,6 +29,35 @@ export const useCollectionMapInfo = collectionId => {
   });
 };
 
+export const useCollectionMosaicInfo = collectionId => {
+  return useQuery([collectionId], getCollectionMosaicParams, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    enabled: !!collectionId,
+  });
+};
+
+export const useTileJson = (collectionId, queryHash) => {
+  return useQuery([collectionId, queryHash], getTileJson, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    enabled: !!collectionId && !!queryHash,
+  });
+};
+
+export const getTileJson = async ({ queryKey }) => {
+  const [collectionId, queryHash] = queryKey;
+
+  const resp = await axios.get(
+    `${DATA_URL}/collection/tilejson.json?collection=${collectionId}&queryhash=${queryHash}`
+  );
+  return resp.data;
+};
+
+export const getMosaicQueryHashKey = async cql => {
+  return axios.get(`/mock/mosaicHashKey.txt?cql=${cql}`);
+};
+
 const getByUrl = async ({ queryKey }) => {
   const [url] = queryKey;
 
@@ -62,5 +91,52 @@ const getCollectionViewerParams = async ({ queryKey }) => {
 
   return {
     info: mapInfoResp.data,
+  };
+};
+
+const getCollectionMosaicParams = async ({ queryKey }) => {
+  const [collectionId] = queryKey;
+
+  try {
+    return await (
+      await axios.get(`mock/${collectionId}/mosaicInfo.json`)
+    ).data;
+  } catch {
+    return faker(collectionId);
+  }
+};
+
+// TODO: temp
+const faker = collectionId => {
+  return {
+    mosaics: [
+      {
+        name: `Preset 1 (${collectionId})`,
+        description: `${collectionId}-abababa`,
+        cql: "order by datetime desc",
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=1,2,3" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
+      },
+      {
+        name: `Preset 2 (${collectionId})`,
+        description: `${collectionId}-cecece`,
+        cql: "order by datetime desc",
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=4,5,6" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
+      },
+      {
+        name: `Preset 3 (${collectionId})`,
+        description: `${collectionId}-eoeoeo`,
+        cql: "order by datetime desc",
+        renderOptions: [
+          { name: "Render Option 1", options: "bidx=4,5,6" },
+          { name: "Render Option 2", options: "bidx=1,5,6" },
+        ],
+      },
+    ],
   };
 };

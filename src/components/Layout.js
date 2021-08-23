@@ -5,12 +5,17 @@ import Footer from "./Footer";
 import Announcement from "./Announcement";
 import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
 
-const Layout = ({ bannerHeader, bannerFooter, isShort = false, children }) => {
+const Layout = ({
+  bannerHeader = null,
+  bannerFooter = null,
+  isShort = false,
+  children,
+}) => {
   return (
     <>
       <Header />
       <Announcement />
-      <div>{bannerHeader}</div>
+      {bannerHeader && <div>{bannerHeader}</div>}
       <ScrollToTopOnMount />
       <main className={isShort ? "short" : undefined}>{children}</main>
       {bannerFooter}
