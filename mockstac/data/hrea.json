@@ -1,0 +1,113 @@
+{
+    "id": "hrea",
+    "type": "Collection",
+    "stac_version": "1.0.0",
+    "title": "HREA: High Resolution Electricity Access",
+    "description": "{{ collection.description }}",
+    "license": "CC-BY-4.0",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://creativecommons.org/licenses/by/4.0/",
+            "title": "CC BY 4.0"
+        }
+    ],
+    "stac_extensions": [
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    ],
+    "keywords": [
+        "hrea",
+        "electricity",
+        "VIIRS"
+    ],
+    "msft:short_description": "Settlement-level measures of electricity access, reliability, and usage derived from VIIRS satellite imagery",
+    "msft:storage_account": "hreadatasa",
+    "msft:container": "hrea",
+    "providers": [
+        {
+            "name": "University of Michigan",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "http://www-personal.umich.edu/~brianmin/HREA/index.html/"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "assets": {
+        "thumbnail": {
+            "title": "HREA",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hrea.png",
+            "media_type": "image/png"
+        }
+    },
+    "item_assets": {
+        "light-composite": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Nighttime light annual composite",
+            "roles": [
+                "data"
+            ]
+        },
+        "estimated-brightness": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Estimated brightness levels",
+            "roles": [
+                "data"
+            ]
+        },
+        "lightscore": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Probability of electrification",
+            "roles": [
+                "data"
+            ]
+        },
+        "night-proportion": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Proportion of nights a settlement is brighter than uninhabited areas",
+            "roles": [
+                "data"
+            ]
+        }
+    },
+    "summaries": {
+        "gsd": [
+            30,
+            460
+        ]
+    },
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -92.008545,
+                    -5.015909,
+                    -75.187155,
+                    1.681036
+                ],
+                [
+                    -17.063472,
+                    -34.838027,
+                    50.759908,
+                    37.169709
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-12-31T00:00:00",
+                    "2019-12-31T00:00:00"
+                ]
+            ]
+        }
+    }
+}

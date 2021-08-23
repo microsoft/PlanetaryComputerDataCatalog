@@ -1,0 +1,337 @@
+{
+  "type": "Collection",
+  "id": "fia",
+  "stac_version": "1.0.0",
+  "description": "## Overview\n\nStatus and trends on U.S. forest location, health, growth, mortality, and production, from the US Forest Service's  [Forest Inventory and Analysis](https://www.fia.fs.fed.us/) (FIA) program.  \n\nThe Forest Inventory and Analysis (FIA) dataset is a nationwide survey of the forest assets of the United States. The FIA research program has been in existence since mandated by Congress in 1928. FIA's primary objective is to determine the extent, condition, volume, growth, and use of trees on the nation's forest land.\n\nDomain: continental U.S., 1928-2018\n\nResolution: plot-level (irregular polygon)\n\nThis dataset was curated and brought to Azure by [CarbonPlan](https://carbonplan.org/).",
+  "links": [
+    {
+      "rel": "root",
+      "href": null,
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/table/v1.0.0/schema.json"
+  ],
+  "table:tables": [
+    {
+      "name": "Survey Table",
+      "description": "Survey table. This table contains one record for each year an inventory is conducted in a State for annual inventory or one record for each periodic inventory. \u2022SURVEY.CN = PLOT.SRV_CN links the unique inventory record for a State and year to the plot records.",
+      "msft:item_name": "survey"
+    },
+    {
+      "name": "County Table",
+      "description": "County table. This table contains survey unit codes and is also a reference table for the county codes and names. \u2022COUNTY.CN = PLOT.CTY_CN links the unique county record to the plot record.",
+      "msft:item_name": "county"
+    },
+    {
+      "name": "Plot Table",
+      "description": "Plot table. This table provides information relevant to the entire 1-acre field plot. This table links to most other tables, and the linkage is made using PLOT.CN = TABLE_NAME.PLT_CN (TABLE_NAME is the name of any table containing the column name PLT_CN). Below are some examples of linking PLOT to other tables. \u2022PLOT.CN = COND.PLT_CN links the unique plot record to the condition class record(s). \u2022PLOT.CN = SUBPLOT.PLT_CN links the unique plot record to the subplot records. \u2022PLOT.CN = TREE.PLT_CN links the unique plot record to the tree records. \u2022PLOT.CN = SEEDLING.PLT_CN links the unique plot record to the seedling records.",
+      "msft:item_name": "plot"
+    },
+    {
+      "name": "Condition Table",
+      "description": "Condition table. This table provides information on the discrete combination of landscape attributes that define the condition (a condition will have the same land class, reserved status, owner group, forest type, stand-size class, regeneration status, and stand density). \u2022PLOT.CN = COND.PLT_CN links the condition class record(s) to the plot table. \u2022COND.PLT_CN = SITETREE.PLT_CN and COND.CONDID = SITETREE.CONDID links the condition class record to the site tree data. \u2022COND.PLT_CN = TREE.PLT_CN and COND.CONDID = TREE.CONDID links the condition class record to the tree data.",
+      "msft:item_name": "cond"
+    },
+    {
+      "name": "Subplot Table",
+      "description": "Subplot table. This table describes the features of a single subplot. There are multiple subplots per 1-acre field plot and there can be multiple conditions sampled on each subplot. \u2022PLOT.CN = SUBPLOT.PLT_CN links the unique plot record to the subplot records. \u2022SUBPLOT.PLT_CN = COND.PLT_CN and SUBPLOT.MACRCOND = COND.CONDID links the macroplot conditions to the condition class record. \u2022SUBPLOT.PLT_CN = COND.PLT_CN and SUBPLOT.SUBPCOND = COND.CONDID links the subplot conditions to the condition class record. \u2022SUBPLOT.PLT_CN = COND.PLT_CN and SUBPLOT.MICRCOND = COND.CONDID links the microplot conditions to the condition class record.",
+      "msft:item_name": "subplot"
+    },
+    {
+      "name": "Subplot Condition Table",
+      "description": "Subplot condition table. This table contains information about the proportion of a subplot in a condition. \u2022PLOT.CN = SUBP_COND.PLT_CN links the subplot condition class record to the plot table. \u2022SUBP_COND.PLT_CN = COND.PLT_CN and SUBP_COND.CONDID = COND.CONDID links the condition class records found on the four subplots to the subplot description.",
+      "msft:item_name": "subp_cond"
+    },
+    {
+      "name": "boundary",
+      "description": "Boundary table. This table provides a description of the demarcation line between two conditions that occur on a single subplot",
+      "msft:item_name": "boundary"
+    },
+    {
+      "name": "subp_cond_chng_mtrx",
+      "description": null,
+      "msft:item_name": "subp_cond_chng_mtrx"
+    },
+    {
+      "name": "Tree Table",
+      "description": "Tree table. This table provides information for each tree 1 inch in diameter and larger found on a microplot, subplot, or core optional macroplot. \u2022PLOT.CN = TREE.PLT_CN links the tree records to the unique plot record. \u2022COND.PLT_CN = TREE.PLT_CN and COND.CONDID = TREE.CONDID links the tree records to the unique condition record.",
+      "msft:item_name": "tree"
+    },
+    {
+      "name": "tree_woodland_stems",
+      "description": null,
+      "msft:item_name": "tree_woodland_stems"
+    },
+    {
+      "name": "tree_regional_biomass",
+      "description": null,
+      "msft:item_name": "tree_regional_biomass"
+    },
+    {
+      "name": "tree_grm_component",
+      "description": null,
+      "msft:item_name": "tree_grm_component"
+    },
+    {
+      "name": "Tree Net Growth, Removal, and Mortality Midpoint Table",
+      "description": "Tree net growth, removal, and mortality midpoint table. This table contains information about a remeasured tree at the midpoint of the remeasurement period. It does not contain a record for every tree. Midpoint estimates are computed for trees that experience mortality, removal, or land use diversion or reversion. The information in this table is used to compute net growth, removal, and mortality estimates on remeasurement trees. \u2022TREE_GRM_MIDPT.TRE_CN = TREE.TRE_CN links the records in this table to the corresponding tree record in the TREE table.",
+      "msft:item_name": "tree_grm_midpt"
+    },
+    {
+      "name": "Tree Net Growth, Removal, and Mortality Begin Table",
+      "description": "Tree net growth, removal, and mortality begin table. This table contains information for remeasured trees where values have been calculated for the beginning of the remeasurement period. Only those trees where information was recalculated for time 1 (T1) are included. The information in this table is used to produce net growth, removal and mortality estimates on remeasured trees. \u2022TREE_GRM_BEGIN.TRE_CN = TREE.TRE_CN links the records in this table to the corresponding tree record in the TREE table.",
+      "msft:item_name": "tree_grm_begin"
+    },
+    {
+      "name": "Tree Net Growth, Removal, and Mortality Estimation Table",
+      "description": "Tree net growth, removal, and mortality estimation table. This table contains information used to produce estimates of growth, removals and mortality. \u2022PLOT.CN = TREE_GRM_ESTN.PLT_CN links the tree GRM estimation records to the unique plot record. \u2022TREE.CN = TREE_GRM_ESTN.TRE_CN links the tree GRM estimation records to the unique tree record.",
+      "msft:item_name": "tree_grm_estn"
+    },
+    {
+      "name": "seedling",
+      "description": null,
+      "msft:item_name": "seedling"
+    },
+    {
+      "name": "Site Tree Table",
+      "description": "Site tree table. This table provides information on the site tree(s) collected in order to calculate site index and/or site productivity information for a condition. \u2022PLOT.CN = SITETREE.PLT_CN links the site tree records to the unique plot record. \u2022SITETREE.PLT_CN = COND.PLT_CN and SITETREE.CONDID = COND.CONDID links the site tree record(s) to the unique condition class record.",
+      "msft:item_name": "sitetree"
+    },
+    {
+      "name": "invasive_subplot_spp",
+      "description": null,
+      "msft:item_name": "invasive_subplot_spp"
+    },
+    {
+      "name": "Phase 2 Vegetation Subplot Species Table",
+      "description": "Phase 2 Vegetation subplot species table. This table provides percent cover data of vegetation species identified on the subplot. \u2022PLOT.CN = P2VEG_SUBPLOT_SPP.PLT_CN links the vegetation subplot species record(s) to the unique plot record. \u2022SUBP_COND.PLT_CN = P2VEG_SUBPLOT_SPP.PLT_CN and SUBP_COND.CONDID = P2VEG_SUBPLOT_SPP.CONDID and SUBP_COND.SUBP = P2VEG_SUBPLOT_SPP.SUBP links the vegetation subplot species record(s) to the unique subplot condition record. \u2022P2VEG_SUBPLOT_SPP.VEG_SPCD = REF_PLANT_DICTIONARY.SYMBOL links the P2 vegetation subplot NRCS species code to the plant dictionary reference species code.",
+      "msft:item_name": "p2veg_subplot_spp"
+    },
+    {
+      "name": "p2veg_subp_structure",
+      "description": null,
+      "msft:item_name": "p2veg_subp_structure"
+    },
+    {
+      "name": "Down Woody Material Visit Table",
+      "description": "Down woody material visit table. This table provides general information on down woody material indicator visit, such as the date of the DWM survey. \u2022PLOT.CN = DWM_VISIT.PLT_CN links the down woody material indicator visit record to the unique plot record.",
+      "msft:item_name": "dwm_visit"
+    },
+    {
+      "name": "dwm_coarse_woody_debris",
+      "description": null,
+      "msft:item_name": "dwm_coarse_woody_debris"
+    },
+    {
+      "name": "dwm_duff_litter_fuel",
+      "description": null,
+      "msft:item_name": "dwm_duff_litter_fuel"
+    },
+    {
+      "name": "dwm_fine_woody_debris",
+      "description": null,
+      "msft:item_name": "dwm_fine_woody_debris"
+    },
+    {
+      "name": "dwm_microplot_fuel",
+      "description": null,
+      "msft:item_name": "dwm_microplot_fuel"
+    },
+    {
+      "name": "Down Woody Material Residual Pile Table",
+      "description": "Down woody material residual pile table. This table provides information on the wood piles measured on the subplot. \u2022PLOT.CN = DWM_RESIDUAL_PILE.PLT_CN links the wood piles records to the unique plot record. \u2022COND.PLT_CN = DWM_RESIDUAL_PILE.PLT_CN and COND.CONDID= DWM_RESIDUAL_PILE.CONDID links the wood piles records to the unique condition record.",
+      "msft:item_name": "dwm_residual_pile"
+    },
+    {
+      "name": "dwm_transect_segment",
+      "description": null,
+      "msft:item_name": "dwm_transect_segment"
+    },
+    {
+      "name": "Condition Down Woody Material Calculation Table",
+      "description": "Condition down woody material calculation table. This table contains calculated values and condition-level estimates for down woody attributes by plot number (PLOT), condition class number (CONDID), and evaluation identifier (EVALID). \u2022PLOT.CN = COND_DWM_CALC.PLT_CN links the down woody material calculation records to the unique plot record. \u2022COND.CN = COND_DWM_CALC.CND_CN links the down woody material calculation records to the unique condition record. \u2022POP_STRATUM. CN = COND_DWM_CALC.STRATUM_CN links the down woody material calculation records to the unique population stratum record.",
+      "msft:item_name": "cond_dwm_calc"
+    },
+    {
+      "name": "Plot Regeneration Table",
+      "description": "Plot regeneration table. This table contains the information for the four subplots describing the amount of animal browse pressure exerted on the regeneration of trees. \u2022PLOT.CN = PLOT_REGEN.PLT_CN links the unique plot record to the unique plot regeneration record.",
+      "msft:item_name": "plot_regen"
+    },
+    {
+      "name": "Subplot Regeneration Table",
+      "description": "Subplot regeneration table. This table provides information on the subplot survey status and the site survey limitations, if any, for the tree regeneration study. \u2022PLOT.CN = SUBPLOT_REGEN.PLT_CN links the unique plot record to the subplot regeneration records. \u2022SUBPLOT.PLT_CN = SUBPLOT_REGEN.PLT_CN and SUBPLOT.SUBP = SUBPLOT_REGEN.SUBP links the subplot record to the subplot regeneration record.",
+      "msft:item_name": "subplot_regen"
+    },
+    {
+      "name": "Seedling Regeneration Table",
+      "description": "Seedling regeneration. This table contains provides information on the seedling count by condition, species, source, and length class for the tree regeneration study. \u2022PLOT.CN = SEEDLING_REGEN.PLT_CN links the unique plot record to the seedling regeneration records. \u2022COND.PLT_CN = SEEDLING_REGEN.PLT_CN and COND.CONDID = SEEDLING_REGEN.CONDID links the regeneration seedling records to the unique condition record.",
+      "msft:item_name": "seedling_regen"
+    },
+    {
+      "name": "Population Estimation Unit Table",
+      "description": "Population estimation unit table. This table contains information about estimation units. An estimation unit is a geographic area that can be drawn on a map. It has a known area, and the sampling intensity must be the same within a stratum within an estimation unit. Generally, estimation units are contiguous areas, but exceptions are made when certain ownerships, usually National Forests, are sampled at different intensities. One record in the POP_ESTN_UNIT table corresponds to a single estimation unit. POP_ESTN_UNIT.CN = POP_STRATUM.ESTN_UNIT_CN links the unique stratified geographical area (ESTN_UNIT) to the strata (STRATUMCD) that are assigned to each ESTN_UNIT.",
+      "msft:item_name": "pop_estn_unit"
+    },
+    {
+      "name": "Population Evaluation Table",
+      "description": "Population evaluation table. This table provides information about evaluations. An evaluation is the combination of a set of plots (the sample) and a set of Phase 1 data (obtained through remote sensing, called a stratification) that can be used to produce population estimates for a State (an evaluation may be created to produce population estimates for a region other than a State, such as the Black Hills National Forest). A record in the POP_EVAL table identifies one evaluation and provides some descriptive information about how the evaluation may be used. \u2022POP_ESTN_UNIT.EVAL_CN = POP_EVAL.CN links the unique evaluation identifier (EVALID) in the POP_EVAL table to the unique geographical areas (ESTN_UNIT) that are stratified. Within a population evaluation (EVALID) there can be multiple population estimation units, or geographic areas across which there are a number of values being estimated (e.g., estimation of volume across counties for a given State).",
+      "msft:item_name": "pop_eval"
+    },
+    {
+      "name": "Population Evaluation Attribute Table",
+      "description": "Population evaluation attribute table. This table provides information as to which population estimates can be provided by an evaluation. If an evaluation can produce only 22 of all the population estimates in the REF_POP_ATTRIBUTE table, there will be 22 records in the POP_EVAL_ATTRIBUTE table (one per population estimate) for that evaluation. \u2022POP_EVAL.CN = POP_EVAL_ATTRIBUTE.EVAL_CN links the unique evaluation identifier to the list of population estimates that can be derived for that evaluation.",
+      "msft:item_name": "pop_eval_attribute"
+    },
+    {
+      "name": "Population Evaluation Group Table",
+      "description": "Population evaluation group table. This table lists and describes the evaluation groups. One record in the POP_EVAL_GRP table can be linked to all the evaluations that were used in generating estimates for a State inventory report. \u2022POP_EVAL_GRP.CN = POP_EVAL_TYP.EVAL_GRP_CN links the evaluation group record to the evaluation type record.",
+      "msft:item_name": "pop_eval_grp"
+    },
+    {
+      "name": "Population Evaluation Type Table",
+      "description": "Population evaluation type table. This table provides information on the type of evaluations that were used to generate a set of tables for an inventory report. In a typical State inventory report, one evaluation is used to generate an estimate of the total land area; a second evaluation is used to generate current estimates of volume, numbers of trees and biomass; and a third evaluation is used for estimating growth, removals and mortality. \u2022POP_EVAL_TYP.EVAL_CN = POP_EVAL.CN links the evaluation type record to the evaluation record. \u2022POP_EVAL_TYP.EVAL_GRP_CN = POP_EVAL_GRP.CN links the evaluation type record to the evaluation group record. \u2022POP_EVAL_TYP.EVAL_TYP = REF_POP_EVAL_TYP_DESCR.EVAL_TYP links an evaluation type record to an evaluation type description reference record.",
+      "msft:item_name": "pop_eval_typ"
+    },
+    {
+      "name": "pop_plot_stratum_assgn",
+      "description": null,
+      "msft:item_name": "pop_plot_stratum_assgn"
+    },
+    {
+      "name": "Population Stratum Table",
+      "description": "Population stratum table. This table provides information about individual strata. The area within an estimation unit is divided into strata. The area for each stratum can be calculated by determining the proportion of Phase 1 pixels/plots in each stratum and multiplying that proportion by the total area in the estimation unit. Information for a single stratum is stored in a single record of the POP_STRATUM table. \u2022POP_STRATUM.CN = POP_PLOT_STRATUM_ASSGN.STRATUM_CN links the defined stratum to each plot.",
+      "msft:item_name": "pop_stratum"
+    },
+    {
+      "name": "Plot Geometry Table",
+      "description": "Plot geometry table. This table contains geometric attributes associated with the plot location, such as the hydrological unit and roadless codes. \u2022PLOTGEOM.CN = PLOT.CN links the unique plot record between the two tables.",
+      "msft:item_name": "plotgeom"
+    },
+    {
+      "name": "Plot Snapshot Table",
+      "description": "Plot snapshot table. This table combines the information in the PLOT table with information in the PLOT_EVAL_GRP and POP_STRATUM tables to provide a snapshot of the plot records with their associated expansion and adjustment factors. \u2022PLOTSNAP.CN = PLOT.CN links the unique plot record between the two tables.",
+      "msft:item_name": "plotsnap"
+    }
+  ],
+  "msft:short_description": "Status and trends on U.S. forest location, health, growth, mortality, and production, from the US Forest Service's Forest Inventory and Analysis (FIA) program.",
+  "msft:container": "cpdata",
+  "msft:storage_account": "cpdataeuwest",
+  "title": "Forest Inventory and Analysis",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -124.784,
+          24.744,
+          -66.951,
+          49.346
+        ],
+        [
+          -179.14734,
+          51.219862,
+          179.77847,
+          71.352561
+        ],
+        [
+          -178.342102,
+          18.917466,
+          -154.809379,
+          28.407391
+        ],
+        [
+          -171.09,
+          -14.53,
+          -168.16,
+          -11.05
+        ],
+        [
+          138.06,
+          0.92,
+          163.05,
+          9.78
+        ],
+        [
+          144.62,
+          13.24,
+          144.95,
+          13.65
+        ],
+        [
+          165.28,
+          4.57,
+          172.03,
+          14.61
+        ],
+        [
+          144.9,
+          14.11,
+          145.87,
+          20.56
+        ],
+        [
+          131.13,
+          2.95,
+          134.73,
+          8.1
+        ],
+        [
+          -67.94,
+          17.92,
+          -65.24,
+          18.52
+        ],
+        [
+          -65.04,
+          17.68,
+          -64.56,
+          18.39
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2021-08-01T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "forest"
+  ],
+  "providers": [
+    {
+      "name": "Forest Inventory & Analysis",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://www.fia.fs.fed.us/"
+    },
+    {
+      "name": "CarbonPlan",
+      "roles": [
+        "processor"
+      ],
+      "url": "https://carbonplan.org/"
+    },
+    {
+      "name": "Microsoft",
+      "roles": [
+        "host"
+      ],
+      "url": "https://planetarycomputer.microsoft.com"
+    }
+  ],
+  "assets": {
+    "thumbnail": {
+      "href": "https://camo.githubusercontent.com/40dc57a0d4f7a365af940e1ce43b419dc12b173eea645907c28e2a2a50267324/68747470733a2f2f6c6162732e676269662e6f72672f7e6d626c6973736574742f323031392f31302f616e616c79746963732d6d6170732f776f726c642d323032312d30312d30312e706e67",
+      "type": "image/png",
+      "title": "Forest Inventory and Analysis"
+    }
+  }
+}
