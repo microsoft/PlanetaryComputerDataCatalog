@@ -1,0 +1,172 @@
+{
+    "id": "naip",
+    "description": "The [National Agricultural Imagery Program](https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/) (NAIP) provides US-wide, high-resolution aerial imagery, with four spectral bands (R, G, B, IR).  NAIP is administered by the [Aerial Field Photography Office](https://www.fsa.usda.gov/programs-and-services/aerial-photography/) (AFPO) within the [US Department of Agriculture](https://www.usda.gov/) (USDA).  Data are captured at least once every three years for each state.  This dataset represents NAIP data from 2010-present, in [cloud-optimized GeoTIFF](https://www.cogeo.org/) format.",
+    "stac_version": "1.0.0-beta.2",
+    "links": [
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip",
+            "rel": "self",
+            "type": "application/json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/",
+            "rel": "parent",
+            "type": "application/json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/naip/items",
+            "rel": "item",
+            "type": "application/geo+json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/",
+            "rel": "root",
+            "type": "application/json"
+        },
+        {
+            "href": "https://www.fsa.usda.gov/help/policies-and-links/",
+            "rel": "license",
+            "title": "public domain"
+        }
+    ],
+    "stac_extensions": [
+        "item-assets",
+        "collection-assets"
+    ],
+    "title": "NAIP: National Agriculture Imagery Program",
+    "license": "proprietary",
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -124.784,
+                    24.744,
+                    -66.951,
+                    49.346
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2010-01-01T00:00:00Z",
+                    "2019-12-31T00:00:00Z"
+                ]
+            ]
+        }
+    },
+    "keywords": [
+        "naip",
+        "aerial",
+        "imagery",
+        "usda",
+        "afpo",
+        "agriculture",
+        "united states"
+    ],
+    "providers": [
+        {
+            "name": "USDA Farm Service Agency",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/"
+        },
+        {
+            "name": "Esri",
+            "roles": [
+                "processor"
+            ],
+            "url": "https://www.esri.com/"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "summaries": {
+        "gsd": [
+            0.6,
+            1
+        ],
+        "eo:bands": [
+            {
+                "name": "red",
+                "common_name": "red",
+                "description": "visible red"
+            },
+            {
+                "name": "green",
+                "common_name": "green",
+                "description": "visible green"
+            },
+            {
+                "name": "blue",
+                "common_name": "blue",
+                "description": "visible blue"
+            },
+            {
+                "name": "nir",
+                "common_name": "nir",
+                "description": "near-infrared"
+            }
+        ]
+    },
+    "msft:storage_account": "naipeuwest",
+    "msft:short_description": "NAIP provides US-wide, high-resolution aerial imagery.  This dataset includes NAIP images from 2010 to the present.",
+    "msft:container": "naip",
+    "item_assets": {
+        "image": {
+            "title": "RGBIR COG tile",
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "roles": [
+                "data"
+            ],
+            "eo:bands": [
+                {
+                    "name": "Red",
+                    "common_name": "red"
+                },
+                {
+                    "name": "Green",
+                    "common_name": "green"
+                },
+                {
+                    "name": "Blue",
+                    "common_name": "blue"
+                },
+                {
+                    "name": "NIR",
+                    "common_name": "nir",
+                    "description": "near-infrared"
+                }
+            ]
+        },
+        "metadata": {
+            "title": "FGDC Metdata",
+            "type": "text/plain",
+            "roles": [
+                "metadata"
+            ]
+        },
+        "thumbnail": {
+            "title": "Thumbnail",
+            "type": "image/jpeg",
+            "roles": [
+                "thumbnail"
+            ]
+        }
+    },
+    "assets": {
+        "thumbnail": {
+            "title": "Landsat 8 C2",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/naip.png",
+            "media_type": "image/png"
+        }
+    }
+}

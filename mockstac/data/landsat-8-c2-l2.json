@@ -1,0 +1,467 @@
+{
+    "id": "landsat-8-c2-l2",
+    "description": "The [Landsat](https://landsat.gsfc.nasa.gov/) program has been imaging the Earth since 1972; it provides a comprehensive, continuous archive of the Earth's surface.  [Landsat 8](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-8) is the most recent satellite in the Landsat series.  Launched in 2013, Landsat 8 captures data in eleven spectral bands: ten optical/IR bands from the [Operational Land Imager](https://landsat.gsfc.nasa.gov/landsat-8/operational-land-imager) (OLI) instrument, and two thermal bands from the [Thermal Infrared Sensor](https://landsat.gsfc.nasa.gov/landsat-8/thermal-infrared-sensor-tirs) (TIRS) instrument.\n\nThis dataset represents the global archive of Level-2 Landsat 8 data from [Landsat Collection 2](https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2).  Because there is some latency before Level-2 data is available, a rolling window of recent Level-1 data is available as well.  Images are stored in [cloud-optimized GeoTIFF](https://www.cogeo.org/) format.\n",
+    "stac_version": "1.0.0-beta.2",
+    "links": [
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-8-c2-l2",
+            "rel": "self",
+            "type": "application/json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/",
+            "rel": "parent",
+            "type": "application/json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/landsat-8-c2-l2/items",
+            "rel": "item",
+            "type": "application/geo+json"
+        },
+        {
+            "href": "https://planetarycomputer.microsoft.com/api/stac/v1/",
+            "rel": "root",
+            "type": "application/json"
+        },
+        {
+            "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+            "rel": "license",
+            "title": "public domain"
+        }
+    ],
+    "stac_extensions": [
+        "item-assets",
+        "collection-assets"
+    ],
+    "title": "Landsat 8 Collection 2 Level-2",
+    "license": "proprietary",
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2013-04-11T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "keywords": [
+        "landsat",
+        "usgs",
+        "nasa",
+        "satellite",
+        "global",
+        "reflectance"
+    ],
+    "providers": [
+        {
+            "name": "NASA",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://landsat.gsfc.nasa.gov/"
+        },
+        {
+            "name": "USGS",
+            "roles": [
+                "producer",
+                "processor",
+                "licensor"
+            ],
+            "url": "https://www.usgs.gov/core-science-systems/nli/landsat/landsat-collection-2-level-2-science-products"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "summaries": {
+        "gsd": [
+            15,
+            30,
+            100
+        ],
+        "eo:bands": [
+            {
+                "gsd": 30,
+                "name": "SR_B1",
+                "common_name": "coastal",
+                "description": "coastal",
+                "center_wavelength": 0.44,
+                "full_width_half_max": 0.02
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B2",
+                "common_name": "blue",
+                "description": "visible blue",
+                "center_wavelength": 0.48,
+                "full_width_half_max": 0.06
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B3",
+                "common_name": "green",
+                "description": "visible green",
+                "center_wavelength": 0.56,
+                "full_width_half_max": 0.06
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B4",
+                "common_name": "red",
+                "description": "visible red",
+                "center_wavelength": 0.65,
+                "full_width_half_max": 0.04
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B5",
+                "common_name": "nir",
+                "description": "near-infrared",
+                "center_wavelength": 0.86,
+                "full_width_half_max": 0.03
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B6",
+                "common_name": "swir16",
+                "description": "short-wave infrared",
+                "center_wavelength": 1.6,
+                "full_width_half_max": 0.08
+            },
+            {
+                "gsd": 30,
+                "name": "SR_B7",
+                "common_name": "swir22",
+                "description": "short-wave infrared",
+                "center_wavelength": 2.2,
+                "full_width_half_max": 0.2
+            },
+            {
+                "gsd": 100,
+                "name": "ST_B10",
+                "common_name": "lwir11",
+                "description": "long-wave infrared",
+                "center_wavelength": 10.9,
+                "full_width_half_max": 0.8
+            },
+            {
+                "gsd": 30,
+                "name": "ST_TRAD",
+                "description": "thermal radiance"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_URAD",
+                "description": "upwelled radiance"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_ATRAN",
+                "description": "atmospheric transmission"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_CDIST",
+                "description": "distance to nearest cloud"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_DRAD",
+                "description": "downwelled radiance"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_EMIS",
+                "description": "emissivity"
+            },
+            {
+                "gsd": 30,
+                "name": "ST_EMSD",
+                "description": "emissivity standard deviation"
+            }
+        ],
+        "platform": [
+            "landsat-8"
+        ],
+        "instruments": [
+            "oli",
+            "tirs"
+        ]
+    },
+    "msft:storage_account": "landsateuwest",
+    "msft:short_description": "Landsat 8 has captured 30m-resolution imagery of the Earth since 2013.  This dataset contains global, atmospherically-corrected imagery from Landsat Collection 2",
+    "msft:container": "landsat-c2",
+    "item_assets": {
+        "ANG": {
+            "title": "Angle Coefficients File",
+            "description": "Collection 2 Level-1 Angle Coefficients File (ANG)",
+            "type": "text/plain"
+        },
+        "SR_B1": {
+            "title": "Coastal/Aerosol Band (B1)",
+            "description": "Collection 2 Level-2 Coastal/Aerosol Band (B1) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B1",
+                    "common_name": "coastal",
+                    "center_wavelength": 0.44,
+                    "full_width_half_max": 0.02
+                }
+            ]
+        },
+        "SR_B2": {
+            "title": "Blue Band (B2)",
+            "description": "Collection 2 Level-2 Blue Band (B2) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B2",
+                    "common_name": "blue",
+                    "center_wavelength": 0.48,
+                    "full_width_half_max": 0.06
+                }
+            ]
+        },
+        "SR_B3": {
+            "title": "Green Band (B3)",
+            "description": "Collection 2 Level-2 Green Band (B3) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B3",
+                    "common_name": "green",
+                    "center_wavelength": 0.56,
+                    "full_width_half_max": 0.06
+                }
+            ]
+        },
+        "SR_B4": {
+            "title": "Red Band (B4)",
+            "description": "Collection 2 Level-2 Red Band (B4) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B4",
+                    "common_name": "red",
+                    "center_wavelength": 0.65,
+                    "full_width_half_max": 0.04
+                }
+            ]
+        },
+        "SR_B5": {
+            "title": "Near Infrared Band 0.8 (B5)",
+            "description": "Collection 2 Level-2 Near Infrared Band 0.8 (B5) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B5",
+                    "common_name": "nir08",
+                    "center_wavelength": 0.86,
+                    "full_width_half_max": 0.03
+                }
+            ]
+        },
+        "SR_B6": {
+            "title": "Short-wave Infrared Band 1.6 (B6)",
+            "description": "Collection 2 Level-2 Short-wave Infrared Band 1.6 (B6) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B6",
+                    "common_name": "swir16",
+                    "center_wavelength": 1.6,
+                    "full_width_half_max": 0.08
+                }
+            ]
+        },
+        "SR_B7": {
+            "title": "Short-wave Infrared Band 2.2 (B7)",
+            "description": "Collection 2 Level-2 Short-wave Infrared Band 2.2 (B7) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "SR_B7",
+                    "common_name": "swir22",
+                    "center_wavelength": 2.2,
+                    "full_width_half_max": 0.2
+                }
+            ]
+        },
+        "SR_B8": {
+            "title": "Aerosol Quality Analysis Band",
+            "description": "Collection 2 Level-2 Aerosol Quality Analysis Band (ANG) Surface Reflectance",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+        },
+        "ST_QA": {
+            "title": "Surface Temperature Quality Assessment Band",
+            "description": "Landsat Collection 2 Level-2 Surface Temperature Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+        },
+        "ST_B10": {
+            "title": "Surface Temperature Band (B10)",
+            "description": "Landsat Collection 2 Level-2 Surface Temperature Band (B10) Surface Temperature Product",
+            "gsd": 100,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_B10",
+                    "common_name": "lwir11",
+                    "center_wavelength": 10.9,
+                    "full_width_half_max": 0.8
+                }
+            ]
+        },
+        "MTL.txt": {
+            "title": "Product Metadata File",
+            "description": "Collection 2 Level-1 Product Metadata File (MTL)",
+            "type": "text/plain"
+        },
+        "MTL.xml": {
+            "title": "Product Metadata File (xml)",
+            "description": "Collection 2 Level-1 Product Metadata File (xml)",
+            "type": "application/xml"
+        },
+        "ST_DRAD": {
+            "title": "Downwelled Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Downwelled Radiance Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_DRAD",
+                    "description": "downwelled radiance"
+                }
+            ]
+        },
+        "ST_EMIS": {
+            "title": "Emissivity Band",
+            "description": "Landsat Collection 2 Level-2 Emissivity Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_EMIS",
+                    "description": "emissivity"
+                }
+            ]
+        },
+        "ST_EMSD": {
+            "title": "Emissivity Standard Deviation Band",
+            "description": "Landsat Collection 2 Level-2 Emissivity Standard Deviation Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_EMSD",
+                    "description": "emissivity standard deviation"
+                }
+            ]
+        },
+        "ST_TRAD": {
+            "title": "Thermal Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Thermal Radiance Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_TRAD",
+                    "description": "thermal radiance"
+                }
+            ]
+        },
+        "ST_URAD": {
+            "title": "Upwelled Radiance Band",
+            "description": "Landsat Collection 2 Level-2 Upwelled Radiance Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_URAD",
+                    "description": "upwelled radiance"
+                }
+            ]
+        },
+        "MTL.json": {
+            "title": "Product Metadata File (json)",
+            "description": "Collection 2 Level-1 Product Metadata File (json)",
+            "type": "application/json"
+        },
+        "QA_PIXEL": {
+            "title": "Pixel Quality Assessment Band",
+            "description": "Collection 2 Level-1 Pixel Quality Assessment Band",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+        },
+        "ST_ATRAN": {
+            "title": "Atmospheric Transmittance Band",
+            "description": "Landsat Collection 2 Level-2 Atmospheric Transmittance Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_ATRAN",
+                    "description": "atmospheric transmission"
+                }
+            ]
+        },
+        "ST_CDIST": {
+            "title": "Cloud Distance Band",
+            "description": "Landsat Collection 2 Level-2 Cloud Distance Band Surface Temperature Product",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "eo:bands": [
+                {
+                    "name": "ST_CDIST",
+                    "description": "distance to nearest cloud"
+                }
+            ]
+        },
+        "QA_RADSAT": {
+            "title": "Radiometric Saturation Quality Assessment Band",
+            "description": "Collection 2 Level-1 Radiometric Saturation Quality Assessment Band",
+            "gsd": 30,
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+        },
+        "thumbnail": {
+            "title": "Thumbnail image",
+            "type": "image/jpeg"
+        },
+        "reduced_resolution_browse": {
+            "title": "Reduced resolution browse image",
+            "type": "image/jpeg"
+        }
+    },
+    "assets": {
+        "thumbnail": {
+            "title": "Landsat 8 C2",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png",
+            "media_type": "image/png"
+        }
+    }
+}
