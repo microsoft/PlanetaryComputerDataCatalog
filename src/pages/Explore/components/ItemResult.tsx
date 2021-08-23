@@ -1,5 +1,6 @@
-import { IStyle, Link, Stack, useTheme } from "@fluentui/react";
+import { IStyle, Link, Stack, Text, useTheme } from "@fluentui/react";
 import dayjs from "dayjs";
+import { useCallback } from "react";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 import ItemPreview from "./ItemPreview";
@@ -26,6 +27,11 @@ const ItemResult = ({ item }: ItemResultProps) => {
     textDecoration: "none",
   };
 
+  const activeStyle: IStyle = {
+    textDecoration: "none",
+    color: theme.palette.black,
+  };
+
   const rootStyle: IStyle = {
     borderWidth: 1,
     borderColor: theme.palette.neutralQuaternary,
@@ -36,27 +42,50 @@ const ItemResult = ({ item }: ItemResultProps) => {
     padding: 0,
     width: "99%",
     ":hover": hoverStyle,
-    ":focus": hoverStyle,
-    ":active": hoverStyle,
+    ":focus": activeStyle,
+    ":active": activeStyle,
   };
+
+  const showBounds = useCallback(() => {
+    dispatch(setBoundaryShape(item.geometry));
+  }, [dispatch, item.geometry]);
+
+  const removeBounds = useCallback(() => {
+    dispatch(clearBoundaryShape());
+  }, [dispatch]);
 
   return (
     <Link
       onClick={() => dispatch(setSelectedItem(item))}
       styles={{ root: rootStyle }}
-      onMouseEnter={() => dispatch(setBoundaryShape(item.geometry))}
-      onMouseLeave={() => dispatch(clearBoundaryShape())}
+      onMouseEnter={showBounds}
+      onMouseLeave={removeBounds}
+      // onFocus={showBounds}
+      // onBlur={removeBounds}
     >
       <Stack
         horizontal
         tokens={{ childrenGap: 10 }}
         styles={{ root: { padding: 0 } }}
       >
-        <div style={{ maxWidth: 100 }}>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            background: theme.palette.neutralLighterAlt,
+            borderRight: theme.palette.neutralLighter,
+            borderRightWidth: 1,
+            borderRightStyle: "solid",
+          }}
+        >
           <ItemPreview item={item} key={item.id} />
         </div>
         <Stack>
-          <div style={{ fontWeight: "bolder" }}>{item.id}</div>
+          <Text
+            styles={{ root: { fontWeight: "bolder", overflowWrap: "anywhere" } }}
+          >
+            {item.id}
+          </Text>
           <Stack tokens={{ childrenGap: 5 }}>
             {dt && (
               <span title="Acquisition date">{dayjs(dt).format("MM/DD/YYYY")}</span>

@@ -17,6 +17,7 @@ const ExploreMap = () => {
   const {
     map: { center, zoom, boundaryShape },
     mosaic,
+    detail: { selectedItem },
   } = useExploreSelector(s => s);
 
   const mapRef = useRef<atlas.Map | null>(null);
@@ -24,7 +25,7 @@ const ExploreMap = () => {
   const { data } = useTileJson(mosaic.collection?.id, mosaic.query.hash);
   const layerMinZoom = data?.minzoom;
 
-  useShowBoundary(boundaryShape);
+  useShowBoundary(boundaryShape ?? selectedItem?.geometry);
   useMosaicLayer(mapRef, mosaic);
 
   // Set the minzoom for the current layer

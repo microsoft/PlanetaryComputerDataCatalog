@@ -6,7 +6,9 @@ import { MosaicState } from "../state/mosaicSlice";
 import { stacItemDatasource } from "../viewerLayers";
 
 // Show highlighted stac item result footprint on the map
-export const useShowBoundary = (boundaryShape: GeoJsonObject | null) => {
+export const useShowBoundary = (
+  boundaryShape: GeoJsonObject | null | undefined = null
+) => {
   useEffect(() => {
     if (boundaryShape === null) {
       stacItemDatasource.clear();

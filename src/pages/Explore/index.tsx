@@ -24,7 +24,7 @@ const Viewer = () => {
       <Provider store={store}>
         <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
-          <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
+          <StackItem disableShrink styles={{ root: { margin: 5, width: 500 } }}>
             <Stack styles={{ root: { height: "100%" } }} tokens={stackTokens}>
               <p>
                 Explore Planetary Computer datasets. Explains filters and results.
@@ -35,7 +35,7 @@ const Viewer = () => {
               <TemporarySearch />
             </Stack>
           </StackItem>
-          <StackItem grow={2}>
+          <StackItem grow={1}>
             <ExploreMap />
           </StackItem>
         </Stack>

@@ -16,9 +16,12 @@ export const detailSlice = createSlice({
     setSelectedItem: (state, action: PayloadAction<IStacItem | null>) => {
       state.selectedItem = action.payload;
     },
+    clearSelectedItem: state => {
+      state.selectedItem = null;
+    },
   },
 });
 
-export const { setSelectedItem } = detailSlice.actions;
+export const { setSelectedItem, clearSelectedItem } = detailSlice.actions;
 
 export default detailSlice.reducer;

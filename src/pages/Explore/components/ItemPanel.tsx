@@ -4,9 +4,11 @@ import { useBoolean } from "@fluentui/react-hooks";
 
 import SimpleKeyValueList from "components/controls/SimpleKeyValueList";
 import ItemPreview from "./ItemPreview";
-import { useExploreSelector } from "./state/hooks";
+import { useExploreDispatch, useExploreSelector } from "./state/hooks";
+import { clearSelectedItem, setSelectedItem } from "./state/detailSlice";
 
 const ItemPanel = () => {
+  const dispatch = useExploreDispatch();
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const selectedItem = useExploreSelector(s => s.detail.selectedItem);
 
@@ -41,6 +43,7 @@ const ItemPanel = () => {
       type={PanelType.customNear}
       customWidth={"33%"}
       closeButtonAriaLabel="Close Item Detail Panel"
+      onDismissed={() => dispatch(clearSelectedItem())}
     >
       {content}
     </Panel>

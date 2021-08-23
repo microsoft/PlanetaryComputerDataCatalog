@@ -16,7 +16,7 @@ const TemporarySearch = () => {
         collections: [collection?.id ?? ""],
         datetime: "",
         bbox: map.bounds,
-        limit: 35,
+        limit: 50,
       } as IStacSearch)
     : undefined;
 
