@@ -75,6 +75,14 @@ export const cubeColumOrders = [
   "attrs",
 ];
 
+export const tableColumnOrders = [
+  "name",
+  "description",
+  "type",
+];
+
+
+
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;
   const url = new URL(href);

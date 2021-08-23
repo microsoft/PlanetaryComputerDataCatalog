@@ -20,6 +20,7 @@ import MetadataHtmlContent from "../components/MetadataHtmlContent";
 import Providers from "../components/stac/Providers";
 import SEO from "../components/Seo";
 import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
+import { TableTables, TableColumns } from "../components/stac/Table";
 import { CollectionProvider } from "../components/stac/CollectionContext";
 import { viewerPivot } from "components/stac/viewerPivot";
 
@@ -109,6 +110,8 @@ const Collection = () => {
         <ItemAssets />
         <CubeDimensions />
         <CubeVariables />
+        <TableTables />
+        <TableColumns />
         <Assets />
       </CollectionProvider>
     </PivotItem>
