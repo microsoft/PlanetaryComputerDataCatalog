@@ -17,8 +17,8 @@ const IconValue = ({ iconName, title, value, iconSize = 20 }: IconValueProps) =>
 
   return (
     <Stack horizontal tokens={{ childrenGap: 8 }}>
-      <FontIcon aria-label={title} iconName={iconName} className={iconClass} />
       <span>{value} </span>
+      <FontIcon aria-label={title} iconName={iconName} className={iconClass} />
     </Stack>
   );
 };

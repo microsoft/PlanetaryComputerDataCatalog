@@ -29,7 +29,10 @@ StacFields.Registry.addMetadataField("attrs", {
 
 StacFields.Registry.addMetadataField("label:classes", {
   label: "Classes",
-  formatter: value => value.classes.join(", "),
+  formatter: value => {
+    const v = Array.isArray(value) ? value[0] : value;
+    return v.classes.join(", ");
+  },
 });
 
 export const mediaTypeOverride = value => {
@@ -75,13 +78,7 @@ export const cubeColumOrders = [
   "attrs",
 ];
 
-export const tableColumnOrders = [
-  "name",
-  "description",
-  "type",
-];
-
-
+export const tableColumnOrders = ["name", "description", "type"];
 
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;

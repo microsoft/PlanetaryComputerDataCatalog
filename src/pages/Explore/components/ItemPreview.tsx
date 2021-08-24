@@ -17,15 +17,14 @@ const assetThumbCheck = (roleKey: string) => {
   };
 };
 
-const isThumbnailAsset = assetThumbCheck("thumbnail");
 const isRenderedPreviewAsset = assetThumbCheck("overview");
 
 const ItemPreview = ({ item, size = 100 }: ItemPreviewProps) => {
   const theme = useTheme();
   // Get a thumbnail asset, either a absolute url to an image or a preview
   // endpoint that will generate one on the fly
-  const thumbAsset = Object.values(item.assets).find(
-    asset => isRenderedPreviewAsset(asset) || isThumbnailAsset(asset)
+  const thumbAsset = Object.values(item.assets).find(asset =>
+    isRenderedPreviewAsset(asset)
   );
 
   if (!thumbAsset) return null;
