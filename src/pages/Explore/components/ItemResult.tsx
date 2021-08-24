@@ -72,7 +72,6 @@ const ItemResult = ({ item }: ItemResultProps) => {
           style={{
             width: 100,
             height: 100,
-            background: theme.palette.neutralLighterAlt,
             borderRight: theme.palette.neutralLighter,
             borderRightWidth: 1,
             borderRightStyle: "solid",

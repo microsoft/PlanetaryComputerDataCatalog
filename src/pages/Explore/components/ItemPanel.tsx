@@ -1,35 +1,89 @@
 import { useEffect } from "react";
-import { Panel, PanelType, Separator } from "@fluentui/react";
+import {
+  Panel,
+  PanelType,
+  Pivot,
+  PivotItem,
+  Separator,
+  Text,
+  useTheme,
+} from "@fluentui/react";
 import { useBoolean } from "@fluentui/react-hooks";
 
-import SimpleKeyValueList from "components/controls/SimpleKeyValueList";
 import ItemPreview from "./ItemPreview";
 import { useExploreDispatch, useExploreSelector } from "./state/hooks";
 import { clearSelectedItem } from "./state/detailSlice";
+import { stacFormatter } from "utils/stac";
 
 const ItemPanel = () => {
   const dispatch = useExploreDispatch();
+  const theme = useTheme();
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
-  const selectedItem = useExploreSelector(s => s.detail.selectedItem);
+  const item = useExploreSelector(s => s.detail.selectedItem);
+  const collectionName = useExploreSelector(s => s.mosaic.collection?.title);
 
   useEffect(() => {
-    if (selectedItem) {
+    if (item) {
       openPanel();
     }
-  }, [selectedItem, openPanel]);
+  }, [item, openPanel]);
 
-  const content = selectedItem ? (
+  const content = item ? (
     <>
-      <h3>{selectedItem.id}</h3>
+      <ItemPreview item={item} size={500} />
+      <Text
+        variant={"large"}
+        styles={{ root: { fontWeight: 600, overflowWrap: "anywhere" } }}
+        block
+      >
+        {item.id}
+      </Text>
+      <Text variant={"mediumPlus"} styles={{ root: { fontWeight: 400 } }} block>
+        {collectionName}
+      </Text>
       <Separator />
-      <SimpleKeyValueList object={selectedItem} />
-      <Separator />
-      <div style={{ maxWidth: 300 }}>
-        <ItemPreview item={selectedItem} />
-      </div>
-
-      <Separator />
-      <SimpleKeyValueList object={selectedItem.properties} />
+      <Pivot styles={{ link: { width: "50%" } }}>
+        <PivotItem headerText="Metadata">
+          {item.properties &&
+            Object.entries(item.properties).map(([key, val]) => {
+              return (
+                <div
+                  key={key}
+                  style={{
+                    padding: "4px 0",
+                    borderTop: "1px solid",
+                    borderTopColor: theme.palette.neutralLight,
+                  }}
+                >
+                  <Text block styles={{ root: { fontWeight: 500 } }}>
+                    {stacFormatter.label(key)}
+                  </Text>
+                  <Text>{stacFormatter.format(val, key, item)}</Text>
+                </div>
+              );
+            })}
+        </PivotItem>
+        <PivotItem headerText="Assets">
+          {item.assets &&
+            Object.entries(item.assets).map(([key, asset]) => {
+              return (
+                <div
+                  key={key}
+                  style={{
+                    padding: "4px 0",
+                    borderTop: "1px solid",
+                    borderTopColor: theme.palette.neutralLight,
+                  }}
+                >
+                  <Text block styles={{ root: { fontWeight: 500 } }}>
+                    {asset.title}
+                  </Text>
+                  <Text>{asset.description}</Text>
+                </div>
+              );
+            })}
+        </PivotItem>
+      </Pivot>
     </>
   ) : (
     <p>No items selected</p>
@@ -38,10 +92,10 @@ const ItemPanel = () => {
   return (
     <Panel
       isBlocking={false}
-      isOpen={isOpen && !!selectedItem}
+      isOpen={isOpen && !!item}
       onDismiss={dismissPanel}
       type={PanelType.customNear}
-      customWidth={"33%"}
+      customWidth={"520px"}
       closeButtonAriaLabel="Close Item Detail Panel"
       onDismissed={() => dispatch(clearSelectedItem())}
     >
