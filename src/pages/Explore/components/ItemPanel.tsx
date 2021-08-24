@@ -5,7 +5,7 @@ import { useBoolean } from "@fluentui/react-hooks";
 import SimpleKeyValueList from "components/controls/SimpleKeyValueList";
 import ItemPreview from "./ItemPreview";
 import { useExploreDispatch, useExploreSelector } from "./state/hooks";
-import { clearSelectedItem, setSelectedItem } from "./state/detailSlice";
+import { clearSelectedItem } from "./state/detailSlice";
 
 const ItemPanel = () => {
   const dispatch = useExploreDispatch();
