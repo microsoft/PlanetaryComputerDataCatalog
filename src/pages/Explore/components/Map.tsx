@@ -7,7 +7,7 @@ import { useExploreDispatch, useExploreSelector } from "./state/hooks";
 import { setCamera, setZoom } from "./state/mapSlice";
 import { useTileJson } from "utils/requests";
 import { setLayerMinZoom } from "./state/mosaicSlice";
-import { useMosaicLayer, useShowBoundary } from "./hooks/map";
+import { useMosaicLayer, useShowBoundary } from "./utils/hooks";
 import ZoomMessage from "./ZoomMessage";
 
 const mapContainerId: string = "viewer-map";
@@ -15,7 +15,7 @@ const mapContainerId: string = "viewer-map";
 const ExploreMap = () => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom, boundaryShape },
+    map: { center, zoom, boundaryShape, showSidebar },
     mosaic,
     detail: { selectedItem },
   } = useExploreSelector(s => s);
@@ -44,6 +44,14 @@ const ExploreMap = () => {
         duration: 750,
       });
   }, [zoom]);
+
+  useEffect(() => {
+    // if (showSidebar) return;
+
+    setTimeout(() => {
+      mapRef.current?.resize();
+    }, 350);
+  }, [showSidebar]);
 
   // Setup tile layers and map controls
   useEffect(() => {
