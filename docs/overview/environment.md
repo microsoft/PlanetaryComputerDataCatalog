@@ -65,3 +65,17 @@ If you're using Dask for scalable computing, you should ensure that modification
 ```
 
 Note that this will slow down worker startup, since the packages will need to be found and downloaded before the worker can start executing tasks.
+
+## Cluster Limits
+
+There are a few restrictions on the size of the Dask Clusters you can create.
+
+1. The maximum number of **cores per worker** is 8, and the maximum amount of **memory per worker** is 64 GiB. This ensures that the worker pods fit in the [Standard_E8_v3 Virtual Machines][vms] used for workers.
+2. The maximum number of **cores per cluster** is 400
+3. The maximum amount of **memory per cluster** is 3200 GiB
+4. The maximum number of **workers per cluster** is 400
+
+With the default settings of 1 core and 8 GiB per worker, this means a limit of 400 workers on 50 physical nodes (each with 8 cores and 64 GiB of memory). If this limit is too low for your use-case, [send us an email][email].
+
+[vms]: https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series
+[email]: mailto:planetarycomputer@microsoft.com
