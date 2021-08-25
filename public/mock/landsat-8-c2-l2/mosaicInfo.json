@@ -1,0 +1,68 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (low cloud)",
+      "description": "",
+      "cql": "eo:cloud_cover < 20 order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B05), Red (B04), Green (B03)",
+          "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
+    },
+    {
+      "name": "Spring 2021 (low cloud)",
+      "cql": "datetime between '03-01-2021' and '06-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderOptions": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B05), Red (B04), Green (B03)",
+          "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
+    },
+    {
+      "name": "Winter 2021 (low cloud)",
+      "cql": "datetime between '12-01-2020' and '03-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
+      "renderOptions": [
+        {
+          "name": "True Color",
+          "description": "RGB from visual asset",
+          "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "False Color (infrared)",
+          "description": "NIR(B05), Red (B04), Green (B03)",
+          "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+        },
+        {
+          "name": "NDVI",
+          "description": "(NIR-Red)/(NIR+Red)",
+          "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=viridis"
+        }
+      ]
+    }
+  ]
+}

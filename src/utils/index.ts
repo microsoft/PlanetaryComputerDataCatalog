@@ -1,7 +1,8 @@
 import { IMosaicState } from "pages/Explore/components/state/mosaicSlice";
 import { IMosaicRenderOption } from "types";
-import { IStacCollection } from "types/stac";
+import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL } from "./constants";
+import * as qs from "query-string";
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -158,4 +159,28 @@ export const makeCollectionTileJsonUrl = (
   renderOption: IMosaicRenderOption
 ) => {
   return `${DATA_URL}/collection/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption.options}`;
+};
+
+export const makeItemPreviewUrl = (
+  item: IStacItem,
+  renderOption: IMosaicRenderOption,
+  size?: number
+) => {
+  const maxSize = size ? `&max_size=${size}` : "";
+  const url = encodeURI(`${DATA_URL}/item/preview.png`);
+
+  // URIEncode any parameters provided in the renderer options
+  const renderParams = qs.parse(renderOption.options, { decode: false });
+  if ("expression" in renderParams) {
+    renderParams["expression"] = encodeURIComponent(
+      renderParams["expression"] as string
+    );
+  }
+
+  const params = `?collection=${item.collection}&items=${item.id}&${qs.stringify(
+    renderParams,
+    { encode: false }
+  )}${maxSize}`;
+
+  return url + params;
 };

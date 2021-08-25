@@ -1,0 +1,21 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent",
+      "description": "Most recent DEM",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Elevation (terrain)",
+          "description": "10 class color map",
+          "options": "assets=data&rescale=0,255&colormap_name=terrain"
+        },
+        {
+          "name": "Elevation (viridis)",
+          "description": "10 class color map",
+          "options": "assets=data&rescale=0,255&colormap_name=viridis"
+        }
+      ]
+    }
+  ]
+}
