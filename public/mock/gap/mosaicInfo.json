@@ -8,7 +8,7 @@
         {
           "name": "Default",
           "description": "",
-          "options": "assets=data&colormap_name=io-lulc"
+          "options": "assets=data&colormap_name=gap-lulc"
         }
       ]
     }

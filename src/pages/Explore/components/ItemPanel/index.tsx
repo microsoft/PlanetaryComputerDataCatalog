@@ -23,7 +23,7 @@ const ItemPanel = () => {
 
   const content = item ? (
     <>
-      <ItemPreview item={item} size={500} />
+      <ItemPreview item={item} size={400} />
       <HeaderCard collectionName={collectionName} item={item} />
       <Pivot styles={{ link: { width: "50%" } }}>
         <PivotItem headerText="Metadata">

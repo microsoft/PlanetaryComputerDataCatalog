@@ -50,8 +50,6 @@ const ExploreMap = () => {
   }, [zoom]);
 
   useEffect(() => {
-    // if (showSidebar) return;
-
     setTimeout(() => {
       mapRef.current?.resize();
     }, 350);

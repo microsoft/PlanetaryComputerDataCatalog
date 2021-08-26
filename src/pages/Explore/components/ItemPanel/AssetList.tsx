@@ -1,31 +1,32 @@
-import { FontWeights, PivotItem, Text, useTheme } from "@fluentui/react";
+import { PivotItem, Text } from "@fluentui/react";
 import { IStacItem } from "types/stac";
+import { mediaTypeOverride } from "utils/stac";
+import DetailListItem from "./DetailListItem";
 
 interface AssetListProps {
   item: IStacItem;
 }
 
 const AssetList = ({ item }: AssetListProps) => {
-  const theme = useTheme();
-
   return (
     <PivotItem headerText="Assets">
       {item.assets &&
         Object.entries(item.assets).map(([key, asset]) => {
           return (
-            <div
+            <DetailListItem
               key={key}
-              style={{
-                padding: "4px 0",
-                borderTop: "1px solid",
-                borderTopColor: theme.palette.neutralLight,
-              }}
-            >
-              <Text block styles={{ root: { fontWeight: FontWeights.semibold } }}>
-                {asset.title}
-              </Text>
-              <Text>{asset.description}</Text>
-            </div>
+              label={asset.title}
+              value={
+                <>
+                  <Text block>
+                    <code>{`${asset?.roles?.[0]}: ${mediaTypeOverride(
+                      asset.type
+                    )}`}</code>
+                  </Text>
+                  <Text>{asset.description}</Text>
+                </>
+              }
+            />
           );
         })}
     </PivotItem>

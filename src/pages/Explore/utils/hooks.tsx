@@ -29,6 +29,7 @@ export const useMosaicLayer = (
     const mosaicLayer = mapRef.current?.layers.getLayerById("stac-mosaic");
 
     if (collection && query.hash && renderOption) {
+      // TODO: checking for tilejson asset is a temporary measure until mosaics are dynamic.
       const tilejsonAsset = Object.values(collection.assets).find(asset =>
         asset.roles?.includes("tiles")
       );
