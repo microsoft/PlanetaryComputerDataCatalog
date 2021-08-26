@@ -13,7 +13,6 @@ const MetadataList = ({ item }: MetadataListProps) => {
         Object.entries(item.properties).map(([key, val]) => {
           return (
             <DetailListItem
-              key={key}
               label={stacFormatter.label(key)}
               value={stacFormatter.format(val, key, item)}
             />

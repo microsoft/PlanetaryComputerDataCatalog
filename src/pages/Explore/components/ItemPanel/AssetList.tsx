@@ -14,7 +14,6 @@ const AssetList = ({ item }: AssetListProps) => {
         Object.entries(item.assets).map(([key, asset]) => {
           return (
             <DetailListItem
-              key={key}
               label={asset.title}
               value={
                 <>
