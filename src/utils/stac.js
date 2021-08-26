@@ -6,6 +6,10 @@ import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 
+const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
+const fixedPct = value => value.toFixed(2) + "%";
+const fixedDeg = value => value.toFixed(3) + "°";
+
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
   formatter: value => (value ? `${value} m` : "-"),
@@ -33,6 +37,78 @@ StacFields.Registry.addMetadataField("label:classes", {
     const v = Array.isArray(value) ? value[0] : value;
     return v.classes.join(", ");
   },
+});
+
+StacFields.Registry.addMetadataField("eo:cloud_cover", {
+  label: "Cloud Cover",
+  formatter: fixedPct,
+});
+
+StacFields.Registry.addMetadataField("proj:epsg", {
+  label: "EPSG Code",
+  formatter: value => (
+    <NewTabLink href={`https://epsg.io/?q=${value}`}>{value}</NewTabLink>
+  ),
+});
+StacFields.Registry.addMetadataField("proj:transform", {
+  formatter: codeNumberList,
+});
+StacFields.Registry.addMetadataField("proj:bbox", {
+  label: "Bounding Box",
+  formatter: codeNumberList,
+});
+StacFields.Registry.addMetadataField("proj:shape", {
+  formatter: codeNumberList,
+});
+StacFields.Registry.addMetadataField("proj:wkt2", {
+  label: "WKT2",
+  formatter: value => <code>{value}</code>,
+});
+
+StacFields.Registry.addMetadataField("sat:relative_orbit", {
+  label: "Relative Orbit No.",
+});
+
+StacFields.Registry.addMetadataField("s2:mgrs_tile", {
+  label: "MGRS Tile",
+});
+
+StacFields.Registry.addMetadataField("view:off_nadir", {
+  label: "Off-Nadir Angle",
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("view:sun_azimuth", {
+  label: "Sun Azimuth",
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("view:sun_elevation", {
+  label: "Sun Elevation",
+  formatter: fixedDeg,
+});
+
+StacFields.Registry.addMetadataField("label:description", {
+  label: "Description",
+  formatter: value => value,
+});
+
+StacFields.Registry.addMetadataField("sci:doi", {
+  label: "DOI",
+  formatter: value => (
+    <NewTabLink href={`https://doi.org/${value}`}>{value}</NewTabLink>
+  ),
+});
+
+StacFields.Registry.addMetadataField("landsat:wrs_row", {
+  label: "WRS Row",
+});
+StacFields.Registry.addMetadataField("landsat:wrs_path", {
+  label: "WRS Path",
+});
+StacFields.Registry.addMetadataField("landsat:wrs_type", {
+  label: "WRS Type",
+});
+StacFields.Registry.addMetadataField("landsat:cloud_cover_land", {
+  formatter: fixedPct,
 });
 
 export const mediaTypeOverride = value => {
