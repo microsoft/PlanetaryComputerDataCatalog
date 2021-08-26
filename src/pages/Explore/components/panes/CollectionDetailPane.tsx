@@ -1,6 +1,6 @@
 import { Separator } from "@fluentui/react";
 
-import { useExploreSelector } from "../state/hooks";
+import { useExploreSelector } from "../../state/hooks";
 
 const CollectionDetailPane = () => {
   const { collection } = useExploreSelector(s => s.mosaic);

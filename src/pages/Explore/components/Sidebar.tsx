@@ -4,9 +4,9 @@ import CollectionSelector from "./selectors/CollectionSelector";
 import MosaicPane from "./panes/MosaicPane";
 import CollectionDetailPane from "./panes/CollectionDetailPane";
 import TemporarySearch from "./TemporarySearch";
-import MinimizeButton from "./MinimizeButton";
-import { useExploreSelector } from "./state/hooks";
-import { SIDEBAR_WIDTH } from "./utils/constants";
+import MinimizeButton from "./controls/MinimizeButton";
+import { useExploreSelector } from "../state/hooks";
+import { SIDEBAR_WIDTH } from "../utils/constants";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,

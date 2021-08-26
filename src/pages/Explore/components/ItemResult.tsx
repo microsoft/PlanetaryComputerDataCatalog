@@ -2,11 +2,11 @@ import { IStyle, Link, Stack, Text, useTheme } from "@fluentui/react";
 import dayjs from "dayjs";
 import { useCallback } from "react";
 import { IStacItem } from "types/stac";
-import IconValue from "./IconValue";
+import IconValue from "./controls/IconValue";
 import ItemPreview from "./ItemPreview";
-import { setSelectedItem } from "./state/detailSlice";
-import { useExploreDispatch } from "./state/hooks";
-import { clearBoundaryShape, setBoundaryShape } from "./state/mapSlice";
+import { setSelectedItem } from "../state/detailSlice";
+import { useExploreDispatch } from "../state/hooks";
+import { clearBoundaryShape, setBoundaryShape } from "../state/mapSlice";
 
 type ItemResultProps = {
   item: IStacItem;

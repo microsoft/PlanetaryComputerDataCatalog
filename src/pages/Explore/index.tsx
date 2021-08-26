@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, IStackTokens } from "@fluentui/react";
 
-import { store } from "./components/state/store";
+import { store } from "./state/store";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";

@@ -2,13 +2,17 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
-import { stacItemDatasource, layerControl, itemLineLayer } from "./viewerLayers";
-import { useExploreDispatch, useExploreSelector } from "./state/hooks";
-import { setCamera, setZoom } from "./state/mapSlice";
+import {
+  stacItemDatasource,
+  layerControl,
+  itemLineLayer,
+} from "./controls/viewerLayers";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
+import { setCamera, setZoom } from "../state/mapSlice";
 import { useTileJson } from "utils/requests";
-import { setLayerMinZoom } from "./state/mosaicSlice";
-import { useMosaicLayer, useShowBoundary } from "./utils/hooks";
-import ZoomMessage from "./ZoomMessage";
+import { setLayerMinZoom } from "../state/mosaicSlice";
+import { useMosaicLayer, useShowBoundary } from "../utils/hooks";
+import ZoomMessage from "./controls/ZoomMessage";
 
 const mapContainerId: string = "viewer-map";
 

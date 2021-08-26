@@ -2,8 +2,8 @@ import { IDropdownOption } from "@fluentui/react";
 
 import StateSelector from "./StateSelector";
 import { useCollectionMosaicInfo } from "utils/requests";
-import { setRenderOption } from "../state/mosaicSlice";
-import { useExploreSelector } from "../state/hooks";
+import { setRenderOption } from "../../state/mosaicSlice";
+import { useExploreSelector } from "../../state/hooks";
 import { IMosaic } from "types";
 
 const RenderOptionsSelector = () => {

@@ -11,8 +11,8 @@ import {
 import { useBoolean } from "@fluentui/react-hooks";
 
 import ItemPreview from "./ItemPreview";
-import { useExploreDispatch, useExploreSelector } from "./state/hooks";
-import { clearSelectedItem } from "./state/detailSlice";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
+import { clearSelectedItem } from "../state/detailSlice";
 import { stacFormatter } from "utils/stac";
 
 const ItemPanel = () => {

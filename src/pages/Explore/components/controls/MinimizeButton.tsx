@@ -1,8 +1,8 @@
 import { IconButton, useTheme } from "@fluentui/react";
 import { useCallback } from "react";
-import { useExploreDispatch, useExploreSelector } from "./state/hooks";
-import { toggleShowSidebar } from "./state/mapSlice";
-import { SIDEBAR_WIDTH } from "./utils/constants";
+import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
+import { toggleShowSidebar } from "../../state/mapSlice";
+import { SIDEBAR_WIDTH } from "../../utils/constants";
 
 const MinimizeButton = () => {
   const dispatch = useExploreDispatch();

@@ -1,4 +1,4 @@
-import { IMosaicState } from "pages/Explore/components/state/mosaicSlice";
+import { IMosaicState } from "pages/Explore/state/mosaicSlice";
 import { IMosaicRenderOption } from "types";
 import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL } from "./constants";

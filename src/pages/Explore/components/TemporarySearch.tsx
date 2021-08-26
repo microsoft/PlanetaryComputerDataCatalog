@@ -1,7 +1,7 @@
 import { IStacSearch } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
 import SearchResultsPane from "./panes/SearchResultsPane";
-import { useExploreSelector } from "./state/hooks";
+import { useExploreSelector } from "../state/hooks";
 
 const TemporarySearch = () => {
   const { map, mosaic } = useExploreSelector(s => s);

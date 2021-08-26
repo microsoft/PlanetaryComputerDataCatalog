@@ -3,7 +3,7 @@ import { GeoJsonObject } from "geojson";
 import { useEffect } from "react";
 import { makeCollectionTileJsonUrl } from "utils";
 import { MosaicState } from "../state/mosaicSlice";
-import { stacItemDatasource } from "../viewerLayers";
+import { stacItemDatasource } from "../components/controls/viewerLayers";
 
 // Show highlighted stac item result footprint on the map
 export const useShowBoundary = (

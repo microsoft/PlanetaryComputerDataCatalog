@@ -1,7 +1,7 @@
 import { Image, ImageFit, useTheme } from "@fluentui/react";
 import { IStacItem } from "types/stac";
 import { makeItemPreviewUrl } from "utils";
-import { useExploreSelector } from "./state/hooks";
+import { useExploreSelector } from "../state/hooks";
 
 interface ItemPreviewProps {
   item: IStacItem;
