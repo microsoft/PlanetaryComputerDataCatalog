@@ -1,5 +1,6 @@
 import { FontWeights, Text, useTheme } from "@fluentui/react";
 import { IStacItem } from "types/stac";
+import MapButton from "./MapButton";
 
 interface HeaderCardProps {
   collectionName: string | undefined;
@@ -8,6 +9,7 @@ interface HeaderCardProps {
 
 const HeaderCard = ({ collectionName, item }: HeaderCardProps) => {
   const theme = useTheme();
+
   return (
     <div
       style={{
@@ -18,6 +20,7 @@ const HeaderCard = ({ collectionName, item }: HeaderCardProps) => {
         borderBottomColor: theme.palette.neutralLight,
       }}
     >
+      <MapButton />
       <Text
         variant={"medium"}
         styles={{ root: { fontWeight: FontWeights.semibold } }}
