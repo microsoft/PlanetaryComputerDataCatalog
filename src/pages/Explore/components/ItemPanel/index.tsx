@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Panel, PanelType, Pivot, PivotItem } from "@fluentui/react";
+import { Panel, PanelType, Pivot, PivotItem, useTheme } from "@fluentui/react";
 import { useBoolean } from "@fluentui/react-hooks";
 
 import ItemPreview from "../ItemPreview";
@@ -11,6 +11,7 @@ import AssetList from "./AssetList";
 
 const ItemPanel = () => {
   const dispatch = useExploreDispatch();
+  const theme = useTheme();
   const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const item = useExploreSelector(s => s.detail.selectedItem);
   const collectionName = useExploreSelector(s => s.mosaic.collection?.title);
@@ -22,7 +23,13 @@ const ItemPanel = () => {
   }, [item, openPanel]);
 
   const content = item ? (
-    <>
+    <div
+      style={{
+        border: "1px solid",
+        borderColor: theme.palette.neutralLight,
+        borderRadius: 4,
+      }}
+    >
       <ItemPreview item={item} size={400} />
       <HeaderCard collectionName={collectionName} item={item} />
       <Pivot styles={{ link: { width: "50%" } }}>
@@ -33,7 +40,7 @@ const ItemPanel = () => {
           <AssetList item={item} />
         </PivotItem>
       </Pivot>
-    </>
+    </div>
   ) : (
     <p>No items selected</p>
   );

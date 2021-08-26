@@ -10,7 +10,7 @@ const DetailListItem = ({ label, value }: DetailListItemProps) => {
   return (
     <div
       style={{
-        padding: "6px 0",
+        padding: 8,
         borderTop: "1px solid",
         borderTopColor: theme.palette.neutralLight,
       }}
