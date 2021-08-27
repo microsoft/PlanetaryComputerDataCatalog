@@ -58,23 +58,21 @@ working directory as a volume, so you can access your local files.
 ```console
 $ export JUPYTERHUB_API_TOKEN=<JUPYTERHUB_API_TOKEN> from above
 $ docker run -it --rm \
-    -v $PWD:/home/jovyan \
     -p 8888:8888 \
     -e JUPYTERHUB_API_TOKEN=$JUPYTERHUB_API_TOKEN \
+    -e DASK_GATEWAY__AUTH__TYPE="jupyterhub" \
     -e DASK_GATEWAY__CLUSTER__OPTIONS__IMAGE="mcr.microsoft.com/planetary-computer/python:latest" \
     -e DASK_GATEWAY__ADDRESS="https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway" \
-    -e DASK_GATEWAY__PROXY_ADDRESS="https://pccompute.westeurope.cloudapp.azure.com/compute/services/dask-gateway" \
+    -e DASK_GATEWAY__PROXY_ADDRESS="gateway://pccompute-dask.westeurope.cloudapp.azure.com:80" \
     mcr.microsoft.com/planetary-computer/python:latest \
     jupyter lab --no-browser --ip="0.0.0.0"
 ```
 
 That will print out a URL you can follow to access your local jupyterlab. From there, you can 
 
-
-
 ```python
 >>> import dask_gateway
->>> gateway = dask_gateway.Gateway(auth="jupyterhub")  # uses DASK_GATEWAY environment variables set above
+>>> gateway = dask_gateway.Gateway()
 >>> cluster = gateway.new_cluster()
 >>> client = cluster.get_client()
 ```
