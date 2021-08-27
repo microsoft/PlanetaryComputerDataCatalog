@@ -11,7 +11,9 @@ const MapButton = () => {
 
   const tooltipId = useId("tooltip");
   const buttonId = useId("targetButton");
-  const label = "View this item on the map";
+  const label = showAsLayer
+    ? "Remove this item from the map"
+    : "View this item on the map";
 
   const calloutProps = useConst({
     gapSpace: 0,
@@ -34,6 +36,16 @@ const MapButton = () => {
         styles={{
           icon: {
             fontSize: FontSizes.size24,
+          },
+          iconChecked: {
+            color: theme.semanticColors.bodyBackground,
+          },
+          rootChecked: {
+            backgroundColor: theme.palette.accent,
+            borderColor: theme.palette.neutralLight,
+          },
+          rootCheckedHovered: {
+            backgroundColor: theme.palette.themeSecondary,
           },
           root: {
             float: "right",
