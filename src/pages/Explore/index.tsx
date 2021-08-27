@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
-import { Stack, StackItem, IStackTokens } from "@fluentui/react";
+import { Stack, StackItem, IStackTokens, useTheme } from "@fluentui/react";
 
 import { store } from "./state/store";
 
@@ -15,6 +15,7 @@ const stackTokens: IStackTokens = {
 };
 
 const Explorer = () => {
+  const theme = useTheme();
   return (
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
@@ -22,7 +23,15 @@ const Explorer = () => {
         <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <Sidebar />
-          <StackItem grow={1}>
+          <StackItem
+            styles={{
+              root: {
+                borderLeft: "1px solid",
+                borderLeftColor: theme.palette.neutralLight,
+              },
+            }}
+            grow={1}
+          >
             <ExploreMap />
           </StackItem>
         </Stack>

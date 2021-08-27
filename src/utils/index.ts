@@ -153,16 +153,16 @@ export const scrollToHash = (
   };
 };
 
-export const makeCollectionTileJsonUrl = (
+export const makeTileJsonUrl = (
   collection: IStacCollection,
   query: IMosaicState,
-  renderOption: IMosaicRenderOption,
+  renderOption: IMosaicRenderOption | null,
   item: IStacItem | null
 ) => {
   const itemParam = item ? `&items=${item.id}` : "";
   const tileEndpoint = item ? "item" : "collection";
 
-  return `${DATA_URL}/${tileEndpoint}/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption.options}${itemParam}`;
+  return `${DATA_URL}/${tileEndpoint}/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption?.options}${itemParam}`;
 };
 
 export const makeItemPreviewUrl = (

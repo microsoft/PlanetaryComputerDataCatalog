@@ -60,8 +60,6 @@ const ItemResult = ({ item }: ItemResultProps) => {
       styles={{ root: rootStyle }}
       onMouseEnter={showBounds}
       onMouseLeave={removeBounds}
-      // onFocus={showBounds}
-      // onBlur={removeBounds}
     >
       <Stack
         horizontal

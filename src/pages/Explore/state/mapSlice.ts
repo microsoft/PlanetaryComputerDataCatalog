@@ -65,6 +65,9 @@ export const mapSlice = createSlice({
       } else {
         state.center = state.previousCenter || state.center;
         state.zoom = state.previousZoom || state.zoom;
+
+        //Reset
+        state.previousCenter = state.previousZoom = null;
       }
     });
   },

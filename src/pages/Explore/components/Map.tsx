@@ -32,8 +32,9 @@ const ExploreMap = () => {
   const itemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
 
   const { data: mosaicLayerTileJson } = useTileJson(
-    mosaic.collection?.id,
-    mosaic.query.hash,
+    mosaic.collection,
+    mosaic.query,
+    mosaic.renderOption,
     itemForMosaic
   );
   const layerMinZoom = mosaicLayerTileJson?.minzoom;
@@ -137,7 +138,13 @@ const ExploreMap = () => {
   const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
 
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+      }}
+    >
       {showZoomMsg && zoomMsg}
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>

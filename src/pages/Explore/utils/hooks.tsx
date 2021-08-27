@@ -1,7 +1,7 @@
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
 import { useEffect } from "react";
-import { makeCollectionTileJsonUrl } from "utils";
+import { makeTileJsonUrl } from "utils";
 import { MosaicState } from "../state/mosaicSlice";
 import { stacItemDatasource } from "../components/controls/viewerLayers";
 import { IStacItem } from "types/stac";
@@ -55,12 +55,7 @@ export const useMosaicLayer = (
 
       if (tilejsonAsset || selectedItem) {
         const tileLayer = {
-          tileUrl: makeCollectionTileJsonUrl(
-            collection,
-            query,
-            renderOption,
-            selectedItem
-          ),
+          tileUrl: makeTileJsonUrl(collection, query, renderOption, selectedItem),
         };
         const layer = new atlas.layer.TileLayer(tileLayer, "stac-mosaic");
 

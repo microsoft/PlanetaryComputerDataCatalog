@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
 
 // Query content can be prefetched if it's likely to be used
@@ -37,22 +38,19 @@ export const useCollectionMosaicInfo = collectionId => {
   });
 };
 
-export const useTileJson = (collectionId, queryHash, item) => {
-  return useQuery([collectionId, queryHash, item], getTileJson, {
+export const useTileJson = (collection, query, renderOption, item) => {
+  return useQuery([collection, query, renderOption, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    enabled: !!collectionId && !!queryHash,
+    enabled: !!collection && !!query.hash,
   });
 };
 
 export const getTileJson = async ({ queryKey }) => {
-  const [collectionId, queryHash, item] = queryKey;
+  const [collection, query, renderOption, item] = queryKey;
+  const tileJsonUrl = makeTileJsonUrl(collection, query, renderOption, item);
 
-  const itemParam = item?.id ? `&items=${item.id}` : "";
-
-  const resp = await axios.get(
-    `${DATA_URL}/collection/tilejson.json?collection=${collectionId}&queryhash=${queryHash}${itemParam}`
-  );
+  const resp = await axios.get(tileJsonUrl);
   return resp.data;
 };
 
