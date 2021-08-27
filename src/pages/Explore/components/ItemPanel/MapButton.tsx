@@ -1,6 +1,6 @@
 import { FontSizes, IconButton, TooltipHost, useTheme } from "@fluentui/react";
 import { useId, useConst } from "@fluentui/react-hooks";
-import { toggleShowAsLayer } from "pages/Explore/state/detailSlice";
+import { setShowAsLayer } from "pages/Explore/state/detailSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { useCallback } from "react";
 
@@ -21,8 +21,8 @@ const MapButton = () => {
   });
 
   const handleClick = useCallback(() => {
-    dispatch(toggleShowAsLayer());
-  }, [dispatch]);
+    dispatch(setShowAsLayer(!showAsLayer));
+  }, [dispatch, showAsLayer]);
 
   return (
     <TooltipHost content={label} calloutProps={calloutProps}>

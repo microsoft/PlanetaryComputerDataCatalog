@@ -38,7 +38,11 @@ const ExploreMap = () => {
   );
   const layerMinZoom = mosaicLayerTileJson?.minzoom;
 
-  useShowBoundary(boundaryShape ?? detail.selectedItem?.geometry);
+  useShowBoundary(
+    mapRef,
+    boundaryShape ?? detail.selectedItem?.geometry,
+    detail.showAsLayer
+  );
   useMosaicLayer(mapRef, mosaic, itemForMosaic);
 
   // Set the minzoom for the current layer
@@ -53,10 +57,11 @@ const ExploreMap = () => {
     if (zoom !== mapRef.current?.getCamera().zoom)
       mapRef.current?.setCamera({
         zoom: zoom,
+        center: center,
         type: "ease",
         duration: 750,
       });
-  }, [zoom]);
+  }, [zoom, center]);
 
   useEffect(() => {
     setTimeout(() => {
