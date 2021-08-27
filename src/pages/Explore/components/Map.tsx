@@ -21,16 +21,25 @@ const ExploreMap = () => {
   const {
     map: { center, zoom, boundaryShape, showSidebar },
     mosaic,
-    detail: { selectedItem },
+    detail,
   } = useExploreSelector(s => s);
 
   const mapRef = useRef<atlas.Map | null>(null);
   const [mapReady, setMapReady] = useState<boolean>(false);
-  const { data } = useTileJson(mosaic.collection?.id, mosaic.query.hash);
-  const layerMinZoom = data?.minzoom;
 
-  useShowBoundary(boundaryShape ?? selectedItem?.geometry);
-  useMosaicLayer(mapRef, mosaic);
+  // If there is a selected Item and we're meant to show it as a mosaic,
+  // select that item for use in mosaic tile requests.
+  const itemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+
+  const { data: mosaicLayerTileJson } = useTileJson(
+    mosaic.collection?.id,
+    mosaic.query.hash,
+    itemForMosaic
+  );
+  const layerMinZoom = mosaicLayerTileJson?.minzoom;
+
+  useShowBoundary(boundaryShape ?? detail.selectedItem?.geometry);
+  useMosaicLayer(mapRef, mosaic, itemForMosaic);
 
   // Set the minzoom for the current layer
   useEffect(() => {

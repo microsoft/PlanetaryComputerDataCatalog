@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Panel, PanelType, Pivot, PivotItem, useTheme } from "@fluentui/react";
 import { useBoolean } from "@fluentui/react-hooks";
 
 import ItemPreview from "../ItemPreview";
 import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
-import { clearSelectedItem } from "../../state/detailSlice";
+import { clearSelectedItem, setShowAsLayer } from "../../state/detailSlice";
 import HeaderCard from "./HeaderCard";
 import MetadataList from "./MetadataList";
 import AssetList from "./AssetList";
@@ -45,6 +45,11 @@ const ItemPanel = () => {
     <p>No items selected</p>
   );
 
+  const handleClose = useCallback(() => {
+    dispatch(clearSelectedItem());
+    dispatch(setShowAsLayer(false));
+  }, [dispatch]);
+
   return (
     <Panel
       isBlocking={false}
@@ -53,7 +58,7 @@ const ItemPanel = () => {
       type={PanelType.customNear}
       customWidth={"520px"}
       closeButtonAriaLabel="Close Item Detail Panel"
-      onDismissed={() => dispatch(clearSelectedItem())}
+      onDismissed={handleClose}
     >
       {content}
     </Panel>

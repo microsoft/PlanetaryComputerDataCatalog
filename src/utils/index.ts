@@ -156,9 +156,13 @@ export const scrollToHash = (
 export const makeCollectionTileJsonUrl = (
   collection: IStacCollection,
   query: IMosaicState,
-  renderOption: IMosaicRenderOption
+  renderOption: IMosaicRenderOption,
+  item: IStacItem | null
 ) => {
-  return `${DATA_URL}/collection/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption.options}`;
+  const itemParam = item ? `&items=${item.id}` : "";
+  const tileEndpoint = item ? "item" : "collection";
+
+  return `${DATA_URL}/${tileEndpoint}/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption.options}${itemParam}`;
 };
 
 export const makeItemPreviewUrl = (

@@ -37,8 +37,8 @@ export const useCollectionMosaicInfo = collectionId => {
   });
 };
 
-export const useTileJson = (collectionId, queryHash) => {
-  return useQuery([collectionId, queryHash], getTileJson, {
+export const useTileJson = (collectionId, queryHash, item) => {
+  return useQuery([collectionId, queryHash, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     enabled: !!collectionId && !!queryHash,
@@ -46,10 +46,12 @@ export const useTileJson = (collectionId, queryHash) => {
 };
 
 export const getTileJson = async ({ queryKey }) => {
-  const [collectionId, queryHash] = queryKey;
+  const [collectionId, queryHash, item] = queryKey;
+
+  const itemParam = item?.id ? `&items=${item.id}` : "";
 
   const resp = await axios.get(
-    `${DATA_URL}/collection/tilejson.json?collection=${collectionId}&queryhash=${queryHash}`
+    `${DATA_URL}/collection/tilejson.json?collection=${collectionId}&queryhash=${queryHash}${itemParam}`
   );
   return resp.data;
 };
