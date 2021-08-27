@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
@@ -28,8 +29,20 @@ def search(request: Request):
 
 @app.get("/api/stac/v1/collections")
 def static_collections():
-    with open("../data/collections.json") as f:
-        return json.load(f)
+    response = {
+        "links": [
+            {
+              "href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections",
+              "rel": "self",
+              "type": "application/json"
+            }
+        ],
+        "collections": [],
+    }
+    for path in Path("../data").glob("*.json"):
+        with open(path) as f:
+            response["collections"].append(json.load(f))
+    return response
 
 
 @app.get("/api/stac/v1/collections/{collection_id}/queryables")

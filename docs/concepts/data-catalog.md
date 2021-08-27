@@ -15,7 +15,7 @@ data easy and approachable.
 
 ### Access patterns
 
-During our Private Preview, we are focused on making our largest datasets
+During our Preview, we are focused on making our largest datasets
 indexed and searchable using the open [STAC specification](https://stacspec.org/).
 These search and access API endpoints lower the barrier to finding specific
 data you need over large spatial and temporal extents. The data itself is
@@ -34,7 +34,7 @@ more about [using tokens for data access](sas.md).
 
 ### Future plans
 
-As the Private Preview develops, we are working with partners to develop and
+As the Preview develops, we are working with partners to develop and
 onboard new datasets into the Planetary Computer, and make them discoverable
 and accessible through open APIs. We're also developing features that will
 allow users to perform analysis and generate visualizations directly from the

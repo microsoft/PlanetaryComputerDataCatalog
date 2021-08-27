@@ -54,7 +54,9 @@ GDAL_HTTP_MERGE_CONSECUTIVE_RANGES | YES           | [Improves GDAL performance]
 
 ## Understanding the software environment
 
-Your software environment is determined by the profile you selected when starting your server. It's a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) located at ``/srv/conda/envs/notebook``. The environment contains many software libraries that are helpful for geospatial data analysis. As mentioned [above](#Understanding-the-file-system) changes to the environment outside of your home directory are not persisted across sessions. If you ``pip`` or ``conda`` install a package, it will not be present the next time you start your server.
+Your software environment is determined by the profile you selected when starting your server. It's a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) located at ``/srv/conda/envs/notebook``. The environment contains many software libraries that are helpful for geospatial data analysis The environments are defined and packaged into Docker containers in the [planetary-computer-containers][containers] repository.
+
+As mentioned [above](#Understanding-the-file-system), changes to the environment outside of your home directory are not persisted across sessions. If you ``pip`` or ``conda`` install a package, it will not be present the next time you start your server.
 
 If you're using Dask for scalable computing, you should ensure that modifications you make to your local software environment are present on the workers too. Dask provides a [PipInstallPlugin](https://distributed.dask.org/en/latest/plugins.html#distributed.diagnostics.plugin.PipInstall) to automatically install packages when workers start
 
@@ -65,3 +67,37 @@ If you're using Dask for scalable computing, you should ensure that modification
 ```
 
 Note that this will slow down worker startup, since the packages will need to be found and downloaded before the worker can start executing tasks.
+
+## Cluster Limits
+
+There are a few restrictions on the size of the Dask Clusters you can create.
+
+1. The maximum number of **cores per worker** is 8, and the maximum amount of **memory per worker** is 64 GiB. This ensures that the workers fit in the [Standard_E8_v3 Virtual Machines][vms] used for workers.
+2. The maximum number of **cores per cluster** is 400
+3. The maximum amount of **memory per cluster** is 3200 GiB
+4. The maximum number of **workers per cluster** is 400
+
+With the default settings of 1 core and 8 GiB per worker, this means a limit of 400 workers on 50 physical nodes (each with 8 cores and 64 GiB of memory). If this limit is too low for your use-case, [send us an email][email].
+
+If you attempt to scale beyond the maximum cores or memory per worker, an exception is raised since your requested workers are larger than they Virtual Machines can handle.
+
+```python
+>>> gateway = dask_gateway.Gateway()
+>>> options = gateway.cluster_options()
+>>> options["worker_cores"] = 16
+Traceback (most recent call last):
+...
+ValueError: worker_cores must be <= 8.000000, got 16.0
+```
+
+If you attempt to scale beyond the maximum number of cores, memory, or workers per cluster, you'll see a warning and the cluster will be scaled to the limit.
+
+```python
+>>> cluster = gateway.new_cluster()
+>>> cluster.scale(1_000)
+GatewayWarning: Scale request of 1000 workers would exceed resource limit of 400 workers. Scaling to 400 instead.
+```
+
+[vms]: https://docs.microsoft.com/en-us/azure/virtual-machines/ev3-esv3-series
+[email]: mailto:planetarycomputer@microsoft.com
+[containers]: https://github.com/microsoft/planetary-computer-containers

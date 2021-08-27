@@ -2,21 +2,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <base href="%PUBLIC_URL%/">
-    <link rel="SHORTCUT ICON" href="https://c.s-microsoft.com/favicon.ico?v2" type="image/x-icon">
+    <base href="%PUBLIC_URL%/" />
+    <link
+      rel="SHORTCUT ICON"
+      href="https://c.s-microsoft.com/favicon.ico?v2"
+      type="image/x-icon"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Microsoft Planetary Computer (Preview)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Microsoft Planetary Computer" />
     <meta
-      name="description"
-      content="Microsoft Planetary Computer (Private Preview)"
+      property="og:description"
+      content="Supporting sustainability decision-making with the power of the cloud"
     />
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Microsoft Planetary Computer">
-    <meta property="og:description" content="Supporting sustainability decision-making with the power of the cloud">
-    <meta property="og:image" content="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png">
+    <meta
+      property="og:image"
+      content="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png"
+    />
 
-    <meta name="twitter:card" content="summary_large_image">
-
+    <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -43,49 +49,51 @@
         Cookie descriptions: https://osgwiki.com/wiki/JSLLv4#Cookies_Set.2FRead_by_JSLL
       */
 
-        // WCP initialization
-        WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
-            if (err != undefined) {
-                return err;
-            } else {
-                // Track a global object for consent to make it available from the
-                // application React components
-                window.siteConsent = siteConsent;
-            }
-        });
+      // WCP initialization
+      WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
+        if (err != undefined) {
+          return err;
+        } else {
+          // Track a global object for consent to make it available from the
+          // application React components
+          window.siteConsent = siteConsent;
+        }
+      });
 
-        // 1DS initialization
-        const analytics = new oneDS.ApplicationInsights();
-        var config = {
-          instrumentationKey: "%REACT_APP_ONEDS_TENANT_KEY%",
-          propertyConfiguration: {
-            callback: {
-                userConsentDetails: window.siteConsent ? window.siteConsent.getConsent : null
+      // 1DS initialization
+      const analytics = new oneDS.ApplicationInsights();
+      var config = {
+        instrumentationKey: "%REACT_APP_ONEDS_TENANT_KEY%",
+        propertyConfiguration: {
+          callback: {
+            userConsentDetails: window.siteConsent
+              ? window.siteConsent.getConsent
+              : null,
+          },
+        },
+        webAnalyticsConfiguration: {
+          autoCapture: {
+            scroll: true,
+            pageView: true,
+            onLoad: true,
+            onUnload: true,
+            click: true,
+            jsError: true,
+          },
+          callback: {
+            pageName: function (el, useDefault) {
+              // Get the pagename from the path since it isn't determined automatically
+              const path = window.location.pathname;
+              return path === "/" ? "homepage" : path;
             },
           },
-          webAnalyticsConfiguration:{
-              autoCapture: {
-                scroll: true,
-                pageView: true,
-                onLoad: true,
-                onUnload: true,
-                click: true,
-                jsError: true
-              },
-              callback: {
-                pageName: function(el, useDefault) {
-                  // Get the pagename from the path since it isn't determined automatically
-                  const path = window.location.pathname;
-                  return path === "/" ? "homepage" : path;
-                }
-              }
-          }
-        };
+        },
+      };
 
-        //Initialize SDK
-        if('%NODE_ENV%' !== 'development') {
-          analytics.initialize(config, []);
-        }
+      //Initialize SDK
+      if ("%NODE_ENV%" !== "development") {
+        analytics.initialize(config, []);
+      }
     </script>
   </body>
 </html>

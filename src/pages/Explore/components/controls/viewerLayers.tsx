@@ -12,13 +12,14 @@ export const layerControl = new atlas.control.StyleControl({
   ],
 });
 
-export const stacSearchDatasource = new atlas.source.DataSource();
+export const stacItemDatasource = new atlas.source.DataSource();
 
 export const itemLineLayer = new atlas.layer.LineLayer(
-  stacSearchDatasource,
+  stacItemDatasource,
   "stac-item-outline",
   {
-    strokeColor: "#FFAE42",
+    strokeColor: "rgb(0, 120, 212)",
+    strokeWidth: 3,
     filter: [
       "any",
       ["==", ["geometry-type"], "Polygon"],
@@ -28,7 +29,7 @@ export const itemLineLayer = new atlas.layer.LineLayer(
 );
 
 export const itemPolyLayer = new atlas.layer.PolygonLayer(
-  stacSearchDatasource,
+  stacItemDatasource,
   "stac-item-fill",
   {
     fillColor: "rgba(255, 255, 255, 0.3)",
@@ -36,7 +37,7 @@ export const itemPolyLayer = new atlas.layer.PolygonLayer(
 );
 
 export const itemHoverLayer = new atlas.layer.PolygonLayer(
-  stacSearchDatasource,
+  stacItemDatasource,
   "stac-hover-fill",
   {
     // select nothing as a base case

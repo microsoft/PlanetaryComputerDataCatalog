@@ -14,10 +14,10 @@ import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
 import CatalogGroup from "./pages/CatalogGroup";
 
-const Viewer = React.lazy(() => import("./pages/Viewer"));
+const Explore = React.lazy(() => import("./pages/Explore"));
 
 function App() {
-  initializeIcons();
+  initializeIcons(undefined, { disableWarnings: true });
   initializeFeatures();
   usePrefetchContent();
 
@@ -49,9 +49,9 @@ function App() {
           <Route path="/account/request">
             <AccountSurvey />
           </Route>
-          <Route path="/viewer">
+          <Route path="/explore">
             <Suspense fallback={null}>
-              <Viewer />
+              <Explore />
             </Suspense>
           </Route>
           <Route path="/404">

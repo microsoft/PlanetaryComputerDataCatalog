@@ -93,10 +93,10 @@ const AccountSurvey = () => {
         <p>
           Microsoft will use this information to communicate with you about the
           Planetary Computer, to evaluate your eligibility to participate in our
-          private preview, to prioritize new features, and to communicate
-          non-identifying information – both internally and externally – about the
-          geographic regions and focus areas that our users represent. For more
-          information on how we use your data please see{" "}
+          preview, to prioritize new features, and to communicate non-identifying
+          information – both internally and externally – about the geographic regions
+          and focus areas that our users represent. For more information on how we
+          use your data please see{" "}
           <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
             Privacy &amp; Cookies
           </NewTabLink>
@@ -152,8 +152,7 @@ const AccountSurvey = () => {
       <h1>Request access</h1>
       <p>
         The Planetary Computer API and Planetary Computer Hub are currently in
-        private preview, and we're excited to expand our partner and developer
-        network.
+        preview, and we're excited to expand our partner and developer network.
       </p>
     </DefaultBanner>
   );

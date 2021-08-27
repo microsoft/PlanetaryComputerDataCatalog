@@ -1,0 +1,108 @@
+{
+    "id": "mtbs",
+    "type": "Collection",
+    "stac_version": "1.0.0",
+    "title": "MTBS: Monitoring Trends in Burn Severity",
+    "description": "{{ collection.description }}",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+            "title": "public domain"
+        }
+    ],
+    "stac_extensions": [
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    ],
+    "keywords": [
+        "mtbs",
+        "USGS",
+        "USFS",
+        "USDA",
+        "forest",
+        "fire"
+    ],
+    "msft:short_description": "Annual burn severity mosaics for the continental United States and Alaska",
+    "msft:storage_account": "cpdataeuwest",
+    "msft:container": "cpdata",
+    "providers": [
+        {
+            "name": "MTBS program",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://www.mtbs.gov/"
+        },
+        {
+            "name": "CarbonPlan",
+            "roles": [
+                "processor"
+            ],
+            "url": "https://carbonplan.org"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "assets": {
+        "thumbnail": {
+            "title": "MTBS",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/mtbs.png",
+            "type": "image/png"
+        }
+    },
+    "item_assets": {
+        "burn-severity": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Burn severity",
+            "roles": [
+                "data"
+            ]
+        },
+        "metadata": {
+            "type": "text/html",
+            "title": "Metadata",
+            "roles": [
+                "metadata"
+            ]
+        }
+    },
+    "summaries": {
+        "gsd": [
+            30
+        ]
+    },
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -166.705027,
+                    56.331164,
+                    -137.664767,
+                    69.980073
+                ],
+                [
+                    -127.579429,
+                    23.680916,
+                    -65.871833,
+                    50.870718
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "1984-12-31T00:00:00",
+                    "2018-12-31T00:00:00"
+                ]
+            ]
+        }
+    }
+}

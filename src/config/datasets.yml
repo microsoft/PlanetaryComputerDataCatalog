@@ -29,67 +29,67 @@ collections:
     tabs:
       - title: Example Notebook
         src: 3dep-seamless-example.html
-        launch: datasets/3dep-seamless-example.ipynb
+        launch: datasets/dep/3dep-seamless-example.ipynb
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-pr:
     headerImg: ./images/daymet-monthly-pr-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-pr:
     headerImg: ./images/daymet-annual-pr-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-daily-hi:
     headerImg: ./images/daymet-daily-hi-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-hi:
     headerImg: ./images/daymet-monthly-hi-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-hi:
     headerImg: ./images/daymet-annual-hi-hero.png
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-daily-na:
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-na:
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-na:
     tabs:
       - title: Example Notebook
         src: daymet-example.html
-        launch: datasets/daymet-example.ipynb
+        launch: datasets/daymet/daymet-example.ipynb
 
   gap:
     headerImg: ./images/gap-hero.png

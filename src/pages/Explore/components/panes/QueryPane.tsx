@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import $RefParser from "@apidevtools/json-schema-ref-parser";
-import { QueryContext } from "./query/context";
-import Builder from "./query/Builder";
+import { QueryContext } from "../query/context";
+import Builder from "../query/Builder";
 
 // import { MQE_URL } from "../../utils/constants";
 
 interface QueryPaneProps {
-  collectionId: string;
+  collectionId: string | null;
 }
 
 const QueryPane = ({ collectionId }: QueryPaneProps) => {

@@ -1,0 +1,112 @@
+{
+    "id": "nasadem",
+    "type": "Collection",
+    "stac_version": "1.0.0",
+    "title": "NASADEM HGT v001",
+    "description": "{{ collection.description }}",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://www.usgs.gov/core-science-systems/hdds/data-policy",
+            "title": "public domain"
+        }
+    ],
+    "stac_extensions": [
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    ],
+    "keywords": [
+        "NASA",
+        "JPL",
+        "elevation",
+        "DEM",
+        "USGS",
+        "NGA",
+        "SRTM"
+    ],
+    "msft:short_description": "Global topographic data at 1 arc-second (~30m) horizontal resolution, derived primarily from data captured via the Shuttle Radar Topography Mission",
+    "msft:storage_account": "nasademeuwest",
+    "msft:container": "nasadem-cog",
+    "providers": [
+        {
+            "name": "NASA",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://earthdata.nasa.gov/esds/competitive-programs/measures/nasadem"
+        },
+        {
+            "name": "JPL",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://trs.jpl.nasa.gov/handle/2014/46123"
+        },
+        {
+            "name": "USGS",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://lpdaac.usgs.gov/products/nasadem_hgtv001/"
+        },
+        {
+            "name": "OpenTopography",
+            "roles": [
+                "processor"
+            ],
+            "url": "https://portal.opentopography.org/datasetMetadata?otCollectionID=OT.032021.4326.2"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "assets": {
+        "thumbnail": {
+            "title": "NASADEM",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/nasadem.png",
+            "type": "image/png"
+        }
+    },
+    "item_assets": {
+        "elevation": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "Elevation",
+            "roles": [
+                "data"
+            ]
+        }
+    },
+    "summaries": {
+        "gsd": [
+            30
+        ]
+    },
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -179.000139,
+                    -56.000139,
+                    179.000139,
+                    61.000139
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2000-02-20T00:00:00",
+                    "2000-02-20T00:00:00"
+                ]
+            ]
+        }
+    }
+}

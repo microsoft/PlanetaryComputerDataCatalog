@@ -1,0 +1,199 @@
+{
+    "id": "mobi",
+    "type": "Collection",
+    "stac_version": "1.0.0",
+    "title": "MoBI: Map of Biodiversity Importance",
+    "description": "long description...",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://aka.ms/mobi-license",
+            "title": "NatureServe MoBI license"
+        }
+    ],
+    "stac_extensions": [
+        "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    ],
+    "keywords": [
+        "mobi",
+        "natureserve",
+        "united states",
+        "biodiversity"
+    ],
+    "msft:short_description": "Habitat information for 2,216 imperiled species occurring in the conterminous United States",
+    "msft:storage_account": "ai4edataeuwest",
+    "msft:container": "mobi",
+    "providers": [
+        {
+            "name": "NatureServe",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "http://natureserve.org/"
+        },
+        {
+            "name": "Microsoft",
+            "roles": [
+                "host",
+                "processor"
+            ],
+            "url": "https://planetarycomputer.microsoft.com"
+        }
+    ],
+    "assets": {
+        "thumbnail": {
+            "title": "MoBI",
+            "href": "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/mobi.png",
+            "media_type": "image/png"
+        }
+    },
+    "item_assets": {
+        "PWRSR_GAP12_SUM_All": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "PWRSR_GAP12_SUM_All",
+            "description": "Protection-weighted range-size rarity for all species",
+            "roles": [
+                "data"
+            ]
+        },
+        "PWRSR_GAP12_SUM_AquaticInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "PWRSR_GAP12_SUM_AquaticInverts",
+            "description": "Protection-weighted range-size rarity for aquatic invertebrates",
+            "roles": [
+                "data"
+            ]
+        },
+        "PWRSR_GAP12_SUM_Plants": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "PWRSR_GAP12_SUM_Plants",
+            "description": "Protection-weighted range-size rarity for vascular plants",
+            "roles": [
+                "data"
+            ]
+        },
+        "PWRSR_GAP12_SUM_PollinatorInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "PWRSR_GAP12_SUM_PollinatorInverts",
+            "description": "Protection-weighted range-size rarity for pollinators",
+            "roles": [
+                "data"
+            ]
+        },
+        "PWRSR_GAP12_SUM_Vertebrates": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "PWRSR_GAP12_SUM_Vertebrates",
+            "description": "Protection-weighted range-size rarity for vertebrates",
+            "roles": [
+                "data"
+            ]
+        },
+        "RSR_All": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "RSR_All",
+            "description": "Range-size rarity for species",
+            "roles": [
+                "data"
+            ]
+        },
+        "RSR_AquaticInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "RSR_AquaticInverts",
+            "description": "Range-size rarity for aquatic invertebrates",
+            "roles": [
+                "data"
+            ]
+        },
+        "RSR_Plants": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "RSR_Plants",
+            "description": "Range-size rarity for vascular plants",
+            "roles": [
+                "data"
+            ]
+        },
+        "RSR_PollinatorInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "RSR_PollinatorInverts",
+            "description": "Range-size rarity for pollinators",
+            "roles": [
+                "data"
+            ]
+        },
+        "RSR_Vertebrates": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "RSR_Vertebrates",
+            "description": "Range-size rarity for vertebrates",
+            "roles": [
+                "data"
+            ]
+        },
+        "SpeciesRichness_All": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SpeciesRichness_All",
+            "description": "Species richness for species",
+            "roles": [
+                "data"
+            ]
+        },
+        "SpeciesRichness_AquaticInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SpeciesRichness_AquaticInverts",
+            "description": "Species richness for aquatic invertebrates",
+            "roles": [
+                "data"
+            ]
+        },
+        "SpeciesRichness_Plants": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SpeciesRichness_Plants",
+            "description": "Species richness for vascular plants",
+            "roles": [
+                "data"
+            ]
+        },
+        "SpeciesRichness_PollinatorInverts": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SpeciesRichness_PollinatorInverts",
+            "description": "Species richness for pollinators",
+            "roles": [
+                "data"
+            ]
+        },
+        "SpeciesRichness_Vertebrates": {
+            "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+            "title": "SpeciesRichness_Vertebrates",
+            "description": "Species richness for vertebrates",
+            "roles": [
+                "data"
+            ]
+        }
+    },
+    "summaries": {
+        "gsd": [
+            990
+        ]
+    },
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -130.23751729209377,
+                    21.736663926419077,
+                    -63.66198266211968,
+                    49.184200486300604
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2020-04-14T00:00:00",
+                    "2020-04-14T00:00:00"
+                ]
+            ]
+        }
+    }
+}
