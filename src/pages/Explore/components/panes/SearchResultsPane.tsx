@@ -1,6 +1,13 @@
-import { Spinner, SpinnerSize, Stack } from "@fluentui/react";
+import {
+  FocusZone,
+  FocusZoneDirection,
+  List,
+  Spinner,
+  SpinnerSize,
+} from "@fluentui/react";
+import { ReactNode } from "react";
 import { UseQueryResult } from "react-query";
-import { IStacSearchResult } from "types/stac";
+import { IStacItem, IStacSearchResult } from "types/stac";
 import ItemResult from "../ItemResult";
 
 interface SearchResultsProps {
@@ -18,18 +25,28 @@ const SearchResultsPane = ({
   }
   if (!data) return null;
 
+  const renderCell = (
+    item?: IStacItem | undefined,
+    index?: number | undefined,
+    isScrolling?: boolean | undefined
+  ): ReactNode => {
+    if (!item) return null;
+
+    return <ItemResult item={item} />;
+  };
+
   return (
-    <div style={{ height: "100%", overflowY: "auto", overflowX: "clip" }}>
+    <>
       <p>
         Showing <strong>{data.features.length}</strong> items that matched your
         search.
       </p>
-      <Stack tokens={{ childrenGap: 6 }}>
-        {data.features.map(item => (
-          <ItemResult key={item.id} item={item} />
-        ))}
-      </Stack>
-    </div>
+      <div style={{ height: "100%", overflowY: "auto", overflowX: "clip" }}>
+        <FocusZone direction={FocusZoneDirection.vertical}>
+          <List items={data.features} onRenderCell={renderCell} />
+        </FocusZone>
+      </div>
+    </>
   );
 };
 

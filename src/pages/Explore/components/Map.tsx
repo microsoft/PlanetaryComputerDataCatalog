@@ -2,30 +2,49 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
-import { stacItemDatasource, layerControl, itemLineLayer } from "./viewerLayers";
-import { useExploreDispatch, useExploreSelector } from "./state/hooks";
-import { setCamera, setZoom } from "./state/mapSlice";
+import {
+  stacItemDatasource,
+  layerControl,
+  itemLineLayer,
+} from "./controls/viewerLayers";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
+import { setCamera, setZoom } from "../state/mapSlice";
 import { useTileJson } from "utils/requests";
-import { setLayerMinZoom } from "./state/mosaicSlice";
-import { useMosaicLayer, useShowBoundary } from "./hooks/map";
-import ZoomMessage from "./ZoomMessage";
+import { setLayerMinZoom } from "../state/mosaicSlice";
+import { useMosaicLayer, useShowBoundary } from "../utils/hooks";
+import ZoomMessage from "./controls/ZoomMessage";
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom, boundaryShape },
+    map: { center, zoom, boundaryShape, showSidebar },
     mosaic,
+    detail,
   } = useExploreSelector(s => s);
 
   const mapRef = useRef<atlas.Map | null>(null);
   const [mapReady, setMapReady] = useState<boolean>(false);
-  const { data } = useTileJson(mosaic.collection?.id, mosaic.query.hash);
-  const layerMinZoom = data?.minzoom;
 
-  useShowBoundary(boundaryShape);
-  useMosaicLayer(mapRef, mosaic);
+  // If there is a selected Item and we're meant to show it as a mosaic,
+  // select that item for use in mosaic tile requests.
+  const itemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+
+  const { data: mosaicLayerTileJson } = useTileJson(
+    mosaic.collection,
+    mosaic.query,
+    mosaic.renderOption,
+    itemForMosaic
+  );
+  const layerMinZoom = mosaicLayerTileJson?.minzoom;
+
+  useShowBoundary(
+    mapRef,
+    boundaryShape ?? detail.selectedItem?.geometry,
+    detail.showAsLayer
+  );
+  useMosaicLayer(mapRef, mosaic, itemForMosaic);
 
   // Set the minzoom for the current layer
   useEffect(() => {
@@ -39,10 +58,17 @@ const ExploreMap = () => {
     if (zoom !== mapRef.current?.getCamera().zoom)
       mapRef.current?.setCamera({
         zoom: zoom,
+        center: center,
         type: "ease",
         duration: 750,
       });
-  }, [zoom]);
+  }, [zoom, center]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      mapRef.current?.resize();
+    }, 350);
+  }, [showSidebar]);
 
   // Setup tile layers and map controls
   useEffect(() => {
@@ -112,7 +138,13 @@ const ExploreMap = () => {
   const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
 
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+      }}
+    >
       {showZoomMsg && zoomMsg}
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>

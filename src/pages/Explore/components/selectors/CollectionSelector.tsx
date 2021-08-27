@@ -4,8 +4,8 @@ import { sortBy } from "lodash-es";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
-import { useExploreSelector } from "../state/hooks";
-import { setCollection } from "../state/mosaicSlice";
+import { useExploreSelector } from "../../state/hooks";
+import { setCollection } from "../../state/mosaicSlice";
 
 const isRenderable = (collection: IStacCollection) =>
   !("cube:variables" in collection);

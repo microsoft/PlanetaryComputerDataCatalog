@@ -1,7 +1,7 @@
 import { IStacSearch } from "types/stac";
 import { useStacSearch } from "utils/stacSearch";
 import SearchResultsPane from "./panes/SearchResultsPane";
-import { useExploreSelector } from "./state/hooks";
+import { useExploreSelector } from "../state/hooks";
 
 const TemporarySearch = () => {
   const { map, mosaic } = useExploreSelector(s => s);
@@ -16,7 +16,7 @@ const TemporarySearch = () => {
         collections: [collection?.id ?? ""],
         datetime: "",
         bbox: map.bounds,
-        limit: 35,
+        limit: 50,
       } as IStacSearch)
     : undefined;
 

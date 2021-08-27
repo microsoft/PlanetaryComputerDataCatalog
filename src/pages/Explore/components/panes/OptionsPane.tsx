@@ -1,7 +1,7 @@
 import { Icon, Stack, Toggle, TooltipHost } from "@fluentui/react";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
-import { useExploreDispatch } from "../state/hooks";
-import { setShowEdit, setShowResults } from "../state/mosaicSlice";
+import { useExploreDispatch } from "../../state/hooks";
+import { setShowEdit, setShowResults } from "../../state/mosaicSlice";
 
 const OptionsPane = () => {
   const dispatch = useExploreDispatch();

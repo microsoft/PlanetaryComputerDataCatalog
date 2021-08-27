@@ -15,7 +15,7 @@ import { IStacSearch, IStacSearchResult } from "types/stac";
 
 import { useStacSearch } from "utils/stacSearch";
 import QueryPane from "./QueryPane";
-import { useExploreSelector } from "../state/hooks";
+import { useExploreSelector } from "../../state/hooks";
 
 type PickerPaneProps = {
   mapRef: React.MutableRefObject<atlas.Map | null>;

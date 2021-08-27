@@ -1,0 +1,31 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent - 2020",
+      "description": "",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Range-size rarity for all species",
+          "description": "10 class color map",
+          "options": "assets=RSR_All&colormap_name=terrain"
+        },
+        {
+          "name": "Range-size rarity for vascular plants",
+          "description": "10 class color map",
+          "options": "assets=RSR_Plants&colormap_name=terrain"
+        },
+        {
+          "name": "Range-size rarity for vertebrates",
+          "description": "10 class color map",
+          "options": "assets=RSR_Vertebrates&colormap_name=terrain"
+        },
+        {
+          "name": "Range-size rarity for aquatic invertebrates",
+          "description": "10 class color map",
+          "options": "assets=RSR_AquaticInverts&colormap_name=terrain"
+        }
+      ]
+    }
+  ]
+}

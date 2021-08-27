@@ -1,0 +1,52 @@
+{
+  "mosaics": [
+    {
+      "name": "Fires - 2010s",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Burn severity",
+          "description": "",
+          "options": "assets=burn-severity&colormap_name=viridis&nodata=0&rescale=0,255"
+        }
+      ]
+    },
+    {
+      "name": "Fires - 2000s",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Burn severity",
+          "description": "",
+          "options": "assets=burn-severity&colormap_name=viridis&nodata=0&rescale=0,255"
+        }
+      ]
+    },
+    {
+      "name": "Fires - 1990s",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Burn severity",
+          "description": "",
+          "options": "assets=burn-severity&colormap_name=viridis&nodata=0&rescale=0,255"
+        }
+      ]
+    },
+    {
+      "name": "Fires - 1980s",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": "order by datetime desc",
+      "renderOptions": [
+        {
+          "name": "Burn severity",
+          "description": "",
+          "options": "assets=burn-severity&colormap_name=viridis&nodata=0&rescale=0,255"
+        }
+      ]
+    }
+  ]
+}

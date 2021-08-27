@@ -13,7 +13,7 @@
         {
           "name": "False Color (infrared)",
           "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
         },
         {
           "name": "NDVI",
@@ -34,7 +34,7 @@
         {
           "name": "False Color (infrared)",
           "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
         },
         {
           "name": "NDVI",
@@ -55,7 +55,7 @@
         {
           "name": "False Color (infrared)",
           "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
         },
         {
           "name": "NDVI",
@@ -76,7 +76,7 @@
         {
           "name": "False Color (infrared)",
           "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
         },
         {
           "name": "NDVI",
@@ -97,7 +97,7 @@
         {
           "name": "False Color (infrared)",
           "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma%20RGB%203.5%20Saturation%201.7%20Sigmoidal%20RGB%2015%200.35"
+          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
         },
         {
           "name": "NDVI",

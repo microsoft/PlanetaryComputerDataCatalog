@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
+import { setShowAsLayer } from "./detailSlice";
 
 export interface MapState {
   center: [number, number];
   zoom: number;
   bounds: atlas.data.BoundingBox;
   boundaryShape: GeoJsonObject | null;
+  showSidebar: boolean;
+  previousCenter: [number, number] | null;
+  previousZoom: number | null;
 }
 
 const initialState: MapState = {
@@ -14,6 +18,9 @@ const initialState: MapState = {
   zoom: 2,
   bounds: [-180, -89, 180, 90],
   boundaryShape: null,
+  showSidebar: true,
+  previousCenter: null,
+  previousZoom: null,
 };
 
 export const mapSlice = createSlice({
@@ -46,6 +53,23 @@ export const mapSlice = createSlice({
     clearBoundaryShape: state => {
       state.boundaryShape = null;
     },
+    toggleShowSidebar: state => {
+      state.showSidebar = !state.showSidebar;
+    },
+  },
+  extraReducers: builder => {
+    builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.previousCenter = state.center;
+        state.previousZoom = state.zoom;
+      } else {
+        state.center = state.previousCenter || state.center;
+        state.zoom = state.previousZoom || state.zoom;
+
+        //Reset
+        state.previousCenter = state.previousZoom = null;
+      }
+    });
   },
 });
 
@@ -55,6 +79,7 @@ export const {
   setZoom,
   setBoundaryShape,
   clearBoundaryShape,
+  toggleShowSidebar,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

@@ -1,45 +1,66 @@
-import { IStacAsset, IStacItem } from "types/stac";
+import {
+  Image,
+  ImageFit,
+  ImageLoadState,
+  Shimmer,
+  ShimmerElementType,
+  useTheme,
+} from "@fluentui/react";
+import { useCallback } from "react";
+import { useBoolean } from "react-use";
+import { IStacItem } from "types/stac";
+import { makeItemPreviewUrl } from "utils";
+import { useExploreSelector } from "../state/hooks";
 
 interface ItemPreviewProps {
   item: IStacItem;
+  size?: number;
 }
 
-const thumbnailImageTypes = ["image/png", "image/jpg", "image/jpeg"];
+const ItemPreview = ({ item, size = 100 }: ItemPreviewProps) => {
+  const theme = useTheme();
+  const [loading, setLoading] = useBoolean(true);
+  const renderOption = useExploreSelector(s => s.mosaic.renderOption);
 
-const assetThumbCheck = (roleKey: string) => {
-  return (asset: IStacAsset): boolean => {
-    return (
-      !!asset?.roles?.includes(roleKey) &&
-      thumbnailImageTypes.includes(asset.type || "")
-    );
-  };
-};
-
-const isThumbnailAsset = assetThumbCheck("thumbnail");
-const isRenderedPreviewAsset = assetThumbCheck("overview");
-
-const ItemPreview = ({ item }: ItemPreviewProps) => {
-  // Get a thumbnail asset, either a absolute url to an image or a preview
-  // endpoint that will generate one on the fly
-  const thumbAsset = Object.values(item.assets).find(
-    asset => isRenderedPreviewAsset(asset) || isThumbnailAsset(asset)
+  const handleStateChange = useCallback(
+    (state: ImageLoadState) => {
+      setLoading(state === ImageLoadState.notLoaded);
+    },
+    [setLoading]
   );
 
-  if (!thumbAsset) return null;
+  if (!renderOption) return null;
 
-  const href = thumbAsset.href.includes("preview")
-    ? thumbAsset.href + "&max_size=100"
-    : thumbAsset.href;
+  const previewUrl = makeItemPreviewUrl(item, renderOption, size);
+
   return (
-    <img
-      src={href}
-      alt={`Rendered thumbnail for item: ${item.id}`}
-      style={{
-        borderRight: "1px solid #ccc",
-        height: "100%",
-        width: "50px",
-      }}
-    />
+    <>
+      {loading && (
+        <Shimmer
+          shimmerColors={{
+            background: theme.palette.neutralLight,
+            shimmer: theme.palette.white,
+            shimmerWave: theme.palette.neutralLighter,
+          }}
+          shimmerElements={[
+            { type: ShimmerElementType.line, height: size, width: size },
+          ]}
+        />
+      )}
+      <Image
+        src={previewUrl}
+        alt={`Rendered thumbnail for item: ${item.id}`}
+        imageFit={ImageFit.contain}
+        onLoadingStateChange={handleStateChange}
+        styles={{
+          root: {
+            background: theme.palette.neutralLighterAlt,
+            height: size,
+            display: loading ? "none" : "block",
+          },
+        }}
+      />
+    </>
   );
 };
 

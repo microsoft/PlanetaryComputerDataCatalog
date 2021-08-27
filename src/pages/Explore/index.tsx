@@ -1,41 +1,37 @@
 import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
-import { Stack, StackItem, IStackTokens } from "@fluentui/react";
+import { Stack, StackItem, IStackTokens, useTheme } from "@fluentui/react";
 
-import { store } from "./components/state/store";
+import { store } from "./state/store";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
-// import ItemPanel from "./components/ItemPanel";
-import CollectionSelector from "./components/selectors/CollectionSelector";
-import MosaicPane from "./components/panes/MosaicPane";
-import CollectionDetailPane from "./components/panes/CollectionDetailPane";
+import ItemPanel from "./components/ItemPanel";
 import ExploreMap from "./components/Map";
-import TemporarySearch from "./components/TemporarySearch";
+import Sidebar from "./components/Sidebar";
 
-const Viewer = () => {
-  const stackTokens: IStackTokens = {
-    childrenGap: 5,
-  };
+const stackTokens: IStackTokens = {
+  childrenGap: 5,
+};
 
+const Explorer = () => {
+  const theme = useTheme();
   return (
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        {/* <ItemPanel selectedItems={selectedItems} /> */}
+        <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
-          <StackItem grow={1} styles={{ root: { maxWidth: "33%", margin: 5 } }}>
-            <Stack styles={{ root: { height: "100%" } }} tokens={stackTokens}>
-              <p>
-                Explore Planetary Computer datasets. Explains filters and results.
-              </p>
-              <CollectionSelector />
-              <MosaicPane />
-              <CollectionDetailPane />
-              <TemporarySearch />
-            </Stack>
-          </StackItem>
-          <StackItem grow={2}>
+          <Sidebar />
+          <StackItem
+            styles={{
+              root: {
+                borderLeft: "1px solid",
+                borderLeftColor: theme.palette.neutralLight,
+              },
+            }}
+            grow={1}
+          >
             <ExploreMap />
           </StackItem>
         </Stack>
@@ -44,4 +40,4 @@ const Viewer = () => {
   );
 };
 
-export default Viewer;
+export default Explorer;
