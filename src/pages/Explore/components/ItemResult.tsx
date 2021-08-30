@@ -13,9 +13,10 @@ type ItemResultProps = {
 };
 
 const ItemResult = ({ item }: ItemResultProps) => {
-  const dispatch = useExploreDispatch();
   const theme = useTheme();
+  const dispatch = useExploreDispatch();
 
+  // The result item will show high-priority attributes if they exist
   const cloud = item.properties?.["eo:cloud_cover"];
   const dt = item.properties?.datetime;
 
