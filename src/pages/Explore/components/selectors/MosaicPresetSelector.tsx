@@ -33,7 +33,7 @@ const MosaicPresetSelector = () => {
   return (
     <StateSelector
       title="Select query preset"
-      icon="Nav2DMapView"
+      icon="PageListFilter"
       action={setMosaicQuery}
       options={mosaicOptions}
       selectedKey={query.name}
