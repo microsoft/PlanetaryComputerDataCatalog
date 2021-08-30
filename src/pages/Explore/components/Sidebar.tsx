@@ -1,4 +1,4 @@
-import { IStackStyles, IStackTokens, Stack, StackItem } from "@fluentui/react";
+import { IStackStyles, IStackTokens, Stack, StackItem, Text } from "@fluentui/react";
 
 import CollectionSelector from "./selectors/CollectionSelector";
 import MosaicPane from "./panes/MosaicPane";
@@ -20,7 +20,8 @@ const Sidebar = () => {
   const margin = showSidebar ? 5 : 3;
 
   const selectedItem = useExploreSelector(s => s.detail.selectedItem);
-  const searchPaneVisibility = selectedItem ? "hidden" : "visible";
+  const searchPanelDisplay = selectedItem ? "none" : "flex";
+  const detailViewDisplay = selectedItem ? "flex" : "none";
 
   const sidebarStyles: Partial<IStackStyles> = {
     root: {
@@ -34,21 +35,26 @@ const Sidebar = () => {
   const searchPanelStyles: Partial<IStackStyles> = {
     root: {
       height: "100%",
-      visibility: searchPaneVisibility,
-      transition: "visibility 0.3s",
-      display: selectedItem ? "none" : "flex",
+      visibility: sidebarVisibility,
+      display: searchPanelDisplay,
+      transition: "visibility 0.1s",
     },
   };
 
   const itemDetailPanelStyles: Partial<IStackStyles> = {
-    root: { height: "100%", display: selectedItem ? "flex" : "none" },
+    root: {
+      height: "100%",
+      display: detailViewDisplay,
+    },
   };
 
   return (
     <>
       <StackItem disableShrink styles={sidebarStyles}>
         <Stack styles={searchPanelStyles} tokens={stackTokens}>
-          <p>Explore Planetary Computer datasets. Explains filters and results.</p>
+          <Text styles={{ root: { padding: "5px 0" } }} block>
+            Explore Planetary Computer datasets. Explains filters and results.
+          </Text>
           <CollectionSelector />
           <MosaicPane />
           <CollectionDetailPane />

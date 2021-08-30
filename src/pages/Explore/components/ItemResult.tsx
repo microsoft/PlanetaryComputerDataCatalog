@@ -1,12 +1,11 @@
 import { IStyle, Link, Stack, Text, useTheme } from "@fluentui/react";
-import dayjs from "dayjs";
 import { useCallback } from "react";
 import { IStacItem } from "types/stac";
-import IconValue from "./controls/IconValue";
 import ItemPreview from "./ItemPreview";
 import { setSelectedItem } from "../state/detailSlice";
 import { useExploreDispatch } from "../state/hooks";
 import { clearBoundaryShape, setBoundaryShape } from "../state/mapSlice";
+import PriorityAttributes from "./controls/PriorityAttributes";
 
 type ItemResultProps = {
   item: IStacItem;
@@ -15,10 +14,6 @@ type ItemResultProps = {
 const ItemResult = ({ item }: ItemResultProps) => {
   const theme = useTheme();
   const dispatch = useExploreDispatch();
-
-  // The result item will show high-priority attributes if they exist
-  const cloud = item.properties?.["eo:cloud_cover"];
-  const dt = item.properties?.datetime;
 
   const hoverStyle: IStyle = {
     background: theme.palette.themeLighterAlt,
@@ -78,24 +73,13 @@ const ItemResult = ({ item }: ItemResultProps) => {
         >
           <ItemPreview item={item} key={item.id} />
         </div>
-        <Stack>
+        <Stack verticalAlign={"space-evenly"}>
           <Text
             styles={{ root: { fontWeight: "bolder", overflowWrap: "anywhere" } }}
           >
             {item.id}
           </Text>
-          <Stack tokens={{ childrenGap: 5 }}>
-            {dt && (
-              <span title="Acquisition date">{dayjs(dt).format("MM/DD/YYYY")}</span>
-            )}
-            {cloud && (
-              <IconValue
-                iconName="Cloud"
-                value={`${cloud.toFixed(1)}%`}
-                title="Cloud Cover %"
-              />
-            )}
-          </Stack>
+          <PriorityAttributes item={item} />
         </Stack>
       </Stack>
     </Link>
