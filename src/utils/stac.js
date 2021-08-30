@@ -111,6 +111,9 @@ StacFields.Registry.addMetadataField("landsat:cloud_cover_land", {
   formatter: fixedPct,
 });
 
+StacFields.Registry.addMetadataField("naip:state", {
+  formatter: value => value && value.toUpperCase(),
+});
 export const mediaTypeOverride = value => {
   if (value === "image/tiff; application=geotiff; profile=cloud-optimized") {
     return "GeoTIFF (COG)";
