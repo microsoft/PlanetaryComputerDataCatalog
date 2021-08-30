@@ -13,13 +13,14 @@ import { useTileJson } from "utils/requests";
 import { setLayerMinZoom } from "../state/mosaicSlice";
 import { useMosaicLayer, useShowBoundary } from "../utils/hooks";
 import ZoomMessage from "./controls/ZoomMessage";
+import { isEqual } from "lodash-es";
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom, boundaryShape, showSidebar },
+    map: { center, zoom, bounds, boundaryShape, showSidebar },
     mosaic,
     detail,
   } = useExploreSelector(s => s);
@@ -63,6 +64,16 @@ const ExploreMap = () => {
         duration: 750,
       });
   }, [zoom, center]);
+
+  useEffect(() => {
+    if (isEqual(bounds, mapRef.current?.getCamera().bounds)) return;
+
+    mapRef.current?.setCamera({
+      bounds: bounds,
+      type: "ease",
+      duration: 750,
+    });
+  }, [bounds]);
 
   useEffect(() => {
     setTimeout(() => {

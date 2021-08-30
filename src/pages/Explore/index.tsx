@@ -9,6 +9,7 @@ import SEO from "components/Seo";
 import ItemPanel from "./components/ItemPanel";
 import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
+import FrameController from "./components/FrameController";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -20,6 +21,7 @@ const Explorer = () => {
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
+        <FrameController />
         <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <Sidebar />
