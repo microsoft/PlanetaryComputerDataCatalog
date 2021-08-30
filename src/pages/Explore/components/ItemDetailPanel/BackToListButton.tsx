@@ -34,18 +34,16 @@ const BackToListButton = () => {
         styles={{
           icon: {
             fontSize: FontSizes.size24,
-          },
-          iconChecked: {
-            color: theme.semanticColors.bodyBackground,
+            color: theme.palette.themeDarkAlt,
           },
           root: {
-            float: "left",
+            position: "absolute",
+            zIndex: 1,
             width: 40,
             height: 40,
-            borderRadius: 20,
+            margin: 6,
             backgroundColor: theme.semanticColors.bodyBackground,
-            border: "1px solid",
-            borderColor: theme.palette.themePrimary,
+            boxShadow: theme.effects.elevation4,
           },
         }}
       />
