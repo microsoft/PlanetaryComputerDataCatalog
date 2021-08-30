@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
+import * as qs from "query-string";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -11,15 +13,19 @@ const Layout = ({
   isShort = false,
   children,
 }) => {
+  const params = qs.parse(useLocation().search);
+
+  const embedded = params.embed.toLowerCase() === "true" || false;
+
   return (
     <>
-      <Header />
-      <Announcement />
+      {!embedded && <Header />}
+      {!embedded && <Announcement />}
       {bannerHeader && <div>{bannerHeader}</div>}
       <ScrollToTopOnMount />
       <main className={isShort ? "short" : undefined}>{children}</main>
       {bannerFooter}
-      <Footer />
+      {!embedded && <Footer />}
     </>
   );
 };
