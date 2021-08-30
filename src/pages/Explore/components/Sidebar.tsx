@@ -1,8 +1,14 @@
-import { IStackStyles, IStackTokens, Stack, StackItem, Text } from "@fluentui/react";
+import {
+  IStackStyles,
+  IStackTokens,
+  Separator,
+  Stack,
+  StackItem,
+  Text,
+} from "@fluentui/react";
 
 import CollectionSelector from "./selectors/CollectionSelector";
 import MosaicPane from "./panes/MosaicPane";
-import CollectionDetailPane from "./panes/CollectionDetailPane";
 import TemporarySearch from "./TemporarySearch";
 import MinimizeButton from "./controls/MinimizeButton";
 import { useExploreSelector } from "../state/hooks";
@@ -57,7 +63,7 @@ const Sidebar = () => {
           </Text>
           <CollectionSelector />
           <MosaicPane />
-          <CollectionDetailPane />
+          <Separator />
           <TemporarySearch />
         </Stack>
         <Stack styles={itemDetailPanelStyles} tokens={stackTokens}>
