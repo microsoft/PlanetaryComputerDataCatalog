@@ -7,8 +7,16 @@ import StateSelector from "./StateSelector";
 import { useExploreSelector } from "../../state/hooks";
 import { setCollection } from "../../state/mosaicSlice";
 
-const isRenderable = (collection: IStacCollection) =>
-  !("cube:variables" in collection);
+const isRenderable = (collection: IStacCollection) => {
+  // By default, all collections with at least one GeoTIFF data-role item_asset
+  // are renderable
+  if (collection.item_assets) {
+    return !!Object.values(collection.item_assets).find(a =>
+      a.type?.toLowerCase().includes("geotiff")
+    );
+  }
+  return false;
+};
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();

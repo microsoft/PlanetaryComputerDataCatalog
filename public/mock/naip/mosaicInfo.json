@@ -1,49 +1,43 @@
 {
   "mosaics": [
     {
-      "name": "Most recent - 2019",
+      "name": "Most recent - 2016-2019",
       "description": "",
-      "cql": "datetime >= 01-01-2019 order by datetime desc",
-      "renderOptions": [
+      "cql": [
         {
-          "name": "True Color",
-          "description": "",
-          "options": "assets=image&bidx=1,2,3"
-        },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=image&&bidx=4,1,2&color_formula=Sigmoidal+RGB+15+0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "assets=image&bidx=1,4&expression=(NIR-Red)/(NIR+Red)&rescale=-1,1&colormap_name=viridis"
+          "anyinteracts": [{ "property": "datetime" }, ["2016-01-01", "2019-12-31"]]
         }
       ]
     },
-
     {
       "name": "2018",
       "description": "",
-      "cql": "datetime >= 01-01-2018 order by datetime desc",
-      "renderOptions": [
+      "cql": [
         {
-          "name": "True Color",
-          "description": "",
-          "options": "assets=image&bidx=1,2,3"
-        },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=image&&bidx=4,1,2&color_formula=Sigmoidal+RGB+15+0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "assets=image&bidx=1,4&expression=(NIR-Red)/(NIR+Red)&rescale=-1,1&colormap_name=viridis"
+          "anyinteracts": [{ "property": "datetime" }, ["2018-01-01", "2018-12-31"]]
         }
       ]
+    },
+    {
+      "name": "2012-2015",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2012-01-01", "2015-12-31"]]
+        }
+      ]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "True Color",
+      "description": "",
+      "options": "assets=image&bidx=1,2,3"
+    },
+    {
+      "name": "False Color (infrared)",
+      "description": "NIR(B08), Red (B04), Green (B03)",
+      "options": "assets=image&&bidx=4,1,2&color_formula=Sigmoidal RGB 15 0.35"
     }
   ]
 }

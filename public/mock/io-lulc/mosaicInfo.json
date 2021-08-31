@@ -3,14 +3,14 @@
     {
       "name": "Most recent - 2020",
       "description": "Most recent Land Use/Land Cover",
-      "cql": "order by datetime desc",
-      "renderOptions": [
-        {
-          "name": "Default",
-          "description": "10 class color map",
-          "options": "assets=data&colormap_name=io-lulc"
-        }
-      ]
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Default - 10 class color map",
+      "description": "",
+      "options": "assets=data&colormap_name=io-lulc"
     }
   ]
 }

@@ -3,14 +3,14 @@
     {
       "name": "Most recent",
       "description": "Most recent Land Use/Land Cover",
-      "cql": "order by datetime desc",
-      "renderOptions": [
-        {
-          "name": "Default",
-          "description": "",
-          "options": "assets=data&colormap_name=gap-lulc"
-        }
-      ]
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Default",
+      "description": "",
+      "options": "assets=data&colormap_name=gap-lulc"
     }
   ]
 }

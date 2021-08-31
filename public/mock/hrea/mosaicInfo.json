@@ -3,36 +3,87 @@
     {
       "name": "Most recent - 2019",
       "description": "",
-      "cql": "order by datetime desc",
-      "renderOptions": [
+      "cql": [
         {
-          "name": "Estimated brightness",
-          "description": "",
-          "options": "assets=estimated-brightness&colormap_name=magma&rescale=1,256"
-        },
-        {
-          "name": "Nighttime light composite",
-          "description": "",
-          "options": "assets=light-composite&colormap_name=viridis&nodata=0&rescale=0,255"
+          "anyinteracts": [{ "property": "datetime" }, ["2019-01-01", "2019-12-31"]]
         }
       ]
     },
     {
       "name": "2018",
       "description": "",
-      "cql": "order by datetime desc",
-      "renderOptions": [
+      "cql": [
         {
-          "name": "Estimated brightness",
-          "description": "",
-          "options": "assets=estimated-brightness&colormap_name=magma&rescale=1,256"
-        },
-        {
-          "name": "Nighttime light composite",
-          "description": "",
-          "options": "assets=light-composite&colormap_name=viridis&nodata=0&rescale=1,50"
+          "anyinteracts": [{ "property": "datetime" }, ["2018-01-01", "2018-12-31"]]
         }
       ]
+    },
+    {
+      "name": "2017",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-01-01", "2017-12-31"]]
+        }
+      ]
+    },
+    {
+      "name": "2016",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2016-01-01", "2016-12-31"]]
+        }
+      ]
+    },
+    {
+      "name": "2015",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2015-01-01", "2015-12-31"]]
+        }
+      ]
+    },
+    {
+      "name": "2014",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2014-01-01", "2014-12-31"]]
+        }
+      ]
+    },
+    {
+      "name": "2013",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2013-01-01", "2013-12-31"]]
+        }
+      ]
+    },
+    {
+      "name": "2012",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2012-01-01", "2012-12-31"]]
+        }
+      ]
+    }
+  ],
+
+  "renderOptions": [
+    {
+      "name": "Estimated brightness",
+      "description": "",
+      "options": "assets=estimated-brightness&colormap_name=magma&rescale=1,256"
+    },
+    {
+      "name": "Nighttime light composite",
+      "description": "",
+      "options": "assets=light-composite&colormap_name=viridis&nodata=0&rescale=0,255"
     }
   ]
 }

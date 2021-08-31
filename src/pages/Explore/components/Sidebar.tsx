@@ -7,13 +7,14 @@ import {
   Text,
 } from "@fluentui/react";
 
-import CollectionSelector from "./selectors/CollectionSelector";
+import { CollectionSelector } from "./selectors";
 import MosaicPane from "./panes/MosaicPane";
-import TemporarySearch from "./TemporarySearch";
 import MinimizeButton from "./controls/MinimizeButton";
-import { useExploreSelector } from "../state/hooks";
-import { SIDEBAR_WIDTH } from "../utils/constants";
 import ItemDetailPanel from "./ItemDetailPanel";
+import SearchResultsPane from "./panes/SearchResultsPane";
+import { useStacFilter } from "../utils/hooks";
+import { SIDEBAR_WIDTH } from "../utils/constants";
+import { useExploreSelector } from "../state/hooks";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -29,6 +30,7 @@ const Sidebar = () => {
   const searchPanelDisplay = selectedItem ? "none" : "flex";
   const detailViewDisplay = selectedItem ? "flex" : "none";
 
+  const stacFilter = useStacFilter();
   const sidebarStyles: Partial<IStackStyles> = {
     root: {
       width: width,
@@ -64,7 +66,7 @@ const Sidebar = () => {
           <CollectionSelector />
           <MosaicPane />
           <Separator />
-          <TemporarySearch />
+          <SearchResultsPane request={stacFilter} />
         </Stack>
         <Stack styles={itemDetailPanelStyles} tokens={stackTokens}>
           <ItemDetailPanel />

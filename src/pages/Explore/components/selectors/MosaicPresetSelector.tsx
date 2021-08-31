@@ -1,7 +1,6 @@
 import { IDropdownOption } from "@fluentui/react";
 import { useEffect } from "react";
-import { IMosaicInfo } from "types";
-import { useCollectionMosaicInfo } from "utils/requests";
+import { useCollectionMosaicInfo } from "../../utils/hooks";
 import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
 import { setMosaicQuery } from "../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
@@ -10,8 +9,7 @@ const MosaicPresetSelector = () => {
   const { collection, query } = useExploreSelector(state => state.mosaic);
   const dispatch = useExploreDispatch();
 
-  const { isSuccess, data } = useCollectionMosaicInfo(collection?.id);
-  const mosaicInfo: IMosaicInfo = data;
+  const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   useEffect(() => {
     if (mosaicInfo && query.name === null) {
@@ -27,7 +25,7 @@ const MosaicPresetSelector = () => {
       : [];
 
   const getQueryPresetByName = (key: string | number) => {
-    return mosaicInfo.mosaics.find(mosaic => mosaic.name === key);
+    return mosaicInfo?.mosaics.find(mosaic => mosaic.name === key);
   };
 
   return (

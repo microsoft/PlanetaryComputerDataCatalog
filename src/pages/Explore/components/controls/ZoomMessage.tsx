@@ -20,6 +20,7 @@ const ZoomMessage = ({ onClick }: ZoomMessageProps) => {
         border: "1px solid",
         borderColor: theme.semanticColors.buttonBorder,
         backgroundColor: theme.semanticColors.bodyBackground,
+        boxShadow: theme.effects.elevation8,
       }}
     >
       <Link onClick={onClick}>Zoom in</Link> to see layer

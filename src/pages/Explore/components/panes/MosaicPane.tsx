@@ -1,5 +1,4 @@
-import MosaicPresetSelector from "../selectors/MosaicPresetSelector";
-import RenderOptionsSelector from "../selectors/RenderOptionsSelector";
+import { MosaicPresetSelector, RenderOptionsSelector } from "../selectors";
 import OptionsPane from "./OptionsPane";
 
 const MosaicPane = () => {

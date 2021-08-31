@@ -1,110 +1,69 @@
 {
   "mosaics": [
     {
+      "name": "Most recent",
+      "description": "",
+      "cql": [],
+      "sortby": [{ "field": "properties.datetime", "direction": "desc" }]
+    },
+    {
       "name": "Most recent (low cloud)",
       "description": "",
-      "cql": "eo:cloud_cover < 20 order by datetime desc",
-      "renderOptions": [
-        {
-          "name": "True Color",
-          "description": "RGB from visual asset",
-          "options": "assets=visual&bidx=1,2,3&nodata=0"
-        },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
-        }
+      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }],
+      "sortby": [
+        { "field": "properties.eo:cloud_cover", "direction": "asc" },
+        { "field": "properties.datetime", "direction": "desc" }
       ]
+    },
+    {
+      "name": "Summer 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2021-07-01", "2021-09-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ],
+      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
     },
     {
       "name": "Spring 2021 (low cloud)",
-      "cql": "datetime between '03-01-2021' and '06-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderOptions": [
+      "description": "",
+      "cql": [
         {
-          "name": "True Color",
-          "description": "RGB from visual asset",
-          "options": "assets=visual&bidx=1,2,3&nodata=0"
+          "anyinteracts": [{ "property": "datetime" }, ["2021-04-01", "2021-06-30"]]
         },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
-        }
-      ]
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ],
+      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
     },
     {
       "name": "Winter 2021 (low cloud)",
-      "cql": "datetime between '12-01-2020' and '03-01-2021' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderOptions": [
+      "description": "",
+      "cql": [
         {
-          "name": "True Color",
-          "description": "RGB from visual asset",
-          "options": "assets=visual&bidx=1,2,3&nodata=0"
+          "anyinteracts": [{ "property": "datetime" }, ["2021-01-01", "2021-03-31"]]
         },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
-        }
-      ]
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ],
+      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "True Color",
+      "description": "RGB from visual asset",
+      "options": "assets=visual&bidx=1,2,3&nodata=0"
     },
     {
-      "name": "Fall 2020 (low cloud)",
-      "cql": "datetime between '09-01-2020' and '12-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderOptions": [
-        {
-          "name": "True Color",
-          "description": "RGB from visual asset",
-          "options": "assets=visual&bidx=1,2,3&nodata=0"
-        },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
-        }
-      ]
+      "name": "False Color (infrared)",
+      "description": "NIR(B08), Red (B04), Green (B03)",
+      "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
     },
     {
-      "name": "Summer 2020 (low cloud)",
-      "cql": "datetime between '06-01-2020' and '06-01-2020' and eo:cloud_cover < 20 order by eo:cloud_cover asc",
-      "renderOptions": [
-        {
-          "name": "True Color",
-          "description": "RGB from visual asset",
-          "options": "assets=visual&bidx=1,2,3&nodata=0"
-        },
-        {
-          "name": "False Color (infrared)",
-          "description": "NIR(B08), Red (B04), Green (B03)",
-          "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
-        },
-        {
-          "name": "NDVI",
-          "description": "(NIR-Red)/(NIR+Red)",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
-        }
-      ]
+      "name": "NDVI",
+      "description": "(NIR-Red)/(NIR+Red)",
+      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
     }
   ]
 }

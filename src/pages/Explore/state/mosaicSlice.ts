@@ -1,16 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { some } from "lodash-es";
 
-import { IMosaic, IMosaicRenderOption } from "types";
 import { IStacCollection } from "types/stac";
 import { getMosaicQueryHashKey } from "utils/requests";
+import { IMosaic, IMosaicRenderOption } from "../types";
 
-export interface IMosaicState extends IMosaic {
-  hash: string | null;
-}
 export interface MosaicState {
   collection: IStacCollection | null;
-  query: IMosaicState;
+  query: IMosaic;
   renderOption: IMosaicRenderOption | null;
   layer: {
     minZoom: number;
@@ -26,6 +22,7 @@ const initialMosaicState = {
   name: null,
   description: null,
   cql: null,
+  sortby: null,
   hash: null,
   renderOptions: null,
 };
@@ -64,20 +61,10 @@ export const mosaicSlice = createSlice({
       state.renderOption = null;
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
-      const { renderOptions } = action.payload;
       state.query = { ...action.payload, hash: null };
-
-      if (!renderOptions) return;
-
-      // Retain the current render option, unless the current option does not
-      // exist for the new mosaic preset
-      if (!state.renderOption || !some(renderOptions, state.renderOption)) {
-        state.renderOption = renderOptions[0];
-      }
     },
-    setRenderOption: (state, action: PayloadAction<string>) => {
-      state.renderOption =
-        state.query.renderOptions?.find(r => r.name === action.payload) || null;
+    setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
+      state.renderOption = action.payload;
     },
     setShowResults: (state, action: PayloadAction<boolean>) => {
       state.options.showResults = action.payload;

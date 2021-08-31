@@ -1,8 +1,7 @@
-import { IMosaicState } from "pages/Explore/state/mosaicSlice";
-import { IMosaicRenderOption } from "types";
 import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL } from "./constants";
 import * as qs from "query-string";
+import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -155,7 +154,7 @@ export const scrollToHash = (
 
 export const makeTileJsonUrl = (
   collection: IStacCollection,
-  query: IMosaicState,
+  query: IMosaic,
   renderOption: IMosaicRenderOption | null,
   item: IStacItem | null
 ) => {

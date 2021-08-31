@@ -3,19 +3,19 @@
     {
       "name": "Most recent - 2000",
       "description": "Most recent DEM",
-      "cql": "order by datetime desc",
-      "renderOptions": [
-        {
-          "name": "Elevation (terrain)",
-          "description": "10 class color map",
-          "options": "assets=elevation&rescale=0,255&colormap_name=terrain"
-        },
-        {
-          "name": "Elevation (viridis)",
-          "description": "10 class color map",
-          "options": "assets=elevation&rescale=0,255&colormap_name=viridis"
-        }
-      ]
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Elevation (terrain)",
+      "description": "",
+      "options": "assets=elevation&rescale=0,255&colormap_name=terrain"
+    },
+    {
+      "name": "Elevation (viridis)",
+      "description": "",
+      "options": "assets=elevation&rescale=0,255&colormap_name=viridis"
     }
   ]
 }
