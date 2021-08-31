@@ -33,7 +33,11 @@ See [Scaling with Dask](../quickstarts/scale-with-dask.md) for an introduction t
 
 ## Use VS Code to connect to a remote Jupyter Kernel
 
-See [Using VS Code](../overview/using-vscode.md) for how to use Visual Studio Code as a user interface for the Planetary Computer's Compute.
+See [Using VS Code](../overview/ui-vscode) for how to use Visual Studio Code as a user interface for the Planetary Computer's Compute.
+
+## Use GitHub Codespaces
+
+See [Use GitHub Codespaces](../overview/ui-codespaces) for how to use [GitHub Codespaces][codespaces] as a user interface and execution environment using data from the on the Planetary Computer catalog.
 
 ## Use our Dask Gateway
 
@@ -134,3 +138,5 @@ and connect to it
 Like the previous setup, the Dask scheduler and workers are running in Azure near the data. The local client might be outside of Azure.
 
 ![Diagram showing compute with self-managed Dask cluster](images/cloudprovider-diagram.png)
+
+[codespaces]: https://github.com/features/codespaces

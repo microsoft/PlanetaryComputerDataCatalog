@@ -8,8 +8,6 @@ You might choose this setup - rather than logging in to the Hub directly and wor
 
 The *source files* you're working with will be stored on your local machine's hard drive, but they will be executed in Azure, next to the data. 
 
-
-
 ## Setting up your Hub environment 
 
 Before you can work with the Planetary Computer Hub with VS Code, you need to start a server on the Hub and create your API token.
