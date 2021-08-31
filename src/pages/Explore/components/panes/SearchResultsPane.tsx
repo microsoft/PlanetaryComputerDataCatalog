@@ -25,13 +25,8 @@ const SearchResultsPane = ({
   }
   if (!data) return null;
 
-  const renderCell = (
-    item?: IStacItem | undefined,
-    index?: number | undefined,
-    isScrolling?: boolean | undefined
-  ): ReactNode => {
+  const renderCell = (item?: IStacItem | undefined): ReactNode => {
     if (!item) return null;
-
     return <ItemResult item={item} />;
   };
 

@@ -6,7 +6,6 @@ import { store } from "./state/store";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
-import ItemPanel from "./components/ItemPanel";
 import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
 
@@ -20,7 +19,6 @@ const Explorer = () => {
     <Layout>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        <ItemPanel />
         <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
           <Sidebar />
           <StackItem
