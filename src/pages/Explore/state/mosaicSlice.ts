@@ -39,8 +39,8 @@ const initialState: MosaicState = {
     maxExtent: [],
   },
   options: {
+    showResults: true,
     showEdit: false,
-    showResults: false,
   },
 };
 
