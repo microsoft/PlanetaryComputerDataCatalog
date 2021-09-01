@@ -37,6 +37,8 @@ First, you'll need a JupyterHub API token. You can generate one at <https://plan
 
 Next, set that JupyterHub API token as an encrypted secret by following [this guide](https://docs.github.com/en/codespaces/managing-your-codespaces/managing-encrypted-secrets-for-your-codespaces). You'll need to grant access to the repositories you want to access the secret. To ensure that it's detected automatically by dask-gateway, the environment variable must be named `JUPYTERHUB_API_TOKEN`.
 
+You'll need to restart your codespace after granting it access to the `JUPYTERHUB_API_TOKEN` secret, if it's already running.
+
 Finally, configure your `devcontainer.json` file to include the relevant environment variables. If you created your Codespace by forking [Planetary Computer Examples][examples], you'll already have these set.
 
 ```json
