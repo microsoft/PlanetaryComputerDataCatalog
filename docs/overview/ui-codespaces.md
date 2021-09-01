@@ -10,6 +10,8 @@ This will create a Codespace under your GitHub account that's configured to work
 
 ![A preview of GitHub Codespaces in the browser.](images/codespaces-browser.png)
 
+When you launch a notebook you'll be prompted to select a kernel. Choose the `'notebook': conda` kernel.
+
 ## Set a default region
 
 We recommend that you create your Codespaces in the West Europe. You can do this per-Codespace, or set a [default region][region].
