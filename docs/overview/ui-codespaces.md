@@ -2,7 +2,11 @@
 
 [GitHub Codespaces][codespaces] is a development environment that's hosted in the cloud.
 
-The easiest way to get started is to [fork] the [Planetary Computer Examples][examples] repository and create a new Codespace (we recommend [setting a default region](#setting-a-default-region) first). This will create a Codespace under your GitHub account that's configured to work well with our data.
+The easiest way to get started is to [fork] the [Planetary Computer Examples][examples] repository and create a new Codespace (we recommend [setting a default region](#setting-a-default-region) first).
+
+![Start codespaces from the "Code" dropdown.](images/codespaces-start.png)
+
+This will create a Codespace under your GitHub account that's configured to work well with our data.
 
 ![A preview of GitHub Codespaces in the browser.](images/codespaces-browser.png)
 
