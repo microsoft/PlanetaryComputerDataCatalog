@@ -30,7 +30,7 @@ We'll assume that you've completed the [prerequisites] for creating an AKS clust
 
 This section walks through the simplest possible deployment, but lacks basic features like authentication, HTTPS, and a user-friendly DNS name. We recommend trying this deployment to ensure that the tools work, before deleting things and moving on to the advanced deployment.
 
-#### Kubernetes Cluster
+#### Kubernetes cluster
 
 Following the [Kubernetes quickstart](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough), we'll use the Azure CLI to create an AKS cluster.
 
@@ -158,7 +158,7 @@ It might take a few minutes for it to appear!
 
 The instructions printed above show how to get the IP address of your hub.
 
-```{warning} This simple deployment doesn't have any kind of authentication. See [recommended](#recommended-deployment) for how to create a deployment with authentication.
+```{warning} This simple deployment doesn't have any kind of authentication. See [recommended](docs/concepts/hub-deployment/#recommended-deployment) for how to create a deployment with authentication.
 ```
 
 When you log in (using any username and password, since we don't have authentication yet) and start a notebook sever, you should be able to connect to the Dask Gateway server and create a cluster.
@@ -183,7 +183,7 @@ The easiest way to clean up the resources is to delete the resource group
 $ az group delete -n pangeo
 ```
 
-### Recommended Deployment
+### Recommended deployment
 
 This deployment is a bit more more complicated. Compared to the simple deployment, it adds
 
@@ -191,7 +191,7 @@ This deployment is a bit more more complicated. Compared to the simple deploymen
 2. Authentication with Azure Active Directory
 3. Multiple Kubernetes node pools, using spot (preemptible) nodes for workers to save on costs
 
-### Azure Resources
+### Azure resources
 
 In this section we'll use the Azure CLI to create a resource group and AKS cluster, and the Azure Portal to create an App registration. This is a nice way to build familiarity with the underlying services, but you might consider using a tool like [terraform](https://www.terraform.io/) and the [Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs) to configure your Azure resources.
 
@@ -374,7 +374,7 @@ After a moment, the Dask Scheduler and Worker pods should start up. Check the po
 The easiest way to clean up the resources is to delete the resource group
 
 ```bash
-az group delete -n pangeo
+$ az group delete -n pangeo
 ```
 
 ### Next steps
