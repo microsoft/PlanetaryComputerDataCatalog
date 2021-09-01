@@ -44,6 +44,7 @@ See all tutorials <https://github.com/microsoft/PlanetaryComputerExamples/tree/m
 concepts/data-catalog
 concepts/computing
 concepts/sas
+concepts/hub-deployment
 ```
 
 ```{toctree}
