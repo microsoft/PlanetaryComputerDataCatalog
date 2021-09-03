@@ -13,7 +13,8 @@
 
 About <overview/about>
 The Hub <overview/environment>
-Using VS Code <overview/ui-vscode>
+Use VS Code <overview/ui-vscode>
+Use GitHub Codespaces <overview/ui-codespaces>
 Changelog <overview/changelog>
 ```
 
