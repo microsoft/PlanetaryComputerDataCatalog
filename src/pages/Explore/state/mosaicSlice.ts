@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 import { IStacCollection } from "types/stac";
-import { getMosaicQueryHashKey } from "utils/requests";
+import { createMosaicQueryHashkey } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
+import { ExploreState } from "./store";
 
 export interface MosaicState {
   collection: IStacCollection | null;
@@ -43,11 +44,13 @@ const initialState: MosaicState = {
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/createQueryHashkey",
-  async (queryInfo: IMosaic, { dispatch }) => {
+  async (queryInfo: IMosaic, { getState, dispatch }) => {
     dispatch(setQuery(queryInfo));
 
-    const response = await getMosaicQueryHashKey(queryInfo.cql);
-    return response.data + queryInfo.name;
+    const state = getState() as ExploreState;
+    const collectionId = state.mosaic.collection?.id;
+    const hashkey = await createMosaicQueryHashkey(queryInfo, collectionId);
+    return hashkey;
   }
 );
 

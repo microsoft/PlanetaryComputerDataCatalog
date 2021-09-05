@@ -1,7 +1,21 @@
-import { IStacFilter } from "types/stac";
+import { IStacFilter, IStacFilterCollection, IStacFilterGeom } from "types/stac";
 import { useStacSearch } from "./useStacSearch";
 import { useExploreSelector } from "../../state/hooks";
 import { collectionFilter, geomFilter } from "../stac";
+import { IMosaic } from "pages/Explore/types";
+import { DEFAULT_QUERY_LIMIT } from "../constants";
+
+export const makeFilterBody = (
+  baseFilter: (IStacFilterCollection | IStacFilterGeom | null)[],
+  query: IMosaic,
+  limit: number | undefined = undefined
+): IStacFilter => {
+  return {
+    filter: { and: [...baseFilter, ...(query.cql || [])] },
+    sortby: query.sortby || undefined,
+    limit: limit,
+  } as IStacFilter;
+};
 
 const useStacFilter = () => {
   const { map, mosaic } = useExploreSelector(s => s);
@@ -15,14 +29,9 @@ const useStacFilter = () => {
   const geometryFragment = geomFilter(map.bounds);
 
   const baseFilter = [collectionFragment, geometryFragment];
-  const mosaicFilter = Array.isArray(query.cql) ? query.cql : [];
 
   const search = shouldQuery()
-    ? ({
-        filter: { and: [...baseFilter, ...mosaicFilter] },
-        sortby: query.sortby || undefined,
-        limit: 50,
-      } as IStacFilter)
+    ? makeFilterBody(baseFilter, query, DEFAULT_QUERY_LIMIT)
     : undefined;
 
   return useStacSearch(search);

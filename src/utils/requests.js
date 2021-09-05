@@ -1,4 +1,6 @@
 import axios from "axios";
+import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
+import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
@@ -42,8 +44,10 @@ export const getTileJson = async ({ queryKey }) => {
   return resp.data;
 };
 
-export const getMosaicQueryHashKey = async cql => {
-  return axios.get(`/mock/mosaicHashKey.txt?cql=${cql}`);
+export const createMosaicQueryHashkey = async (queryInfo, collectionId) => {
+  const body = makeFilterBody([collectionFilter(collectionId)], queryInfo);
+  const r = await axios.post(`${DATA_URL}/mosaic/create?assets=foo`, body);
+  return r.data?.name;
 };
 
 const getCollections = async ({ queryKey }) => {

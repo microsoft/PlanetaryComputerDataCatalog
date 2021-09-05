@@ -23,30 +23,15 @@ const useMosaicLayer = (
     const removeMosaic = () => mosaicLayer && map.layers.remove(mosaicLayer);
 
     if (collection && query.hash && renderOption) {
-      // TODO: checking for tilejson asset is a temporary measure until mosaics are dynamic. We override this
-      // for selectedItem, but that should not be necessary after dynamic mosaics.
-      const tilejsonAsset = Object.values(collection.assets).find(asset =>
-        asset.roles?.includes("tiles")
-      );
+      const tileLayerOpts = {
+        tileUrl: makeTileJsonUrl(collection, query, renderOption, stacItemForMosaic),
+      };
 
-      if (tilejsonAsset || stacItemForMosaic) {
-        const tileLayerOpts = {
-          tileUrl: makeTileJsonUrl(
-            collection,
-            query,
-            renderOption,
-            stacItemForMosaic
-          ),
-        };
-
-        if (mosaicLayer) {
-          (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
-        } else {
-          const layer = new atlas.layer.TileLayer(tileLayerOpts, "stac-mosaic");
-          map.layers.add(layer, "stac-item-outline");
-        }
+      if (mosaicLayer) {
+        (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
       } else {
-        removeMosaic();
+        const layer = new atlas.layer.TileLayer(tileLayerOpts, "stac-mosaic");
+        map.layers.add(layer, "stac-item-outline");
       }
     } else {
       removeMosaic();
