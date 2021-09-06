@@ -10,12 +10,12 @@
     {
       "name": "Elevation (terrain)",
       "description": "",
-      "options": "assets=elevation&rescale=0,255&colormap_name=terrain"
+      "options": "assets=elevation&rescale=0,5000&colormap_name=terrain"
     },
     {
       "name": "Elevation (viridis)",
       "description": "",
-      "options": "assets=elevation&rescale=0,255&colormap_name=viridis"
+      "options": "assets=elevation&rescale=0,5000&colormap_name=viridis"
     }
   ]
 }

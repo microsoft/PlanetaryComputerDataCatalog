@@ -1,15 +1,8 @@
-import {
-  IStackStyles,
-  IStackTokens,
-  Separator,
-  Stack,
-  StackItem,
-  Text,
-} from "@fluentui/react";
+import { IStackStyles, IStackTokens, Stack, StackItem, Text } from "@fluentui/react";
 
 import { CollectionSelector } from "./selectors";
-import MosaicPane from "./panes/MosaicPane";
-import MinimizeButton from "./controls/MinimizeButton";
+import { MosaicPresetSelector, RenderOptionsSelector } from "./selectors";
+import MinimizeButton from "./controls/ToggleSidebarButton";
 import ItemDetailPanel from "./ItemDetailPanel";
 import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../utils/hooks";
@@ -37,6 +30,7 @@ const Sidebar = () => {
       margin: margin,
       visibility: sidebarVisibility,
       transition: "width 0.3s",
+      paddingLeft: 4,
     },
   };
 
@@ -64,8 +58,8 @@ const Sidebar = () => {
             Explore Planetary Computer datasets. Explains filters and results.
           </Text>
           <CollectionSelector />
-          <MosaicPane />
-          <Separator />
+          <MosaicPresetSelector />
+          <RenderOptionsSelector />
           <SearchResultsPane request={stacFilter} />
         </Stack>
         <Stack styles={itemDetailPanelStyles} tokens={stackTokens}>

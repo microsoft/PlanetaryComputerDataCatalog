@@ -15,9 +15,10 @@ import { useExploreSelector } from "../state/hooks";
 interface ItemPreviewProps {
   item: IStacItem;
   size?: number;
+  border?: "top" | "side";
 }
 
-const ItemPreview = ({ item, size = 100 }: ItemPreviewProps) => {
+const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) => {
   const theme = useTheme();
   const [loading, setLoading] = useBoolean(true);
   const renderOption = useExploreSelector(s => s.mosaic.renderOption);
@@ -54,9 +55,11 @@ const ItemPreview = ({ item, size = 100 }: ItemPreviewProps) => {
         onLoadingStateChange={handleStateChange}
         styles={{
           root: {
-            background: theme.palette.neutralLighterAlt,
-            height: size,
+            background: theme.palette.black,
             display: loading ? "none" : "block",
+            borderRadius: border === "top" ? "4px 4px 0 0" : " 4px 0 0 4px",
+            maxWidth: size,
+            maxHeight: size,
           },
         }}
       />

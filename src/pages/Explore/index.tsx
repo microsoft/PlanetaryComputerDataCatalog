@@ -16,10 +16,10 @@ const stackTokens: IStackTokens = {
 const Explorer = () => {
   const theme = useTheme();
   return (
-    <Layout>
+    <Layout onGrid={false}>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
+        <Stack horizontal tokens={stackTokens} styles={{ root: { height: "91vh" } }}>
           <Sidebar />
           <StackItem
             styles={{

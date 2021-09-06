@@ -14,7 +14,7 @@ const AssetList = ({ item }: AssetListProps) => {
       <MessageBar styles={{ root: { margin: "10px 0" } }}>
         These file assets are accessible via the
         <NewTabLink href="/docs/quickstarts/reading-stac/">
-          Planetary Computer STAC API
+          Planetary Computer API
         </NewTabLink>
       </MessageBar>
       {item.assets &&

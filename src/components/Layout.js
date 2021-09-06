@@ -9,17 +9,18 @@ const Layout = ({
   bannerHeader = null,
   bannerFooter = null,
   isShort = false,
+  onGrid = true,
   children,
 }) => {
   return (
     <>
-      <Header />
+      <Header onGrid={onGrid} />
       <Announcement />
       {bannerHeader && <div>{bannerHeader}</div>}
       <ScrollToTopOnMount />
       <main className={isShort ? "short" : undefined}>{children}</main>
       {bannerFooter}
-      <Footer />
+      <Footer onGrid={onGrid} />
     </>
   );
 };

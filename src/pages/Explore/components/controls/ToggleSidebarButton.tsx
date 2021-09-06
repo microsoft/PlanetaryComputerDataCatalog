@@ -21,8 +21,8 @@ const MinimizeButton = () => {
     <div
       style={{
         position: "absolute",
-        top: 110,
-        left: showSidebar ? SIDEBAR_WIDTH + 10 : 0,
+        top: 190,
+        left: showSidebar ? SIDEBAR_WIDTH + 14 : 0,
         zIndex: 1,
         padding: "8px 1px",
         borderRadius: "0  4px 4px 0",
