@@ -5,7 +5,7 @@ import { useCollectionMosaicInfo } from "./useCollectionMosaicInfo";
 import useMapControls from "./useMapControls";
 import useMapEvents from "./useMapEventHandlers";
 import useMapZoomEvents from "./useMapZoomEvents";
-import useMapZoomToLayer from "./useMapZoomToLayer";
+import { useMapZoomToLayer, useMapZoomToExtent } from "./useMapLayerNotices";
 
 export {
   useStacFilter,
@@ -16,4 +16,5 @@ export {
   useMapEvents,
   useMapZoomEvents,
   useMapZoomToLayer,
+  useMapZoomToExtent,
 };

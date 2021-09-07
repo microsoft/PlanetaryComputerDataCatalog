@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 import {
   FocusZone,
   FocusZoneDirection,
@@ -28,6 +28,10 @@ const SearchResultsPane = ({
 }: SearchResultsProps) => {
   const collection = useExploreSelector(s => s.mosaic.collection);
   const [scrollPos, setScrollPos] = useState(0);
+
+  useEffect(() => {
+    setScrollPos(0);
+  }, [isLoading]);
 
   const handleScroll = useCallback(e => {
     const target = e.target as HTMLTextAreaElement;

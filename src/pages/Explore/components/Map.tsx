@@ -10,8 +10,9 @@ import {
   useMapZoomEvents,
   useMapControls,
   useMapZoomToLayer,
+  useMapZoomToExtent,
 } from "../utils/hooks";
-import ZoomMessage from "./controls/ZoomMessage";
+import { ZoomMessage, ExtentMessage } from "./controls/MapMessages";
 
 const mapContainerId: string = "viewer-map";
 
@@ -35,6 +36,7 @@ const ExploreMap = () => {
         showLogo: false,
         style: "road_shaded_relief",
         renderWorldCopies: true,
+        maxBounds: [-180, -90, 180, 90],
         authOptions: {
           authType: atlas.AuthenticationType.subscriptionKey,
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
@@ -61,6 +63,9 @@ const ExploreMap = () => {
   const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
   const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
 
+  const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
+  const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
+
   return (
     <div
       style={{
@@ -70,6 +75,7 @@ const ExploreMap = () => {
       }}
     >
       {showZoomMsg && zoomMsg}
+      {showExtentMsg && extentMsg}
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>
   );
