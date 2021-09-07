@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 
+export const mosaicLayerName = "stac-mosaic";
+export const outlineLayerName = "stac-item-outline";
+
 const useMosaicLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
@@ -21,17 +24,19 @@ const useMosaicLayer = (
     const map = mapRef.current;
     const mosaicLayer = map.layers.getLayerById("stac-mosaic");
     const removeMosaic = () => mosaicLayer && map.layers.remove(mosaicLayer);
+    const isItemLayerValid = stacItemForMosaic && collection;
+    const isMosaicLayerValid = query.hash;
 
-    if (collection && query.hash && renderOption) {
+    if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts = {
-        tileUrl: makeTileJsonUrl(collection, query, renderOption, stacItemForMosaic),
+        tileUrl: makeTileJsonUrl(query, renderOption, collection, stacItemForMosaic),
       };
 
       if (mosaicLayer) {
         (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
       } else {
-        const layer = new atlas.layer.TileLayer(tileLayerOpts, "stac-mosaic");
-        map.layers.add(layer, "stac-item-outline");
+        const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
+        map.layers.add(layer, outlineLayerName);
       }
     } else {
       removeMosaic();

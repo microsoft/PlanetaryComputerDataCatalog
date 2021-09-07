@@ -28,8 +28,8 @@ export const useCollectionMapInfo = collectionId => {
   });
 };
 
-export const useTileJson = (collection, query, renderOption, item) => {
-  return useQuery([collection, query, renderOption, item], getTileJson, {
+export const useTileJson = (query, renderOption, collection, item) => {
+  return useQuery([query, renderOption, collection, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     enabled: !!collection && !!query.hash,
@@ -37,8 +37,8 @@ export const useTileJson = (collection, query, renderOption, item) => {
 };
 
 export const getTileJson = async ({ queryKey }) => {
-  const [collection, query, renderOption, item] = queryKey;
-  const tileJsonUrl = makeTileJsonUrl(collection, query, renderOption, item);
+  const [query, renderOption, collection, item] = queryKey;
+  const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
 
   const resp = await axios.get(tileJsonUrl);
   return resp.data;

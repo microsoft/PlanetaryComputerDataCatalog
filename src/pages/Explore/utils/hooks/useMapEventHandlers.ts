@@ -2,6 +2,7 @@ import atlas from "azure-maps-control";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCamera } from "pages/Explore/state/mapSlice";
 import { useCallback } from "react";
+import { mosaicLayerName, outlineLayerName } from "./useMosaicLayer";
 
 const useMapEvents = () => {
   const dispatch = useExploreDispatch();
@@ -17,10 +18,17 @@ const useMapEvents = () => {
 
   const onStyleDataLoaded = useCallback((e: atlas.MapDataEvent) => {
     if (e.dataType === "style") {
-      const layers = e.map.layers;
-      if (layers.getLayers()[0].getId() !== "base") {
-        layers.move("stac-item-outline", "labels");
-        layers.move("stac-mosaic", "stac-item-outline");
+      const layerMgr = e.map.layers;
+      if (layerMgr.getLayers()[0].getId() !== "base") {
+        const hasOutlineLayer = layerMgr.getLayerById(outlineLayerName);
+        if (hasOutlineLayer) {
+          layerMgr.move(outlineLayerName, "labels");
+        }
+
+        const hasMosaicLayer = layerMgr.getLayerById(mosaicLayerName);
+        if (hasOutlineLayer && hasMosaicLayer) {
+          layerMgr.move(mosaicLayerName, outlineLayerName);
+        }
       }
     }
   }, []);
