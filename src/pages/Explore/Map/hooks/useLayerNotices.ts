@@ -8,7 +8,7 @@ import { setZoom } from "pages/Explore/state/mapSlice";
 import { BBox } from "geojson";
 
 // Handle zoom toast for layers with min zoom level
-const useMapZoomToLayer = () => {
+const useZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
     mosaic,
@@ -45,4 +45,4 @@ const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) =>
   return { showExtentMsg, zoomToExtent };
 };
 
-export { useMapZoomToLayer, useMapZoomToExtent };
+export { useZoomToLayer as useMapZoomToLayer, useMapZoomToExtent };

@@ -7,12 +7,13 @@ import {
   useMosaicLayer,
   useItemBoundsLayer,
   useMapEvents,
-  useMapZoomEvents,
+  useZoomEvents,
   useMapControls,
   useMapZoomToLayer,
   useMapZoomToExtent,
-} from "../utils/hooks";
-import { ZoomMessage, ExtentMessage } from "./controls/MapMessages";
+  useCollectionBoundsLayer,
+} from "./hooks";
+import { ZoomMessage, ExtentMessage } from "../components/controls/MapMessages";
 
 const mapContainerId: string = "viewer-map";
 
@@ -56,8 +57,9 @@ const ExploreMap = () => {
   }, [center, zoom, mapHandlers.onMapMove, mapHandlers.onStyleDataLoaded]);
 
   useItemBoundsLayer(mapRef, mapReady);
+  useCollectionBoundsLayer(mapRef, mapReady);
   useMosaicLayer(mapRef, mapReady);
-  useMapZoomEvents(mapRef);
+  useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
 
   const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();

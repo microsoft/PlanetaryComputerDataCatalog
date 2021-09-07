@@ -42,13 +42,13 @@ export const ExtentMessage = ({ onClick }: MessageProps) => {
 
   return (
     <MapMessage>
-      <Stack horizontalAlign={"center"}>
-        <Text block>This area doesn't include data from:</Text>
+      <Stack horizontalAlign={"center"} styles={{ root: { textAlign: "center" } }}>
+        <Text block>This area doesn't include data from</Text>
         <Text block styles={{ root: { fontStyle: "italic" } }}>
           {collection?.title}
         </Text>
         <Text block styles={{ root: { paddingTop: 5 } }}>
-          <Link onClick={onClick}>Zoom out</Link> to see the valid extent.
+          <Link onClick={onClick}>Zoom to</Link> the valid extent.
         </Text>
       </Stack>
     </MapMessage>

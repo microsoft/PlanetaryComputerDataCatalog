@@ -1,6 +1,6 @@
 import * as atlas from "azure-maps-control";
 import { useEffect } from "react";
-import { layerControl } from "../layers";
+import { layerControl } from "../../utils/layers";
 
 // Setup tile layers and map controls
 const useMapControls = (
@@ -12,7 +12,7 @@ const useMapControls = (
 
     if (!mapReady || !map) return;
 
-    if (!map.controls.getControls().includes(layerControl)) {
+    if (map.controls.getControls().length < 2) {
       map.controls.add(new atlas.control.ZoomControl(), {
         position: atlas.ControlPosition.TopRight,
       });

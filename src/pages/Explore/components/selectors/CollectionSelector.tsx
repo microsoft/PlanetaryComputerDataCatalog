@@ -44,6 +44,7 @@ const CollectionSelector = () => {
       options={collectionOptions}
       selectedKey={collection?.id}
       getStateValFn={getCollectionById}
+      disabled={!isSuccess}
     />
   );
 };

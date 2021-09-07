@@ -8,7 +8,7 @@ import { useTileJson } from "utils/requests";
 const ZOOM_DURATION = 750;
 const SIDEBAR_DURATION = 350;
 
-const useMapZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
+const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
   const {
     map: { center, zoom, showSidebar },
@@ -60,4 +60,4 @@ const useMapZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   }, [map, showSidebar]);
 };
 
-export default useMapZoomEvents;
+export default useZoomEvents;

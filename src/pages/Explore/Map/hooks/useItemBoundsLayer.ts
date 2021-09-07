@@ -1,7 +1,11 @@
 import * as atlas from "azure-maps-control";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { useEffect } from "react";
-import { itemLineLayer, stacItemDatasource } from "../layers";
+import {
+  itemLineLayer,
+  itemOutlineLayer,
+  stacItemDatasource,
+} from "../../utils/layers";
 
 // Show highlighted stac item result footprint on the map
 
@@ -24,6 +28,7 @@ const useItemBoundsLayer = (
     if (!map.sources.getSources().includes(stacItemDatasource)) {
       map.sources.add(stacItemDatasource);
       map.layers.add(itemLineLayer, "labels");
+      map.layers.add(itemOutlineLayer, itemLineLayer);
     }
   }, [mapRef, mapReady]);
 
