@@ -19,7 +19,7 @@ const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
   const { center, zoom } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
-  const mapHandlers = useMapEvents();
+  const mapHandlers = useMapEvents(mapRef);
 
   // Initialize the map
   useEffect(() => {

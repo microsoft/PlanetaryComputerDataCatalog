@@ -1,11 +1,17 @@
-import PropTypes from "prop-types";
-
+import { ReactNode } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Announcement from "./Announcement";
 import { ScrollToTopOnMount } from "./ScrollToTopOnMount";
 
-const Layout = ({
+interface Props {
+  bannerHeader?: ReactNode;
+  bannerFooter?: ReactNode;
+  isShort?: boolean;
+  onGrid?: boolean;
+}
+
+const Layout: React.FC<Props> = ({
   bannerHeader = null,
   bannerFooter = null,
   isShort = false,
@@ -23,10 +29,6 @@ const Layout = ({
       <Footer onGrid={onGrid} />
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

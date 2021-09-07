@@ -1,11 +1,18 @@
+import { useCallback, useEffect } from "react";
+import { useWindowSize } from "react-use";
 import atlas from "azure-maps-control";
+
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCamera } from "pages/Explore/state/mapSlice";
-import { useCallback } from "react";
 import { mosaicLayerName, outlineLayerName } from "./useMosaicLayer";
 
-const useMapEvents = () => {
+const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
+  const { height, width } = useWindowSize();
+
+  useEffect(() => {
+    mapRef.current?.resize();
+  }, [height, width, mapRef]);
 
   // Update state when map moves end
   const onMapMove = useCallback(
