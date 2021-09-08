@@ -3,8 +3,7 @@
     {
       "name": "All",
       "description": "",
-      "cql": [],
-      "sortby": [{ "field": "properties.datetime", "direction": "desc" }]
+      "cql": []
     },
     {
       "name": "Most recent - 2018",

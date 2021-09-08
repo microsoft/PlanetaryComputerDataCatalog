@@ -3,17 +3,12 @@
     {
       "name": "Most recent",
       "description": "",
-      "cql": [],
-      "sortby": [{ "field": "properties.datetime", "direction": "desc" }]
+      "cql": []
     },
     {
       "name": "Most recent (low cloud)",
       "description": "",
-      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }],
-      "sortby": [
-        { "field": "properties.datetime", "direction": "desc" },
-        { "field": "properties.eo:cloud_cover", "direction": "asc" }
-      ]
+      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
     },
     {
       "name": "Summer 2021 (low cloud)",
@@ -23,8 +18,7 @@
           "anyinteracts": [{ "property": "datetime" }, ["2021-07-01", "2021-09-30"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ],
-      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
+      ]
     },
     {
       "name": "Spring 2021 (low cloud)",
@@ -34,8 +28,7 @@
           "anyinteracts": [{ "property": "datetime" }, ["2021-04-01", "2021-06-30"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ],
-      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
+      ]
     },
     {
       "name": "Winter 2021 (low cloud)",
@@ -45,8 +38,7 @@
           "anyinteracts": [{ "property": "datetime" }, ["2021-01-01", "2021-03-31"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ],
-      "sortby": [{ "field": "properties.eo:cloud_cover", "direction": "asc" }]
+      ]
     }
   ],
   "renderOptions": [
