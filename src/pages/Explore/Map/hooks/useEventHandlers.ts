@@ -54,7 +54,8 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
         }
 
         // To prevent runaway re-renders, move the base layer under the first
-        // layer if it isn't already
+        // layer if it isn't already. This likely means a custom layer hasn't been
+        // handled above.
         const firstLayerId = layerMgr.getLayers()[0].getId();
         if (firstLayerId !== "base") {
           layerMgr.move("base", firstLayerId);

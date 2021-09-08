@@ -11,7 +11,7 @@ const SIDEBAR_DURATION = 350;
 const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom, showSidebar },
+    map: { center, zoom, bounds, showSidebar },
     mosaic,
     detail,
   } = useExploreSelector(s => s);
@@ -41,14 +41,28 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   useEffect(() => {
     if (!map) return;
 
-    if (zoom !== map.getCamera().zoom)
+    if (zoom !== map.getCamera().zoom) {
       map.setCamera({
         zoom: zoom,
         center: center,
         type: "ease",
         duration: ZOOM_DURATION,
       });
+    }
   }, [zoom, center, map]);
+
+  // Zoom the map to the new level
+  useEffect(() => {
+    if (!map) return;
+    if (bounds[0] !== map.getCamera().bounds?.[0]) {
+      map.setCamera({
+        bounds,
+        padding: 20,
+        type: "ease",
+        duration: ZOOM_DURATION,
+      });
+    }
+  }, [bounds, map]);
 
   // Resize the map after the sidebar has been hidden or restored
   useEffect(() => {

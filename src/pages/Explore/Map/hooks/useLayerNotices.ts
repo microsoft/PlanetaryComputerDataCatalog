@@ -4,8 +4,9 @@ import intersects from "@turf/boolean-intersects";
 import bboxToPolygon from "@turf/bbox-polygon";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setZoom } from "pages/Explore/state/mapSlice";
+import { setCamera, setZoom } from "pages/Explore/state/mapSlice";
 import { BBox } from "geojson";
+import { stacCollectionDatasource } from "pages/Explore/utils/layers";
 
 // Handle zoom toast for layers with min zoom level
 const useZoomToLayer = () => {
@@ -24,6 +25,7 @@ const useZoomToLayer = () => {
 };
 
 const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
+  const dispatch = useExploreDispatch();
   const { mosaic } = useExploreSelector(s => s);
 
   const viewport = mapRef.current
@@ -33,14 +35,18 @@ const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) =>
     bboxToPolygon(box as BBox)
   );
 
-  // TODO: when mosaics are back
   const showExtentMsg =
+    // TODO: when mosaics are back
     // !!mosaic.query.hash &&
     !!collectionGeoms?.length &&
     !!viewport &&
     !collectionGeoms.some(geom => intersects(geom, viewport));
 
-  const zoomToExtent = () => {};
+  const zoomToExtent = () => {
+    const fc = stacCollectionDatasource.toJson();
+    const overallBbox = atlas.data.BoundingBox.fromData(fc);
+    dispatch(setCamera({ bounds: overallBbox }));
+  };
 
   return { showExtentMsg, zoomToExtent };
 };
