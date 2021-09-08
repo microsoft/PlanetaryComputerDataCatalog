@@ -51,7 +51,7 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
     }
   }, [zoom, center, map]);
 
-  // Zoom the map to the new level
+  // Fit the map to the provided bounds
   useEffect(() => {
     if (!map) return;
     if (bounds[0] !== map.getCamera().bounds?.[0]) {

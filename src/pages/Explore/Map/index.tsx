@@ -15,6 +15,8 @@ import {
 } from "./hooks";
 import { ZoomMessage, ExtentMessage } from "../components/controls/MapMessages";
 
+import PlaceSearchControl from "./SearchControl";
+
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
@@ -78,6 +80,7 @@ const ExploreMap = () => {
     >
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
+      <PlaceSearchControl mapRef={mapRef} />
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>
   );

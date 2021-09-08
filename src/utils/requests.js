@@ -46,8 +46,8 @@ export const getTileJson = async ({ queryKey }) => {
 
 export const createMosaicQueryHashkey = async (queryInfo, collectionId) => {
   const body = makeFilterBody([collectionFilter(collectionId)], queryInfo);
-  const r = await axios.post(`${DATA_URL}/mosaic/create?assets=foo`, body);
-  return r.data?.name;
+  const r = await axios.post(`${DATA_URL}/mosaic/register`, body);
+  return r.data;
 };
 
 const getCollections = async ({ queryKey }) => {
