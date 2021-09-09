@@ -158,10 +158,11 @@ export const makeTileJsonUrl = (
   collection: IStacCollection | null,
   item: IStacItem | null
 ) => {
+  const renderParams = encodeRenderOpts(renderOption);
   if (item && collection) {
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&items=${item.id}&${renderOption?.options}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&items=${item.id}&${renderParams}`;
   }
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?${renderOption?.options}`;
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?${renderParams}`;
 };
 
 export const makeItemPreviewUrl = (
@@ -171,8 +172,17 @@ export const makeItemPreviewUrl = (
 ) => {
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
+  const renderParams = encodeRenderOpts(renderOption);
 
-  // URIEncode any parameters provided in the renderer options
+  const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
+
+  return url + params;
+};
+
+// URIEncode any parameters provided in the renderer options
+const encodeRenderOpts = (renderOption: IMosaicRenderOption | null) => {
+  if (!renderOption) return "";
+
   const renderParams = qs.parse(renderOption.options, { decode: false });
   if ("expression" in renderParams) {
     renderParams["expression"] = encodeURIComponent(
@@ -180,10 +190,5 @@ export const makeItemPreviewUrl = (
     );
   }
 
-  const params = `?collection=${item.collection}&items=${item.id}&${qs.stringify(
-    renderParams,
-    { encode: false }
-  )}${maxSize}`;
-
-  return url + params;
+  return qs.stringify(renderParams, { encode: false });
 };
