@@ -2,7 +2,7 @@ import * as atlas from "azure-maps-control";
 import { useEffect } from "react";
 import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import { itemLineLayerName } from "pages/Explore/utils/layers";
+import { itemOutlineLayerName } from "pages/Explore/utils/layers";
 
 export const mosaicLayerName = "stac-mosaic";
 
@@ -36,7 +36,7 @@ const useMosaicLayer = (
         (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
       } else {
         const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
-        map.layers.add(layer, itemLineLayerName);
+        map.layers.add(layer, itemOutlineLayerName);
       }
     } else {
       removeMosaic();
