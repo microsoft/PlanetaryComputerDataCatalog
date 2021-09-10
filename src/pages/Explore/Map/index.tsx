@@ -15,7 +15,7 @@ import {
 } from "./hooks";
 import { ZoomMessage, ExtentMessage } from "../components/controls/MapMessages";
 
-import PlaceSearchControl from "./SearchControl";
+import PlaceSearchControl from "./components/PlaceSearch";
 
 const mapContainerId: string = "viewer-map";
 
