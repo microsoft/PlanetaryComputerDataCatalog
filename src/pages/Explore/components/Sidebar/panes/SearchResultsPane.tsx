@@ -5,6 +5,8 @@ import {
   FontSizes,
   FontWeights,
   List,
+  MessageBar,
+  MessageBarType,
   Separator,
   Spinner,
   SpinnerSize,
@@ -18,6 +20,7 @@ import * as abbreviate from "number-abbreviate";
 import { IStacItem, IStacSearchResult } from "types/stac";
 import ItemResult from "../../ItemResult";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import ExploreInHub from "../ExploreInHub";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
@@ -47,7 +50,11 @@ const SearchResultsPane = ({
     );
   }
   if (isError) {
-    return <p>Sorry, we're having trouble completing this search.</p>;
+    return (
+      <MessageBar messageBarType={MessageBarType.error}>
+        Sorry, we're having trouble completing this search.
+      </MessageBar>
+    );
   }
   if (!data) return null;
 
@@ -86,13 +93,14 @@ const SearchResultsPane = ({
       <div className={scrollPos ? "hood on" : "hood"} />
       <div
         className="custom-overflow"
-        style={{ height: "100%", overflowY: "auto", overflowX: "clip" }}
+        style={{ height: "100%", overflowY: "auto", overflowX: "hidden" }}
         onScroll={handleScroll}
       >
         <FocusZone direction={FocusZoneDirection.vertical}>
           <List items={data.features} onRenderCell={renderCell} />
         </FocusZone>
       </div>
+      <ExploreInHub />
     </>
   );
 };

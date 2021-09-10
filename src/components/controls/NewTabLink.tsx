@@ -1,11 +1,18 @@
 import { Link } from "@fluentui/react";
 
-const NewTabLink = ({
+interface NewTabLinkProps {
+  href: string;
+  ariaLabel?: string;
+  title?: string;
+  style?: React.CSSProperties;
+  As?: any;
+}
+const NewTabLink: React.FC<NewTabLinkProps> = ({
   href,
   ariaLabel = "Link will open in new tab",
-  title = null,
+  title = "",
   children,
-  style = null,
+  style = {},
   As = Link,
 }) => {
   return (

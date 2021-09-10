@@ -17,7 +17,7 @@ export const makeFilterBody = (
   } as IStacFilter;
 };
 
-const useStacFilter = () => {
+export const useCqlFormat = () => {
   const { map, mosaic } = useExploreSelector(s => s);
   const { collection, query, options } = mosaic;
 
@@ -30,10 +30,13 @@ const useStacFilter = () => {
 
   const baseFilter = [collectionFragment, geometryFragment];
 
-  const search = shouldQuery()
+  return shouldQuery()
     ? makeFilterBody(baseFilter, query, DEFAULT_QUERY_LIMIT)
     : undefined;
+};
 
+const useStacFilter = () => {
+  const search = useCqlFormat();
   return useStacSearch(search);
 };
 

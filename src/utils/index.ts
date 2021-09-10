@@ -1,5 +1,5 @@
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL } from "./constants";
+import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 
@@ -108,7 +108,7 @@ export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
 
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
-  return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
+  return `${HUB_URL}/user-redirect/git-pull?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
 }
 
 export function buildGitHubUrl(launcher: ILauncherConfig): string;
