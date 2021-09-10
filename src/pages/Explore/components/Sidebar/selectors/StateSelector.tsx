@@ -1,5 +1,5 @@
 import { Dropdown, IDropdownOption, Icon, useTheme } from "@fluentui/react";
-import { useExploreDispatch } from "../../state/hooks";
+import { useExploreDispatch } from "../../../state/hooks";
 
 type StateSelectorProps = {
   options: IDropdownOption[];

@@ -1,13 +1,21 @@
-import { IStackStyles, IStackTokens, Stack, StackItem, Text } from "@fluentui/react";
+import {
+  IStackStyles,
+  IStackTokens,
+  Stack,
+  StackItem,
+  Text,
+  FontSizes,
+  FontWeights,
+} from "@fluentui/react";
 
 import { CollectionSelector } from "./selectors";
 import { MosaicPresetSelector, RenderOptionsSelector } from "./selectors";
-import MinimizeButton from "./controls/ToggleSidebarButton";
-import ItemDetailPanel from "./ItemDetailPanel";
+import MinimizeButton from "../controls/ToggleSidebarButton";
+import ItemDetailPanel from "../ItemDetailPanel";
 import SearchResultsPane from "./panes/SearchResultsPane";
-import { useStacFilter } from "../utils/hooks";
-import { SIDEBAR_WIDTH } from "../utils/constants";
-import { useExploreSelector } from "../state/hooks";
+import { useStacFilter } from "../../utils/hooks";
+import { SIDEBAR_WIDTH } from "../../utils/constants";
+import { useExploreSelector } from "../../state/hooks";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -54,8 +62,17 @@ const Sidebar = () => {
     <>
       <StackItem disableShrink styles={sidebarStyles}>
         <Stack styles={searchPanelStyles} tokens={stackTokens}>
-          <Text styles={{ root: { padding: "5px 0" } }} block>
-            Explore Planetary Computer datasets. Explains filters and results.
+          <Text
+            styles={{
+              root: {
+                padding: "5px 0",
+                fontSize: FontSizes.mediumPlus,
+                fontWeight: FontWeights.bold,
+              },
+            }}
+            block
+          >
+            Explore Planetary Computer datasets
           </Text>
           <CollectionSelector />
           <MosaicPresetSelector />

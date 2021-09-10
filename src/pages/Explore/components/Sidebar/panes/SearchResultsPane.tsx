@@ -16,7 +16,7 @@ import { UseQueryResult } from "react-query";
 import * as abbreviate from "number-abbreviate";
 
 import { IStacItem, IStacSearchResult } from "types/stac";
-import ItemResult from "../ItemResult";
+import ItemResult from "../../ItemResult";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 
 interface SearchResultsProps {

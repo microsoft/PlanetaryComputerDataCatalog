@@ -8,7 +8,7 @@ import {
   collectionLineLayer,
   collectionOutlineLayer,
   stacCollectionDatasource,
-} from "../../utils/layers";
+} from "../../../utils/layers";
 import { BBox } from "geojson";
 
 // Show highlighted stac item result footprint on the map

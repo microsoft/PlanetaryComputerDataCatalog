@@ -1,6 +1,6 @@
 import * as atlas from "azure-maps-control";
 import { useEffect } from "react";
-import { layerControl } from "../../utils/layers";
+import { layerControl } from "../../../utils/layers";
 
 // Setup tile layers and map controls
 const useMapControls = (

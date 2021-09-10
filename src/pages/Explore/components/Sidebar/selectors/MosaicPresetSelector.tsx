@@ -1,8 +1,8 @@
 import { IDropdownOption } from "@fluentui/react";
 import { useEffect } from "react";
-import { useCollectionMosaicInfo } from "../../utils/hooks";
-import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
-import { setMosaicQuery } from "../../state/mosaicSlice";
+import { useCollectionMosaicInfo } from "../../../utils/hooks";
+import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
+import { setMosaicQuery } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
 
 const MosaicPresetSelector = () => {

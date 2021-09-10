@@ -5,7 +5,7 @@ import {
   itemLineLayer,
   itemOutlineLayer,
   stacItemDatasource,
-} from "../../utils/layers";
+} from "../../../utils/layers";
 
 // Show highlighted stac item result footprint on the map
 

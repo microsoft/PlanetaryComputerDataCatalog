@@ -6,7 +6,7 @@ import { IPickerItemProps, Text, useTheme, FontSizes } from "@fluentui/react";
 import { IUseBooleanCallbacks } from "@fluentui/react-hooks";
 
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCamera } from "../../../state/mapSlice";
+import { setCamera } from "../../../../state/mapSlice";
 import { FuzzySearchResult } from "./types";
 
 const azMapsDomain = atlas.getDomain();

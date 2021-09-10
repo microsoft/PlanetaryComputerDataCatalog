@@ -6,7 +6,7 @@ import { store } from "./state/store";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
-import ExploreMap from "./Map";
+import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import { useWindowSize } from "react-use";
 

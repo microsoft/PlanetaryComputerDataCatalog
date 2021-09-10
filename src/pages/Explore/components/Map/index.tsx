@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
-import { useExploreSelector } from "../state/hooks";
+import { useExploreSelector } from "../../state/hooks";
 import {
   useMosaicLayer,
   useItemBoundsLayer,
@@ -13,7 +13,7 @@ import {
   useMapZoomToExtent,
   useCollectionBoundsLayer,
 } from "./hooks";
-import { ZoomMessage, ExtentMessage } from "../components/controls/MapMessages";
+import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
 
 import PlaceSearchControl from "./components/PlaceSearch";
 
