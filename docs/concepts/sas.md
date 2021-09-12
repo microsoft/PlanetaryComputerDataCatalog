@@ -76,15 +76,17 @@ curl https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-
 
 The [planetary-computer](https://github.com/microsoft/planetary-computer-sdk-for-python) Python package makes using the Data Access API simple by providing a library that calls these endpoints to sign URLs, and provides functionality for signing the Assets of [PySTAC](https://github.com/stac-utils/pystac) Items returned by the STAC API. A cache is also kept, which tracks expiration values, to ensure new SAS tokens are only requested when needed.
 
+The library provides a single function, `planetary_computer.sign` to sign URLs, Assets, Items, or ItemCollections.
+
 Here's an example of using the library to sign a single URL:
 
 ```python
-import planetary_computer as pc
+import planetary_computer
 import pystac
 
 item: pystac.Item = ...  # Landsat Item
 
-b4_href = pc.sign(item.assets['SR_B4'].href)
+b4_href = planetary_computer.sign(item.assets['SR_B4'].href)
 
 with rasterio.open(b4_href) as ds:
    ...
@@ -93,11 +95,11 @@ with rasterio.open(b4_href) as ds:
 And here's an example of using the library to sign all assets in a [PySTAC](https://github.com/stac-utils/pystac) item:
 
 ```python
+import planetary_computer
 import pystac
-import planetary_computer as pc
 
 raw_item: pystac.Item = ...
-item: pystac.Item = pc.sign_assets(raw_item)
+item: pystac.Item = planetary_computer.sign(raw_item)
 
 # Now use the item however you want. All appropriate assets are signed for read access.
 ```
@@ -113,3 +115,6 @@ Once installed, the CLI may be used to supply an API subscription key if you hav
 ```bash
 planetarycomputer configure
 ```
+
+Or you can set the environment variable `PC_SDK_SUBSCRIPTION_KEY` to your API subscription key.
+Your subscription key is set automatically for you on the [Planetary Computer Hub](../overview/environment).
