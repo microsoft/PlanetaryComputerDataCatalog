@@ -177,6 +177,16 @@ collections:
       - title: Blob Storage Notebook
         src: terraclimate.html
 
+  us-census:
+    headerImg: ./images/us-census-hero.png
+    tabs:
+      - title: Example Notebook
+        src: us-census-example.html
+        launch:
+          - repo: https://github.com/microsoft/planetarycomputerexamples
+            branch: release/2021-Q3
+            filePath: datasets/us-census/us-census-example.ipynb
+
   naip:
     headerImg: ./images/naip-hero.jpg
     tabs:
