@@ -1,16 +1,8 @@
 import React from "react";
-import {
-  DetailsList,
-  DetailsListLayoutMode,
-  SelectionMode,
-} from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
-import {
-  cubeColumOrders,
-  renderItemColumn,
-  stacFormatter,
-} from "../../utils/stac";
+import { cubeColumOrders, renderItemColumn, stacFormatter } from "../../utils/stac";
 import { sortByPosition } from "../../utils";
 
 const defaultWidth = 95;
@@ -49,7 +41,7 @@ const CubeTable = ({ stacKey, title }) => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: ["description", "attrs"].includes(key),
+      isMultiline: ["name", "description", "attrs"].includes(key),
     };
   });
 

@@ -22,10 +22,11 @@ const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
   const collTags = collections.map(c => c.keywords).flat();
   const dsTags = datasetsConfig.map(d => d.keywords || []).flat();
+  const combinedTags = new Set(collTags.concat(dsTags));
 
   // Filter out any falsy elements
-  return Array.from(new Set(collTags.concat(dsTags)))
-    .filter(t => !!t)
+  return Array.from(combinedTags)
+    .filter(tag => !!tag)
     .sort(isort)
     .map(item => ({ key: item.toLocaleLowerCase(), name: item }));
 };
