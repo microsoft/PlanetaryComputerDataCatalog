@@ -1,11 +1,11 @@
-import { FontSizes, IconButton, TooltipHost, useTheme } from "@fluentui/react";
+import { IconButton, TooltipHost } from "@fluentui/react";
 import { useId, useConst } from "@fluentui/react-hooks";
 import { setShowAsLayer } from "pages/Explore/state/detailSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { useCallback } from "react";
+import { checkedHeaderButtonStyle } from "./styles";
 
 const MapButton = () => {
-  const theme = useTheme();
   const dispatch = useExploreDispatch();
   const showAsLayer = useExploreSelector(s => s.detail.showAsLayer);
 
@@ -33,31 +33,7 @@ const MapButton = () => {
         iconProps={{ iconName: "Nav2DMapView" }}
         ariaLabel={label}
         aria-describedby={tooltipId}
-        styles={{
-          icon: {
-            fontSize: FontSizes.size24,
-          },
-          iconChecked: {
-            color: theme.semanticColors.bodyBackground,
-          },
-          rootChecked: {
-            backgroundColor: theme.palette.accent,
-            borderColor: theme.palette.neutralLight,
-          },
-          rootCheckedHovered: {
-            backgroundColor: theme.palette.themeSecondary,
-          },
-          root: {
-            float: "right",
-            top: -32,
-            width: 40,
-            height: 40,
-            borderRadius: 20,
-            backgroundColor: theme.semanticColors.bodyBackground,
-            border: "1px solid",
-            borderColor: theme.palette.themePrimary,
-          },
-        }}
+        styles={checkedHeaderButtonStyle}
       />
     </TooltipHost>
   );

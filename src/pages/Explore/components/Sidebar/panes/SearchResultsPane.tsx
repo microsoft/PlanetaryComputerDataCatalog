@@ -20,7 +20,7 @@ import * as abbreviate from "number-abbreviate";
 import { IStacItem, IStacSearchResult } from "types/stac";
 import ItemResult from "../../ItemResult";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import ExploreInHub from "../ExploreInHub";
+import ExploreInHub from "../../ExploreInHub";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
