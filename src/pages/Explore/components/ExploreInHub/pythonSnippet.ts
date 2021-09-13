@@ -1,6 +1,5 @@
 import stringify from "json-stringify-pretty-compact";
 import { IStacFilter, IStacItem } from "types/stac";
-import AssetList from "../ItemDetailPanel/AssetList";
 
 export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
   if (!cql) return null;
