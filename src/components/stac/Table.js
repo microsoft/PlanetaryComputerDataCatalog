@@ -1,23 +1,15 @@
 // for the table extension
 import React from "react";
-import {
-  DetailsList,
-  DetailsListLayoutMode,
-  SelectionMode,
-} from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
-import {
-  renderItemColumn,
-  stacFormatter,
-} from "../../utils/stac";
+import { renderItemColumn, stacFormatter } from "../../utils/stac";
 
 const defaultWidth = 95;
 const tableColumnWidths = {
   name: 150,
   description: 400,
 };
-
 
 const columnColumnWidths = {
   title: 150,
@@ -31,7 +23,7 @@ const TableTable = ({ stacKey, title }) => {
 
   // Get a set of unique attributes for each dimension, these will be columns.
   // The list is modified to include/remove keys in the table
-  const columnKeys = ["name", "description"]
+  const columnKeys = ["name", "description"];
   const columns = columnKeys.map(key => {
     return {
       key: key,
@@ -41,7 +33,7 @@ const TableTable = ({ stacKey, title }) => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: key === "description",
+      isMultiline: true,
     };
   });
 
@@ -63,7 +55,6 @@ const TableTable = ({ stacKey, title }) => {
       {details}
     </div>
   );
-
 };
 
 const ColumnTable = ({ stacKey, title }) => {
@@ -72,7 +63,7 @@ const ColumnTable = ({ stacKey, title }) => {
 
   // Get a set of unique attributes for each dimension, these will be columns.
   // The list is modified to include/remove keys in the table
-  const columnKeys = ["name", "description", "type"]
+  const columnKeys = ["name", "description", "type"];
   const columns = columnKeys.map(key => {
     return {
       key: key,
@@ -82,7 +73,7 @@ const ColumnTable = ({ stacKey, title }) => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: key === "description",
+      isMultiline: true,
     };
   });
 
@@ -104,7 +95,6 @@ const ColumnTable = ({ stacKey, title }) => {
       {details}
     </div>
   );
-
 };
 
 export const TableTables = () => {
