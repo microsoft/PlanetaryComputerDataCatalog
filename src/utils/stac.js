@@ -86,6 +86,10 @@ StacFields.Registry.addMetadataField("view:sun_elevation", {
   formatter: fixedDeg,
 });
 
+StacFields.Registry.addMetadataField("table:storage_options", {
+  formatter: value => <SimpleKeyValueList object={value} />,
+});
+
 StacFields.Registry.addMetadataField("label:description", {
   label: "Description",
   formatter: value => value,

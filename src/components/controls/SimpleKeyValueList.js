@@ -1,4 +1,5 @@
 import LabeledValue from "./LabeledValue";
+import { stacFormatter } from "utils/stac";
 
 const SimpleKeyValueList = ({ object }) => {
   return (
@@ -7,7 +8,7 @@ const SimpleKeyValueList = ({ object }) => {
         if (Array.isArray(val) || typeof val === "object") return null;
 
         return (
-          <LabeledValue key={key} label={key}>
+          <LabeledValue key={key} label={stacFormatter.label(key)}>
             {val}
           </LabeledValue>
         );

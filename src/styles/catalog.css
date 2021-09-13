@@ -27,7 +27,7 @@
   font-size: inherit;
 }
 
-.json-list .collection-content-item {
+.json-list .collection-content-item:not(:first-child) {
   margin-top: 5px;
 }
 
