@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
 import marked from "marked";
+import { isEmpty } from "lodash-es";
 
 import GroupBanner from "../components/stac/GroupBanner";
 import Layout from "../components/Layout";
@@ -92,6 +93,7 @@ const CatalogGroup = () => {
   // of collections that are included.
   const groupedKeys = collections
     .map(c => c[GROUP_KEYS])
+    .filter(k => !!k)
     .flat()
     .sort()
     .reduce((accum, groupKey) => {
@@ -155,7 +157,7 @@ const CatalogGroup = () => {
           </p>
           <div className="layout-container">
             {<Separator />}
-            {pivot}
+            {!isEmpty(groupedKeys) && pivot}
             <div className="layout-row" style={{ marginTop: 20 }}>
               {datasets}
             </div>
