@@ -49,10 +49,12 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   // Serialize the content back to a string so it can be injected
   const processedMarkup = new XMLSerializer().serializeToString(docsDoc);
 
-  // Handle any internal links as an SPA style route, not a full reload
+  // Handle any internal links as an SPA style route, not a full reload.
+  // If the href includes 1-4 characters after a `.`, treat as file extension
+  // and allow a direct download.
   const handleClick = e => {
     const anchor = e.target.closest("a.reference.internal");
-    if (anchor) {
+    if (anchor && !anchor.href.match(/\.[a-z]{1,4}$/i)) {
       const path = anchor.getAttribute("href");
       e.preventDefault();
       history.push(path);
