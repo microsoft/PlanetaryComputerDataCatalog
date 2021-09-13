@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import {
   Callout,
   DirectionalHint,
@@ -22,13 +23,24 @@ import NewTabLink from "components/controls/NewTabLink";
 
 const ExploreInHub = () => {
   const theme = useTheme();
-  const copyToClipboard = useCopyToClipboard()[1];
+  const [clipboardState, copyToClipboard] = useCopyToClipboard();
+  const [isRecentCopy, setIsRecentCopy] = useState<boolean>(false);
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("callout-button");
   const labelId = useId("callout-label");
   const descriptionId = useId("callout-description");
   const cql = useCqlFormat();
   const snippet = createPythonSnippet(cql);
+
+  // Briefly change the copy button icon when a user copies to indicate success
+  const copyIcon = clipboardState.value && isRecentCopy ? "SkypeCheck" : "Copy";
+
+  const handleCopy = useCallback(() => {
+    if (!snippet) return;
+    setIsRecentCopy(true);
+    copyToClipboard(snippet);
+    setTimeout(() => setIsRecentCopy(false), 3000);
+  }, [copyToClipboard, snippet]);
 
   return (
     <Stack
@@ -72,15 +84,15 @@ const ExploreInHub = () => {
                 tokens={{ childrenGap: 6 }}
               >
                 <DefaultButton
-                  iconProps={{ iconName: "Copy" }}
-                  onClick={() => copyToClipboard(snippet)}
+                  iconProps={{ iconName: copyIcon }}
+                  onClick={handleCopy}
                 >
                   Copy
                 </DefaultButton>
                 <NewTabLink
                   As={PrimaryButton}
                   href={HUB_URL}
-                  title="This example can be launched in the Planetary Computer Hub"
+                  title="Open the Planetary Computer Hub"
                 >
                   Launch Hub
                 </NewTabLink>
