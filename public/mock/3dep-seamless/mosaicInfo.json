@@ -1,43 +1,26 @@
 {
   "mosaics": [
     {
-      "name": "Most recent (2018 - 2020)",
+      "name": "Most recent",
       "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2018-01-01", "2020-12-31"]]
-        }
-      ]
-    },
-    {
-      "name": "2015 - 2017",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2015-01-01", "2017-12-31"]]
-        }
-      ]
-    },
-    {
-      "name": "2012 - 2014",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2012-01-01", "2014-12-31"]]
-        }
-      ]
+      "cql": []
     }
   ],
   "renderOptions": [
     {
-      "name": "Elevation (terrain)",
-      "description": "",
-      "options": "assets=data&rescale=0,255&colormap_name=terrain"
-    },
-    {
       "name": "Elevation (viridis)",
       "description": "",
-      "options": "assets=data&rescale=0,255&colormap_name=viridis"
+      "options": "assets=data&rescale=0,3000&colormap_name=viridis"
+    },
+    {
+      "name": "Elevation (terrain)",
+      "description": "",
+      "options": "assets=data&rescale=0,5000&colormap_name=terrain"
+    },
+    {
+      "name": "Elevation (gray)",
+      "description": "",
+      "options": "assets=data&rescale=0,3000&colormap_name=gray_r"
     }
   ]
 }

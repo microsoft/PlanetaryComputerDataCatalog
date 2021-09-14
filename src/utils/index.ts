@@ -158,11 +158,14 @@ export const makeTileJsonUrl = (
   collection: IStacCollection | null,
   item: IStacItem | null
 ) => {
+  const highDef = true;
+  const scaleParam = highDef ? "tile_scale=2" : "tile_scale=1";
+
   const renderParams = encodeRenderOpts(renderOption);
   if (item && collection) {
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&items=${item.id}&${renderParams}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${renderParams}&format=png`;
   }
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?tile_scale=2&${renderParams}`;
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}`;
 };
 
 export const makeItemPreviewUrl = (
