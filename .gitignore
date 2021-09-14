@@ -369,6 +369,7 @@ etl/_docs_working_dir
 # source tree
 src/docs/
 public/_images/
+public/_downloads/
 
 # misc
 .DS_Store

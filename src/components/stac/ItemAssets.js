@@ -52,7 +52,7 @@ const ItemAssets = () => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: key === "description",
+      isMultiline: true,
     };
   });
 

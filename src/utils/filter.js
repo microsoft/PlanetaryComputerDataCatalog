@@ -47,7 +47,7 @@ export const stacTagFilter = (collections, tags) => {
     return collections.reduce((accum, collection) => {
       const groupId = collection["msft:group_id"];
 
-      if (groupId) {
+      if (groupId && groups[groupId]) {
         // Don't add the group again if it's been added
         const filtered = addedGroups.has(groupId)
           ? accum

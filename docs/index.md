@@ -13,7 +13,8 @@
 
 About <overview/about>
 The Hub <overview/environment>
-Using VS Code <overview/ui-vscode>
+Use VS Code <overview/ui-vscode>
+Use GitHub Codespaces <overview/ui-codespaces>
 Changelog <overview/changelog>
 ```
 
@@ -44,6 +45,7 @@ See all tutorials <https://github.com/microsoft/PlanetaryComputerExamples/tree/m
 concepts/data-catalog
 concepts/computing
 concepts/sas
+concepts/hub-deployment
 ```
 
 ```{toctree}

@@ -26,3 +26,14 @@ daymet:
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg
   keywords: [Daymet, Weather, Climate, North America, Puerto Rico, Hawaii]
+
+goes:
+  title: GOES Collection
+  short_description: TBD.
+  description: TBD.
+  assets:
+    headerImg:
+      href: https://via.placeholder.com/550x100?text=Placeholder...
+    thumbnail:
+      href: https://via.placeholder.com/550x300?text=Placeholder...
+  keywords: [GOES, Global, Satellite, Imagery, Fire, Weather, Climate, Ocean]
