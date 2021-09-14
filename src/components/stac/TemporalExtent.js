@@ -8,7 +8,7 @@ const TemporalExtent = ({ extent }) => {
     const startFormat = new Date(start).toLocaleDateString();
     const endFormat = end ? new Date(end).toLocaleDateString() : "Present";
     return (
-      <Text key={`temporal-${idx}`}>{`${startFormat} - ${endFormat}`}</Text>
+      <Text block key={`temporal-${idx}`}>{`${startFormat} - ${endFormat}`}</Text>
     );
   });
 
