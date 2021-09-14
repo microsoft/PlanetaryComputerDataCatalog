@@ -35,3 +35,5 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/3dep/3dep-seamless-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gap/gap-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/jrc-gsw/jrc-gsw-example.ipynb
+
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/release/2021-Q3/datasets/us-census/us-census-example.ipynb
