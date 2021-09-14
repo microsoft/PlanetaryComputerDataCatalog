@@ -162,7 +162,7 @@ export const makeTileJsonUrl = (
   if (item && collection) {
     return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&items=${item.id}&${renderParams}`;
   }
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?${renderParams}`;
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?tile_scale=2&${renderParams}`;
 };
 
 export const makeItemPreviewUrl = (
