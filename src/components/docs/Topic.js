@@ -13,16 +13,17 @@ const Topic = ({ topics }) => {
   const docsKey = `./${topicId}/${fileId}.json`;
   const doc = topics[docsKey];
 
-  const bottomNav = (
-    <TopicNav topic={topicId} prev={doc.prev} next={doc.next} />
-  );
+  const bottomNav = <TopicNav topic={topicId} prev={doc.prev} next={doc.next} />;
 
   if (doc?.body) {
     const generatedToc = <GeneratedInternalToc html={doc.body} />;
     return (
       <>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <DocsHtmlContent className="generated-docs" markupJson={doc} />
+          <DocsHtmlContent
+            className="generated-docs markdown-source"
+            markupJson={doc}
+          />
           {generatedToc}
         </div>
         <Separator styles={{ root: { width: centerPanelWidth } }} />
