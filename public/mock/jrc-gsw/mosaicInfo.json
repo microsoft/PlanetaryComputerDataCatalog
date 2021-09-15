@@ -1,7 +1,7 @@
 {
   "mosaics": [
     {
-      "name": "Most recent - 2020",
+      "name": "Most recent (2020)",
       "description": "",
       "cql": [
         {
@@ -14,12 +14,32 @@
     {
       "name": "Water occurrence",
       "description": "",
-      "options": "assets=occurrence&colormap_name=jrc-gsw&nodata=0"
+      "options": "assets=occurrence&colormap_name=jrc-occurrence&nodata=0"
     },
     {
-      "name": "Water recurrence",
+      "name": "Annual water recurrence",
       "description": "",
-      "options": "assets=recurrence&colormap_name=blues&nodata=0"
+      "options": "assets=recurrence&colormap_name=jrc-recurrence&nodata=0"
+    },
+    {
+      "name": "Water Occurrence change intensity",
+      "description": "",
+      "options": "assets=change&colormap_name=jrc-change&nodata=0"
+    },
+    {
+      "name": "Water seasonality",
+      "description": "",
+      "options": "assets=seasonality&colormap_name=jrc-seasonality&nodata=0"
+    },
+    {
+      "name": "Water transitions",
+      "description": "",
+      "options": "assets=transitions&colormap_name=jrc-transitions&nodata=0"
+    },
+    {
+      "name": "Maximum water extent",
+      "description": "",
+      "options": "assets=extent&colormap_name=jrc-extent&nodata=0"
     }
   ]
 }

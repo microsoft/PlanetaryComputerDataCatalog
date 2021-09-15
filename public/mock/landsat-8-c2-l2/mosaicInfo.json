@@ -1,7 +1,7 @@
 {
   "mosaics": [
     {
-      "name": "Most recent",
+      "name": "Most recent (any cloud cover)",
       "description": "",
       "cql": []
     },
@@ -43,7 +43,7 @@
   ],
   "renderOptions": [
     {
-      "name": "True Color",
+      "name": "Natural color",
       "description": "RGB from visual asset",
       "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
     },
@@ -53,9 +53,14 @@
       "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
     },
     {
-      "name": "NDVI",
+      "name": "False Color (vegetation)",
+      "description": "SWIR16, NIR08, red",
+      "options": "assets=SR_B6,SR_B5,SR_B4&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+    },
+    {
+      "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "(NIR-Red)/(NIR+Red)",
-      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=viridis"
+      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=piyg"
     }
   ]
 }

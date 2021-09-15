@@ -43,7 +43,7 @@
   ],
   "renderOptions": [
     {
-      "name": "True Color",
+      "name": "Natural color",
       "description": "RGB from visual asset",
       "options": "assets=visual&bidx=1,2,3&nodata=0"
     },
