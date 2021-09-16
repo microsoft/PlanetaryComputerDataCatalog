@@ -1,17 +1,17 @@
 {
   "mosaics": [
     {
-      "name": "Most recent (any cloud cover)",
-      "description": "",
-      "cql": []
-    },
-    {
       "name": "Most recent (low cloud)",
       "description": "",
       "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
     },
     {
-      "name": "Sep-Nov 2021 (low cloud)",
+      "name": "Most recent (any cloud cover)",
+      "description": "",
+      "cql": []
+    },
+    {
+      "name": "Fall 2021 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "Jun-Aug 2021 (low cloud)",
+      "name": "Summer 2021 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -31,7 +31,7 @@
       ]
     },
     {
-      "name": "Mar-May 2021 (low cloud)",
+      "name": "Spring 2021 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -41,17 +41,17 @@
       ]
     },
     {
-      "name": "Dec-Feb 2021 (low cloud)",
+      "name": "Winter 2021 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2021-12-01", "2021-02-28"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2020-12-01", "2021-02-28"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
     },
     {
-      "name": "Sep-Nov 2020 (low cloud)",
+      "name": "Fall 2020 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -61,7 +61,7 @@
       ]
     },
     {
-      "name": "Jun-Aug 2020 (low cloud)",
+      "name": "Summer 2020 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -71,7 +71,7 @@
       ]
     },
     {
-      "name": "Mar-May 2020 (low cloud)",
+      "name": "Spring 2020 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -81,17 +81,17 @@
       ]
     },
     {
-      "name": "Dec-Feb 2020 (low cloud)",
+      "name": "Winter 2020 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2020-12-01", "2020-02-28"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2019-12-01", "2020-02-28"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
     },
     {
-      "name": "Sep-Nov 2019 (low cloud)",
+      "name": "Fall 2019 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -101,7 +101,7 @@
       ]
     },
     {
-      "name": "Jun-Aug 2019 (low cloud)",
+      "name": "Summer 2019 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "name": "Mar-May 2019 (low cloud)",
+      "name": "Spring 2019 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -121,17 +121,17 @@
       ]
     },
     {
-      "name": "Dec-Feb 2019 (low cloud)",
+      "name": "Winter 2019 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2019-12-01", "2019-02-28"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2018-12-01", "2019-02-28"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
     },
     {
-      "name": "Sep-Nov 2018 (low cloud)",
+      "name": "Fall 2018 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -141,7 +141,7 @@
       ]
     },
     {
-      "name": "Jun-Aug 2018 (low cloud)",
+      "name": "Summer 2018 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "name": "Mar-May 2018 (low cloud)",
+      "name": "Spring 2018 (low cloud)",
       "description": "",
       "cql": [
         {
@@ -161,51 +161,11 @@
       ]
     },
     {
-      "name": "Dec-Feb 2018 (low cloud)",
+      "name": "Winter 2018 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2018-12-01", "2018-02-28"]]
-        },
-        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ]
-    },
-    {
-      "name": "Sep-Nov 2017 (low cloud)",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2017-09-01", "2017-11-30"]]
-        },
-        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ]
-    },
-    {
-      "name": "Jun-Aug 2017 (low cloud)",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2017-06-01", "2017-08-31"]]
-        },
-        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ]
-    },
-    {
-      "name": "Mar-May 2017 (low cloud)",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2017-03-01", "2017-05-31"]]
-        },
-        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
-      ]
-    },
-    {
-      "name": "Dec-Feb 2017 (low cloud)",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2017-12-01", "2017-02-28"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2017-12-01", "2018-02-28"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
