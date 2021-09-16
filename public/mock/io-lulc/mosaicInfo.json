@@ -1,16 +1,16 @@
 {
   "mosaics": [
     {
-      "name": "Most recent - 2020",
+      "name": "Most recent (2020)",
       "description": "Most recent Land Use/Land Cover",
       "cql": []
     }
   ],
   "renderOptions": [
     {
-      "name": "Default - 10 class color map",
+      "name": "Default",
       "description": "",
-      "options": "assets=data&colormap_name=io-lulc"
+      "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc"
     }
   ]
 }

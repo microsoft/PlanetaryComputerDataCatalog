@@ -1,41 +1,211 @@
 {
   "mosaics": [
     {
-      "name": "Most recent",
-      "description": "",
-      "cql": []
-    },
-    {
       "name": "Most recent (low cloud)",
       "description": "",
       "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
     },
     {
-      "name": "Summer 2021 (low cloud)",
+      "name": "Most recent (any cloud cover)",
+      "description": "",
+      "cql": []
+    },
+    {
+      "name": "Sep-Nov 2021 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2021-07-01", "2021-09-30"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2021-09-01", "2021-11-30"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
     },
     {
-      "name": "Spring 2021 (low cloud)",
+      "name": "Jun-Aug 2021 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2021-04-01", "2021-06-30"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2021-06-01", "2021-08-31"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
     },
     {
-      "name": "Winter 2021 (low cloud)",
+      "name": "Mar-May 2021 (low cloud)",
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2021-01-01", "2021-03-31"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2021-03-01", "2021-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Dec-Feb 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2021-12-01", "2021-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Sep-Nov 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-09-01", "2020-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Jun-Aug 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-06-01", "2020-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Mar-May 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-03-01", "2020-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Dec-Feb 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-12-01", "2020-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Sep-Nov 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-09-01", "2019-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Jun-Aug 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-06-01", "2019-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Mar-May 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-03-01", "2019-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Dec-Feb 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-12-01", "2019-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Sep-Nov 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-09-01", "2018-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Jun-Aug 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-06-01", "2018-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Mar-May 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-03-01", "2018-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Dec-Feb 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-12-01", "2018-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Sep-Nov 2017 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-09-01", "2017-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Jun-Aug 2017 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-06-01", "2017-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Mar-May 2017 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-03-01", "2017-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Dec-Feb 2017 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-12-01", "2017-02-28"]]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -48,14 +218,39 @@
       "options": "assets=visual&bidx=1,2,3&nodata=0"
     },
     {
-      "name": "False Color (infrared)",
-      "description": "NIR(B08), Red (B04), Green (B03)",
+      "name": "Color infrared",
+      "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B08, B04, B03).",
       "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
     },
     {
+      "name": "Short wave infrared",
+      "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B12, B8A, B04).",
+      "options": "assets=B12,B8A,B04&nodata=0"
+    },
+    {
+      "name": "Agriculture",
+      "description": "Darker shades of green indicate denser vegetation (B11, B08, B02).",
+      "options": "assets=B11,B08,B02&nodata=0"
+    },
+    {
+      "name": "Geology",
+      "description": " Identifying geological formations, lithology features, and faults (B12, B11, B02)",
+      "options": "assets=B12,B11,B02&nodata=0"
+    },
+    {
+      "name": "Bathymetric",
+      "description": "Estimates suspended sediment in water (B04, B03, B01).",
+      "options": "assets=B04,B03,B01&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
+    },
+    {
       "name": "NDVI",
-      "description": "(NIR-Red)/(NIR+Red)",
-      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=viridis"
+      "description": "Normalized Difference Veg. Index (NIR-Red)/(NIR+Red)",
+      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn"
+    },
+    {
+      "name": "Moisture Index ",
+      "description": "Moisture index indicating water stress in plants (B8A-B11)/(B8A+B11)",
+      "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu"
     }
   ]
 }
