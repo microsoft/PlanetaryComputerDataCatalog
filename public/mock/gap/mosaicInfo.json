@@ -10,7 +10,8 @@
     {
       "name": "Default",
       "description": "",
-      "options": "assets=data&colormap_name=gap-lulc"
+      "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=gap-lulc",
+      "minZoom": 5
     }
   ]
 }

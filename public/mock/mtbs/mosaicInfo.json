@@ -326,7 +326,8 @@
     {
       "name": "Burn severity",
       "description": "",
-      "options": "assets=burn-severity&colormap_name=mtbs-severity"
+      "options": "assets=burn-severity&exitwhenfull=False&skipcovered=True&colormap_name=mtbs-severity",
+      "minZoom": 3
     }
   ]
 }

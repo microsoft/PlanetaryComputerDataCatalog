@@ -2,6 +2,7 @@ import { IStacCollection, IStacItem } from "types/stac";
 import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -160,12 +161,13 @@ export const makeTileJsonUrl = (
 ) => {
   const highDef = true;
   const scaleParam = highDef ? "tile_scale=2" : "tile_scale=1";
+  const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
 
   const renderParams = encodeRenderOpts(renderOption);
   if (item && collection) {
     return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${renderParams}&format=png`;
   }
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}`;
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}${minZoom}`;
 };
 
 export const makeItemPreviewUrl = (

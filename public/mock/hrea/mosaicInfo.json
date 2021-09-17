@@ -78,22 +78,26 @@
     {
       "name": "Nighttime light composite",
       "description": "",
-      "options": "assets=light-composite&colormap_name=magma&rescale=0.9,2"
+      "options": "assets=light-composite&colormap_name=magma&rescale=0.9,2",
+      "minZoom": 3
     },
     {
       "name": "Estimated brightness",
       "description": "",
-      "options": "assets=estimated-brightness&colormap_name=magma&rescale=0,200"
+      "options": "assets=estimated-brightness&colormap_name=magma&rescale=0,200",
+      "minZoom": 3
     },
     {
       "name": "Probability of electrification",
       "description": "",
-      "options": "assets=lightscore&colormap_name=magma&rescale=0,1"
+      "options": "assets=lightscore&colormap_name=magma&rescale=0,1",
+      "minZoom": 3
     },
     {
       "name": "Brightness proportion to uninhabited areas",
       "description": "Proportion of nights a settlement is brighter than uninhabited areas",
-      "options": "assets=night-proportion&colormap_name=magma&rescale=0,1"
+      "options": "assets=night-proportion&colormap_name=magma&rescale=0,1",
+      "minZoom": 3
     }
   ]
 }

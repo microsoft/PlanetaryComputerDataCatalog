@@ -2,6 +2,7 @@ import * as atlas from "azure-maps-control";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setLayerMinZoom } from "pages/Explore/state/mosaicSlice";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { useEffect } from "react";
 import { useTileJson } from "utils/requests";
 
@@ -28,7 +29,8 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   );
 
   const map = mapRef.current;
-  const layerMinZoom = mosaicLayerTileJson?.minzoom;
+  const layerMinZoom =
+    mosaic.renderOption?.minZoom || mosaicLayerTileJson?.minzoom || DEFAULT_MIN_ZOOM;
 
   // Set the minzoom for the current mosaic layer
   useEffect(() => {

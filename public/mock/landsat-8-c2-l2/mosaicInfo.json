@@ -175,42 +175,50 @@
     {
       "name": "Natural color",
       "description": "RGB from visual asset",
-      "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+      "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "minZoom": 6
     },
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B5, B4, B3).",
-      "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55"
+      "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "minZoom": 6
     },
     {
       "name": "Short wave infrared",
       "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B7, B6, B4).",
-      "options": "assets=SR_B7,SR_B6,SR_B4&nodata=0"
+      "options": "assets=SR_B7,SR_B6,SR_B4&nodata=0",
+      "minZoom": 6
     },
     {
       "name": "Agriculture",
       "description": "Darker shades of green indicate denser vegetation (B6, B5, B2).",
-      "options": "assets=SR_B6,SR_B5,SR_B2&nodata=0"
+      "options": "assets=SR_B6,SR_B5,SR_B2&nodata=0",
+      "minZoom": 6
     },
     {
       "name": "Geology",
       "description": " Identifying geological formations, lithology features, and faults (B7, B6, B2)",
-      "options": "assets=SR_B7,SR_B6,SR_B2&nodata=0"
+      "options": "assets=SR_B7,SR_B6,SR_B2&nodata=0",
+      "minZoom": 6
     },
     {
       "name": "Bathymetric",
       "description": "Estimates suspended sediment in water (B4, B3, B0).",
-      "options": "assets=SR_B4,SR_B3,SR_B1&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35"
+      "options": "assets=SR_B4,SR_B3,SR_B1&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
+      "minZoom": 6
     },
     {
       "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "(NIR-Red)/(NIR+Red)",
-      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=piyg"
+      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=piyg",
+      "minZoom": 6
     },
     {
       "name": "Moisture Index ",
       "description": "Moisture index indicating water stress in plants (B5-B6)/(B5+B6)",
-      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1,1&colormap_name=rdbu"
+      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1,1&colormap_name=rdbu",
+      "minZoom": 6
     }
   ]
 }

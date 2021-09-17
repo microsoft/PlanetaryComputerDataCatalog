@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IStacCollection } from "types/stac";
 import { createMosaicQueryHashkey } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
+import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { ExploreState } from "./store";
 
 export interface MosaicState {
@@ -33,7 +34,7 @@ const initialState: MosaicState = {
   query: initialMosaicState,
   renderOption: null,
   layer: {
-    minZoom: 8,
+    minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
   },
   options: {
@@ -68,6 +69,9 @@ export const mosaicSlice = createSlice({
     },
     setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
       state.renderOption = action.payload;
+      if (!action.payload.minZoom) {
+        state.renderOption.minZoom = DEFAULT_MIN_ZOOM;
+      }
     },
     setShowResults: (state, action: PayloadAction<boolean>) => {
       state.options.showResults = action.payload;

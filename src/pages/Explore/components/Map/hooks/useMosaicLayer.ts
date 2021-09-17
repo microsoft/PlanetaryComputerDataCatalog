@@ -14,7 +14,7 @@ const useMosaicLayer = (
   const { collection, query, renderOption } = mosaic;
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
-  // with the selected item (TODO: make custom selector)
+  // with the selected item (TODO: make custom redux selector)
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
 
   // Add a mosaic layer endpoint to the map
@@ -30,7 +30,7 @@ const useMosaicLayer = (
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
         tileUrl: makeTileJsonUrl(query, renderOption, collection, stacItemForMosaic),
-        minZoom: isItemLayerValid ? undefined : 8, // TODO: temp hardcoding until backend support per-collection
+        // minZoom: isItemLayerValid ? 0 : undefined,
       };
 
       if (mosaicLayer) {

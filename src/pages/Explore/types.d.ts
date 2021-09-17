@@ -15,4 +15,5 @@ export interface IMosaicRenderOption {
   name: string;
   description: string;
   options: string;
+  minZoom: number | undefined;
 }
