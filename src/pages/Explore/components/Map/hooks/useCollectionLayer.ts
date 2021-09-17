@@ -1,6 +1,5 @@
 import * as atlas from "azure-maps-control";
 import bboxToPolygon from "@turf/bbox-polygon";
-import { featureCollection } from "@turf/helpers";
 
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { useEffect } from "react";
@@ -9,7 +8,8 @@ import {
   collectionOutlineLayer,
   stacCollectionDatasource,
 } from "../../../utils/layers";
-import { BBox } from "geojson";
+import { BBox, Feature, GeoJsonProperties, MultiPolygon, Polygon } from "geojson";
+import union from "@turf/union";
 
 // Show highlighted stac item result footprint on the map
 
@@ -37,11 +37,23 @@ const useCollectionBoundsLayer = (
     if (!bbox) {
       stacCollectionDatasource.clear();
     } else {
-      const polys = bbox.map(box => bboxToPolygon(box as BBox));
-      const fc = featureCollection(polys);
-
       stacCollectionDatasource.clear();
-      stacCollectionDatasource.add(fc);
+      const polys = bbox.map(box => bboxToPolygon(box as BBox));
+
+      const multiPoly = polys.reduce<Feature<
+        Polygon | MultiPolygon,
+        GeoJsonProperties
+      > | null>((unionedPoly, currPoly) => {
+        if (unionedPoly) {
+          return union(unionedPoly.geometry, currPoly.geometry);
+        }
+        // base case
+        return currPoly;
+      }, null);
+
+      if (multiPoly) {
+        stacCollectionDatasource.add(multiPoly);
+      }
     }
   }, [mapRef, collection]);
 };
