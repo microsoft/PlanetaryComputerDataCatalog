@@ -1,4 +1,4 @@
-import { IDropdownOption } from "@fluentui/react";
+import { DropdownMenuItemType, IDropdownOption } from "@fluentui/react";
 import { sortBy } from "lodash-es";
 
 import { useCollections } from "utils/requests";
@@ -7,30 +7,14 @@ import StateSelector from "./StateSelector";
 import { useExploreSelector } from "../../../state/hooks";
 import { setCollection } from "../../../state/mosaicSlice";
 
-const isRenderable = (collection: IStacCollection) => {
-  // By default, all collections with at least one GeoTIFF data-role item_asset
-  // are renderable
-  if (collection.item_assets) {
-    return !!Object.values(collection.item_assets).find(a =>
-      a.type?.toLowerCase().includes("geotiff")
-    );
-  }
-  return false;
-};
+import { collections as collectionConfig } from "config/datasets.yml";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
   const collections: IStacCollection[] = data?.collections;
   const collection = useExploreSelector(state => state.mosaic.collection);
 
-  const collectionOptions = isSuccess
-    ? sortBy(
-        collections.filter(isRenderable).map((collection): IDropdownOption => {
-          return { key: collection.id, text: collection.title };
-        }),
-        "text"
-      )
-    : [];
+  const collectionOptions = isSuccess ? sortedOptions(collections) : [];
 
   const getCollectionById = (key: string | number) => {
     return collections.find(c => c.id === key.toString());
@@ -50,3 +34,46 @@ const CollectionSelector = () => {
 };
 
 export default CollectionSelector;
+
+const isRenderable = (collection: IStacCollection) => {
+  // By default, all collections with at least one GeoTIFF data-role item_asset
+  // are renderable
+  if (collection.item_assets) {
+    return !!Object.values(collection.item_assets).find(a =>
+      a.type?.toLowerCase().includes("geotiff")
+    );
+  }
+  return false;
+};
+
+const sortedOptions = (collections: IStacCollection[]) => {
+  const renderable = collections.filter(isRenderable).map(c => ({
+    text: c.title,
+    key: c.id,
+    category: collectionConfig[c.id]?.category || "Other",
+  }));
+  const catCollections = sortBy(renderable, "text");
+  const sortedCollections = sortBy(catCollections, "category");
+  const options: IDropdownOption[] = [];
+
+  let lastCategory = "";
+  sortedCollections.forEach(({ key, text, category }) => {
+    // Add a category header if the category has changed
+    if (lastCategory !== category) {
+      options.push({
+        key: `${category}-div`,
+        text: "-",
+        itemType: DropdownMenuItemType.Divider,
+      });
+      options.push({
+        key: `${category}-header`,
+        text: category,
+        itemType: DropdownMenuItemType.Header,
+      });
+    }
+    options.push({ key, text });
+    lastCategory = category;
+  });
+
+  return options;
+};
