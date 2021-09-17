@@ -16,6 +16,6 @@ const getCollectionMosaicParams = async (
   const [collectionId] = queryParam.queryKey;
 
   return await (
-    await axios.get(`mock/${collectionId}/mosaicInfo.json`)
+    await axios.get(`stac/${collectionId}/mosaicInfo.json`)
   ).data;
 };

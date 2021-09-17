@@ -16,7 +16,7 @@ const QueryPane = ({ collectionId }: QueryPaneProps) => {
     setSchema(null);
     // TODO: replace mock queryables
     const schema = await $RefParser.dereference(
-      `/mock/${collectionId}/queryables.json`
+      `/stac/${collectionId}/queryables.json`
     );
     setSchema(schema);
   }, [collectionId]);
