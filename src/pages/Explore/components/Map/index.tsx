@@ -16,6 +16,12 @@ import {
 import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
 
 import PlaceSearchControl from "./components/PlaceSearch";
+import {
+  IStyleFunctionOrObject,
+  IProgressIndicatorStyleProps,
+  IProgressIndicatorStyles,
+  ProgressIndicator,
+} from "@fluentui/react";
 
 const mapContainerId: string = "viewer-map";
 
@@ -49,6 +55,8 @@ const ExploreMap = () => {
       map.events.add("ready", onReady);
       map.events.add("moveend", mapHandlers.onMapMove);
       map.events.add("styledata", mapHandlers.onStyleDataLoaded);
+      map.events.add("data", mapHandlers.onDataEvent);
+
       mapRef.current = map;
     }
 
@@ -56,7 +64,13 @@ const ExploreMap = () => {
 
     // Remove event handlers on unmount
     return () => map.events.remove("ready", onReady);
-  }, [center, zoom, mapHandlers.onMapMove, mapHandlers.onStyleDataLoaded]);
+  }, [
+    center,
+    zoom,
+    mapHandlers.onMapMove,
+    mapHandlers.onStyleDataLoaded,
+    mapHandlers.onDataEvent,
+  ]);
 
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
@@ -69,15 +83,13 @@ const ExploreMap = () => {
 
   const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
   const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
+  const loadingIndicator = (
+    <ProgressIndicator barHeight={1} styles={progressIndicatorStyles} />
+  );
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "relative",
-      }}
-    >
+    <div style={mapContainerStyle}>
+      {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
@@ -87,3 +99,17 @@ const ExploreMap = () => {
 };
 
 export default ExploreMap;
+
+const mapContainerStyle: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+  position: "relative",
+};
+
+const progressIndicatorStyles: IStyleFunctionOrObject<
+  IProgressIndicatorStyleProps,
+  IProgressIndicatorStyles
+> = {
+  root: { position: "absolute", width: "100%", zIndex: 1 },
+  itemProgress: { padding: 0 },
+};

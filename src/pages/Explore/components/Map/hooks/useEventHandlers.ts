@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useWindowSize } from "react-use";
 import atlas from "azure-maps-control";
 
@@ -16,6 +16,7 @@ import {
 const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
   const { height, width } = useWindowSize();
+  const [areTilesLoading, setTilesLoading] = useState<boolean>(false);
 
   useEffect(() => {
     mapRef.current?.resize();
@@ -64,7 +65,17 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
     }
   }, []);
 
-  return { onMapMove, onStyleDataLoaded };
+  // Loading indicator for mosaic tiles
+  const onDataEvent = useCallback((e: atlas.MapDataEvent) => {
+    const { map, isSourceLoaded, source, tile } = e;
+    if (map.areTilesLoaded() && isSourceLoaded && source === undefined && tile) {
+      setTilesLoading(false);
+    } else if (!map.areTilesLoaded() && source === undefined && tile) {
+      setTilesLoading(true);
+    }
+  }, []);
+
+  return { onMapMove, onStyleDataLoaded, onDataEvent, areTilesLoading };
 };
 
 export default useMapEvents;
