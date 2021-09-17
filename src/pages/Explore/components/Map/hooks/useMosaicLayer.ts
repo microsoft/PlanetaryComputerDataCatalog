@@ -30,7 +30,7 @@ const useMosaicLayer = (
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
         tileUrl: makeTileJsonUrl(query, renderOption, collection, stacItemForMosaic),
-        minZoom: 8, // TODO: temp hardcoding until backend support per-collection
+        minZoom: isItemLayerValid ? undefined : 8, // TODO: temp hardcoding until backend support per-collection
       };
 
       if (mosaicLayer) {
