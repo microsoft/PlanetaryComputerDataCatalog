@@ -197,25 +197,19 @@
       "minZoom": 7
     },
     {
-      "name": "Geology",
-      "description": " Identifying geological formations, lithology features, and faults (B12, B11, B02)",
-      "options": "assets=B12,B11,B02&nodata=0",
-      "minZoom": 7
-    },
-    {
       "name": "Bathymetric",
       "description": "Estimates suspended sediment in water (B04, B03, B01).",
       "options": "assets=B04,B03,B01&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
       "minZoom": 7
     },
     {
-      "name": "NDVI",
-      "description": "Normalized Difference Veg. Index (NIR-Red)/(NIR+Red)",
+      "name": "Normalized Difference Veg. Index (NDVI)",
+      "description": "Normalized Difference Vegetation Index (NIR-Red)/(NIR+Red)",
       "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 7
     },
     {
-      "name": "Moisture Index ",
+      "name": "Moisture Index",
       "description": "Moisture index indicating water stress in plants (B8A-B11)/(B8A+B11)",
       "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu",
       "minZoom": 7

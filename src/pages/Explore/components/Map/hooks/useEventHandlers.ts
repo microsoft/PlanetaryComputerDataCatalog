@@ -26,7 +26,6 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const onMapMove = useCallback(
     (e: atlas.MapEvent) => {
       const camera = e.map.getCamera();
-      console.log("onMapMove", camera);
       dispatch(setCamera(camera));
     },
     [dispatch]

@@ -76,9 +76,9 @@ const ExploreMap = () => {
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
   useMosaicLayer(mapRef, mapReady);
-  useUrlState();
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
+  useUrlState();
 
   const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
   const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;

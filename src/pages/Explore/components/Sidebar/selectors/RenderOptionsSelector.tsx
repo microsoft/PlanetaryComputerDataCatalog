@@ -14,9 +14,9 @@ const RenderOptionsSelector = () => {
   );
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
+  // Set a default render option if none is selected
   useEffect(() => {
     if (mosaicInfo?.renderOptions && renderOption === null) {
-      console.log("setting render option from mosaic");
       dispatch(setRenderOption(mosaicInfo.renderOptions[0]));
     }
   }, [dispatch, mosaicInfo, renderOption]);
