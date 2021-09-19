@@ -7,16 +7,18 @@ import { IStacFilterCollection, IStacFilterGeom } from "types/stac";
 export const collectionFilter = (
   collectionId: string | undefined
 ): IStacFilterCollection | null => {
-  if (collectionId) {
-    return {
-      eq: [{ property: "collection" }, collectionId],
-    };
-  }
+  if (!collectionId) return null;
 
-  return null;
+  return {
+    eq: [{ property: "collection" }, collectionId],
+  };
 };
 
-export const geomFilter = (bbox: atlas.data.BoundingBox): IStacFilterGeom => {
+export const geomFilter = (
+  bbox: atlas.data.BoundingBox | null
+): IStacFilterGeom | null => {
+  if (!bbox) return null;
+
   return {
     intersects: [
       {

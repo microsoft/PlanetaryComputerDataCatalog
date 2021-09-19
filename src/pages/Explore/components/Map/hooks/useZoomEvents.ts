@@ -32,7 +32,7 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const layerMinZoom =
     mosaic.renderOption?.minZoom || mosaicLayerTileJson?.minzoom || DEFAULT_MIN_ZOOM;
 
-  // Set the minzoom for the current mosaic layer
+  // Set the minzoom state for the current mosaic layer. This informs the zoom messages displayed.
   useEffect(() => {
     if (layerMinZoom) {
       dispatch(setLayerMinZoom(layerMinZoom));
@@ -56,7 +56,7 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   // Fit the map to the provided bounds
   useEffect(() => {
     if (!map) return;
-    if (bounds[0] !== map.getCamera().bounds?.[0]) {
+    if (bounds && bounds[0] !== map.getCamera().bounds?.[0]) {
       map.setCamera({
         bounds,
         padding: 20,

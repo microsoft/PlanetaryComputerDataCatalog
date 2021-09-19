@@ -12,6 +12,7 @@ import {
   useMapZoomToLayer,
   useMapZoomToExtent,
   useCollectionBoundsLayer,
+  useUrlState,
 } from "./hooks";
 import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
 
@@ -75,6 +76,7 @@ const ExploreMap = () => {
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
   useMosaicLayer(mapRef, mapReady);
+  useUrlState();
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
 

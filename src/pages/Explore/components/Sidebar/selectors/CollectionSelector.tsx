@@ -4,15 +4,19 @@ import { sortBy } from "lodash-es";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
-import { useExploreSelector } from "../../../state/hooks";
 import { setCollection } from "../../../state/mosaicSlice";
 
 import { collections as collectionConfig } from "config/datasets.yml";
+import { useExploreSelector } from "pages/Explore/state/hooks";
+import { useCollectionUrlState } from "./hooks/useUrlState";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
   const collections: IStacCollection[] = data?.collections;
   const collection = useExploreSelector(state => state.mosaic.collection);
+
+  // Sets selector values based off of url state
+  useCollectionUrlState(collections);
 
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];
 

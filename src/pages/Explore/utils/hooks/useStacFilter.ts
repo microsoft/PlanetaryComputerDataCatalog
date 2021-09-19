@@ -26,7 +26,7 @@ export const useCqlFormat = () => {
   };
 
   const collectionFragment = collectionFilter(collection?.id);
-  const geometryFragment = geomFilter(map.bounds);
+  const geometryFragment = geomFilter(map?.bounds);
 
   const baseFilter = [collectionFragment, geometryFragment];
 
