@@ -64,6 +64,7 @@ const Header = ({ onGrid = true }) => {
             </Text>
           </HeaderLink>
           <div className="break" />
+          <HeaderLink to="/explore">Explore</HeaderLink>
           <HeaderLink to="/catalog">Data Catalog</HeaderLink>
           <HeaderLink external to="/compute">
             Hub

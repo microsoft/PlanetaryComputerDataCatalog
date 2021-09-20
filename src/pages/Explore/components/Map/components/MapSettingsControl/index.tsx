@@ -11,12 +11,15 @@ import {
 import * as atlas from "azure-maps-control";
 import PanelControl from "../PanelControl";
 import { mosaicLayerName } from "../../hooks/useMosaicLayer";
-
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { setShowCollectionOutline } from "pages/Explore/state/mapSlice";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
 
 const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
+  const dispatch = useExploreDispatch();
+  const { showCollectionOutline } = useExploreSelector(s => s.map);
   const [opacity, setOpacity] = useState<number>(100);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>("grayscale_dark");
   const [showLabels, setShowLabels] = useState<boolean>(true);
@@ -81,9 +84,16 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
           styles={{ root: { width: 250 } }}
         />
         <Toggle
-          label="Show map feature labels"
+          label="Show labels on map"
           checked={showLabels}
           onChange={(_, checked) => setShowLabels(checked || false)}
+        />
+        <Toggle
+          label="Show current dataset extent on map"
+          checked={showCollectionOutline}
+          onChange={(_, checked) =>
+            dispatch(setShowCollectionOutline(checked || false))
+          }
         />
       </Stack>
     </PanelControl>

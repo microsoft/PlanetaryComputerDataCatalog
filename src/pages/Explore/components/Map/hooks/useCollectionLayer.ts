@@ -18,6 +18,7 @@ const useCollectionBoundsLayer = (
   mapReady: boolean
 ) => {
   const collection = useExploreSelector(s => s.mosaic.collection);
+  const { showCollectionOutline } = useExploreSelector(s => s.map);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -51,11 +52,11 @@ const useCollectionBoundsLayer = (
         return currPoly;
       }, null);
 
-      if (multiPoly) {
+      if (multiPoly && showCollectionOutline) {
         stacCollectionDatasource.add(multiPoly);
       }
     }
-  }, [mapRef, collection]);
+  }, [mapRef, collection, showCollectionOutline]);
 };
 
 export default useCollectionBoundsLayer;

@@ -11,6 +11,7 @@ export interface MapState {
   zoom: number;
   bounds: atlas.data.BoundingBox | null;
   boundaryShape: GeoJsonObject | null;
+  showCollectionOutline: boolean;
   showSidebar: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
@@ -21,6 +22,7 @@ const initialState: MapState = {
   zoom: zoom || 2,
   bounds: null,
   boundaryShape: null,
+  showCollectionOutline: true,
   showSidebar: true,
   previousCenter: null,
   previousZoom: null,
@@ -59,6 +61,9 @@ export const mapSlice = createSlice({
     toggleShowSidebar: state => {
       state.showSidebar = !state.showSidebar;
     },
+    setShowCollectionOutline: (state, action: PayloadAction<boolean>) => {
+      state.showCollectionOutline = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
@@ -81,6 +86,7 @@ export const {
   setCenter,
   setZoom,
   setBoundaryShape,
+  setShowCollectionOutline,
   clearBoundaryShape,
   toggleShowSidebar,
 } = mapSlice.actions;
