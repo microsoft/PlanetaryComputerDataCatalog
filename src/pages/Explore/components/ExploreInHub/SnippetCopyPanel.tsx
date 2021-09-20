@@ -49,13 +49,18 @@ const SnippetCopyPanel = ({
       ? "Use the code below to recreate this search in the Planetary Computer Hub or other Python analytic environment."
       : "Use the code below to access this individual item's data assets.";
 
+  const isCopySuccess = clipboardState.value && isRecentCopy;
+
   // Briefly change the copy button icon when a user copies to indicate success
-  const copyIcon = clipboardState.value && isRecentCopy ? "SkypeCheck" : "Copy";
+  const copyIcon = isCopySuccess ? "SkypeCheck" : "Copy";
+  const copyIconColor = isCopySuccess
+    ? theme.palette.green
+    : theme.palette.neutralPrimary;
 
   const handleCopy = useCallback(() => {
-    if (!snippet) return;
+    if (!snippet?.code) return;
     setIsRecentCopy(true);
-    copyToClipboard(snippet);
+    copyToClipboard(snippet.code);
     setTimeout(() => setIsRecentCopy(false), 3000);
   }, [copyToClipboard, snippet]);
 
@@ -81,7 +86,11 @@ const SnippetCopyPanel = ({
         <Text styles={{ root: { paddingBottom: 6 } }}>{title}</Text>
         <StackItem>
           <Stack horizontal horizontalAlign={"start"} tokens={{ childrenGap: 6 }}>
-            <DefaultButton iconProps={{ iconName: copyIcon }} onClick={handleCopy}>
+            <DefaultButton
+              styles={{ icon: { color: copyIconColor } }}
+              iconProps={{ iconName: copyIcon }}
+              onClick={handleCopy}
+            >
               Copy
             </DefaultButton>
             <NewTabLink
@@ -96,7 +105,7 @@ const SnippetCopyPanel = ({
       </Stack>
 
       <div className="input_area">
-        <pre>{snippet}</pre>
+        <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
       </div>
     </Callout>
   );

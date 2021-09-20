@@ -1,18 +1,26 @@
 import stringify from "json-stringify-pretty-compact";
+import hljs from "highlight.js/lib/core";
+import python from "highlight.js/lib/languages/python";
+import "highlight.js/styles/github.css";
+
 import { IStacFilter, IStacItem } from "types/stac";
+
+hljs.registerLanguage("python", python);
 
 export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
   if (!cql) return null;
 
   const pythonDict = stringify(cql.filter);
 
-  return `from pystac_client import Client
+  const template = `from pystac_client import Client
 import planetary_computer as pc
 
 catalog = Client.open("https://planetarycomputer.microsoft.com/api/stac/v1")
 search = catalog.search(filter=${pythonDict})
 
 search.get_items()`;
+
+  return hljs.highlight("python", template);
 };
 
 export const createItemPythonSnippet = (item: IStacItem | null) => {
@@ -39,7 +47,7 @@ export const createItemPythonSnippet = (item: IStacItem | null) => {
         .join(", ")})`
     : "";
 
-  return `import pystac
+  const template = `import pystac
 import planetary_computer
 import rioxarray
 
@@ -54,4 +62,6 @@ asset_href = signed_item.assets["${firstDataAsset[0]}"].href
 ds = rioxarray.open_rasterio(asset_href)
 ds
 `;
+
+  return hljs.highlight("python", template);
 };
