@@ -28,6 +28,8 @@ import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
 import Assets from "../components/stac/Assets";
 import CollectionUrl from "components/stac/CollectionUrl";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
 
 const Collection = () => {
   const { id } = useParams();
@@ -106,13 +108,15 @@ const Collection = () => {
             </div>
           </div>
         </div>
-        <Bands />
-        <ItemAssets />
-        <CubeDimensions />
-        <CubeVariables />
-        <TableTables />
-        <TableColumns />
-        <Assets />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Bands />
+          <ItemAssets />
+          <CubeDimensions />
+          <CubeVariables />
+          <TableTables />
+          <TableColumns />
+          <Assets />
+        </ErrorBoundary>
       </CollectionProvider>
     </PivotItem>
   );

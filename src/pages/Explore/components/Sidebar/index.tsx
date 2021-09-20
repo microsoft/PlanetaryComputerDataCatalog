@@ -16,6 +16,8 @@ import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import { useExploreSelector } from "../../state/hooks";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -74,13 +76,19 @@ const Sidebar = () => {
           >
             Explore Planetary Computer datasets
           </Text>
-          <CollectionSelector />
-          <MosaicPresetSelector />
-          <RenderOptionsSelector />
-          <SearchResultsPane request={stacFilter} />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <CollectionSelector />
+            <MosaicPresetSelector />
+            <RenderOptionsSelector />
+          </ErrorBoundary>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <SearchResultsPane request={stacFilter} />
+          </ErrorBoundary>
         </Stack>
         <Stack styles={itemDetailPanelStyles} tokens={stackTokens}>
-          <ItemDetailPanel />
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ItemDetailPanel />
+          </ErrorBoundary>
         </Stack>
       </StackItem>
       <MinimizeButton />

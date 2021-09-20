@@ -9,6 +9,8 @@ import SEO from "components/Seo";
 import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import { useWindowSize } from "react-use";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -46,7 +48,9 @@ const Explorer = () => {
             }}
             grow={1}
           >
-            <ExploreMap />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <ExploreMap />
+            </ErrorBoundary>
           </StackItem>
         </Stack>
       </Provider>
