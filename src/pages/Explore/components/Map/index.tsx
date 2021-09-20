@@ -23,6 +23,7 @@ import {
   IProgressIndicatorStyles,
   ProgressIndicator,
 } from "@fluentui/react";
+import MapOptionsControl from "./components/MapOptionsControl";
 
 const mapContainerId: string = "viewer-map";
 
@@ -95,6 +96,7 @@ const ExploreMap = () => {
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
+      <MapOptionsControl />
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>
   );
