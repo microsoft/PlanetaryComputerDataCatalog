@@ -56,10 +56,12 @@ const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) =>
         styles={{
           root: {
             background: theme.palette.black,
-            display: loading ? "none" : "block",
+            display: loading ? "none" : "flex",
             borderRadius: border === "top" ? "4px 4px 0 0" : " 4px 0 0 4px",
             maxWidth: size,
             maxHeight: size,
+            minHeight: size / 2,
+            alignItems: "center",
           },
         }}
       />
