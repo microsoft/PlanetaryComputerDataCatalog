@@ -20,7 +20,7 @@ search = catalog.search(filter=${pythonDict})
 
 search.get_items()`;
 
-  return hljs.highlight("python", template);
+  return hljs.highlight(template, { language: "python" });
 };
 
 export const createItemPythonSnippet = (item: IStacItem | null) => {
@@ -63,5 +63,5 @@ ds = rioxarray.open_rasterio(asset_href)
 ds
 `;
 
-  return hljs.highlight("python", template);
+  return hljs.highlight(template, { language: "python" });
 };

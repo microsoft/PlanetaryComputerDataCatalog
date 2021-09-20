@@ -72,7 +72,6 @@ const ItemResult = ({ item }: ItemResultProps) => {
             borderRightStyle: "solid",
             backgroundColor: theme.palette.black,
             borderRadius: "5px 0 0 3px",
-            display: "flex",
           }}
         >
           <ItemPreview item={item} key={item.id} />
