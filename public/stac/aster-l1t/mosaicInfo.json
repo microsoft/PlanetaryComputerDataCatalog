@@ -1,6 +1,16 @@
 {
   "mosaics": [
     {
+      "name": "Most recent (low cloud)",
+      "description": "",
+      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
+    },
+    {
+      "name": "Most recent",
+      "description": "",
+      "cql": []
+    },
+    {
       "name": "Most Recent: Fall 2006 (low-cloud)",
       "description": "",
       "cql": [
@@ -39,24 +49,19 @@
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 20] }
       ]
-    },
-    {
-      "name": "Very low cloud, any time (< 5%)",
-      "description": "",
-      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 5] }]
     }
   ],
   "renderOptions": [
     {
       "name": "VNIR - Psuedo RGB",
       "description": "",
-      "options": "assets=VNIR&bidx=2,3,1&nodata=0",
+      "options": "assets=VNIR&bidx=2,3,1&nodata=0&skipcovered=False&exitwhenfull=False",
       "minZoom": 7
     },
     {
       "name": "SWIR - Psuedo RGB",
       "description": "",
-      "options": "assets=SWIR&bidx=2,1,3&nodata=0",
+      "options": "assets=SWIR&bidx=2,1,3&nodata=0&skipcovered=False&exitwhenfull=False",
       "minZoom": 7
     }
   ]

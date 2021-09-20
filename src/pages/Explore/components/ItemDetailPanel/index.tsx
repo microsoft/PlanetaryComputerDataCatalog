@@ -37,7 +37,14 @@ const ItemDetailPanel = () => {
   const content = item ? (
     <div style={itemDetailStylesInner}>
       <BackToListButton />
-      <ItemPreview item={item} size={400} border="top" />
+      <div
+        style={{
+          minWidth: 400,
+          minHeight: 400,
+        }}
+      >
+        <ItemPreview item={item} size={400} border="top" />
+      </div>
       <HeaderCard collectionName={collectionName} item={item} />
 
       <Pivot styles={{ link: { width: "50%" } }}>

@@ -29,6 +29,7 @@ const useMosaicLayer = (
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
         tileUrl: makeTileJsonUrl(query, renderOption, collection, stacItemForMosaic),
+        visible: true,
       };
 
       if (mosaicLayer) {
@@ -36,6 +37,12 @@ const useMosaicLayer = (
       } else {
         const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
         map.layers.add(layer, itemOutlineLayerName);
+      }
+    } else {
+      if (mosaicLayer) {
+        // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
+        // the opacity settings will be retained
+        (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
       }
     }
   }, [collection, query, renderOption, mapRef, stacItemForMosaic, mapReady]);
