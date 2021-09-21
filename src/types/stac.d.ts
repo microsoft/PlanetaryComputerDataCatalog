@@ -1,4 +1,4 @@
-import { Feature, FeatureCollection } from "geojson";
+import { Feature, FeatureCollection, Geometry } from "geojson";
 
 export interface IStacCollection {
   id: string;
@@ -6,6 +6,7 @@ export interface IStacCollection {
   description: string;
   license: string;
   assets: Record<string, IStacAsset>;
+  item_assets: Record<string, IStacAsset>;
   extent: {
     spatial: {
       bbox: Array<Array<number>>;
@@ -29,6 +30,7 @@ export interface IStacLink {
 export interface IStacItem extends Feature {
   collection: string;
   assets: { [key: string]: IStacAsset };
+  links: IStacLink[];
 }
 
 export interface IStacAsset {
@@ -39,12 +41,17 @@ export interface IStacAsset {
   roles?: string[];
 }
 
-export interface IStacSearch {
-  collections: string[];
-  bbox: [number, number, number, number];
-  limit: number;
-  datetime: string;
-  items?: string[];
+export interface IStacFilter {
+  filter: Record<string, any>;
+  limit?: number;
+}
+
+export interface IStacFilterCollection {
+  eq: [{ property: "collection" }, string];
+}
+
+export interface IStacFilterGeom {
+  intersects: [{ property: "geometry" }, Geometry];
 }
 
 export interface IStacSearchResult extends FeatureCollection {

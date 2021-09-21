@@ -1,0 +1,17 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (2020)",
+      "description": "Most recent Land Use/Land Cover",
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Default",
+      "description": "",
+      "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc",
+      "minZoom": 4
+    }
+  ]
+}

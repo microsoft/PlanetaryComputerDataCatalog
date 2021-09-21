@@ -40,6 +40,7 @@ const ItemResult = ({ item }: ItemResultProps) => {
     ":hover": hoverStyle,
     ":focus": activeStyle,
     ":active": activeStyle,
+    ":active:hover": activeStyle,
   };
 
   const showBounds = useCallback(() => {
@@ -64,11 +65,13 @@ const ItemResult = ({ item }: ItemResultProps) => {
       >
         <div
           style={{
-            width: 100,
-            height: 100,
+            minWidth: 100,
+            minHeight: 100,
             borderRight: theme.palette.neutralLighter,
             borderRightWidth: 1,
             borderRightStyle: "solid",
+            backgroundColor: theme.palette.black,
+            borderRadius: "5px 0 0 3px",
           }}
         >
           <ItemPreview item={item} key={item.id} />

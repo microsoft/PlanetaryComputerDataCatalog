@@ -1,4 +1,6 @@
 import axios from "axios";
+import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
+import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
@@ -19,10 +21,6 @@ export const useStaticMetadata = staticFileName => {
   return useQuery([staticFileName], getStaticMetadata);
 };
 
-export const useRequest = href => {
-  return useQuery([href], getByUrl);
-};
-
 export const useCollectionMapInfo = collectionId => {
   return useQuery([collectionId], getCollectionViewerParams, {
     refetchOnWindowFocus: false,
@@ -30,16 +28,8 @@ export const useCollectionMapInfo = collectionId => {
   });
 };
 
-export const useCollectionMosaicInfo = collectionId => {
-  return useQuery([collectionId], getCollectionMosaicParams, {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    enabled: !!collectionId,
-  });
-};
-
-export const useTileJson = (collection, query, renderOption, item) => {
-  return useQuery([collection, query, renderOption, item], getTileJson, {
+export const useTileJson = (query, renderOption, collection, item) => {
+  return useQuery([query, renderOption, collection, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     enabled: !!collection && !!query.hash,
@@ -47,27 +37,17 @@ export const useTileJson = (collection, query, renderOption, item) => {
 };
 
 export const getTileJson = async ({ queryKey }) => {
-  const [collection, query, renderOption, item] = queryKey;
-  const tileJsonUrl = makeTileJsonUrl(collection, query, renderOption, item);
+  const [query, renderOption, collection, item] = queryKey;
+  const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
 
   const resp = await axios.get(tileJsonUrl);
   return resp.data;
 };
 
-export const getMosaicQueryHashKey = async cql => {
-  return axios.get(`/mock/mosaicHashKey.txt?cql=${cql}`);
-};
-
-const getByUrl = async ({ queryKey }) => {
-  const [url] = queryKey;
-
-  // TODO: remove when #498 is fixed. The STAC `Link` objects don't always
-  // reflect the protocol of the request, causing errors in production. As a
-  // workaround, upgrade to HTTPS if the current location is HTTPS
-  const safeUrl =
-    window.location.protocol === "https:" ? url.replace("http:", "https:") : url;
-  const resp = await axios.get(safeUrl);
-  return resp.data;
+export const createMosaicQueryHashkey = async (queryInfo, collectionId) => {
+  const body = makeFilterBody([collectionFilter(collectionId)], queryInfo);
+  const r = await axios.post(`${DATA_URL}/mosaic/register`, body);
+  return r.data.searchid;
 };
 
 const getCollections = async ({ queryKey }) => {
@@ -91,52 +71,5 @@ const getCollectionViewerParams = async ({ queryKey }) => {
 
   return {
     info: mapInfoResp.data,
-  };
-};
-
-const getCollectionMosaicParams = async ({ queryKey }) => {
-  const [collectionId] = queryKey;
-
-  try {
-    return await (
-      await axios.get(`mock/${collectionId}/mosaicInfo.json`)
-    ).data;
-  } catch {
-    return faker(collectionId);
-  }
-};
-
-// TODO: temp
-const faker = collectionId => {
-  return {
-    mosaics: [
-      {
-        name: `Preset 1 (${collectionId})`,
-        description: `${collectionId}-abababa`,
-        cql: "order by datetime desc",
-        renderOptions: [
-          { name: "Render Option 1", options: "bidx=1,2,3" },
-          { name: "Render Option 2", options: "bidx=1,5,6" },
-        ],
-      },
-      {
-        name: `Preset 2 (${collectionId})`,
-        description: `${collectionId}-cecece`,
-        cql: "order by datetime desc",
-        renderOptions: [
-          { name: "Render Option 1", options: "bidx=4,5,6" },
-          { name: "Render Option 2", options: "bidx=1,5,6" },
-        ],
-      },
-      {
-        name: `Preset 3 (${collectionId})`,
-        description: `${collectionId}-eoeoeo`,
-        cql: "order by datetime desc",
-        renderOptions: [
-          { name: "Render Option 1", options: "bidx=4,5,6" },
-          { name: "Render Option 2", options: "bidx=1,5,6" },
-        ],
-      },
-    ],
   };
 };
