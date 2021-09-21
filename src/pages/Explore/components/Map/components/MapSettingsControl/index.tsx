@@ -13,6 +13,7 @@ import PanelControl from "../PanelControl";
 import { mosaicLayerName } from "../../hooks/useMosaicLayer";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setShowCollectionOutline } from "pages/Explore/state/mapSlice";
+import { INIT_MAP_STYLE } from "pages/Explore/utils/constants";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
@@ -21,7 +22,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   const dispatch = useExploreDispatch();
   const { showCollectionOutline } = useExploreSelector(s => s.map);
   const [opacity, setOpacity] = useState<number>(100);
-  const [currentMapStyle, setCurrentMapStyle] = useState<string>("grayscale_dark");
+  const [currentMapStyle, setCurrentMapStyle] = useState<string>(INIT_MAP_STYLE);
   const [showLabels, setShowLabels] = useState<boolean>(true);
 
   // Update opacity when slider changes

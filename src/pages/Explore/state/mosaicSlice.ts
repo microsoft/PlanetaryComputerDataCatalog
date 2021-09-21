@@ -82,6 +82,10 @@ export const mosaicSlice = createSlice({
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       state.layer.minZoom = action.payload;
     },
+    resetMosiac: () => {
+      console.log("resetting");
+      return initialState;
+    },
   },
   extraReducers: builder => {
     builder.addCase(
@@ -94,6 +98,7 @@ export const mosaicSlice = createSlice({
 });
 
 export const {
+  resetMosiac,
   setCollection,
   setQuery,
   setRenderOption,

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   IStackStyles,
   IStackTokens,
@@ -15,15 +16,17 @@ import ItemDetailPanel from "../ItemDetailPanel";
 import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
-import { useExploreSelector } from "../../state/hooks";
+import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
+import { resetMosiac } from "pages/Explore/state/mosaicSlice";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
 };
 
 const Sidebar = () => {
+  const dispatch = useExploreDispatch();
   const showSidebar = useExploreSelector(s => s.map.showSidebar);
   const width = showSidebar ? SIDEBAR_WIDTH : 0;
   const sidebarVisibility = showSidebar ? "visibile" : "hidden";
@@ -32,6 +35,14 @@ const Sidebar = () => {
   const selectedItem = useExploreSelector(s => s.detail.selectedItem);
   const searchPanelDisplay = selectedItem ? "none" : "flex";
   const detailViewDisplay = selectedItem ? "flex" : "none";
+
+  useEffect(() => {
+    return () => {
+      // When Explore unmounts, reset the mosaic state so it's fresh when the
+      // user navigates back
+      dispatch(resetMosiac());
+    };
+  }, [dispatch]);
 
   const stacFilter = useStacFilter();
   const sidebarStyles: Partial<IStackStyles> = {

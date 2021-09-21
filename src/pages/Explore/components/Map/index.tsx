@@ -24,6 +24,7 @@ import {
   ProgressIndicator,
 } from "@fluentui/react";
 import MapSettingsControl from "./components/MapSettingsControl";
+import { INIT_MAP_STYLE } from "pages/Explore/utils/constants";
 
 const mapContainerId: string = "viewer-map";
 
@@ -45,7 +46,7 @@ const ExploreMap = () => {
         language: "en-US",
         showFeedbackLink: false,
         showLogo: false,
-        style: "road_shaded_relief",
+        style: INIT_MAP_STYLE,
         renderWorldCopies: true,
         maxBounds: [-180, -90, 180, 90],
         authOptions: {
@@ -61,11 +62,6 @@ const ExploreMap = () => {
 
       mapRef.current = map;
     }
-
-    const map = mapRef.current;
-
-    // Remove event handlers on unmount
-    return () => map.events.remove("ready", onReady);
   }, [
     center,
     zoom,
