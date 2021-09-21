@@ -35,7 +35,7 @@ const RenderOptionsSelector = () => {
 
   return (
     <StateSelector
-      title="Select render presets"
+      title="Select a rendering option"
       icon="MapLayers"
       action={setRenderOption}
       options={options}

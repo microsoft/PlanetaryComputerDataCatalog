@@ -75,6 +75,7 @@ const StateSelector = ({
         onRenderTitle={renderTitle(icon)}
         onRenderPlaceholder={renderPlaceholder(icon, title)}
         ariaLabel={title}
+        title={title}
         disabled={disabled}
       />
     </div>

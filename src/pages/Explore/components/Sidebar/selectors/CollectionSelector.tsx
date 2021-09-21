@@ -26,7 +26,7 @@ const CollectionSelector = () => {
 
   return (
     <StateSelector
-      title="Select a dataset"
+      title="Select a dataset to visualize"
       icon="World"
       action={setCollection}
       options={collectionOptions}

@@ -83,7 +83,6 @@ export const mosaicSlice = createSlice({
       state.layer.minZoom = action.payload;
     },
     resetMosiac: () => {
-      console.log("resetting");
       return initialState;
     },
   },
