@@ -164,10 +164,15 @@ export const makeTileJsonUrl = (
   const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
 
   const renderParams = encodeRenderOpts(renderOption);
+
+  // Rendering a single Item
   if (item && collection) {
     return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${renderParams}&format=png`;
   }
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}${minZoom}`;
+
+  // Rendering a Collection mosaic
+  const collectionParam = collection ? `&collection=${collection.id}` : '';
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}${minZoom}${collectionParam}`;
 };
 
 export const makeItemPreviewUrl = (
