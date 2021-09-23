@@ -20,6 +20,7 @@ export const collectionLineLayer = new atlas.layer.LineLayer(
   stacCollectionDatasource,
   collectionLineLayerName,
   {
+    strokeOpacity: 0.4,
     strokeColor: "#2b88d8",
     strokeWidth: 2,
     strokeDashArray: [1, 1, 1],
@@ -36,6 +37,7 @@ export const collectionOutlineLayer = new atlas.layer.LineLayer(
   stacCollectionDatasource,
   collectionOutlineLayerName,
   {
+    strokeOpacity: 0.4,
     strokeColor: "#deecf9",
     strokeWidth: 4,
     filter: [

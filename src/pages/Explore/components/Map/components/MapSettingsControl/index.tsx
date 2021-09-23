@@ -11,16 +11,13 @@ import {
 import * as atlas from "azure-maps-control";
 import PanelControl from "../PanelControl";
 import { mosaicLayerName } from "../../hooks/useMosaicLayer";
-import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setShowCollectionOutline } from "pages/Explore/state/mapSlice";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
+import CollectionBoundaryToggle from "./CollectionBoundaryToggle";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
 
 const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
-  const dispatch = useExploreDispatch();
-  const { showCollectionOutline } = useExploreSelector(s => s.map);
   const [opacity, setOpacity] = useState<number>(100);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>(DEFAULT_MAP_STYLE);
   const [showLabels, setShowLabels] = useState<boolean>(true);
@@ -67,6 +64,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   }, [mapRef]);
 
   const title = "Manage map settings";
+
   return (
     <PanelControl label={title} iconName="Settings" top={142}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
@@ -89,13 +87,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
           checked={showLabels}
           onChange={(_, checked) => setShowLabels(checked || false)}
         />
-        <Toggle
-          label="Show current dataset extent on map"
-          checked={showCollectionOutline}
-          onChange={(_, checked) =>
-            dispatch(setShowCollectionOutline(checked || false))
-          }
-        />
+        <CollectionBoundaryToggle />
       </Stack>
     </PanelControl>
   );
