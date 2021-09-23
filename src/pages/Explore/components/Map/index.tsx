@@ -25,6 +25,7 @@ import {
 } from "@fluentui/react";
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
+import LegendControl from "./components/LegendControl";
 
 const mapContainerId: string = "viewer-map";
 
@@ -92,6 +93,7 @@ const ExploreMap = () => {
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
+      <LegendControl />
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>
   );
