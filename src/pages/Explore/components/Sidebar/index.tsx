@@ -8,18 +8,22 @@ import {
   FontSizes,
   FontWeights,
 } from "@fluentui/react";
+import { ErrorBoundary } from "react-error-boundary";
 
-import { CollectionSelector } from "./selectors";
-import { MosaicPresetSelector, RenderOptionsSelector } from "./selectors";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { resetMosiac } from "pages/Explore/state/mosaicSlice";
+import {
+  CollectionSelector,
+  MosaicPresetSelector,
+  RenderOptionsSelector,
+} from "./selectors";
+import ResetSelectors from "./ResetSelectors";
 import MinimizeButton from "../controls/ToggleSidebarButton";
 import ItemDetailPanel from "../ItemDetailPanel";
 import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
-import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
-import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
-import { resetMosiac } from "pages/Explore/state/mosaicSlice";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -91,6 +95,7 @@ const Sidebar = () => {
             <CollectionSelector />
             <MosaicPresetSelector />
             <RenderOptionsSelector />
+            <ResetSelectors />
           </ErrorBoundary>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <SearchResultsPane request={stacFilter} />

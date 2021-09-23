@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { ActionButton } from "@fluentui/react";
+import { useState } from "react";
+import { ActionButton, getTheme } from "@fluentui/react";
 import { useTimeoutFn } from "react-use";
 
 const Footer = ({ onGrid = true }) => {
+  const theme = getTheme();
   // Allow users to manage their cookie consent preferences. Not all regions
   // require consent, and the cookie library will do a no-op if the consent dialog is
   // launched in a non-required region. So check for requirements before rendering the button.
@@ -32,7 +33,13 @@ const Footer = ({ onGrid = true }) => {
   const navClass = onGrid ? "grid-content" : "off-grid-content";
 
   return (
-    <footer className="context-uhf">
+    <footer
+      className="context-uhf"
+      style={{
+        borderTop: "1px solid",
+        borderColor: theme.palette.neutralQuaternaryAlt,
+      }}
+    >
       <div className={`c-uhff-base ${navClass}`} style={{ paddingBottom: 2 }}>
         <nav aria-label="Microsoft corporate links">
           <ul

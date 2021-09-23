@@ -24,7 +24,8 @@ import {
   ProgressIndicator,
 } from "@fluentui/react";
 import MapSettingsControl from "./components/MapSettingsControl";
-import { INIT_MAP_STYLE } from "pages/Explore/utils/constants";
+import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
+import LegendControl from "./components/LegendControl";
 
 const mapContainerId: string = "viewer-map";
 
@@ -46,9 +47,8 @@ const ExploreMap = () => {
         language: "en-US",
         showFeedbackLink: false,
         showLogo: false,
-        style: INIT_MAP_STYLE,
+        style: DEFAULT_MAP_STYLE,
         renderWorldCopies: true,
-        maxBounds: [-180, -90, 180, 90],
         authOptions: {
           authType: atlas.AuthenticationType.subscriptionKey,
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
@@ -93,6 +93,7 @@ const ExploreMap = () => {
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
+      <LegendControl />
       <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
     </div>
   );

@@ -10,6 +10,7 @@ import {
 } from "../../../utils/layers";
 import { BBox, Feature, GeoJsonProperties, MultiPolygon, Polygon } from "geojson";
 import union from "@turf/union";
+import { MAX_ZOOM_FOR_COLLECTION_OUTLINE } from "pages/Explore/utils/constants";
 
 // Show highlighted stac item result footprint on the map
 
@@ -18,7 +19,7 @@ const useCollectionBoundsLayer = (
   mapReady: boolean
 ) => {
   const collection = useExploreSelector(s => s.mosaic.collection);
-  const { showCollectionOutline } = useExploreSelector(s => s.map);
+  const { showCollectionOutline, zoom } = useExploreSelector(s => s.map);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -52,11 +53,17 @@ const useCollectionBoundsLayer = (
         return currPoly;
       }, null);
 
-      if (multiPoly && showCollectionOutline) {
+      if (multiPoly) {
         stacCollectionDatasource.add(multiPoly);
       }
+
+      // Sync the line layers with the visibility setting, or if the zoom level is low
+      const isCollectionBoundsVisible =
+        showCollectionOutline && zoom <= MAX_ZOOM_FOR_COLLECTION_OUTLINE;
+      collectionLineLayer.setOptions({ visible: isCollectionBoundsVisible });
+      collectionOutlineLayer.setOptions({ visible: isCollectionBoundsVisible });
     }
-  }, [mapRef, collection, showCollectionOutline]);
+  }, [mapRef, collection, showCollectionOutline, zoom]);
 };
 
 export default useCollectionBoundsLayer;

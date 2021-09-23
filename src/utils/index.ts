@@ -157,10 +157,10 @@ export const makeTileJsonUrl = (
   query: IMosaic,
   renderOption: IMosaicRenderOption | null,
   collection: IStacCollection | null,
-  item: IStacItem | null
+  item: IStacItem | null,
+  isHighDef: boolean = true
 ) => {
-  const highDef = true;
-  const scaleParam = highDef ? "tile_scale=2" : "tile_scale=1";
+  const scaleParam = isHighDef ? "tile_scale=2" : "tile_scale=1";
   const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
 
   const renderParams = encodeRenderOpts(renderOption);
@@ -171,7 +171,7 @@ export const makeTileJsonUrl = (
   }
 
   // Rendering a Collection mosaic
-  const collectionParam = collection ? `&collection=${collection.id}` : '';
+  const collectionParam = collection ? `&collection=${collection.id}` : "";
   return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}${minZoom}${collectionParam}`;
 };
 

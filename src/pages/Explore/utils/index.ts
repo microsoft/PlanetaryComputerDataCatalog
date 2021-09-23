@@ -7,10 +7,15 @@ export const updateQueryStringParam = (
   const url = new URL(window.location.href);
   const existing = url.searchParams.get(key);
 
+  // Update or remove the query string param
   if (value && existing !== value) {
     url.searchParams.set(key, value);
-    window.history.replaceState({}, "", url.toString());
+  } else if (!value && existing) {
+    url.searchParams.delete(key);
+  } else {
+    return;
   }
+  window.history.replaceState({}, "", url.toString());
 };
 
 export const getCenterAndZoomQueryString = (): {
