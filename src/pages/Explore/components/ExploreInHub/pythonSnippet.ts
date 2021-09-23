@@ -4,6 +4,8 @@ import python from "highlight.js/lib/languages/python";
 import "highlight.js/styles/github.css";
 
 import { IStacFilter, IStacItem } from "types/stac";
+import { STAC_URL } from "utils/constants";
+import { DEFAULT_QUERY_LIMIT } from "pages/Explore/utils/constants";
 
 hljs.registerLanguage("python", python);
 
@@ -15,10 +17,11 @@ export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
   const template = `from pystac_client import Client
 import planetary_computer as pc
 
-catalog = Client.open("https://planetarycomputer.microsoft.com/api/stac/v1")
-search = catalog.search(filter=${pythonDict})
+catalog = Client.open("${STAC_URL}")
+search = catalog.search(limit=${DEFAULT_QUERY_LIMIT}, filter=${pythonDict})
 
-search.get_items()`;
+items = search.get_all_items()
+print(f"{len(items)} items returned!")`;
 
   return hljs.highlight(template, { language: "python" });
 };
