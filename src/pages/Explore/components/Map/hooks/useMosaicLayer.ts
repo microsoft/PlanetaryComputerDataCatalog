@@ -10,8 +10,9 @@ const useMosaicLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
 ) => {
-  const { mosaic, detail } = useExploreSelector(s => s);
+  const { mosaic, detail, map } = useExploreSelector(s => s);
   const { collection, query, renderOption } = mosaic;
+  const { useHighDef } = map;
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
@@ -28,7 +29,13 @@ const useMosaicLayer = (
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
-        tileUrl: makeTileJsonUrl(query, renderOption, collection, stacItemForMosaic),
+        tileUrl: makeTileJsonUrl(
+          query,
+          renderOption,
+          collection,
+          stacItemForMosaic,
+          useHighDef
+        ),
         visible: true,
       };
 
@@ -45,7 +52,15 @@ const useMosaicLayer = (
         (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
       }
     }
-  }, [collection, query, renderOption, mapRef, stacItemForMosaic, mapReady]);
+  }, [
+    collection,
+    query,
+    renderOption,
+    mapRef,
+    stacItemForMosaic,
+    mapReady,
+    useHighDef,
+  ]);
 };
 
 export default useMosaicLayer;

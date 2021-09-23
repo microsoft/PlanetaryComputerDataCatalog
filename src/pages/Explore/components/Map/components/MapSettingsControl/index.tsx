@@ -13,6 +13,7 @@ import PanelControl from "../PanelControl";
 import { mosaicLayerName } from "../../hooks/useMosaicLayer";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import CollectionBoundaryToggle from "./CollectionBoundaryToggle";
+import HighDefTilesToggle from "./HighDefTilesToggle";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
@@ -82,6 +83,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
           valueFormat={(value: number) => `${value}%`}
           styles={{ root: { width: 250 } }}
         />
+        <HighDefTilesToggle />
         <Toggle
           label="Show labels on map"
           checked={showLabels}

@@ -13,6 +13,7 @@ export interface MapState {
   boundaryShape: GeoJsonObject | null;
   showCollectionOutline: boolean;
   showSidebar: boolean;
+  useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
 }
@@ -24,6 +25,7 @@ const initialState: MapState = {
   boundaryShape: null,
   showCollectionOutline: true,
   showSidebar: true,
+  useHighDef: true,
   previousCenter: null,
   previousZoom: null,
 };
@@ -64,6 +66,9 @@ export const mapSlice = createSlice({
     setShowCollectionOutline: (state, action: PayloadAction<boolean>) => {
       state.showCollectionOutline = action.payload;
     },
+    setUseHighDef: (state, action: PayloadAction<boolean>) => {
+      state.useHighDef = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
@@ -87,6 +92,7 @@ export const {
   setZoom,
   setBoundaryShape,
   setShowCollectionOutline,
+  setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
 } = mapSlice.actions;
