@@ -48,7 +48,6 @@ const ExploreMap = () => {
         showLogo: false,
         style: DEFAULT_MAP_STYLE,
         renderWorldCopies: true,
-        maxBounds: [-180, -90, 180, 90],
         authOptions: {
           authType: atlas.AuthenticationType.subscriptionKey,
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
