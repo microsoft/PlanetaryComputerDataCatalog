@@ -56,13 +56,13 @@
       "name": "VNIR - Psuedo RGB",
       "description": "",
       "options": "assets=VNIR&bidx=2,3,1&nodata=0&skipcovered=False&exitwhenfull=False",
-      "minZoom": 7
+      "minZoom": 8
     },
     {
       "name": "SWIR - Psuedo RGB",
       "description": "",
       "options": "assets=SWIR&bidx=2,1,3&nodata=0&skipcovered=False&exitwhenfull=False",
-      "minZoom": 7
+      "minZoom": 8
     }
   ]
 }
