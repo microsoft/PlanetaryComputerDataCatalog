@@ -1,6 +1,4 @@
 import { FontSizes, FontWeights, Stack, Text } from "@fluentui/react";
-// @ts-ignore
-import * as abbreviate from "number-abbreviate";
 
 import { IStacSearchResult } from "types/stac";
 import { useExploreSelector } from "pages/Explore/state/hooks";
@@ -12,22 +10,22 @@ interface Props {
 const SearchResultsHeader = ({ results }: Props) => {
   const collection = useExploreSelector(s => s.mosaic.collection);
   const returned = results.features.length;
-  const matched = results.context.matched;
+  const hasNextLink = results.links.find(l => l.rel === "next");
+  const plural = returned === 1 ? "item" : "items";
+  const preamble = hasNextLink ? "the first" : "";
 
-  const preamble = matched > returned ? "the first" : "";
-  const epilogue = matched > returned ? `(of about ${abbreviate(matched)}) ` : "";
   const withResults = (
     <Text>
-      Showing {preamble} {returned} {epilogue} items that matched your search.
+      Showing {preamble} {returned} {plural} that matched your search.
     </Text>
   );
   const withoutResults = (
     <Text block>
-      Sorry, no items matched your search. Try adjusting search options or the map
+      Sorry, no items matched your search. Try adjusting the query or expand the map
       area.
     </Text>
   );
-  const resultsText = matched && matched !== 0 ? withResults : withoutResults;
+  const resultsText = returned !== 0 ? withResults : withoutResults;
 
   return (
     <Stack tokens={{ childrenGap: 4 }} styles={{ root: { paddingBottom: 6 } }}>

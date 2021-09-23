@@ -56,9 +56,10 @@ export interface IStacFilterGeom {
 
 export interface IStacSearchResult extends FeatureCollection {
   features: IStacItem[];
+  links: IStacLink[];
   numberMatched: number;
   numberReturned: number;
-  context: {
+  context?: {
     limit: number;
     matched: number;
     returned: number;
