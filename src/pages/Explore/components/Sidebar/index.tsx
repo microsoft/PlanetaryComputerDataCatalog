@@ -20,6 +20,7 @@ import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
 import { resetMosiac } from "pages/Explore/state/mosaicSlice";
+import ResetSelectors from "./ResetSelectors";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -91,6 +92,7 @@ const Sidebar = () => {
             <CollectionSelector />
             <MosaicPresetSelector />
             <RenderOptionsSelector />
+            <ResetSelectors />
           </ErrorBoundary>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <SearchResultsPane request={stacFilter} />

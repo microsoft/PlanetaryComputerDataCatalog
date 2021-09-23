@@ -30,7 +30,8 @@ const CollectionSelector = () => {
       icon="World"
       action={setCollection}
       options={collectionOptions}
-      selectedKey={collection?.id}
+      // null will reset the control, while undefined will not
+      selectedKey={collection?.id || null}
       getStateValFn={getCollectionById}
       disabled={!isSuccess}
     />
@@ -60,6 +61,7 @@ const sortedOptions = (collections: IStacCollection[]) => {
   const sortedCollections = sortBy(catCollections, "category");
   const options: IDropdownOption[] = [];
 
+  // Group by category, defined in the dataset config
   let lastCategory = "";
   sortedCollections.forEach(({ key, text, category }) => {
     // Add a category header if the category has changed
