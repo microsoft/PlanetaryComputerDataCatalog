@@ -182,10 +182,21 @@ collections:
     tabs:
       - title: Example Notebook
         src: us-census-example.html
-        launch:
-          repo: https://github.com/microsoft/planetarycomputerexamples
-          branch: release/2021-Q3
-          filePath: datasets/us-census/us-census-example.ipynb
+        launch: datasets/us-census/us-census-example.ipynb
+
+  gbif:
+    headerImg: ./images/gbif-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gbif-example.html
+        launch: datasets/gbif/gbif-example.ipynb
+
+  fia:
+    headerImg: ./images/fia-hero.png
+    tabs:
+      - title: Example Notebook
+        src: fia-example.html
+        launch: datasets/fia/fia-example.ipynb
 
   naip:
     headerImg: ./images/naip-hero.jpg
