@@ -1,0 +1,35 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (2010)",
+      "description": "",
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Above ground biomass carbon density",
+      "description": "",
+      "options": "assets=aboveground&colormap_name=greens&nodata=0&rescale=0,255",
+      "minZoom": 2
+    },
+    {
+      "name": "Below ground biomass carbon density",
+      "description": "",
+      "options": "assets=belowground&colormap_name=greens&nodata=0&rescale=0,255",
+      "minZoom": 2
+    },
+    {
+      "name": "Above ground biomass - accumulated uncertainty",
+      "description": "",
+      "options": "assets=aboveground_uncertainty&colormap_name=reds&nodata=0&rescale=0,50",
+      "minZoom": 2
+    },
+    {
+      "name": "Below ground biomass - accumulated uncertainty",
+      "description": "",
+      "options": "assets=belowground_uncertainty&colormap_name=reds&nodata=0&rescale=0,50",
+      "minZoom": 2
+    }
+  ]
+}

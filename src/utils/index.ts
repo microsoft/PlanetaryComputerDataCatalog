@@ -1,8 +1,8 @@
-import { IMosaicState } from "pages/Explore/state/mosaicSlice";
-import { IMosaicRenderOption } from "types";
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL } from "./constants";
+import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
+import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -109,7 +109,7 @@ export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
 
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
-  return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
+  return `${HUB_URL}/user-redirect/git-pull?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
 }
 
 export function buildGitHubUrl(launcher: ILauncherConfig): string;
@@ -154,15 +154,25 @@ export const scrollToHash = (
 };
 
 export const makeTileJsonUrl = (
-  collection: IStacCollection,
-  query: IMosaicState,
+  query: IMosaic,
   renderOption: IMosaicRenderOption | null,
-  item: IStacItem | null
+  collection: IStacCollection | null,
+  item: IStacItem | null,
+  isHighDef: boolean = true
 ) => {
-  const itemParam = item ? `&items=${item.id}` : "";
-  const tileEndpoint = item ? "item" : "collection";
+  const scaleParam = isHighDef ? "tile_scale=2" : "tile_scale=1";
+  const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
 
-  return `${DATA_URL}/${tileEndpoint}/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption?.options}${itemParam}`;
+  const renderParams = encodeRenderOpts(renderOption);
+
+  // Rendering a single Item
+  if (item && collection) {
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${renderParams}&format=png`;
+  }
+
+  // Rendering a Collection mosaic
+  const collectionParam = collection ? `&collection=${collection.id}` : "";
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&format=png&${renderParams}${minZoom}${collectionParam}`;
 };
 
 export const makeItemPreviewUrl = (
@@ -172,8 +182,17 @@ export const makeItemPreviewUrl = (
 ) => {
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
+  const renderParams = encodeRenderOpts(renderOption);
 
-  // URIEncode any parameters provided in the renderer options
+  const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
+
+  return url + params;
+};
+
+// URIEncode any parameters provided in the renderer options
+const encodeRenderOpts = (renderOption: IMosaicRenderOption | null) => {
+  if (!renderOption) return "";
+
   const renderParams = qs.parse(renderOption.options, { decode: false });
   if ("expression" in renderParams) {
     renderParams["expression"] = encodeURIComponent(
@@ -181,10 +200,5 @@ export const makeItemPreviewUrl = (
     );
   }
 
-  const params = `?collection=${item.collection}&items=${item.id}&${qs.stringify(
-    renderParams,
-    { encode: false }
-  )}${maxSize}`;
-
-  return url + params;
+  return qs.stringify(renderParams, { encode: false });
 };

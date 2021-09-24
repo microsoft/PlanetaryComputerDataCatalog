@@ -37,7 +37,14 @@ const ItemDetailPanel = () => {
   const content = item ? (
     <div style={itemDetailStylesInner}>
       <BackToListButton />
-      <ItemPreview item={item} size={400} />
+      <div
+        style={{
+          minWidth: 400,
+          minHeight: 400,
+        }}
+      >
+        <ItemPreview item={item} size={400} border="top" />
+      </div>
       <HeaderCard collectionName={collectionName} item={item} />
 
       <Pivot styles={{ link: { width: "50%" } }}>
@@ -51,7 +58,11 @@ const ItemDetailPanel = () => {
     </div>
   ) : null;
 
-  return <StackItem styles={itemDetailStylesOuter}>{content}</StackItem>;
+  return (
+    <StackItem className="custom-overflow" styles={itemDetailStylesOuter}>
+      {content}
+    </StackItem>
+  );
 };
 
 export default ItemDetailPanel;

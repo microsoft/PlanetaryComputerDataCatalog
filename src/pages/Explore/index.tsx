@@ -8,18 +8,36 @@ import Layout from "components/Layout";
 import SEO from "components/Seo";
 import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
+import { useWindowSize } from "react-use";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
 };
 
+// TODO: track heights rather than hard code them
+const heights = {
+  header: 57.5,
+  footer: 27,
+  buffer: 2,
+};
+
 const Explorer = () => {
   const theme = useTheme();
+  const { height } = useWindowSize();
+
+  const bodyHeight = height - heights.header - heights.footer - heights.buffer;
+
   return (
-    <Layout>
+    <Layout onGrid={false}>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        <Stack horizontal tokens={stackTokens} styles={{ root: { height: "94vh" } }}>
+        <Stack
+          horizontal
+          tokens={stackTokens}
+          styles={{ root: { height: bodyHeight } }}
+        >
           <Sidebar />
           <StackItem
             styles={{
@@ -30,7 +48,9 @@ const Explorer = () => {
             }}
             grow={1}
           >
-            <ExploreMap />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <ExploreMap />
+            </ErrorBoundary>
           </StackItem>
         </Stack>
       </Provider>

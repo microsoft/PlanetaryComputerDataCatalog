@@ -1,6 +1,7 @@
 import { FontWeights, Text, useTheme } from "@fluentui/react";
 import { IStacItem } from "types/stac";
 import PriorityAttributes from "../controls/PriorityAttributes";
+import ItemSnippetButton from "./ItemSnippetButton";
 import MapButton from "./MapButton";
 
 interface HeaderCardProps {
@@ -22,6 +23,7 @@ const HeaderCard = ({ collectionName, item }: HeaderCardProps) => {
       }}
     >
       <MapButton />
+      <ItemSnippetButton />
       <Text
         block
         variant={"medium"}

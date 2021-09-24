@@ -1,0 +1,218 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (low cloud)",
+      "description": "",
+      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
+    },
+    {
+      "name": "Most recent (any cloud cover)",
+      "description": "",
+      "cql": []
+    },
+    {
+      "name": "Fall 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2021-09-01", "2021-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Summer 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2021-06-01", "2021-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Spring 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2021-03-01", "2021-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Winter 2021 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-12-01", "2021-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Fall 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-09-01", "2020-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Summer 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-06-01", "2020-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Spring 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2020-03-01", "2020-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Winter 2020 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-12-01", "2020-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Fall 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-09-01", "2019-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Summer 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-06-01", "2019-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Spring 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2019-03-01", "2019-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Winter 2019 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-12-01", "2019-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Fall 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-09-01", "2018-11-30"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Summer 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-06-01", "2018-08-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Spring 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-03-01", "2018-05-31"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    },
+    {
+      "name": "Winter 2018 (low cloud)",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-12-01", "2018-02-28"]]
+        },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Natural color",
+      "description": "RGB from visual asset",
+      "options": "assets=visual&bidx=1,2,3&nodata=0",
+      "minZoom": 9
+    },
+    {
+      "name": "Color infrared",
+      "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B08, B04, B03).",
+      "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
+      "minZoom": 9
+    },
+    {
+      "name": "Short wave infrared",
+      "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B12, B8A, B04).",
+      "options": "assets=B12,B8A,B04&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
+      "minZoom": 9
+    },
+    {
+      "name": "Agriculture",
+      "description": "Darker shades of green indicate denser vegetation (B11, B08, B02).",
+      "options": "assets=B11,B08,B02&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
+      "minZoom": 9
+    },
+    {
+      "name": "Bathymetric",
+      "description": "Estimates suspended sediment in water (B04, B03, B01).",
+      "options": "assets=B04,B03,B01&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
+      "minZoom": 9
+    },
+    {
+      "name": "Normalized Difference Veg. Index (NDVI)",
+      "description": "Normalized Difference Vegetation Index (NIR-Red)/(NIR+Red)",
+      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn",
+      "minZoom": 9
+    },
+    {
+      "name": "Moisture Index",
+      "description": "Moisture index indicating water stress in plants (B8A-B11)/(B8A+B11)",
+      "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu",
+      "minZoom": 9
+    }
+  ]
+}
