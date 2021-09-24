@@ -37,3 +37,21 @@ goes:
     thumbnail:
       href: https://via.placeholder.com/550x300?text=Placeholder...
   keywords: [GOES, Global, Satellite, Imagery, Fire, Weather, Climate, Ocean]
+
+copernicus-dem:
+  title: Copernicus DEM Collection
+  short_description: This data set is a global digital surface model (DSM) with horizontal resolution of either 30 or 90 meters derived from an edited DSM named WorldDEMTM based on radar satellite data aquired during the TanDEM-X Mission 
+  description: >
+    The Copernicus DEM is a Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation. This DEM is derived from an edited DSM named WorldDEMTM, i.e. flattening of water bodies and consistent flow of rivers has been included. Editing of shore- and coastlines, special features such as airports and implausible terrain structures has also been applied.
+
+    The WorldDEM product is based on the radar satellite data acquired during the TanDEM-X Mission, which is funded by a Public Private Partnership between the German State, represented by the German Aerospace Centre (DLR) and Airbus Defence and Space.
+
+  assets:
+    headerImg:
+      href: https://via.placeholder.com/550x100?text=Placeholder...
+    thumbnail:
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/cop-dem.png
+  keywords: [Copernicus, DEM, DSM, elevation]
+
+
+
