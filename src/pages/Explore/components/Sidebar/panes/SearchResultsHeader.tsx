@@ -12,12 +12,15 @@ import { useExploreSelector } from "pages/Explore/state/hooks";
 import { loadingStyle } from "./SearchResultsPane";
 
 interface SearchResultsHeaderProps {
-  results: IStacSearchResult;
+  results: IStacSearchResult | undefined;
   isLoading: boolean;
 }
 
 const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) => {
   const collection = useExploreSelector(s => s.mosaic.collection);
+
+  if (results === undefined) return null;
+
   const returned = results.features.length;
   const hasNextLink = results.links.find(l => l.rel === "next");
   const plural = returned === 1 ? "item" : "items";
