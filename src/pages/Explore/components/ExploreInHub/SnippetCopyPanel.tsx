@@ -46,7 +46,7 @@ const SnippetCopyPanel = ({
       : createItemPythonSnippet(item);
   const title =
     snippetType === "query"
-      ? "Use the code below to recreate this search in the Planetary Computer Hub or other Python analytic environment."
+      ? "Use the code below to recreate this search in the Planetary Computer Hub or other Python analytic environments."
       : "Use the code below to access this individual item's data assets.";
 
   const isCopySuccess = clipboardState.value && isRecentCopy;
