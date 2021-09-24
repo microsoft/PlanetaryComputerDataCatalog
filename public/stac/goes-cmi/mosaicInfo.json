@@ -1,0 +1,23 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent",
+      "description": "",
+      "cql": []
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Natural color",
+      "description": "",
+      "options": "expression=B02,0.45*B02+0.1*B03+0.45*B01,B01&rescale=1,450&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 6
+    },
+    {
+      "name": "Test",
+      "description": "",
+      "options": "nodata=0&rescale=1,450&max_size=500&bix=1&assets=C01-2km,C02-2km,C03-2km",
+      "minZoom": 6
+    }
+  ]
+}
