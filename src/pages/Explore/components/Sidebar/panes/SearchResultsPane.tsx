@@ -1,13 +1,12 @@
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import {
   FocusZone,
   FocusZoneDirection,
+  IList,
   List,
   MessageBar,
   MessageBarType,
   Separator,
-  Spinner,
-  SpinnerSize,
 } from "@fluentui/react";
 import { UseQueryResult } from "react-query";
 
@@ -21,27 +20,25 @@ interface SearchResultsProps {
 }
 
 const SearchResultsPane = ({
-  request: { data, isError, isLoading },
+  request: { data, isError, isPreviousData },
 }: SearchResultsProps) => {
   const [scrollPos, setScrollPos] = useState(0);
+  const listRef: React.RefObject<IList> = useRef(null);
 
+  // When the data changes, scroll to the top
   useEffect(() => {
-    setScrollPos(0);
-  }, [isLoading]);
+    if (!isPreviousData) {
+      setScrollPos(0);
+      listRef.current?.scrollToIndex(0);
+    }
+  }, [isPreviousData]);
 
+  // Track scroll position in order to show/hide the hood effect
   const handleScroll = useCallback(e => {
     const target = e.target as HTMLTextAreaElement;
     setScrollPos(target.scrollTop);
   }, []);
 
-  if (isLoading) {
-    return (
-      <>
-        <Separator />
-        <Spinner size={SpinnerSize.large} />
-      </>
-    );
-  }
   if (isError) {
     return (
       <MessageBar messageBarType={MessageBarType.error}>
@@ -49,25 +46,35 @@ const SearchResultsPane = ({
       </MessageBar>
     );
   }
+
+  // In practice, this is unlikely, as we retain previous data from the useQuery
   if (!data) return null;
 
   const renderCell = (item?: IStacItem | undefined): ReactNode => {
     if (!item) return null;
     return <ItemResult item={item} />;
   };
-
   return (
     <>
       <Separator />
-      <SearchResultsHeader results={data} />
+      <SearchResultsHeader results={data} isLoading={isPreviousData} />
       <div className={scrollPos ? "hood on" : "hood"} />
       <div
         className="custom-overflow"
-        style={{ height: "100%", overflowY: "auto", overflowX: "hidden" }}
+        style={{
+          height: "100%",
+          overflowY: "auto",
+          overflowX: "hidden",
+          ...loadingStyle(isPreviousData),
+        }}
         onScroll={handleScroll}
       >
         <FocusZone direction={FocusZoneDirection.vertical}>
-          <List items={data.features} onRenderCell={renderCell} />
+          <List
+            componentRef={listRef}
+            items={data.features}
+            onRenderCell={renderCell}
+          />
         </FocusZone>
       </div>
       <ExploreInHub />
@@ -76,3 +83,8 @@ const SearchResultsPane = ({
 };
 
 export default SearchResultsPane;
+
+export const loadingStyle = (inLoadingState: boolean) => ({
+  opacity: inLoadingState ? 0.6 : 1,
+  transition: "opacity 0.1s ease-in-out",
+});
