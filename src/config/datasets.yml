@@ -1,8 +1,15 @@
 # Use STAC collection IDs to attach specific notebooks/content to a collection
-# detail page. Any references to Notebook html files below require the .ipynb
+# detail page.
+
+# ****************************************************************************
+# Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/codefiles_urls.txt` file for processing
+# ****************************************************************************
 
 # Omitting headerImg will reuse and stretch the collection thumbnail
+
+# `category` attribute determines which header the dataset is included under in the
+# Explorer collection selector
 
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
@@ -26,6 +33,11 @@
 collections:
   alos-dem:
     category: DEMs
+    headerImg: ./images/alos-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-dem-example.html
+        launch: datasets/alos-dem/alos-dem-example.ipynb
 
   cop-dem-glo-90:
     category: DEMs

@@ -61,7 +61,7 @@
     {
       "name": "SWIR - Psuedo RGB",
       "description": "",
-      "options": "assets=SWIR&bidx=2,1,3&nodata=0&skipcovered=False&exitwhenfull=False",
+      "options": "assets=SWIR&bidx=1,3,5&nodata=0&skipcovered=False&exitwhenfull=False&&color_formula=gamma RGB 2.7, saturation 1.2, sigmoidal RGB 15 0.55",
       "minZoom": 8
     }
   ]

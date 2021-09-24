@@ -22,6 +22,7 @@ export const useStacSearch = (
   search: IStacFilter | undefined
 ): UseQueryResult<IStacSearchResult, Error> => {
   return useQuery(["items", search], getStacItems, {
+    keepPreviousData: true, // intended to not clear out search results when panning the map
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     enabled: !!search,

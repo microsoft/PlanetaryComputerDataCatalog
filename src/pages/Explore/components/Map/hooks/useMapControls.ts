@@ -12,11 +12,14 @@ const useMapControls = (
 
     if (!mapReady || !map) return;
 
-    if (map.controls.getControls().length < 2) {
-      map.controls.add(new atlas.control.ZoomControl(), {
-        position: atlas.ControlPosition.TopRight,
-      });
-      map.controls.add(layerControl, {
+    const controls: atlas.Control[] = [
+      new atlas.control.CompassControl(),
+      new atlas.control.ZoomControl(),
+      layerControl,
+    ];
+
+    if (map.controls.getControls().length < controls.length) {
+      map.controls.add(controls, {
         position: atlas.ControlPosition.TopRight,
       });
     }

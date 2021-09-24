@@ -67,7 +67,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   const title = "Manage map settings";
 
   return (
-    <PanelControl label={title} iconName="Settings" top={142}>
+    <PanelControl label={title} iconName="Settings" top={178}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
         <StackItem>
           <Text styles={{ root: { fontWeight: FontWeights.bold } }}>{title}</Text>
