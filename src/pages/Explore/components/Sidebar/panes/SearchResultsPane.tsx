@@ -113,6 +113,6 @@ const SearchResultsPane = ({
 export default SearchResultsPane;
 
 export const loadingStyle = (inLoadingState: boolean) => ({
-  opacity: inLoadingState ? 0.5 : 1,
+  opacity: inLoadingState ? 0.4 : 1,
   transition: "opacity 0.1s ease-in-out",
 });
