@@ -5,7 +5,10 @@ import { useBoolean, useId } from "@fluentui/react-hooks";
 interface PanelControlProps {
   label: string;
   iconName: string;
-  top: number;
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
 }
 
 export interface PanelControlHandlers {
@@ -15,45 +18,60 @@ export interface PanelControlHandlers {
 const PanelControl = React.forwardRef<
   PanelControlHandlers,
   React.PropsWithChildren<PanelControlProps>
->(({ label, iconName, children, top }, ref) => {
-  const theme = getTheme();
-  const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] = useBoolean(false);
-  const buttonId = useId("callout-button");
-  const buttonStyle = { top, ...controlStyle };
-
-  // Expose the toggle handle
-  useImperativeHandle(ref, () => ({
-    togglePanel: () => {
-      toggleIsCalloutVisible();
+>(
+  (
+    {
+      label,
+      iconName,
+      children,
+      top = undefined,
+      bottom = undefined,
+      left = undefined,
+      right = 2,
     },
-  }));
+    ref
+  ) => {
+    const theme = getTheme();
+    const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] = useBoolean(false);
+    const buttonId = useId("callout-button");
+    const r = left ? undefined : right;
+    const buttonStyle = { top, bottom, left, right: r, ...controlStyle };
 
-  return (
-    <div style={buttonStyle}>
-      <IconButton
-        id={buttonId}
-        ariaLabel={label}
-        title={label}
-        styles={{ icon: { color: theme.semanticColors.bodyText } }}
-        className="azure-maps-control-button"
-        iconProps={{ iconName: iconName }}
-        onClick={toggleIsCalloutVisible}
-      />
-      {isCalloutVisible && (
-        <Callout
-          styles={calloutStyle}
-          directionalHint={DirectionalHint.leftCenter}
-          onDismiss={toggleIsCalloutVisible}
-          target={`#${buttonId}`}
-          isBeakVisible={false}
-          setInitialFocus
-        >
-          {children}
-        </Callout>
-      )}
-    </div>
-  );
-});
+    // Expose the toggle handle
+    useImperativeHandle(ref, () => ({
+      togglePanel: () => {
+        toggleIsCalloutVisible();
+      },
+    }));
+
+    const panelDir = left ? DirectionalHint.rightCenter : DirectionalHint.leftCenter;
+    return (
+      <div style={buttonStyle}>
+        <IconButton
+          id={buttonId}
+          ariaLabel={label}
+          title={label}
+          styles={{ icon: { color: theme.semanticColors.bodyText } }}
+          className="azure-maps-control-button"
+          iconProps={{ iconName: iconName }}
+          onClick={toggleIsCalloutVisible}
+        />
+        {isCalloutVisible && (
+          <Callout
+            styles={calloutStyle}
+            directionalHint={panelDir}
+            onDismiss={toggleIsCalloutVisible}
+            target={`#${buttonId}`}
+            isBeakVisible={false}
+            setInitialFocus
+          >
+            {children}
+          </Callout>
+        )}
+      </div>
+    );
+  }
+);
 
 export default PanelControl;
 
@@ -61,7 +79,6 @@ const controlStyle: React.CSSProperties = {
   zIndex: 1,
   position: "absolute",
   display: "flex",
-  right: 2,
   margin: 8,
   background: "#f1f1f1",
   borderCollapse: "collapse",

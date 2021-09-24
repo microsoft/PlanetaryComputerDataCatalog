@@ -18,7 +18,7 @@ const PlaceSearchControl = ({ mapRef }: PlaceSearchProps) => {
     <PanelControl
       ref={panelRef}
       label="Search for places on the map"
-      top={106}
+      top={142}
       iconName="Search"
     >
       <Text block styles={{ root: { fontWeight: FontWeights.bold } }}>
