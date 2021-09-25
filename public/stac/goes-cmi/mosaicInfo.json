@@ -43,15 +43,45 @@
   ],
   "renderOptions": [
     {
-      "name": "Natural color",
+      "name": "Natural color (low range)",
       "description": "",
       "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,450&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
       "minZoom": 4
     },
     {
-      "name": "Natural color - WM",
+      "name": "Natural color (low-mid range)",
+      "description": "",
+      "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,800&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 4
+    },
+    {
+      "name": "Natural color (mid range)",
+      "description": "",
+      "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,2000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 4
+    },
+    {
+      "name": "Natural color (mid-hi range)",
+      "description": "",
+      "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,3000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 4
+    },
+    {
+      "name": "Natural color (high range)",
+      "description": "",
+      "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,4000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 4
+    },
+    {
+      "name": "Natural color - WM (low range)",
       "description": "",
       "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,450&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 4
+    },
+    {
+      "name": "Natural color - WM (high range)",
+      "description": "",
+      "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,4000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
       "minZoom": 4
     }
   ]
