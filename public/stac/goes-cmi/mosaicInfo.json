@@ -1,9 +1,24 @@
 {
   "mosaics": [
     {
-      "name": "Most recent",
+      "name": "Most recent (any)",
       "description": "",
       "cql": []
+    },
+    {
+      "name": "Most recent (full disk)",
+      "description": "",
+      "cql": [{ "eq": [{ "property": "goes:image-type" }, "FULL DISK"] }]
+    },
+    {
+      "name": "Most recent (mesoscale)",
+      "description": "",
+      "cql": [{ "eq": [{ "property": "goes:image-type" }, "MESOSCALE"] }]
+    },
+    {
+      "name": "Most recent (CONUS)",
+      "description": "",
+      "cql": [{ "eq": [{ "property": "goes:image-type" }, "CONUS"] }]
     }
   ],
   "renderOptions": [
@@ -11,7 +26,7 @@
       "name": "Natural color",
       "description": "",
       "options": "expression=C02_2km,0.45*C02_2km+0.1*C03_2km+0.45*C01_2km,C01_2km&nodata=-1&rescale=1,450&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
-      "minZoom": 8
+      "minZoom": 4
     }
   ]
 }
