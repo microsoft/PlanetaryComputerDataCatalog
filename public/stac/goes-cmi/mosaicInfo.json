@@ -8,17 +8,26 @@
     {
       "name": "Most recent (full disk)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "FULL DISK"] }]
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "FULL DISK"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
     },
     {
       "name": "Most recent (mesoscale)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "MESOSCALE"] }]
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "MESOSCALE"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
     },
     {
       "name": "Most recent (CONUS)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "CONUS"] }]
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "CONUS"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
     }
   ],
   "renderOptions": [
