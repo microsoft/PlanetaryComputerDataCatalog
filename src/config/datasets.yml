@@ -51,7 +51,7 @@ collections:
   goes-rrqpe:
     category: Climate/Weather
 
-  goes-cmip:
+  goes-cmi:
     category: Imagery
 
   goes-mcmip:

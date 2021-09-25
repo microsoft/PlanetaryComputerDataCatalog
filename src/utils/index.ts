@@ -163,7 +163,7 @@ export const makeTileJsonUrl = (
   const scaleParam = isHighDef ? "tile_scale=2" : "tile_scale=1";
   const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
 
-  const renderParams = encodeRenderOpts(renderOption);
+  const renderParams = encodeRenderOpts(renderOption?.options);
 
   // Rendering a single Item
   if (item && collection) {
@@ -182,7 +182,7 @@ export const makeItemPreviewUrl = (
 ) => {
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
-  const renderParams = encodeRenderOpts(renderOption);
+  const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption.options));
 
   const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
 
@@ -190,10 +190,10 @@ export const makeItemPreviewUrl = (
 };
 
 // URIEncode any parameters provided in the renderer options
-const encodeRenderOpts = (renderOption: IMosaicRenderOption | null) => {
-  if (!renderOption) return "";
+const encodeRenderOpts = (renderOpts: string | undefined) => {
+  if (!renderOpts) return "";
 
-  const renderParams = qs.parse(renderOption.options, { decode: false });
+  const renderParams = qs.parse(renderOpts, { decode: false });
   if ("expression" in renderParams) {
     renderParams["expression"] = encodeURIComponent(
       renderParams["expression"] as string
@@ -201,4 +201,9 @@ const encodeRenderOpts = (renderOption: IMosaicRenderOption | null) => {
   }
 
   return qs.stringify(renderParams, { encode: false });
+};
+
+// Remove the suffix that designates the mercator assets from the render options
+const removeMercatorAssets = (renderOpts: string) => {
+  return renderOpts.replaceAll("_wm", "");
 };

@@ -1,0 +1,47 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent (any)",
+      "description": "",
+      "cql": []
+    },
+    {
+      "name": "Most recent (Full disk)",
+      "description": "",
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "FULL DISK"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
+    },
+    {
+      "name": "Most recent (CONUS)",
+      "description": "",
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "CONUS"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
+    },
+    {
+      "name": "Most recent (Mesoscale)",
+      "description": "",
+      "cql": [
+        { "eq": [{ "property": "goes:image-type" }, "MESOSCALE"] },
+        { "eq": [{ "property": "platform" }, "GOES-16"] }
+      ]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Natural color",
+      "description": "",
+      "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,2000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 2
+    },
+    {
+      "name": "Natural color (low contrast)",
+      "description": "",
+      "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,3000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "minZoom": 2
+    }
+  ]
+}
