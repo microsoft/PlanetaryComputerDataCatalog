@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
 import CatalogGroup from "./pages/CatalogGroup";
+import Layout from "./components/Layout";
 
 const Explore = React.lazy(() => import("./pages/Explore"));
 
@@ -20,6 +21,8 @@ function App() {
   initializeIcons(undefined, { disableWarnings: true });
   initializeFeatures();
   usePrefetchContent();
+
+  const fallback = <Layout onGrid={false} isShort={true}></Layout>;
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -50,7 +53,7 @@ function App() {
             <AccountSurvey />
           </Route>
           <Route path="/explore">
-            <Suspense fallback={null}>
+            <Suspense fallback={fallback}>
               <Explore />
             </Suspense>
           </Route>
