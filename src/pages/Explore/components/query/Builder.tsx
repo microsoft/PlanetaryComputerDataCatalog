@@ -3,7 +3,7 @@ import { Formik, Form, FieldArray } from "formik";
 
 import { QueryContext } from "./context";
 import FormSelect from "components/forms/FormSelect";
-import { Operators } from "./constants";
+import { operators } from "./constants";
 import ValueField from "./ValueField";
 import { DefaultButton, IconButton, Stack } from "@fluentui/react";
 
@@ -24,7 +24,7 @@ const Builder = () => {
     ([key, property]) => ({ key, text: property.title })
   );
 
-  const queryableOps = Object.entries(Operators).map(([key, value]) => ({
+  const queryableOps = Object.entries(operators).map(([key, value]) => ({
     key,
     text: value,
   }));
@@ -61,7 +61,7 @@ const Builder = () => {
                             fieldSchema={
                               state.schema.properties[expression.attribute]
                             }
-                            operator={expression.operator as Operators}
+                            operator={expression.operator as keyof typeof operators}
                             name={`expressions.${index}.value`}
                           />
                           <IconButton

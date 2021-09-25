@@ -1,6 +1,6 @@
 import FormInput from "components/forms/FormInput";
 import FormSelect from "components/forms/FormSelect";
-import { Operators } from "./constants";
+import { operators } from "./constants";
 // integer
 // string: format: date-time
 // string: enum
@@ -24,7 +24,7 @@ type FieldType = NumberField | EnumField;
 
 interface ValueFieldProps {
   fieldSchema: FieldType;
-  operator: Operators;
+  operator: keyof typeof operators;
   name: string;
 }
 
