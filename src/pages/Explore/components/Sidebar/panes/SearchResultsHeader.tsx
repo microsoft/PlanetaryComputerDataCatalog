@@ -56,6 +56,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         horizontal
         tokens={{ childrenGap: 4 }}
         horizontalAlign={"space-between"}
+        verticalAlign="center"
       >
         {resultsText}
         <QueryInfo />
