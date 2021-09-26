@@ -174,8 +174,8 @@
   "renderOptions": [
     {
       "name": "Natural color",
-      "description": "RGB from visual asset",
-      "options": "assets=visual&bidx=1,2,3&nodata=0",
+      "description": "True color composite of visible bands (B04, B03, B02)",
+      "options": "assets=B04,B03,B02&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
