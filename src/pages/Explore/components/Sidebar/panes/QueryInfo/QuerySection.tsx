@@ -9,6 +9,25 @@ import Section from "./Section";
 interface QuerySectionProps {
   query: IMosaic;
 }
+const getDateLabel = (
+  attr: any,
+  property: string,
+  value: any,
+  op: keyof typeof operators
+) => {
+  if (Array.isArray(value)) {
+    const oneDate = new Set(value.map(toUtcDate)).size === 1 || value.length === 1;
+
+    const labelText = oneDate
+      ? `${property} ${opEnglish[op]} ${toUtcDate(value[0])} `
+      : `${property} between ${toUtcDate(value[0])} and ${toUtcDate(value[1])}`;
+
+    return <Text>{labelText}</Text>;
+  } else if (attr.property === "datetime" && !Array.isArray(value)) {
+    const labelText = `${property} ${opEnglish[op]} ${toUtcDate(value)}`;
+    return <Text>{labelText}</Text>;
+  }
+};
 
 const QuerySection = ({ query }: QuerySectionProps) => {
   const expressions = (expression: any) => {
@@ -18,24 +37,15 @@ const QuerySection = ({ query }: QuerySectionProps) => {
     const opText = operators[op];
 
     // Special handling for datetime property
-    if (attr.property === "datetime" && Array.isArray(value)) {
-      const oneDate = new Set(value.map(toUtcDate)).size === 1 || value.length === 1;
-
-      const labelText = oneDate
-        ? `${property} ${opEnglish[op]} ${toUtcDate(value[0])} `
-        : `${property} between ${toUtcDate(value[0])} and ${toUtcDate(value[1])}`;
-
-      return <Text>{labelText}</Text>;
-    } else if (attr.property === "datetime" && !Array.isArray(value)) {
-      const labelText = `${property} ${opEnglish[op]} ${toUtcDate(value)}`;
-      return <Text>{labelText}</Text>;
-    }
-
-    return (
-      <Text key={`exp-${property}-${op}`}>
-        {property} {opText} {value}
-      </Text>
-    );
+    const label =
+      attr.property === "datetime" ? (
+        getDateLabel(attr, property, value, op)
+      ) : (
+        <Text>
+          {property} {opText} {value}
+        </Text>
+      );
+    return <Text key={`exp-${property}-${op}`}>{label}</Text>;
   };
 
   const expressionsLabels = query.cql?.map(expressions);
