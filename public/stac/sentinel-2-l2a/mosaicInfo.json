@@ -197,21 +197,21 @@
       "minZoom": 9
     },
     {
-      "name": "Bathymetric",
-      "description": "Estimates suspended sediment in water (B04, B03, B01).",
-      "options": "assets=B04,B03,B01&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
-      "minZoom": 9
-    },
-    {
       "name": "Normalized Difference Veg. Index (NDVI)",
-      "description": "Normalized Difference Vegetation Index (NIR-Red)/(NIR+Red)",
+      "description": "Normalized Difference Vegetation Index (B08-B04)/(B08+B04), darker green indicates healthier vegetation.",
       "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 9
     },
     {
       "name": "Moisture Index",
-      "description": "Moisture index indicating water stress in plants (B8A-B11)/(B8A+B11)",
+      "description": "Index indicating water stress in plants (B8A-B11)/(B8A+B11)",
       "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu",
+      "minZoom": 9
+    },
+    {
+      "name": "Atmospheric penetration",
+      "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (B12, B11, B8A).",
+      "options": "nodata=0&assets=B12,B11,B8A&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     }
   ]

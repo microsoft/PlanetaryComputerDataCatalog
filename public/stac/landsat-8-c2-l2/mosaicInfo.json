@@ -180,39 +180,39 @@
     },
     {
       "name": "Color infrared",
-      "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B5, B4, B3).",
+      "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (SR_B5, SR_B4, SR_B3).",
       "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
       "minZoom": 8
     },
     {
       "name": "Short wave infrared",
-      "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B7, B6, B4).",
+      "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (SR_B7, SR_B6, SR_B4).",
       "options": "assets=SR_B7,SR_B6,SR_B4&nodata=0",
       "minZoom": 8
     },
     {
       "name": "Agriculture",
-      "description": "Darker shades of green indicate denser vegetation (B6, B5, B2).",
+      "description": "Darker shades of green indicate denser vegetation (SR_B6, SR_B5, SR_B2).",
       "options": "assets=SR_B6,SR_B5,SR_B2&nodata=0",
       "minZoom": 8
     },
     {
-      "name": "Bathymetric",
-      "description": "Estimates suspended sediment in water (B4, B3, B0).",
-      "options": "assets=SR_B4,SR_B3,SR_B1&nodata=0&color_formula=Gamma RGB 3.5 Saturation 1.7 Sigmoidal RGB 15 0.35",
-      "minZoom": 8
-    },
-    {
       "name": "Normalized Difference Veg. Index (NDVI)",
-      "description": "Normalized Difference Vegetation Index (NIR-Red)/(NIR+Red)",
+      "description": "Normalized Difference Vegetation Index (SR_B5-SR_B4)/(SR_B5+SR_B4), darker green indicates healthier vegetation.",
       "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 8
     },
     {
       "name": "Moisture Index",
-      "description": "Moisture index indicating water stress in plants (B5-B6)/(B5+B6)",
+      "description": "Moisture index indicating water stress in plants (SR_B5-SR_B6)/(SR_B5+SR_B6)",
       "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1,1&colormap_name=rdbu",
       "minZoom": 8
+    },
+    {
+      "name": "Atmospheric penetration",
+      "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (SR_B7, SR_B6, SR_B5).",
+      "options": "nodata=0&assets=SR_B7,SR_B6,SR_B5&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "minZoom": 9
     }
   ]
 }

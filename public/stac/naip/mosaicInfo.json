@@ -5,7 +5,7 @@
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2016-01-01", "2019-12-31"]]
+          "anyinteracts": [{ "property": "datetime" }, ["2010-01-01", "2019-12-31"]]
         }
       ]
     },
@@ -98,21 +98,12 @@
           "anyinteracts": [{ "property": "datetime" }, ["2010-01-01", "2010-12-31"]]
         }
       ]
-    },
-    {
-      "name": "2009",
-      "description": "",
-      "cql": [
-        {
-          "anyinteracts": [{ "property": "datetime" }, ["2009-01-01", "2009-12-31"]]
-        }
-      ]
     }
   ],
   "renderOptions": [
     {
       "name": "Natural color",
-      "description": "",
+      "description": "RGB from visual assets",
       "options": "assets=image&bidx=1,2,3",
       "minZoom": 11
     },

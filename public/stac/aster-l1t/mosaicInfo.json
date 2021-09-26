@@ -3,7 +3,10 @@
     {
       "name": "Most recent (low cloud)",
       "description": "",
-      "cql": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
+      "cql": [
+        { "lte": [{ "property": "datetime" }, "2006-12-31"] },
+        { "lte": [{ "property": "eo:cloud_cover" }, 10] }
+      ]
     },
     {
       "name": "Most recent",
@@ -53,15 +56,15 @@
   ],
   "renderOptions": [
     {
-      "name": "VNIR - Psuedo RGB",
-      "description": "Spectral bands 2,3,1",
-      "options": "assets=VNIR&bidx=2,3,1&nodata=0&skipcovered=False&exitwhenfull=False&items_limit=15&time_limit=5&items_limit=15&",
-      "minZoom": 9
-    },
-    {
       "name": "SWIR - Psuedo RGB",
       "description": "Spectral bands 1,3,5",
       "options": "assets=SWIR&bidx=1,3,5&nodata=0&skipcovered=False&exitwhenfull=False&items_limit=15&time_limit=5&color_formula=gamma RGB 2.7, saturation 1.2, sigmoidal RGB 15 0.55",
+      "minZoom": 9
+    },
+    {
+      "name": "VNIR - Psuedo RGB",
+      "description": "Spectral bands 2,3,1",
+      "options": "assets=VNIR&bidx=2,3,1&nodata=0&skipcovered=False&exitwhenfull=False&items_limit=15&time_limit=5&items_limit=15&",
       "minZoom": 9
     }
   ]
