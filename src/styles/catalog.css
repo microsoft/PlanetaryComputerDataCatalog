@@ -27,7 +27,7 @@
   font-size: inherit;
 }
 
-.json-list .collection-content-item {
+.json-list .collection-content-item:not(:first-child) {
   margin-top: 5px;
 }
 
@@ -260,8 +260,8 @@
   }
 }
 
-/* docs general table style */
-.generated-docs table {
+/* docs and example table style */
+.markdown-source table {
   margin-right: auto;
   border: none;
   border-collapse: collapse;
@@ -269,7 +269,7 @@
   table-layout: fixed;
 }
 
-.generated-docs table td {
+.markdown-source table td {
   padding: 5px 10px;
   vertical-align: top;
   border-bottom: 1px solid #e0e0e0;
@@ -281,17 +281,17 @@ th.head {
 }
 
 /* xarray dataframe table output */
-.generated-docs table.dataframe {
+.markdown-source table.dataframe {
   font-size: 12px;
 }
 
-.generated-docs thead {
+.markdown-source thead {
   border-bottom: 1px solid #e0e0e0;
   vertical-align: bottom;
 }
-.generated-docs .dataframe tr,
-.generated-docs .dataframe th,
-.generated-docs .dataframe td {
+.markdown-source .dataframe tr,
+.markdown-source .dataframe th,
+.markdown-source .dataframe td {
   text-align: right;
   vertical-align: middle;
   padding: 0.5em 0.5em;
@@ -300,13 +300,13 @@ th.head {
   max-width: none;
   border: none;
 }
-.generated-docs .dataframe th {
+.markdown-source .dataframe th {
   font-weight: bold;
 }
-.generated-docs .dataframe tbody tr:nth-child(odd) {
+.markdown-source .dataframe tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
-.generated-docs .dataframe tbody tr:hover {
+.markdown-source .dataframe tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 * + table {

@@ -25,9 +25,9 @@
 #   - title: My title
 #     src: notebook.html
 #     launch:
-#       - repo: http://github.com/exampleorg/myrepo
-#         branch: v1
-#         filePath: tutorials/notebook.ipynb
+#       repo: http://github.com/exampleorg/myrepo
+#       branch: v1
+#       filePath: tutorials/notebook.ipynb
 
 ---
 collections:
@@ -226,6 +226,27 @@ collections:
       - title: Blob Storage Notebook
         src: terraclimate.html
 
+  us-census:
+    headerImg: ./images/us-census-hero.png
+    tabs:
+      - title: Example Notebook
+        src: us-census-example.html
+        launch: datasets/us-census/us-census-example.ipynb
+
+  gbif:
+    headerImg: ./images/gbif-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gbif-example.html
+        launch: datasets/gbif/gbif-example.ipynb
+
+  fia:
+    headerImg: ./images/fia-hero.png
+    tabs:
+      - title: Example Notebook
+        src: fia-example.html
+        launch: datasets/fia/fia-example.ipynb
+
   naip:
     category: Imagery
     headerImg: ./images/naip-hero.jpg
@@ -285,15 +306,6 @@ ai4e:
     thumbnailUrl: deltares-flood.png
     alt: Flood map of coastal Myanmar
     keywords: [Global, Flood, Sea level rise, Water]
-
-  - title: GBIF
-    shortTerm: GBIF occurrence
-    description:
-      Species occurrences shared through the Global Biodiversity Information Facility
-    infoUrl: http://aka.ms/ai4edata-gbif/
-    thumbnailUrl: gbif.jpg
-    alt: Colorful frog on a leaf
-    keywords: [Global, Biodiversity, Species, GBIF]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation
@@ -402,10 +414,3 @@ ai4e:
     alt: Sky and clouds over mountain range
     keywords: [China, Climate, Historical]
 
-  - title: USFS Forest Inventory and Analysis
-    shortTerm: forest health
-    description: Trends in US forest health
-    infoUrl: https://aka.ms/ai4edata-fia
-    thumbnailUrl: RWz2Nt.jpg
-    alt: Evergreen forest with shrubbery
-    keywords: [United States, Forest, Biomass]
