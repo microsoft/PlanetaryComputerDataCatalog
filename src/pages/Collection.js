@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
 import {
   MessageBar,
@@ -7,6 +7,7 @@ import {
   PivotItem,
   Spinner,
   SpinnerSize,
+  getTheme,
 } from "@fluentui/react";
 
 import Bands from "../components/stac/Bands";
@@ -22,7 +23,6 @@ import SEO from "../components/Seo";
 import { CubeDimensions, CubeVariables } from "../components/stac/CubeTable";
 import { TableTables, TableColumns } from "../components/stac/Table";
 import { CollectionProvider } from "../components/stac/CollectionContext";
-import { viewerPivot } from "components/stac/viewerPivot";
 
 import { useCollections } from "../utils/requests";
 import { collections as tabConfig } from "../config/datasets.yml";
@@ -35,7 +35,7 @@ const Collection = () => {
   const { id } = useParams();
   const location = useLocation();
   const history = useHistory();
-
+  const pivotRef = useRef();
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
@@ -57,15 +57,37 @@ const Collection = () => {
     }
   }, [id, stacResponse, isSuccess]);
 
+  useEffect(() => {
+    if (pivotRef.current) {
+      const tabBar = pivotRef.current.querySelector('[role="tablist"]');
+
+      // Keep the tab bar on the right grid
+      tabBar?.classList.add("grid-content");
+
+      // Add a class to the tabBar when at the top, so we apply our box shadow style
+      const observer = new IntersectionObserver(
+        ([e]) => e.target.classList.toggle("is-pinned", e.intersectionRatio < 1),
+        { threshold: [1] }
+      );
+      observer.observe(tabBar);
+    }
+  });
+
   const handleTabChange = pivotItem => {
     const { itemKey } = pivotItem.props;
     history.replace({ hash: itemKey });
+
+    // Handle scroll to sticky-top when switching tabs
+    const headerHeight = 360;
+    if (window.scrollY > headerHeight) {
+      window.scrollTo({ top: headerHeight, behavior: "smooth" });
+    }
   };
 
   const tabs = tabConfig[id]?.tabs?.map(({ title, src, launch }) => {
     return (
       <PivotItem
-        className="main-content"
+        className="main-content grid-content"
         key={title}
         headerText={title}
         itemKey={title.replace(/ /g, "-")}
@@ -92,7 +114,11 @@ const Collection = () => {
     </MessageBar>
   );
   const overviewPivot = collection && (
-    <PivotItem className="main-content" headerText="Overview" itemKey="overview">
+    <PivotItem
+      className="main-content grid-content"
+      headerText="Overview"
+      itemKey="overview"
+    >
       <CollectionProvider collection={collection}>
         <div className="with-sidebar">
           <div>
@@ -121,22 +147,22 @@ const Collection = () => {
     </PivotItem>
   );
 
-  const viewerTab = viewerPivot(collection);
-
   return (
     <Layout bannerHeader={bannerHeader} isShort>
       <SEO title={collection?.title || id} description={collection?.description} />
       {collection ? (
-        <Pivot
-          className="grid-content"
-          selectedKey={activeTab}
-          onLinkClick={handleTabChange}
-          ariaLabel="Dataset detail tabs"
-        >
-          {overviewPivot}
-          {viewerTab}
-          {tabs}
-        </Pivot>
+        <>
+          <Pivot
+            ref={pivotRef}
+            styles={{ root: pivotHeaderStyle }}
+            selectedKey={activeTab}
+            onLinkClick={handleTabChange}
+            ariaLabel="Dataset detail tabs"
+          >
+            {overviewPivot}
+            {tabs}
+          </Pivot>
+        </>
       ) : isLoading ? (
         loadingMsg
       ) : isError ? (
@@ -147,3 +173,17 @@ const Collection = () => {
 };
 
 export default Collection;
+
+const theme = getTheme();
+const pivotHeaderStyle = {
+  position: "sticky",
+  top: "-1px",
+  zIndex: 1,
+  backgroundColor: theme.semanticColors.bodyBackground,
+  borderBottom: `1px solid ${theme.semanticColors.bodyDivider}`,
+  paddingBottom: 6,
+  marginBottom: 4,
+  "&.is-pinned": {
+    boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.5)",
+  },
+};
