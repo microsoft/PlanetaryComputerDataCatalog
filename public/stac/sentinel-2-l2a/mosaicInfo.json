@@ -174,7 +174,7 @@
   "renderOptions": [
     {
       "name": "Natural color",
-      "description": "True color composite of visible bands(B04, B03, B02)",
+      "description": "True color composite of visible bands (B04, B03, B02)",
       "options": "assets=B04,B03,B02&nodata=0&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
