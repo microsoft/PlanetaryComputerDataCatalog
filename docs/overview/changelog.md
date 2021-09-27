@@ -2,6 +2,51 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## September 2021
+
+This release includes several new datasets and updates to libraries.
+
+### Highlights
+
+- Launched the [Explorer](https://planetarycomputer.microsoft.com/explore)
+- Added various datasets from the GOES mission
+- Added support for tabular datasets to the STAC API
+
+### APIs
+
+#### STAC API
+
+##### New features
+
+- Implements STAC API [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.3), the latest STAC API version at the time of release
+
+##### Breaking changes
+
+#### Data API
+
+### Datasets
+
+#### New datasets
+
+* [GOES collection](https://planetarycomputer-staging.microsoft.com/dataset/group/goes): ...
+* [ALOS DEM](https://planetarycomputer-staging.microsoft.com/dataset/alos-dem): a 30-meter resoluation global Digital Surface Model.
+* [Copernicus DEM](https://planetarycomputer-staging.microsoft.com/dataset/cop-dem-glo-90): A Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation.
+* [Global Biodiversity Information Facility (GBIF)](https://planetarycomputer-staging.microsoft.com/dataset/gbif): records of species occurrences from a wide array of sources including specimen-related data from natural history museums, observations from citizen science networks and environment recording schemes.
+* [US Census 2020](https://planetarycomputer-staging.microsoft.com/dataset/us-census): information on population and geographic boundaries at various levels of cartographic aggregation.
+* [gridMET](https://planetarycomputer-staging.microsoft.com/dataset/gridmet): a dataset of daily high-spatial resolution surface meteorological data covering the contiguous US.
+* [USFS Forest Inventory and Analysis (FIA)](https://planetarycomputer-staging.microsoft.com/dataset/fia): Status and trends on U.S. forest location, health, growth, mortality, and production.
+
+#### Changes to existing datasets
+
+### Hub environments
+
+#### New package versions
+
+### Website
+
+* New guide for deploying your own Hub: <https://planetarycomputer.microsoft.com/docs/concepts/hub-deployment/>
+* New guide for accessing Planetary Computer datasets from [GitHub Codespaces](https://github.com/features/codespaces): <https://planetarycomputer.microsoft.com/docs/overview/ui-codespaces/>
+
 ## August 2021
 
 This minor release has the following __breaking__ changes:
