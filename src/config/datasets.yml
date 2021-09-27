@@ -39,11 +39,13 @@ collections:
         src: alos-dem-example.html
         launch: datasets/alos-dem/alos-dem-example.ipynb
 
-  cop-dem-glo-90:
-    category: DEMs
-
   cop-dem-glo-30:
     category: DEMs
+    headerImg: ./images/cop-dem-glo-30-hero.png
+
+  cop-dem-glo-90:
+    category: DEMs
+    headerImg: ./images/cop-dem-glo-90-hero.png
 
   goes-fdc:
     category: Fire

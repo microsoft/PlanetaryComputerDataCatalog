@@ -48,7 +48,7 @@ copernicus-dem:
 
   assets:
     headerImg:
-      href: https://via.placeholder.com/550x100?text=Placeholder...
+      href: ./images/cop-dep-collection-hero.png
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/cop-dem.png
   keywords: [Copernicus, DEM, DSM, elevation]
