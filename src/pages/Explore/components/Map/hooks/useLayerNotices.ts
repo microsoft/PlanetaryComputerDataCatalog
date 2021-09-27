@@ -39,8 +39,6 @@ const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) =>
   );
 
   const showExtentMsg =
-    // TODO: when mosaics are back
-    // !!mosaic.query.hash &&
     !!collectionGeoms?.length &&
     !!viewport &&
     !collectionGeoms.some(geom => intersects(geom, viewport));

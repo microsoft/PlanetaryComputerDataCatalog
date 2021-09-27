@@ -19,7 +19,13 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const [areTilesLoading, setTilesLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    mapRef.current?.resize();
+    // Some actions that resize the map that occur from browser chrome (show
+    // bookmark bar, devtools, etc) are animated and don't have the new height
+    // set when this fires. Timeout for a bit to make sure the map is resized to
+    // the correct size.
+    setTimeout(() => {
+      mapRef.current?.resize();
+    }, 100);
   }, [height, width, mapRef]);
 
   // Update state when map moves end

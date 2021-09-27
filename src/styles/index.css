@@ -182,7 +182,7 @@ a:not(header a):hover img {
   .sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    top: 30px;
   }
 }
 

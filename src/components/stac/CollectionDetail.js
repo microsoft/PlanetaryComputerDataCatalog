@@ -5,6 +5,8 @@ import Summaries from "./Summaries";
 import TemporalExtent from "./TemporalExtent";
 import { useStac } from "./CollectionContext";
 import Crs from "./Crs";
+import LaunchInExplorer from "components/LaunchInExplorer";
+import { ErrorBoundary } from "react-error-boundary";
 
 const SpatialExtent = React.lazy(() => import("./SpatialExtent"));
 
@@ -21,6 +23,9 @@ const CollectionDetail = () => {
             <SpatialExtent extent={collection.extent?.spatial} />
           </Suspense>
         </div>
+        <ErrorBoundary fallbackRender={() => null}>
+          <LaunchInExplorer collection={collection} />
+        </ErrorBoundary>
         <TemporalExtent extent={collection.extent?.temporal} />
         <Summaries collection={collection} />
         <Crs />

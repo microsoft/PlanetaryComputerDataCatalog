@@ -21,7 +21,7 @@ const MapMessage: React.FC = ({ children }) => {
         border: "1px solid",
         borderColor: theme.semanticColors.primaryButtonBorder,
         backgroundColor: theme.semanticColors.bodyBackground,
-        boxShadow: theme.effects.elevation8,
+        boxShadow: theme.effects.elevation16,
       }}
     >
       {children}

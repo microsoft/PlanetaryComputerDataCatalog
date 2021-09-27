@@ -9,6 +9,7 @@ import { setCollection } from "../../../state/mosaicSlice";
 import { collections as collectionConfig } from "config/datasets.yml";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { useCollectionUrlState } from "./hooks/useUrlState";
+import { isValidExplorer } from "utils/collections";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
@@ -40,19 +41,8 @@ const CollectionSelector = () => {
 
 export default CollectionSelector;
 
-const isRenderable = (collection: IStacCollection) => {
-  // By default, all collections with at least one GeoTIFF data-role item_asset
-  // are renderable
-  if (collection.item_assets) {
-    return !!Object.values(collection.item_assets).find(a =>
-      a.type?.toLowerCase().includes("geotiff")
-    );
-  }
-  return false;
-};
-
 const sortedOptions = (collections: IStacCollection[]) => {
-  const renderable = collections.filter(isRenderable).map(c => ({
+  const renderable = collections.filter(isValidExplorer).map(c => ({
     text: c.title,
     key: c.id,
     category: collectionConfig[c.id]?.category || "Other",

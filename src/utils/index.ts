@@ -213,6 +213,5 @@ const encodeRenderOpts = (renderOpts: string | undefined) => {
 
 // Remove the suffix that designates the mercator assets from the render options
 const removeMercatorAssets = (renderOpts: string) => {
-  return renderOpts;
-  // return renderOpts.replaceAll("_wm", "");
+  return renderOpts.replaceAll("_wm", "");
 };
