@@ -25,7 +25,7 @@
     {
       "name": "Natural color",
       "description": "Natural color representation with Green represented by formula: `0.45*C02_2km+0.1*C03_2km+0.45*C01_2km`",
-      "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&format=jpg&rescale=1,2000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
+      "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,2000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
       "minZoom": 2
     },
     {

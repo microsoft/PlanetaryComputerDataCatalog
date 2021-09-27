@@ -169,16 +169,16 @@ export const makeTileJsonUrl = (
 ) => {
   const scaleParam = isHighDef ? "tile_scale=2" : "tile_scale=1";
   const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
-  const format = renderOption?.options.includes("format") ? "" : "&format=png";
-
   const renderParams = encodeRenderOpts(renderOption?.options);
+  const format = renderOption?.options.includes("format") ? "" : "&format=png";
 
   // Rendering a single Item
   if (item && collection) {
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${renderParams}${format}`;
+    const forcePngRenderParams = renderParams.replace("jpg", "png");
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${forcePngRenderParams}`;
   }
 
-  // Rendering a Collection mosaic
+  // Rendering a STAC search mosaic
   const collectionParam = collection ? `&collection=${collection.id}` : "";
   return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
@@ -213,5 +213,6 @@ const encodeRenderOpts = (renderOpts: string | undefined) => {
 
 // Remove the suffix that designates the mercator assets from the render options
 const removeMercatorAssets = (renderOpts: string) => {
-  return renderOpts.replaceAll("_wm", "");
+  return renderOpts;
+  // return renderOpts.replaceAll("_wm", "");
 };
