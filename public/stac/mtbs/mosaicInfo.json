@@ -3,7 +3,11 @@
     {
       "name": "All years",
       "description": "",
-      "cql": []
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["1984-01-01", "2018-12-31"]]
+        }
+      ]
     },
     {
       "name": "Most recent (2018)",
@@ -325,7 +329,7 @@
   "renderOptions": [
     {
       "name": "Burn severity",
-      "description": "",
+      "description": "Classifies the burn severity and extent of large fires across all lands of the United States",
       "options": "assets=burn-severity&exitwhenfull=False&skipcovered=True&colormap_name=mtbs-severity",
       "minZoom": 3
     }

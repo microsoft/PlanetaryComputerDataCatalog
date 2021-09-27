@@ -2,8 +2,11 @@
   "mosaics": [
     {
       "name": "Most recent (2020)",
-      "description": "",
-      "cql": []
+      "cql": [
+        {
+          "eq": [{ "property": "datetime" }, "2020-04-14"]
+        }
+      ]
     }
   ],
   "renderOptions": [

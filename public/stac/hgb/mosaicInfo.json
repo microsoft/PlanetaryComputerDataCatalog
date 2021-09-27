@@ -3,7 +3,11 @@
     {
       "name": "Most recent (2010)",
       "description": "",
-      "cql": []
+      "cql": [
+        {
+          "eq": [{ "property": "datetime" }, "2010-12-31"]
+        }
+      ]
     }
   ],
   "renderOptions": [

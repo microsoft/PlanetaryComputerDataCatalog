@@ -1,15 +1,19 @@
 {
   "mosaics": [
     {
-      "name": "Most recent (2020)",
+      "name": "Most recent",
       "description": "Most recent Land Use/Land Cover",
-      "cql": []
+      "cql": [
+        {
+          "eq": [{ "property": "datetime" }, "2020-06-01"]
+        }
+      ]
     }
   ],
   "renderOptions": [
     {
       "name": "Default",
-      "description": "",
+      "description": "Land cover classification using 5 class custom colormap",
       "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc",
       "minZoom": 4
     }

@@ -10,6 +10,7 @@ import {
 import { IStacSearchResult } from "types/stac";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { loadingStyle } from "./SearchResultsPane";
+import QueryInfo from "./QueryInfo";
 
 interface SearchResultsHeaderProps {
   results: IStacSearchResult | undefined;
@@ -51,7 +52,15 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         <Text styles={headerStyles}>{collection?.title}</Text>
         {isLoading && <Spinner size={SpinnerSize.xSmall} />}
       </Stack>
-      {resultsText}
+      <Stack
+        horizontal
+        tokens={{ childrenGap: 4 }}
+        horizontalAlign={"space-between"}
+        verticalAlign="center"
+      >
+        {resultsText}
+        <QueryInfo />
+      </Stack>
     </Stack>
   );
 };
