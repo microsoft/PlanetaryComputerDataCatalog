@@ -47,23 +47,29 @@ collections:
     category: DEMs
     headerImg: ./images/cop-dem-glo-90-hero.png
 
-  goes-fdc:
-    category: Fire
-
-  goes-rrqpe:
-    category: Climate/Weather
-
   goes-cmi:
     category: Imagery
+    headerImg: ./images/goes-cmi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: goes-cmi-example.html
+        launch: datasets/goes/goes-cmi-example.ipynb
 
-  goes-mcmip:
-    category: Imagery
+  # Waiting on the other goes collections
+  # goes-fdc:
+  #   category: Fire
 
-  goes-sst:
-    category: Climate/Weather
+  # goes-rrqpe:
+  #   category: Climate/Weather
 
-  goes-lst:
-    category: Climate/Weather
+  # goes-mcmip:
+  #   category: Imagery
+
+  # goes-sst:
+  #   category: Climate/Weather
+
+  # goes-lst:
+  #   category: Climate/Weather
 
   3dep-seamless:
     category: DEMs
@@ -323,14 +329,6 @@ ai4e:
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
     keywords: [NOAA, Global, Precipitation]
-
-  - title: GOES-16
-    shortTerm: GOES-16 weather
-    description: Weather imagery of the Americas
-    infoUrl: http://aka.ms/ai4edata-goes16
-    thumbnailUrl: RE4ucH9.jpg
-    alt: Raindrops hitting water
-    keywords: [GOES, Weather, Americas, Imagery]
 
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
