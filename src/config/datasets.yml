@@ -240,6 +240,13 @@ collections:
         src: gbif-example.html
         launch: datasets/gbif/gbif-example.ipynb
 
+  gridmet:
+    headerImg: ./images/gridmet-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gridmet-example.html
+        launch: datasets/gridmet/gridmet-example.ipynb
+
   fia:
     headerImg: ./images/fia-hero.png
     tabs:
