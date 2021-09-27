@@ -315,14 +315,6 @@ ai4e:
     alt: Clouds at sunset
     keywords: [NOAA, Global, Precipitation]
 
-  - title: GOES-16
-    shortTerm: GOES-16 weather
-    description: Weather imagery of the Americas
-    infoUrl: http://aka.ms/ai4edata-goes16
-    thumbnailUrl: RE4ucH9.jpg
-    alt: Raindrops hitting water
-    keywords: [GOES, Weather, Americas, Imagery]
-
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
     description: 30m-resolution satellite imagery for North America
@@ -413,4 +405,3 @@ ai4e:
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
     keywords: [China, Climate, Historical]
-

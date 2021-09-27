@@ -17,11 +17,17 @@ export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
   const template = `from pystac_client import Client
 import planetary_computer as pc
 
-catalog = Client.open("${STAC_URL}")
+# Search against the Planetary Computer STAC API
+catalog = Client.open(
+  "${STAC_URL}"
+)
 search = catalog.search(limit=${DEFAULT_QUERY_LIMIT}, filter=${pythonDict})
 
-items = search.get_all_items()
-print(f"{len(items)} items returned!")`;
+# Grab the first item from the search results
+first_item = next(search.get_items())
+
+# Sign it and view the assets it contains
+pc.sign_item(first_item).assets`;
 
   return hljs.highlight(template, { language: "python" });
 };

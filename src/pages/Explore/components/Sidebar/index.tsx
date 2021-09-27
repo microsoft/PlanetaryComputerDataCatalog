@@ -12,6 +12,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { resetMosiac } from "pages/Explore/state/mosaicSlice";
+import { resetDetail } from "pages/Explore/state/detailSlice";
 import {
   CollectionSelector,
   MosaicPresetSelector,
@@ -45,6 +46,7 @@ const Sidebar = () => {
       // When Explore unmounts, reset the mosaic state so it's fresh when the
       // user navigates back
       dispatch(resetMosiac());
+      dispatch(resetDetail());
     };
   }, [dispatch]);
 
