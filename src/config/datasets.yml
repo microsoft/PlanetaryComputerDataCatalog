@@ -99,7 +99,7 @@ collections:
         launch: datasets/gap/gap-example.ipynb
 
   goes-mcmip:
-    headerImage: ./images/goes-mcmip-hero.png
+    headerImg: ./images/goes-mcmip-hero.png
 
   hgb:
     headerImg: ./images/hgb-hero.png
