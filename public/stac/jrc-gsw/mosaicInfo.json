@@ -25,7 +25,7 @@
     },
     {
       "name": "Water Occurrence change intensity",
-      "description": "Shows where surface water occurrence increased, decreased or did not change between 1984 and 2020",
+      "description": "Shows where surface water occurrence increased, decreased, or did not change between 1984 and 2020",
       "options": "assets=change&colormap_name=jrc-change&nodata=0",
       "minZoom": 4
     },
