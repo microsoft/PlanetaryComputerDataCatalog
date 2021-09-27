@@ -1,4 +1,4 @@
-import { FontSizes, StackItem, Text, Toggle } from "@fluentui/react";
+import { Checkbox, FontSizes, StackItem, Text } from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setShowCollectionOutline } from "pages/Explore/state/mapSlice";
 import { MAX_ZOOM_FOR_COLLECTION_OUTLINE } from "pages/Explore/utils/constants";
@@ -10,8 +10,8 @@ const CollectionBoundaryToggle = () => {
 
   return (
     <StackItem>
-      <Toggle
-        label="Show current dataset extent on map"
+      <Checkbox
+        label="Show current dataset extent"
         disabled={isCollectionOutlineDisabled}
         checked={showCollectionOutline}
         onChange={(_, checked) =>

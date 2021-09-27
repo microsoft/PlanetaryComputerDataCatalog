@@ -1,19 +1,10 @@
 import { useEffect, useState } from "react";
-import {
-  FontWeights,
-  Separator,
-  Slider,
-  Stack,
-  StackItem,
-  Text,
-  Toggle,
-} from "@fluentui/react";
+import { Checkbox, Separator, Slider, Stack } from "@fluentui/react";
 import * as atlas from "azure-maps-control";
 import PanelControl from "../PanelControl";
 import { mosaicLayerName } from "../../hooks/useMosaicLayer";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import CollectionBoundaryToggle from "./CollectionBoundaryToggle";
-import HighDefTilesToggle from "./HighDefTilesToggle";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
@@ -69,23 +60,19 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   return (
     <PanelControl label={title} iconName="Settings" top={178}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
-        <StackItem>
-          <Text styles={{ root: { fontWeight: FontWeights.bold } }}>{title}</Text>
-          <Separator />
-        </StackItem>
         <Slider
           min={0}
           max={100}
           step={1}
           value={opacity}
           onChange={value => setOpacity(value)}
-          label="Mosaic layer opacity"
+          label="Layer opacity"
           valueFormat={(value: number) => `${value}%`}
-          styles={{ root: { width: 250 } }}
+          styles={{ root: { width: "100%" } }}
         />
-        <HighDefTilesToggle />
-        <Toggle
-          label="Show labels on map"
+        <Separator />
+        <Checkbox
+          label="Show map labels"
           checked={showLabels}
           onChange={(_, checked) => setShowLabels(checked || false)}
         />
