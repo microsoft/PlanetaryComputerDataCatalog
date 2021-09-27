@@ -45,23 +45,29 @@ collections:
   cop-dem-glo-30:
     category: DEMs
 
-  goes-fdc:
-    category: Fire
-
-  goes-rrqpe:
-    category: Climate/Weather
-
   goes-cmi:
     category: Imagery
+    headerImg: ./images/goes-cmi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: goes-cmi-example.html
+        launch: datasets/goes/goes-cmi-example.ipynb
 
-  goes-mcmip:
-    category: Imagery
+  # Waiting on the other goes collections
+  # goes-fdc:
+  #   category: Fire
 
-  goes-sst:
-    category: Climate/Weather
+  # goes-rrqpe:
+  #   category: Climate/Weather
 
-  goes-lst:
-    category: Climate/Weather
+  # goes-mcmip:
+  #   category: Imagery
+
+  # goes-sst:
+  #   category: Climate/Weather
+
+  # goes-lst:
+  #   category: Climate/Weather
 
   3dep-seamless:
     category: DEMs
@@ -138,13 +144,6 @@ collections:
       - title: Example Notebook
         src: gap-example.html
         launch: datasets/gap/gap-example.ipynb
-
-  goes-cmi:
-    headerImg: ./images/goes-cmi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: goes-cmi-example.html
-        launch: datasets/goes/goes-cmi-example.ipynb
 
   hgb:
     category: Biodiversity
