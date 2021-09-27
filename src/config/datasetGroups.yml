@@ -27,17 +27,6 @@ daymet:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg
   keywords: [Daymet, Weather, Climate, North America, Puerto Rico, Hawaii]
 
-goes:
-  title: GOES Collection
-  short_description: TBD.
-  description: TBD.
-  assets:
-    headerImg:
-      href: https://via.placeholder.com/550x100?text=Placeholder...
-    thumbnail:
-      href: https://via.placeholder.com/550x300?text=Placeholder...
-  keywords: [GOES, Global, Satellite, Imagery, Fire, Weather, Climate, Ocean]
-
 copernicus-dem:
   title: Copernicus DEM Collection
   short_description: This data set is a global digital surface model (DSM) with horizontal resolution of either 30 or 90 meters derived from an edited DSM named WorldDEMTM based on radar satellite data aquired during the TanDEM-X Mission 
@@ -53,5 +42,14 @@ copernicus-dem:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/cop-dem.png
   keywords: [Copernicus, DEM, DSM, elevation]
 
-
-
+# Waiting on other GOES collections
+# goes:
+#   title: GOES Collection
+#   short_description: TBD.
+#   description: TBD.
+#   assets:
+#     headerImg:
+#       href: https://via.placeholder.com/550x100?text=Placeholder...
+#     thumbnail:
+#       href: https://via.placeholder.com/550x300?text=Placeholder...
+#   keywords: [GOES, Global, Satellite, Imagery, Fire, Weather, Climate, Ocean]
