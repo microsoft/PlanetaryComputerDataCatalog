@@ -212,7 +212,7 @@
       "name": "Atmospheric penetration",
       "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (SR_B7, SR_B6, SR_B5).",
       "options": "nodata=0&assets=SR_B7,SR_B6,SR_B5&format=jpg&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
-      "minZoom": 9
+      "minZoom": 8
     }
   ]
 }
