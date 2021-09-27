@@ -21,11 +21,12 @@ const LaunchInExplorer = ({ collection }: LaunchInExplorerProps) => {
   const collectionCenterCoords = centerPoint?.geometry.coordinates
     .map(n => n.toFixed(4))
     .join(",");
-  const center = mapData && [...mapData?.info.initialCoords].reverse().join(",");
+  const center =
+    mapData?.info && [...mapData?.info.initialCoords].reverse().join(",");
   const zoom = mapData?.info.initialZoom || undefined;
 
   const params = {
-    c: mapData?.info ? center : collectionCenterCoords,
+    c: center || collectionCenterCoords,
     d: collection?.id,
     z: zoom,
   };
