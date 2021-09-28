@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import Keywords from "./Keywords";
 import { collections as collectionsConfig } from "../../config/datasets.yml";
+import groups from "../../config/datasetGroups.yml";
 import { useHistory } from "react-router";
 import { titleCase } from "utils";
 
@@ -19,7 +20,9 @@ const Banner = ({ collection }) => {
     collection.assets?.thumbnail?.href;
 
   const groupId = collection["msft:group_id"];
-  const bannerBreadcrumbs = groupId ? (
+  const hasGroup = groupId && groups[groupId];
+
+  const bannerBreadcrumbs = hasGroup ? (
     <>
       <Link to="/catalog">Datasets</Link> {" > "}
       <Link to={`/dataset/group/${groupId}`}>{titleCase(groupId)}</Link>
