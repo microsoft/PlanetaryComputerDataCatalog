@@ -14,3 +14,10 @@
   content: >
     New datasets, features, and upgrades! [Check it out
     &rarr;](/docs/overview/changelog)
+- id: sept-release-notes
+  startDate: 2021-09-27
+  endDate: 2021-10-20
+  content: >
+    Search and visualize new datasets in the [Planetary Computer
+    Explorer](https://planetarycomputer.microsoft.com/explore) (see
+    [changelog](/docs/overview/changelog))
