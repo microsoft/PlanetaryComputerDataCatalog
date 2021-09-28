@@ -1,11 +1,10 @@
 import { Stack, StackItem, useTheme } from "@fluentui/react";
-import * as dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
+import { isNumber } from "lodash-es";
 
+import { toUtcDate } from "utils";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 
-dayjs.extend(utc);
 interface PriorityAttributesProps {
   item: IStacItem;
 }
@@ -27,11 +26,9 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
         },
       }}
     >
-      {dt && (
-        <span title="Acquisition date">{dayjs.utc(dt).format("MM/DD/YYYY")}</span>
-      )}
+      {dt && <span title="Acquisition date">{toUtcDate(dt)}</span>}
       <StackItem styles={{ root: { paddingRight: 8 } }}>
-        {cloud && (
+        {isNumber(cloud) && (
           <IconValue
             iconName="Cloud"
             value={`${cloud.toFixed(1)}%`}

@@ -1,6 +1,7 @@
 import { IStacItem } from "types/stac";
 import { stacFormatter } from "utils/stac";
 import DetailListItem from "./DetailListItem";
+import LinkListItems from "./LinkListItems";
 
 interface MetadataListProps {
   item: IStacItem;
@@ -19,6 +20,7 @@ const MetadataList = ({ item }: MetadataListProps) => {
             />
           );
         })}
+      <LinkListItems item={item} />
     </>
   );
 };

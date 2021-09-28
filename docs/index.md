@@ -12,6 +12,7 @@
 :caption: Overview
 
 About <overview/about>
+Explorer <overview/explorer>
 The Hub <overview/environment>
 Use VS Code <overview/ui-vscode>
 Use GitHub Codespaces <overview/ui-codespaces>
@@ -35,6 +36,7 @@ quickstarts/storage
 
 tutorials/cloudless-mosaic-sentinel2
 tutorials/landcover
+tutorials/hurricane-florence-animation
 See all tutorials <https://github.com/microsoft/PlanetaryComputerExamples/tree/main/tutorials>
 ```
 

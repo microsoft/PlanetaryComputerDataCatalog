@@ -1,8 +1,15 @@
-import { IMosaicState } from "pages/Explore/state/mosaicSlice";
-import { IMosaicRenderOption } from "types";
+import * as dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL } from "./constants";
+import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
+import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
+
+dayjs.extend(utc);
+
+export const toUtcDate = (dt: string) => dayjs.utc(dt).format("MM/DD/YYYY");
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -109,7 +116,7 @@ export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
 
   const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
 
-  return `${process.env.REACT_APP_HUB_URL}?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
+  return `${HUB_URL}/user-redirect/git-pull?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
 }
 
 export function buildGitHubUrl(launcher: ILauncherConfig): string;
@@ -154,15 +161,26 @@ export const scrollToHash = (
 };
 
 export const makeTileJsonUrl = (
-  collection: IStacCollection,
-  query: IMosaicState,
+  query: IMosaic,
   renderOption: IMosaicRenderOption | null,
-  item: IStacItem | null
+  collection: IStacCollection | null,
+  item: IStacItem | null,
+  isHighDef: boolean = true
 ) => {
-  const itemParam = item ? `&items=${item.id}` : "";
-  const tileEndpoint = item ? "item" : "collection";
+  const scaleParam = isHighDef ? "tile_scale=2" : "tile_scale=1";
+  const minZoom = `&minzoom=${renderOption?.minZoom || DEFAULT_MIN_ZOOM}`;
+  const renderParams = encodeRenderOpts(renderOption?.options);
+  const format = renderOption?.options.includes("format") ? "" : "&format=png";
 
-  return `${DATA_URL}/${tileEndpoint}/tilejson.json?hash=${query.hash}&collection=${collection.id}&${renderOption?.options}${itemParam}`;
+  // Rendering a single Item
+  if (item && collection) {
+    const forcePngRenderParams = renderParams.replace("jpg", "png");
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${forcePngRenderParams}`;
+  }
+
+  // Rendering a STAC search mosaic
+  const collectionParam = collection ? `&collection=${collection.id}` : "";
+  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
 
 export const makeItemPreviewUrl = (
@@ -172,19 +190,28 @@ export const makeItemPreviewUrl = (
 ) => {
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
+  const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption.options));
 
-  // URIEncode any parameters provided in the renderer options
-  const renderParams = qs.parse(renderOption.options, { decode: false });
+  const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
+
+  return url + params;
+};
+
+// URIEncode any parameters provided in the renderer options
+const encodeRenderOpts = (renderOpts: string | undefined) => {
+  if (!renderOpts) return "";
+
+  const renderParams = qs.parse(renderOpts, { decode: false });
   if ("expression" in renderParams) {
     renderParams["expression"] = encodeURIComponent(
       renderParams["expression"] as string
     );
   }
 
-  const params = `?collection=${item.collection}&items=${item.id}&${qs.stringify(
-    renderParams,
-    { encode: false }
-  )}${maxSize}`;
+  return qs.stringify(renderParams, { encode: false });
+};
 
-  return url + params;
+// Remove the suffix that designates the mercator assets from the render options
+const removeMercatorAssets = (renderOpts: string) => {
+  return renderOpts.replaceAll("_wm", "");
 };

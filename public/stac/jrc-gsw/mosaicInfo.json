@@ -1,0 +1,51 @@
+{
+  "mosaics": [
+    {
+      "name": "Most recent",
+      "description": "",
+      "cql": [
+        {
+          "eq": [{ "property": "datetime" }, "2020-07-01"]
+        }
+      ]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Water occurrence",
+      "description": "Shows where surface water occurred between 1984 and 2020",
+      "options": "assets=occurrence&colormap_name=jrc-occurrence&nodata=0",
+      "minZoom": 4
+    },
+    {
+      "name": "Annual water recurrence",
+      "description": "Shows frequency that water returns from one year to another",
+      "options": "assets=recurrence&colormap_name=jrc-recurrence&nodata=0",
+      "minZoom": 4
+    },
+    {
+      "name": "Water Occurrence change intensity",
+      "description": "Shows where surface water occurrence increased, decreased, or did not change between 1984 and 2020",
+      "options": "assets=change&colormap_name=jrc-change&nodata=0",
+      "minZoom": 4
+    },
+    {
+      "name": "Water seasonality",
+      "description": "Indicates more seasonal or permanent surface water features during the course of a year",
+      "options": "assets=seasonality&colormap_name=jrc-seasonality&nodata=0",
+      "minZoom": 4
+    },
+    {
+      "name": "Water transitions",
+      "description": "Classifies the change in water state between the first and last years of observation",
+      "options": "assets=transitions&colormap_name=jrc-transitions&nodata=0",
+      "minZoom": 4
+    },
+    {
+      "name": "Maximum water extent",
+      "description": "Show the maximum observed water extent during the course of 1984 to 2020",
+      "options": "assets=extent&colormap_name=jrc-extent&nodata=0",
+      "minZoom": 4
+    }
+  ]
+}

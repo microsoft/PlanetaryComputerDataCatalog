@@ -1,8 +1,15 @@
 # Use STAC collection IDs to attach specific notebooks/content to a collection
-# detail page. Any references to Notebook html files below require the .ipynb
+# detail page.
+
+# ****************************************************************************
+# Any references to Notebook html files below require the .ipynb
 # file to be included in the `etl/codefiles_urls.txt` file for processing
+# ****************************************************************************
 
 # Omitting headerImg will reuse and stretch the collection thumbnail
+
+# `category` attribute determines which header the dataset is included under in the
+# Explorer collection selector
 
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
@@ -18,13 +25,62 @@
 #   - title: My title
 #     src: notebook.html
 #     launch:
-#       - repo: http://github.com/exampleorg/myrepo
-#         branch: v1
-#         filePath: tutorials/notebook.ipynb
+#       repo: http://github.com/exampleorg/myrepo
+#       branch: v1
+#       filePath: tutorials/notebook.ipynb
 
 ---
 collections:
+  alos-dem:
+    category: DEMs
+    headerImg: ./images/alos-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-dem-example.html
+        launch: datasets/alos-dem/alos-dem-example.ipynb
+
+  cop-dem-glo-30:
+    category: DEMs
+    headerImg: ./images/cop-dem-glo-30-hero.png
+    tabs:
+      - title: Example Notebook
+        src: copernicus-dem-example.html
+        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+
+  cop-dem-glo-90:
+    category: DEMs
+    headerImg: ./images/cop-dem-glo-90-hero.png
+    tabs:
+      - title: Example Notebook
+        src: copernicus-dem-example.html
+        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+
+  goes-cmi:
+    category: Imagery
+    headerImg: ./images/goes-cmi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: goes-cmi-example.html
+        launch: datasets/goes/goes-cmi-example.ipynb
+
+  # Waiting on the other goes collections
+  # goes-fdc:
+  #   category: Fire
+
+  # goes-rrqpe:
+  #   category: Climate/Weather
+
+  # goes-mcmip:
+  #   category: Imagery
+
+  # goes-sst:
+  #   category: Climate/Weather
+
+  # goes-lst:
+  #   category: Climate/Weather
+
   3dep-seamless:
+    category: DEMs
     headerImg: ./images/threedep-seamless-hero.png
     tabs:
       - title: Example Notebook
@@ -92,6 +148,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   gap:
+    category: Land use/Land cover
     headerImg: ./images/gap-hero.png
     tabs:
       - title: Example Notebook
@@ -99,6 +156,7 @@ collections:
         launch: datasets/gap/gap-example.ipynb
 
   hgb:
+    category: Biodiversity
     headerImg: ./images/hgb-hero.png
     tabs:
       - title: Example Notebook
@@ -110,6 +168,7 @@ collections:
         src: hgb-storage.html
 
   hrea:
+    category: Infrastructure
     headerImg: ./images/hrea-hero.png
     tabs:
       - title: Example Notebook
@@ -121,6 +180,7 @@ collections:
         src: hrea-storage.html
 
   io-lulc:
+    category: Land use/Land cover
     tabs:
       - title: Example Notebook
         src: io-lulc-example.html
@@ -129,6 +189,7 @@ collections:
         src: io-lulc-storage.html
 
   jrc-gsw:
+    category: Water
     headerImg: ./images/jrc-gsw-hero.png
     tabs:
       - title: Example Notebook
@@ -136,6 +197,7 @@ collections:
         launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
 
   mobi:
+    category: Biodiversity
     headerImg: ./images/mobi-hero.png
     tabs:
       - title: Example Notebook
@@ -147,6 +209,7 @@ collections:
         src: mobi-storage.html
 
   mtbs:
+    category: Fire
     headerImg: ./images/mtbs-hero.png
     tabs:
       - title: Example Notebook
@@ -158,6 +221,7 @@ collections:
         src: mtbs-storage.html
 
   nasadem:
+    category: DEMs
     headerImg: ./images/nasadem-hero.png
     tabs:
       - title: Example Notebook
@@ -169,6 +233,7 @@ collections:
         src: nasadem-storage.html
 
   terraclimate:
+    category: Climate/Weather
     headerImg: ./images/terraclimate-hero.png
     tabs:
       - title: Example Notebook
@@ -177,7 +242,36 @@ collections:
       - title: Blob Storage Notebook
         src: terraclimate.html
 
+  us-census:
+    headerImg: ./images/us-census-hero.png
+    tabs:
+      - title: Example Notebook
+        src: us-census-example.html
+        launch: datasets/us-census/us-census-example.ipynb
+
+  gbif:
+    headerImg: ./images/gbif-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gbif-example.html
+        launch: datasets/gbif/gbif-example.ipynb
+
+  gridmet:
+    headerImg: ./images/gridmet-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gridmet-example.html
+        launch: datasets/gridmet/gridmet-example.ipynb
+
+  fia:
+    headerImg: ./images/fia-hero.png
+    tabs:
+      - title: Example Notebook
+        src: fia-example.html
+        launch: datasets/fia/fia-example.ipynb
+
   naip:
+    category: Imagery
     headerImg: ./images/naip-hero.jpg
     tabs:
       - title: Example Notebook
@@ -189,6 +283,7 @@ collections:
         src: naip-storage.html
 
   landsat-8-c2-l2:
+    category: Imagery
     headerImg: ./images/landsat-hero.jpg
     tabs:
       - title: Example Notebook
@@ -200,6 +295,7 @@ collections:
         src: landsat-8-storage.html
 
   sentinel-2-l2a:
+    category: Imagery
     headerImg: ./images/sentinel-hero.jpg
     tabs:
       - title: Example Notebook
@@ -211,6 +307,7 @@ collections:
         src: sentinel-2-storage.html
 
   aster-l1t:
+    category: Imagery
     headerImg: ./images/aster-hero.jpg
     tabs:
       - title: Example Notebook
@@ -233,15 +330,6 @@ ai4e:
     alt: Flood map of coastal Myanmar
     keywords: [Global, Flood, Sea level rise, Water]
 
-  - title: GBIF
-    shortTerm: GBIF occurrence
-    description:
-      Species occurrences shared through the Global Biodiversity Information Facility
-    infoUrl: http://aka.ms/ai4edata-gbif/
-    thumbnailUrl: gbif.jpg
-    alt: Colorful frog on a leaf
-    keywords: [Global, Biodiversity, Species, GBIF]
-
   - title: Global Hydro Estimator
     shortTerm: global precipitation
     description: Global precipitation estimates
@@ -249,14 +337,6 @@ ai4e:
     thumbnailUrl: RE4ucH7.jpg
     alt: Clouds at sunset
     keywords: [NOAA, Global, Precipitation]
-
-  - title: GOES-16
-    shortTerm: GOES-16 weather
-    description: Weather imagery of the Americas
-    infoUrl: http://aka.ms/ai4edata-goes16
-    thumbnailUrl: RE4ucH9.jpg
-    alt: Raindrops hitting water
-    keywords: [GOES, Weather, Americas, Imagery]
 
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
@@ -348,11 +428,3 @@ ai4e:
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
     keywords: [China, Climate, Historical]
-
-  - title: USFS Forest Inventory and Analysis
-    shortTerm: forest health
-    description: Trends in US forest health
-    infoUrl: https://aka.ms/ai4edata-fia
-    thumbnailUrl: RWz2Nt.jpg
-    alt: Evergreen forest with shrubbery
-    keywords: [United States, Forest, Biomass]

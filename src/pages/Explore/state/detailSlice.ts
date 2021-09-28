@@ -24,10 +24,13 @@ export const detailSlice = createSlice({
     setShowAsLayer: (state, action: PayloadAction<boolean>) => {
       state.showAsLayer = action.payload;
     },
+    resetDetail: () => {
+      return initialState;
+    },
   },
 });
 
-export const { setSelectedItem, clearSelectedItem, setShowAsLayer } =
+export const { resetDetail, setSelectedItem, clearSelectedItem, setShowAsLayer } =
   detailSlice.actions;
 
 export default detailSlice.reducer;

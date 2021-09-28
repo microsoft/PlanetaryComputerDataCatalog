@@ -86,6 +86,10 @@ StacFields.Registry.addMetadataField("view:sun_elevation", {
   formatter: fixedDeg,
 });
 
+StacFields.Registry.addMetadataField("table:storage_options", {
+  formatter: value => <SimpleKeyValueList object={value} />,
+});
+
 StacFields.Registry.addMetadataField("label:description", {
   label: "Description",
   formatter: value => value,
@@ -115,11 +119,14 @@ StacFields.Registry.addMetadataField("naip:state", {
   formatter: value => value && value.toUpperCase(),
 });
 export const mediaTypeOverride = value => {
-  if (value === "image/tiff; application=geotiff; profile=cloud-optimized") {
-    return "GeoTIFF (COG)";
+  switch (value) {
+    case "image/tiff; application=geotiff; profile=cloud-optimized":
+      return "GeoTIFF (COG)";
+    case "application/x-parquet":
+      return "Parquet";
+    default:
+      return StacFields.Formatters.formatMediaType(value);
   }
-
-  return StacFields.Formatters.formatMediaType(value);
 };
 
 export const bandOverrideList = bands => {

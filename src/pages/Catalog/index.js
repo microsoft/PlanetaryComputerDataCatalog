@@ -17,6 +17,8 @@ import { useCollections } from "utils/requests";
 import { ai4e as datasetsConfig } from "config/datasets.yml";
 
 import "styles/catalog.css";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback, { CardErrorFallback } from "components/ErrorFallback";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
@@ -67,7 +69,12 @@ const Catalog = () => {
           group={collection}
         />
       ) : (
-        <CollectionCard key={`card-${collection.id}`} collection={collection} />
+        <ErrorBoundary
+          key={`card-${collection.id}`}
+          FallbackComponent={CardErrorFallback}
+        >
+          <CollectionCard key={`card-${collection.id}`} collection={collection} />
+        </ErrorBoundary>
       );
     });
   };
@@ -112,7 +119,9 @@ const Catalog = () => {
             <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>.
           </p>
           <div className="layout-container">
-            <div className="layout-row">{primaryDatasets}</div>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <div className="layout-row">{primaryDatasets}</div>
+            </ErrorBoundary>
           </div>
         </div>
       </section>
@@ -125,7 +134,9 @@ const Catalog = () => {
             of the Planetary Computer Hub.
           </p>
           <div className="layout-container">
-            <div className="layout-row">{otherDatasets}</div>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <div className="layout-row">{otherDatasets}</div>
+            </ErrorBoundary>
           </div>
         </div>
       </section>
