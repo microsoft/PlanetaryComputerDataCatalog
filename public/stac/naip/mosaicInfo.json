@@ -104,13 +104,13 @@
     {
       "name": "Natural color",
       "description": "RGB from visual assets",
-      "options": "assets=image&format=jpg&bidx=1,2,3",
+      "options": "assets=image&bidx=1,2,3",
       "minZoom": 11
     },
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation.",
-      "options": "assets=image&&bidx=4,1,2&format=jpg&color_formula=Sigmoidal RGB 15 0.35",
+      "options": "assets=image&bidx=4,1,2&color_formula=Sigmoidal RGB 15 0.35",
       "minZoom": 11
     }
   ]
