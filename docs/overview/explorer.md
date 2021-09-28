@@ -16,20 +16,22 @@ visualize data, and easily recreate their searches in an analytic environment
 like our [Hub][pc-docs-hub].
 
 Additionally, it's a great tool for casual browsing to get more familiar with
-dataset content, their spatiotemporal range, and to understand what types of
-features are visible at the available pixel resolution.
+datasets, their spatiotemporal range, and to understand what types of
+features are visible at their available pixel resolution.
 
 ## Selecting datasets
 
-Datasets that are available in the Explorer can be selected via the dropdown,
-grouped by category type. If you're switching between datasets, you may be
-looking at an area of the world that isn't covered by the new dataset. Look for
-a notice to direct you to the valid extent.
+Datasets that are available in the Explorer can be selected in the top dropdown,
+which is grouped by category.
 
 ```{image} images/explorer-ds.jpg
 :height: 200
 :name: Planetary Computer Explorer dataset selection
 ```
+
+If you're switching between datasets, you may be looking at an area of the world
+that isn't covered by the new dataset. Look for a notice to direct you to the
+valid extent.
 
 Datasets can also be opened in the Explorer directly from their
 [catalog][pc-catalog] page. These buttons will launch the Explorer at a
