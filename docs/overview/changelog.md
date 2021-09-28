@@ -9,7 +9,7 @@ This release includes several new datasets, features, and updates to libraries.
 ### Highlights
 
 - Launched the [Explorer](https://planetarycomputer.microsoft.com/explore) (see [documentation](https://planetarycomputer.microsoft.com/docs/overview/explorer/))
-- Added GOES-R Cloud and Moisture Imagery along with other datasets.
+- Added [GOES-R Cloud and Moisture Imagery](https://planetarycomputer-staging.microsoft.com/dataset/goes-cmi) along with other datasets.
 - Added support for tabular datasets to the STAC API
 - Added support for CQL to the STAC API
 - Added support for dynamic mosaics of STAC query results to the Data API
@@ -38,8 +38,6 @@ This release includes several new datasets, features, and updates to libraries.
 * [US Census 2020](https://planetarycomputer-staging.microsoft.com/dataset/us-census): information on population and geographic boundaries at various levels of cartographic aggregation.
 * [gridMET](https://planetarycomputer-staging.microsoft.com/dataset/gridmet): a dataset of daily high-spatial resolution surface meteorological data covering the contiguous US.
 * [USFS Forest Inventory and Analysis (FIA)](https://planetarycomputer-staging.microsoft.com/dataset/fia): Status and trends on U.S. forest location, health, growth, mortality, and production.
-
-#### Changes to existing datasets
 
 ### Hub environments
 
