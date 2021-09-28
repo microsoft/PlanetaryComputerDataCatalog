@@ -13,6 +13,7 @@ This release includes several new datasets, features, and updates to libraries.
 - Added support for tabular datasets to the STAC API
 - Added support for CQL to the STAC API
 - Added support for dynamic mosaics of STAC query results to the Data API
+- The Planetary Computer Hub configuration is now open-source. See <https://github.com/microsoft/planetary-computer-hub>.
 
 ### APIs
 
