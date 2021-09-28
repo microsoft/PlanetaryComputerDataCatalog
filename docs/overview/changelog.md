@@ -12,7 +12,7 @@ This release includes several new datasets and updates to libraries.
 - Added GOES-R Cloud and Moisture Imagery along with other datasets.
 - Added support for tabular datasets to the STAC API
 - Added support for CQL to the STAC API
-- Added support for dynamic mosaicing of STAC query results to the Data API
+- Added support for dynamic mosaics of STAC query results to the Data API
 
 ### APIs
 
@@ -27,7 +27,7 @@ This release includes several new datasets and updates to libraries.
 
 #### Data API
 
-- Implemented STAC query mosaicing through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaicing of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
+- Implemented STAC query mosaics through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaics of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
 
 ### Datasets
 
