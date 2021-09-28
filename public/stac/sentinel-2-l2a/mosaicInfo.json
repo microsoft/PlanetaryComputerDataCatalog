@@ -175,25 +175,25 @@
     {
       "name": "Natural color",
       "description": "True color composite of visible bands (B04, B03, B02)",
-      "options": "assets=B04,B03,B02&nodata=0&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "assets=B04,B03,B02&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B08, B04, B03).",
-      "options": "assets=B08,B04,B03&nodata=0&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "assets=B08,B04,B03&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
       "name": "Short wave infrared",
       "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B12, B8A, B04).",
-      "options": "assets=B12,B8A,B04&nodata=0&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "assets=B12,B8A,B04&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
       "name": "Agriculture",
       "description": "Darker shades of green indicate denser vegetation (B11, B08, B02).",
-      "options": "assets=B11,B08,B02&nodata=0&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "assets=B11,B08,B02&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
@@ -211,7 +211,7 @@
     {
       "name": "Atmospheric penetration",
       "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (B12, B11, B8A).",
-      "options": "nodata=0&assets=B12,B11,B8A&format=jpg&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "nodata=0&assets=B12,B11,B8A&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     }
   ]
