@@ -9,8 +9,10 @@ This release includes several new datasets and updates to libraries.
 ### Highlights
 
 - Launched the [Explorer](https://planetarycomputer.microsoft.com/explore)
-- Added various datasets from the GOES mission
+- Added GOES-R Cloud and Moisture Imagery along with other datasets.
 - Added support for tabular datasets to the STAC API
+- Added support for CQL to the STAC API
+- Added support for dynamic mosaicing of STAC query results to the Data API
 
 ### APIs
 
@@ -18,17 +20,20 @@ This release includes several new datasets and updates to libraries.
 
 ##### New features
 
-- Implements STAC API [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.3), the latest STAC API version at the time of release
+- Implementation of the [filter]() extension: The API now supports the STAC API [filter extension](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter), which brings support for the [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288) to STAC. The API supports CQL JSON currently, with CQL TEXT support planned for a future release.
+- Implements STAC API [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.3), the latest STAC API version at the time of release.
 
 ##### Breaking changes
 
 #### Data API
 
+- Implemented STAC query mosaicing through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaicing of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
+
 ### Datasets
 
 #### New datasets
 
-* [GOES collection](https://planetarycomputer-staging.microsoft.com/dataset/group/goes): ...
+* [GOES-R ABI L2+ Cloud & Moisture Imagery](https://planetarycomputer-staging.microsoft.com/dataset/group/goes): This dataset provides 16 bands from the ABI instrument aboard the GOES-16 and GOES017 satellites. We provide both NetCDF and COG data assets. More derived products coming soon!
 * [ALOS DEM](https://planetarycomputer-staging.microsoft.com/dataset/alos-dem): a 30-meter resoluation global Digital Surface Model.
 * [Copernicus DEM](https://planetarycomputer-staging.microsoft.com/dataset/cop-dem-glo-90): A Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation.
 * [Global Biodiversity Information Facility (GBIF)](https://planetarycomputer-staging.microsoft.com/dataset/gbif): records of species occurrences from a wide array of sources including specimen-related data from natural history museums, observations from citizen science networks and environment recording schemes.
