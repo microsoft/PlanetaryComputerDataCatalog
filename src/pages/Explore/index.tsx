@@ -30,7 +30,7 @@ const Explorer = () => {
   const bodyHeight = height - heights.header - heights.footer - heights.buffer;
 
   return (
-    <Layout onGrid={false}>
+    <Layout onGrid={false} allowAnnouncement={false}>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
         <Stack

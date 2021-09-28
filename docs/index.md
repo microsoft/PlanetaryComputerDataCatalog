@@ -12,6 +12,7 @@
 :caption: Overview
 
 About <overview/about>
+Explorer <overview/explorer>
 The Hub <overview/environment>
 Use VS Code <overview/ui-vscode>
 Use GitHub Codespaces <overview/ui-codespaces>

@@ -2,6 +2,65 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## September 2021
+
+This release includes several new datasets, features, and updates to libraries.
+
+### Highlights
+
+- Launched the [Explorer](https://planetarycomputer.microsoft.com/explore) (see [documentation](https://planetarycomputer.microsoft.com/docs/overview/explorer/))
+- Added [GOES-R Cloud and Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/goes-cmi) along with other datasets.
+- Added support for tabular datasets to the STAC API
+- Added support for CQL to the STAC API
+- Added support for dynamic mosaics of STAC query results to the Data API
+
+### APIs
+
+#### STAC API
+
+##### New features
+
+- Implementation of the [filter]() extension: The API now supports the STAC API [filter extension](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter), which brings support for the [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288) to STAC. The API supports CQL JSON currently, with CQL TEXT support planned for a future release.
+- Implements STAC API [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.3), the latest STAC API version at the time of release.
+
+#### Data API
+
+##### New features
+
+- Implemented STAC query mosaics through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaics of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
+
+#### New datasets
+
+* [GOES-R ABI L2+ Cloud & Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/group/goes): This dataset provides 16 bands from the ABI instrument aboard the GOES-16 and GOES017 satellites. We provide both NetCDF and COG data assets. More derived products coming soon!
+* [ALOS DEM](https://planetarycomputer.microsoft.com/dataset/alos-dem): a 30-meter resoluation global Digital Surface Model.
+* [Copernicus DEM](https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-90): A Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation.
+* [Global Biodiversity Information Facility (GBIF)](https://planetarycomputer.microsoft.com/dataset/gbif): records of species occurrences from a wide array of sources including specimen-related data from natural history museums, observations from citizen science networks and environment recording schemes.
+* [US Census 2020](https://planetarycomputer.microsoft.com/dataset/us-census): information on population and geographic boundaries at various levels of cartographic aggregation.
+* [gridMET](https://planetarycomputer.microsoft.com/dataset/gridmet): a dataset of daily high-spatial resolution surface meteorological data covering the contiguous US.
+* [USFS Forest Inventory and Analysis (FIA)](https://planetarycomputer.microsoft.com/dataset/fia): Status and trends on U.S. forest location, health, growth, mortality, and production.
+
+### Hub environments
+
+#### New package versions
+
+The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2021.09.27.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2021.09.27.0).
+Among other changes, these container images include
+
+* pystac-client 0.3.0b1
+* dask-geopandas 0.1.0a4
+* planetary-computer 0.4.2
+
+See the release notes for the changes in the various packages provided in the Planetary Computer's environment.
+
+```{note}
+pystac-client 0.2.0 doesn't recognize the new conformance classes provided by the Planetary Computer's STAC API. Either set "ignore_conformance=True" when creating your pystac Client, or upgrade to pystac-client>=0.3.0b1.
+```
+
+### Website
+
+* New guide for deploying your own Hub: <https://planetarycomputer.microsoft.com/docs/concepts/hub-deployment/>
+* New guide for accessing Planetary Computer datasets from [GitHub Codespaces](https://github.com/features/codespaces): <https://planetarycomputer.microsoft.com/docs/overview/ui-codespaces/>
+
 ## August 2021
 
 This minor release has the following __breaking__ changes:

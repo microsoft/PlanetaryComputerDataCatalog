@@ -9,6 +9,7 @@ interface Props {
   bannerFooter?: ReactNode;
   isShort?: boolean;
   onGrid?: boolean;
+  allowAnnouncement?: boolean;
 }
 
 const Layout: React.FC<Props> = ({
@@ -17,11 +18,12 @@ const Layout: React.FC<Props> = ({
   isShort = false,
   onGrid = true,
   children,
+  allowAnnouncement = true,
 }) => {
   return (
     <>
       <Header onGrid={onGrid} />
-      <Announcement />
+      {allowAnnouncement && <Announcement />}
       {bannerHeader && <div>{bannerHeader}</div>}
       <ScrollToTopOnMount />
       <main className={isShort ? "short" : undefined}>{children}</main>
