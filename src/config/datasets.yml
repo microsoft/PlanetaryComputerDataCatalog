@@ -42,10 +42,18 @@ collections:
   cop-dem-glo-30:
     category: DEMs
     headerImg: ./images/cop-dem-glo-30-hero.png
+    tabs:
+      - title: Example Notebook
+        src: copernicus-dem-example.html
+        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
 
   cop-dem-glo-90:
     category: DEMs
     headerImg: ./images/cop-dem-glo-90-hero.png
+    tabs:
+      - title: Example Notebook
+        src: copernicus-dem-example.html
+        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
 
   goes-cmi:
     category: Imagery
