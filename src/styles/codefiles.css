@@ -33,6 +33,10 @@
   margin-top: 15px;
 }
 
+.generated-docs video {
+  width: 100%;
+}
+
 .generated-docs p {
   overflow-wrap: break-word;
 }
