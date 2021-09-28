@@ -80,7 +80,7 @@ const controlStyle: React.CSSProperties = {
   position: "absolute",
   display: "flex",
   margin: 8,
-  background: "#f1f1f1",
+  background: getTheme().semanticColors.bodyBackground,
   borderCollapse: "collapse",
   borderRadius: getTheme().effects.roundedCorner2,
   boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
