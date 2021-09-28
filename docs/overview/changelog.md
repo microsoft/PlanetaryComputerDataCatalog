@@ -4,7 +4,7 @@ This document highlights the new features, datasets, and breaking changes betwee
 
 ## September 2021
 
-This release includes several new datasets and updates to libraries.
+This release includes several new datasets, features, and updates to libraries.
 
 ### Highlights
 
@@ -23,13 +23,11 @@ This release includes several new datasets and updates to libraries.
 - Implementation of the [filter]() extension: The API now supports the STAC API [filter extension](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter), which brings support for the [OGC API - Features - Part 3: Filtering and the Common Query Language (CQL)](https://portal.ogc.org/files/96288) to STAC. The API supports CQL JSON currently, with CQL TEXT support planned for a future release.
 - Implements STAC API [v1.0.0-beta.3](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.3), the latest STAC API version at the time of release.
 
-##### Breaking changes
-
 #### Data API
 
-- Implemented STAC query mosaics through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaics of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
+##### New features
 
-### Datasets
+- Implemented STAC query mosaics through the [titiler-pgstac](https://github.com/stac-utils/titiler-pgstac) project. This API allows mosaics of the results of STAC queries, and powers the map tiles for the new Explorer front-end.
 
 #### New datasets
 
@@ -46,6 +44,19 @@ This release includes several new datasets and updates to libraries.
 ### Hub environments
 
 #### New package versions
+
+The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2021.09.27.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2021.09.27.0).
+Among other changes, these container images include
+
+* pystac-client 0.3.0b1
+* dask-geopandas 0.1.0a4
+* planetary-computer 0.4.2
+
+See the release notes for the changes in the various packages provided in the Planetary Computer's environment.
+
+```{note}
+pystac-client 0.2.0 doesn't recognize the new conformance classes provided by the Planetary Computer's STAC API. Either set "ignore_conformance=True" when creating your pystac Client, or upgrade to pystac-client>=0.3.0b1.
+```
 
 ### Website
 
