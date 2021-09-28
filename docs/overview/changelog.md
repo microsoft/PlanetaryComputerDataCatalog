@@ -8,7 +8,7 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Highlights
 
-- Launched the [Explorer](https://planetarycomputer.microsoft.com/explore)
+- Launched the [Explorer](https://planetarycomputer.microsoft.com/explore) (see [documentation](https://planetarycomputer.microsoft.com/docs/overview/explorer/))
 - Added GOES-R Cloud and Moisture Imagery along with other datasets.
 - Added support for tabular datasets to the STAC API
 - Added support for CQL to the STAC API
