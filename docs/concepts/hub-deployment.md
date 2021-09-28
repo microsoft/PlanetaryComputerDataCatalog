@@ -8,7 +8,7 @@ In this guide you will:
 * Deploy an [AKS] cluster using the Azure CLI
 * Deploy JupyterHub and Dask Gateway using the [daskhub] Helm chart.
 
-We describe two deployment scenarios, a [simple](docs/concepts/hub-deployment/#simple-deployment) and a [recommended](docs/concepts/hub-deployment/#recommended-deployment) deployment. If you're new to Azure, Kubernetes, or JupyterHub, then you should try the simple deployment to verify that the basics work, before moving on to the more advanced recommended deployment.
+We describe two deployment scenarios, a [simple](docs/concepts/hub-deployment/#simple-deployment) and a [recommended](docs/concepts/hub-deployment/#recommended-deployment) deployment. If you're new to Azure, Kubernetes, or JupyterHub, then you should try the simple deployment to verify that the basics work, before moving on to the more advanced recommended deployment. Finally, the configuration for the Planetary Computer's Hub is available on [GitHub](https://github.com/microsoft/planetary-computer-hub), which provides a reference for a real-world deployment.
 
 For background, we recommend reading the [Zero to JupyterHub with Kubernetes][z2jh] guide and the [Dask Gateway on Kubernetes][gateway-k8s] documentation.
 
