@@ -22,7 +22,9 @@ function App() {
   initializeFeatures();
   usePrefetchContent();
 
-  const fallback = <Layout onGrid={false} isShort={true}></Layout>;
+  const pageFallback = (
+    <Layout onGrid={false} isShort={true} allowAnnouncement={false}></Layout>
+  );
 
   return (
     <Router basename={process.env.PUBLIC_URL}>
@@ -53,7 +55,7 @@ function App() {
             <AccountSurvey />
           </Route>
           <Route path="/explore">
-            <Suspense fallback={fallback}>
+            <Suspense fallback={pageFallback}>
               <Explore />
             </Suspense>
           </Route>
