@@ -130,8 +130,8 @@ const Catalog = () => {
         <div className="grid-content">
           <h2>Additional datasets</h2>
           <p style={{ maxWidth: 800, marginBottom: 40 }}>
-            The following datasets are available on Azure, for use within or outside
-            of the Planetary Computer Hub.
+            The following datasets are available on Azure, but are not yet available
+            through our Planetary Computer API.
           </p>
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
