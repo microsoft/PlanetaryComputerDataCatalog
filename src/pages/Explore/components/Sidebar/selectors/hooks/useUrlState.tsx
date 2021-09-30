@@ -16,10 +16,10 @@ const mosaicKey = "m";
 const renderKey = "r";
 
 interface INamedObject {
-  name: string;
+  name: string | null;
 }
 
-export const useUrlState = (
+const useUrlState = (
   options: INamedObject[] | undefined | null,
   stateKey: "query" | "renderOption",
   renderKey: "d" | "m" | "r",
@@ -33,14 +33,14 @@ export const useUrlState = (
     new URLSearchParams(window.location.search).get(renderKey)
   );
 
-  // Sync current render option to query string. This does not cause further state changes.
+  // Sync current option to query string. This does not cause further state changes.
   useEffect(() => {
     if (currentState) {
       updateQueryStringParam(renderKey, currentState?.name);
     }
   }, [currentState, renderKey]);
 
-  // When the render options change, check to see if we've loaded the option
+  // When the options change, check to see if we've loaded the option
   // provided from the querystring. If not, use it. State is cleared after use
   // so the query string no longer feeds state changes, it's is only synced for copy/reload.
   useEffect(() => {
@@ -54,63 +54,14 @@ export const useUrlState = (
   }, [dispatch, qsValue, options, actionCreator]);
 };
 
-export const useRenderUrlStateGen = (
+export const useRenderUrlState = (
   renderOptions: IMosaicRenderOption[] | null | undefined
 ) => {
   useUrlState(renderOptions, "renderOption", renderKey, setRenderOption);
 };
 
-export const useRenderUrlState = (
-  renderOptions: IMosaicRenderOption[] | undefined | null
-) => {
-  const dispatch = useExploreDispatch();
-  const { renderOption } = useExploreSelector(state => state.mosaic);
-
-  // Set local state any initial render option specified in the URL
-  const [qsRender, setQsRender] = useState<string | null>(
-    new URLSearchParams(window.location.search).get(renderKey)
-  );
-
-  // Sync current render option to query string. This does not cause further state changes.
-  useEffect(() => {
-    if (renderOption) {
-      updateQueryStringParam(renderKey, renderOption?.name);
-    }
-  }, [renderOption]);
-
-  // When the render options change, check to see if we've loaded the option
-  // provided from the querystring. If not, use it. State is cleared after use
-  // so the query string no longer feeds state changes, it's is only synced for copy/reload.
-  useEffect(() => {
-    if (renderOptions && qsRender) {
-      const option = renderOptions.find(m => m.name === qsRender);
-      if (option) {
-        dispatch(setRenderOption(option));
-      }
-      setQsRender(null);
-    }
-  }, [dispatch, qsRender, renderOptions]);
-};
-
-export const useMosaicUrlState = (mosaics: IMosaic[] | undefined) => {
-  const qs = useQueryString();
-  const dispatch = useExploreDispatch();
-  const qsMosaic = qs.get(mosaicKey);
-
-  const { query } = useExploreSelector(state => state.mosaic);
-
-  useEffect(() => {
-    updateQueryStringParam(mosaicKey, query.name);
-  }, [query.name]);
-
-  useEffect(() => {
-    if (mosaics && qsMosaic) {
-      const mosaic = mosaics.find(m => m.name === qsMosaic);
-      if (mosaic) {
-        dispatch(setMosaicQuery(mosaic));
-      }
-    }
-  }, [dispatch, mosaics, qsMosaic]);
+export const useMosaicUrlState = (mosaics: IMosaic[] | null | undefined) => {
+  useUrlState(mosaics, "query", mosaicKey, setMosaicQuery);
 };
 
 export const useCollectionUrlState = (collections: IStacCollection[] | null) => {

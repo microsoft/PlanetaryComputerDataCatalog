@@ -5,7 +5,7 @@ import { useCollectionMosaicInfo } from "../../../utils/hooks";
 import { setRenderOption } from "../../../state/mosaicSlice";
 import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
 import StateSelector from "./StateSelector";
-import { useRenderUrlState, useRenderUrlStateGen } from "./hooks/useUrlState";
+import { useRenderUrlState } from "./hooks/useUrlState";
 
 const RenderOptionsSelector = () => {
   const dispatch = useExploreDispatch();
@@ -21,7 +21,7 @@ const RenderOptionsSelector = () => {
     }
   }, [dispatch, mosaicInfo, renderOption]);
 
-  useRenderUrlStateGen(mosaicInfo?.renderOptions);
+  useRenderUrlState(mosaicInfo?.renderOptions);
 
   const renderers = mosaicInfo?.renderOptions ?? [];
 
