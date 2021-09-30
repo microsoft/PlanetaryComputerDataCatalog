@@ -37,9 +37,19 @@ export const getTileJson = async ({ queryKey }) => {
   return resp.data;
 };
 
+let registerCancelToken = null;
 export const createMosaicQueryHashkey = async (queryInfo, collectionId) => {
+  // If there is a register request in-flight, cancel it. This is important because
+  // this function is called as a result of an async thunk. If two register requests
+  // are made very quickly, the first request may return after the second, causing the
+  // map layer to refernce the wrong mosaic hash tiles
+  registerCancelToken && registerCancelToken();
+
+  // Make a new request
   const body = makeFilterBody([collectionFilter(collectionId)], queryInfo);
-  const r = await axios.post(`${DATA_URL}/mosaic/register`, body);
+  const r = await axios.post(`${DATA_URL}/mosaic/register`, body, {
+    cancelToken: new axios.CancelToken(c => (registerCancelToken = c)),
+  });
   return r.data.searchid;
 };
 

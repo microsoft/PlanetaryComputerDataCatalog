@@ -1,4 +1,13 @@
 import { centerKey, zoomKey } from "../components/Map/hooks/useUrlState";
+import {
+  renderQsKey,
+  mosaicQsKey,
+} from "../components/Sidebar/selectors/hooks/useUrlState";
+
+export const resetMosaicQueryStringState = () => {
+  updateQueryStringParam(renderQsKey, "");
+  updateQueryStringParam(mosaicQsKey, "");
+};
 
 export const updateQueryStringParam = (
   key: string,

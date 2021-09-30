@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { FontSizes, Link, Stack } from "@fluentui/react";
 
 import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
-import { resetMosiac } from "pages/Explore/state/mosaicSlice";
+import { resetMosaicState } from "pages/Explore/state/mosaicSlice";
 
 const ResetSelectors = () => {
   const dispatch = useExploreDispatch();
@@ -10,7 +10,7 @@ const ResetSelectors = () => {
   const disabled = !collection;
 
   const handleClick = useCallback(() => {
-    dispatch(resetMosiac());
+    dispatch(resetMosaicState());
   }, [dispatch]);
 
   return (
