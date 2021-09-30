@@ -12,8 +12,8 @@ import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { updateQueryStringParam } from "pages/Explore/utils";
 
 const collectionKey = "d";
-const mosaicKey = "m";
-const renderKey = "r";
+export const mosaicQsKey = "m";
+export const renderQsKey = "r";
 
 interface INamedObject {
   name: string | null;
@@ -57,11 +57,11 @@ const useUrlState = (
 export const useRenderUrlState = (
   renderOptions: IMosaicRenderOption[] | null | undefined
 ) => {
-  useUrlState(renderOptions, "renderOption", renderKey, setRenderOption);
+  useUrlState(renderOptions, "renderOption", renderQsKey, setRenderOption);
 };
 
 export const useMosaicUrlState = (mosaics: IMosaic[] | null | undefined) => {
-  useUrlState(mosaics, "query", mosaicKey, setMosaicQuery);
+  useUrlState(mosaics, "query", mosaicQsKey, setMosaicQuery);
 };
 
 export const useCollectionUrlState = (collections: IStacCollection[] | null) => {
