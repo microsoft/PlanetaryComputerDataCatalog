@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useQueryString } from "utils/hooks";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
@@ -15,48 +15,53 @@ const collectionKey = "d";
 const mosaicKey = "m";
 const renderKey = "r";
 
-export const useRenderUrlState = (
-  renderOptions: IMosaicRenderOption[] | undefined | null
+interface INamedObject {
+  name: string | null;
+}
+
+const useUrlState = (
+  options: INamedObject[] | undefined | null,
+  stateKey: "query" | "renderOption",
+  renderKey: "d" | "m" | "r",
+  actionCreator: Function
 ) => {
-  const qs = useQueryString();
   const dispatch = useExploreDispatch();
-  const qsRender = qs.get(renderKey);
+  const currentState = useExploreSelector(state => state.mosaic[stateKey]);
 
-  const { renderOption } = useExploreSelector(state => state.mosaic);
+  // Set local state any initial render option specified in the URL
+  const [qsValue, setQsValue] = useState<string | null>(
+    new URLSearchParams(window.location.search).get(renderKey)
+  );
 
+  // Sync current option to query string. This does not cause further state changes.
   useEffect(() => {
-    updateQueryStringParam(renderKey, renderOption?.name);
-  }, [renderOption]);
-
-  useEffect(() => {
-    if (renderOptions && qsRender) {
-      const option = renderOptions.find(m => m.name === qsRender);
-      if (option) {
-        dispatch(setRenderOption(option));
-      }
+    if (currentState) {
+      updateQueryStringParam(renderKey, currentState?.name);
     }
-  }, [dispatch, renderOptions, qsRender]);
+  }, [currentState, renderKey]);
+
+  // When the options change, check to see if we've loaded the option
+  // provided from the querystring. If not, use it. State is cleared after use
+  // so the query string no longer feeds state changes, it's is only synced for copy/reload.
+  useEffect(() => {
+    if (options && qsValue) {
+      const option = options.find(m => m.name === qsValue);
+      if (option) {
+        dispatch(actionCreator(option));
+      }
+      setQsValue(null);
+    }
+  }, [dispatch, qsValue, options, actionCreator]);
 };
 
-export const useMosaicUrlState = (mosaics: IMosaic[] | undefined) => {
-  const qs = useQueryString();
-  const dispatch = useExploreDispatch();
-  const qsMosaic = qs.get(mosaicKey);
+export const useRenderUrlState = (
+  renderOptions: IMosaicRenderOption[] | null | undefined
+) => {
+  useUrlState(renderOptions, "renderOption", renderKey, setRenderOption);
+};
 
-  const { query } = useExploreSelector(state => state.mosaic);
-
-  useEffect(() => {
-    updateQueryStringParam(mosaicKey, query.name);
-  }, [query.name]);
-
-  useEffect(() => {
-    if (mosaics && qsMosaic) {
-      const mosaic = mosaics.find(m => m.name === qsMosaic);
-      if (mosaic) {
-        dispatch(setMosaicQuery(mosaic));
-      }
-    }
-  }, [dispatch, mosaics, qsMosaic]);
+export const useMosaicUrlState = (mosaics: IMosaic[] | null | undefined) => {
+  useUrlState(mosaics, "query", mosaicKey, setMosaicQuery);
 };
 
 export const useCollectionUrlState = (collections: IStacCollection[] | null) => {
