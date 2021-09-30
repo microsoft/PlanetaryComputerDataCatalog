@@ -17,3 +17,8 @@ export interface IMosaicRenderOption {
   options: string;
   minZoom: number | undefined;
 }
+
+export interface IMapInfo {
+  initialCoords: [number, number];
+  initialZoom: number;
+}

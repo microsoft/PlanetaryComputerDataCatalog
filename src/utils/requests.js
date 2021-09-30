@@ -21,18 +21,11 @@ export const useStaticMetadata = staticFileName => {
   return useQuery([staticFileName], getStaticMetadata);
 };
 
-export const useCollectionMapInfo = collectionId => {
-  return useQuery([collectionId], getCollectionViewerParams, {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
-};
-
 export const useTileJson = (query, renderOption, collection, item) => {
   return useQuery([query, renderOption, collection, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    enabled: !!collection && !!query.hash,
+    enabled: Boolean(collection) && Boolean(query.hash),
   });
 };
 
@@ -61,15 +54,4 @@ const getStaticMetadata = async ({ queryKey }) => {
   const [file] = queryKey;
   const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
-};
-
-const getCollectionViewerParams = async ({ queryKey }) => {
-  const [collectionId] = queryKey;
-  const mapInfoResp = await axios.get(
-    `${DATA_URL}/collection/map/info?collection=${collectionId}`
-  );
-
-  return {
-    info: mapInfoResp.data,
-  };
 };
