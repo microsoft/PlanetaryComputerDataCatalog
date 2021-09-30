@@ -3,8 +3,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IStacCollection } from "types/stac";
 import { createMosaicQueryHashkey } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
+import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
-import { ExploreState } from "./store";
+import { AppThunk, ExploreState } from "./store";
 
 export interface MosaicState {
   collection: IStacCollection | null;
@@ -54,6 +55,11 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
     return hashkey;
   }
 );
+
+export const resetMosaicState = (): AppThunk => dispatch => {
+  resetMosaicQueryStringState();
+  dispatch(resetMosiac());
+};
 
 export const mosaicSlice = createSlice({
   name: "mosaic",
