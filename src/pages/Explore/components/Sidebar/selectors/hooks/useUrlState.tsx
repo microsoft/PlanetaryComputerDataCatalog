@@ -18,24 +18,25 @@ const renderKey = "r";
 export const useRenderUrlState = (
   renderOptions: IMosaicRenderOption[] | undefined | null
 ) => {
-  const qs = useQueryString();
   const dispatch = useExploreDispatch();
-  const qsRender = qs.get(renderKey);
 
   const { renderOption } = useExploreSelector(state => state.mosaic);
 
   useEffect(() => {
-    updateQueryStringParam(renderKey, renderOption?.name);
+    if (renderOption) {
+      updateQueryStringParam(renderKey, renderOption?.name);
+    }
   }, [renderOption]);
 
   useEffect(() => {
+    const qsRender = new URLSearchParams(window.location.search).get(renderKey);
     if (renderOptions && qsRender) {
       const option = renderOptions.find(m => m.name === qsRender);
       if (option) {
         dispatch(setRenderOption(option));
       }
     }
-  }, [dispatch, renderOptions, qsRender]);
+  }, [dispatch, renderOptions]);
 };
 
 export const useMosaicUrlState = (mosaics: IMosaic[] | undefined) => {
