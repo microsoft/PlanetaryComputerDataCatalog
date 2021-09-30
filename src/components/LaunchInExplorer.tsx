@@ -3,7 +3,7 @@ import centroid from "@turf/centroid";
 import * as qs from "query-string";
 
 import { IStacCollection } from "types/stac";
-import { useCollectionMapInfo } from "utils/requests";
+import { useCollectionMapInfo } from "pages/Explore/utils/hooks";
 import { isValidExplorer, spatialExtentToMultipolygon } from "utils/collections";
 
 interface LaunchInExplorerProps {
@@ -22,8 +22,8 @@ const LaunchInExplorer = ({ collection }: LaunchInExplorerProps) => {
     .map(n => n.toFixed(4))
     .join(",");
   const center =
-    mapData?.info && [...mapData?.info.initialCoords].reverse().join(",");
-  const zoom = mapData?.info.initialZoom || undefined;
+    mapData?.initialCoords && [...mapData.initialCoords].reverse().join(",");
+  const zoom = mapData?.initialZoom || undefined;
 
   const params = {
     c: center || collectionCenterCoords,
