@@ -96,6 +96,7 @@ const SearchResultsPane = ({
           ...loadingStyle(isPreviousData),
         }}
         onScroll={handleScroll}
+        data-cy="search-results-list"
       >
         <FocusZone direction={FocusZoneDirection.vertical}>
           <List

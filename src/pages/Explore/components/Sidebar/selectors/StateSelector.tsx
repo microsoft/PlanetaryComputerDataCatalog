@@ -9,6 +9,7 @@ type StateSelectorProps = {
   selectedKey: string | null | undefined;
   disabled?: boolean;
   getStateValFn?: (key: string | number) => any;
+  cyId: string;
 };
 
 const StateSelector = ({
@@ -18,6 +19,7 @@ const StateSelector = ({
   icon,
   selectedKey,
   disabled = false,
+  cyId,
   getStateValFn,
 }: StateSelectorProps) => {
   const dispatch = useExploreDispatch();
@@ -77,6 +79,7 @@ const StateSelector = ({
         ariaLabel={title}
         title={title}
         disabled={disabled}
+        data-cy={cyId}
       />
     </div>
   );
