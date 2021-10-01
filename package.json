@@ -57,7 +57,9 @@
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "jest": {
     "moduleNameMapper": {
@@ -83,6 +85,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.4.1",
+    "cypress": "^8.5.0",
     "html-loader": "^1.3.2",
     "js-yaml": "^4.1.0",
     "json-loader": "^0.5.7",

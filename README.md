@@ -85,6 +85,23 @@ A simple feature flag system is included in the application. To add a flagged fe
 
 To debug or extend the small API backend, please read the [API README](api/README.md).
 
+#### Testing and linting
+
+The project contains cypress end-to-end tests and jest based unit tests.
+
+To run jest based unit test and perform linting, run `./scripts/test`.
+
+##### Cypress
+
+If you're on WSL2, be sure to set up your system to run the Cypress GUI:
+<https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/>
+
+- Install Google Chrome in your WSL2 environment (Cypress ships with a chromium-based electron browser)
+- Run `yarn cypress:open` to run the GUI and debug tests, or
+- Run `yarn cypress:run` to run the headless version in the terminal
+
+Both test suites are run from CI.
+
 ## Ports
 
 | Service                  | Port |
