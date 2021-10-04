@@ -15,7 +15,7 @@ data easy and approachable.
 
 ### Access patterns
 
-During our Preview, we are focused on making our largest datasets
+Most of our datasets are 
 indexed and searchable using the open [STAC specification](https://stacspec.org/).
 These search and access API endpoints lower the barrier to finding specific
 data you need over large spatial and temporal extents. The data itself is
@@ -34,11 +34,11 @@ more about [using tokens for data access](sas.md).
 
 ### Future plans
 
-As the Preview develops, we are working with partners to develop and
-onboard new datasets into the Planetary Computer, and make them discoverable
+We are working with partners to develop and
+onboard new datasets into the Planetary Computer, and to make them discoverable
 and accessible through open APIs. We're also developing features that will
 allow users to perform analysis and generate visualizations directly from the
 Data Catalog.
 
 If you have feedback about our existing datasets, or are interested in seeing
-additional datasets, contact us at <a href="mailto:aiforearthdatasets@microsoft.com">aiforearthdatasets@microsoft.com</a>.
+additional datasets, contact us at <a href="mailto:planetarycomputer@microsoft.com">planetarycomputer@microsoft.com</a>.
