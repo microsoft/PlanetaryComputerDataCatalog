@@ -34,6 +34,7 @@ const MapButton = () => {
         ariaLabel={label}
         aria-describedby={tooltipId}
         styles={checkedHeaderButtonStyle}
+        data-cy="item-map-button"
       />
     </TooltipHost>
   );
