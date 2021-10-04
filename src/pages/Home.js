@@ -84,7 +84,7 @@ const Home = () => {
                 color: "#fff",
               }}
             >
-              The Planetary Computer API and Hub are currently available in private
+              The Planetary Computer API and Hub are currently available in 
               preview. If you're interested in developing on our platform,{" "}
               <RouterLink
                 to="/account/request"
