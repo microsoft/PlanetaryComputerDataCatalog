@@ -141,6 +141,10 @@ collections:
       - title: Example Notebook
         src: fia-example.html
         launch: datasets/fia/fia-example.ipynb
+      - title: Blob Storage Notebook
+        src: forest-inventory-and-analysis.html
+      - title: Storage Documentation
+        src: gbif-storage.html
 
   gap:
     category: Land use/Land cover
@@ -156,6 +160,11 @@ collections:
       - title: Example Notebook
         src: gbif-example.html
         launch: datasets/gbif/gbif-example.ipynb
+      - title: Blob Storage Notebook
+        src: gbif.html
+      - title: Storage Documentation
+        src: gbif-storage.html
+
   goes-cmi:
     category: Imagery
     headerImg: ./images/goes-cmi-hero.png
@@ -163,6 +172,10 @@ collections:
       - title: Example Notebook
         src: goes-cmi-example.html
         launch: datasets/goes/goes-cmi-example.ipynb
+      - title: Blob Storage Notebook
+        src: goes-r-abi-l2-mcmipf.html
+      - title: Storage Documentation
+        src: goes-r-storage.html
 
   # Waiting on the other goes collections
   # goes-fdc:
@@ -309,6 +322,8 @@ collections:
         launch: datasets/terraclimate/terraclimate-example.ipynb
       - title: Blob Storage Notebook
         src: terraclimate.html
+      - title: Storage Documentation
+        src: terraclimate-storage.html
 
   us-census:
     headerImg: ./images/us-census-hero.png
