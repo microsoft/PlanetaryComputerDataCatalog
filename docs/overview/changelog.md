@@ -8,8 +8,8 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Highlights
 
-- Launched the [Explorer](https://planetarycomputer.microsoft.com/explore) (see [documentation](https://planetarycomputer.microsoft.com/docs/overview/explorer/))
-- Added [GOES-R Cloud and Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/goes-cmi) along with other datasets.
+- Launched the [Planetary Computer Explorer](https://planetarycomputer.microsoft.com/explore) (see [documentation](https://planetarycomputer.microsoft.com/docs/overview/explorer/))
+- Added [GOES-R Cloud and Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/goes-cmi) along with other datasets
 - Added support for tabular datasets to the STAC API
 - Added support for CQL to the STAC API
 - Added support for dynamic mosaics of STAC query results to the Data API
@@ -32,12 +32,12 @@ This release includes several new datasets, features, and updates to libraries.
 
 #### New datasets
 
-* [GOES-R ABI L2+ Cloud & Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/group/goes): This dataset provides 16 bands from the ABI instrument aboard the GOES-16 and GOES017 satellites. We provide both NetCDF and COG data assets. More derived products coming soon!
-* [ALOS DEM](https://planetarycomputer.microsoft.com/dataset/alos-dem): a 30-meter resoluation global Digital Surface Model.
-* [Copernicus DEM](https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-90): A Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation.
-* [Global Biodiversity Information Facility (GBIF)](https://planetarycomputer.microsoft.com/dataset/gbif): records of species occurrences from a wide array of sources including specimen-related data from natural history museums, observations from citizen science networks and environment recording schemes.
+* [GOES-R ABI L2 Cloud & Moisture Imagery](https://planetarycomputer.microsoft.com/dataset/group/goes): This dataset provides 16 bands from the ABI instrument aboard the GOES-16 and GOES-17 satellites. We provide both NetCDF and COG data assets. More GOES-R products are coming soon!
+* [ALOS DEM](https://planetarycomputer.microsoft.com/dataset/alos-dem): a 30-meter resoluation global digital surface model.
+* [Copernicus DEM](https://planetarycomputer.microsoft.com/dataset/cop-dem-glo-30): a global digital surface model available at both 30- and 90-meter resolution.
+* [Global Biodiversity Information Facility (GBIF)](https://planetarycomputer.microsoft.com/dataset/gbif): records of species occurrences from a wide array of sources including specimen-related data from natural history museums, observations from citizen science networks, and automated biodiversity surveys.
 * [US Census 2020](https://planetarycomputer.microsoft.com/dataset/us-census): information on population and geographic boundaries at various levels of cartographic aggregation.
-* [gridMET](https://planetarycomputer.microsoft.com/dataset/gridmet): a dataset of daily high-spatial resolution surface meteorological data covering the contiguous US.
+* [gridMET](https://planetarycomputer.microsoft.com/dataset/gridmet): a dataset of daily surface meteorological data covering the contiguous United States at ~4km resolution.
 * [USFS Forest Inventory and Analysis (FIA)](https://planetarycomputer.microsoft.com/dataset/fia): Status and trends on U.S. forest location, health, growth, mortality, and production.
 
 ### Hub environments
