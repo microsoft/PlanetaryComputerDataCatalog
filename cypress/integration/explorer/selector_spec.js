@@ -3,9 +3,7 @@ const disabledClass = "is-disabled";
 
 describe("Explorer selector tests", () => {
   it("has collection selectors", () => {
-    cy.intercept("/api/stac/v1/collections", { fixture: "collections" }).as(
-      "getCollections"
-    );
+    cy.intercept("/api/stac/v1/collections").as("getCollections");
 
     cy.visit("/explore");
 
@@ -31,10 +29,8 @@ describe("Explorer selector tests", () => {
   });
 
   it("loads mosaic spec for selected collection", () => {
-    cy.intercept("/stac/sentinel-2-l2a/mosaicInfo.json", { fixture: "s2mosaic" }).as(
-      "getS2mosaic"
-    );
-    cy.intercept("/api/stac/v1/search", { fixture: "s2search" }).as("getS2search");
+    cy.intercept("/stac/sentinel-2-l2a/mosaicInfo.json").as("getS2mosaic");
+    cy.intercept("/api/stac/v1/search").as("getS2search");
 
     cy.contains("Sentinel-2 Level-2A").click();
     cy.wait(["@getS2mosaic"]);
