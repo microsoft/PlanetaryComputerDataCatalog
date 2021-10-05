@@ -10,6 +10,7 @@ import { AppThunk, ExploreState } from "./store";
 export interface MosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
+  isCustom: boolean;
   renderOption: IMosaicRenderOption | null;
   layer: {
     minZoom: number;
@@ -33,6 +34,7 @@ const initialMosaicState = {
 const initialState: MosaicState = {
   collection: null,
   query: initialMosaicState,
+  isCustom: false,
   renderOption: null,
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
@@ -72,6 +74,9 @@ export const mosaicSlice = createSlice({
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
       state.query = { ...action.payload, hash: null };
+    },
+    setIsCustom: (state, action: PayloadAction<boolean>) => {
+      state.isCustom = action.payload;
     },
     setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
       state.renderOption = action.payload;

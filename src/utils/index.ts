@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { IStacCollection, IStacItem } from "types/stac";
@@ -9,7 +9,9 @@ import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 dayjs.extend(utc);
 
-export const toUtcDate = (dt: string) => dayjs.utc(dt).format("MM/DD/YYYY");
+export { dayjs };
+export const toUtcDate = (dt: string | Date) => dayjs.utc(dt).format("MM/DD/YYYY");
+export const toUtcDates = (dt: string[]) => dt.map(toUtcDate);
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);

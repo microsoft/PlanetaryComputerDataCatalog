@@ -29,7 +29,7 @@ const ResetSelectors = () => {
 
 export default ResetSelectors;
 
-const buttonStyles = {
+export const buttonStyles = {
   root: {
     marginRight: "2px",
     fontSize: FontSizes.small,

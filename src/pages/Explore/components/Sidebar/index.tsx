@@ -25,6 +25,8 @@ import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import ErrorFallback from "components/ErrorFallback";
+import CustomizeQuery from "./CustomizeQuery";
+import CustomQueryBuilder from "./CustomQueryBuilder";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -96,8 +98,12 @@ const Sidebar = () => {
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <CollectionSelector />
             <MosaicPresetSelector />
+            <CustomQueryBuilder />
             <RenderOptionsSelector />
-            <ResetSelectors />
+            <Stack horizontal horizontalAlign="end">
+              <CustomizeQuery /> |
+              <ResetSelectors />
+            </Stack>
           </ErrorBoundary>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <SearchResultsPane request={stacFilter} />

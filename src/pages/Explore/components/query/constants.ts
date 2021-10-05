@@ -18,6 +18,8 @@ export const opEnglish = {
   eq: "on",
   between: "between",
   like: "like",
-  isnull: "is nulL",
+  isnull: "is null",
   in: "in",
+  anyinteracts: "",
+  intersects: "",
 };
