@@ -10,7 +10,6 @@ const CustomQueryBuilder = () => {
 
   if (!cql || !collection) return null;
 
-  console.log("render builder");
   // Get date
   const parsed = new CqlParser(cql, collection);
   const date = parsed.dateValue;

@@ -96,13 +96,15 @@ const Sidebar = () => {
             Explore Planetary Computer datasets
           </Text>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <CollectionSelector />
-            <MosaicPresetSelector />
-            <CustomQueryBuilder />
-            <RenderOptionsSelector />
-            <Stack horizontal horizontalAlign="end">
-              <CustomizeQuery /> |
-              <ResetSelectors />
+            <Stack tokens={{ childrenGap: 5 }}>
+              <CollectionSelector />
+              <MosaicPresetSelector />
+              <CustomQueryBuilder />
+              <RenderOptionsSelector />
+              <Stack horizontal horizontalAlign="end">
+                <CustomizeQuery /> |
+                <ResetSelectors />
+              </Stack>
             </Stack>
           </ErrorBoundary>
           <ErrorBoundary FallbackComponent={ErrorFallback}>

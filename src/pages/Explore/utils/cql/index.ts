@@ -12,10 +12,12 @@ import {
 export class CqlParser {
   readonly cql: CqlBody;
   readonly collection: IStacCollection;
+  readonly expressions: CqlExpressionParser[];
 
   constructor(cql: CqlBody, collection: IStacCollection) {
     this.cql = cql;
     this.collection = collection;
+    this.expressions = this.cql.map(exp => new CqlExpressionParser(exp));
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
@@ -23,9 +25,7 @@ export class CqlParser {
   }
 
   get dateValue(): CqlDate | undefined {
-    const date = this.cql
-      .map(exp => new CqlExpressionParser(exp))
-      .find(exp => exp.property === "datetime");
+    const date = this.expressions.find(exp => exp.property === "datetime");
 
     const [min, max] = rangeFromTemporalExtent(
       this.collection.extent.temporal.interval
