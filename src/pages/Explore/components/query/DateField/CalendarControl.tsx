@@ -1,70 +1,85 @@
-import { useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { Calendar, MaskedTextField, Stack } from "@fluentui/react";
 import { capitalize, dayjs, toDateString } from "utils";
 import { Dayjs } from "dayjs";
 import { DateFieldContext } from "./context";
-import { RangeType } from "./types";
+import { DateRangeAction, RangeType } from "./types";
 
-interface Props {
+interface CalendarControlProps {
   date: Dayjs;
   rangeType: RangeType;
-  onSelectDate: (date: Dayjs) => void;
+  onSelectDate: React.Dispatch<DateRangeAction>;
 }
 
-const CalendarControl = ({ date, rangeType, onSelectDate }: Props) => {
-  const [workingDate, setWorkingDate] = useState<Dayjs>(date);
+const CalendarControl = ({
+  date,
+  rangeType,
+  onSelectDate,
+}: CalendarControlProps) => {
   const { validMaxDate, validMinDate, setValidation } = useContext(DateFieldContext);
 
   const handleSelectDate = (newDate: Date) => {
     const day = dayjs(newDate);
-    setWorkingDate(day);
-    onSelectDate(day);
+    onSelectDate({ [rangeType]: day });
   };
 
-  const dateValidation = (value: Date | string) => {
-    const errorMessage = getErrorMessage(value);
+  const handleTextChange = (
+    _: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
+    newValue: string | undefined
+  ) => {
+    const newDay = dayjs(newValue);
 
-    // Dispatch to the parent context useing the rangeType key provided
-    const validation = { [rangeType]: errorMessage ? false : true };
-    setValidation(validation);
-
-    // The calendar control determines validation state by the presense or absence of a
-    // string which is used as a validation message.
-    return errorMessage;
+    // Check valid date format and if it's in range - only set working date if so
+    const valid = newDay.isValid() && getErrorMessage(newDay.toDate()) === "";
+    valid && handleSelectDate(newDay.toDate());
   };
 
-  const getErrorMessage = (value: Date | string) => {
-    const day = dayjs(value);
-    if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
+  const getErrorMessage = useCallback(
+    (value: Date | string) => {
+      const day = dayjs(value);
+      if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
 
-    if (day.isBefore(validMinDate))
-      return `Date must be after ${toDateString(validMinDate.subtract(1, "day"))}`;
+      if (day.isBefore(validMinDate))
+        return `Date must be after ${toDateString(validMinDate.subtract(1, "day"))}`;
 
-    if (day.isAfter(validMaxDate))
-      return `Date must be before ${toDateString(validMaxDate.add(1, "day"))}`;
+      if (day.isAfter(validMaxDate))
+        return `Date must be before ${toDateString(validMaxDate.add(1, "day"))}`;
 
-    return "";
-  };
+      return "";
+    },
+    [validMaxDate, validMinDate]
+  );
+
+  const dateValidation = useCallback(
+    (value: Date | string) => {
+      const errorMessage = getErrorMessage(value);
+
+      // Dispatch to the parent context useing the rangeType key provided
+      const validation = { [rangeType]: errorMessage ? false : true };
+      setValidation(validation);
+
+      // The calendar control determines validation state by the presense or absence of a
+      // string which is used as a validation message.
+      return errorMessage;
+    },
+    [getErrorMessage, rangeType, setValidation]
+  );
 
   return (
     <Stack>
       <MaskedTextField
         label={`${capitalize(rangeType)} Date`}
         mask="99/99/9999"
-        value={toDateString(workingDate)}
+        value={toDateString(date)}
         onGetErrorMessage={dateValidation}
-        onChange={v => {
-          const newDay = dayjs(v.currentTarget.value);
-          const valid = newDay.isValid() && getErrorMessage(newDay.toDate()) === "";
-          valid && handleSelectDate(newDay.toDate());
-        }}
+        onChange={handleTextChange}
       />
       <Calendar
         showMonthPickerAsOverlay
         highlightSelectedMonth
         isMonthPickerVisible={false}
         showGoToToday={false}
-        value={workingDate.toDate()}
+        value={date.toDate()}
         onSelectDate={handleSelectDate}
         minDate={validMinDate.toDate()}
         maxDate={validMaxDate.toDate()}

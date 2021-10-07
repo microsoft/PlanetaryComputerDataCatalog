@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer } from "react";
 import {
   Callout,
   DefaultButton,
@@ -7,41 +7,43 @@ import {
   getTheme,
   Stack,
 } from "@fluentui/react";
-import { getDayEnd, getDayStart } from "utils";
-
 import { useBoolean, useId } from "@fluentui/react-hooks";
-import { CqlDate } from "pages/Explore/utils/cql/types";
-import { opEnglish } from "../constants";
+
 import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
-import { Dayjs } from "dayjs";
+import { CqlDate } from "pages/Explore/utils/cql/types";
+import { opEnglish } from "../constants";
 import { DateFieldProvider } from "./context";
-import { ValidAction, ValidationState } from "./types";
+import { getDayEnd, getDayStart } from "utils";
+import {
+  getDateDisplayText,
+  getEndRangeValue,
+  getStartRangeValue,
+  isValidToApply,
+} from "./helpers";
+import {
+  dateRangeReducer,
+  initialValidationState,
+  validationReducer,
+} from "./state";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
 }
 
-const getStartRangeValue = (d: CqlDate) => {
-  return getDayStart(d.isRange ? d.value[0] : d.value);
-};
-
-const getEndRangeValue = (d: CqlDate) => {
-  return getDayStart(d.isRange ? d.value[1] : undefined);
-};
-
-const initialValidationState = {
-  start: true,
-  end: true,
-};
-
-const validationReducer = (state: ValidationState, action: ValidAction) => {
-  return { ...state, ...action };
-};
-
 const DateField = ({ dateExpression }: DateFieldProps) => {
-  const [startDate, setStart] = useState<Dayjs>(getStartRangeValue(dateExpression));
-  const [endDate, setEnd] = useState<Dayjs>(getEndRangeValue(dateExpression));
+  const initialDateRange = useMemo(() => {
+    return {
+      start: getStartRangeValue(dateExpression),
+      end: getEndRangeValue(dateExpression),
+    };
+  }, [dateExpression]);
+
+  const [workingDateRange, workingDateRangeDispatch] = useReducer(
+    dateRangeReducer,
+    initialDateRange
+  );
+
   const [controlValidState, validationDispatch] = useReducer(
     validationReducer,
     initialValidationState
@@ -61,11 +63,16 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
 
   // When there is a new default expression, update the start and end date
   useEffect(() => {
-    setStart(getStartRangeValue(dateExpression));
-    setEnd(getEndRangeValue(dateExpression));
+    workingDateRangeDispatch({
+      start: getStartRangeValue(dateExpression),
+      end: getEndRangeValue(dateExpression),
+    });
   }, [dateExpression]);
 
-  const handleSave = useCallback(() => {}, []);
+  const handleSave = useCallback(() => {
+    console.log("going to save", workingDateRange);
+    toggle();
+  }, [toggle, workingDateRange]);
 
   const handleCancel = useCallback(() => {
     toggle();
@@ -77,13 +84,10 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
     dateExpression.operator
   );
 
-  const displayText = dateExpression.isRange
-    ? dateExpression.value.join(" - ")
-    : dateExpression.value;
+  const displayText = getDateDisplayText(dateExpression);
 
   // Range or not?
   // Disable apply until changes
-  // Disable apply if invalid
 
   return (
     <>
@@ -111,21 +115,25 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
             <Stack horizontal tokens={{ childrenGap: 10 }}>
               <CalendarControl
                 rangeType="start"
-                date={startDate}
-                onSelectDate={setStart}
+                date={workingDateRange.start}
+                onSelectDate={workingDateRangeDispatch}
               />
               {dateExpression.isRange && (
                 <CalendarControl
                   rangeType="end"
-                  date={endDate}
-                  onSelectDate={setEnd}
+                  date={workingDateRange.end}
+                  onSelectDate={workingDateRangeDispatch}
                 />
               )}
             </Stack>
             <ControlFooter
               onCancel={handleCancel}
               onSave={handleSave}
-              isValid={controlValidState.start && controlValidState.end}
+              isValid={isValidToApply(
+                controlValidState,
+                initialDateRange,
+                workingDateRange
+              )}
             />
           </Callout>
         )}

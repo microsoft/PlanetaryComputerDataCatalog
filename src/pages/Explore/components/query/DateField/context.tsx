@@ -1,11 +1,13 @@
 import React from "react";
 import dayjs, { Dayjs } from "dayjs";
-import { ValidAction } from "./types";
+import { ValidationAction } from "./types";
 
 interface IDateFieldContext {
   validMinDate: Dayjs;
   validMaxDate: Dayjs;
-  setValidation: React.Dispatch<ValidAction> | ((arg: ValidAction) => void);
+  setValidation:
+    | React.Dispatch<ValidationAction>
+    | ((arg: ValidationAction) => void);
 }
 
 export const DateFieldContext = React.createContext<IDateFieldContext>({
