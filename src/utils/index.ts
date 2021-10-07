@@ -8,15 +8,17 @@ import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 dayjs.extend(utc);
-
 export { dayjs };
-export const toUtcDate = (dt: string | Date | Dayjs) =>
-  dayjs.utc(dt).format("MM/DD/YYYY");
 
-export const getStartDay = (date: string | Date | Dayjs) =>
+export const toDateString = (dt: string | Date | Dayjs) =>
+  dayjs(dt).format("MM/DD/YYYY");
+
+export const toUtcDate = (dt: string | Date | Dayjs) => toDateString(dayjs.utc(dt));
+
+export const getDayStart = (date: string | Date | Dayjs | undefined) =>
   dayjs(date).startOf("day");
 
-export const getEndDay = (date: string | Date | Dayjs | undefined) =>
+export const getDayEnd = (date: string | Date | Dayjs | undefined) =>
   dayjs(date).endOf("day");
 
 export const capitalize = (str: string) => {

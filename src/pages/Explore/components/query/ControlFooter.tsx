@@ -3,14 +3,17 @@ import { DefaultButton, PrimaryButton, Separator, Stack } from "@fluentui/react"
 interface Props {
   onCancel: () => void;
   onSave: () => void;
+  isValid: boolean;
 }
 
-const ControlFooter = ({ onSave, onCancel }: Props) => {
+const ControlFooter = ({ onSave, onCancel, isValid }: Props) => {
   return (
     <Stack>
       <Separator />
       <Stack horizontal horizontalAlign={"end"} tokens={{ childrenGap: 6 }}>
-        <PrimaryButton onClick={onSave}>Apply</PrimaryButton>
+        <PrimaryButton onClick={onSave} disabled={!isValid}>
+          Apply
+        </PrimaryButton>
         <DefaultButton onClick={onCancel}>Cancel</DefaultButton>
       </Stack>
     </Stack>
