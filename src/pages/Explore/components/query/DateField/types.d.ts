@@ -12,7 +12,7 @@ export interface ValidationAction {
 
 export interface DateRangeState {
   start: Dayjs;
-  end: Dayjs;
+  end: Dayjs | null;
 }
 export interface DateRangeAction {
   [rangeKey: RangeType]: Dayjs;

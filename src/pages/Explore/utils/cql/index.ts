@@ -68,10 +68,10 @@ class CqlExpressionParser {
 
   constructor(exp: ICqlExpression) {
     this.exp = exp;
-    this.operator = Object.keys(this.exp)[0] as CqlOperator;
+    const [op, entity] = Object.entries(this.exp)[0];
 
-    const [entity, value] = this.exp[this.operator];
+    this.operator = op as CqlOperator;
     this.property = entity.property;
-    this.value = value;
+    this.value = entity.value;
   }
 }

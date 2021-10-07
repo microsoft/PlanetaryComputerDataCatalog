@@ -3,7 +3,7 @@ type CqlOperator =
   | "gte"
   | "gt"
   | "lte"
-  | "lte"
+  | "lt"
   | "between"
   | "like"
   | "anyinteracts"
@@ -11,17 +11,16 @@ type CqlOperator =
 
 type CqlPropertyObject = { property: string };
 
-export interface ICqlExpression {
-  eq: [CqlPropertyObject, number | string];
-  gte: [CqlPropertyObject, number | string];
-  gt: [CqlPropertyObject, number | string];
-  lte: [CqlPropertyObject, number | string];
-  lt: [CqlPropertyObject, number | string];
-  between: [CqlPropertyObject, number[] | string[]];
-  like: [CqlPropertyObject, string];
-  anyinteracts: [CqlPropertyObject, string[]];
-  intersects: any;
-}
+export type ICqlExpression =
+  | { eq: [CqlPropertyObject, number | string] }
+  | { gte: [CqlPropertyObject, number | string] }
+  | { gt: [CqlPropertyObject, number | string] }
+  | { lte: [CqlPropertyObject, number | string] }
+  | { lt: [CqlPropertyObject, number | string] }
+  | { between: [CqlPropertyObject, number[] | string[]] }
+  | { like: [CqlPropertyObject, string] }
+  | { anyinteracts: [CqlPropertyObject, string[]] }
+  | { intersects: any };
 
 export type CqlBody = ICqlExpression[];
 

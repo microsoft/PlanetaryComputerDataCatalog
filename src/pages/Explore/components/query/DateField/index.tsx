@@ -17,15 +17,17 @@ import { DateFieldProvider } from "./context";
 import { getDayEnd, getDayStart } from "utils";
 import {
   getDateDisplayText,
-  getEndRangeValue,
-  getStartRangeValue,
   isValidToApply,
+  toCqlExpression,
+  toDateRange,
 } from "./helpers";
 import {
   dateRangeReducer,
   initialValidationState,
   validationReducer,
 } from "./state";
+import { useExploreDispatch } from "pages/Explore/state/hooks";
+import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
@@ -33,10 +35,7 @@ interface DateFieldProps {
 
 const DateField = ({ dateExpression }: DateFieldProps) => {
   const initialDateRange = useMemo(() => {
-    return {
-      start: getStartRangeValue(dateExpression),
-      end: getEndRangeValue(dateExpression),
-    };
+    return toDateRange(dateExpression);
   }, [dateExpression]);
 
   const [workingDateRange, workingDateRangeDispatch] = useReducer(
@@ -50,6 +49,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
   );
 
   const [isCalloutVisible, { toggle }] = useBoolean(false);
+  const dispatch = useExploreDispatch();
   const buttonId = useId("query-daterange-button");
   const labelId = useId("query-daterange-label");
 
@@ -63,16 +63,14 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
 
   // When there is a new default expression, update the start and end date
   useEffect(() => {
-    workingDateRangeDispatch({
-      start: getStartRangeValue(dateExpression),
-      end: getEndRangeValue(dateExpression),
-    });
+    workingDateRangeDispatch(toDateRange(dateExpression));
   }, [dateExpression]);
 
   const handleSave = useCallback(() => {
-    console.log("going to save", workingDateRange);
+    const exp = toCqlExpression(workingDateRange);
+    dispatch(setCustomCqlExpression(exp));
     toggle();
-  }, [toggle, workingDateRange]);
+  }, [dispatch, toggle, workingDateRange]);
 
   const handleCancel = useCallback(() => {
     toggle();

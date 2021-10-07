@@ -6,7 +6,7 @@ import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 
 interface CalendarControlProps {
-  date: Dayjs;
+  date: Dayjs | null;
   rangeType: RangeType;
   onSelectDate: React.Dispatch<DateRangeAction>;
 }
@@ -64,6 +64,8 @@ const CalendarControl = ({
     },
     [getErrorMessage, rangeType, setValidation]
   );
+
+  if (!date) return null;
 
   return (
     <Stack>

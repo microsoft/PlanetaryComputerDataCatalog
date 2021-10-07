@@ -23,6 +23,9 @@ export const initialWorkingDateState: DateRangeState = {
   end: dayjs(),
 };
 
-export const dateRangeReducer = (state: DateRangeState, action: DateRangeAction) => {
+export const dateRangeReducer = (
+  state: DateRangeState,
+  action: DateRangeAction
+): DateRangeState => {
   return { ...state, ...action };
 };
