@@ -13,20 +13,13 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { resetMosiac } from "pages/Explore/state/mosaicSlice";
 import { resetDetail } from "pages/Explore/state/detailSlice";
-import {
-  CollectionSelector,
-  MosaicPresetSelector,
-  RenderOptionsSelector,
-} from "./selectors";
-import ResetSelectors from "./ResetSelectors";
 import MinimizeButton from "../controls/ToggleSidebarButton";
 import ItemDetailPanel from "../ItemDetailPanel";
 import SearchResultsPane from "./panes/SearchResultsPane";
 import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import ErrorFallback from "components/ErrorFallback";
-import CustomizeQuery from "./CustomizeQuery";
-import CustomQueryBuilder from "./CustomQueryBuilder";
+import SelectorPane from "./panes/SelectorPane";
 
 const stackTokens: IStackTokens = {
   childrenGap: 5,
@@ -105,18 +98,7 @@ const Sidebar = () => {
           >
             Explore Planetary Computer datasets
           </Text>
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Stack tokens={stackTokens}>
-              <CollectionSelector />
-              <MosaicPresetSelector />
-              {isCustomQuery && <CustomQueryBuilder />}
-              <RenderOptionsSelector />
-              <Stack horizontal horizontalAlign="end" tokens={stackTokens}>
-                <CustomizeQuery />
-                <ResetSelectors />
-              </Stack>
-            </Stack>
-          </ErrorBoundary>
+          <SelectorPane isCustomQuery={isCustomQuery} />
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <SearchResultsPane request={stacFilter} />
           </ErrorBoundary>

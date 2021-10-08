@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useReducer } from "react";
 import {
   Callout,
-  DefaultButton,
   DirectionalHint,
   mergeStyleSets,
   getTheme,
   Stack,
   IStackTokens,
+  Text,
 } from "@fluentui/react";
 import { useBoolean } from "@fluentui/react-hooks";
 
@@ -29,6 +29,7 @@ import {
 } from "./state";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
+import DropdownButton from "../DropdownButton";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
@@ -69,12 +70,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
     toggle();
   }, [dispatch, toggle, workingDateRange]);
 
-  // Exact and range labels don't need an operator label, the dates will be self explanatory
   const opLabel = opEnglish[dateExpression.operator];
-  const shouldUseLabel = ["gt", "gte", "lt", "lte"].includes(
-    dateExpression.operator
-  );
-
   const displayText = getDateDisplayText(dateExpression);
 
   const providerState = {
@@ -87,12 +83,24 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
 
   return (
     <>
-      <DefaultButton id={buttonId} onClick={toggle}>
-        {shouldUseLabel && opLabel} {displayText}
-      </DefaultButton>
+      <DropdownButton
+        id={buttonId}
+        onClick={toggle}
+        iconProps={{ iconName: "Calendar" }}
+        onRenderText={() => {
+          return (
+            <Stack horizontal horizontalAlign="start">
+              <Text>
+                Acquired: {opLabel} {displayText}
+              </Text>
+            </Stack>
+          );
+        }}
+      />
       <DateFieldProvider state={providerState}>
         {isCalloutVisible && (
           <Callout
+            role="dialog"
             className={styles.callout}
             ariaLabelledBy={labelId}
             gapSpace={0}
