@@ -8,6 +8,8 @@ export const operators = {
   like: "LIKE",
   isnull: "IS NULL",
   in: "IN",
+  anyinteracts: "",
+  intersects: "",
 };
 
 export const opEnglish = {

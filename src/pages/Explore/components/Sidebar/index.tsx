@@ -35,6 +35,7 @@ const stackTokens: IStackTokens = {
 const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const showSidebar = useExploreSelector(s => s.map.showSidebar);
+  const isCustomQuery = useExploreSelector(s => s.mosaic.isCustomQuery);
   const width = showSidebar ? SIDEBAR_WIDTH : 0;
   const sidebarVisibility = showSidebar ? "visibile" : "hidden";
   const margin = showSidebar ? 5 : 3;
@@ -99,11 +100,10 @@ const Sidebar = () => {
             <Stack tokens={{ childrenGap: 5 }}>
               <CollectionSelector />
               <MosaicPresetSelector />
-              <CustomQueryBuilder />
+              {isCustomQuery && <CustomQueryBuilder />}
               <RenderOptionsSelector />
-              <Stack horizontal horizontalAlign="end">
-                <CustomizeQuery /> |
-                <ResetSelectors />
+              <Stack horizontal horizontalAlign="end" tokens={{ childrenGap: 8 }}>
+                <CustomizeQuery /> <ResetSelectors />
               </Stack>
             </Stack>
           </ErrorBoundary>

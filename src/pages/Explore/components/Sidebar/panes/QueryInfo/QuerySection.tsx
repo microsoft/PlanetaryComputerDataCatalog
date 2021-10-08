@@ -1,59 +1,66 @@
 import { Text } from "@fluentui/react";
 
-import { IMosaic } from "pages/Explore/types";
+import { CqlExpressionParser } from "pages/Explore/utils/cql";
+import {
+  CqlOperator,
+  ICqlExpression,
+  ICqlExpressionList,
+} from "pages/Explore/utils/cql/types";
 import { toUtcDate } from "utils";
 import { stacFormatter } from "utils/stac";
 import { opEnglish, operators } from "../../../query/constants";
 import Section from "./Section";
 
 interface QuerySectionProps {
-  query: IMosaic;
+  cql: ICqlExpressionList;
 }
 const getDateLabel = (
-  attr: any,
   property: string,
-  value: any,
-  op: keyof typeof operators
+  propertyLabel: string,
+  value: string[] | string,
+  op: CqlOperator
 ) => {
   if (Array.isArray(value)) {
     const oneDate = new Set(value.map(toUtcDate)).size === 1 || value.length === 1;
 
     const labelText = oneDate
-      ? `${property} ${opEnglish[op]} ${toUtcDate(value[0])} `
-      : `${property} between ${toUtcDate(value[0])} and ${toUtcDate(value[1])}`;
+      ? `${propertyLabel} ${opEnglish[op]} ${toUtcDate(value[0])} `
+      : `${propertyLabel} between ${toUtcDate(value[0])} and ${toUtcDate(value[1])}`;
 
     return <Text>{labelText}</Text>;
-  } else if (attr.property === "datetime" && !Array.isArray(value)) {
-    const labelText = `${property} ${opEnglish[op]} ${toUtcDate(value)}`;
+  } else if (property === "datetime" && !Array.isArray(value)) {
+    const labelText = `${propertyLabel} ${opEnglish[op]} ${toUtcDate(value)}`;
     return <Text>{labelText}</Text>;
   }
 };
 
-const QuerySection = ({ query }: QuerySectionProps) => {
-  const expressions = (expression: any) => {
-    const op = Object.keys(expression)[0] as keyof typeof operators;
-    const [attr, value] = expression[op];
-    const property = stacFormatter.label(attr.property);
-    const opText = operators[op];
+const QuerySection = ({ cql }: QuerySectionProps) => {
+  const expressions = (expression: ICqlExpression) => {
+    const exp = new CqlExpressionParser(expression);
+    const propertyLabel = stacFormatter.label(exp.property);
+    const opText = operators[exp.operator];
 
     // Special handling for datetime property
     const label =
-      attr.property === "datetime" ? (
-        getDateLabel(attr, property, value, op)
+      exp.property === "datetime" ? (
+        getDateLabel(exp.property, propertyLabel, exp.value, exp.operator)
       ) : (
         <Text>
-          {property} {opText} {value}
+          {propertyLabel} {opText} {exp.value}
         </Text>
       );
-    return <Text key={`exp-${property}-${op}`}>{label}</Text>;
+    return <Text key={`exp-${propertyLabel}-${exp.operator}`}>{label}</Text>;
   };
 
-  const expressionsLabels = query.cql?.map(expressions);
-  const implicitDateExpression = !query?.cql?.find((exp: any) => {
-    // TODO: Typing 'expression'
-    // @ts-ignore
-    return Object.values(exp)[0][0].property === "datetime";
-  })
+  const expressionsLabels = cql.map(expressions);
+
+  // If there is no date expression, use the implicit text that all recent items
+  // are included
+  const implicitDateExpression = !cql
+    .map(exp => new CqlExpressionParser(exp))
+    .find(exp => {
+      return exp.property === "datetime";
+    })
     ? "All recent data items"
     : null;
 

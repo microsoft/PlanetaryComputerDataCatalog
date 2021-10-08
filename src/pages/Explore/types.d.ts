@@ -1,7 +1,10 @@
+import { ICqlExpressionList } from "./utils/cql/types";
+
 export interface IDefaultLocationInfo {
   zoom: number;
   coordinates: [number, number];
 }
+
 export interface IMosaicInfo {
   mosaics: IMosaic[];
   renderOptions: IMosaicRenderOption[] | null;
@@ -11,7 +14,7 @@ export interface IMosaicInfo {
 export interface IMosaic {
   name: string | null;
   description: string | null;
-  cql: [] | null;
+  cql: ICqlExpressionList;
   sortby: [] | null;
   hash?: string | null;
 }

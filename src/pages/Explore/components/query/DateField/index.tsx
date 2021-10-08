@@ -33,6 +33,9 @@ interface DateFieldProps {
   dateExpression: CqlDate;
 }
 
+// 1. Rollover initial dates to custom redux slice
+// 2. Double check re-render reset but while panel open
+// 3. Clean the hell up
 const DateField = ({ dateExpression }: DateFieldProps) => {
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);

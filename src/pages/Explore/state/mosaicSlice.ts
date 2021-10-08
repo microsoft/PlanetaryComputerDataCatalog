@@ -5,14 +5,15 @@ import { createMosaicQueryHashkey } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
 import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
-import { ICqlExpression } from "../utils/cql/types";
+import { CqlExpressionParser } from "../utils/cql";
+import { ICqlExpression, ICqlExpressionList } from "../utils/cql/types";
 import { AppThunk, ExploreState } from "./store";
 
-export interface MosaicState {
+export interface IMosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
   isCustomQuery: boolean;
-  customCqlExpressions: { [key: string]: ICqlExpression } | {};
+  customCqlExpressions: ICqlExpressionList;
   renderOption: IMosaicRenderOption | null;
   layer: {
     minZoom: number;
@@ -27,17 +28,17 @@ export interface MosaicState {
 const initialMosaicState = {
   name: null,
   description: null,
-  cql: null,
+  cql: [],
   sortby: null,
   hash: null,
   renderOptions: null,
 };
 
-const initialState: MosaicState = {
+const initialState: IMosaicState = {
   collection: null,
   query: initialMosaicState,
   isCustomQuery: false,
-  customCqlExpressions: {},
+  customCqlExpressions: [],
   renderOption: null,
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
@@ -56,7 +57,10 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;
-    const hashkey = await createMosaicQueryHashkey(queryInfo, collectionId);
+    const cql = state.mosaic.isCustomQuery
+      ? state.mosaic.customCqlExpressions
+      : state.mosaic.query.cql;
+    const hashkey = await createMosaicQueryHashkey(collectionId, queryInfo, cql);
     return hashkey;
   }
 );
@@ -75,7 +79,7 @@ export const mosaicSlice = createSlice({
       state.query = initialMosaicState;
       state.renderOption = null;
       state.isCustomQuery = false;
-      state.customCqlExpressions = {};
+      state.customCqlExpressions = [];
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
       state.query = { ...action.payload, hash: null };
@@ -98,11 +102,24 @@ export const mosaicSlice = createSlice({
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       state.layer.minZoom = action.payload;
     },
+    setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.customCqlExpressions = state.query.cql;
+      }
+      state.isCustomQuery = action.payload;
+    },
     setCustomCqlExpression: (state, action: PayloadAction<ICqlExpression>) => {
-      state.customCqlExpressions = {
-        ...state.customCqlExpressions,
-        ...action.payload,
-      };
+      const draft = state.customCqlExpressions;
+      const newExpProperty = new CqlExpressionParser(action.payload).property;
+      const existingIndex = draft.findIndex(
+        exp => new CqlExpressionParser(exp).property === newExpProperty
+      );
+
+      if (existingIndex === -1) {
+        draft.splice(0, 0, action.payload);
+      } else {
+        draft.splice(existingIndex, 1, action.payload);
+      }
     },
     resetMosiac: () => {
       return initialState;
@@ -126,7 +143,14 @@ export const {
   setShowEdit,
   setShowResults,
   setLayerMinZoom,
+  setIsCustomQuery,
   setCustomCqlExpression,
 } = mosaicSlice.actions;
+
+export const selectCurrentCql = (state: ExploreState) => {
+  return state.mosaic.isCustomQuery
+    ? state.mosaic.customCqlExpressions
+    : state.mosaic.query.cql;
+};
 
 export default mosaicSlice.reducer;

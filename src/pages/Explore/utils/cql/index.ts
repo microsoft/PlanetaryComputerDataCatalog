@@ -2,19 +2,19 @@ import { IStacCollection } from "types/stac";
 import { toUtcDate } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
 import {
-  CqlBody,
   CqlDate,
   CqlDateRange,
   CqlOperator,
   ICqlExpression,
+  ICqlExpressionList,
 } from "./types";
 
 export class CqlParser {
-  readonly cql: CqlBody;
+  readonly cql: ICqlExpressionList;
   readonly collection: IStacCollection;
   readonly expressions: CqlExpressionParser[];
 
-  constructor(cql: CqlBody, collection: IStacCollection) {
+  constructor(cql: ICqlExpressionList, collection: IStacCollection) {
     this.cql = cql;
     this.collection = collection;
     this.expressions = this.cql.map(exp => new CqlExpressionParser(exp));
@@ -35,7 +35,7 @@ export class CqlParser {
     // If there is no date, return the max date range
     if (!date) {
       return {
-        operator: "between",
+        operator: "anyinteracts",
         isRange: true,
         value: this.formatRange([min, max]),
         ...collectionRange,
@@ -60,7 +60,7 @@ export class CqlParser {
   }
 }
 
-class CqlExpressionParser {
+export class CqlExpressionParser {
   readonly exp: ICqlExpression;
   readonly operator: CqlOperator;
   readonly property: string;
@@ -69,9 +69,10 @@ class CqlExpressionParser {
   constructor(exp: ICqlExpression) {
     this.exp = exp;
     const [op, entity] = Object.entries(this.exp)[0];
+    const [attr, value] = entity;
 
     this.operator = op as CqlOperator;
-    this.property = entity.property;
-    this.value = entity.value;
+    this.property = attr.property;
+    this.value = value;
   }
 }

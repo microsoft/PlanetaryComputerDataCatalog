@@ -22,7 +22,7 @@ export type ICqlExpression =
   | { anyinteracts: [CqlPropertyObject, string[]] }
   | { intersects: any };
 
-export type CqlBody = ICqlExpression[];
+export type ICqlExpressionList = ICqlExpression[] | [];
 
 // Represent parsed dates
 export type CqlDateSingle = string;

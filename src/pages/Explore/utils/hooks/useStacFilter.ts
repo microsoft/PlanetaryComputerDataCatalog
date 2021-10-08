@@ -4,14 +4,17 @@ import { useExploreSelector } from "../../state/hooks";
 import { collectionFilter, geomFilter } from "../stac";
 import { IMosaic } from "pages/Explore/types";
 import { DEFAULT_QUERY_LIMIT } from "../constants";
+import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import { ICqlExpressionList } from "../cql/types";
 
 export const makeFilterBody = (
   baseFilter: (IStacFilterCollection | IStacFilterGeom | null)[],
   query: IMosaic,
+  cql: ICqlExpressionList,
   limit: number | undefined = undefined
 ): IStacFilter => {
   return {
-    filter: { and: [...baseFilter, ...(query.cql || [])] },
+    filter: { and: [...baseFilter, ...cql] },
     sortby: query.sortby || undefined,
     limit: limit,
   } as IStacFilter;
@@ -20,9 +23,10 @@ export const makeFilterBody = (
 export const useCqlFormat = () => {
   const { map, mosaic } = useExploreSelector(s => s);
   const { collection, query, options } = mosaic;
+  const cql = useExploreSelector(selectCurrentCql);
 
   const shouldQuery = () => {
-    return collection && query.cql && options.showResults;
+    return collection && cql && options.showResults;
   };
 
   const collectionFragment = collectionFilter(collection?.id);
@@ -31,7 +35,7 @@ export const useCqlFormat = () => {
   const baseFilter = [collectionFragment, geometryFragment];
 
   return shouldQuery()
-    ? makeFilterBody(baseFilter, query, DEFAULT_QUERY_LIMIT)
+    ? makeFilterBody(baseFilter, query, cql, DEFAULT_QUERY_LIMIT)
     : undefined;
 };
 
