@@ -65,6 +65,23 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   }
 );
 
+export const setCustomCqlExpression = createAsyncThunk<string, ICqlExpression>(
+  "cql-api/createCustomQueryHashkey",
+  async (cqlExpression: ICqlExpression, { getState, dispatch }) => {
+    dispatch(addOrUpdateCustomCqlExpression(cqlExpression));
+
+    const state = getState() as ExploreState;
+    const collectionId = state.mosaic.collection?.id;
+    const queryPreset = state.mosaic.query;
+    const cql = state.mosaic.isCustomQuery
+      ? state.mosaic.customCqlExpressions
+      : queryPreset.cql;
+
+    const hashkey = await createMosaicQueryHashkey(collectionId, queryPreset, cql);
+    return hashkey;
+  }
+);
+
 export const resetMosaicState = (): AppThunk => dispatch => {
   resetMosaicQueryStringState();
   dispatch(resetMosiac());
@@ -108,7 +125,10 @@ export const mosaicSlice = createSlice({
       }
       state.isCustomQuery = action.payload;
     },
-    setCustomCqlExpression: (state, action: PayloadAction<ICqlExpression>) => {
+    addOrUpdateCustomCqlExpression: (
+      state,
+      action: PayloadAction<ICqlExpression>
+    ) => {
       const draft = state.customCqlExpressions;
       const newExpProperty = new CqlExpressionParser(action.payload).property;
       const existingIndex = draft.findIndex(
@@ -132,6 +152,13 @@ export const mosaicSlice = createSlice({
         state.query.hash = action.payload;
       }
     );
+
+    builder.addCase(
+      setCustomCqlExpression.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.query.hash = action.payload;
+      }
+    );
   },
 });
 
@@ -144,7 +171,7 @@ export const {
   setShowResults,
   setLayerMinZoom,
   setIsCustomQuery,
-  setCustomCqlExpression,
+  addOrUpdateCustomCqlExpression,
 } = mosaicSlice.actions;
 
 export const selectCurrentCql = (state: ExploreState) => {

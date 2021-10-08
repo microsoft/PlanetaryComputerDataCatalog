@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   IStackStyles,
   IStackTokens,
@@ -36,13 +36,22 @@ const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const showSidebar = useExploreSelector(s => s.map.showSidebar);
   const isCustomQuery = useExploreSelector(s => s.mosaic.isCustomQuery);
-  const width = showSidebar ? SIDEBAR_WIDTH : 0;
-  const sidebarVisibility = showSidebar ? "visibile" : "hidden";
-  const margin = showSidebar ? 5 : 3;
-
   const selectedItem = useExploreSelector(s => s.detail.selectedItem);
-  const searchPanelDisplay = selectedItem ? "none" : "flex";
-  const detailViewDisplay = selectedItem ? "flex" : "none";
+
+  const { width, margin, sidebarVisibility } = useMemo(() => {
+    return {
+      width: showSidebar ? SIDEBAR_WIDTH : 0,
+      sidebarVisibility: showSidebar ? "visibile" : "hidden",
+      margin: showSidebar ? 5 : 3,
+    };
+  }, [showSidebar]);
+
+  const { searchPanelDisplay, detailViewDisplay } = useMemo(() => {
+    return {
+      searchPanelDisplay: selectedItem ? "none" : "flex",
+      detailViewDisplay: selectedItem ? "flex" : "none",
+    };
+  }, [selectedItem]);
 
   useEffect(() => {
     return () => {
@@ -97,13 +106,14 @@ const Sidebar = () => {
             Explore Planetary Computer datasets
           </Text>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Stack tokens={{ childrenGap: 5 }}>
+            <Stack tokens={stackTokens}>
               <CollectionSelector />
               <MosaicPresetSelector />
               {isCustomQuery && <CustomQueryBuilder />}
               <RenderOptionsSelector />
-              <Stack horizontal horizontalAlign="end" tokens={{ childrenGap: 8 }}>
-                <CustomizeQuery /> <ResetSelectors />
+              <Stack horizontal horizontalAlign="end" tokens={stackTokens}>
+                <CustomizeQuery />
+                <ResetSelectors />
               </Stack>
             </Stack>
           </ErrorBoundary>

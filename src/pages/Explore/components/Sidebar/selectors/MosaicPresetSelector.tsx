@@ -7,7 +7,9 @@ import StateSelector from "./StateSelector";
 import { useMosaicUrlState } from "./hooks/useUrlState";
 
 const MosaicPresetSelector = () => {
-  const { collection, query } = useExploreSelector(state => state.mosaic);
+  const { collection, query, isCustomQuery } = useExploreSelector(
+    state => state.mosaic
+  );
   const dispatch = useExploreDispatch();
 
   const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
@@ -39,7 +41,7 @@ const MosaicPresetSelector = () => {
       options={mosaicOptions}
       selectedKey={query.name}
       getStateValFn={getQueryPresetByName}
-      disabled={!collection?.id}
+      disabled={!collection?.id || isCustomQuery}
       cyId="mosaic-selector"
     />
   );

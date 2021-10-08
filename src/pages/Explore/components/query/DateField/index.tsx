@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer } from "react";
+import { useCallback, useMemo, useReducer } from "react";
 import {
   Callout,
   DefaultButton,
@@ -6,8 +6,9 @@ import {
   mergeStyleSets,
   getTheme,
   Stack,
+  IStackTokens,
 } from "@fluentui/react";
-import { useBoolean, useId } from "@fluentui/react-hooks";
+import { useBoolean } from "@fluentui/react-hooks";
 
 import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
@@ -33,9 +34,9 @@ interface DateFieldProps {
   dateExpression: CqlDate;
 }
 
-// 1. Rollover initial dates to custom redux slice
-// 2. Double check re-render reset but while panel open
-// 3. Clean the hell up
+const buttonId = "query-daterange-button";
+const labelId = "query-daterange-label";
+
 const DateField = ({ dateExpression }: DateFieldProps) => {
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
@@ -53,8 +54,6 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
 
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const dispatch = useExploreDispatch();
-  const buttonId = useId("query-daterange-button");
-  const labelId = useId("query-daterange-label");
 
   const minDay = useMemo(() => {
     return getDayStart(dateExpression.min);
@@ -64,20 +63,11 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
     return getDayEnd(dateExpression.max);
   }, [dateExpression.max]);
 
-  // When there is a new default expression, update the start and end date
-  useEffect(() => {
-    workingDateRangeDispatch(toDateRange(dateExpression));
-  }, [dateExpression]);
-
   const handleSave = useCallback(() => {
     const exp = toCqlExpression(workingDateRange);
     dispatch(setCustomCqlExpression(exp));
     toggle();
   }, [dispatch, toggle, workingDateRange]);
-
-  const handleCancel = useCallback(() => {
-    toggle();
-  }, [toggle]);
 
   // Exact and range labels don't need an operator label, the dates will be self explanatory
   const opLabel = opEnglish[dateExpression.operator];
@@ -87,21 +77,20 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
 
   const displayText = getDateDisplayText(dateExpression);
 
+  const providerState = {
+    validMinDate: minDay,
+    validMaxDate: maxDay,
+    setValidation: validationDispatch,
+  };
+
   // Range or not?
-  // Disable apply until changes
 
   return (
     <>
       <DefaultButton id={buttonId} onClick={toggle}>
         {shouldUseLabel && opLabel} {displayText}
       </DefaultButton>
-      <DateFieldProvider
-        state={{
-          validMinDate: minDay,
-          validMaxDate: maxDay,
-          setValidation: validationDispatch,
-        }}
-      >
+      <DateFieldProvider state={providerState}>
         {isCalloutVisible && (
           <Callout
             className={styles.callout}
@@ -113,7 +102,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
             isBeakVisible={false}
             setInitialFocus
           >
-            <Stack horizontal tokens={{ childrenGap: 10 }}>
+            <Stack horizontal tokens={calendarTokens}>
               <CalendarControl
                 rangeType="start"
                 date={workingDateRange.start}
@@ -128,7 +117,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
               )}
             </Stack>
             <ControlFooter
-              onCancel={handleCancel}
+              onCancel={toggle}
               onSave={handleSave}
               isValid={isValidToApply(
                 controlValidState,
@@ -152,3 +141,7 @@ const styles = mergeStyleSets({
     backgroundColor: getTheme().semanticColors.bodyBackground,
   },
 });
+
+const calendarTokens: IStackTokens = {
+  childrenGap: 10,
+};
