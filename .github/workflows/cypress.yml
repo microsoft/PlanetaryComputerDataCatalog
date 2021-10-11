@@ -23,3 +23,13 @@ jobs:
           wait-on: http://localhost:3000
           wait-on-timeout: 95
           browser: chrome
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos

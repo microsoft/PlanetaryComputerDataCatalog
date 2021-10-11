@@ -3,7 +3,7 @@
 ```{image} images/explorer-docs.jpg
 :height: 500
 :name: Planetary Computer Explorer screenshot
-
+:class: no-scaled-link
 ```
 
 The [Planetary Computer Explorer][1] allows you to search datasets from our
@@ -27,6 +27,7 @@ which is grouped by category.
 ```{image} images/explorer-ds.jpg
 :height: 200
 :name: Planetary Computer Explorer dataset selection
+:class: no-scaled-link
 ```
 
 Datasets can also be opened in the Explorer directly from their
@@ -36,6 +37,7 @@ location that has data availability and an interesting visualization.
 ```{image} images/explorer-launch.jpg
 :height: 300
 :name: Planetary Computer Explorer catalog selection
+:class: no-scaled-link
 ```
 
 After selecting a dataset, a pre-configured query and appropriate rendering
@@ -69,6 +71,7 @@ list, you will return to your original viewport and search results.
 ```{image} images/explorer-item.png
 :height: 500
 :name: Planetary Computer Explorer item screenshot
+:class: no-scaled-link
 ```
 
 Depending on how restrictive your query is, or the general availability of
@@ -84,6 +87,7 @@ to direct you to the valid extent.
 ```{image} images/explorer-extent.png
 :width: 500
 :name: Planetary Computer Explorer extent notice
+:class: no-scaled-link
 ```
 
 ### Rendering options
@@ -100,6 +104,7 @@ selected rendering option, click the info button next to the search results.
 ```{image} images/explorer-queryinfo.png
 :height: 500
 :name: Planetary Computer Explorer query info
+:class: no-scaled-link
 ```
 
 ### Working with results in the Hub
@@ -114,6 +119,7 @@ viewport. This can be copied and launched into a new Hub notebook:
 ```{image} images/explorer-hub.png
 :height: 500
 :name: Planetary Computer Explorer hub code
+:class: no-scaled-link
 ```
 
 Or, if you're interested in working with a single item you've found, you can
@@ -123,6 +129,7 @@ that single item in the Hub:
 ```{image} images/explorer-item-hub.png
 :height: 500
 :name: Planetary Computer Explorer hub item code
+:class: no-scaled-link
 ```
 
 Since our data and APIs are accessible to anyone with or without a Hub account,
