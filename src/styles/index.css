@@ -476,3 +476,8 @@ https://every-layout.dev/layouts/sidebar/
 .hood.on:after {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
 }
+
+/* Code blocks inside of anchors needs darker text color for color contrast */
+a code {
+  color: #006cbe;
+}
