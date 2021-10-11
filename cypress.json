@@ -1,4 +1,5 @@
 {
   "baseUrl": "http://localhost:3000",
-  "experimentalStudio": true
+  "defaultCommandTimeout": 8000,
+  "retries": { "runMode": 2 }
 }
