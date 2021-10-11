@@ -51,7 +51,7 @@ describe("Explorer selector tests", () => {
       });
   });
 
-  it("has item detail controsl", () => {
+  it("has item detail controls", () => {
     cy.getBySel("detail-dialog")
       .find("[data-cy=preview-thumbnail]")
       .first()
