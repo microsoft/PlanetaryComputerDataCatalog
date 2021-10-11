@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REACT_APP_API_ROOT: https://planetarycomputer-staging.microsoft.com
+      CHOKIDAR_USEPOLLING: 1
     container: cypress/browsers:node14.17.0-chrome91-ff89
     steps:
       - name: Checkout
