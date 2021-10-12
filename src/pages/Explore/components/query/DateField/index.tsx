@@ -89,7 +89,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
         iconProps={{ iconName: "Calendar" }}
         onRenderText={() => {
           return (
-            <Stack horizontal horizontalAlign="start">
+            <Stack key="datetime-selector" horizontal horizontalAlign="start">
               <Text>
                 Acquired: {opLabel} {displayText}
               </Text>

@@ -27,18 +27,20 @@ export type ICqlExpressionList = ICqlExpression[] | [];
 // Represent parsed dates
 export type CqlDateSingle = string;
 export type CqlDateRange = [string, string];
-export type CqlDate =
+interface ICqlDatePart {
+  operator: CqlOperator;
+  min: CqlDateSingle;
+  max: CqlDateSingle;
+}
+
+type CqlRangeableDate =
   | {
-      operator: CqlOperator;
       isRange: false;
       value: CqlDateSingle;
-      min: CqlDateSingle;
-      max: CqlDateSingle;
     }
   | {
-      operator: CqlOperator;
       isRange: true;
       value: CqlDateRange;
-      min: CqlDateSingle;
-      max: CqlDateSingle;
     };
+
+export type CqlDate = CqlRangeableDate & ICqlDatePart;

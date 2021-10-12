@@ -1,6 +1,6 @@
 import {
-  CqlDate,
   CqlPropertyObject,
+  CqlDate,
   ICqlExpression,
 } from "pages/Explore/utils/cql/types";
 import { getDayStart, toDateString } from "utils";

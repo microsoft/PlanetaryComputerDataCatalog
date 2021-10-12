@@ -30,3 +30,7 @@ export interface IMapInfo {
   initialCoords: [number, number];
   initialZoom: number;
 }
+
+export interface IQueryable {
+  properties: { [key: string]: any };
+}

@@ -2,16 +2,12 @@
   "$schema": "https://json-schema.org/draft/2019-09/schema",
   "$id": "https://example.org/queryables",
   "type": "object",
-  "title": "Queryables for mock PC Sentinel-2-l2a STAC API",
-  "description": "Queryable properties for the mock STAC API Item Search filter.",
+  "title": "Queryables for PC Sentinel-2-l2a STAC API",
+  "description": "Queryable properties for the STAC API Item Search filter.",
   "properties": {
     "id": {
       "description": "ID",
-      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/id"
-    },
-    "geometry": {
-      "description": "Geometry",
-      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/geometry"
+      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id"
     },
     "datetime": {
       "description": "Datetime",

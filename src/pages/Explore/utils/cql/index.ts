@@ -1,3 +1,4 @@
+import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
 import { toUtcDate } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
@@ -13,15 +14,26 @@ export class CqlParser {
   readonly cql: ICqlExpressionList;
   readonly collection: IStacCollection;
   readonly expressions: CqlExpressionParser[];
+  readonly queryable: JSONSchema;
 
-  constructor(cql: ICqlExpressionList, collection: IStacCollection) {
+  constructor(
+    cql: ICqlExpressionList,
+    collection: IStacCollection,
+    queryable: JSONSchema
+  ) {
     this.cql = cql;
     this.collection = collection;
     this.expressions = this.cql.map(exp => new CqlExpressionParser(exp));
+    this.queryable = queryable;
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
     return [toUtcDate(range[0]), toUtcDate(range[1])];
+  }
+
+  getExpressions(omit: string[]): CqlExpressionParser[] {
+    console.log(this.queryable.properties);
+    return this.expressions.filter(exp => !omit.includes(exp.property));
   }
 
   get dateValue(): CqlDate | undefined {
