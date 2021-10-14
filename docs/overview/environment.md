@@ -8,11 +8,11 @@ Once you have an [account](https://planetarycomputer.microsoft.com/account/reque
 
 ![JupyterHub login page](images/hub-login.png)
 
-The Hub offers several *profiles* to customize your computing environment. The profile determines the computing power and software environment of your server.
+The Hub offers several *environments* to customize your computing environment. This determines the computing power (CPU cores, memory, GPUs) and software environment of your server.
 
-![JupyterHub profiles: Small, Large, R, and GPU](images/hub-profiles.png)
+![JupyterHub environments: Python, R, GPU - Pytorch, GPU - Tensorflow, and QGIS](images/hub-profiles.png)
 
-Select a profile and click *Start* to start your server. You'll see a progress bar and some logs as your server comes online. Once it's ready you'll be redirected to Jupyterlab.
+Select an environment and click *Start* to start your server. You'll see a progress bar and some logs as your server comes online. Once it's ready you'll be redirected to Jupyterlab.
 
 ## Stopping your server
 
@@ -54,7 +54,7 @@ GDAL_HTTP_MERGE_CONSECUTIVE_RANGES | YES           | [Improves GDAL performance]
 
 ## Understanding the software environment
 
-Your software environment is determined by the profile you selected when starting your server. It's a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) located at ``/srv/conda/envs/notebook``. The environment contains many software libraries that are helpful for geospatial data analysis The environments are defined and packaged into Docker containers in the [planetary-computer-containers][containers] repository.
+Your software environment is determined by the environment you selected when starting your server. It's a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) located at ``/srv/conda/envs/notebook``. The environment contains many software libraries that are helpful for geospatial data analysis The environments are defined and packaged into Docker containers in the [planetary-computer-containers][containers] repository.
 
 As mentioned [above](#Understanding-the-file-system), changes to the environment outside of your home directory are not persisted across sessions. If you ``pip`` or ``conda`` install a package, it will not be present the next time you start your server.
 
