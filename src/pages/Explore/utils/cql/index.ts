@@ -1,7 +1,10 @@
+import React from "react";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
 import { toUtcDate } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
+import { getControlForField } from "./helpers";
+
 import {
   CqlDate,
   CqlDateRange,
@@ -10,6 +13,9 @@ import {
   ICqlExpressionList,
 } from "./types";
 
+type getExpressionOptions = {
+  omit: string[];
+};
 export class CqlParser {
   readonly cql: ICqlExpressionList;
   readonly collection: IStacCollection;
@@ -23,7 +29,9 @@ export class CqlParser {
   ) {
     this.cql = cql;
     this.collection = collection;
-    this.expressions = this.cql.map(exp => new CqlExpressionParser(exp));
+    this.expressions = this.cql.map(exp => {
+      return new CqlExpressionParser(exp, queryable);
+    });
     this.queryable = queryable;
   }
 
@@ -31,8 +39,7 @@ export class CqlParser {
     return [toUtcDate(range[0]), toUtcDate(range[1])];
   }
 
-  getExpressions(omit: string[]): CqlExpressionParser[] {
-    console.log(this.queryable.properties);
+  getExpressions({ omit }: getExpressionOptions): CqlExpressionParser[] {
     return this.expressions.filter(exp => !omit.includes(exp.property));
   }
 
@@ -77,8 +84,9 @@ export class CqlExpressionParser {
   readonly operator: CqlOperator;
   readonly property: string;
   readonly value: string | [string, string];
+  readonly fieldSchema: JSONSchema | undefined;
 
-  constructor(exp: ICqlExpression) {
+  constructor(exp: ICqlExpression, queryable?: JSONSchema) {
     this.exp = exp;
     const [op, entity] = Object.entries(this.exp)[0];
     const [attr, value] = entity;
@@ -86,5 +94,21 @@ export class CqlExpressionParser {
     this.operator = op as CqlOperator;
     this.property = attr.property;
     this.value = value;
+    this.fieldSchema = this.queryableFieldDefinition(this.property, queryable);
+  }
+
+  private queryableFieldDefinition(
+    property: string,
+    queryable: JSONSchema | undefined
+  ): JSONSchema | undefined {
+    const fieldSchema = queryable?.properties?.[property];
+    if (typeof fieldSchema !== "boolean") {
+      return fieldSchema;
+    }
+    console.warn("Unexpected property schema: ", property);
+  }
+
+  get control(): React.ReactNode {
+    return getControlForField(this);
   }
 }

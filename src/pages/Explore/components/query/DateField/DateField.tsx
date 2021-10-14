@@ -29,7 +29,7 @@ import {
 } from "./state";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
-import DropdownButton from "../DropdownButton";
+import { DropdownButton } from "../DropdownButton";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
@@ -38,7 +38,7 @@ interface DateFieldProps {
 const buttonId = "query-daterange-button";
 const labelId = "query-daterange-label";
 
-const DateField = ({ dateExpression }: DateFieldProps) => {
+export const DateField = ({ dateExpression }: DateFieldProps) => {
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -84,6 +84,7 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
   return (
     <>
       <DropdownButton
+        label="Date acquired"
         id={buttonId}
         onClick={toggle}
         iconProps={{ iconName: "Calendar" }}
@@ -139,8 +140,6 @@ const DateField = ({ dateExpression }: DateFieldProps) => {
     </>
   );
 };
-
-export default DateField;
 
 const styles = mergeStyleSets({
   callout: {

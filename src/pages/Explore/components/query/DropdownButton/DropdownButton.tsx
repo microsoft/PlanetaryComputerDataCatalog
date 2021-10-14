@@ -1,3 +1,4 @@
+import React from "react";
 import {
   DefaultButton,
   Icon,
@@ -6,18 +7,21 @@ import {
   Stack,
   getTheme,
   IButtonStyles,
+  IButtonProps,
 } from "@fluentui/react";
 
-const DropdownButton = ({ ...rest }) => {
+interface DropdownButtonProps extends IButtonProps {
+  label: string;
+}
+
+export const DropdownButton = ({ label, ...rest }: DropdownButtonProps) => {
   return (
-    <Stack styles={stackStyle}>
+    <Stack styles={stackStyle} aria-label={label} aria-haspopup="dialog">
       <DefaultButton {...rest} styles={buttonStyles} />
       <Icon iconName="ChevronDown" styles={chevronStyle} />
     </Stack>
   );
 };
-
-export default DropdownButton;
 
 const theme = getTheme();
 

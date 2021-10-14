@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { IStackStyles, Stack, getTheme } from "@fluentui/react";
+import { IStackStyles, Stack, getTheme, IStackTokens } from "@fluentui/react";
 
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
-import DateField from "../query/DateField";
+import { DateField } from "../query/DateField";
 
 const CustomQueryBuilder = () => {
   const collection = useExploreSelector(s => s.mosaic.collection);
@@ -26,10 +26,15 @@ const CustomQueryBuilder = () => {
   const date = parsed.dateValue;
   const dateControl = date ? <DateField dateExpression={date} /> : null;
 
-  const rest = parsed.getExpressions(["datetime"]);
-  console.log(rest);
+  const expressions = parsed.getExpressions({ omit: ["datetime"] });
+  const controls = expressions.map(e => e.control);
 
-  return <Stack styles={styles}>{dateControl}</Stack>;
+  return (
+    <Stack styles={styles} tokens={stackTokens}>
+      {dateControl}
+      {controls}
+    </Stack>
+  );
 };
 
 export default CustomQueryBuilder;
@@ -41,4 +46,7 @@ const styles: IStackStyles = {
     borderColor: theme.palette.neutralLight,
     padding: "5px 0px 10px 20px",
   },
+};
+const stackTokens: Partial<IStackTokens> = {
+  childrenGap: 10,
 };
