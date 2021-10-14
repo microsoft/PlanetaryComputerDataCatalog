@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from "react";
+import React, { useCallback, useImperativeHandle } from "react";
 import {
   Callout,
   DefaultButton,
@@ -17,12 +17,13 @@ import { PanelControlHandlers } from "../../Map/components/PanelControl";
 
 interface DropdownButtonProps extends IButtonProps {
   label: string;
+  onDismiss?: () => void;
 }
 
 export const DropdownButton = React.forwardRef<
   PanelControlHandlers,
   React.PropsWithChildren<DropdownButtonProps>
->(({ label, children, ...rest }, ref) => {
+>(({ label, onDismiss, children, ...rest }, ref) => {
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("query-dropdown-button");
   const labelId = useId("query-dropdown-label");
@@ -33,6 +34,11 @@ export const DropdownButton = React.forwardRef<
       toggle();
     },
   }));
+
+  const handleDismiss = useCallback(() => {
+    toggle();
+    onDismiss && onDismiss();
+  }, [onDismiss, toggle]);
 
   return (
     <>
@@ -52,7 +58,7 @@ export const DropdownButton = React.forwardRef<
           ariaLabelledBy={labelId}
           gapSpace={0}
           target={`#${buttonId}`}
-          onDismiss={toggle}
+          onDismiss={handleDismiss}
           directionalHint={DirectionalHint.bottomLeftEdge}
           isBeakVisible={false}
           setInitialFocus

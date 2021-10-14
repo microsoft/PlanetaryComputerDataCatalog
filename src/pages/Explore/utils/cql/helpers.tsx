@@ -3,18 +3,18 @@ import { TextField } from "@fluentui/react";
 import { RangeField } from "pages/Explore/components/query/RangeField";
 import { CqlExpressionParser } from ".";
 
-export const getControlForField = (field: CqlExpressionParser) => {
+export const getControlForField = (field: CqlExpressionParser<string | number>) => {
   const schemaType = field.fieldSchema?.type;
   if (!schemaType) return null;
 
   if (schemaType === "string") {
-    return getTextControl(field);
+    return getTextControl(field as CqlExpressionParser<string>);
   } else if (schemaType === "number") {
-    return getNumericControl(field);
+    return getNumericControl(field as CqlExpressionParser<number>);
   }
 };
 
-export const getTextControl = (field: CqlExpressionParser) => {
+export const getTextControl = (field: CqlExpressionParser<string>) => {
   const { fieldSchema } = field;
   if (!fieldSchema) return null;
 
@@ -26,7 +26,7 @@ export const getTextControl = (field: CqlExpressionParser) => {
   );
 };
 
-export const getNumericControl = (field: CqlExpressionParser) => {
+export const getNumericControl = (field: CqlExpressionParser<number>) => {
   const { fieldSchema } = field;
   if (!fieldSchema) return null;
 

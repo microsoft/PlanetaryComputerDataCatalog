@@ -19,7 +19,7 @@ type getExpressionOptions = {
 export class CqlParser {
   readonly cql: ICqlExpressionList;
   readonly collection: IStacCollection;
-  readonly expressions: CqlExpressionParser[];
+  readonly expressions: CqlExpressionParser<string | number>[];
   readonly queryable: JSONSchema;
 
   constructor(
@@ -39,12 +39,16 @@ export class CqlParser {
     return [toUtcDate(range[0]), toUtcDate(range[1])];
   }
 
-  getExpressions({ omit }: getExpressionOptions): CqlExpressionParser[] {
+  getExpressions({
+    omit,
+  }: getExpressionOptions): CqlExpressionParser<string | number>[] {
     return this.expressions.filter(exp => !omit.includes(exp.property));
   }
 
   get dateValue(): CqlDate | undefined {
-    const date = this.expressions.find(exp => exp.property === "datetime");
+    const date = this.expressions.find(
+      exp => exp.property === "datetime"
+    ) as CqlExpressionParser<string>;
 
     const [min, max] = rangeFromTemporalExtent(
       this.collection.extent.temporal.interval
@@ -79,11 +83,11 @@ export class CqlParser {
   }
 }
 
-export class CqlExpressionParser {
+export class CqlExpressionParser<T extends string | number> {
   readonly exp: ICqlExpression;
   readonly operator: CqlOperator;
   readonly property: string;
-  readonly value: string | [string, string];
+  readonly value: T | [T, T];
   readonly fieldSchema: JSONSchema | undefined;
 
   constructor(exp: ICqlExpression, queryable?: JSONSchema) {

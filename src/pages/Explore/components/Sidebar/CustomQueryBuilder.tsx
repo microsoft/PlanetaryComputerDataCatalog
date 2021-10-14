@@ -48,5 +48,5 @@ const styles: IStackStyles = {
   },
 };
 const stackTokens: IStackTokens = {
-  childrenGap: 10,
+  childrenGap: 4,
 };

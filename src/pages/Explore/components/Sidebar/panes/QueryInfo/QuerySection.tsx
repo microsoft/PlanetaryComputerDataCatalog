@@ -43,7 +43,7 @@ const QuerySection = ({ cql }: QuerySectionProps) => {
     // Special handling for datetime property
     const label =
       exp.property === "datetime" ? (
-        getDateLabel(exp.property, propertyLabel, exp.value, exp.operator)
+        getDateLabel(exp.property, propertyLabel, exp.value.toString(), exp.operator)
       ) : (
         <Text>
           {propertyLabel} {opText} {exp.value}

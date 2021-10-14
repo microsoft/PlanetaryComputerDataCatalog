@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useReducer, useRef } from "react";
-import { Stack, IStackTokens, Text } from "@fluentui/react";
+import { Stack, IStackTokens, Text, IIconProps } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
@@ -79,7 +79,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         ref={panelRef}
         key={"query-datetime-field"}
         label="Date acquired"
-        iconProps={{ iconName: "Calendar" }}
+        iconProps={iconProps}
         onRenderText={() => {
           return (
             <Stack key="datetime-selector-label" horizontal horizontalAlign="start">
@@ -122,4 +122,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
 
 const calendarTokens: IStackTokens = {
   childrenGap: 10,
+};
+
+const iconProps: IIconProps = {
+  iconName: "Calendar",
 };
