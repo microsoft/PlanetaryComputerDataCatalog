@@ -1,4 +1,3 @@
-import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { TextField } from "@fluentui/react";
 
 import { RangeField } from "pages/Explore/components/query/RangeField";
@@ -15,8 +14,16 @@ export const getControlForField = (field: CqlExpressionParser) => {
   }
 };
 
-export const getTextControl = (fieldSchema: JSONSchema) => {
-  return <TextField label={fieldSchema.title}></TextField>;
+export const getTextControl = (field: CqlExpressionParser) => {
+  const { fieldSchema } = field;
+  if (!fieldSchema) return null;
+
+  return (
+    <TextField
+      key={`textcontrol-${field.property}`}
+      label={fieldSchema.title}
+    ></TextField>
+  );
 };
 
 export const getNumericControl = (field: CqlExpressionParser) => {
@@ -28,8 +35,21 @@ export const getNumericControl = (field: CqlExpressionParser) => {
     fieldSchema.properties?.["max"] !== "undefined"
   ) {
     // Range control
-    return <RangeField field={field} />;
+    return (
+      <RangeField
+        key={`rangecontrol-${field.property}`}
+        field={field}
+        // TODO: icon lookup or generic
+        icon="Cloud"
+      />
+    );
   } else {
-    return <TextField label={fieldSchema.title} type="number"></TextField>;
+    return (
+      <TextField
+        key={`numericcontrol-${field.property}`}
+        label={fieldSchema.title}
+        type="number"
+      ></TextField>
+    );
   }
 };

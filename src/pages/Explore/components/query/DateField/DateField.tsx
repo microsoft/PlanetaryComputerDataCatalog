@@ -1,14 +1,5 @@
-import { useCallback, useMemo, useReducer } from "react";
-import {
-  Callout,
-  DirectionalHint,
-  mergeStyleSets,
-  getTheme,
-  Stack,
-  IStackTokens,
-  Text,
-} from "@fluentui/react";
-import { useBoolean } from "@fluentui/react-hooks";
+import { useCallback, useMemo, useReducer, useRef } from "react";
+import { Stack, IStackTokens, Text } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
@@ -30,13 +21,11 @@ import {
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
 import { DropdownButton } from "../DropdownButton";
+import { PanelControlHandlers } from "pages/Explore/components/Map/components/PanelControl";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
 }
-
-const buttonId = "query-daterange-button";
-const labelId = "query-daterange-label";
 
 export const DateField = ({ dateExpression }: DateFieldProps) => {
   const initialDateRange = useMemo(() => {
@@ -53,8 +42,11 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     initialValidationState
   );
 
-  const [isCalloutVisible, { toggle }] = useBoolean(false);
   const dispatch = useExploreDispatch();
+  const panelRef = useRef<PanelControlHandlers>(null);
+  const togglePanel = useCallback(() => {
+    panelRef.current?.togglePanel();
+  }, []);
 
   const minDay = useMemo(() => {
     return getDayStart(dateExpression.min);
@@ -67,8 +59,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const handleSave = useCallback(() => {
     const exp = toCqlExpression(workingDateRange);
     dispatch(setCustomCqlExpression(exp));
-    toggle();
-  }, [dispatch, toggle, workingDateRange]);
+    togglePanel();
+  }, [dispatch, togglePanel, workingDateRange]);
 
   const opLabel = opEnglish[dateExpression.operator];
   const displayText = getDateDisplayText(dateExpression);
@@ -84,70 +76,49 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   return (
     <>
       <DropdownButton
+        ref={panelRef}
+        key={"query-datetime-field"}
         label="Date acquired"
-        id={buttonId}
-        onClick={toggle}
         iconProps={{ iconName: "Calendar" }}
         onRenderText={() => {
           return (
-            <Stack key="datetime-selector" horizontal horizontalAlign="start">
+            <Stack key="datetime-selector-label" horizontal horizontalAlign="start">
               <Text>
                 Acquired: {opLabel} {displayText}
               </Text>
             </Stack>
           );
         }}
-      />
-      <DateFieldProvider state={providerState}>
-        {isCalloutVisible && (
-          <Callout
-            role="dialog"
-            className={styles.callout}
-            ariaLabelledBy={labelId}
-            gapSpace={0}
-            target={`#${buttonId}`}
-            onDismiss={toggle}
-            directionalHint={DirectionalHint.bottomLeftEdge}
-            isBeakVisible={false}
-            setInitialFocus
-          >
-            <Stack horizontal tokens={calendarTokens}>
+      >
+        <DateFieldProvider state={providerState}>
+          <Stack horizontal tokens={calendarTokens}>
+            <CalendarControl
+              rangeType="start"
+              date={workingDateRange.start}
+              onSelectDate={workingDateRangeDispatch}
+            />
+            {dateExpression.isRange && (
               <CalendarControl
-                rangeType="start"
-                date={workingDateRange.start}
+                rangeType="end"
+                date={workingDateRange.end}
                 onSelectDate={workingDateRangeDispatch}
               />
-              {dateExpression.isRange && (
-                <CalendarControl
-                  rangeType="end"
-                  date={workingDateRange.end}
-                  onSelectDate={workingDateRangeDispatch}
-                />
-              )}
-            </Stack>
-            <ControlFooter
-              onCancel={toggle}
-              onSave={handleSave}
-              isValid={isValidToApply(
-                controlValidState,
-                initialDateRange,
-                workingDateRange
-              )}
-            />
-          </Callout>
-        )}
-      </DateFieldProvider>
+            )}
+          </Stack>
+          <ControlFooter
+            onCancel={togglePanel}
+            onSave={handleSave}
+            isValid={isValidToApply(
+              controlValidState,
+              initialDateRange,
+              workingDateRange
+            )}
+          />
+        </DateFieldProvider>
+      </DropdownButton>
     </>
   );
 };
-
-const styles = mergeStyleSets({
-  callout: {
-    // minWidth: 420,
-    padding: "20px 24px",
-    backgroundColor: getTheme().semanticColors.bodyBackground,
-  },
-});
 
 const calendarTokens: IStackTokens = {
   childrenGap: 10,

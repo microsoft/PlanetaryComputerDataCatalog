@@ -47,6 +47,6 @@ const styles: IStackStyles = {
     padding: "5px 0px 10px 20px",
   },
 };
-const stackTokens: Partial<IStackTokens> = {
+const stackTokens: IStackTokens = {
   childrenGap: 10,
 };
