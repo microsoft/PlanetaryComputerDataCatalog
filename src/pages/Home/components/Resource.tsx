@@ -4,16 +4,20 @@ import { Link as RouterLink } from "react-router-dom";
 import { FontIcon } from "@fluentui/react/lib/Icon";
 import { mergeStyles } from "@fluentui/react/lib/Styling";
 
-const iconClass = mergeStyles({
-  fontSize: 50,
-  height: 50,
-  width: "100%",
-  textAlign: "center",
-  marginBottom: 25,
-  color: "#0078d4",
-});
+type ResourceProps = {
+  title: string;
+  href: string;
+  iconName: string;
+  external?: boolean;
+};
 
-const Resource = ({ title, to, href, iconName = "CompassNW", children }) => {
+const Resource: React.FC<ResourceProps> = ({
+  title,
+  href,
+  external = false,
+  iconName,
+  children,
+}) => {
   const content = (
     <>
       <FontIcon aria-label={title} iconName={iconName} className={iconClass} />
@@ -28,12 +32,21 @@ const Resource = ({ title, to, href, iconName = "CompassNW", children }) => {
       <p style={{ textAlign: "center", color: "#323130" }}>{children}</p>
     </>
   );
-  const link = href ? (
+  const link = external ? (
     <Link href={href}>{content}</Link>
   ) : (
-    <RouterLink to={to}>{content}</RouterLink>
+    <RouterLink to={href}>{content}</RouterLink>
   );
   return <div className="home-resource-item">{link}</div>;
 };
 
 export default Resource;
+
+const iconClass = mergeStyles({
+  fontSize: 50,
+  height: 50,
+  width: "100%",
+  textAlign: "center",
+  marginBottom: 25,
+  color: "#0078d4",
+});
