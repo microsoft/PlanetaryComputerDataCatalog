@@ -63,6 +63,7 @@ const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) =>
             height: size,
           },
         }}
+        data-cy="preview-thumbnail"
       />
     </>
   );

@@ -5,21 +5,18 @@ daymet:
   title: Daymet Collection
   short_description:
     Gridded estimates of weather parameters for North America, Hawaii, and Puerto
-    Rico at daily, monthly, and annual summaries
+    Rico at daily, monthly, and annual temporal resolutions
   description: >
-    Daymet provides long-term, continuous, gridded estimates of daily weather and
-    climatology variables by interpolating and extrapolating ground-based
-    observations through statistical modeling techniques. The
-    [Daymet](https://daymet.ornl.gov/overview) data products provide driver data for
-    biogeochemical terrestrial modeling and have myriad applications in many Earth
-    science, natural resource, biodiversity, and agricultural research areas.
-
-
+    [Daymet](https://daymet.ornl.gov) provides long-term, continuous, gridded estimates of 
+    daily weather and climatology variables by interpolating and extrapolating ground-based
+    observations through statistical modeling techniques. Daymet data products have 
+    applications in Earth science, natural resource management, biodiversity conservation,
+    and agricultural research.    
+        
     Daymet weather variables include daily minimum and maximum temperature,
     precipitation, vapor pressure, shortwave radiation, snow water equivalent, and
-    day length produced on a 1 km x 1 km gridded surface over continental North
-    America, Hawaii, and Puerto Rico from 1980 through the end of the most recent
-    full calendar year.
+    day length.  All variables are produced on a 1 km x 1 km gridded surface, and are available 
+    from 1980 to the end of the most recent calendar year.
   assets:
     headerImg:
       href: ./images/daymet-hero.png
@@ -29,12 +26,14 @@ daymet:
 
 copernicus-dem:
   title: Copernicus DEM Collection
-  short_description: This data set is a global digital surface model (DSM) with horizontal resolution of either 30 or 90 meters derived from an edited DSM named WorldDEMTM based on radar satellite data aquired during the TanDEM-X Mission 
+  short_description: Copernicus DEM is a near-global digital surface model (DSM) derived from radar 
+    satellite data acquired during the TanDEM-X mission. 
   description: >
-    The Copernicus DEM is a Digital Surface Model (DSM) which represents the surface of the Earth including buildings, infrastructure and vegetation. This DEM is derived from an edited DSM named WorldDEMTM, i.e. flattening of water bodies and consistent flow of rivers has been included. Editing of shore- and coastlines, special features such as airports and implausible terrain structures has also been applied.
-
-    The WorldDEM product is based on the radar satellite data acquired during the TanDEM-X Mission, which is funded by a Public Private Partnership between the German State, represented by the German Aerospace Centre (DLR) and Airbus Defence and Space.
-
+    The Copernicus DEM is a digital surface model (DSM), which represents the surface of the Earth 
+    including buildings, infrastructure, and vegetation. This DSM is based on radar satellite data 
+    acquired during the TanDEM-X Mission, which was funded by a public-private partnership between 
+    the German Aerospace Centre (DLR) and Airbus Defence and Space.  Copernicus DEM is available at both 
+    30-meter and 90-meter resolution.
   assets:
     headerImg:
       href: ./images/cop-dem-collection-hero.png

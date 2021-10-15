@@ -42,6 +42,7 @@ const RenderOptionsSelector = () => {
       selectedKey={renderOption?.name}
       getStateValFn={getOptionByName}
       disabled={!query.name}
+      cyId="render-selector"
     />
   );
 };

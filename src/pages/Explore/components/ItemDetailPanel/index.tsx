@@ -35,7 +35,7 @@ const ItemDetailPanel = () => {
   };
 
   const content = item ? (
-    <div style={itemDetailStylesInner}>
+    <div style={itemDetailStylesInner} data-cy="detail-dialog">
       <BackToListButton />
       <div
         style={{
@@ -59,7 +59,11 @@ const ItemDetailPanel = () => {
   ) : null;
 
   return (
-    <StackItem className="custom-overflow" styles={itemDetailStylesOuter}>
+    <StackItem
+      className="custom-overflow"
+      styles={itemDetailStylesOuter}
+      data-cy="detail-dialog-list"
+    >
       {content}
     </StackItem>
   );

@@ -58,6 +58,7 @@ const QueryInfo = () => {
         title={title}
         ariaLabel={title}
         onClick={toggle}
+        data-cy="query-detail-button"
       />
       {isCalloutVisible && (
         <Callout

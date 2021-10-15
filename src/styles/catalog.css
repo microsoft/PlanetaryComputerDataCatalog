@@ -189,7 +189,6 @@
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  padding: 20px initial;
   min-height: 300px;
 }
 

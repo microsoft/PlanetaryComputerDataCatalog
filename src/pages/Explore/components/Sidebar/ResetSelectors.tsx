@@ -15,7 +15,12 @@ const ResetSelectors = () => {
 
   return (
     <Stack horizontal horizontalAlign={"end"}>
-      <Link disabled={disabled} styles={buttonStyles} onClick={handleClick}>
+      <Link
+        disabled={disabled}
+        styles={buttonStyles}
+        onClick={handleClick}
+        data-cy="reset"
+      >
         Reset
       </Link>
     </Stack>

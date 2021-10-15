@@ -35,6 +35,7 @@ const CollectionSelector = () => {
       selectedKey={collection?.id || null}
       getStateValFn={getCollectionById}
       disabled={!isSuccess}
+      cyId="collection-selector"
     />
   );
 };

@@ -33,6 +33,7 @@ const BackToListButton = () => {
           boxShadow: theme.effects.elevation4,
         },
       }}
+      data-cy="back-to-list"
     >
       Back to results
     </ActionButton>

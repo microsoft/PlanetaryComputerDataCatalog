@@ -40,6 +40,7 @@ const MosaicPresetSelector = () => {
       selectedKey={query.name}
       getStateValFn={getQueryPresetByName}
       disabled={!collection?.id}
+      cyId="mosaic-selector"
     />
   );
 };

@@ -29,19 +29,6 @@ const mdLoader = {
   ],
 };
 
-const prettierLoader = {
-  test: /\.jsx?$/,
-  use: [
-    {
-      loader: require.resolve("prettier-loader"),
-      options: {
-        exclude: /node_modules/,
-        enforce: "pre",
-      },
-    },
-  ],
-};
-
 module.exports = {
   webpack: {
     plugins: {
@@ -71,11 +58,6 @@ module.exports = {
     configure: webpackConfig => {
       addBeforeLoader(webpackConfig, loaderByName("file-loader"), mdLoader);
       addBeforeLoader(webpackConfig, loaderByName("file-loader"), yamlLoader);
-      addBeforeLoader(
-        webpackConfig,
-        loaderByName("file-loader"),
-        prettierLoader
-      );
 
       return webpackConfig;
     },

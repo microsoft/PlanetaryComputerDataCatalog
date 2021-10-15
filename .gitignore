@@ -385,3 +385,5 @@ yarn-error.log*
 # yarn intermediate files
 .package-lock.json
 
+# cypress
+cypress/videos/

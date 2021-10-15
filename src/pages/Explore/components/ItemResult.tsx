@@ -57,6 +57,7 @@ const ItemResult = ({ item }: ItemResultProps) => {
       styles={{ root: rootStyle }}
       onMouseEnter={showBounds}
       onMouseLeave={removeBounds}
+      data-cy="item-result"
     >
       <Stack
         horizontal

@@ -17,7 +17,7 @@ const ExploreInHub = () => {
         },
       }}
     >
-      <PrimaryButton id={buttonId} onClick={toggle}>
+      <PrimaryButton id={buttonId} onClick={toggle} data-cy="explore-in-hub">
         Explore results in the Hub
       </PrimaryButton>
 

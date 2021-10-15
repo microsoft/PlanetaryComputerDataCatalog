@@ -31,6 +31,14 @@
 
 ---
 collections:
+  3dep-seamless:
+    category: DEMs
+    headerImg: ./images/threedep-seamless-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-seamless-example.html
+        launch: datasets/dep/3dep-seamless-example.ipynb
+
   alos-dem:
     category: DEMs
     headerImg: ./images/alos-hero.png
@@ -38,6 +46,18 @@ collections:
       - title: Example Notebook
         src: alos-dem-example.html
         launch: datasets/alos-dem/alos-dem-example.ipynb
+
+  aster-l1t:
+    category: Imagery
+    headerImg: ./images/aster-hero.jpg
+    tabs:
+      - title: Example Notebook
+        src: aster-l1t-example.html
+        launch: datasets/aster-l1t/aster-l1t-example.ipynb
+      - title: Blob Storage Notebook
+        src: aster.html
+      - title: Storage Documentation
+        src: aster-storage.html
 
   cop-dem-glo-30:
     category: DEMs
@@ -54,38 +74,6 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-
-  goes-cmi:
-    category: Imagery
-    headerImg: ./images/goes-cmi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: goes-cmi-example.html
-        launch: datasets/goes/goes-cmi-example.ipynb
-
-  # Waiting on the other goes collections
-  # goes-fdc:
-  #   category: Fire
-
-  # goes-rrqpe:
-  #   category: Climate/Weather
-
-  # goes-mcmip:
-  #   category: Imagery
-
-  # goes-sst:
-  #   category: Climate/Weather
-
-  # goes-lst:
-  #   category: Climate/Weather
-
-  3dep-seamless:
-    category: DEMs
-    headerImg: ./images/threedep-seamless-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-seamless-example.html
-        launch: datasets/dep/3dep-seamless-example.ipynb
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
@@ -147,6 +135,17 @@ collections:
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
+  fia:
+    headerImg: ./images/fia-hero.png
+    tabs:
+      - title: Example Notebook
+        src: fia-example.html
+        launch: datasets/fia/fia-example.ipynb
+      - title: Blob Storage Notebook
+        src: forest-inventory-and-analysis.html
+      - title: Storage Documentation
+        src: gbif-storage.html
+
   gap:
     category: Land use/Land cover
     headerImg: ./images/gap-hero.png
@@ -154,6 +153,52 @@ collections:
       - title: Example Notebook
         src: gap-example.html
         launch: datasets/gap/gap-example.ipynb
+
+  gbif:
+    headerImg: ./images/gbif-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gbif-example.html
+        launch: datasets/gbif/gbif-example.ipynb
+      - title: Blob Storage Notebook
+        src: gbif.html
+      - title: Storage Documentation
+        src: gbif-storage.html
+
+  goes-cmi:
+    category: Imagery
+    headerImg: ./images/goes-cmi-hero.png
+    tabs:
+      - title: Example Notebook
+        src: goes-cmi-example.html
+        launch: datasets/goes/goes-cmi-example.ipynb
+      - title: Blob Storage Notebook
+        src: goes-r-abi-l2-mcmipf.html
+      - title: Storage Documentation
+        src: goes-r-storage.html
+
+  # Waiting on the other goes collections
+  # goes-fdc:
+  #   category: Fire
+
+  # goes-rrqpe:
+  #   category: Climate/Weather
+
+  # goes-mcmip:
+  #   category: Imagery
+
+  # goes-sst:
+  #   category: Climate/Weather
+
+  # goes-lst:
+  #   category: Climate/Weather
+
+  gridmet:
+    headerImg: ./images/gridmet-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gridmet-example.html
+        launch: datasets/gridmet/gridmet-example.ipynb
 
   hgb:
     category: Biodiversity
@@ -196,6 +241,18 @@ collections:
         src: jrc-gsw-example.html
         launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
 
+  landsat-8-c2-l2:
+    category: Imagery
+    headerImg: ./images/landsat-hero.jpg
+    tabs:
+      - title: Example Notebook
+        src: landsat-8-c2-l2-example.html
+        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
+      - title: Blob Storage Notebook
+        src: landsat-8.html
+      - title: Storage Documentation
+        src: landsat-8-storage.html
+
   mobi:
     category: Biodiversity
     headerImg: ./images/mobi-hero.png
@@ -220,56 +277,6 @@ collections:
       - title: Storage Documentation
         src: mtbs-storage.html
 
-  nasadem:
-    category: DEMs
-    headerImg: ./images/nasadem-hero.png
-    tabs:
-      - title: Example Notebook
-        src: nasadem-example.html
-        launch: datasets/nasadem/nasadem-example.ipynb
-      - title: Blob Storage Notebook
-        src: nasadem-cog.html
-      - title: Storage Documentation
-        src: nasadem-storage.html
-
-  terraclimate:
-    category: Climate/Weather
-    headerImg: ./images/terraclimate-hero.png
-    tabs:
-      - title: Example Notebook
-        src: terraclimate-example.html
-        launch: datasets/terraclimate/terraclimate-example.ipynb
-      - title: Blob Storage Notebook
-        src: terraclimate.html
-
-  us-census:
-    headerImg: ./images/us-census-hero.png
-    tabs:
-      - title: Example Notebook
-        src: us-census-example.html
-        launch: datasets/us-census/us-census-example.ipynb
-
-  gbif:
-    headerImg: ./images/gbif-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gbif-example.html
-        launch: datasets/gbif/gbif-example.ipynb
-
-  gridmet:
-    headerImg: ./images/gridmet-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gridmet-example.html
-        launch: datasets/gridmet/gridmet-example.ipynb
-
-  fia:
-    headerImg: ./images/fia-hero.png
-    tabs:
-      - title: Example Notebook
-        src: fia-example.html
-        launch: datasets/fia/fia-example.ipynb
-
   naip:
     category: Imagery
     headerImg: ./images/naip-hero.jpg
@@ -282,17 +289,17 @@ collections:
       - title: Storage Documentation
         src: naip-storage.html
 
-  landsat-8-c2-l2:
-    category: Imagery
-    headerImg: ./images/landsat-hero.jpg
+  nasadem:
+    category: DEMs
+    headerImg: ./images/nasadem-hero.png
     tabs:
       - title: Example Notebook
-        src: landsat-8-c2-l2-example.html
-        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
+        src: nasadem-example.html
+        launch: datasets/nasadem/nasadem-example.ipynb
       - title: Blob Storage Notebook
-        src: landsat-8.html
+        src: nasadem-cog.html
       - title: Storage Documentation
-        src: landsat-8-storage.html
+        src: nasadem-storage.html
 
   sentinel-2-l2a:
     category: Imagery
@@ -306,17 +313,24 @@ collections:
       - title: Storage Documentation
         src: sentinel-2-storage.html
 
-  aster-l1t:
-    category: Imagery
-    headerImg: ./images/aster-hero.jpg
+  terraclimate:
+    category: Climate/Weather
+    headerImg: ./images/terraclimate-hero.png
     tabs:
       - title: Example Notebook
-        src: aster-l1t-example.html
-        launch: datasets/aster-l1t/aster-l1t-example.ipynb
+        src: terraclimate-example.html
+        launch: datasets/terraclimate/terraclimate-example.ipynb
       - title: Blob Storage Notebook
-        src: aster.html
+        src: terraclimate.html
       - title: Storage Documentation
-        src: aster-storage.html
+        src: terraclimate-storage.html
+
+  us-census:
+    headerImg: ./images/us-census-hero.png
+    tabs:
+      - title: Example Notebook
+        src: us-census-example.html
+        launch: datasets/us-census/us-census-example.ipynb
 
 # Configuration for "other dataset" section. This list is rendered
 # in the order represented here, which is mostly alphabetical, with

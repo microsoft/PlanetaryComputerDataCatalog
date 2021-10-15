@@ -26,6 +26,7 @@ const ItemSnippetButton = () => {
           ariaLabel={label}
           aria-describedby={tooltipId}
           styles={headerButtonStyle}
+          data-cy="item-snippet-button"
         />
       </TooltipHost>
       <SnippetCopyPanel
