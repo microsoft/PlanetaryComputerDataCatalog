@@ -30,10 +30,7 @@ export const getNumericControl = (field: CqlExpressionParser<number>) => {
   const { fieldSchema } = field;
   if (!fieldSchema) return null;
 
-  if (
-    fieldSchema.properties?.["min"] !== "undefined" &&
-    fieldSchema.properties?.["max"] !== "undefined"
-  ) {
+  if (fieldSchema.minimum !== undefined && fieldSchema.maximum !== undefined) {
     // Range control
     return (
       <RangeField

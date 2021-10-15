@@ -3,6 +3,7 @@ import { Slider, Stack, Text } from "@fluentui/react";
 
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { DropdownButton } from "../DropdownButton";
+import { ICqlExpression } from "pages/Explore/utils/cql/types";
 
 type RangeFieldProps = {
   field: CqlExpressionParser<number>;
@@ -17,20 +18,21 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
   const [lowerValue, setLowerValue] = useState<number>(0);
 
   const label = field.fieldSchema?.title || field.property;
+  const keyPrefex = `rangecontrol-${field.property}`;
 
   return (
     <DropdownButton
-      key={`control-${field.property}`}
+      key={keyPrefex}
       label={label}
       iconProps={{ iconName: icon }}
       onRenderText={() => {
         return (
-          <Text>
+          <Text key={`${keyPrefex}-label`}>
             {label}: {field.value}
           </Text>
         );
       }}
-      onDismiss={() => console.log(lowerValue, upperValue)}
+      onDismiss={() => console.log(toCqlExpression(lowerValue, upperValue, field))}
     >
       <Stack styles={stackStyles}>
         <Slider
@@ -57,4 +59,48 @@ const stackStyles = {
   root: {
     width: "100%",
   },
+};
+
+const toCqlExpression = (
+  lowerValue: number,
+  upperValue: number,
+  field: CqlExpressionParser<number>
+): ICqlExpression => {
+  if (field.fieldSchema?.minimum === lowerValue) {
+    return toSingleValuePredicate("lte", field.property, upperValue);
+  } else if (field.fieldSchema?.maximum === upperValue) {
+    return toSingleValuePredicate("gte", field.property, lowerValue);
+  } else {
+    return toBetweenPredicate(field.property, lowerValue, upperValue);
+  }
+};
+
+const toBetweenPredicate = (
+  property: string,
+  lowerValue: number,
+  upperValue: number
+): ICqlExpression => {
+  return {
+    between: {
+      value: { property: property },
+      lower: lowerValue,
+      upper: upperValue,
+    },
+  };
+};
+
+const toSingleValuePredicate = (
+  operator: "gte" | "lte",
+  property: string,
+  value: number
+): ICqlExpression => {
+  // TODO: type this properly to use `operator`
+  return {
+    lte: [
+      {
+        property: property,
+      },
+      value,
+    ],
+  };
 };

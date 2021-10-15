@@ -10,6 +10,11 @@ type CqlOperator =
   | "intersects";
 
 type CqlPropertyObject = { property: string };
+type CqlBetweenPredicate = {
+  value: CqlPropertyObject;
+  lower: number;
+  upper: number;
+};
 
 export type ICqlExpression =
   | { eq: [CqlPropertyObject, number | string] }
@@ -17,10 +22,10 @@ export type ICqlExpression =
   | { gt: [CqlPropertyObject, number | string] }
   | { lte: [CqlPropertyObject, number | string] }
   | { lt: [CqlPropertyObject, number | string] }
-  | { between: [CqlPropertyObject, number[] | string[]] }
   | { like: [CqlPropertyObject, string] }
   | { anyinteracts: [CqlPropertyObject, string[]] }
-  | { intersects: any };
+  | { between: CqlBetweenPredicate }
+  | { intersects: [CqlPropertyObject, GeoJSON] };
 
 export type ICqlExpressionList = ICqlExpression[] | [];
 

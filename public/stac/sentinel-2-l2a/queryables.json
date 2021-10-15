@@ -6,11 +6,12 @@
   "description": "Queryable properties for the STAC API Item Search filter.",
   "properties": {
     "id": {
-      "description": "ID",
+      "description": "Item identifier",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id"
     },
     "datetime": {
       "description": "Datetime",
+      "type": "string",
       "title": "Acquired",
       "format": "date-time",
       "pattern": "(\\+00:00|Z)$"
@@ -21,8 +22,8 @@
     "s2:snow_ice_percentage": {
       "title": "Snow/Ice Cover",
       "type": "number",
-      "min": 0,
-      "max": 100
+      "minimum": 0,
+      "maximum": 100
     },
     "sat:orbit_state": {
       "$ref": "https://stac-extensions.github.io/sat/v1.0.0/schema.json#/definitions/fields/properties/sat:orbit_state"
