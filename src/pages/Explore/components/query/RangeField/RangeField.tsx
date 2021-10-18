@@ -29,10 +29,11 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
   const range = schemaRange(fieldSchema);
   const labelPrefix = fieldSchema?.title || field.property;
   const valueLabel = getValueLabel(field, currentLower, currentUpper);
-  const keyPrefex = `rangecontrol-${field.property}`;
+  const keyPrefix = `rangecontrol-${field.property}`;
 
   const handleUpdate = () => {
     const cql = toCqlExpression(lowerWorkingValue, upperWorkingValue, field);
+    console.log("calling", cql);
     dispatch(setCustomCqlExpression(cql));
   };
 
@@ -46,7 +47,7 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
 
   const renderLabel = () => {
     return (
-      <Text key={`${keyPrefex}-label`}>
+      <Text key={`${keyPrefix}-label`}>
         {labelPrefix}: {valueLabel}
       </Text>
     );
@@ -54,11 +55,12 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
 
   return (
     <DropdownButton
-      key={keyPrefex}
+      key={keyPrefix}
       label={`${labelPrefix}: ${valueLabel}`}
       iconProps={{ iconName: icon }}
       onRenderText={renderLabel}
       onDismiss={handleUpdate}
+      data-cy={keyPrefix}
     >
       <Stack styles={stackStyles}>
         <Slider
