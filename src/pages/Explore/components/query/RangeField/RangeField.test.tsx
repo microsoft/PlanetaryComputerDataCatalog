@@ -1,4 +1,3 @@
-import * as reactRedux from "react-redux";
 import {
   render,
   screen,
@@ -6,7 +5,6 @@ import {
   waitFor,
   within,
 } from "pages/Explore/utils/testUtils";
-import userEvent from "@testing-library/user-event";
 
 import { RangeField } from "./RangeField";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
@@ -29,15 +27,9 @@ const queryable: JSONSchema = {
   },
 };
 
-const useDispatchMock = jest.spyOn(reactRedux, "useDispatch");
-
 const gte: CqlGteExpression = { gte: [{ property: "eo:cloud_cover" }, 10] };
 const lte: CqlLteExpression = { lte: [{ property: "eo:cloud_cover" }, 10] };
 const eq: CqlEqualExpression = { eq: [{ property: "eo:cloud_cover" }, 10] };
-
-beforeEach(() => {
-  useDispatchMock.mockClear();
-});
 
 test("it displays correct title and formatted value for GTE", async () => {
   const field = new CqlExpressionParser<number>(gte, queryable);
@@ -66,9 +58,6 @@ test("it displays correct title and formatted value for LTE", async () => {
 });
 
 test("it displays correct title and formatted value for EQ", async () => {
-  const dummyDispatch = jest.fn();
-  useDispatchMock.mockReturnValue(dummyDispatch);
-
   const field = new CqlExpressionParser<number>(eq, queryable);
   render(<RangeField field={field} icon="search" />);
 
