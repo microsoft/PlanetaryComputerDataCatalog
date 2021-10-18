@@ -1,106 +1,95 @@
 import { useState } from "react";
-import { Slider, Stack, Text } from "@fluentui/react";
+import { getTheme, ISliderStyles, Slider, Stack, Text } from "@fluentui/react";
 
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { DropdownButton } from "../DropdownButton";
-import { ICqlExpression } from "pages/Explore/utils/cql/types";
+import { useExploreDispatch } from "pages/Explore/state/hooks";
+import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
+import {
+  getValueLabel,
+  parseCqlValueToRange,
+  schemaRange,
+  toCqlExpression,
+  formatValue,
+} from "./helpers";
 
 type RangeFieldProps = {
   field: CqlExpressionParser<number>;
   icon: string;
 };
-export const RangeField = ({ field, icon }: RangeFieldProps) => {
-  // TODO: Handle min/max ranges
-  const value = Array.isArray(field.value)
-    ? parseInt(field.value[0].toString())
-    : parseInt(field.value.toString());
-  const [upperValue, setUpperValue] = useState<number>(value);
-  const [lowerValue, setLowerValue] = useState<number>(0);
 
-  const label = field.fieldSchema?.title || field.property;
+export const RangeField = ({ field, icon }: RangeFieldProps) => {
+  const dispatch = useExploreDispatch();
+
+  const { currentLower, currentUpper } = parseCqlValueToRange(field);
+  const [lowerWorkingValue, setLowerValue] = useState<number>(currentLower);
+  const [upperWorkingValue, setUpperValue] = useState<number>(currentUpper);
+
+  const { fieldSchema } = field;
+  const range = schemaRange(fieldSchema);
+  const labelPrefix = fieldSchema?.title || field.property;
+  const valueLabel = getValueLabel(field, currentLower, currentUpper);
   const keyPrefex = `rangecontrol-${field.property}`;
+
+  const handleUpdate = () => {
+    const cql = toCqlExpression(lowerWorkingValue, upperWorkingValue, field);
+    dispatch(setCustomCqlExpression(cql));
+  };
+
+  const handleChange = (_: unknown, range: [number, number] | undefined) => {
+    if (range) {
+      const [lower, upper] = range;
+      setLowerValue(lower);
+      setUpperValue(upper);
+    }
+  };
+
+  const renderLabel = () => {
+    return (
+      <Text key={`${keyPrefex}-label`}>
+        {labelPrefix}: {valueLabel}
+      </Text>
+    );
+  };
 
   return (
     <DropdownButton
       key={keyPrefex}
-      label={label}
+      label={`${labelPrefix}: ${valueLabel}`}
       iconProps={{ iconName: icon }}
-      onRenderText={() => {
-        return (
-          <Text key={`${keyPrefex}-label`}>
-            {label}: {field.value}
-          </Text>
-        );
-      }}
-      onDismiss={() => console.log(toCqlExpression(lowerValue, upperValue, field))}
+      onRenderText={renderLabel}
+      onDismiss={handleUpdate}
     >
       <Stack styles={stackStyles}>
         <Slider
           ranged
-          min={0}
-          max={100}
+          min={range.minimum}
+          max={range.maximum}
           step={1}
-          lowerValue={lowerValue}
-          value={upperValue}
-          onChange={(_: unknown, range: [number, number] | undefined) => {
-            if (range) {
-              const [lower, upper] = range;
-              setLowerValue(lower);
-              setUpperValue(upper);
-            }
-          }}
+          lowerValue={lowerWorkingValue}
+          value={upperWorkingValue}
+          onChange={handleChange}
+          valueFormat={formatValue(field)}
+          styles={sliderStyles}
         />
       </Stack>
     </DropdownButton>
   );
 };
 
+const theme = getTheme();
 const stackStyles = {
   root: {
     width: "100%",
   },
 };
 
-const toCqlExpression = (
-  lowerValue: number,
-  upperValue: number,
-  field: CqlExpressionParser<number>
-): ICqlExpression => {
-  if (field.fieldSchema?.minimum === lowerValue) {
-    return toSingleValuePredicate("lte", field.property, upperValue);
-  } else if (field.fieldSchema?.maximum === upperValue) {
-    return toSingleValuePredicate("gte", field.property, lowerValue);
-  } else {
-    return toBetweenPredicate(field.property, lowerValue, upperValue);
-  }
-};
-
-const toBetweenPredicate = (
-  property: string,
-  lowerValue: number,
-  upperValue: number
-): ICqlExpression => {
-  return {
-    between: {
-      value: { property: property },
-      lower: lowerValue,
-      upper: upperValue,
-    },
-  };
-};
-
-const toSingleValuePredicate = (
-  operator: "gte" | "lte",
-  property: string,
-  value: number
-): ICqlExpression => {
-  // TODO: type this properly to use `operator`
-  return {
-    lte: [
-      {
-        property: property,
-      },
-      value,
-    ],
-  };
+const sliderStyles: Partial<ISliderStyles> = {
+  thumb: { width: 14, height: 14, top: -5 },
+  activeSection: {
+    background: theme.palette.themePrimary,
+  },
+  inactiveSection: {
+    background: theme.palette.themeLighter,
+  },
 };

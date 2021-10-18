@@ -7,7 +7,14 @@ import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 
 const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
-const fixedPct = value => value.toFixed(2) + "%";
+const fixedPct = value => {
+  const n = Number(value);
+  if (Number.isInteger(n)) {
+    return `${n}%`;
+  }
+  return value.toFixed(2) + "%";
+};
+
 const fixedDeg = value => value.toFixed(3) + "°";
 
 StacFields.Registry.addMetadataField("gsd", {

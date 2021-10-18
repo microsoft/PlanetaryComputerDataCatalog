@@ -16,11 +16,15 @@ type CqlBetweenPredicate = {
   upper: number;
 };
 
+export type CqlEqualExpression = { eq: [CqlPropertyObject, number | string] };
+export type CqlGteExpression = { gte: [CqlPropertyObject, number | string] };
+export type CqlLteExpression = { lte: [CqlPropertyObject, number | string] };
+
 export type ICqlExpression =
-  | { eq: [CqlPropertyObject, number | string] }
-  | { gte: [CqlPropertyObject, number | string] }
+  | CqlEqualExpression
+  | CqlGteExpression
   | { gt: [CqlPropertyObject, number | string] }
-  | { lte: [CqlPropertyObject, number | string] }
+  | CqlLteExpression
   | { lt: [CqlPropertyObject, number | string] }
   | { like: [CqlPropertyObject, string] }
   | { anyinteracts: [CqlPropertyObject, string[]] }
