@@ -22,6 +22,9 @@ export type CqlGtExpression<T> = { gt: [CqlPropertyObject, T] };
 export type CqlLteExpression<T> = { lte: [CqlPropertyObject, T] };
 export type CqlLtExpression<T> = { lt: [CqlPropertyObject, T] };
 export type CqlBetweenExpression<T> = { between: CqlBetweenPredicate<T> };
+export type CqlAnyinteractsExpression<T> = {
+  anyinteracts: [CqlPropertyObject, [T, T]];
+};
 
 type CqlSinglePreditcate<T> =
   | CqlEqualExpression<T>
@@ -37,8 +40,8 @@ export type CqlExpression =
   | CqlLteExpression
   | CqlLtExpression
   | CqlBetweenExpression
+  | CqlAnyinteractsExpression
   | { like: [CqlPropertyObject, string] }
-  | { anyinteracts: [CqlPropertyObject, string[]] }
   | { intersects: [CqlPropertyObject, GeoJSON] };
 
 export type ICqlExpressionList = CqlExpression[] | [];

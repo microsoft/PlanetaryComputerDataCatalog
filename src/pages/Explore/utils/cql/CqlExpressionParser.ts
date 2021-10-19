@@ -8,6 +8,7 @@ import {
   CqlBetweenExpression,
   ParsedBetweenExpression,
   CqlSinglePreditcate,
+  CqlAnyinteractsExpression,
 } from "./types";
 
 export class CqlExpressionParser<T extends string | number> {
@@ -39,11 +40,28 @@ export class CqlExpressionParser<T extends string | number> {
         this.value = parsed.value;
         break;
 
+      case "anyinteracts":
+        const aiParsed = this.parseAnyinteracts();
+        this.property = aiParsed.property;
+        this.value = aiParsed.value;
+        break;
+
       default:
-        throw new Error("Unsupported operator");
+        throw new Error(`Unsupported operator: ${this.operator}`);
     }
 
     this.fieldSchema = this.queryableFieldDefinition(this.property, queryable);
+  }
+
+  private parseAnyinteracts() {
+    const exp = this.exp as CqlAnyinteractsExpression<T>;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, body] = Object.entries(exp)[0];
+    const [field, value] = body;
+    return {
+      property: field.property,
+      value,
+    };
   }
 
   private parseBetween(): ParsedBetweenExpression {
