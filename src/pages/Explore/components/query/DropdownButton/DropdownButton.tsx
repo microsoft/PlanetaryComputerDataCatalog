@@ -46,7 +46,7 @@ export const DropdownButton = React.forwardRef<
         <DefaultButton
           id={buttonId}
           styles={buttonStyles}
-          onClick={toggle}
+          onClick={handleDismiss}
           {...rest}
         />
         <Icon iconName="ChevronDown" styles={chevronStyle} />
