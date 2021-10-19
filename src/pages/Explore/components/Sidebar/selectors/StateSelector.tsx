@@ -1,6 +1,7 @@
 import { useCallback } from "react";
-import { Dropdown, IDropdownOption, Icon, getTheme } from "@fluentui/react";
+import { Dropdown, IDropdownOption } from "@fluentui/react";
 import { useExploreDispatch } from "../../../state/hooks";
+import { renderPlaceholder, renderTitle } from "pages/Explore/utils/render";
 
 type StateSelectorProps = {
   options: IDropdownOption[];
@@ -53,37 +54,3 @@ const StateSelector = ({
 };
 
 export default StateSelector;
-
-const renderTitle = (iconName: string) => {
-  return (options: IDropdownOption[] | undefined): JSX.Element | null => {
-    if (!options) return null;
-
-    const option = options[0];
-
-    return (
-      <div>
-        <Icon
-          style={iconStyles}
-          iconName={iconName}
-          aria-hidden="true"
-          title={option.title}
-        />
-        <span>{option.text}</span>
-      </div>
-    );
-  };
-};
-
-const renderPlaceholder = (iconName: string, title: string) => {
-  return (): JSX.Element => {
-    return (
-      <div>
-        <Icon style={iconStyles} iconName={iconName} aria-hidden="true" />
-        <span>{title}</span>
-      </div>
-    );
-  };
-};
-
-const { palette } = getTheme();
-const iconStyles = { marginRight: 8, color: palette.themePrimary };

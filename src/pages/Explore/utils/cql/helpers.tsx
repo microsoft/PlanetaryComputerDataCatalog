@@ -1,4 +1,5 @@
 import { TextField } from "@fluentui/react";
+import { EnumField } from "pages/Explore/components/query/EnumField";
 
 import { RangeField } from "pages/Explore/components/query/RangeField";
 import { CqlExpressionParser } from "./CqlExpressionParser";
@@ -7,10 +8,16 @@ export const getControlForField = (field: CqlExpressionParser<string | number>) 
   const schemaType = field.fieldSchema?.type;
   if (!schemaType) return null;
 
-  if (schemaType === "string") {
-    return getTextControl(field as CqlExpressionParser<string>);
-  } else if (schemaType === "number") {
-    return getNumericControl(field as CqlExpressionParser<number>);
+  switch (schemaType) {
+    case "string":
+      if (fieldSchemaIsEnum(field)) {
+        return getEnumControl(field as CqlExpressionParser<string>);
+      }
+      return getTextControl(field as CqlExpressionParser<string>);
+    case "number":
+      return getNumericControl(field as CqlExpressionParser<number>);
+    default:
+      return getTextControl(field as CqlExpressionParser<string>);
   }
 };
 
@@ -49,4 +56,12 @@ export const getNumericControl = (field: CqlExpressionParser<number>) => {
       ></TextField>
     );
   }
+};
+
+const getEnumControl = (field: CqlExpressionParser<string>) => {
+  return <EnumField field={field} />;
+};
+
+const fieldSchemaIsEnum = (field: CqlExpressionParser<string | number>) => {
+  return field.fieldSchema?.enum !== undefined;
 };
