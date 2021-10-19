@@ -160,6 +160,7 @@ export const scrollToHash = (
   };
 };
 
+// TODO: Refactor to parse into params, not string manipulation
 export const makeTileJsonUrl = (
   query: IMosaic,
   renderOption: IMosaicRenderOption | null,
@@ -201,12 +202,14 @@ export const makeItemPreviewUrl = (
 const encodeRenderOpts = (renderOpts: string | undefined) => {
   if (!renderOpts) return "";
 
+  const paramsToEncode = ["expression", "asset_expression"];
   const renderParams = qs.parse(renderOpts, { decode: false });
-  if ("expression" in renderParams) {
-    renderParams["expression"] = encodeURIComponent(
-      renderParams["expression"] as string
-    );
-  }
+
+  paramsToEncode.forEach(key => {
+    if (key in renderParams) {
+      renderParams[key] = encodeURIComponent(renderParams[key] as string);
+    }
+  });
 
   return qs.stringify(renderParams, { encode: false });
 };
