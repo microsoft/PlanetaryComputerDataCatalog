@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.org/queryables",
+  "type": "object",
+  "title": "Queryables for Planetary Computer GOES-R CMI STAC API",
+  "properties": {
+    "id": {
+      "description": "Item identifier",
+      "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id"
+    },
+    "datetime": {
+      "description": "Datetime",
+      "type": "string",
+      "title": "Acquired",
+      "format": "date-time",
+      "pattern": "(\\+00:00|Z)$"
+    },
+    "platform": {
+      "description": "Platform",
+      "type": "string",
+      "title": "Platform",
+      "enum": ["GOES-16", "GOES-17"]
+    },
+    "goes:image-type": {
+      "description": "Image type",
+      "type": "string",
+      "title": "Image Type",
+      "enum": ["FULL DISK", "CONUS", "MESOSCALE"]
+    }
+  }
+}
