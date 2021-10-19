@@ -1,7 +1,7 @@
 import { TextField } from "@fluentui/react";
 
 import { RangeField } from "pages/Explore/components/query/RangeField";
-import { CqlExpressionParser } from ".";
+import { CqlExpressionParser } from "./CqlExpressionParser";
 
 export const getControlForField = (field: CqlExpressionParser<string | number>) => {
   const schemaType = field.fieldSchema?.type;

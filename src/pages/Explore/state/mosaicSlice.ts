@@ -6,7 +6,7 @@ import { IMosaic, IMosaicRenderOption } from "../types";
 import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
-import { ICqlExpression, ICqlExpressionList } from "../utils/cql/types";
+import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
 import { AppThunk, ExploreState } from "./store";
 
 export interface IMosaicState {
@@ -65,9 +65,9 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   }
 );
 
-export const setCustomCqlExpression = createAsyncThunk<string, ICqlExpression>(
+export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
   "cql-api/createCustomQueryHashkey",
-  async (cqlExpression: ICqlExpression, { getState, dispatch }) => {
+  async (cqlExpression: CqlExpression, { getState, dispatch }) => {
     dispatch(addOrUpdateCustomCqlExpression(cqlExpression));
 
     const state = getState() as ExploreState;
@@ -127,7 +127,7 @@ export const mosaicSlice = createSlice({
     },
     addOrUpdateCustomCqlExpression: (
       state,
-      action: PayloadAction<ICqlExpression>
+      action: PayloadAction<CqlExpression>
     ) => {
       const draft = state.customCqlExpressions;
       const newExpProperty = new CqlExpressionParser(action.payload).property;

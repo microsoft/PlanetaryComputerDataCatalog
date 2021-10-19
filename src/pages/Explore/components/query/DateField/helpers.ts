@@ -1,7 +1,7 @@
 import {
   CqlPropertyObject,
   CqlDate,
-  ICqlExpression,
+  CqlExpression,
 } from "pages/Explore/utils/cql/types";
 import { getDayStart, toDateString } from "utils";
 import { DateRangeState, ValidationState } from "./types";
@@ -42,7 +42,7 @@ export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
   };
 };
 
-export const toCqlExpression = (dateRange: DateRangeState): ICqlExpression => {
+export const toCqlExpression = (dateRange: DateRangeState): CqlExpression => {
   const property: CqlPropertyObject = { property: "datetime" };
 
   if (dateRange.end) {

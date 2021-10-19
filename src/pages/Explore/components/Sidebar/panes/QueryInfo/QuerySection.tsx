@@ -3,7 +3,7 @@ import { Text } from "@fluentui/react";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import {
   CqlOperator,
-  ICqlExpression,
+  CqlExpression,
   ICqlExpressionList,
 } from "pages/Explore/utils/cql/types";
 import { toUtcDate } from "utils";
@@ -35,7 +35,7 @@ const getDateLabel = (
 };
 
 const QuerySection = ({ cql }: QuerySectionProps) => {
-  const expressions = (expression: ICqlExpression) => {
+  const expressions = (expression: CqlExpression) => {
     const exp = new CqlExpressionParser(expression);
     const propertyLabel = stacFormatter.label(exp.property);
     const opText = operators[exp.operator];

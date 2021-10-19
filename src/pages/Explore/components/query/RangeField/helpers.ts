@@ -3,7 +3,7 @@ import {
   CqlGteExpression,
   CqlLteExpression,
   CqlEqualExpression,
-  ICqlExpression,
+  CqlExpression,
 } from "pages/Explore/utils/cql/types";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
@@ -38,7 +38,7 @@ export const toCqlExpression = (
   lowerValue: number,
   upperValue: number,
   field: CqlExpressionParser<number>
-): ICqlExpression => {
+): CqlExpression => {
   const isLowerClamped = field.fieldSchema?.minimum === lowerValue;
   const isUpperClamped = field.fieldSchema?.maximum === upperValue;
 
@@ -59,7 +59,7 @@ export const toBetweenPredicate = (
   property: string,
   lowerValue: number,
   upperValue: number
-): ICqlExpression => {
+): CqlExpression => {
   return {
     between: {
       value: { property: property },
@@ -73,7 +73,10 @@ export const toSingleValuePredicate = (
   operator: "gte" | "lte" | "eq",
   property: string,
   value: number
-): CqlGteExpression | CqlLteExpression | CqlEqualExpression => {
+):
+  | CqlGteExpression<number>
+  | CqlLteExpression<number>
+  | CqlEqualExpression<number> => {
   // REFACTOR: can `operator` be successfully discriminated for use as a dynamic key in a single return type?
 
   switch (operator) {

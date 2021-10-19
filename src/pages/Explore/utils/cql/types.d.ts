@@ -10,28 +10,38 @@ type CqlOperator =
   | "intersects";
 
 type CqlPropertyObject = { property: string };
-type CqlBetweenPredicate = {
+type CqlBetweenPredicate<T> = {
   value: CqlPropertyObject;
-  lower: number;
-  upper: number;
+  lower: T;
+  upper: T;
 };
 
-export type CqlEqualExpression = { eq: [CqlPropertyObject, number | string] };
-export type CqlGteExpression = { gte: [CqlPropertyObject, number | string] };
-export type CqlLteExpression = { lte: [CqlPropertyObject, number | string] };
+export type CqlEqualExpression<T> = { eq: [CqlPropertyObject, T] };
+export type CqlGteExpression<T> = { gte: [CqlPropertyObject, T] };
+export type CqlGtExpression<T> = { gt: [CqlPropertyObject, T] };
+export type CqlLteExpression<T> = { lte: [CqlPropertyObject, T] };
+export type CqlLtExpression<T> = { lt: [CqlPropertyObject, T] };
+export type CqlBetweenExpression<T> = { between: CqlBetweenPredicate<T> };
 
-export type ICqlExpression =
+type CqlSinglePreditcate<T> =
+  | CqlEqualExpression<T>
+  | CqlGteExpression<T>
+  | CqlGtExpression<T>
+  | CqlLteExpression<T>
+  | CqlLtExpression<T>;
+
+export type CqlExpression =
   | CqlEqualExpression
   | CqlGteExpression
-  | { gt: [CqlPropertyObject, number | string] }
+  | CqlGtExpression
   | CqlLteExpression
-  | { lt: [CqlPropertyObject, number | string] }
+  | CqlLtExpression
+  | CqlBetweenExpression
   | { like: [CqlPropertyObject, string] }
   | { anyinteracts: [CqlPropertyObject, string[]] }
-  | { between: CqlBetweenPredicate }
   | { intersects: [CqlPropertyObject, GeoJSON] };
 
-export type ICqlExpressionList = ICqlExpression[] | [];
+export type ICqlExpressionList = CqlExpression[] | [];
 
 // Represent parsed dates
 export type CqlDateSingle = string;
@@ -53,3 +63,5 @@ type CqlRangeableDate =
     };
 
 export type CqlDate = CqlRangeableDate & ICqlDatePart;
+
+export type ParsedBetweenExpression = { property: string; value: [T, T] };
