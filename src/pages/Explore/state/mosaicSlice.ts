@@ -67,7 +67,7 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
 export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
   "cql-api/createCustomQueryHashkey",
   async (cqlExpression: CqlExpression, { getState, dispatch }) => {
-    dispatch(removeCustomCqlExpression(cqlExpression));
+    dispatch(addOrUpdateCustomCqlExpression(cqlExpression));
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;

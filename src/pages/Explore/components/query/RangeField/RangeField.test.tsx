@@ -28,10 +28,10 @@ const queryable: JSONSchema = {
   },
 };
 
-const gte: CqlGteExpression = { gte: [{ property: "eo:cloud_cover" }, 10] };
-const lte: CqlLteExpression = { lte: [{ property: "eo:cloud_cover" }, 10] };
-const eq: CqlEqualExpression = { eq: [{ property: "eo:cloud_cover" }, 10] };
-const bt: CqlBetweenExpression = {
+const gte: CqlGteExpression<number> = { gte: [{ property: "eo:cloud_cover" }, 10] };
+const lte: CqlLteExpression<number> = { lte: [{ property: "eo:cloud_cover" }, 10] };
+const eq: CqlEqualExpression<number> = { eq: [{ property: "eo:cloud_cover" }, 10] };
+const bt: CqlBetweenExpression<number> = {
   between: { value: { property: "eo:cloud_cover" }, lower: 25, upper: 75 },
 };
 
