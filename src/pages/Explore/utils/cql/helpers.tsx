@@ -59,7 +59,7 @@ export const getNumericControl = (field: CqlExpressionParser<number>) => {
 };
 
 const getEnumControl = (field: CqlExpressionParser<string>) => {
-  return <EnumField field={field} />;
+  return <EnumField field={field} key={`enumcontrol-${field.property}`} />;
 };
 
 const fieldSchemaIsEnum = (field: CqlExpressionParser<string | number>) => {

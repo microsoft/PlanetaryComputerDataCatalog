@@ -59,9 +59,13 @@ export class CqlParser {
     }
 
     if (Array.isArray(date.value)) {
+      if (date.value.length !== 2) {
+        throw new Error("Date range value must contain exactly two dates");
+      }
+      const [min, max] = date.value;
       return {
         operator: date.operator,
-        value: this.formatRange(date.value),
+        value: this.formatRange([min, max]),
         isRange: true,
         ...collectionRange,
       };

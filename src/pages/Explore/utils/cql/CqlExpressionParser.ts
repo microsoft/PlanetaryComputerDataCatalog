@@ -9,13 +9,14 @@ import {
   ParsedBetweenExpression,
   CqlSinglePreditcate,
   CqlAnyinteractsExpression,
+  CqlInExpression,
 } from "./types";
 
 export class CqlExpressionParser<T extends string | number> {
   readonly exp: CqlExpression;
   readonly operator: CqlOperator;
   readonly property: string;
-  readonly value: T | [T, T];
+  readonly value: T | [T, T] | T[];
   readonly fieldSchema: JSONSchema | undefined;
 
   constructor(exp: CqlExpression, queryable?: JSONSchema) {
@@ -38,6 +39,12 @@ export class CqlExpressionParser<T extends string | number> {
         const parsed = this.parseSinglePredicate();
         this.property = parsed.property;
         this.value = parsed.value;
+        break;
+
+      case "in":
+        const inParsed = this.parseInPredicate();
+        this.property = inParsed.property;
+        this.value = inParsed.value;
         break;
 
       case "anyinteracts":
@@ -69,6 +76,14 @@ export class CqlExpressionParser<T extends string | number> {
     return {
       value: [exp.between.lower, exp.between.upper],
       property: exp.between.value.property,
+    };
+  }
+
+  private parseInPredicate() {
+    const exp = this.exp as CqlInExpression<T>;
+    return {
+      value: exp.in.list,
+      property: exp.in.value.property,
     };
   }
 

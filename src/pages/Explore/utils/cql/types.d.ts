@@ -4,6 +4,7 @@ type CqlOperator =
   | "gt"
   | "lte"
   | "lt"
+  | "in"
   | "between"
   | "like"
   | "anyinteracts"
@@ -15,6 +16,10 @@ type CqlBetweenPredicate<T> = {
   lower: T;
   upper: T;
 };
+type CqlInPredicate<T> = {
+  value: CqlPropertyObject;
+  list: T[];
+};
 
 export type CqlEqualExpression<T> = { eq: [CqlPropertyObject, T] };
 export type CqlGteExpression<T> = { gte: [CqlPropertyObject, T] };
@@ -22,6 +27,7 @@ export type CqlGtExpression<T> = { gt: [CqlPropertyObject, T] };
 export type CqlLteExpression<T> = { lte: [CqlPropertyObject, T] };
 export type CqlLtExpression<T> = { lt: [CqlPropertyObject, T] };
 export type CqlBetweenExpression<T> = { between: CqlBetweenPredicate<T> };
+export type CqlInExpression<T> = { in: CqlInPredicate<T> };
 export type CqlAnyinteractsExpression<T> = {
   anyinteracts: [CqlPropertyObject, [T, T]];
 };
@@ -41,6 +47,7 @@ export type CqlExpression =
   | CqlLtExpression
   | CqlBetweenExpression
   | CqlAnyinteractsExpression
+  | CqlInPredicate
   | { like: [CqlPropertyObject, string] }
   | { intersects: [CqlPropertyObject, GeoJSON] };
 

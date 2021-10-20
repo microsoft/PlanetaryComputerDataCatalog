@@ -1,6 +1,6 @@
 import { Icon, IDropdownOption, getTheme, Text } from "@fluentui/react";
 
-export const renderTitle = (iconName: string) => {
+export const renderTitle = (iconName: string, prefix: string = "") => {
   return (options: IDropdownOption[] | undefined): JSX.Element | null => {
     if (!options) return null;
 
@@ -9,7 +9,9 @@ export const renderTitle = (iconName: string) => {
     return (
       <div>
         <Icon style={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text>{optionsText}</Text>
+        <Text>
+          {prefix} {optionsText}
+        </Text>
       </div>
     );
   };
@@ -20,7 +22,7 @@ export const renderPlaceholder = (iconName: string, title: string) => {
     return (
       <div>
         <Icon style={iconStyles} iconName={iconName} aria-hidden="true" />
-        <span>{title}</span>
+        <Text>{title}</Text>
       </div>
     );
   };
