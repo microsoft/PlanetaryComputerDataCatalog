@@ -57,9 +57,8 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;
-    const cql = state.mosaic.isCustomQuery
-      ? state.mosaic.customCqlExpressions
-      : state.mosaic.query.cql;
+    const cql = selectCurrentCql(state);
+
     const hashkey = await createMosaicQueryHashkey(collectionId, queryInfo, cql);
     return hashkey;
   }
@@ -68,14 +67,12 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
 export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
   "cql-api/createCustomQueryHashkey",
   async (cqlExpression: CqlExpression, { getState, dispatch }) => {
-    dispatch(addOrUpdateCustomCqlExpression(cqlExpression));
+    dispatch(removeCustomCqlExpression(cqlExpression));
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;
     const queryPreset = state.mosaic.query;
-    const cql = state.mosaic.isCustomQuery
-      ? state.mosaic.customCqlExpressions
-      : queryPreset.cql;
+    const cql = selectCurrentCql(state);
 
     const hashkey = await createMosaicQueryHashkey(collectionId, queryPreset, cql);
     return hashkey;
@@ -141,6 +138,17 @@ export const mosaicSlice = createSlice({
         draft.splice(existingIndex, 1, action.payload);
       }
     },
+    removeCustomCqlExpression: (state, action: PayloadAction<string>) => {
+      const draft = state.customCqlExpressions;
+      const property = action.payload;
+      const existingIndex = draft.findIndex(
+        exp => new CqlExpressionParser(exp).property === property
+      );
+
+      if (existingIndex > -1) {
+        draft.splice(existingIndex, 1);
+      }
+    },
     resetMosiac: () => {
       return initialState;
     },
@@ -172,6 +180,7 @@ export const {
   setLayerMinZoom,
   setIsCustomQuery,
   addOrUpdateCustomCqlExpression,
+  removeCustomCqlExpression,
 } = mosaicSlice.actions;
 
 export const selectCurrentCql = (state: ExploreState) => {

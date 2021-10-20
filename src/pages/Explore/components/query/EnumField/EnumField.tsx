@@ -48,7 +48,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
       options={options}
       selectedKeys={selectedKeys}
       onRenderTitle={renderTitle(icon, `${title}:`)}
-      onRenderPlaceholder={renderPlaceholder(icon, `${title}: (none)`)}
+      onRenderPlaceholder={renderPlaceholder(icon, `${title}: (include all)`)}
       onChange={handleChange}
       onDismiss={handleDismiss}
     />
@@ -70,13 +70,11 @@ const parseKeysToCql = (
   field: CqlExpressionParser<string>
 ): CqlEqualExpression<string> | CqlInExpression<string> | null => {
   const length = selectedKeys.length;
-  if (length === 0) {
-    return null;
-  }
 
   if (length === 1) {
     return { eq: [{ property: field.property }, selectedKeys[0]] };
   }
-
+  // This may result in an empty `list` value, which is fine and will get
+  // filtered out when optimizing the query
   return { in: { value: { property: field.property }, list: selectedKeys } };
 };

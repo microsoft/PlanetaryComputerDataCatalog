@@ -5,7 +5,7 @@ import { collectionFilter, geomFilter } from "../stac";
 import { IMosaic } from "pages/Explore/types";
 import { DEFAULT_QUERY_LIMIT } from "../constants";
 import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
-import { ICqlExpressionList } from "../cql/types";
+import { CqlExpression, CqlInExpression, ICqlExpressionList } from "../cql/types";
 
 export const makeFilterBody = (
   baseFilter: (IStacFilterCollection | IStacFilterGeom | null)[],
@@ -13,11 +13,28 @@ export const makeFilterBody = (
   cql: ICqlExpressionList,
   limit: number | undefined = undefined
 ): IStacFilter => {
+  const optimizedCql = optimizeCqlExpressions(cql);
   return {
-    filter: { and: [...baseFilter, ...cql] },
+    filter: { and: [...baseFilter, ...optimizedCql] },
     sortby: query.sortby || undefined,
     limit: limit,
   } as IStacFilter;
+};
+
+const optimizeCqlExpressions = (cql: ICqlExpressionList): ICqlExpressionList => {
+  // Some cql expressions can be filtered out of the list and still have the
+  // same function query:
+
+  // * IN predicate with an empty list
+  const checkEmptyIn = (cql: CqlExpression) => {
+    const cqlIn = cql as CqlInExpression<any>;
+    if (cqlIn.in !== undefined) {
+      return cql.in.list.length;
+    }
+    return true;
+  };
+
+  return cql.filter(checkEmptyIn);
 };
 
 export const useCqlFormat = () => {
