@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useReducer, useState, useRef } from "react";
+import { useCallback, useMemo, useReducer, useRef } from "react";
 import {
   Stack,
   IStackTokens,
@@ -6,9 +6,6 @@ import {
   IIconProps,
   VerticalDivider,
   IVerticalDividerStyles,
-  IContextualMenuItem,
-  CommandButton,
-  IContextualMenuProps,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
@@ -28,6 +25,7 @@ import {
   initialValidationState,
   validationReducer,
 } from "./state";
+import useOperatorSelector from "./useOperatorSelector";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
 import { DropdownButton } from "../DropdownButton";
@@ -38,9 +36,6 @@ interface DateFieldProps {
 }
 
 export const DateField = ({ dateExpression }: DateFieldProps) => {
-  const [currentOp, setCurrentOp] = useState<IContextualMenuItem>(
-    opItemFromExpression(dateExpression)
-  );
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -68,6 +63,9 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const maxDay = useMemo(() => {
     return getDayEnd(dateExpression.max);
   }, [dateExpression.max]);
+
+  const { OperatorSelector, currentOp } = useOperatorSelector(dateExpression);
+  console.log(currentOp);
 
   const handleSave = useCallback(() => {
     const exp = toCqlExpression(workingDateRange);
@@ -101,7 +99,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
           );
         }}
       >
-        <CommandButton text={currentOp.text} menuProps={menuProps} />
+        {OperatorSelector}
         <DateFieldProvider state={providerState}>
           <Stack horizontal tokens={calendarTokens}>
             <CalendarControl
@@ -144,30 +142,12 @@ const iconProps: IIconProps = {
 };
 
 const dividerStyles: IVerticalDividerStyles = {
-  wrapper: { marginTop: 55 },
+  wrapper: {
+    marginTop: 55,
+  },
   divider: {
     height: 265,
     background:
       "linear-gradient(rgba(200, 198, 196, .0) , rgb(223 221 220), rgba(200, 198, 196, .0) )",
   },
-};
-
-const menuProps: IContextualMenuProps = {
-  items: [
-    { key: "eq", text: "On date" },
-    { key: "gte", text: "On or after date" },
-    { key: "lte", text: "On or before date" },
-    { key: "anyinteracts", text: "Between dates" },
-  ],
-};
-const opItemFromExpression = (dateExpression: CqlDate): IContextualMenuItem => {
-  const item = menuProps.items.find(item => item.key === dateExpression.operator);
-
-  if (!item) {
-    throw new Error(
-      `Unable to find operator "${dateExpression.operator}" for date control`
-    );
-  }
-
-  return item;
 };
