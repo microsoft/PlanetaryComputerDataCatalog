@@ -1,5 +1,15 @@
-import { useCallback, useMemo, useReducer, useRef } from "react";
-import { Stack, IStackTokens, Text, IIconProps } from "@fluentui/react";
+import { useCallback, useMemo, useReducer, useState, useRef } from "react";
+import {
+  Stack,
+  IStackTokens,
+  Text,
+  IIconProps,
+  VerticalDivider,
+  IVerticalDividerStyles,
+  IContextualMenuItem,
+  CommandButton,
+  IContextualMenuProps,
+} from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
@@ -28,6 +38,9 @@ interface DateFieldProps {
 }
 
 export const DateField = ({ dateExpression }: DateFieldProps) => {
+  const [currentOp, setCurrentOp] = useState<IContextualMenuItem>(
+    opItemFromExpression(dateExpression)
+  );
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -71,8 +84,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     setValidation: validationDispatch,
   };
 
-  // Range or not?
-
   return (
     <>
       <DropdownButton
@@ -90,6 +101,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
           );
         }}
       >
+        <CommandButton text={currentOp.text} menuProps={menuProps} />
         <DateFieldProvider state={providerState}>
           <Stack horizontal tokens={calendarTokens}>
             <CalendarControl
@@ -98,11 +110,14 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               onSelectDate={workingDateRangeDispatch}
             />
             {dateExpression.isRange && (
-              <CalendarControl
-                rangeType="end"
-                date={workingDateRange.end}
-                onSelectDate={workingDateRangeDispatch}
-              />
+              <>
+                <VerticalDivider styles={dividerStyles} />
+                <CalendarControl
+                  rangeType="end"
+                  date={workingDateRange.end}
+                  onSelectDate={workingDateRangeDispatch}
+                />
+              </>
             )}
           </Stack>
           <ControlFooter
@@ -126,4 +141,33 @@ const calendarTokens: IStackTokens = {
 
 const iconProps: IIconProps = {
   iconName: "Calendar",
+};
+
+const dividerStyles: IVerticalDividerStyles = {
+  wrapper: { marginTop: 55 },
+  divider: {
+    height: 265,
+    background:
+      "linear-gradient(rgba(200, 198, 196, .0) , rgb(223 221 220), rgba(200, 198, 196, .0) )",
+  },
+};
+
+const menuProps: IContextualMenuProps = {
+  items: [
+    { key: "eq", text: "On date" },
+    { key: "gte", text: "On or after date" },
+    { key: "lte", text: "On or before date" },
+    { key: "anyinteracts", text: "Between dates" },
+  ],
+};
+const opItemFromExpression = (dateExpression: CqlDate): IContextualMenuItem => {
+  const item = menuProps.items.find(item => item.key === dateExpression.operator);
+
+  if (!item) {
+    throw new Error(
+      `Unable to find operator "${dateExpression.operator}" for date control`
+    );
+  }
+
+  return item;
 };
