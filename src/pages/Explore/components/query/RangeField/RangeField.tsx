@@ -81,7 +81,7 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
 const theme = getTheme();
 const stackStyles = {
   root: {
-    width: "100%",
+    width: 330,
   },
 };
 

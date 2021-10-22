@@ -36,6 +36,9 @@ interface DateFieldProps {
 }
 
 export const DateField = ({ dateExpression }: DateFieldProps) => {
+  const dispatch = useExploreDispatch();
+  const panelRef = useRef<PanelControlHandlers>(null);
+
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -50,36 +53,47 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     initialValidationState
   );
 
-  const dispatch = useExploreDispatch();
-  const panelRef = useRef<PanelControlHandlers>(null);
   const togglePanel = useCallback(() => {
     panelRef.current?.togglePanel();
   }, []);
 
-  const minDay = useMemo(() => {
-    return getDayStart(dateExpression.min);
-  }, [dateExpression.min]);
+  const minDay = getDayStart(dateExpression.min);
+  const maxDay = getDayEnd(dateExpression.max);
 
-  const maxDay = useMemo(() => {
-    return getDayEnd(dateExpression.max);
-  }, [dateExpression.max]);
+  const { OperatorSelector, operatorSelection, resetOperatorSelection } =
+    useOperatorSelector(dateExpression);
 
-  const { OperatorSelector, currentOp } = useOperatorSelector(dateExpression);
-  console.log(currentOp);
+  const handleCancel = () => {
+    workingDateRangeDispatch(initialDateRange);
+    resetOperatorSelection();
+    togglePanel();
+  };
 
   const handleSave = useCallback(() => {
-    const exp = toCqlExpression(workingDateRange);
+    const exp = toCqlExpression(workingDateRange, operatorSelection.key);
+    console.log(exp);
     dispatch(setCustomCqlExpression(exp));
     togglePanel();
-  }, [dispatch, togglePanel, workingDateRange]);
+  }, [operatorSelection.key, dispatch, togglePanel, workingDateRange]);
 
   const opLabel = opEnglish[dateExpression.operator];
   const displayText = getDateDisplayText(dateExpression);
+  const isRange = operatorSelection.key === "between";
 
   const providerState = {
     validMinDate: minDay,
     validMaxDate: maxDay,
     setValidation: validationDispatch,
+  };
+
+  const handleRenderText = () => {
+    return (
+      <Stack key="datetime-selector-label" horizontal horizontalAlign="start">
+        <Text>
+          Acquired: {opLabel} {displayText}
+        </Text>
+      </Stack>
+    );
   };
 
   return (
@@ -89,28 +103,22 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         key={"query-datetime-field"}
         label="Date acquired"
         iconProps={iconProps}
-        onRenderText={() => {
-          return (
-            <Stack key="datetime-selector-label" horizontal horizontalAlign="start">
-              <Text>
-                Acquired: {opLabel} {displayText}
-              </Text>
-            </Stack>
-          );
-        }}
+        onRenderText={handleRenderText}
       >
         {OperatorSelector}
         <DateFieldProvider state={providerState}>
           <Stack horizontal tokens={calendarTokens}>
             <CalendarControl
+              label={isRange ? "Start date" : ""}
               rangeType="start"
               date={workingDateRange.start}
               onSelectDate={workingDateRangeDispatch}
             />
-            {dateExpression.isRange && (
+            {isRange && (
               <>
                 <VerticalDivider styles={dividerStyles} />
                 <CalendarControl
+                  label="End date"
                   rangeType="end"
                   date={workingDateRange.end}
                   onSelectDate={workingDateRangeDispatch}
@@ -119,12 +127,14 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
             )}
           </Stack>
           <ControlFooter
-            onCancel={togglePanel}
+            onCancel={handleCancel}
             onSave={handleSave}
             isValid={isValidToApply(
               controlValidState,
               initialDateRange,
-              workingDateRange
+              workingDateRange,
+              dateExpression.operator,
+              operatorSelection.key
             )}
           />
         </DateFieldProvider>

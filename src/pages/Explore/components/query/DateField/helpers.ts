@@ -3,7 +3,7 @@ import {
   CqlDate,
   CqlExpression,
 } from "pages/Explore/utils/cql/types";
-import { getDayStart, toDateString } from "utils";
+import { getDayEnd, getDayStart, toIsoDateString } from "utils";
 import { DateRangeState, ValidationState } from "./types";
 
 export const getStartRangeValue = (d: CqlDate) => {
@@ -23,7 +23,9 @@ export const getDateDisplayText = (dateExpression: CqlDate) => {
 export const isValidToApply = (
   validationState: ValidationState,
   initialDates: DateRangeState,
-  workingDates: DateRangeState
+  workingDates: DateRangeState,
+  initialOperator: string,
+  workingOperator: string
 ) => {
   const validDates = validationState.start && validationState.end;
   const startDateChanged = !initialDates.start.isSame(workingDates.start);
@@ -32,7 +34,10 @@ export const isValidToApply = (
     Boolean(initialDates.end && !initialDates.end.isSame(workingDates.end));
 
   // Valid if the dates are valid and either the start date or end date has changed
-  return validDates && (startDateChanged || endDateChanged);
+  const dateChanged = startDateChanged || endDateChanged;
+  const operatorChanged = initialOperator !== workingOperator;
+
+  return validDates && (dateChanged || operatorChanged);
 };
 
 export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
@@ -42,17 +47,40 @@ export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
   };
 };
 
-export const toCqlExpression = (dateRange: DateRangeState): CqlExpression => {
+export const toCqlExpression = (
+  dateRange: DateRangeState,
+  operator: string
+): CqlExpression => {
   const property: CqlPropertyObject = { property: "datetime" };
 
-  if (dateRange.end) {
-    const value = [toDateString(dateRange.start), toDateString(dateRange.end)];
-    return {
-      anyinteracts: [property, value],
-    };
-  }
+  // For precision, the date-only string needs to be manipulated to include UTC begining/end of day
+  const start = toIsoDateString(getDayStart(dateRange.start), true);
+  const startEndOfDay = toIsoDateString(getDayEnd(dateRange.start), true);
 
-  return {
-    eq: [property, toDateString(dateRange.start)],
-  };
+  const end = dateRange.end
+    ? toIsoDateString(getDayEnd(dateRange.end), true)
+    : undefined;
+
+  switch (operator) {
+    case "between":
+      if (!dateRange.end) throw new Error("Invalid date range: missing 'end'");
+
+      return {
+        anyinteracts: [property, [start, end]],
+      };
+    case "on":
+      return {
+        anyinteracts: [property, [start, startEndOfDay]],
+      };
+    case "after":
+      return {
+        gt: [property, startEndOfDay],
+      };
+    case "before":
+      return {
+        lt: [property, start],
+      };
+    default:
+      throw new Error(`Invalid operator: ${operator} for date range field`);
+  }
 };

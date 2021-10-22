@@ -10,10 +10,29 @@ import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 dayjs.extend(utc);
 export { dayjs };
 
-export const toDateString = (dt: string | Date | Dayjs) =>
-  dayjs(dt).format("MM/DD/YYYY");
+export const toDateString = (
+  dt: string | Date | Dayjs,
+  includeTime: boolean = false
+) => {
+  const dateFormat = "MM/DD/YYYY";
+  const timeFormat = includeTime ? "THH:mm:ss" : "";
 
-export const toUtcDate = (dt: string | Date | Dayjs) => toDateString(dayjs.utc(dt));
+  return dayjs(dt).format(dateFormat + timeFormat);
+};
+
+export const toUtcDate = (dt: string | Date | Dayjs) => {
+  return toDateString(dayjs.utc(dt));
+};
+
+export const toIsoDateString = (
+  dt: string | Date | Dayjs,
+  includeTime: boolean = true
+) => {
+  const dateFormat = "YYYY-MM-DD";
+  const timeFormat = includeTime ? "THH:mm:ss" : "";
+
+  return dayjs(dt).format(dateFormat + timeFormat);
+};
 
 export const getDayStart = (date: string | Date | Dayjs | undefined) =>
   dayjs(date).startOf("day");

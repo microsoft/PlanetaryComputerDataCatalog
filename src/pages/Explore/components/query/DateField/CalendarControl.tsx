@@ -6,12 +6,14 @@ import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 
 interface CalendarControlProps {
+  label: string;
   date: Dayjs | null;
   rangeType: RangeType;
   onSelectDate: React.Dispatch<DateRangeAction>;
 }
 
 const CalendarControl = ({
+  label,
   date,
   rangeType,
   onSelectDate,
@@ -70,7 +72,7 @@ const CalendarControl = ({
   return (
     <Stack>
       <MaskedTextField
-        label={`${capitalize(rangeType)} Date`}
+        label={label}
         mask="99/99/9999"
         value={toDateString(date)}
         onGetErrorMessage={dateValidation}

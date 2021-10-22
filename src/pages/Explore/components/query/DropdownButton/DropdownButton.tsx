@@ -108,7 +108,6 @@ const chevronStyle: IIconStyles = {
 
 const styles = mergeStyleSets({
   callout: {
-    minWidth: 375,
     padding: "20px 24px",
     backgroundColor: getTheme().semanticColors.bodyBackground,
   },
