@@ -39,14 +39,7 @@ export const getNumericControl = (field: CqlExpressionParser<number>) => {
 
   if (fieldSchema.minimum !== undefined && fieldSchema.maximum !== undefined) {
     // Range control
-    return (
-      <RangeField
-        key={`rangecontrol-${field.property}`}
-        field={field}
-        // TODO: icon lookup or generic
-        icon="Cloud"
-      />
-    );
+    return <RangeField key={`rangecontrol-${field.property}`} field={field} />;
   } else {
     return (
       <TextField

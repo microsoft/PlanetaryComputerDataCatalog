@@ -1,16 +1,19 @@
 import { dayjs } from "utils";
-import { CqlExpressionParser } from "..";
 
-export const rangeIsOnSameDay = (dateExpression: CqlExpressionParser<string>) => {
-  if (!Array.isArray(dateExpression.value)) {
+export const rangeIsOnSameDay = (
+  dateExpressionValue: string | string[] | undefined
+) => {
+  if (!dateExpressionValue) return false;
+
+  if (!Array.isArray(dateExpressionValue)) {
     return false;
   }
 
-  if (dateExpression.value.length !== 2) {
+  if (dateExpressionValue.length !== 2) {
     return false;
   }
 
-  const [date1, date2] = dateExpression.value.map(d => dayjs.utc(d));
+  const [date1, date2] = dateExpressionValue.map(d => dayjs.utc(d));
 
   return date1.isSame(date2, "day");
 };

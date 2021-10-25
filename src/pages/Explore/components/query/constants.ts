@@ -1,9 +1,9 @@
 export const operators = {
   eq: "=",
   lt: "<",
-  lte: "<=",
+  lte: "≤",
   gt: ">",
-  gte: ">=",
+  gte: "≥",
   between: "BETWEEN",
   like: "LIKE",
   isnull: "IS NULL",

@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import { Calendar, MaskedTextField, Stack } from "@fluentui/react";
-import { capitalize, dayjs, toDateString } from "utils";
+import { dayjs, toDateString } from "utils";
 import { Dayjs } from "dayjs";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";

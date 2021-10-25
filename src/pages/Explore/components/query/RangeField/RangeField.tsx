@@ -15,10 +15,9 @@ import {
 
 type RangeFieldProps = {
   field: CqlExpressionParser<number>;
-  icon: string;
 };
 
-export const RangeField = ({ field, icon }: RangeFieldProps) => {
+export const RangeField = ({ field }: RangeFieldProps) => {
   const dispatch = useExploreDispatch();
 
   const { currentLower, currentUpper } = parseCqlValueToRange(field);
@@ -51,6 +50,8 @@ export const RangeField = ({ field, icon }: RangeFieldProps) => {
       </Text>
     );
   };
+
+  const icon = labelPrefix.match(/Cloud/i)?.length ? "Cloud" : "LocationFill";
 
   return (
     <DropdownButton

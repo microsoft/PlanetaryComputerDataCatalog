@@ -33,7 +33,7 @@ export const geomFilter = (
 export const rangeFromTemporalExtent = (
   interval: IStacCollection["extent"]["temporal"]["interval"]
 ): CqlDateRange => {
-  const start = interval[0][0];
+  const start = interval[0][0] || new Date().toUTCString();
   const end = interval[0][1] || new Date().toUTCString();
   return [start, end];
 };

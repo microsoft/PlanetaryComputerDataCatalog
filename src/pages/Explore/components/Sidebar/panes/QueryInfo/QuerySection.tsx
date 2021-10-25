@@ -1,6 +1,7 @@
 import { Text } from "@fluentui/react";
 
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
+import { rangeIsOnSameDay } from "pages/Explore/utils/cql/helpers";
 import {
   CqlOperator,
   CqlExpression,
@@ -21,9 +22,9 @@ const getDateLabel = (
   op: CqlOperator
 ) => {
   if (Array.isArray(value)) {
-    const oneDate = new Set(value.map(toUtcDate)).size === 1 || value.length === 1;
+    const isSingleDate = rangeIsOnSameDay(value);
 
-    const labelText = oneDate
+    const labelText = isSingleDate
       ? `${propertyLabel} ${opEnglish[op]} ${toUtcDate(value[0])} `
       : `${propertyLabel} between ${toUtcDate(value[0])} and ${toUtcDate(value[1])}`;
 
@@ -39,11 +40,12 @@ const QuerySection = ({ cql }: QuerySectionProps) => {
     const exp = new CqlExpressionParser(expression);
     const propertyLabel = stacFormatter.label(exp.property);
     const opText = operators[exp.operator];
+    const dateValue = exp.value as string | string[];
 
     // Special handling for datetime property
     const label =
       exp.property === "datetime" ? (
-        getDateLabel(exp.property, propertyLabel, exp.value.toString(), exp.operator)
+        getDateLabel(exp.property, propertyLabel, dateValue, exp.operator)
       ) : (
         <Text>
           {propertyLabel} {opText} {exp.value}

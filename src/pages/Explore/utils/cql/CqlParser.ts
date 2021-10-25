@@ -48,7 +48,7 @@ export class CqlParser {
       this.collection.extent.temporal.interval
     );
     const collectionRange = { min, max };
-    const isRange = !rangeIsOnSameDay(date);
+    const isRange = !rangeIsOnSameDay(date?.value);
 
     // If there is no date, return the max date range
     if (!date) {
