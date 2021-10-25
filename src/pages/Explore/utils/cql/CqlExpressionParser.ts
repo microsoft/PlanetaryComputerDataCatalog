@@ -1,6 +1,6 @@
 import React from "react";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
-import { getControlForField } from "./helpers";
+import { getControlForField } from "./helpers/formFields";
 
 import {
   CqlOperator,

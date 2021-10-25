@@ -2,7 +2,7 @@ import { TextField } from "@fluentui/react";
 import { EnumField } from "pages/Explore/components/query/EnumField";
 
 import { RangeField } from "pages/Explore/components/query/RangeField";
-import { CqlExpressionParser } from "./CqlExpressionParser";
+import { CqlExpressionParser } from "../CqlExpressionParser";
 
 export const getControlForField = (field: CqlExpressionParser<string | number>) => {
   const schemaType = field.fieldSchema?.type;

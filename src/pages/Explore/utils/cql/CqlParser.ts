@@ -3,6 +3,7 @@ import { IStacCollection } from "types/stac";
 import { toUtcDate } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
 import { CqlExpressionParser } from "./CqlExpressionParser";
+import { rangeIsOnSameDay } from "./helpers";
 
 import { CqlDate, CqlDateRange, ICqlExpressionList } from "./types";
 
@@ -38,7 +39,7 @@ export class CqlParser {
     return this.expressions.filter(exp => !omit.includes(exp.property));
   }
 
-  get dateValue(): CqlDate | undefined {
+  get dateValue(): CqlDate {
     const date = this.expressions.find(
       exp => exp.property === "datetime"
     ) as CqlExpressionParser<string>;
@@ -47,6 +48,7 @@ export class CqlParser {
       this.collection.extent.temporal.interval
     );
     const collectionRange = { min, max };
+    const isRange = !rangeIsOnSameDay(date);
 
     // If there is no date, return the max date range
     if (!date) {
@@ -62,13 +64,24 @@ export class CqlParser {
       if (date.value.length !== 2) {
         throw new Error("Date range value must contain exactly two dates");
       }
-      const [min, max] = date.value;
-      return {
-        operator: date.operator,
-        value: this.formatRange([min, max]),
-        isRange: true,
-        ...collectionRange,
-      };
+
+      if (isRange) {
+        const [min, max] = date.value;
+        return {
+          operator: date.operator,
+          value: this.formatRange([min, max]),
+          isRange: true,
+          ...collectionRange,
+        };
+      } else {
+        const implicitDate = date.value[0];
+        return {
+          operator: date.operator,
+          value: toUtcDate(implicitDate),
+          isRange: false,
+          ...collectionRange,
+        };
+      }
     }
 
     return {

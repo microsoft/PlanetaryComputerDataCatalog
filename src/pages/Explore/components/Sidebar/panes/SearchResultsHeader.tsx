@@ -40,8 +40,8 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
   );
   const withoutResults = (
     <Text block styles={style}>
-      Sorry, no items matched your search. Try adjusting the query or expand the map
-      area.
+      Sorry, no items matched your search. Try adjusting the query parameters or
+      expand the map area.
     </Text>
   );
   const resultsText = returned !== 0 ? withResults : withoutResults;
