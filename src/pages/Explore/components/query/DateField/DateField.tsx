@@ -6,6 +6,8 @@ import {
   IIconProps,
   VerticalDivider,
   IVerticalDividerStyles,
+  MessageBar,
+  IMessageBarStyles,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
@@ -13,7 +15,7 @@ import ControlFooter from "../ControlFooter";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider } from "./context";
-import { getDayEnd, getDayStart } from "utils";
+import { dayjs, getDayEnd, getDayStart, toDateString } from "utils";
 import {
   getDateDisplayText,
   isValidToApply,
@@ -71,7 +73,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
 
   const handleSave = useCallback(() => {
     const exp = toCqlExpression(workingDateRange, operatorSelection.key);
-    console.log(exp);
     dispatch(setCustomCqlExpression(exp));
     togglePanel();
   }, [operatorSelection.key, dispatch, togglePanel, workingDateRange]);
@@ -95,6 +96,12 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
       </Stack>
     );
   };
+
+  const displayMin = toDateString(dateExpression.min);
+  const displayMax = toDateString(dateExpression.max);
+  const validDateText = isRange
+    ? `Valid between ${displayMin} and ${displayMax}`
+    : `Valid ${displayMin} to ${displayMax}`;
 
   return (
     <>
@@ -126,6 +133,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               </>
             )}
           </Stack>
+          <MessageBar styles={messagebarStyles}>{validDateText}</MessageBar>
           <ControlFooter
             onCancel={handleCancel}
             onSave={handleSave}
@@ -160,4 +168,8 @@ const dividerStyles: IVerticalDividerStyles = {
     background:
       "linear-gradient(rgba(200, 198, 196, .0) , rgb(223 221 220), rgba(200, 198, 196, .0) )",
   },
+};
+
+const messagebarStyles: IMessageBarStyles = {
+  root: { borderRadius: 5 },
 };

@@ -42,8 +42,8 @@ const getMenuItems = (
   return {
     items: [
       { key: "on", text: "On date", onClick: handleClick },
-      { key: "after", text: "After date", onClick: handleClick },
-      { key: "before", text: "Before date", onClick: handleClick },
+      { key: "before", text: "On or before date", onClick: handleClick },
+      { key: "after", text: "On or after date", onClick: handleClick },
       { key: "between", text: "Between dates", onClick: handleClick },
     ],
   };
@@ -64,11 +64,11 @@ const opItemFromExpression = (
       return item.key === "on";
     }
 
-    if (dateExpression.operator === "lt") {
+    if (dateExpression.operator === "lte") {
       return item.key === "before";
     }
 
-    if (dateExpression.operator === "gt") {
+    if (dateExpression.operator === "gte") {
       return item.key === "after";
     }
 

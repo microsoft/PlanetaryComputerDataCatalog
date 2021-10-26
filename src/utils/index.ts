@@ -29,7 +29,7 @@ export const toIsoDateString = (
   includeTime: boolean = true
 ) => {
   const dateFormat = "YYYY-MM-DD";
-  const timeFormat = includeTime ? "THH:mm:ss" : "";
+  const timeFormat = includeTime ? "[T]HH:mm:ss[Z]" : "";
 
   return dayjs(dt).format(dateFormat + timeFormat);
 };

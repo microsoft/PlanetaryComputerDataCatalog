@@ -11,7 +11,7 @@ export const getStartRangeValue = (d: CqlDate) => {
 };
 
 export const getEndRangeValue = (d: CqlDate) => {
-  return getDayStart(d.isRange ? d.value[1] : undefined);
+  return getDayEnd(d.isRange ? d.value[1] : undefined);
 };
 
 export const getDateDisplayText = (dateExpression: CqlDate) => {
@@ -43,7 +43,9 @@ export const isValidToApply = (
 export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
   return {
     start: getStartRangeValue(dateExpression),
-    end: dateExpression.isRange ? getEndRangeValue(dateExpression) : null,
+    end: dateExpression.isRange
+      ? getEndRangeValue(dateExpression)
+      : getDayEnd(dateExpression.max),
   };
 };
 
@@ -74,11 +76,11 @@ export const toCqlExpression = (
       };
     case "after":
       return {
-        gt: [property, startEndOfDay],
+        gte: [property, startEndOfDay],
       };
     case "before":
       return {
-        lt: [property, start],
+        lte: [property, start],
       };
     default:
       throw new Error(`Invalid operator: ${operator} for date range field`);

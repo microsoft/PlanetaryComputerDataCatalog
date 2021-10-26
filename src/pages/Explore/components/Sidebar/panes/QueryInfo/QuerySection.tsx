@@ -48,7 +48,7 @@ const QuerySection = ({ cql }: QuerySectionProps) => {
         getDateLabel(exp.property, propertyLabel, dateValue, exp.operator)
       ) : (
         <Text>
-          {propertyLabel} {opText} {exp.value}
+          {propertyLabel} {opText} {stacFormatter.format(exp.value, exp.property)}
         </Text>
       );
     return <Text key={`exp-${propertyLabel}-${exp.operator}`}>{label}</Text>;
