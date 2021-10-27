@@ -14,8 +14,8 @@ import CalendarControl from "./CalendarControl";
 import ControlFooter from "../ControlFooter";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
-import { DateFieldProvider } from "./context";
-import { dayjs, getDayEnd, getDayStart, toDateString } from "utils";
+import { DateFieldProvider, IDateFieldContext } from "./context";
+import { getDayEnd, getDayStart, toUtcDateString } from "utils";
 import {
   getDateDisplayText,
   isValidToApply,
@@ -59,8 +59,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     panelRef.current?.togglePanel();
   }, []);
 
-  const minDay = getDayStart(dateExpression.min);
-  const maxDay = getDayEnd(dateExpression.max);
+  const minDay = getDayStart(dateExpression.min, true);
+  const maxDay = getDayEnd(dateExpression.max, true);
 
   const { OperatorSelector, operatorSelection, resetOperatorSelection } =
     useOperatorSelector(dateExpression);
@@ -81,10 +81,12 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const displayText = getDateDisplayText(dateExpression);
   const isRange = operatorSelection.key === "between";
 
-  const providerState = {
+  const providerState: IDateFieldContext = {
     validMinDate: minDay,
     validMaxDate: maxDay,
+    workingDates: workingDateRange,
     setValidation: validationDispatch,
+    validationState: controlValidState,
   };
 
   const handleRenderText = () => {
@@ -97,8 +99,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     );
   };
 
-  const displayMin = toDateString(dateExpression.min);
-  const displayMax = toDateString(dateExpression.max);
+  const displayMin = toUtcDateString(dateExpression.min);
+  const displayMax = toUtcDateString(dateExpression.max);
   const validDateText = isRange
     ? `Valid between ${displayMin} and ${displayMax}`
     : `Valid ${displayMin} to ${displayMax}`;
@@ -119,6 +121,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               label={isRange ? "Start date" : ""}
               rangeType="start"
               date={workingDateRange.start}
+              operator={operatorSelection.key}
               onSelectDate={workingDateRangeDispatch}
             />
             {isRange && (
@@ -128,6 +131,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
                   label="End date"
                   rangeType="end"
                   date={workingDateRange.end}
+                  operator={operatorSelection.key}
                   onSelectDate={workingDateRangeDispatch}
                 />
               </>
