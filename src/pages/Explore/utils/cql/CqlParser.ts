@@ -1,6 +1,6 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
-import { toUtcDate } from "utils";
+import { toUtcDateString } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
 import { CqlExpressionParser } from "./CqlExpressionParser";
 import { rangeIsOnSameDay } from "./helpers";
@@ -30,7 +30,7 @@ export class CqlParser {
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
-    return [toUtcDate(range[0]), toUtcDate(range[1])];
+    return [toUtcDateString(range[0]), toUtcDateString(range[1])];
   }
 
   getExpressions({
@@ -77,7 +77,7 @@ export class CqlParser {
         const implicitDate = date.value[0];
         return {
           operator: date.operator,
-          value: toUtcDate(implicitDate),
+          value: toUtcDateString(implicitDate),
           isRange: false,
           ...collectionRange,
         };
@@ -86,7 +86,7 @@ export class CqlParser {
 
     return {
       operator: date.operator,
-      value: toUtcDate(date.value),
+      value: toUtcDateString(date.value),
       isRange: false,
       ...collectionRange,
     };

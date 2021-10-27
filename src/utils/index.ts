@@ -20,7 +20,7 @@ export const toDateString = (
   return dayjs(dt).format(dateFormat + timeFormat);
 };
 
-export const toUtcDate = (dt: string | Date | Dayjs) => {
+export const toUtcDateString = (dt: string | Date | Dayjs) => {
   return toDateString(dayjs.utc(dt));
 };
 
@@ -34,11 +34,21 @@ export const toIsoDateString = (
   return dayjs(dt).format(dateFormat + timeFormat);
 };
 
-export const getDayStart = (date: string | Date | Dayjs | undefined) =>
-  dayjs(date).startOf("day");
+export const getDayStart = (
+  date: string | Date | Dayjs | undefined,
+  fromUtc: boolean = false
+) => {
+  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
+  return d.startOf("day");
+};
 
-export const getDayEnd = (date: string | Date | Dayjs | undefined) =>
-  dayjs(date).endOf("day");
+export const getDayEnd = (
+  date: string | Date | Dayjs | undefined,
+  fromUtc: boolean = false
+) => {
+  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
+  return d.endOf("day");
+};
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
