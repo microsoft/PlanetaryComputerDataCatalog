@@ -6,7 +6,7 @@ import { initialValidationState } from "./state";
 export interface IDateFieldContext {
   validMinDate: Dayjs;
   validMaxDate: Dayjs;
-  workingDates: DateRangeState | null;
+  workingDates: DateRangeState;
   validationState: ValidationState;
   setValidation:
     | React.Dispatch<ValidationAction>
@@ -16,7 +16,7 @@ export interface IDateFieldContext {
 export const DateFieldContext = React.createContext<IDateFieldContext>({
   validMinDate: dayjs(),
   validMaxDate: dayjs(),
-  workingDates: null,
+  workingDates: { start: dayjs(), end: null },
   setValidation: () => {},
   validationState: initialValidationState,
 });

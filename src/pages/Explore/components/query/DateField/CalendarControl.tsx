@@ -1,5 +1,5 @@
-import { useEffect, useCallback, useContext, useRef } from "react";
-import { Calendar, IMaskedTextField, MaskedTextField, Stack } from "@fluentui/react";
+import { useEffect, useCallback, useContext, useState } from "react";
+import { Calendar, MaskedTextField, Stack } from "@fluentui/react";
 import { dayjs, toDateString, toUtcDateString } from "utils";
 import { Dayjs } from "dayjs";
 import { DateFieldContext } from "./context";
@@ -7,7 +7,6 @@ import { DateRangeAction, RangeType } from "./types";
 
 interface CalendarControlProps {
   label: string;
-  date: Dayjs | null;
   rangeType: RangeType;
   operator: string;
   onSelectDate: React.Dispatch<DateRangeAction>;
@@ -15,13 +14,11 @@ interface CalendarControlProps {
 
 const CalendarControl = ({
   label,
-  date,
   rangeType,
   operator,
   onSelectDate,
 }: CalendarControlProps) => {
-  // const [localDate, setLocalDate] = useState<Dayjs | null>(date);
-  const textFieldRef: React.RefObject<IMaskedTextField> = useRef(null);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const {
     validMaxDate,
     validMinDate,
@@ -30,13 +27,14 @@ const CalendarControl = ({
     setValidation,
   } = useContext(DateFieldContext);
 
-  const handleSelectDate = useCallback(
-    (newDate: Date | Dayjs) => {
-      const day = dayjs(newDate);
-      onSelectDate({ [rangeType]: day });
-    },
-    [onSelectDate, rangeType]
-  );
+  const date = workingDates[rangeType];
+
+  const handleSelectDate = (newDate: Date | Dayjs) => {
+    const day = dayjs(newDate);
+    setDateValidation(day.toDate());
+
+    onSelectDate({ [rangeType]: day });
+  };
 
   const handleTextChange = (
     _: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -46,13 +44,12 @@ const CalendarControl = ({
     const newDate = newDay.toDate();
 
     // Check valid date format and if it's in range - only set working date if so
-    const valid = newDay.isValid() && getErrorMessage(newDate) === "";
+    const valid = newDay.isValid() && setDateValidation(newDay.toDate());
     valid && handleSelectDate(newDate);
   };
 
   const getErrorMessage = useCallback(
     (value: Date | string) => {
-      console.log(rangeType + " re validating...");
       const day = dayjs(value);
       if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
 
@@ -94,60 +91,49 @@ const CalendarControl = ({
     ]
   );
 
-  const dateValidation = (value: Date | string) => {
-    const errorMessage = getErrorMessage(value);
+  const setDateValidation = useCallback(
+    (value: Date | string) => {
+      const err = getErrorMessage(value);
+      setErrorMessage(err);
 
-    // Dispatch to the parent context useing the rangeType key provided
-    const validation = { [rangeType]: !Boolean(errorMessage) };
-    setValidation(validation);
+      // Dispatch to the parent context useing the rangeType key provided
+      const validation = { [rangeType]: !Boolean(err) };
+      if (validation[rangeType] !== validationState[rangeType]) {
+        setValidation(validation);
+      }
 
-    // The calendar control determines validation state by the presense or absence of a
-    // string which is used as a validation message.
-    return errorMessage;
-  };
+      // The calendar control determines validation state by the presense or absence of a
+      // string which is also used as a validation message.
+      const hasError = Boolean(err);
+      return !hasError;
+    },
+    [getErrorMessage, rangeType, setValidation, validationState]
+  );
 
+  // Cross validate date ranges
   useEffect(() => {
-    if (
-      !validationState[rangeType] &&
-      textFieldRef.current &&
-      date &&
-      !getErrorMessage(toDateString(date))
-    ) {
-      console.log(rangeType);
-      const validation = { [rangeType]: true };
-      setValidation(validation);
-      handleSelectDate(date);
+    if (errorMessage && operator === "between") {
+      setDateValidation(toDateString(date || ""));
     }
-  }, [
-    date,
-    getErrorMessage,
-    handleSelectDate,
-    rangeType,
-    setValidation,
-    validationState,
-    workingDates,
-  ]);
+  });
 
-  if (!date || !workingDates) return null;
+  if (!date) return null;
 
-  rangeType === "end" && console.log(" render " + workingDates.end?.toISOString());
   return (
     <Stack>
       <MaskedTextField
-        componentRef={textFieldRef}
         label={label}
         mask="99/99/9999"
-        value={toUtcDateString(workingDates[rangeType] || date)}
-        onGetErrorMessage={dateValidation}
+        value={toUtcDateString(date)}
+        errorMessage={errorMessage}
         onChange={handleTextChange}
-        validateOnFocusOut
       />
       <Calendar
         showMonthPickerAsOverlay
         highlightSelectedMonth
         isMonthPickerVisible={false}
         showGoToToday={false}
-        value={new Date(toUtcDateString(workingDates[rangeType] || date))}
+        value={new Date(toUtcDateString(date))}
         onSelectDate={handleSelectDate}
         minDate={validMinDate.toDate()}
         maxDate={validMaxDate.toDate()}

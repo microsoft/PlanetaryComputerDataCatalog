@@ -105,7 +105,10 @@
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["2019-06-01", "2019-08-31"]]
+          "anyinteracts": [
+            { "property": "datetime" },
+            ["2019-06-01", "2019-08-31:23:59:59Z"]
+          ]
         },
         { "lte": [{ "property": "eo:cloud_cover" }, 10] }
       ]

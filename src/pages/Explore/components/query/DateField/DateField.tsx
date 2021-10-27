@@ -120,7 +120,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
             <CalendarControl
               label={isRange ? "Start date" : ""}
               rangeType="start"
-              date={workingDateRange.start}
               operator={operatorSelection.key}
               onSelectDate={workingDateRangeDispatch}
             />
@@ -130,7 +129,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
                 <CalendarControl
                   label="End date"
                   rangeType="end"
-                  date={workingDateRange.end}
                   operator={operatorSelection.key}
                   onSelectDate={workingDateRangeDispatch}
                 />
