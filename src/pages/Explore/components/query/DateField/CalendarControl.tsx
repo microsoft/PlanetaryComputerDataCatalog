@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react";
-import { Calendar, MaskedTextField, Stack } from "@fluentui/react";
+import { Calendar, ITextFieldStyles, MaskedTextField, Stack } from "@fluentui/react";
 import { dayjs, toDateString, toUtcDateString } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
@@ -18,12 +18,14 @@ const CalendarControl = ({
   onSelectDate,
 }: CalendarControlProps) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [invalidDate, setInvalidDate] = useState<Date>();
   const {
     validMaxDate,
     validMinDate,
     workingDates,
     validationState,
     setValidation,
+    signalApply,
   } = useContext(DateFieldContext);
 
   const date = workingDates[rangeType];
@@ -43,6 +45,14 @@ const CalendarControl = ({
     // Check valid date format and if it's in range - only set working date if so
     const valid = newDay.isValid() && setDateValidation(newDate);
     valid && handleSelectDate(newDate);
+  };
+
+  const handleKeyPress = (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (e.key === "Enter") {
+      signalApply();
+    }
   };
 
   const getErrorMessage = (value: Date | string) => {
@@ -92,6 +102,15 @@ const CalendarControl = ({
       setValidation(validation);
     }
 
+    // Track the invalid date. It may not be *currently* valid compared to the other date in the range.
+    // When the other date changes, we'll check this invalid date and it could become valid will need to
+    // be applied to the working dates.
+    if (err) {
+      setInvalidDate(value);
+    } else {
+      setInvalidDate(undefined);
+    }
+
     const hasError = Boolean(err);
     return !hasError;
   };
@@ -99,8 +118,14 @@ const CalendarControl = ({
   // Cross validate date ranges - when rendering, the current invalid date may
   // have become valid due to changes in the other date range value.
   useEffect(() => {
-    if (errorMessage && operator === "between") {
-      setDateValidation(date?.toDate());
+    if (errorMessage && operator === "between" && invalidDate) {
+      // Check the validity of the previous invalid date
+      const valid = setDateValidation(invalidDate);
+
+      // If it's now valid, use it as the selected date
+      if (valid) {
+        handleSelectDate(invalidDate);
+      }
     }
   });
 
@@ -109,11 +134,13 @@ const CalendarControl = ({
   return (
     <Stack>
       <MaskedTextField
+        styles={textStyles}
         label={label}
         mask="99/99/9999"
         value={toUtcDateString(date)}
         errorMessage={errorMessage}
         onChange={handleTextChange}
+        onKeyPress={handleKeyPress}
       />
       <Calendar
         showMonthPickerAsOverlay
@@ -130,3 +157,9 @@ const CalendarControl = ({
 };
 
 export default CalendarControl;
+
+const textStyles: Partial<ITextFieldStyles> = {
+  root: {
+    maxWidth: 218,
+  },
+};

@@ -6,7 +6,7 @@ import {
   IButtonStyles,
   getTheme,
 } from "@fluentui/react";
-import { CqlDate } from "../../../utils/cql/types";
+import { CqlDate } from "pages/Explore/utils/cql/types";
 
 const useOperatorSelector = (dateExpression: CqlDate) => {
   const handleOperatorChange = (_: any, item: IContextualMenuItem | undefined) => {
@@ -88,6 +88,8 @@ const theme = getTheme();
 const opDropdownStyles: IButtonStyles = {
   root: {
     padding: 0,
+    paddingBottom: 10,
+    height: "auto",
   },
   label: {
     margin: 0,

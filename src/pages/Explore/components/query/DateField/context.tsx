@@ -11,6 +11,7 @@ export interface IDateFieldContext {
   setValidation:
     | React.Dispatch<ValidationAction>
     | ((arg: ValidationAction) => void);
+  signalApply: () => void;
 }
 
 export const DateFieldContext = React.createContext<IDateFieldContext>({
@@ -19,6 +20,7 @@ export const DateFieldContext = React.createContext<IDateFieldContext>({
   workingDates: { start: dayjs(), end: null },
   setValidation: () => {},
   validationState: initialValidationState,
+  signalApply: () => {},
 });
 
 export const DateFieldProvider: React.FC<{ state: IDateFieldContext }> = ({

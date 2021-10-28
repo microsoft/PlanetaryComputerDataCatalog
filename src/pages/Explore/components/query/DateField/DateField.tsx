@@ -71,11 +71,21 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     togglePanel();
   };
 
+  const isValid = isValidToApply(
+    controlValidState,
+    initialDateRange,
+    workingDateRange,
+    dateExpression.operator,
+    operatorSelection.key
+  );
+
   const handleSave = useCallback(() => {
-    const exp = toCqlExpression(workingDateRange, operatorSelection.key);
-    dispatch(setCustomCqlExpression(exp));
-    togglePanel();
-  }, [operatorSelection.key, dispatch, togglePanel, workingDateRange]);
+    if (isValid) {
+      const exp = toCqlExpression(workingDateRange, operatorSelection.key);
+      dispatch(setCustomCqlExpression(exp));
+      togglePanel();
+    }
+  }, [isValid, workingDateRange, operatorSelection.key, dispatch, togglePanel]);
 
   const opLabel = opEnglish[dateExpression.operator];
   const displayText = getDateDisplayText(dateExpression);
@@ -87,6 +97,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     workingDates: workingDateRange,
     setValidation: validationDispatch,
     validationState: controlValidState,
+    signalApply: handleSave,
   };
 
   const handleRenderText = () => {
@@ -139,13 +150,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
           <ControlFooter
             onCancel={handleCancel}
             onSave={handleSave}
-            isValid={isValidToApply(
-              controlValidState,
-              initialDateRange,
-              workingDateRange,
-              dateExpression.operator,
-              operatorSelection.key
-            )}
+            isValid={isValid}
           />
         </DateFieldProvider>
       </DropdownButton>

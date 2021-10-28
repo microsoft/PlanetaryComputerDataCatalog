@@ -30,10 +30,10 @@ export const isValidToApply = (
   workingOperator: string
 ) => {
   const validDates = validationState.start && validationState.end;
-  const startDateChanged = !initialDates.start.isSame(workingDates.start);
+  const startDateChanged = !initialDates.start.isSame(workingDates.start, "day");
   const endDateChanged =
     (!initialDates.end && !workingDates.end) ||
-    Boolean(initialDates.end && !initialDates.end.isSame(workingDates.end));
+    Boolean(initialDates.end && !initialDates.end.isSame(workingDates.end, "day"));
 
   // Valid if the dates are valid and either the start date or end date has changed
   const dateChanged = startDateChanged || endDateChanged;
