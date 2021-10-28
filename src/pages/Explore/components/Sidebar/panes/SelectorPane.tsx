@@ -20,7 +20,7 @@ const SelectorPane = ({ isCustomQuery }: SelectorPaneProps) => {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Stack tokens={stackTokens}>
         <CollectionSelector />
-        <MosaicPresetSelector />
+        {!isCustomQuery && <MosaicPresetSelector />}
         {isCustomQuery && <CustomQueryBuilder />}
         <RenderOptionsSelector />
         <Stack horizontal horizontalAlign="end" tokens={stackTokens}>

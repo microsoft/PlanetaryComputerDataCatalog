@@ -16,6 +16,7 @@ import ItemResult from "../../ItemResult";
 import ExploreInHub from "../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import { errorMessageStyles } from "components/ErrorFallback";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
@@ -52,7 +53,7 @@ const SearchResultsPane = ({
 
   if (isError) {
     return (
-      <MessageBar messageBarType={MessageBarType.error}>
+      <MessageBar messageBarType={MessageBarType.error} styles={errorMessageStyles}>
         Sorry, we're having trouble completing this search.
       </MessageBar>
     );

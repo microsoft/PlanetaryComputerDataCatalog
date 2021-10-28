@@ -39,7 +39,7 @@ describe("Explorer selector tests", () => {
     cy.getBySel("render-selector").not("have.class", disabledClass);
 
     cy.wait(["@getS2search"]);
-    cy.contains("matched your search");
+    cy.contains("matched your filter");
   });
 
   it("searches and opens a detail dialog", function () {

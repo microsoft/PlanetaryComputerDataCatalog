@@ -40,7 +40,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   };
 
   const title = field.fieldSchema.title || field.property;
-  const icon = "LocationFill";
+  const icon = "CircleShapeSolid";
   const options = enumToOptions(field.fieldSchema.enum);
   return (
     <Dropdown

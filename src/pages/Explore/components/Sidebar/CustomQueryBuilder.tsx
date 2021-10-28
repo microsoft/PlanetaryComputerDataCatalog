@@ -1,15 +1,30 @@
 import { useMemo } from "react";
-import { IStackStyles, Stack, getTheme, IStackTokens } from "@fluentui/react";
+import {
+  IStackStyles,
+  Stack,
+  getTheme,
+  IStackTokens,
+  Text,
+  ITextStyles,
+  Link,
+  ILinkStyles,
+} from "@fluentui/react";
+import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
-import { useExploreSelector } from "pages/Explore/state/hooks";
-import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentCql, setIsCustomQuery } from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../query/DateField";
 
 const CustomQueryBuilder = () => {
+  const dispatch = useExploreDispatch();
   const collection = useExploreSelector(s => s.mosaic.collection);
   const cql = useExploreSelector(selectCurrentCql);
+
+  const handleClearCustom = () => {
+    dispatch(setIsCustomQuery(false));
+  };
 
   // TODO: handle errors, which include parsing schema. The user should
   // still be able to do a date query, as it's always available.
@@ -26,11 +41,22 @@ const CustomQueryBuilder = () => {
   const date = parsed.dateValue;
   const dateControl = date ? <DateField dateExpression={date} /> : null;
 
+  // Get the rest of the controls needed to represent the CQL
   const expressions = parsed.getExpressions({ omit: ["datetime"] });
   const controls = expressions.map(e => e.control);
 
   return (
-    <Stack styles={styles} tokens={stackTokens}>
+    <Stack styles={styles} tokens={controlStackTokens}>
+      <Stack horizontal tokens={customStackTokens} styles={customStackStyles}>
+        <Text styles={textStyle}>Custom filter</Text>
+        <Link
+          onClick={handleClearCustom}
+          styles={linkStyle}
+          title="Clear the custom filter"
+        >
+          Clear
+        </Link>
+      </Stack>
       {dateControl}
       {controls}
     </Stack>
@@ -42,11 +68,33 @@ export default CustomQueryBuilder;
 const theme = getTheme();
 const styles: IStackStyles = {
   root: {
-    backgroundColor: theme.palette.neutralLighterAlt,
+    backgroundColor: theme.palette.neutralLighter,
+    border: "1px solid",
     borderColor: theme.palette.neutralLight,
-    padding: "5px 0px 10px 20px",
+    borderRadius: 2,
+    padding: "5px 5px 5px 10px",
   },
 };
-const stackTokens: IStackTokens = {
+const controlStackTokens: IStackTokens = {
   childrenGap: 4,
+};
+
+const customStackStyles: IStackStyles = {
+  root: { alignItems: "flexStart" },
+};
+
+const customStackTokens: IStackTokens = {
+  childrenGap: 8,
+};
+
+const textStyle: Partial<ITextStyles> = {
+  root: {
+    fontWeight: FontWeights.semibold,
+    fontSize: FontSizes.size14,
+  },
+};
+const linkStyle: Partial<ILinkStyles> = {
+  root: {
+    fontSize: FontSizes.size12,
+  },
 };

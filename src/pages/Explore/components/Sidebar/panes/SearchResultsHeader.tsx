@@ -35,12 +35,12 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
 
   const withResults = (
     <Text styles={style}>
-      Showing {preamble} {returned} {plural} that matched your search.
+      Showing {preamble} {returned} {plural} that matched your filter.
     </Text>
   );
   const withoutResults = (
     <Text block styles={style}>
-      Sorry, no items matched your search. Try adjusting the query parameters or
+      Sorry, no items matched your filter. Try adjusting the query parameters or
       expand the map area.
     </Text>
   );

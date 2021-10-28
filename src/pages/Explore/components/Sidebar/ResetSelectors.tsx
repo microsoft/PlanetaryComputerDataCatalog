@@ -19,6 +19,7 @@ const ResetSelectors = () => {
         disabled={disabled}
         styles={buttonStyles}
         onClick={handleClick}
+        title="Reset all selectors"
         data-cy="reset"
       >
         Reset

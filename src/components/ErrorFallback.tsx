@@ -7,7 +7,11 @@ import {
 
 const ErrorFallback = () => {
   return (
-    <MessageBar isMultiline styles={styles} messageBarType={MessageBarType.error}>
+    <MessageBar
+      isMultiline
+      styles={errorMessageStyles}
+      messageBarType={MessageBarType.error}
+    >
       <Text>
         Sorry, something went wrong when trying to display this information.
       </Text>
@@ -21,6 +25,6 @@ export const CardErrorFallback = () => {
 
 export default ErrorFallback;
 
-const styles: IMessageBarStyles = {
-  root: { paddingBottom: "6px", borderRadius: 4 },
+export const errorMessageStyles: IMessageBarStyles = {
+  root: { borderRadius: 4 },
 };
