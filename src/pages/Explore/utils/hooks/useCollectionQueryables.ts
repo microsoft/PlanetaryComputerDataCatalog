@@ -5,6 +5,7 @@ export const useCollectionQueryables = (collectionId: string | undefined) => {
   return useQuery(["queryable", collectionId], getCollectionQueryables, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    retry: false,
     enabled: Boolean(collectionId),
   });
 };

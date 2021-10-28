@@ -16,6 +16,7 @@ import { selectCurrentCql, setIsCustomQuery } from "pages/Explore/state/mosaicSl
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../query/DateField";
+import datetimeQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
 
 const CustomQueryBuilder = () => {
   const dispatch = useExploreDispatch();
@@ -26,9 +27,9 @@ const CustomQueryBuilder = () => {
     dispatch(setIsCustomQuery(false));
   };
 
-  // TODO: handle errors, which include parsing schema. The user should
-  // still be able to do a date query, as it's always available.
-  const { data: queryable } = useCollectionQueryables(collection?.id);
+  const { data: apiQueryable, isError } = useCollectionQueryables(collection?.id);
+
+  const queryable = isError ? datetimeQueryable : apiQueryable;
 
   // Get parsed CQL object
   const parsed = useMemo(() => {
