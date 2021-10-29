@@ -50,6 +50,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
       multiSelect
       options={options}
       selectedKeys={selectedKeys}
+      ariaLabel={`${title} dropdown selector`}
       onRenderTitle={renderSegmentedTitle(icon, title)}
       onRenderPlaceholder={renderSegmentedPlaceholder(icon, title, "Include all")}
       onChange={handleChange}

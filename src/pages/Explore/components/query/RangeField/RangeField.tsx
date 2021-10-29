@@ -45,7 +45,13 @@ export const RangeField = ({ field }: RangeFieldProps) => {
   };
 
   const renderLabel = () => {
-    return <DropdownLabel label={labelPrefix} displayValue={valueLabel} />;
+    return (
+      <DropdownLabel
+        key={`rangefield-label-${labelPrefix}`}
+        label={labelPrefix}
+        displayValue={valueLabel}
+      />
+    );
   };
 
   const icon = labelPrefix.match(/Cloud/i)?.length ? "Cloud" : "LocationFill";

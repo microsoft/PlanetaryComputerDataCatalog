@@ -16,7 +16,7 @@ interface IDropdownLabelProps {
 const DropdownLabel = ({ label, displayValue }: IDropdownLabelProps) => {
   return (
     <Stack
-      key="datetime-selector-label"
+      key={`selector-label-${label}`}
       horizontal
       horizontalAlign="start"
       tokens={labelTokens}
@@ -26,7 +26,7 @@ const DropdownLabel = ({ label, displayValue }: IDropdownLabelProps) => {
         {label}
       </Text>
       <VerticalDivider styles={labelDividerStyles} />
-      <Text block nowrap title={displayValue}>
+      <Text block nowrap title={displayValue} styles={labelValueStyle}>
         {displayValue}
       </Text>
     </Stack>
@@ -36,20 +36,30 @@ const DropdownLabel = ({ label, displayValue }: IDropdownLabelProps) => {
 export default DropdownLabel;
 
 const theme = getTheme();
+
 export const labelTokens: IStackTokens = {
   childrenGap: 4,
 };
-export const labelDividerStyles: IVerticalDividerStyles = {
+
+const labelDividerStyles: IVerticalDividerStyles = {
   divider: {
     height: 29,
     background: theme.palette.neutralTertiaryAlt,
   },
   wrapper: {},
 };
-export const labelStyle: ITextStyles = {
+
+const labelStyle: ITextStyles = {
   root: {
     paddingRight: 5,
     width: 85,
+    textAlign: "left",
+  },
+};
+
+const labelValueStyle: ITextStyles = {
+  root: {
+    paddingLeft: 5,
     textAlign: "left",
   },
 };

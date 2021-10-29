@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 import { Calendar, ITextFieldStyles, MaskedTextField, Stack } from "@fluentui/react";
-import { dayjs, toDateString, toUtcDateString } from "utils";
+import { dayjs, toAbsoluteDate, toDateString, toUtcDateString } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 
@@ -91,12 +91,12 @@ const CalendarControl = ({
   const setDateValidation = (value: Date | undefined) => {
     if (!value) return false;
 
-    // The calendar control determines validation state by the presense or absence of a
+    // The calendar control determines validation state by the presence or absence of a
     // string which is also used as a validation message.
     const err = getErrorMessage(value);
     setErrorMessage(err);
 
-    // Dispatch to the parent context useing the rangeType key provided
+    // Dispatch to the parent context using the rangeType key provided
     const validation = { [rangeType]: !Boolean(err) };
     if (validation[rangeType] !== validationState[rangeType]) {
       setValidation(validation);
@@ -147,10 +147,10 @@ const CalendarControl = ({
         highlightSelectedMonth
         isMonthPickerVisible={false}
         showGoToToday={false}
-        value={new Date(toUtcDateString(date))}
+        value={toAbsoluteDate(date)}
+        minDate={toAbsoluteDate(validMinDate)}
+        maxDate={toAbsoluteDate(validMaxDate)}
         onSelectDate={handleSelectDate}
-        minDate={validMinDate.toDate()}
-        maxDate={validMaxDate.toDate()}
       />
     </Stack>
   );

@@ -42,14 +42,18 @@ export const DropdownButton = React.forwardRef<
 
   return (
     <>
-      <Stack styles={stackStyle} aria-label={label} aria-haspopup="dialog">
+      <Stack
+        styles={stackStyle}
+        aria-label={`${label} selector`}
+        aria-haspopup="dialog"
+      >
         <DefaultButton
           id={buttonId}
           styles={buttonStyles}
           onClick={handleDismiss}
           {...rest}
         />
-        <Icon key="xxx" iconName="ChevronDown" styles={chevronStyle} />
+        <Icon iconName="ChevronDown" styles={chevronStyle} />
       </Stack>
       {isCalloutVisible && (
         <Callout

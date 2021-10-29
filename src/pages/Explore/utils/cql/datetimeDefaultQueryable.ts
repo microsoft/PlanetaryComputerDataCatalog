@@ -1,6 +1,6 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 
-const datetimeQueryable: JSONSchema = {
+const defaultQueryable: JSONSchema = {
   $schema: "http://json-schema.org/draft-07/schema#",
   $id: "https://example.org/queryables",
   type: "object",
@@ -16,4 +16,4 @@ const datetimeQueryable: JSONSchema = {
   },
 };
 
-export default datetimeQueryable;
+export default defaultQueryable;

@@ -14,9 +14,10 @@ import ControlFooter from "../components/ControlFooter";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider, IDateFieldContext } from "./context";
-import { capitalize, getDayEnd, getDayStart, toUtcDateString } from "utils";
+import { capitalize, getDayEnd, getDayStart } from "utils";
 import {
   getDateDisplayText,
+  getValidDateText,
   isValidToApply,
   toCqlExpression,
   toDateRange,
@@ -102,14 +103,16 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
 
   const handleRenderText = () => {
     const displayValue = `${capitalize(opLabel)} ${displayText}`;
-    return <DropdownLabel label="Acquired" displayValue={displayValue} />;
+    return (
+      <DropdownLabel
+        key="datefield-button-label"
+        label="Acquired"
+        displayValue={displayValue}
+      />
+    );
   };
 
-  const displayMin = toUtcDateString(dateExpression.min);
-  const displayMax = toUtcDateString(dateExpression.max);
-  const validDateText = isRange
-    ? `Valid between ${displayMin} and ${displayMax}`
-    : `Valid ${displayMin} to ${displayMax}`;
+  const validDateText = getValidDateText(dateExpression, isRange);
 
   return (
     <>

@@ -8,6 +8,8 @@ import {
   ITextStyles,
   Link,
   ILinkStyles,
+  Shimmer,
+  ShimmerElementType,
 } from "@fluentui/react";
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
@@ -16,7 +18,7 @@ import { selectCurrentCql, setIsCustomQuery } from "pages/Explore/state/mosaicSl
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../query/DateField";
-import datetimeQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
+import defaultQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
 
 const CustomQueryBuilder = () => {
   const dispatch = useExploreDispatch();
@@ -27,9 +29,13 @@ const CustomQueryBuilder = () => {
     dispatch(setIsCustomQuery(false));
   };
 
-  const { data: apiQueryable, isError } = useCollectionQueryables(collection?.id);
+  const {
+    data: apiQueryable,
+    isError,
+    isLoading,
+  } = useCollectionQueryables(collection?.id);
 
-  const queryable = isError ? datetimeQueryable : apiQueryable;
+  const queryable = isError ? defaultQueryable : apiQueryable;
 
   // Get parsed CQL object
   const parsed = useMemo(() => {
@@ -37,14 +43,13 @@ const CustomQueryBuilder = () => {
     return new CqlParser(cql, collection, queryable);
   }, [collection, queryable, cql]);
 
-  if (!parsed) return null;
-
-  const date = parsed.dateValue;
-  const dateControl = date ? <DateField dateExpression={date} /> : null;
+  const dateControl = parsed?.dateValue ? (
+    <DateField dateExpression={parsed.dateValue} />
+  ) : null;
 
   // Get the rest of the controls needed to represent the CQL
-  const expressions = parsed.getExpressions({ omit: ["datetime"] });
-  const controls = expressions.map(e => e.control);
+  const expressions = parsed?.getExpressions({ omit: ["datetime"] });
+  const controls = expressions?.map(e => e.control);
 
   return (
     <Stack styles={styles} tokens={controlStackTokens}>
@@ -58,6 +63,7 @@ const CustomQueryBuilder = () => {
           Clear
         </Link>
       </Stack>
+      {isLoading && loadingIndicator}
       {dateControl}
       {controls}
     </Stack>
@@ -66,10 +72,14 @@ const CustomQueryBuilder = () => {
 
 export default CustomQueryBuilder;
 
+const loadingIndicator = (
+  <Shimmer shimmerElements={[{ type: ShimmerElementType.line, height: 34 }]} />
+);
+
 const theme = getTheme();
 const styles: IStackStyles = {
   root: {
-    backgroundColor: theme.palette.neutralLighter,
+    backgroundColor: theme.palette.neutralLighterAlt,
     border: "1px solid",
     borderColor: theme.palette.neutralLight,
     borderRadius: 2,

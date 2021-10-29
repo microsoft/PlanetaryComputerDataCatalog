@@ -10,6 +10,11 @@ import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 dayjs.extend(utc);
 export { dayjs };
 
+// The represented date without consideration for the timezone
+export const toAbsoluteDate = (date: Dayjs) => {
+  return new Date(date.year(), date.month(), date.date());
+};
+
 export const toDateString = (
   dt: string | Date | Dayjs,
   includeTime: boolean = false

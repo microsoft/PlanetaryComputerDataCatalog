@@ -3,7 +3,14 @@ import {
   CqlDate,
   CqlExpression,
 } from "pages/Explore/utils/cql/types";
-import { getDayEnd, getDayStart, toIsoDateString } from "utils";
+import {
+  dayjs,
+  getDayEnd,
+  getDayStart,
+  toIsoDateString,
+  toUtcDateString,
+} from "utils";
+import { Message, DateMessage } from "./DateMessage";
 import { DateRangeState, ValidationState } from "./types";
 
 export const getStartRangeValue = (date: CqlDate) => {
@@ -51,13 +58,40 @@ export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
   };
 };
 
+export const getValidDateText = (dateExpression: CqlDate, isRange: boolean) => {
+  const displayMin = (
+    <DateMessage>{toUtcDateString(dateExpression.min)}</DateMessage>
+  );
+  const displayMax = (
+    <DateMessage>{toUtcDateString(dateExpression.max)}</DateMessage>
+  );
+
+  const min = dayjs.utc(dateExpression.min);
+  const max = dayjs.utc(dateExpression.max);
+  const sameDay = min.isSame(max, "day");
+
+  if (sameDay) {
+    return <Message>Date only valid on {displayMin}</Message>;
+  }
+
+  return isRange ? (
+    <Message>
+      Valid between {displayMin} and {displayMax}
+    </Message>
+  ) : (
+    <Message>
+      Valid {displayMin} to {displayMax}
+    </Message>
+  );
+};
+
 export const toCqlExpression = (
   dateRange: DateRangeState,
   operator: string
 ): CqlExpression => {
   const property: CqlPropertyObject = { property: "datetime" };
 
-  // For precision, the date-only string needs to be manipulated to include UTC begining/end of day
+  // For precision, the date-only string needs to be manipulated to include UTC beginning/end of day
   const start = toIsoDateString(getDayStart(dateRange.start), true);
   const startEndOfDay = toIsoDateString(getDayEnd(dateRange.start), true);
 

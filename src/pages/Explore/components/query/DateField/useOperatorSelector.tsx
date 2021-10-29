@@ -96,6 +96,6 @@ const opDropdownStyles: IButtonStyles = {
   },
   label: {
     margin: 0,
-    color: theme.palette.themeSecondary,
+    color: theme.palette.themePrimary,
   },
 };
