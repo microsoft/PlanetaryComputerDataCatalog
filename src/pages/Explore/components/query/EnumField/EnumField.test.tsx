@@ -1,10 +1,4 @@
-import {
-  render,
-  screen,
-  fireEvent,
-  waitFor,
-  within,
-} from "pages/Explore/utils/testUtils";
+import { render, screen } from "pages/Explore/utils/testUtils";
 
 import { EnumField } from "./EnumField";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
@@ -37,22 +31,31 @@ test("it displays correct title and formatted value for EQ", async () => {
   const field = new CqlExpressionParser<string>(eq, queryable);
   render(<EnumField field={field} />);
 
-  const label = screen.getByText("Image Type: FULL DISK");
+  const label = screen.getByText("Image Type");
   expect(label).toBeInTheDocument();
+
+  const value = screen.getByText("FULL DISK");
+  expect(value).toBeInTheDocument();
 });
 
 test("it displays correct title and formatted value for IN", async () => {
   const field = new CqlExpressionParser<string>(inExp, queryable);
   render(<EnumField field={field} />);
 
-  const label = screen.getByText("Image Type: FULL DISK, MESOSCALE");
+  const label = screen.getByText("Image Type");
   expect(label).toBeInTheDocument();
+
+  const value = screen.getByText("FULL DISK, MESOSCALE");
+  expect(value).toBeInTheDocument();
 });
 
 test("it displays correct title and formatted value for empty IN", async () => {
   const field = new CqlExpressionParser<string>(inExpEmpty, queryable);
   render(<EnumField field={field} />);
 
-  const label = screen.getByText("Image Type: (include all)");
+  const label = screen.getByText("Image Type");
   expect(label).toBeInTheDocument();
+
+  const value = screen.getByText("Include all");
+  expect(value).toBeInTheDocument();
 });

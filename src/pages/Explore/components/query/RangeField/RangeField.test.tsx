@@ -37,9 +37,12 @@ const bt: CqlBetweenExpression<number> = {
 
 test("it displays correct title and formatted value for GTE", async () => {
   const field = new CqlExpressionParser<number>(gte, queryable);
-  const { getByText } = render(<RangeField field={field} icon="search" />);
+  const { getByText } = render(<RangeField field={field} />);
 
-  expect(getByText(/Cloud Cover: over 10%/i)).toBeInTheDocument();
+  const label = getByText(/Cloud Cover/i);
+  expect(label).toBeInTheDocument();
+  const value = getByText("Over 10%");
+  expect(value).toBeInTheDocument();
 
   fireEvent.click(screen.getByTestId("rangecontrol-eo:cloud_cover"));
   await waitFor(() => screen.getByRole("dialog"));
@@ -50,9 +53,12 @@ test("it displays correct title and formatted value for GTE", async () => {
 
 test("it displays correct title and formatted value for LTE", async () => {
   const field = new CqlExpressionParser<number>(lte, queryable);
-  const { getByText } = render(<RangeField field={field} icon="search" />);
+  const { getByText } = render(<RangeField field={field} />);
 
-  expect(getByText(/Cloud Cover: under 10%/i)).toBeInTheDocument();
+  const label = getByText(/Cloud Cover/i);
+  expect(label).toBeInTheDocument();
+  const value = getByText("Under 10%");
+  expect(value).toBeInTheDocument();
 
   fireEvent.click(screen.getByTestId("rangecontrol-eo:cloud_cover"));
   await waitFor(() => screen.getByRole("dialog"));
@@ -63,10 +69,12 @@ test("it displays correct title and formatted value for LTE", async () => {
 
 test("it displays correct title and formatted value for EQ", async () => {
   const field = new CqlExpressionParser<number>(eq, queryable);
-  render(<RangeField field={field} icon="search" />);
+  render(<RangeField field={field} />);
 
-  const label = screen.getByText(/Cloud Cover: exactly 10%/i);
+  const label = screen.getByText(/Cloud Cover/i);
   expect(label).toBeInTheDocument();
+  const value = screen.getByText("Exactly 10%");
+  expect(value).toBeInTheDocument();
 
   fireEvent.click(screen.getByTestId("rangecontrol-eo:cloud_cover"));
   await waitFor(() => screen.getByRole("dialog"));
@@ -77,10 +85,12 @@ test("it displays correct title and formatted value for EQ", async () => {
 
 test("it displays correct title and formatted value for BETWEEN", async () => {
   const field = new CqlExpressionParser<number>(bt, queryable);
-  render(<RangeField field={field} icon="search" />);
+  render(<RangeField field={field} />);
 
-  const label = screen.getByText(/Cloud Cover: 25% - 75%/i);
+  const label = screen.getByText(/Cloud Cover/i);
   expect(label).toBeInTheDocument();
+  const value = screen.getByText("25% - 75%");
+  expect(value).toBeInTheDocument();
 
   fireEvent.click(screen.getByTestId("rangecontrol-eo:cloud_cover"));
   await waitFor(() => screen.getByRole("dialog"));

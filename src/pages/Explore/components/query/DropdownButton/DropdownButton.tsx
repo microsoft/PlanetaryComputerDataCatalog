@@ -49,7 +49,7 @@ export const DropdownButton = React.forwardRef<
           onClick={handleDismiss}
           {...rest}
         />
-        <Icon iconName="ChevronDown" styles={chevronStyle} />
+        <Icon key="xxx" iconName="ChevronDown" styles={chevronStyle} />
       </Stack>
       {isCalloutVisible && (
         <Callout
