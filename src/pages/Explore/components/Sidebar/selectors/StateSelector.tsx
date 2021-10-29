@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 import { Dropdown, IDropdownOption } from "@fluentui/react";
 import { useExploreDispatch } from "../../../state/hooks";
-import { renderPlaceholder, renderTitle } from "pages/Explore/utils/render";
+import {
+  renderPlaceholder,
+  renderTitle,
+} from "pages/Explore/utils/dropdownRenderers";
 
 type StateSelectorProps = {
   options: IDropdownOption[];

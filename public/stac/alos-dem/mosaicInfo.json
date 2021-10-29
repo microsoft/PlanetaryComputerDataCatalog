@@ -5,7 +5,10 @@
       "description": "",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2016-12-07"]
+          "anyinteracts": [
+            { "property": "datetime" },
+            ["2016-12-07T00:00:00Z", "2016-12-07T23:59:59Z"]
+          ]
         }
       ]
     }

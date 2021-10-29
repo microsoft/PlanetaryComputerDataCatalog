@@ -2,7 +2,6 @@ import { useCallback, useMemo, useReducer, useRef } from "react";
 import {
   Stack,
   IStackTokens,
-  Text,
   IIconProps,
   VerticalDivider,
   IVerticalDividerStyles,
@@ -11,11 +10,11 @@ import {
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
-import ControlFooter from "../ControlFooter";
+import ControlFooter from "../components/ControlFooter";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider, IDateFieldContext } from "./context";
-import { getDayEnd, getDayStart, toUtcDateString } from "utils";
+import { capitalize, getDayEnd, getDayStart, toUtcDateString } from "utils";
 import {
   getDateDisplayText,
   isValidToApply,
@@ -32,6 +31,7 @@ import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
 import { DropdownButton } from "../DropdownButton";
 import { PanelControlHandlers } from "pages/Explore/components/Map/components/PanelControl";
+import DropdownLabel from "../components/DropdownLabel";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
@@ -101,13 +101,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   };
 
   const handleRenderText = () => {
-    return (
-      <Stack key="datetime-selector-label" horizontal horizontalAlign="start">
-        <Text>
-          Acquired: {opLabel} {displayText}
-        </Text>
-      </Stack>
-    );
+    const displayValue = `${capitalize(opLabel)} ${displayText}`;
+    return <DropdownLabel label="Acquired" displayValue={displayValue} />;
   };
 
   const displayMin = toUtcDateString(dateExpression.min);

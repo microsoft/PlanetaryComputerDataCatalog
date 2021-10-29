@@ -81,13 +81,16 @@ const stackStyle: IStackStyles = {
 const buttonStyles: Partial<IButtonStyles> = {
   icon: {
     color: theme.palette.themePrimary,
+    marginLeft: 0,
     marginRight: 10,
+    width: 14,
+    height: 14,
   },
   flexContainer: {
     justifyContent: "start",
   },
   root: {
-    paddingLeft: 5,
+    paddingLeft: 8,
     paddingRight: 30,
   },
 };
@@ -109,6 +112,6 @@ const chevronStyle: IIconStyles = {
 const styles = mergeStyleSets({
   callout: {
     padding: "20px 24px",
-    backgroundColor: getTheme().semanticColors.bodyBackground,
+    backgroundColor: theme.semanticColors.bodyBackground,
   },
 });

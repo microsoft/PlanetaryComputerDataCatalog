@@ -2,7 +2,10 @@ import { useState } from "react";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { Dropdown, IDropdownOption } from "@fluentui/react";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
-import { renderPlaceholder, renderTitle } from "pages/Explore/utils/render";
+import {
+  renderSegmentedPlaceholder,
+  renderSegmentedTitle,
+} from "pages/Explore/utils/dropdownRenderers";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
 import { CqlEqualExpression, CqlInExpression } from "pages/Explore/utils/cql/types";
@@ -40,15 +43,15 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   };
 
   const title = field.fieldSchema.title || field.property;
-  const icon = "CircleShapeSolid";
+  const icon = "LocationDot";
   const options = enumToOptions(field.fieldSchema.enum);
   return (
     <Dropdown
       multiSelect
       options={options}
       selectedKeys={selectedKeys}
-      onRenderTitle={renderTitle(icon, `${title}:`)}
-      onRenderPlaceholder={renderPlaceholder(icon, `${title}: (include all)`)}
+      onRenderTitle={renderSegmentedTitle(icon, title)}
+      onRenderPlaceholder={renderSegmentedPlaceholder(icon, title, "Include all")}
       onChange={handleChange}
       onDismiss={handleDismiss}
     />

@@ -4,10 +4,10 @@ export const operators = {
   lte: "≤",
   gt: ">",
   gte: "≥",
-  between: "BETWEEN",
+  between: "between",
   like: "LIKE",
   isnull: "IS NULL",
-  in: "IN",
+  in: "in",
   anyinteracts: "",
   intersects: "",
 };

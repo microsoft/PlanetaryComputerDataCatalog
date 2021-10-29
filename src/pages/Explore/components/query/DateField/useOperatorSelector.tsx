@@ -59,8 +59,11 @@ const opItemFromExpression = (
       return item.key === "between";
     }
 
-    // Equals is really an any interacts with a single day in both values
-    if (dateExpression.operator === "anyinteracts") {
+    // Equals is really an anyinteracts with a single day in both values
+    if (
+      dateExpression.operator === "anyinteracts" ||
+      dateExpression.operator === "eq"
+    ) {
       return item.key === "on";
     }
 

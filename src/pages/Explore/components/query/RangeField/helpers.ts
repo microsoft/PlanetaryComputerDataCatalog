@@ -18,15 +18,17 @@ export const getValueLabel = (
 
   switch (field.operator) {
     case "eq":
-      return `exactly ${lower}`;
+      return `Exactly ${lower}`;
     case "gte":
     case "gt":
-      return `over ${lower}`;
+      return `Over ${lower}`;
     case "lte":
     case "lt":
-      return `under ${upper}`;
+      return `Under ${upper}`;
     case "between":
       return `${lower} - ${upper}`;
+    default:
+      return "";
   }
 };
 

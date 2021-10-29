@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getTheme, ISliderStyles, Slider, Stack, Text } from "@fluentui/react";
+import { getTheme, ISliderStyles, Slider, Stack } from "@fluentui/react";
 
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { DropdownButton } from "../DropdownButton";
@@ -12,6 +12,7 @@ import {
   toCqlExpression,
   formatValue,
 } from "./helpers";
+import DropdownLabel from "../components/DropdownLabel";
 
 type RangeFieldProps = {
   field: CqlExpressionParser<number>;
@@ -44,11 +45,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
   };
 
   const renderLabel = () => {
-    return (
-      <Text key={`${keyPrefix}-label`}>
-        {labelPrefix}: {valueLabel}
-      </Text>
-    );
+    return <DropdownLabel label={labelPrefix} displayValue={valueLabel} />;
   };
 
   const icon = labelPrefix.match(/Cloud/i)?.length ? "Cloud" : "LocationFill";
