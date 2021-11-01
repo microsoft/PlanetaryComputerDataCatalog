@@ -56,7 +56,23 @@ GDAL_HTTP_MERGE_CONSECUTIVE_RANGES | YES           | [Improves GDAL performance]
 
 Your software environment is determined by the environment you selected when starting your server. It's a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) located at ``/srv/conda/envs/notebook``. The environment contains many software libraries that are helpful for geospatial data analysis The environments are defined and packaged into Docker containers in the [planetary-computer-containers][containers] repository.
 
-As mentioned [above](#Understanding-the-file-system), changes to the environment outside of your home directory are not persisted across sessions. If you ``pip`` or ``conda`` install a package, it will not be present the next time you start your server.
+The exact versions available can be viewed in the environment's `conda-linux-64.lock` file. For example, see the [Python](https://github.com/microsoft/planetary-computer-containers/blob/main/python/conda-linux-64.lock) or [R](https://github.com/microsoft/planetary-computer-containers/blob/main/r/conda-linux-64.lock) lock files. If you have a notebook server running, you can [open a new terminal](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html) and run `conda list`.
+
+### Installing additional packages at runtime
+
+You can install additional packages "at runtime", after starting your notebook server. We recommend using `conda` (specifically, the `mamba` solver) to install additional packages, which will ensure that your environment stays in a consistent state. Most of the packages already present come from the [conda-forge](https://conda-forge.org/) channel, so you should prefer it with `-c conda-forge`.
+
+```console
+$ mamba install -c conda-forge r-rjson
+```
+
+`conda` is a multi-language package manager, so most R packages are prefixed with `r-`. You can search the list of packages available at <https://conda-forge.org/feedstock-outputs/>. If a package isn't present, then consider [contributing it to conda-forge](https://conda-forge.org/#contribute).
+
+Alternatively, you can try installing packages from [PyPI](https://pypi.org/) or [CRAN](https://cran.r-project.org/), but note that existing packages may not be recognized.
+
+As mentioned [above](#Understanding-the-file-system), changes to the environment outside of your home directory are not persisted across sessions. If you ``pip`` or ``conda`` install a package, it will not be present the next time you start your server. If you think our environments are missing a package that's commonly used in geospatial or sustainability data analysis, then [open an issue](https://github.com/microsoft/PlanetaryComputer/issues) requesting that we add it.
+
+### Installing packages on Dask clusters at runtime
 
 If you're using Dask for scalable computing, you should ensure that modifications you make to your local software environment are present on the workers too. Dask provides a [PipInstallPlugin](https://distributed.dask.org/en/latest/plugins.html#distributed.diagnostics.plugin.PipInstall) to automatically install packages when workers start
 
