@@ -46,6 +46,10 @@ collections:
       - title: Example Notebook
         src: alos-dem-example.html
         launch: datasets/alos-dem/alos-dem-example.ipynb
+      - title: Blob Storage Notebook
+        src: alos-dem.html
+      - title: Storage Documentation
+        src: alos-dem-storage.html
 
   aster-l1t:
     category: Imagery
@@ -66,6 +70,10 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+      - title: Blob Storage Notebook
+        src: copernicus-dem.html
+      - title: Storage Documentation
+        src: copernicus-dem-storage.html
 
   cop-dem-glo-90:
     category: DEMs
@@ -74,6 +82,10 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+      - title: Blob Storage Notebook
+        src: copernicus-dem.html
+      - title: Storage Documentation
+        src: copernicus-dem-storage.html
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
@@ -176,22 +188,6 @@ collections:
         src: goes-r-abi-l2-mcmipf.html
       - title: Storage Documentation
         src: goes-r-storage.html
-
-  # Waiting on the other goes collections
-  # goes-fdc:
-  #   category: Fire
-
-  # goes-rrqpe:
-  #   category: Climate/Weather
-
-  # goes-mcmip:
-  #   category: Imagery
-
-  # goes-sst:
-  #   category: Climate/Weather
-
-  # goes-lst:
-  #   category: Climate/Weather
 
   gridmet:
     headerImg: ./images/gridmet-hero.png
@@ -352,6 +348,15 @@ ai4e:
     alt: Clouds at sunset
     keywords: [NOAA, Global, Precipitation]
 
+  - title: High Resolution Ocean Surface Wave Hindcast
+    shortTerm: wave hindcast
+    description:
+      Long-term wave hindcast data for the U.S. Exclusive Economic Zone (EEZ)
+    infoUrl: https://aka.ms/ai4edata-doe-wave
+    thumbnailUrl: wave-hindcast_small.jpg
+    alt: Ocean waves
+    keywords: [Wave, hindcast, United States]
+
   - title: Harmonized Landsat Sentinel-2
     shortTerm: HLS
     description: 30m-resolution satellite imagery for North America
@@ -359,6 +364,15 @@ ai4e:
     thumbnailUrl: RE3OM3E.jpg
     alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
+
+  - title: Landsat TM/MSS Collection 2
+    shortTerm: Landsat TM/MSS
+    description:
+      Global imagery from the MSS and TM instruments on the Landsat 1-5 satellites
+    infoUrl: https://aka.ms/ai4edata-landsat-tm-mss
+    thumbnailUrl: landsat_tm_mms_small.jpg
+    alt: Earth from above
+    keywords: [Landsat, Global, Imagery, Satellite]
 
   - title: LILA BC
     shortTerm: LILA BC
@@ -386,6 +400,39 @@ ai4e:
     alt: Landcover map of the United States
     keywords: [Land Cover, United States]
 
+  - title: National Solar Radiation Database
+    shortTerm: solar radiation
+    description:
+      Half-hourly measurements of incident solar radiation from 1998-present
+    infoUrl: https://aka.ms/ai4edata-nsrdb
+    thumbnailUrl: solar_radiation_small.jpg
+    alt: Bright sun over the ocean
+    keywords: [United States, Solar, Radiation]
+
+  - title: NOAA Climate Data Records
+    shortTerm: NOAA climate
+    description: Historical global climate information
+    infoUrl: https://aka.ms/ai4edata-cdr
+    thumbnailUrl: global_weather_1.jpg
+    alt: Weather pattern from space
+    keywords: [Global, NOAA, Climate]
+
+  - title: NOAA Climate Forecast System
+    shortTerm: NOAA climate forecast
+    description: Global weather forecasts at approximately 56km resolution
+    infoUrl: https://aka.ms/ai4edata-cfs
+    thumbnailUrl: global_weather_2.jpg
+    alt: Weather pattern from space
+    keywords: [Global, NOAA, Climate, Forecast]
+
+  - title: NOAA Global Ensemble Forecast System (GEFS)
+    shortTerm: NOAA ensemble forecast
+    description: Ensembled global weather forecasts
+    infoUrl: https://aka.ms/ai4edata-gefs
+    thumbnailUrl: global_weather_3.jpg
+    alt: Weather pattern from space
+    keywords: [Global, NOAA, Weather, Forecast]
+
   - title: NOAA Global Forecast System
     shortTerm: NOAA global forecast
     description: 15-day US hourly weather forecast data
@@ -402,6 +449,14 @@ ai4e:
     alt: High altitude view of cloud cover with moon
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
+  - title: NOAA High-Resolution Rapid Refresh (HRRR)
+    shortTerm: NOAA HRRR
+    description: Weather forecasts for North America at 3km resolution
+    infoUrl: https://aka.ms/ai4edata-hrrr
+    thumbnailUrl: hrrr_small.jpg
+    alt: Temperature rendering of North America
+    keywords: [North America, NOAA, Weather, Forecast]
+
   - title: NOAA Integrated Surface Data
     shortTerm: NOAA surface
     description: Worldwide hourly weather history data
@@ -409,6 +464,30 @@ ai4e:
     thumbnailUrl: RE4rsOQ.jpg
     alt: High altitude view of clouds
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
+
+  - title: NOAA US Climate Gridded Dataset (NClimGrid)
+    shortTerm: NOAA US climate
+    description: Gridded climate data for the U.S. from 1895 to the present
+    infoUrl: https://aka.ms/ai4edata-nclimgrid
+    thumbnailUrl: nclimgrid.png
+    alt: Rendering of precipitation in NW USA
+    keywords: [United States, NOAA, Climate, Historical]
+
+  - title: NOAA Rapid Refresh (RAP)
+    shortTerm: NOAA RAP
+    description: Weather forecasts for North America at 13km resolution
+    infoUrl: https://aka.ms/ai4edata-rap
+    thumbnailUrl: thunder_storm.jpg
+    alt: Lightning and thunder storm
+    keywords: [North America, NOAA, Weather]
+
+  - title: NOAA US Climate Normals
+    shortTerm: NOAA climate normals
+    description: Typical climate conditions for the U.S. from 1981-present
+    infoUrl: https://aka.ms/ai4edata-climatenormals
+    thumbnailUrl: climate_normals.jpg
+    alt: Pink cloudy sky
+    keywords: [North America, NOAA, Weather]
 
   - title: Ocean Observatories Initiative CAMHD
     shortTerm: OOI
@@ -426,6 +505,14 @@ ai4e:
     alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
     keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
 
+  - title: Sentinel-1 SLC
+    shortTerm: Sentinel-1 SLC
+    description: Global synthetic aperture radar data for the last 90 days
+    infoUrl: https://aka.ms/ai4edata-sentinel-1-slc
+    thumbnailUrl: sentinel-1-sat.jpg
+    alt: Earth from space showing panel of satellite
+    keywords: [Global, Sentinel, Satellite, ESA, SAR]
+
   - title: Sentinel-3 L2
     shortTerm: Sentinel-3 L2
     description:
@@ -435,10 +522,35 @@ ai4e:
     alt: Satellite image of Grand Canyon from Sentinel-3 L2
     keywords: [Global, Sentinel, Satellite, ESA, Temperature, SAR, Ocean, Imagery]
 
+  - title: Sentinel-5P
+    shortTerm: Sentinel-5P
+    description: Global atmospheric data from 2018-present
+    infoUrl: https://aka.ms/ai4edata-sentinel-5p
+    thumbnailUrl: sentinel-5.png
+    alt: Rendering of sentinel 5 swath
+    keywords: [Global, Sentinel, Satellite, ESA, Atmosphere]
+
   - title: UK Met Office CSSP China 20CRDS
     shortTerm: CSSP China 20CRDS
     description: Historical climate data for China, from 1851-2010
     infoUrl: https://aka.ms/ai4edata-uk-met-20crds
     thumbnailUrl: cssp-china.jpg
     alt: Sky and clouds over mountain range
-    keywords: [China, Climate, Historical]
+    keywords: [Met Office, China, Climate, Historical]
+
+  - title: UK Met Office Global Weather Data for COVID-19 Analysis
+    shortTerm: UK Met COVID-19
+    description:
+      Data to explore relationships between COVID-19 and environmental factors
+    infoUrl: https://aka.ms/ai4edata-metofficecovid19
+    thumbnailUrl: covid-dot-map.jpg
+    alt: Global map rendered as dots showing hotspot areas
+    keywords: [Met Office, Global, COVID-19, Weather]
+
+  - title: UMCM Hurricanes
+    shortTerm: UMCM Hurricane
+    description: Modeled wind, wave, and current data for Hurricanes Ike and Sandy
+    infoUrl: https://aka.ms/ai4edata-umcm-hurricanes
+    thumbnailUrl: hurricane_small.jpg
+    alt: Hurricane in gulf of Mexico
+    keywords: [UMCM, Hurricane, Wind, Wave, Current, Ocean]
