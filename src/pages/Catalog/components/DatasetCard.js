@@ -6,7 +6,7 @@ const DatasetCard = ({ resourceItem }) => {
   const { alt, title, shortTerm, thumbnailUrl, description, infoUrl } = resourceItem;
 
   const linkLabel = shortTerm || title;
-  const thumbnailHref = `https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/additional_datasets/${thumbnailUrl}`;
+  const thumbnailHref = `https://ai4edatasetspublicassets.azureedge.net/assets/pc_thumbnails/additional_datasets/${thumbnailUrl}`;
 
   return (
     <div className="add-datasource-item">
