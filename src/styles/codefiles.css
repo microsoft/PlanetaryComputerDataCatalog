@@ -92,11 +92,20 @@ div.prompt.output_prompt {
 }
 
 .admonition.note .admonition-title {
-  background: #0078d4;
+  background: #2b88d8;
+}
+
+.admonition-title {
+  border-radius: 3px 3px 0 0;
 }
 
 .admonition.warning .admonition-title {
   background: #fed9cc;
+  color: #000;
+}
+
+.admonition.tip .admonition-title {
+  background: rgba(255, 193, 7, 0.4);
   color: #000;
 }
 
@@ -105,6 +114,7 @@ div.prompt.output_prompt {
   border: 1px solid #e0e0e0;
   border-top: 0;
   padding: 14px 6px;
+  border-radius: 0 0 3px 3px;
 }
 
 /* Use darker text for accessible contrast for xarray output table columns */
