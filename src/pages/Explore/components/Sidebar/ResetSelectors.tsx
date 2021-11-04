@@ -10,7 +10,7 @@ const ResetSelectors = () => {
   const disabled = !collection;
 
   const handleClick = useCallback(() => {
-    dispatch(resetMosaicState());
+    dispatch<any>(resetMosaicState());
   }, [dispatch]);
 
   return (
