@@ -1,7 +1,5 @@
 # About the Microsoft Planetary Computer
 
-[Service Status](https://planetarycomputer-status.microsoft.com "Check current Planetary Computer health status and view past incidents")
-
 The Microsoft Planetary Computer is a platform that lets users leverage the power of the cloud to accelerate environmental sustainability and Earth science.
 
 The Planetary Computer consists of four major components:
@@ -10,6 +8,10 @@ The Planetary Computer consists of four major components:
 - [APIs](../concepts/stac.md) that allow users to search for the data they need across space and time.
 - The [Hub](./environment.md), a fully managed computing environment that allows scientists to process massive geospatial datasets.
 - [Applications](https://planetarycomputer.microsoft.com/applications), built by our network of partners, that put the Planetary Computer platform to work for environmental sustainability.
+
+```{note}
+Check current Planetary Computer health status and view past incidents on the [Service Status](https://planetarycomputer-status.microsoft.com) page.
+```
 
 ## Built on Open
 
@@ -21,10 +23,13 @@ While the Planetary Computer data and APIs are publicly accessible, certain feat
 
 In the meantime, the core components of the Planetary Computer are usable without an account:
 
-* The [STAC API](../reference/stac) is public and can be accessed anonymously.
-* Data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
- 
+- The [STAC API](../reference/stac) is public and can be accessed anonymously.
+- Data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
+
 We're just getting started. Check back for updated documentation and new features!
+
+```{tip} To report issues, ask questions, or engage in community discussions please visit our [GitHub repository](https://github.com/microsoft/PlanetaryComputer).
+```
 
 ## Next steps
 
@@ -36,7 +41,6 @@ We're just getting started. Check back for updated documentation and new feature
   - [NAIP]((http://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook))
   - [ASTER L1T]((http://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook))
 - [Request a Planetary Computer account](https://planetarycomputer.microsoft.com/account/request)
-
 
 ## Beyond the Planetary Computer
 
