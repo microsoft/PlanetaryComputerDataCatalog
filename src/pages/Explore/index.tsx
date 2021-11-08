@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
-import { Stack, StackItem, IStackTokens, useTheme } from "@fluentui/react";
+import { Stack, StackItem, useTheme } from "@fluentui/react";
 
 import { store } from "./state/store";
 
@@ -11,10 +11,6 @@ import Sidebar from "./components/Sidebar";
 import { useWindowSize } from "react-use";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
-
-const stackTokens: IStackTokens = {
-  childrenGap: 5,
-};
 
 // TODO: track heights rather than hard code them
 const heights = {
@@ -33,11 +29,7 @@ const Explorer = () => {
     <Layout onGrid={false} allowAnnouncement={false}>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        <Stack
-          horizontal
-          tokens={stackTokens}
-          styles={{ root: { height: bodyHeight } }}
-        >
+        <Stack horizontal styles={{ root: { height: bodyHeight } }}>
           <Sidebar />
           <StackItem
             styles={{

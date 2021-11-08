@@ -38,7 +38,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   const handleDismiss = () => {
     const cql = parseKeysToCql(selectedKeys, field);
     if (cql) {
-      dispatch(setCustomCqlExpression(cql));
+      dispatch<any>(setCustomCqlExpression(cql));
     }
   };
 

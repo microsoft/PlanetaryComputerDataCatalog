@@ -33,7 +33,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
 
   const handleUpdate = () => {
     const cql = toCqlExpression(lowerWorkingValue, upperWorkingValue, field);
-    dispatch(setCustomCqlExpression(cql));
+    dispatch<any>(setCustomCqlExpression(cql));
   };
 
   const handleChange = (_: unknown, range: [number, number] | undefined) => {

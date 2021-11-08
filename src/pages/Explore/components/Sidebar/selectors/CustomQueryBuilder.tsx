@@ -17,7 +17,7 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import { selectCurrentCql, setIsCustomQuery } from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
-import { DateField } from "../query/DateField";
+import { DateField } from "../../query/DateField";
 import defaultQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
 
 const CustomQueryBuilder = () => {

@@ -1,10 +1,8 @@
 import { IStackTokens, Stack } from "@fluentui/react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import CustomizeQuery from "../CustomizeQuery";
-import CustomQueryBuilder from "../CustomQueryBuilder";
+import CustomQueryBuilder from "../selectors/CustomQueryBuilder";
 import ErrorFallback from "components/ErrorFallback";
-import ResetSelectors from "../ResetSelectors";
 import {
   CollectionSelector,
   MosaicPresetSelector,
@@ -23,10 +21,6 @@ const SelectorPane = ({ isCustomQuery }: SelectorPaneProps) => {
         {!isCustomQuery && <MosaicPresetSelector />}
         {isCustomQuery && <CustomQueryBuilder />}
         <RenderOptionsSelector />
-        <Stack horizontal horizontalAlign="end" tokens={stackTokens}>
-          <CustomizeQuery />
-          <ResetSelectors />
-        </Stack>
       </Stack>
     </ErrorBoundary>
   );
@@ -35,5 +29,5 @@ const SelectorPane = ({ isCustomQuery }: SelectorPaneProps) => {
 export default SelectorPane;
 
 const stackTokens: IStackTokens = {
-  childrenGap: 5,
+  childrenGap: 6,
 };

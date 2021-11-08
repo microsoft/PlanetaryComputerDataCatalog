@@ -81,7 +81,7 @@ export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
 
 export const resetMosaicState = (): AppThunk => dispatch => {
   resetMosaicQueryStringState();
-  dispatch(resetMosiac());
+  dispatch(resetMosaic());
 };
 
 export const mosaicSlice = createSlice({
@@ -149,7 +149,7 @@ export const mosaicSlice = createSlice({
         draft.splice(existingIndex, 1);
       }
     },
-    resetMosiac: () => {
+    resetMosaic: () => {
       return initialState;
     },
   },
@@ -171,7 +171,7 @@ export const mosaicSlice = createSlice({
 });
 
 export const {
-  resetMosiac,
+  resetMosaic,
   setCollection,
   setQuery,
   setRenderOption,

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { FontSizes, Link, Stack } from "@fluentui/react";
 
-import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { resetMosaicState } from "pages/Explore/state/mosaicSlice";
 
 const ResetSelectors = () => {
