@@ -36,29 +36,23 @@ export const renderPlaceholder = (iconName: string, title: string) => {
   };
 };
 
-export const renderSegmentedTitle = (iconName: string, label: string) => {
+export const renderSegmentedTitle = (label: string) => {
   return (options: IDropdownOption[] | undefined): JSX.Element | null => {
     if (!options) return null;
 
     const optionsText = options.map(o => o.text).join(", ");
     return (
       <Stack horizontal>
-        <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
         <DropdownLabel label={label} displayValue={optionsText} />
       </Stack>
     );
   };
 };
 
-export const renderSegmentedPlaceholder = (
-  iconName: string,
-  label: string,
-  displayValue: string
-) => {
+export const renderSegmentedPlaceholder = (label: string, displayValue: string) => {
   return (): JSX.Element => {
     return (
       <Stack horizontal>
-        <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
         <DropdownLabel label={label} displayValue={displayValue} />
       </Stack>
     );

@@ -27,34 +27,33 @@ export const EnumField = ({ field }: EnumFieldProps) => {
     item: IDropdownOption | undefined
   ): void => {
     if (item) {
-      setSelectedKeys(
-        item.selected
-          ? [...selectedKeys, item.key as string]
-          : selectedKeys.filter(key => key !== item.key)
-      );
+      const newKeys = item.selected
+        ? [...selectedKeys, item.key as string]
+        : selectedKeys.filter(key => key !== item.key);
+      setSelectedKeys(newKeys);
+      handleUpdate(newKeys);
     }
   };
 
-  const handleDismiss = () => {
-    const cql = parseKeysToCql(selectedKeys, field);
+  const handleUpdate = (keys: string[]) => {
+    const cql = parseKeysToCql(keys, field);
     if (cql) {
       dispatch<any>(setCustomCqlExpression(cql));
     }
   };
 
   const title = field.fieldSchema.title || field.property;
-  const icon = "LocationDot";
   const options = enumToOptions(field.fieldSchema.enum);
+
   return (
     <Dropdown
       multiSelect
       options={options}
       selectedKeys={selectedKeys}
       ariaLabel={`${title} dropdown selector`}
-      onRenderTitle={renderSegmentedTitle(icon, title)}
-      onRenderPlaceholder={renderSegmentedPlaceholder(icon, title, "Include all")}
+      onRenderTitle={renderSegmentedTitle(title)}
+      onRenderPlaceholder={renderSegmentedPlaceholder(title, "Include all")}
       onChange={handleChange}
-      onDismiss={handleDismiss}
     />
   );
 };
