@@ -1,6 +1,6 @@
 import { MutableRefObject, useCallback } from "react";
 import * as atlas from "azure-maps-control";
-import axios from "axios";
+import axios, { AxiosRequestHeaders } from "axios";
 import { isEmpty } from "lodash-es";
 import { IPickerItemProps, Text, useTheme, FontSizes } from "@fluentui/react";
 import { IUseBooleanCallbacks } from "@fluentui/react-hooks";
@@ -49,7 +49,9 @@ const usePlaceSuggestions = (
     if (!params.url) return [];
 
     try {
-      const suggests = await axios.get(params.url, { headers: params.headers });
+      const suggests = await axios.get(params.url, {
+        headers: params.headers as AxiosRequestHeaders,
+      });
       return suggests.data.results;
     } catch {
       return [];
