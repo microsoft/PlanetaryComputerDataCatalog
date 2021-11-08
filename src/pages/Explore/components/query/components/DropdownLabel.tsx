@@ -52,8 +52,9 @@ const labelDividerStyles: IVerticalDividerStyles = {
 const labelStyle: ITextStyles = {
   root: {
     paddingRight: 5,
-    width: 85,
+    width: 100,
     textAlign: "left",
+    fontWeight: 500,
   },
 };
 

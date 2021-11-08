@@ -83,13 +83,6 @@ const stackStyle: IStackStyles = {
   },
 };
 const buttonStyles: Partial<IButtonStyles> = {
-  icon: {
-    color: theme.palette.themePrimary,
-    marginLeft: 0,
-    marginRight: 10,
-    width: 14,
-    height: 14,
-  },
   flexContainer: {
     justifyContent: "start",
   },

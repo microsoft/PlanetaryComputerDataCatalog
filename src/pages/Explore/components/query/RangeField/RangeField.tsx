@@ -54,13 +54,10 @@ export const RangeField = ({ field }: RangeFieldProps) => {
     );
   };
 
-  const icon = labelPrefix.match(/Cloud/i)?.length ? "Cloud" : "LocationFill";
-
   return (
     <DropdownButton
       key={keyPrefix}
       label={`${labelPrefix}: ${valueLabel}`}
-      iconProps={{ iconName: icon }}
       onRenderText={renderLabel}
       onDismiss={handleUpdate}
       data-cy={keyPrefix}

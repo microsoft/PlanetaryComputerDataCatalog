@@ -2,7 +2,6 @@ import { useCallback, useMemo, useReducer, useRef } from "react";
 import {
   Stack,
   IStackTokens,
-  IIconProps,
   VerticalDivider,
   IVerticalDividerStyles,
   MessageBar,
@@ -120,7 +119,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         ref={panelRef}
         key={"query-datetime-field"}
         label="Date acquired"
-        iconProps={iconProps}
         onRenderText={handleRenderText}
       >
         {OperatorSelector}
@@ -144,7 +142,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               </>
             )}
           </Stack>
-          <MessageBar styles={messagebarStyles}>{validDateText}</MessageBar>
+          <MessageBar styles={messageBarStyles}>{validDateText}</MessageBar>
           <ControlFooter
             onCancel={handleCancel}
             onSave={handleSave}
@@ -160,10 +158,6 @@ const calendarTokens: IStackTokens = {
   childrenGap: 10,
 };
 
-const iconProps: IIconProps = {
-  iconName: "Calendar",
-};
-
 const dividerStyles: IVerticalDividerStyles = {
   wrapper: {
     marginTop: 55,
@@ -175,6 +169,6 @@ const dividerStyles: IVerticalDividerStyles = {
   },
 };
 
-const messagebarStyles: IMessageBarStyles = {
+const messageBarStyles: IMessageBarStyles = {
   root: { borderRadius: 5 },
 };

@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import {
   IStackStyles,
   Stack,
-  getTheme,
   IStackTokens,
   Text,
   ITextStyles,
@@ -10,6 +9,8 @@ import {
   ILinkStyles,
   Shimmer,
   ShimmerElementType,
+  Separator,
+  ISeparatorStyles,
 } from "@fluentui/react";
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
@@ -52,7 +53,8 @@ const CustomQueryBuilder = () => {
   const controls = expressions?.map(e => e.control);
 
   return (
-    <Stack styles={styles} tokens={controlStackTokens}>
+    <Stack tokens={controlStackTokens}>
+      <Separator styles={separatorStyles} />
       <Stack horizontal tokens={customStackTokens} styles={customStackStyles}>
         <Text styles={textStyle}>Custom filter</Text>
         <Link
@@ -66,6 +68,7 @@ const CustomQueryBuilder = () => {
       {isLoading && loadingIndicator}
       {dateControl}
       {controls}
+      <Separator styles={separatorStyles} />
     </Stack>
   );
 };
@@ -76,31 +79,21 @@ const loadingIndicator = (
   <Shimmer shimmerElements={[{ type: ShimmerElementType.line, height: 34 }]} />
 );
 
-const theme = getTheme();
-const styles: IStackStyles = {
-  root: {
-    backgroundColor: theme.palette.neutralLighterAlt,
-    border: "1px solid",
-    borderColor: theme.palette.neutralLight,
-    borderRadius: 2,
-    padding: "5px 5px 5px 10px",
-  },
-};
 const controlStackTokens: IStackTokens = {
   childrenGap: 4,
 };
 
 const customStackStyles: IStackStyles = {
-  root: { alignItems: "flexStart" },
+  root: { alignItems: "flexStart", justifyContent: "space-between" },
 };
 
 const customStackTokens: IStackTokens = {
-  childrenGap: 8,
+  childrenGap: 4,
 };
 
 const textStyle: Partial<ITextStyles> = {
   root: {
-    fontWeight: FontWeights.semibold,
+    fontWeight: FontWeights.bold,
     fontSize: FontSizes.size14,
   },
 };
@@ -108,4 +101,8 @@ const linkStyle: Partial<ILinkStyles> = {
   root: {
     fontSize: FontSizes.size12,
   },
+};
+
+const separatorStyles: Partial<ISeparatorStyles> = {
+  root: { padding: 0, margin: 0, height: 10 },
 };
