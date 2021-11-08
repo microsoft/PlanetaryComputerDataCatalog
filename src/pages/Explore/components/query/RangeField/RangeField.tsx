@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { getTheme, ISliderStyles, Slider, Stack } from "@fluentui/react";
+import {
+  getTheme,
+  ISliderStyles,
+  IStackTokens,
+  ITextFieldStyles,
+  Slider,
+  Stack,
+} from "@fluentui/react";
 
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { DropdownButton } from "../DropdownButton";
@@ -31,9 +38,18 @@ export const RangeField = ({ field }: RangeFieldProps) => {
   const valueLabel = getValueLabel(field, currentLower, currentUpper);
   const keyPrefix = `rangecontrol-${field.property}`;
 
-  const handleUpdate = () => {
-    const cql = toCqlExpression(lowerWorkingValue, upperWorkingValue, field);
-    dispatch<any>(setCustomCqlExpression(cql));
+  const handleUpdate = (
+    _: any,
+    __: number,
+    range?: [number, number] | undefined
+  ) => {
+    if (range) {
+      handleChange(null, range);
+
+      const [lower, upper] = range;
+      const cql = toCqlExpression(lower, upper, field);
+      dispatch<any>(setCustomCqlExpression(cql));
+    }
   };
 
   const handleChange = (_: unknown, range: [number, number] | undefined) => {
@@ -59,10 +75,21 @@ export const RangeField = ({ field }: RangeFieldProps) => {
       key={keyPrefix}
       label={`${labelPrefix}: ${valueLabel}`}
       onRenderText={renderLabel}
-      onDismiss={handleUpdate}
       data-cy={keyPrefix}
     >
-      <Stack styles={stackStyles}>
+      <Stack horizontal styles={stackStyles} tokens={stackTokens}>
+        {/* <TextField
+          underlined
+          suffix="%"
+          styles={inputStyles}
+          value={lowerWorkingValue.toString()}
+          onChange={(e, v) => {
+            const n = Number(v);
+            if (!Number.isNaN(n)) {
+              setLowerValue(Number(v));
+            }
+          }}
+        /> */}
         <Slider
           ranged
           min={range.minimum}
@@ -71,9 +98,23 @@ export const RangeField = ({ field }: RangeFieldProps) => {
           lowerValue={lowerWorkingValue}
           value={upperWorkingValue}
           onChange={handleChange}
+          onChanged={handleUpdate}
           valueFormat={formatValue(field)}
           styles={sliderStyles}
+          showValue={true}
         />
+        {/* <TextField
+          underlined
+          suffix="%"
+          styles={inputStyles}
+          value={upperWorkingValue.toString()}
+          onChange={(e, v) => {
+            const n = Number(v);
+            if (!Number.isNaN(n)) {
+              setUpperValue(Number(v));
+            }
+          }}
+        /> */}
       </Stack>
     </DropdownButton>
   );
@@ -82,8 +123,12 @@ export const RangeField = ({ field }: RangeFieldProps) => {
 const theme = getTheme();
 const stackStyles = {
   root: {
-    width: 330,
+    width: 360,
+    justifyContent: "space-between",
   },
+};
+const stackTokens: IStackTokens = {
+  childrenGap: theme.spacing.m,
 };
 
 const sliderStyles: Partial<ISliderStyles> = {
@@ -93,5 +138,23 @@ const sliderStyles: Partial<ISliderStyles> = {
   },
   inactiveSection: {
     background: theme.palette.themeLighter,
+  },
+  root: {
+    width: "100%",
+  },
+};
+
+// TODO use for editable min/max inputs
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const inputStyles: Partial<ITextFieldStyles> = {
+  root: {
+    width: 95,
+  },
+  field: {
+    textAlign: "center",
+  },
+  suffix: {
+    padding: 0,
+    backgroundColor: theme.semanticColors.bodyBackground,
   },
 };
