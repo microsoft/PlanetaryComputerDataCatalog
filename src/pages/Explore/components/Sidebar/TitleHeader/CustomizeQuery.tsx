@@ -2,15 +2,23 @@ import { useCallback } from "react";
 import { Link, Stack } from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { buttonStyles } from "./ResetSelectors";
-import { setIsCustomQuery } from "pages/Explore/state/mosaicSlice";
+import {
+  setCustomCqlExpressions,
+  setIsCustomQuery,
+} from "pages/Explore/state/mosaicSlice";
+import { useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 
 const CustomizeQuery = () => {
   const { isCustomQuery, collection } = useExploreSelector(s => s.mosaic);
   const dispatch = useExploreDispatch();
+  const { data: mosaicInfo, isSuccess } = useCollectionMosaicInfo(collection?.id);
 
   const handleClick = useCallback(() => {
+    if (isSuccess && mosaicInfo) {
+      dispatch<any>(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
+    }
     dispatch(setIsCustomQuery(true));
-  }, [dispatch]);
+  }, [dispatch, isSuccess, mosaicInfo]);
 
   const disabled = !collection || isCustomQuery;
   return (
@@ -22,7 +30,7 @@ const CustomizeQuery = () => {
         data-cy="customize-query"
         title="Customize the current filters applied to this dataset"
       >
-        Customize this filter
+        [Use customize filter]
       </Link>
     </Stack>
   );

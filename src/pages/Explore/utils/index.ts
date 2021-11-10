@@ -8,6 +8,7 @@ import {
 export const resetMosaicQueryStringState = () => {
   updateQueryStringParam(renderQsKey, "");
   updateQueryStringParam(mosaicQsKey, "");
+  updateQueryStringParam(customQueryQsKey, "");
 };
 
 export const updateQueryStringParam = (

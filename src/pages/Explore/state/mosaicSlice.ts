@@ -6,10 +6,11 @@ import { IMosaic, IMosaicRenderOption } from "../types";
 import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
-import { CqlExpression } from "../utils/cql/types";
+import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
 import { AppThunk, ExploreState } from "./store";
 
 const isCustomQueryOnLoad = getIsCustomQueryString();
+
 export interface IMosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
@@ -64,10 +65,18 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   }
 );
 
-export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
+export const setCustomCqlExpressions = createAsyncThunk<string, CqlExpression>(
   "cql-api/registerCustomQuery",
-  async (cqlExpression: CqlExpression, { getState, dispatch }) => {
-    dispatch(addOrUpdateCustomCqlExpression(cqlExpression));
+  async (
+    cqlExpression: CqlExpression | ICqlExpressionList,
+    { getState, dispatch }
+  ) => {
+    const expressions = Array.isArray(cqlExpression)
+      ? cqlExpression
+      : [cqlExpression];
+    expressions.forEach(expression => {
+      dispatch(addOrUpdateCustomCqlExpression(expression));
+    });
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;
@@ -121,7 +130,6 @@ export const mosaicSlice = createSlice({
     },
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        state.customQuery = state.query;
         state.customQuery.searchId = null;
       }
 
@@ -158,7 +166,9 @@ export const mosaicSlice = createSlice({
       }
     },
     resetMosaic: () => {
-      return initialState;
+      // Explicitly set isCustomQuery since the initial state may have been
+      // informed by querystring
+      return { ...initialState, ...{ isCustomQuery: false } };
     },
   },
   extraReducers: builder => {
@@ -170,9 +180,9 @@ export const mosaicSlice = createSlice({
     );
 
     builder.addCase(
-      setCustomCqlExpression.fulfilled,
+      setCustomCqlExpressions.fulfilled,
       (state, action: PayloadAction<string>) => {
-        state.query.searchId = action.payload;
+        state.customQuery.searchId = action.payload;
       }
     );
   },

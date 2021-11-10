@@ -12,6 +12,7 @@ import { IStacCollection } from "types/stac";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { updateQueryStringParam } from "pages/Explore/utils";
 import { useSearchIdMetadata } from "pages/Explore/utils/hooks/useSearchIdMetadata";
+import { filterCoreExpressions } from "pages/Explore/utils/cql/helpers";
 
 const collectionKey = "d";
 export const mosaicQsKey = "m";
@@ -36,7 +37,7 @@ const useUrlState = (
     new URLSearchParams(window.location.search).get(renderKey)
   );
 
-  // Sync current option to query string. This does not cause further state changes.
+  // Sync current option to query string. This does not cause further state changes
   useEffect(() => {
     if (currentState) {
       updateQueryStringParam(renderKey, currentState?.name);
@@ -69,34 +70,37 @@ export const useMosaicUrlState = (mosaics: IMosaic[] | null | undefined) => {
 
 export const useCustomQueryUrlState = () => {
   const dispatch = useExploreDispatch();
-  const qsSearchId = useQueryString().get(customQueryQsKey);
+  const [qsSearchId, setQsSearchId] = useState<string | null>(
+    useQueryString().get(customQueryQsKey)
+  );
   const { isCustomQuery, customQuery } = useExploreSelector(state => state.mosaic);
 
   // TODO: handle failure
   const { data: searchMetadata, isSuccess } = useSearchIdMetadata(qsSearchId);
 
-  // useEffect(() => {
-  //   if (isCustomQuery) {
-  //     console.log("setting custom query");
-  //     updateQueryStringParam(customQueryQsKey, customQuery.searchId);
-  //     updateQueryStringParam(mosaicQsKey, null);
-  //   } else {
-  //     console.log("setting custom query to null");
-  //     updateQueryStringParam(customQueryQsKey, null);
-  //   }
-  // }, [customQuery.searchId, isCustomQuery]);
+  useEffect(() => {
+    if (isCustomQuery) {
+      updateQueryStringParam(customQueryQsKey, customQuery.searchId);
+      updateQueryStringParam(mosaicQsKey, null);
+    }
+
+    return () => {
+      updateQueryStringParam(customQueryQsKey, null);
+    };
+  }, [customQuery.searchId, isCustomQuery]);
 
   useEffect(() => {
     if (searchMetadata && isSuccess) {
-      // TODO: handle non-Explorer queries that can't be parsed
+      // TODO: handle queries that can't be parsed (e.g. not created by Explorer)
       const queryInfo: IMosaic = {
         cql: filterCoreExpressions(searchMetadata.search.filter.and),
-        sortby: null, // TODO: use searchMetadata.orderby but convert to CQL
+        sortby: null, // TODO: use searchMetadata.orderby but convert to CQL format.
         name: "Custom",
         description: "Set via query string",
         searchId: searchMetadata.hash,
       };
       dispatch(setCustomQueryBody(queryInfo));
+      setQsSearchId(null);
     }
   }, [dispatch, searchMetadata, isSuccess]);
 };

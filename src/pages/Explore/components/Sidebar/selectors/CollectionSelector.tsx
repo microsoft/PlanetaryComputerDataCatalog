@@ -16,7 +16,8 @@ const CollectionSelector = () => {
   const collections: IStacCollection[] = data?.collections;
   const collection = useExploreSelector(state => state.mosaic.collection);
 
-  // Sets selector values based off of url state
+  // Sets selector values based off of url state on load, and subsequently syncs
+  // selection to URL
   useCollectionUrlState(collections);
 
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];

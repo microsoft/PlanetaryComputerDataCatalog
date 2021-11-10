@@ -11,6 +11,7 @@ import {
   ShimmerElementType,
   Separator,
   ISeparatorStyles,
+  getTheme,
 } from "@fluentui/react";
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
@@ -78,8 +79,16 @@ const CustomQueryBuilder = () => {
 
 export default CustomQueryBuilder;
 
+const theme = getTheme();
 const loadingIndicator = (
-  <Shimmer shimmerElements={[{ type: ShimmerElementType.line, height: 34 }]} />
+  <Shimmer
+    shimmerElements={[{ type: ShimmerElementType.line, height: 34 }]}
+    shimmerColors={{
+      background: theme.palette.neutralLighter,
+      shimmer: theme.palette.neutralLight,
+      shimmerWave: theme.palette.neutralLighterAlt,
+    }}
+  />
 );
 
 const controlStackTokens: IStackTokens = {

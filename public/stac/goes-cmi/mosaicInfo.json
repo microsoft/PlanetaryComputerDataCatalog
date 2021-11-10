@@ -38,5 +38,6 @@
   "defaultLocation": {
     "zoom": 4,
     "coordinates": [33.4872, -114.4842]
-  }
+  },
+  "defaultCustomQuery": [{ "eq": [{ "property": "goes:image-type" }, "FULL DISK"] }]
 }

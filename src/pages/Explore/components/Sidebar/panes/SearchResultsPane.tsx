@@ -10,6 +10,7 @@ import {
   Spinner,
   Stack,
   getTheme,
+  IMessageBarStyles,
 } from "@fluentui/react";
 import { UseQueryResult } from "react-query";
 
@@ -18,7 +19,7 @@ import ItemResult from "../../ItemResult";
 import ExploreInHub from "../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import ErrorFallback, { errorMessageStyles } from "components/ErrorFallback";
+import ErrorFallback from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 
 interface SearchResultsProps {
@@ -59,9 +60,15 @@ const SearchResultsPane = ({
 
   if (isError) {
     return (
-      <MessageBar messageBarType={MessageBarType.error} styles={errorMessageStyles}>
-        Sorry, we're having trouble completing this search.
-      </MessageBar>
+      <>
+        <Separator />
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={errorMessageStyles}
+        >
+          Sorry, we're having trouble completing this search.
+        </MessageBar>
+      </>
     );
   }
   const loadingIndicator = (
@@ -139,3 +146,7 @@ export const loadingStyle = (inLoadingState: boolean) => ({
   opacity: inLoadingState ? 0.4 : 1,
   transition: "opacity 0.1s ease-in-out",
 });
+
+export const errorMessageStyles: IMessageBarStyles = {
+  root: { borderRadius: 4, margin: 8, width: "unset" },
+};

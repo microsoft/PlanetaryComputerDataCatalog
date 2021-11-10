@@ -29,7 +29,7 @@ import {
 } from "./state";
 import useOperatorSelector from "./useOperatorSelector";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
+import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import { DropdownButton } from "../DropdownButton";
 import { PanelControlHandlers } from "pages/Explore/components/Map/components/PanelControl";
 import DropdownLabel from "../components/DropdownLabel";
@@ -73,7 +73,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const handleSave = useCallback(() => {
     if (isValid) {
       const exp = toCqlExpression(workingDateRange, operatorSelection.key);
-      dispatch<any>(setCustomCqlExpression(exp));
+      dispatch<any>(setCustomCqlExpressions(exp));
     }
   }, [isValid, workingDateRange, operatorSelection.key, dispatch]);
 

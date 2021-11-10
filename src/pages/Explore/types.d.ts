@@ -9,6 +9,7 @@ export interface IMosaicInfo {
   mosaics: IMosaic[];
   renderOptions: IMosaicRenderOption[] | null;
   defaultLocation: IDefaultLocationInfo;
+  defaultCustomQuery: ICqlExpressionList;
 }
 
 export interface IMosaic {

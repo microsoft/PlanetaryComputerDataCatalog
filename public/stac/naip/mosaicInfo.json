@@ -123,5 +123,10 @@
   "defaultLocation": {
     "zoom": 13,
     "coordinates": [36.0891, -111.8577]
-  }
+  },
+  "defaultCustomQuery": [
+    {
+      "anyinteracts": [{ "property": "datetime" }, ["2017-01-01", "2019-12-31"]]
+    }
+  ]
 }

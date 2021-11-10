@@ -7,7 +7,7 @@ import {
   renderSegmentedTitle,
 } from "pages/Explore/utils/dropdownRenderers";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
+import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import { CqlEqualExpression, CqlInExpression } from "pages/Explore/utils/cql/types";
 
 type EnumFieldProps = {
@@ -38,7 +38,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   const handleUpdate = (keys: string[]) => {
     const cql = parseKeysToCql(keys, field);
     if (cql) {
-      dispatch<any>(setCustomCqlExpression(cql));
+      dispatch<any>(setCustomCqlExpressions(cql));
     }
   };
 

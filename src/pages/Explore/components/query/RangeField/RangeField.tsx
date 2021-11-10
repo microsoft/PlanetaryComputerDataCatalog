@@ -11,7 +11,7 @@ import {
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { DropdownButton } from "../DropdownButton";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCustomCqlExpression } from "pages/Explore/state/mosaicSlice";
+import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import {
   getValueLabel,
   parseCqlValueToRange,
@@ -48,7 +48,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
 
       const [lower, upper] = range;
       const cql = toCqlExpression(lower, upper, field);
-      dispatch<any>(setCustomCqlExpression(cql));
+      dispatch<any>(setCustomCqlExpressions(cql));
     }
   };
 
