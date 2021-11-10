@@ -17,6 +17,15 @@ Check current Planetary Computer health status and view past incidents on the [S
 
 The Planetary Computer uses open source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open source community. For example, our Hub builds on the work done by the [Pangeo](http://pangeo.io/) community to put the tools of data science to work for the Earth science community, and our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.
 
+Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.
+
+|                                           GitHub repository                                           |                                                                                        Purpose                                                                                         |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Microsoft/planetary-computer-apis](https://github.com/Microsoft/planetary-computer-apis)             | Deploys the [STAC](https://planetarycomputer.microsoft.com/docs/reference/stac/) and [data](https://planetarycomputer.microsoft.com/docs/reference/data/) APIs                         |
+| [Microsoft/planetary-computer-hub](https://github.com/Microsoft/planetary-computer-hub)               | Deploys the [Planetary Computer Hub](https://planetarycomputer.microsoft.com/docs/overview/environment/)                                                                               |
+| [Microsoft/planetary-computer-containers](https://github.com/Microsoft/planetary-computer-containers) | Builds the container images with the [software environment](https://planetarycomputer.microsoft.com/docs/overview/environment/#understanding-the-software-environment) used on the Hub |
+| [Microsoft/PlanetaryComputerExamples](https://github.com/microsoft/planetarycomputerexamples)         | Contains notebooks with examples for each dataset, quickstarts, and tutorials for using the Planetary Computer                                                                         |
+
 ## About the Preview
 
 While the Planetary Computer data and APIs are publicly accessible, certain features of the Planetary Computer are in Preview and require access be granted. Use the [request access form](https://planetarycomputer.microsoft.com/account/request) to express your interest in becoming an early user.

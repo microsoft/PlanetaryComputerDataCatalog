@@ -3,6 +3,8 @@ import { IMapInfo } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { DATA_URL } from "utils/constants";
 
+/* DEPRECATED: mapInfo endpoint from the API has been deprecated and this information now
+lives in the mosaicInfo object. */
 export const useCollectionMapInfo = (collectionId: string) => {
   return useQuery(["mapinfo", collectionId], getCollectionViewerParams, {
     refetchOnWindowFocus: false,

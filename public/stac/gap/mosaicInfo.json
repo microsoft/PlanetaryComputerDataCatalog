@@ -16,5 +16,9 @@
       "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=gap-lulc",
       "minZoom": 5
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 7,
+    "coordinates": [26.7409, -80.9714]
+  }
 }
