@@ -34,3 +34,9 @@ export interface IMapInfo {
 export interface IQueryable {
   properties: { [key: string]: any };
 }
+
+export interface ISearchIdMetadata {
+  hash: string;
+  search: { filter: { and: ICqlExpressionList } };
+  orderby: string;
+}

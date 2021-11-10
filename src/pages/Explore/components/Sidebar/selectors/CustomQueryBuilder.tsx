@@ -20,11 +20,14 @@ import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../../query/DateField";
 import defaultQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
+import { useCustomQueryUrlState } from "./hooks/useUrlState";
 
 const CustomQueryBuilder = () => {
   const dispatch = useExploreDispatch();
   const collection = useExploreSelector(s => s.mosaic.collection);
   const cql = useExploreSelector(selectCurrentCql);
+
+  useCustomQueryUrlState();
 
   const handleClearCustom = () => {
     dispatch(setIsCustomQuery(false));

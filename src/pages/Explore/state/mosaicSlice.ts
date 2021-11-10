@@ -3,12 +3,13 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
 import { IMosaic, IMosaicRenderOption } from "../types";
-import { resetMosaicQueryStringState } from "../utils";
+import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression } from "../utils/cql/types";
 import { AppThunk, ExploreState } from "./store";
 
+const isCustomQueryOnLoad = getIsCustomQueryString();
 export interface IMosaicState {
   collection: IStacCollection | null;
   query: IMosaic;
@@ -36,7 +37,7 @@ const initialMosaicState: IMosaic = {
 const initialState: IMosaicState = {
   collection: null,
   query: initialMosaicState,
-  isCustomQuery: false,
+  isCustomQuery: isCustomQueryOnLoad,
   customQuery: initialMosaicState,
   renderOption: null,
   layer: {
@@ -70,10 +71,10 @@ export const setCustomCqlExpression = createAsyncThunk<string, CqlExpression>(
 
     const state = getState() as ExploreState;
     const collectionId = state.mosaic.collection?.id;
-    const queryPreset = state.mosaic.query;
+    const queryInfo = state.mosaic.customQuery;
     const cql = selectCurrentCql(state);
 
-    const searchId = await registerStacFilter(collectionId, queryPreset, cql);
+    const searchId = await registerStacFilter(collectionId, queryInfo, cql);
     return searchId;
   }
 );
@@ -87,7 +88,13 @@ export const mosaicSlice = createSlice({
   name: "mosaic",
   initialState,
   reducers: {
-    setCollection: (state, action: PayloadAction<IStacCollection | null>) => {
+    setCollection: (state, action: PayloadAction<IStacCollection>) => {
+      state.collection = action.payload;
+    },
+    setCollectionDefaultState: (
+      state,
+      action: PayloadAction<IStacCollection | null>
+    ) => {
       state.collection = action.payload;
       state.query = initialMosaicState;
       state.renderOption = null;
@@ -96,9 +103,6 @@ export const mosaicSlice = createSlice({
     },
     setQuery: (state, action: PayloadAction<IMosaic>) => {
       state.query = { ...action.payload, searchId: null };
-    },
-    setIsCustom: (state, action: PayloadAction<boolean>) => {
-      state.isCustomQuery = action.payload;
     },
     setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
       state.renderOption = action.payload;
@@ -117,12 +121,14 @@ export const mosaicSlice = createSlice({
     },
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        state.customQuery = Object.assign(initialMosaicState, {
-          ...state.query.cql,
-          ...state.query.sortby,
-        });
+        state.customQuery = state.query;
+        state.customQuery.searchId = null;
       }
+
       state.isCustomQuery = action.payload;
+    },
+    setCustomQueryBody: (state, action: PayloadAction<IMosaic>) => {
+      state.customQuery = action.payload;
     },
     addOrUpdateCustomCqlExpression: (
       state,
@@ -175,12 +181,14 @@ export const mosaicSlice = createSlice({
 export const {
   resetMosaic,
   setCollection,
+  setCollectionDefaultState,
   setQuery,
   setRenderOption,
   setShowEdit,
   setShowResults,
   setLayerMinZoom,
   setIsCustomQuery,
+  setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
   removeCustomCqlExpression,
 } = mosaicSlice.actions;
