@@ -34,5 +34,9 @@
       "options": "expression=C02_2km_wm,0.45*C02_2km_wm+0.1*C03_2km_wm+0.45*C01_2km_wm,C01_2km_wm&nodata=-1&rescale=1,3000&color_formula=Gamma RGB 2.5 Saturation 1.4 Sigmoidal RGB 2 0.7",
       "minZoom": 2
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 4,
+    "coordinates": [33.4872, -114.4842]
+  }
 }

@@ -119,5 +119,9 @@
       "options": "assets=image&asset_expression=(B4-B1)/(B4+B1)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 12
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 13,
+    "coordinates": [36.0891, -111.8577]
+  }
 }

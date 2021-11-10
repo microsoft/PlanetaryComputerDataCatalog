@@ -1,6 +1,11 @@
+export interface IDefaultLocationInfo {
+  zoom: number;
+  coordinates: [number, number];
+}
 export interface IMosaicInfo {
   mosaics: IMosaic[];
   renderOptions: IMosaicRenderOption[] | null;
+  defaultLocation: IDefaultLocationInfo;
 }
 
 export interface IMosaic {

@@ -214,5 +214,9 @@
       "options": "nodata=0&assets=B12,B11,B8A&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 9,
+    "coordinates": [-16.494, 124.0274]
+  }
 }

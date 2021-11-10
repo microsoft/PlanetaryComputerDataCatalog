@@ -333,5 +333,9 @@
       "options": "assets=burn-severity&exitwhenfull=False&skipcovered=True&colormap_name=mtbs-severity",
       "minZoom": 3
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 9,
+    "coordinates": [39.2234, -122.6932]
+  }
 }

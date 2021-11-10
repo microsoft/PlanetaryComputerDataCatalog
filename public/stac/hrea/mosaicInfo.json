@@ -99,5 +99,9 @@
       "options": "assets=night-proportion&colormap_name=magma&rescale=0,1&skipcovered=False&exitwhenfull=False",
       "minZoom": 3
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 3,
+    "coordinates": [11.828, 20.6367]
+  }
 }
