@@ -16,7 +16,7 @@ export interface IMosaic {
   description: string | null;
   cql: ICqlExpressionList;
   sortby: [] | null;
-  hash?: string | null;
+  searchId?: string | null;
 }
 
 export interface IMosaicRenderOption {

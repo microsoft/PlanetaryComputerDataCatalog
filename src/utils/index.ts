@@ -225,7 +225,7 @@ export const makeTileJsonUrl = (
 
   // Rendering a STAC search mosaic
   const collectionParam = collection ? `&collection=${collection.id}` : "";
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
+  return `${DATA_URL}/mosaic/${query.searchId}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
 
 export const makeItemPreviewUrl = (

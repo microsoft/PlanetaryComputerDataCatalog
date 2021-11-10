@@ -25,7 +25,7 @@ const useMosaicLayer = (
     const map = mapRef.current;
     const mosaicLayer = map.layers.getLayerById("stac-mosaic");
     const isItemLayerValid = stacItemForMosaic && collection;
-    const isMosaicLayerValid = query.hash;
+    const isMosaicLayerValid = query.searchId;
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
