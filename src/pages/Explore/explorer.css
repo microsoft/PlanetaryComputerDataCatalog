@@ -1,0 +1,10 @@
+/* Styles that can't otherwise be overloaded via fluent ui components */
+
+.ms-CalendarDay-daySelected .ms-CalendarDay-dayIsToday {
+  color: white;
+  font-weight: 500;
+}
+
+.ms-Stack .ms-layer {
+  margin-top: 0;
+}

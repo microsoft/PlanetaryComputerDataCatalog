@@ -17,62 +17,74 @@ import { PanelControlHandlers } from "../../Map/components/PanelControl";
 
 interface DropdownButtonProps extends IButtonProps {
   label: string;
+  directionalHint?: DirectionalHint;
   onDismiss?: () => void;
 }
 
 export const DropdownButton = React.forwardRef<
   PanelControlHandlers,
   React.PropsWithChildren<DropdownButtonProps>
->(({ label, onDismiss, children, ...rest }, ref) => {
-  const [isCalloutVisible, { toggle }] = useBoolean(false);
-  const buttonId = useId("query-dropdown-button");
-  const labelId = useId("query-dropdown-label");
-
-  // Expose the toggle handle
-  useImperativeHandle(ref, () => ({
-    togglePanel: () => {
-      toggle();
+>(
+  (
+    {
+      label,
+      directionalHint = DirectionalHint.bottomLeftEdge,
+      onDismiss,
+      children,
+      ...rest
     },
-  }));
+    ref
+  ) => {
+    const [isCalloutVisible, { toggle }] = useBoolean(false);
+    const buttonId = useId("query-dropdown-button");
+    const labelId = useId("query-dropdown-label");
 
-  const handleDismiss = useCallback(() => {
-    toggle();
-    onDismiss && onDismiss();
-  }, [onDismiss, toggle]);
+    // Expose the toggle handle
+    useImperativeHandle(ref, () => ({
+      togglePanel: () => {
+        toggle();
+      },
+    }));
 
-  return (
-    <>
-      <Stack
-        styles={stackStyle}
-        aria-label={`${label} selector`}
-        aria-haspopup="dialog"
-      >
-        <DefaultButton
-          id={buttonId}
-          styles={buttonStyles}
-          onClick={handleDismiss}
-          {...rest}
-        />
-        <Icon iconName="ChevronDown" styles={chevronStyle} />
-      </Stack>
-      {isCalloutVisible && (
-        <Callout
-          role="dialog"
-          className={styles.callout}
-          ariaLabelledBy={labelId}
-          gapSpace={0}
-          target={`#${buttonId}`}
-          onDismiss={handleDismiss}
-          directionalHint={DirectionalHint.bottomLeftEdge}
-          isBeakVisible={false}
-          setInitialFocus
+    const handleDismiss = useCallback(() => {
+      toggle();
+      onDismiss && onDismiss();
+    }, [onDismiss, toggle]);
+
+    return (
+      <>
+        <Stack
+          styles={stackStyle}
+          aria-label={`${label} selector`}
+          aria-haspopup="dialog"
         >
-          {children}
-        </Callout>
-      )}
-    </>
-  );
-});
+          <DefaultButton
+            id={buttonId}
+            styles={buttonStyles}
+            onClick={handleDismiss}
+            {...rest}
+          />
+          <Icon iconName="ChevronDown" styles={chevronStyle} />
+        </Stack>
+        {isCalloutVisible && (
+          <Callout
+            role="dialog"
+            className={styles.callout}
+            ariaLabelledBy={labelId}
+            gapSpace={0}
+            target={`#${buttonId}`}
+            onDismiss={handleDismiss}
+            directionalHint={directionalHint}
+            isBeakVisible={false}
+            setInitialFocus
+          >
+            {children}
+          </Callout>
+        )}
+      </>
+    );
+  }
+);
 
 const theme = getTheme();
 
@@ -108,7 +120,7 @@ const chevronStyle: IIconStyles = {
 
 const styles = mergeStyleSets({
   callout: {
-    padding: "20px 24px",
+    padding: "2px 2px",
     backgroundColor: theme.semanticColors.bodyBackground,
   },
 });

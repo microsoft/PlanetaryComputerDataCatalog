@@ -4,7 +4,9 @@ export type RangeType = "start" | "end";
 
 export interface ValidationState {
   start: boolean;
+  startError: string | null;
   end: boolean;
+  endError: string | null;
 }
 export interface ValidationAction {
   [rangeKey: RangeType]: boolean;

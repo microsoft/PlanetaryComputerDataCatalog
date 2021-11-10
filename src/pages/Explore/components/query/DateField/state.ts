@@ -6,9 +6,11 @@ import {
   ValidationState,
 } from "./types";
 
-export const initialValidationState = {
+export const initialValidationState: ValidationState = {
   start: true,
+  startError: null,
   end: true,
+  endError: null,
 };
 
 export const validationReducer = (

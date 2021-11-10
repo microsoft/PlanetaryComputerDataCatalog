@@ -1,6 +1,20 @@
-import { useEffect, useContext, useState } from "react";
-import { Calendar, ITextFieldStyles, MaskedTextField, Stack } from "@fluentui/react";
-import { dayjs, toAbsoluteDate, toDateString, toUtcDateString } from "utils";
+import { useRef, useEffect, useContext, useState } from "react";
+import {
+  Calendar,
+  Stack,
+  FontSizes,
+  FontWeights,
+  getTheme,
+  ICalendarDayStyles,
+  Label,
+  IStackStyles,
+  Text,
+  ITextStyles,
+  ICalendarDayProps,
+  ICalendarMonthStyles,
+  ILabelStyles,
+} from "@fluentui/react";
+import { dayjs, toAbsoluteDate, toDateString } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 
@@ -17,6 +31,7 @@ const CalendarControl = ({
   operator,
   onSelectDate,
 }: CalendarControlProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [invalidDate, setInvalidDate] = useState<Date>();
   const {
@@ -25,7 +40,6 @@ const CalendarControl = ({
     workingDates,
     validationState,
     setValidation,
-    signalApply,
   } = useContext(DateFieldContext);
 
   const date = workingDates[rangeType];
@@ -33,26 +47,6 @@ const CalendarControl = ({
   const handleSelectDate = (newDate: Date) => {
     setDateValidation(newDate);
     onSelectDate({ [rangeType]: dayjs(newDate) });
-  };
-
-  const handleTextChange = (
-    _: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
-    newValue: string | undefined
-  ) => {
-    const newDay = dayjs(newValue);
-    const newDate = newDay.toDate();
-
-    // Check valid date format and if it's in range - only set working date if so
-    const valid = newDay.isValid() && setDateValidation(newDate);
-    valid && handleSelectDate(newDate);
-  };
-
-  const handleKeyPress = (
-    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (e.key === "Enter") {
-      signalApply();
-    }
   };
 
   const getErrorMessage = (value: Date | string) => {
@@ -72,17 +66,13 @@ const CalendarControl = ({
         workingDates?.end &&
         day.isAfter(workingDates.end)
       ) {
-        return `Start date must be before end date (${toDateString(
-          workingDates.end
-        )})`;
+        return `* Start date must be before end date`;
       } else if (
         rangeType === "end" &&
         workingDates?.start &&
         day.isBefore(workingDates.start)
       ) {
-        return `End date must be after start date (${toDateString(
-          workingDates.start
-        )})`;
+        return `* End date must be after start date`;
       }
     }
     return "";
@@ -132,18 +122,11 @@ const CalendarControl = ({
   if (!date) return null;
 
   return (
-    <Stack>
-      <MaskedTextField
-        styles={textStyles}
-        label={label}
-        mask="99/99/9999"
-        value={toUtcDateString(date)}
-        errorMessage={errorMessage}
-        onChange={handleTextChange}
-        onKeyPress={handleKeyPress}
-      />
+    <Stack styles={controlStyles}>
+      <Label styles={labelStyles}>{label}</Label>
       <Calendar
-        showMonthPickerAsOverlay
+        ref={ref}
+        showMonthPickerAsOverlay={true}
         highlightSelectedMonth
         isMonthPickerVisible={false}
         showGoToToday={false}
@@ -151,15 +134,119 @@ const CalendarControl = ({
         minDate={toAbsoluteDate(validMinDate)}
         maxDate={toAbsoluteDate(validMaxDate)}
         onSelectDate={handleSelectDate}
+        calendarDayProps={calendarDayProps}
+        calendarMonthProps={calendarMonthProps}
       />
+      <Text styles={errorMsgStyles}>{errorMessage}</Text>
     </Stack>
   );
 };
 
 export default CalendarControl;
 
-const textStyles: Partial<ITextFieldStyles> = {
+const theme = getTheme();
+const controlStyles: Partial<IStackStyles> = {
   root: {
-    maxWidth: 218,
+    maxWidth: 220,
+  },
+};
+
+const labelStyles: ILabelStyles = {
+  root: {
+    textAlign: "center",
+    paddingBottom: 0,
+  },
+};
+
+const errorMsgStyles: Partial<ITextStyles> = {
+  root: {
+    color: theme.palette.redDark,
+    fontSize: FontSizes.size12,
+    paddingLeft: theme.spacing.m,
+  },
+};
+
+const calendarStyles: Partial<ICalendarDayStyles> = {
+  dayCell: {
+    fontSize: FontSizes.size14,
+    width: 29,
+    height: 29,
+    lineHeight: 29,
+  },
+  dayButton: {
+    fontSize: FontSizes.size14,
+  },
+  daySelected: {
+    backgroundColor: theme.palette.themePrimary,
+    color: theme.palette.white,
+    fontWeight: FontWeights.semibold,
+    borderRadius: "100% !important",
+    ":after": {
+      border: 0,
+    },
+  },
+  datesAbove: {
+    ":after": {
+      border: 0,
+    },
+  },
+  datesBelow: {
+    ":after": {
+      border: 0,
+    },
+  },
+  datesLeft: {
+    ":after": {
+      border: 0,
+    },
+  },
+  datesRight: {
+    ":after": {
+      border: 0,
+    },
+  },
+  dayIsToday: {
+    borderRadius: 0,
+    backgroundColor: "unset",
+    color: theme.palette.black,
+    fontWeight: FontWeights.regular,
+  },
+  weekDayLabelCell: {
+    fontSize: FontSizes.size14,
+    fontWeight: FontWeights.semibold,
+  },
+  disabledStyle: {
+    color: theme.palette.neutralTertiary,
+  },
+  headerIconButton: {
+    color: theme.palette.themePrimary,
+    ":hover": {
+      color: theme.palette.themePrimary,
+    },
+  },
+};
+
+const monthStyles: Partial<ICalendarMonthStyles> = {
+  navigationButton: {
+    color: theme.palette.themePrimary,
+    ":hover": {
+      color: theme.palette.themePrimary,
+    },
+  },
+};
+
+const calendarDayProps: Partial<ICalendarDayProps> = {
+  styles: calendarStyles,
+  navigationIcons: {
+    leftNavigation: "ChevronLeft",
+    rightNavigation: "ChevronRight",
+  },
+};
+
+const calendarMonthProps: Partial<ICalendarDayProps> = {
+  styles: monthStyles,
+  navigationIcons: {
+    leftNavigation: "ChevronLeft",
+    rightNavigation: "ChevronRight",
   },
 };

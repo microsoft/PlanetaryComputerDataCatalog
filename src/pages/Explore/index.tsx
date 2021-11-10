@@ -3,6 +3,7 @@ import "azure-maps-control/dist/atlas.min.css";
 import { Stack, StackItem, useTheme } from "@fluentui/react";
 
 import { store } from "./state/store";
+import "./explorer.css";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";

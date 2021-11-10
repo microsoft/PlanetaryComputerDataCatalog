@@ -41,10 +41,10 @@ const getMenuItems = (
 ): IContextualMenuProps => {
   return {
     items: [
+      { key: "between", text: "Between dates", onClick: handleClick },
       { key: "on", text: "On date", onClick: handleClick },
       { key: "before", text: "On or before date", onClick: handleClick },
       { key: "after", text: "On or after date", onClick: handleClick },
-      { key: "between", text: "Between dates", onClick: handleClick },
     ],
   };
 };

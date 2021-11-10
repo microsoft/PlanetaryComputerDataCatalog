@@ -1,22 +1,23 @@
-import { useCallback, useMemo, useReducer, useRef } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import {
   Stack,
   IStackTokens,
   VerticalDivider,
   IVerticalDividerStyles,
-  MessageBar,
-  IMessageBarStyles,
+  Separator,
+  getTheme,
+  DirectionalHint,
+  ISeparatorStyles,
+  IStackStyles,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
-import ControlFooter from "../components/ControlFooter";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider, IDateFieldContext } from "./context";
 import { capitalize, getDayEnd, getDayStart } from "utils";
 import {
   getDateDisplayText,
-  getValidDateText,
   isValidToApply,
   toCqlExpression,
   toDateRange,
@@ -55,21 +56,11 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     initialValidationState
   );
 
-  const togglePanel = useCallback(() => {
-    panelRef.current?.togglePanel();
-  }, []);
-
   const minDay = getDayStart(dateExpression.min, true);
   const maxDay = getDayEnd(dateExpression.max, true);
 
-  const { OperatorSelector, operatorSelection, resetOperatorSelection } =
+  const { OperatorSelector, operatorSelection /*resetOperatorSelection */ } =
     useOperatorSelector(dateExpression);
-
-  const handleCancel = () => {
-    workingDateRangeDispatch(initialDateRange);
-    resetOperatorSelection();
-    togglePanel();
-  };
 
   const isValid = isValidToApply(
     controlValidState,
@@ -83,9 +74,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     if (isValid) {
       const exp = toCqlExpression(workingDateRange, operatorSelection.key);
       dispatch<any>(setCustomCqlExpression(exp));
-      togglePanel();
     }
-  }, [isValid, workingDateRange, operatorSelection.key, dispatch, togglePanel]);
+  }, [isValid, workingDateRange, operatorSelection.key, dispatch]);
 
   const opLabel = opEnglish[dateExpression.operator];
   const displayText = getDateDisplayText(dateExpression);
@@ -111,7 +101,9 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     );
   };
 
-  const validDateText = getValidDateText(dateExpression, isRange);
+  useEffect(() => {
+    handleSave();
+  }, [handleSave, workingDateRange, operatorSelection.key]);
 
   return (
     <>
@@ -119,9 +111,9 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         ref={panelRef}
         key={"query-datetime-field"}
         label="Date acquired"
+        directionalHint={DirectionalHint.rightTopEdge}
         onRenderText={handleRenderText}
       >
-        {OperatorSelector}
         <DateFieldProvider state={providerState}>
           <Stack horizontal tokens={calendarTokens}>
             <CalendarControl
@@ -142,33 +134,46 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               </>
             )}
           </Stack>
-          <MessageBar styles={messageBarStyles}>{validDateText}</MessageBar>
-          <ControlFooter
-            onCancel={handleCancel}
-            onSave={handleSave}
-            isValid={isValid}
-          />
+          {!isValid && controlValidState.end}
+          <Separator styles={separatorStyles} />
+          <Stack
+            horizontal
+            styles={commandBarStyles}
+            horizontalAlign={"space-between"}
+          >
+            {OperatorSelector}
+            <Stack horizontal>Reset | Remove</Stack>
+          </Stack>
         </DateFieldProvider>
       </DropdownButton>
     </>
   );
 };
 
+const theme = getTheme();
 const calendarTokens: IStackTokens = {
-  childrenGap: 10,
+  childrenGap: theme.spacing.s2,
+};
+
+const commandBarStyles: Partial<IStackStyles> = {
+  root: {
+    paddingLeft: theme.spacing.s1,
+    paddingRight: theme.spacing.s1,
+  },
+};
+
+const separatorStyles: Partial<ISeparatorStyles> = {
+  root: {
+    padding: 0,
+  },
 };
 
 const dividerStyles: IVerticalDividerStyles = {
   wrapper: {
-    marginTop: 55,
+    marginTop: 0,
   },
   divider: {
-    height: 265,
-    background:
-      "linear-gradient(rgba(200, 198, 196, .0) , rgb(223 221 220), rgba(200, 198, 196, .0) )",
+    height: 255,
+    backgroundColor: theme.palette.neutralLight,
   },
-};
-
-const messageBarStyles: IMessageBarStyles = {
-  root: { borderRadius: 5 },
 };

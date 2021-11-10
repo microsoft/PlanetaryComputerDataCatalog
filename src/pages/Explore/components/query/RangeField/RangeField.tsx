@@ -123,7 +123,8 @@ export const RangeField = ({ field }: RangeFieldProps) => {
 const theme = getTheme();
 const stackStyles = {
   root: {
-    width: 360,
+    width: 405,
+    padding: 14,
     justifyContent: "space-between",
   },
 };
