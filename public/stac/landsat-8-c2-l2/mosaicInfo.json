@@ -214,5 +214,9 @@
       "options": "nodata=0&assets=SR_B7,SR_B6,SR_B5&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
       "minZoom": 8
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 11,
+    "coordinates": [37.4069, 118.8188]
+  }
 }

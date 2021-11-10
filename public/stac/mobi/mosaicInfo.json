@@ -89,5 +89,9 @@
       "options": "assets=RSR_PollinatorInverts&colormap_name=magma&rescale=0,.001",
       "minZoom": 3
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 4,
+    "coordinates": [37.3052, -85.8457]
+  }
 }

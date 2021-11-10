@@ -17,5 +17,9 @@
       "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc",
       "minZoom": 4
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 4,
+    "coordinates": [-0.8749, 109.8456]
+  }
 }

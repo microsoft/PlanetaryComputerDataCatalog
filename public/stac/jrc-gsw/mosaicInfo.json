@@ -47,5 +47,9 @@
       "options": "assets=extent&colormap_name=jrc-extent&nodata=0",
       "minZoom": 4
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 10,
+    "coordinates": [24.21647, 91.015209]
+  }
 }

@@ -35,5 +35,9 @@
       "options": "assets=belowground_uncertainty&colormap_name=reds&nodata=0&rescale=0,50",
       "minZoom": 2
     }
-  ]
+  ],
+  "defaultLocation": {
+    "zoom": 9,
+    "coordinates": [-7.641129, 39.162521]
+  }
 }
