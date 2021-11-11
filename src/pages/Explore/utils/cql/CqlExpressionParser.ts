@@ -36,6 +36,7 @@ export class CqlExpressionParser<T extends string | number> {
       case "gt":
       case "gte":
       case "eq":
+      case "like":
         const parsed = this.parseSinglePredicate();
         this.property = parsed.property;
         this.value = parsed.value;

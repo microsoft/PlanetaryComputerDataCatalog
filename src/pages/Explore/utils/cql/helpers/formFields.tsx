@@ -2,6 +2,7 @@ import { TextField } from "@fluentui/react";
 import { EnumField } from "pages/Explore/components/query/EnumField";
 
 import { RangeField } from "pages/Explore/components/query/RangeField";
+import { TextStringField } from "pages/Explore/components/query/TextStringField";
 import { CqlExpressionParser } from "../CqlExpressionParser";
 
 export const getControlForField = (field: CqlExpressionParser<string | number>) => {
@@ -25,12 +26,7 @@ export const getTextControl = (field: CqlExpressionParser<string>) => {
   const { fieldSchema } = field;
   if (!fieldSchema) return null;
 
-  return (
-    <TextField
-      key={`textcontrol-${field.property}`}
-      label={fieldSchema.title}
-    ></TextField>
-  );
+  return <TextStringField key={`textstringfield-${field.property}`} field={field} />;
 };
 
 export const getNumericControl = (field: CqlExpressionParser<number>) => {
