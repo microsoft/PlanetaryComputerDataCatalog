@@ -1,9 +1,8 @@
-import { TextField } from "@fluentui/react";
-import { EnumField } from "pages/Explore/components/query/EnumField";
-
-import { RangeField } from "pages/Explore/components/query/RangeField";
-import { TextStringField } from "pages/Explore/components/query/TextStringField";
 import { CqlExpressionParser } from "../CqlExpressionParser";
+import { EnumField } from "pages/Explore/components/query/EnumField";
+import { RangeField } from "pages/Explore/components/query/RangeField";
+import { TextNumberField } from "pages/Explore/components/query/TextNumberField/TextNumberField";
+import { TextStringField } from "pages/Explore/components/query/TextStringField";
 
 export const getControlForField = (field: CqlExpressionParser<string | number>) => {
   const schemaType = field.fieldSchema?.type;
@@ -16,6 +15,7 @@ export const getControlForField = (field: CqlExpressionParser<string | number>) 
       }
       return getTextControl(field as CqlExpressionParser<string>);
     case "number":
+    case "integer":
       return getNumericControl(field as CqlExpressionParser<number>);
     default:
       return getTextControl(field as CqlExpressionParser<string>);
@@ -38,11 +38,10 @@ export const getNumericControl = (field: CqlExpressionParser<number>) => {
     return <RangeField key={`rangecontrol-${field.property}`} field={field} />;
   } else {
     return (
-      <TextField
+      <TextNumberField
         key={`numericcontrol-${field.property}`}
-        label={fieldSchema.title}
-        type="number"
-      ></TextField>
+        field={field}
+      ></TextNumberField>
     );
   }
 };

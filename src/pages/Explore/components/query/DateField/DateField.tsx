@@ -142,7 +142,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
             horizontalAlign={"space-between"}
           >
             {OperatorSelector}
-            <Stack horizontal>Reset | Remove</Stack>
+            <Stack horizontal>Reset</Stack>
           </Stack>
         </DateFieldProvider>
       </DropdownButton>

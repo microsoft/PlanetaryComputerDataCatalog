@@ -7,11 +7,11 @@ import {
 import { TextFieldBase } from "../TextFieldBase/TextFieldBase";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 
-type TextStringFieldProps = {
-  field: CqlExpressionParser<string>;
+type TextNumberFieldProps = {
+  field: CqlExpressionParser<number>;
 };
 
-export const TextStringField = ({ field }: TextStringFieldProps) => {
+export const TextNumberField = ({ field }: TextNumberFieldProps) => {
   return (
     <TextFieldBase
       field={field}
