@@ -1,6 +1,24 @@
 # Planetary Computer Data Catalog
 
-A homepage and catalog of datasets provided by the Planetary Computer.
+⚠️ Note: This repository serves as a reference implementation for interacting with
+Planetary Computer APIs on Azure. Ths code supports the production deployment of
+the Planetary Computer Data Catalog and Explorer applications. This repository
+is not meant to be reusable in other situations without significant
+modification, and the repository maintainers cannot provide any support for
+non-development deployments of this code. Additionally, this application is under
+constant development, including some significant planned refactors.
+
+That said, it is hoped that components or examples contained here will be
+helpful for users developing applications using the open-source components also
+used by the Planetary Computer, or against Planetary Computer APIs themselves.
+Please review the [terms of use](https://planetarycomputer.microsoft.com/terms).
+
+To file general issues or ask questions, please visit the [Planetary Computer
+repository](https://github.com/microsoft/PlanetaryComputer).
+
+## Data Catalog
+
+A homepage, data catalog, and visualizations for the Planetary Computer.
 
 ## Requirements
 
@@ -54,7 +72,7 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 | Name | Value | Description |
 |---|---|---|
 `REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
-|`REACT_APP_AZMAPS_KEY`| Optional. Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
+|`REACT_APP_AZMAPS_KEY`| Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
 |`REACT_APP_HUB_URL`| Optional. URL to root Hub instance | Used to enable a request to launch the Hub with a specific git hosted file.|
 |`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 
@@ -62,7 +80,7 @@ Run `./scripts/server` to launch a development server.
 
 #### Developing against local STAC assets
 
-The `REACT_APP_API_ROOT` can be set to a local instance of the MQE if you are
+The `REACT_APP_API_ROOT` can be set to a local instance of the Metadata API if you are
 prototyping changes to collections. However, as a shortcut, you can also run the
 `./scripts/mockstac` script in order to locally serve a static json file from
 `/mockstac/collections`. Simply alter the contents of the JSON file as you need,
@@ -123,9 +141,12 @@ Both test suites are run from CI.
 
 ## Deploying
 
-There are 2 Azure Static Web App services enabled, one for staging and another for production. They are configured via [the GitHub workflow files](.github/workflows). Generally, merging to deployment branches will initiate a build and deploy with the service framework:
+There are 3 Azure Static Web App services enabled, for staging, test and
+production. They are configured via [the GitHub workflow
+files](.github/workflows). Generally, merging to deployment branches will
+initiate a build and deploy with the service framework:
 
-- `develop`: Deploys to staging (`pc-datacatalog`)
+- `develop`: Deploys to staging and test (`pc-datacatalog`, `pc-datacatalog-test`)
 - `main`: Deploys to production (`pc-datacatalog-production`)
 
 Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
