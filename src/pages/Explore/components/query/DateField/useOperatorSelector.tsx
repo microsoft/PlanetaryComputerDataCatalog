@@ -13,8 +13,6 @@ const useOperatorSelector = (dateExpression: CqlDate) => {
     item && setOperatorSelection(item);
   };
 
-  const menuItems = getMenuItems(handleOperatorChange);
-
   const [operatorSelection, setOperatorSelection] = useState<IContextualMenuItem>(
     opItemFromExpression(dateExpression, menuItems)
   );
@@ -23,10 +21,15 @@ const useOperatorSelector = (dateExpression: CqlDate) => {
     setOperatorSelection(opItemFromExpression(dateExpression, menuItems));
   };
 
+  const menu: IContextualMenuProps = {
+    items: menuItems,
+    onItemClick: handleOperatorChange,
+  };
+
   const OperatorSelector = (
     <CommandButton
       text={operatorSelection.text}
-      menuProps={menuItems}
+      menuProps={menu}
       styles={opDropdownStyles}
     />
   );
@@ -36,24 +39,18 @@ const useOperatorSelector = (dateExpression: CqlDate) => {
 
 export default useOperatorSelector;
 
-const getMenuItems = (
-  handleClick: (_: any, item: IContextualMenuItem | undefined) => void
-): IContextualMenuProps => {
-  return {
-    items: [
-      { key: "between", text: "Between dates", onClick: handleClick },
-      { key: "on", text: "On date", onClick: handleClick },
-      { key: "before", text: "On or before date", onClick: handleClick },
-      { key: "after", text: "On or after date", onClick: handleClick },
-    ],
-  };
-};
+const menuItems: IContextualMenuProps["items"] = [
+  { key: "between", text: "Between dates" },
+  { key: "on", text: "On date" },
+  { key: "before", text: "On or before date" },
+  { key: "after", text: "On or after date" },
+];
 
 const opItemFromExpression = (
   dateExpression: CqlDate,
-  menuItems: IContextualMenuProps
+  menuItems: IContextualMenuProps["items"]
 ): IContextualMenuItem => {
-  const item = menuItems.items.find(item => {
+  const item = menuItems.find(item => {
     // Range will be anyinteracts with two different days as values
     if (dateExpression.isRange) {
       return item.key === "between";

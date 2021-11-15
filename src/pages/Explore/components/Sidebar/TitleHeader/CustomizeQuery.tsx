@@ -14,10 +14,11 @@ const CustomizeQuery = () => {
   const { data: mosaicInfo, isSuccess } = useCollectionMosaicInfo(collection?.id);
 
   const handleClick = useCallback(() => {
+    dispatch(setIsCustomQuery(true));
+
     if (isSuccess && mosaicInfo) {
       dispatch<any>(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
     }
-    dispatch(setIsCustomQuery(true));
   }, [dispatch, isSuccess, mosaicInfo]);
 
   const disabled = !collection || isCustomQuery;

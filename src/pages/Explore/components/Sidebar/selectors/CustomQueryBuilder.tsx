@@ -12,6 +12,7 @@ import {
   Separator,
   ISeparatorStyles,
   getTheme,
+  VerticalDivider,
 } from "@fluentui/react";
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
@@ -22,6 +23,7 @@ import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollection
 import { DateField } from "../../query/DateField";
 import defaultQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
 import { useCustomQueryUrlState } from "./hooks/useUrlState";
+import { AddFilter } from "../../query/AddFilter/AddFilter";
 
 const CustomQueryBuilder = () => {
   const dispatch = useExploreDispatch();
@@ -43,31 +45,35 @@ const CustomQueryBuilder = () => {
   const queryable = isError ? defaultQueryable : apiQueryable;
 
   // Get parsed CQL object
-  const parsed = useMemo(() => {
+  const parsedCql = useMemo(() => {
     if (!collection || !queryable) return null;
     return new CqlParser(cql, collection, queryable);
   }, [collection, queryable, cql]);
 
-  const dateControl = parsed?.dateValue ? (
-    <DateField dateExpression={parsed.dateValue} />
+  const dateControl = parsedCql?.dateValue ? (
+    <DateField dateExpression={parsedCql.dateValue} />
   ) : null;
 
   // Get the rest of the controls needed to represent the CQL
-  const expressions = parsed?.getExpressions({ omit: ["datetime"] });
+  const expressions = parsedCql?.getExpressions({ omit: ["datetime"] });
   const controls = expressions?.map(e => e.control);
 
   return (
     <Stack tokens={controlStackTokens}>
       <Separator styles={separatorStyles} />
       <Stack horizontal tokens={customStackTokens} styles={customStackStyles}>
-        <Text styles={textStyle}>Custom filter</Text>
-        <Link
-          onClick={handleClearCustom}
-          styles={linkStyle}
-          title="Clear the custom filter"
-        >
-          Clear
-        </Link>
+        <Text styles={textStyle}>Custom filters</Text>
+        <Stack horizontal tokens={customStackTokens}>
+          <AddFilter queryable={queryable} cql={parsedCql} />
+          <VerticalDivider />
+          <Link
+            onClick={handleClearCustom}
+            styles={linkStyle}
+            title="Clear the custom filters"
+          >
+            Clear
+          </Link>
+        </Stack>
       </Stack>
       {isLoading && loadingIndicator}
       {dateControl}

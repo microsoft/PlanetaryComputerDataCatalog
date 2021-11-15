@@ -130,7 +130,7 @@ export const mosaicSlice = createSlice({
     },
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        state.customQuery.searchId = null;
+        state.customQuery = initialMosaicState;
       }
 
       state.isCustomQuery = action.payload;
@@ -149,7 +149,7 @@ export const mosaicSlice = createSlice({
       );
 
       if (existingIndex === -1) {
-        draft.splice(0, 0, action.payload);
+        draft.splice(draft.length, 0, action.payload);
       } else {
         draft.splice(existingIndex, 1, action.payload);
       }

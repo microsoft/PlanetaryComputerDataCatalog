@@ -97,6 +97,7 @@ export const TextFieldBase = ({
     );
   };
 
+  // TODO: use min/max if available for validation
   const isNumeric =
     fieldSchema?.type === "number" || fieldSchema?.type === "integer";
 

@@ -26,6 +26,19 @@
       "minimum": 0,
       "maximum": 100
     },
+    "s2:datatake_type": {
+      "title": "Datatake Type",
+      "type": "string",
+      "enum": [
+        "INS-NOBS",
+        "INS-EOBS",
+        "INS-DASC",
+        "INS-ABSR",
+        "INS-VIC",
+        "INS-RAW",
+        "INS-TST"
+      ]
+    },
     "sat:orbit_state": {
       "title": "Orbit State",
       "$ref": "https://stac-extensions.github.io/sat/v1.0.0/schema.json#/definitions/fields/properties/sat:orbit_state"

@@ -222,9 +222,5 @@
     "zoom": 9,
     "coordinates": [-16.494, 124.0274]
   },
-  "defaultCustomQuery": [
-    { "lte": [{ "property": "eo:cloud_cover" }, 10] },
-    { "gt": [{ "property": "sat:relative_orbit" }, 100] },
-    { "eq": [{ "property": "sat:orbit_state" }, "ascending"] }
-  ]
+  "defaultCustomQuery": [{ "lte": [{ "property": "eo:cloud_cover" }, 10] }]
 }
