@@ -126,7 +126,7 @@
   },
   "defaultCustomQuery": [
     {
-      "anyinteracts": [{ "property": "datetime" }, ["2017-01-01", "2019-12-31"]]
+      "anyinteracts": []
     }
   ]
 }

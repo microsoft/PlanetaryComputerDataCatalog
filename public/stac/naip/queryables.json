@@ -5,6 +5,7 @@
   "title": "Queryables for Planetary Computer Landsat 8 C2 L2 STAC API",
   "properties": {
     "id": {
+      "title": "Item ID",
       "description": "Item identifier",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id"
     },
@@ -14,6 +15,78 @@
       "title": "Acquired",
       "format": "date-time",
       "pattern": "(\\+00:00|Z)$"
+    },
+    "naip:year": {
+      "title": "Year",
+      "type": "string",
+      "enum": [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019"
+      ]
+    },
+    "naip:state": {
+      "title": "State",
+      "type": "string",
+      "enum": [
+        "al",
+        "ak",
+        "az",
+        "ar",
+        "ca",
+        "co",
+        "ct",
+        "de",
+        "fl",
+        "ga",
+        "hi",
+        "id",
+        "il",
+        "in",
+        "ia",
+        "ks",
+        "ky",
+        "la",
+        "me",
+        "md",
+        "ma",
+        "mi",
+        "mn",
+        "ms",
+        "mo",
+        "mt",
+        "ne",
+        "nv",
+        "nh",
+        "nj",
+        "nm",
+        "ny",
+        "nc",
+        "nd",
+        "oh",
+        "ok",
+        "or",
+        "pa",
+        "ri",
+        "sc",
+        "sd",
+        "tn",
+        "tx",
+        "ut",
+        "vt",
+        "va",
+        "wa",
+        "wv",
+        "wi",
+        "wy"
+      ]
     }
   }
 }

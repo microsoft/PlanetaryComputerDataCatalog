@@ -19,6 +19,7 @@ export const testQueryable: JSONSchema = {
   type: "object",
   properties: {
     id: {
+      title: "Item ID",
       description: "Item identifier",
       $ref: "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id",
     },

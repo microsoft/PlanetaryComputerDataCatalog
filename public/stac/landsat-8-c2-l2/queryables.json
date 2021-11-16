@@ -5,6 +5,7 @@
   "title": "Queryables for Planetary Computer Landsat 8 C2 L2 STAC API",
   "properties": {
     "id": {
+      "title": "Item ID",
       "description": "Item identifier",
       "$ref": "https://schemas.stacspec.org/v1.0.0/item-spec/json-schema/item.json#/definitions/core/allOf/2/properties/id"
     },
@@ -17,6 +18,38 @@
     },
     "eo:cloud_cover": {
       "$ref": "https://stac-extensions.github.io/eo/v1.0.0/schema.json#/definitions/fields/properties/eo:cloud_cover"
+    },
+    "view:off_nadir": {
+      "$ref": "https://stac-extensions.github.io/view/v1.0.0/schema.json#/definitions/fields/properties/view:off_nadir"
+    },
+    "view:sun_azimuth": {
+      "$ref": "https://stac-extensions.github.io/view/v1.0.0/schema.json#/definitions/fields/properties/view:sun_azimuth"
+    },
+    "view:sun_elevation": {
+      "$ref": "https://stac-extensions.github.io/view/v1.0.0/schema.json#/definitions/fields/properties/view:sun_elevation"
+    },
+    "landsat:wrs_row": {
+      "title": "WRS Row",
+      "type": "string"
+    },
+    "landsat:wrs_path": {
+      "title": "WRS Path",
+      "type": "string"
+    },
+    "landsat:scene_id": {
+      "title": "Scene ID",
+      "type": "string"
+    },
+    "landsat:cloud_cover_land": {
+      "title": "Cloud Cover Land",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "landsat:collection_category": {
+      "title": "Collection Cat.",
+      "type": "string",
+      "enum": ["T1", "T2"]
     }
   }
 }
