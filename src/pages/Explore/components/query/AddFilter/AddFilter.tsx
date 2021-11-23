@@ -1,17 +1,19 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import {
   getTheme,
-  FontSizes,
-  CommandButton,
-  IButtonStyles,
-  IContextualMenuProps,
-  IIconProps,
-  IContextualMenuItem,
+  IDropdownOption,
+  Dropdown,
+  IDropdownStyles,
+  ITextStyles,
 } from "@fluentui/react";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
+import {
+  removeCustomCqlExpression,
+  setCustomCqlExpressions,
+} from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { makeDefaultCqlExpression } from "pages/Explore/utils/cql/helpers";
+import { renderPlaceholder } from "pages/Explore/utils/dropdownRenderers";
 
 interface AddAttributeProps {
   queryable: JSONSchema | undefined;
@@ -21,33 +23,32 @@ interface AddAttributeProps {
 export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
   const dispatch = useExploreDispatch();
   const existingProperties = getCurrentProperties(cql);
-  const items = makeMenuItems(queryable, existingProperties);
-  const disabled = items.length === 0;
+  const options = makeDropdownItems(queryable, existingProperties);
 
-  const handleClick = (_: any, item: IContextualMenuItem | undefined) => {
-    const cql = makeDefaultCqlExpression(
-      item?.key as string,
-      item?.data as JSONSchema
-    );
-    dispatch<any>(setCustomCqlExpressions(cql));
+  const handleChange = (_: any, item: IDropdownOption | undefined) => {
+    const property = item?.key as string;
+    const field = item?.data as JSONSchema;
+
+    if (item?.selected) {
+      const cql = makeDefaultCqlExpression(property, field);
+      dispatch<any>(setCustomCqlExpressions(cql));
+    } else {
+      dispatch(removeCustomCqlExpression(property));
+    }
   };
 
-  const menu: IContextualMenuProps = {
-    isBeakVisible: true,
-    items,
-    onItemClick: handleClick,
-  };
-  const addIcon: IIconProps = { iconName: "CircleAdditionSolid" };
-
+  const title = "Select filters";
   return (
-    <CommandButton
-      styles={buttonStyles}
-      iconProps={addIcon}
-      menuProps={menu}
-      disabled={disabled}
-    >
-      Add
-    </CommandButton>
+    <Dropdown
+      multiSelect
+      selectedKeys={existingProperties}
+      ariaLabel={title}
+      placeholder={title}
+      options={options}
+      onRenderTitle={renderPlaceholder("Slider", title, displayTextStyles)}
+      styles={dropdownStyles}
+      onChange={handleChange}
+    />
   );
 };
 
@@ -56,44 +57,68 @@ const getCurrentProperties = (cql: CqlParser | null) => {
   return existing || [];
 };
 
-const makeMenuItems = (
+const makeDropdownItems = (
   queryable: JSONSchema | undefined,
   existingProperties: string[]
-): IContextualMenuProps["items"] => {
+): IDropdownOption[] => {
   const keys = Object.keys(queryable?.properties || {});
   const fields = queryable?.properties;
 
   return keys.map(key => {
     const field = fields?.[key] as JSONSchema;
     const exists = existingProperties.includes(key);
-    const tooltip = exists
-      ? "This property is currently being filtered on"
-      : field.description;
+    const isAcquired = key === "datetime";
+    const tooltip = isAcquired ? "This filter cannot be removed" : field.description;
 
     return {
       key,
-      text: field.title,
+      text: field.title || "no title",
       title: tooltip,
-      disabled: exists,
       data: field,
+      checked: exists,
+      disabled: isAcquired,
     };
   });
 };
 
 const theme = getTheme();
-const buttonStyles: IButtonStyles = {
+const displayTextStyles: ITextStyles = {
   root: {
-    padding: 0,
-    paddingBottom: 0,
-    height: "auto",
-  },
-  label: {
-    fontSize: FontSizes.size12,
-    margin: 0,
     color: theme.palette.themePrimary,
   },
-  icon: {
-    fontSize: FontSizes.size12,
+};
+
+const dropdownStyles: Partial<IDropdownStyles> = {
+  title: {
+    color: theme.palette.themePrimary,
+    border: 0,
+    padding: 0,
+    "&:hover": {
+      color: theme.palette.themePrimary + " !important",
+    },
+    "&:focus": {
+      color: theme.palette.themePrimary + " !important",
+    },
+    lineHeight: "unset",
+    display: "inline",
   },
-  menuIcon: { display: "none" },
+  dropdownItemSelected: {
+    backgroundColor: theme.palette.white,
+  },
+  caretDownWrapper: {
+    display: "none",
+  },
+  dropdown: {
+    "&:focus:after": {
+      border: "0px ",
+    },
+    "&:focus-visible": {
+      outline: "1px solid",
+      outlineColor: theme.palette.neutralSecondary,
+      borderRadius: "3px",
+    },
+  },
+  callout: {
+    minWidth: 200,
+  },
 };

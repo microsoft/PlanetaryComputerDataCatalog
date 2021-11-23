@@ -5,6 +5,7 @@ import {
   Text,
   Stack,
   IIconStyles,
+  ITextStyles,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
 
@@ -25,12 +26,17 @@ export const renderTitle = (iconName: string, prefix: string = "") => {
   };
 };
 
-export const renderPlaceholder = (iconName: string, title: string) => {
+export const renderPlaceholder = (
+  iconName: string,
+  title: string,
+  textStyle: ITextStyles | undefined = undefined,
+  iconStyle: IIconStyles = iconStyles
+) => {
   return (): JSX.Element => {
     return (
       <div>
-        <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text>{title}</Text>
+        <Icon styles={iconStyle} iconName={iconName} aria-hidden="true" />
+        <Text styles={textStyle}>{title}</Text>
       </div>
     );
   };

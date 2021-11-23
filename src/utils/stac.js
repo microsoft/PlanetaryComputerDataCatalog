@@ -15,7 +15,7 @@ const fixedPct = value => {
   return value.toFixed(2) + "%";
 };
 
-const fixedDeg = value => value.toFixed(3) + "°";
+const fixedDeg = value => value.toFixed(2) + "°";
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",

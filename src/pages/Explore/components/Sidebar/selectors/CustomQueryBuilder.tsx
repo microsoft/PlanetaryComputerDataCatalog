@@ -5,19 +5,16 @@ import {
   IStackTokens,
   Text,
   ITextStyles,
-  Link,
-  ILinkStyles,
   Shimmer,
   ShimmerElementType,
   Separator,
   ISeparatorStyles,
   getTheme,
-  VerticalDivider,
 } from "@fluentui/react";
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
-import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { selectCurrentCql, setIsCustomQuery } from "pages/Explore/state/mosaicSlice";
+import { useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../../query/DateField";
@@ -26,15 +23,10 @@ import { useCustomQueryUrlState } from "./hooks/useUrlState";
 import { AddFilter } from "../../query/AddFilter/AddFilter";
 
 const CustomQueryBuilder = () => {
-  const dispatch = useExploreDispatch();
   const collection = useExploreSelector(s => s.mosaic.collection);
   const cql = useExploreSelector(selectCurrentCql);
 
   useCustomQueryUrlState();
-
-  const handleClearCustom = () => {
-    dispatch(setIsCustomQuery(false));
-  };
 
   const {
     data: apiQueryable,
@@ -63,17 +55,7 @@ const CustomQueryBuilder = () => {
       <Separator styles={separatorStyles} />
       <Stack horizontal tokens={customStackTokens} styles={customStackStyles}>
         <Text styles={textStyle}>Custom filters</Text>
-        <Stack horizontal tokens={customStackTokens}>
-          <AddFilter queryable={queryable} cql={parsedCql} />
-          <VerticalDivider />
-          <Link
-            onClick={handleClearCustom}
-            styles={linkStyle}
-            title="Clear the custom filters"
-          >
-            Clear
-          </Link>
-        </Stack>
+        <AddFilter queryable={queryable} cql={parsedCql} />
       </Stack>
       {isLoading && loadingIndicator}
       {dateControl}
@@ -113,11 +95,6 @@ const textStyle: Partial<ITextStyles> = {
   root: {
     fontWeight: FontWeights.bold,
     fontSize: FontSizes.size14,
-  },
-};
-const linkStyle: Partial<ILinkStyles> = {
-  root: {
-    fontSize: FontSizes.size12,
   },
 };
 
