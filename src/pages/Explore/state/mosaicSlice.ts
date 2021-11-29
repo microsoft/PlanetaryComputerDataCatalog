@@ -74,17 +74,21 @@ export const setCustomCqlExpressions = createAsyncThunk<string, CqlExpression>(
     const expressions = Array.isArray(cqlExpression)
       ? cqlExpression
       : [cqlExpression];
+
     expressions.forEach(expression => {
       dispatch(addOrUpdateCustomCqlExpression(expression));
     });
 
-    const state = getState() as ExploreState;
-    const collectionId = state.mosaic.collection?.id;
-    const queryInfo = state.mosaic.customQuery;
-    const cql = selectCurrentCql(state);
+    return await registerUpdatedSearch(getState);
+  }
+);
 
-    const searchId = await registerStacFilter(collectionId, queryInfo, cql);
-    return searchId;
+export const removeCustomCqlExpression = createAsyncThunk<string, string>(
+  "cql-api/removeCqlProperties",
+  async (property: string, { getState, dispatch }) => {
+    dispatch(removeCustomCqlProperty(property));
+
+    return await registerUpdatedSearch(getState);
   }
 );
 
@@ -154,7 +158,7 @@ export const mosaicSlice = createSlice({
         draft.splice(existingIndex, 1, action.payload);
       }
     },
-    removeCustomCqlExpression: (state, action: PayloadAction<string>) => {
+    removeCustomCqlProperty: (state, action: PayloadAction<string>) => {
       const draft = state.customQuery.cql;
       const property = action.payload;
       const existingIndex = draft.findIndex(
@@ -185,6 +189,10 @@ export const mosaicSlice = createSlice({
         state.customQuery.searchId = action.payload;
       }
     );
+
+    builder.addCase(removeCustomCqlExpression.fulfilled, (state, action) => {
+      state.customQuery.searchId = action.payload;
+    });
   },
 });
 
@@ -200,7 +208,7 @@ export const {
   setIsCustomQuery,
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
-  removeCustomCqlExpression,
+  removeCustomCqlProperty,
 } = mosaicSlice.actions;
 
 export const selectCurrentCql = (state: ExploreState) => {
@@ -208,5 +216,15 @@ export const selectCurrentCql = (state: ExploreState) => {
     ? state.mosaic.customQuery.cql
     : state.mosaic.query.cql;
 };
+
+async function registerUpdatedSearch(getState: () => unknown) {
+  const state = getState() as ExploreState;
+  const collectionId = state.mosaic.collection?.id;
+  const queryInfo = state.mosaic.customQuery;
+  const cql = selectCurrentCql(state);
+
+  const searchId = await registerStacFilter(collectionId, queryInfo, cql);
+  return searchId;
+}
 
 export default mosaicSlice.reducer;

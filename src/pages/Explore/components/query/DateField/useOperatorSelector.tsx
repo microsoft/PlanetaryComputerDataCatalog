@@ -88,11 +88,12 @@ const theme = getTheme();
 const opDropdownStyles: IButtonStyles = {
   root: {
     padding: 0,
-    paddingBottom: 10,
-    height: "auto",
   },
   label: {
     margin: 0,
+    color: theme.palette.themePrimary,
+  },
+  menuIcon: {
     color: theme.palette.themePrimary,
   },
 };

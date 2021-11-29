@@ -9,6 +9,7 @@ import {
   DirectionalHint,
   ISeparatorStyles,
   IStackStyles,
+  Link,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
@@ -59,7 +60,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const minDay = getDayStart(dateExpression.min, true);
   const maxDay = getDayEnd(dateExpression.max, true);
 
-  const { OperatorSelector, operatorSelection /*resetOperatorSelection */ } =
+  const { OperatorSelector, operatorSelection, resetOperatorSelection } =
     useOperatorSelector(dateExpression);
 
   const isValid = isValidToApply(
@@ -115,6 +116,15 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         onRenderText={handleRenderText}
       >
         <DateFieldProvider state={providerState}>
+          <Stack
+            horizontal
+            styles={commandBarStyles}
+            horizontalAlign={"space-between"}
+          >
+            {OperatorSelector}
+            <Link onClick={resetOperatorSelection}>Reset</Link>
+          </Stack>
+          <Separator styles={separatorStyles} />
           <Stack horizontal tokens={calendarTokens}>
             <CalendarControl
               label={isRange ? "Start date" : ""}
@@ -135,15 +145,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
             )}
           </Stack>
           {!isValid && controlValidState.end}
-          <Separator styles={separatorStyles} />
-          <Stack
-            horizontal
-            styles={commandBarStyles}
-            horizontalAlign={"space-between"}
-          >
-            {OperatorSelector}
-            <Stack horizontal>Reset</Stack>
-          </Stack>
         </DateFieldProvider>
       </DropdownButton>
     </>
@@ -166,14 +167,15 @@ const separatorStyles: Partial<ISeparatorStyles> = {
   root: {
     padding: 0,
   },
+  content: {
+    display: "block",
+  },
 };
 
 const dividerStyles: IVerticalDividerStyles = {
-  wrapper: {
-    marginTop: 0,
-  },
+  wrapper: {},
   divider: {
-    height: 255,
+    height: 285,
     backgroundColor: theme.palette.neutralLight,
   },
 };

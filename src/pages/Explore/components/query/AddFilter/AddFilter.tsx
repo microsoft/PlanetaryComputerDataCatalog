@@ -33,7 +33,7 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
       const cql = makeDefaultCqlExpression(property, field);
       dispatch<any>(setCustomCqlExpressions(cql));
     } else {
-      dispatch(removeCustomCqlExpression(property));
+      dispatch<any>(removeCustomCqlExpression(property));
     }
   };
 
@@ -45,7 +45,7 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
       ariaLabel={title}
       placeholder={title}
       options={options}
-      onRenderTitle={renderPlaceholder("Slider", title, displayTextStyles)}
+      onRenderTitle={renderPlaceholder("Filter", title, displayTextStyles)}
       styles={dropdownStyles}
       onChange={handleChange}
     />
@@ -72,7 +72,7 @@ const makeDropdownItems = (
 
     return {
       key,
-      text: field.title || "no title",
+      text: field.title || "",
       title: tooltip,
       data: field,
       checked: exists,
