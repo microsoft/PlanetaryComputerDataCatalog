@@ -17,6 +17,7 @@ import {
 import { dayjs, toAbsoluteDate, toDateString } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
+import { CalendarNavControl } from "./CalendarNavControl";
 
 interface CalendarControlProps {
   label: string;
@@ -119,11 +120,26 @@ const CalendarControl = ({
     }
   });
 
+  const [navigatedDate, setNavigatedDate] = useState<Date>(
+    toAbsoluteDate(dayjs(date))
+  );
   if (!date) return null;
+
+  const calDayNav: Partial<ICalendarDayProps> = {
+    navigatedDate: navigatedDate,
+  };
+
+  const navigation = (
+    <CalendarNavControl
+      onChange={date => setNavigatedDate(date)}
+      navigatedDate={navigatedDate}
+    />
+  );
 
   return (
     <Stack styles={controlStyles}>
       <Label styles={labelStyles}>{label}</Label>
+      {navigation}
       <Calendar
         ref={ref}
         showMonthPickerAsOverlay={true}
@@ -134,7 +150,7 @@ const CalendarControl = ({
         minDate={toAbsoluteDate(validMinDate)}
         maxDate={toAbsoluteDate(validMaxDate)}
         onSelectDate={handleSelectDate}
-        calendarDayProps={calendarDayProps}
+        calendarDayProps={{ ...calendarDayProps, ...calDayNav }}
         calendarMonthProps={calendarMonthProps}
       />
       <Text styles={errorMsgStyles}>{errorMessage}</Text>
@@ -153,8 +169,9 @@ const controlStyles: Partial<IStackStyles> = {
 
 const labelStyles: ILabelStyles = {
   root: {
-    textAlign: "center",
-    paddingBottom: 0,
+    textTransform: "uppercase",
+    marginLeft: 8,
+    fontSize: 13,
   },
 };
 
@@ -217,6 +234,9 @@ const calendarStyles: Partial<ICalendarDayStyles> = {
   },
   disabledStyle: {
     color: theme.palette.neutralTertiary,
+  },
+  header: {
+    display: "none",
   },
   headerIconButton: {
     color: theme.palette.themePrimary,
