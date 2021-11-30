@@ -1,9 +1,10 @@
-import React from "react";
+import { useState, useContext } from "react";
 import {
   Dropdown,
   IButtonStyles,
   IconButton,
   IDropdownOption,
+  IDropdownStyles,
   IStackStyles,
   IStackTokens,
   Stack,
@@ -21,30 +22,33 @@ export const CalendarNavControl = ({
   onChange,
   navigatedDate,
 }: ICalendarNavControlProps) => {
-  const [year, setYear] = React.useState(navigatedDate.getFullYear());
-  //NB: JS Date object provides 0-based month, and is manipulated throughout this file to be 1-based
-  const [month, setMonth] = React.useState(navigatedDate.getMonth() + 1);
-  const { validMaxDate, validMinDate } = React.useContext(DateFieldContext);
+  const [year, setYear] = useState(navigatedDate.getFullYear());
+  const [month, setMonth] = useState(navigatedDate.getMonth());
+  const { validMaxDate, validMinDate } = useContext(DateFieldContext);
 
   const changeMonth = (newMonth: number) => {
     setMonth(newMonth);
-    onChange(new Date(year, newMonth - 1));
+    onChange(new Date(year, newMonth));
   };
 
   const changeYear = (newYear: number) => {
     setYear(newYear);
-    onChange(new Date(newYear, month - 1));
+    onChange(new Date(newYear, month));
   };
 
   const handleNavMonth = (direction: "next" | "previous") => {
     return () => {
-      const curDate = dayjs(new Date(year, month - 1, 1));
+      const curDate = dayjs(new Date(year, month, 1));
       const newDate =
         direction === "next"
           ? curDate.add(1, "month")
           : curDate.subtract(1, "month");
-      changeMonth(newDate.get("month") + 1);
-      changeYear(newDate.get("year"));
+
+      const newMonth = newDate.month();
+      const newYear = newDate.year();
+      setMonth(newMonth);
+      setYear(newYear);
+      onChange(new Date(newYear, newMonth));
     };
   };
 
@@ -59,15 +63,27 @@ export const CalendarNavControl = ({
     };
   };
 
+  const makeValidator = (year: number) => {
+    return (monthIndex: number): boolean => {
+      const date = dayjs(new Date(year, monthIndex, 1));
+      return (
+        (validMinDate && date < validMinDate) ||
+        (validMaxDate && date > validMaxDate)
+      );
+    };
+  };
+
   return (
     <Stack horizontal horizontalAlign="space-between">
       <Stack horizontal styles={stackStyles} tokens={stackTokens}>
         <Dropdown
-          options={monthsOptions}
+          styles={dropdownStyles}
+          options={getMonthsOptions(makeValidator(year))}
           onChange={handleChange("month")}
           selectedKey={month}
         />
         <Dropdown
+          styles={dropdownStyles}
           options={getYearOptions(validMinDate, validMaxDate)}
           onChange={handleChange("year")}
           selectedKey={year}
@@ -89,20 +105,31 @@ export const CalendarNavControl = ({
   );
 };
 
-const monthsOptions: IDropdownOption<number>[] = [
-  { key: 1, text: "Jan" },
-  { key: 2, text: "Feb" },
-  { key: 3, text: "Mar" },
-  { key: 4, text: "Apr" },
-  { key: 5, text: "May" },
-  { key: 6, text: "Jun" },
-  { key: 7, text: "Jul" },
-  { key: 8, text: "Aug" },
-  { key: 9, text: "Sep" },
-  { key: 10, text: "Oct" },
-  { key: 11, text: "Nov" },
-  { key: 12, text: "Dec" },
-];
+const getMonthsOptions = (
+  validator: (n: number) => boolean
+): IDropdownOption<number>[] => {
+  //NB: JS Date object provides 0-based month
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  return months.map((month, index) => ({
+    key: index,
+    text: month,
+    disabled: validator(index),
+  }));
+};
 
 const getYearOptions = (start: Dayjs, end: Dayjs): IDropdownOption[] => {
   // Generate list of years between start and end
@@ -123,6 +150,11 @@ const navStyles: Partial<IButtonStyles> = {
   },
   icon: {
     fontSize: 12,
+  },
+};
+const dropdownStyles: Partial<IDropdownStyles> = {
+  root: {
+    width: 70,
   },
 };
 const stackTokens: IStackTokens = { childrenGap: 5 };

@@ -170,6 +170,7 @@ const controlStyles: Partial<IStackStyles> = {
 const labelStyles: ILabelStyles = {
   root: {
     textTransform: "uppercase",
+    marginTop: 8,
     marginLeft: 8,
     fontSize: 13,
   },
