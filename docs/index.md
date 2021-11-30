@@ -28,6 +28,7 @@ quickstarts/reading-stac-r
 quickstarts/reading-zarr-data
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
+quickstarts/using-radiant-mlhub-api
 quickstarts/storage
 ```
 

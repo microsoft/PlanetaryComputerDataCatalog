@@ -21,6 +21,7 @@
     - quickstarts/images/dashboard-tab.png
 - file_url: quickstarts/reading-stac.ipynb
 - file_url: quickstarts/reading-stac-r.ipynb
+- file_url: quickstarts/using-radiant-mlhub-api.ipynb
 - file_url: quickstarts/reading-tabular-data.ipynb
 - file_url: quickstarts/reading-zarr-data.ipynb
 - file_url: quickstarts/storage.ipynb
