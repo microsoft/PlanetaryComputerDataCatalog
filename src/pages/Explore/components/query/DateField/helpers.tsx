@@ -25,7 +25,7 @@ export const getEndRangeValue = (date: CqlDate) => {
 
 export const getDateDisplayText = (dateExpression: CqlDate) => {
   return dateExpression.isRange
-    ? dateExpression.value.join(" - ")
+    ? dateExpression.value.join(" – ")
     : dateExpression.value;
 };
 

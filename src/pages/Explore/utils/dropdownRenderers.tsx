@@ -49,7 +49,11 @@ export const renderSegmentedTitle = (label: string) => {
     const optionsText = options.map(o => o.text).join(", ");
     return (
       <Stack horizontal>
-        <DropdownLabel label={label} displayValue={optionsText} />
+        <DropdownLabel
+          label={label}
+          displayValue={optionsText}
+          title={optionsText}
+        />
       </Stack>
     );
   };
@@ -59,7 +63,11 @@ export const renderSegmentedPlaceholder = (label: string, displayValue: string) 
   return (): JSX.Element => {
     return (
       <Stack horizontal>
-        <DropdownLabel label={label} displayValue={displayValue} />
+        <DropdownLabel
+          label={label}
+          displayValue={displayValue}
+          title={displayValue}
+        />
       </Stack>
     );
   };

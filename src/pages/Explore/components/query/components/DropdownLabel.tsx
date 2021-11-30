@@ -10,10 +10,11 @@ import { getTheme } from "@fluentui/style-utilities";
 
 interface IDropdownLabelProps {
   label: string;
-  displayValue: string;
+  displayValue: string | JSX.Element;
+  title: string;
 }
 
-const DropdownLabel = ({ label, displayValue }: IDropdownLabelProps) => {
+const DropdownLabel = ({ label, displayValue, title }: IDropdownLabelProps) => {
   return (
     <Stack
       key={`selector-label-${label}`}
@@ -26,7 +27,7 @@ const DropdownLabel = ({ label, displayValue }: IDropdownLabelProps) => {
         {label}
       </Text>
       <VerticalDivider styles={labelDividerStyles} />
-      <Text block nowrap title={displayValue} styles={labelValueStyle}>
+      <Text block nowrap title={title} styles={labelValueStyle}>
         {displayValue}
       </Text>
     </Stack>

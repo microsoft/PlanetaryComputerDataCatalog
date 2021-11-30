@@ -5,6 +5,8 @@ import {
   Dropdown,
   IDropdownStyles,
   ITextStyles,
+  FontSizes,
+  IIconStyles,
 } from "@fluentui/react";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import {
@@ -45,7 +47,12 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
       ariaLabel={title}
       placeholder={title}
       options={options}
-      onRenderTitle={renderPlaceholder("Filter", title, displayTextStyles)}
+      onRenderTitle={renderPlaceholder(
+        "Filter",
+        title,
+        displayTextStyles,
+        displayIconStyles
+      )}
       styles={dropdownStyles}
       onChange={handleChange}
     />
@@ -85,12 +92,19 @@ const theme = getTheme();
 const displayTextStyles: ITextStyles = {
   root: {
     color: theme.palette.themePrimary,
+    fontSize: FontSizes.small,
+  },
+};
+const displayIconStyles: IIconStyles = {
+  root: {
+    marginRight: 4,
   },
 };
 
 const dropdownStyles: Partial<IDropdownStyles> = {
   title: {
     color: theme.palette.themePrimary,
+    fontSize: FontSizes.small,
     border: 0,
     padding: 0,
     "&:hover": {

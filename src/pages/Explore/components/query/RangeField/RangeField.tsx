@@ -66,6 +66,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
         key={`rangefield-label-${labelPrefix}`}
         label={labelPrefix}
         displayValue={valueLabel}
+        title={valueLabel}
       />
     );
   };

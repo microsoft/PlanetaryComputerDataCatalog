@@ -98,6 +98,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
         key="datefield-button-label"
         label="Acquired"
         displayValue={displayValue}
+        title={displayValue}
       />
     );
   };

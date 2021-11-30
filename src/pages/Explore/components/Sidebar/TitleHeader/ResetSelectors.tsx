@@ -32,7 +32,6 @@ export default ResetSelectors;
 
 export const buttonStyles = {
   root: {
-    marginRight: "2px",
     fontSize: FontSizes.small,
   },
 };

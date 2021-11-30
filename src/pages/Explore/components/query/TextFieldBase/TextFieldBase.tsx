@@ -7,6 +7,7 @@ import {
   IStackTokens,
   ITextFieldStyles,
   Stack,
+  Text,
   TextField,
 } from "@fluentui/react";
 import { debounce } from "lodash-es";
@@ -49,7 +50,7 @@ export const TextFieldBase = ({
   const [selectedOperatorKey, setSelectedOperatorKey] = useState<string>(
     onParseOperatorKey(field.operator)
   );
-  const labeledValue = getLabeledValue(
+  const [labeledValue, title] = getLabeledValue(
     selectedOperatorKey,
     formattedValue,
     operatorOptions
@@ -93,6 +94,7 @@ export const TextFieldBase = ({
         key={`textstringfield-label-${labelPrefix}`}
         label={labelPrefix}
         displayValue={labeledValue}
+        title={title}
       />
     );
   };
@@ -130,13 +132,18 @@ const getLabeledValue = (
   selectedOperatorKey: string,
   value: string,
   operatorOptions: IDropdownOption[]
-) => {
-  const formattedValue = value === "" ? "-" : value;
+): [string | JSX.Element, string] => {
+  const emptyText = "(Empty)";
+  const emptyLabel = <Text styles={emptyStyles}>{emptyText}</Text>;
+  const formattedValue = value === "" ? emptyLabel : value;
+  const title = value === "" ? emptyText : value;
+
   const noPrefixRequired = ["eq"];
-  if (noPrefixRequired.includes(selectedOperatorKey)) return formattedValue;
+  if (noPrefixRequired.includes(selectedOperatorKey)) return [formattedValue, title];
 
   const option = operatorOptions.find(o => o.key === selectedOperatorKey);
-  return option ? `${option.text} ${formattedValue}` : formattedValue;
+  const labeledValue = option ? `${option.text} ${formattedValue}` : formattedValue;
+  return [labeledValue, title];
 };
 
 const theme = getTheme();
@@ -157,4 +164,10 @@ const operatorStyles: Partial<IDropdownStyles> = {
 
 const inputStyles: Partial<ITextFieldStyles> = {
   root: { width: "100%" },
+};
+
+const emptyStyles: Partial<ITextFieldStyles> = {
+  root: {
+    fontStyle: "italic",
+  },
 };
