@@ -6,6 +6,8 @@ import {
   IDropdownStyles,
   IStackTokens,
   ITextFieldStyles,
+  MessageBar,
+  MessageBarType,
   Stack,
   Text,
   TextField,
@@ -30,6 +32,7 @@ interface TextFieldProps<T extends string | number> {
     field: CqlExpressionParser<any>
   ) => any;
   onRenderDisplay: (value: T) => string;
+  instructions?: Record<string, JSX.Element>;
 }
 
 export const TextFieldBase = ({
@@ -38,6 +41,7 @@ export const TextFieldBase = ({
   onFormatValue,
   onParseOperatorKey,
   onGenerateCqlExpression,
+  instructions,
 }: TextFieldProps<string> | TextFieldProps<number>) => {
   const dispatch = useExploreDispatch();
 
@@ -103,6 +107,8 @@ export const TextFieldBase = ({
   const isNumeric =
     fieldSchema?.type === "number" || fieldSchema?.type === "integer";
 
+  const instruction = instructions?.[selectedOperatorKey];
+
   return (
     <DropdownButton
       key={keyPrefix}
@@ -110,19 +116,24 @@ export const TextFieldBase = ({
       onRenderText={renderLabel}
       data-cy={keyPrefix}
     >
-      <Stack horizontal styles={stackStyles} tokens={stackTokens}>
-        <Dropdown
-          selectedKey={selectedOperatorKey}
-          options={operatorOptions}
-          styles={operatorStyles}
-          onChange={handleOperatorChange}
-        ></Dropdown>
-        <TextField
-          styles={inputStyles}
-          value={value.toString()}
-          onChange={handleValueChange}
-          type={isNumeric ? "number" : "text"}
-        />
+      <Stack styles={stackStyles} tokens={stackTokens}>
+        <Stack horizontal tokens={stackTokens}>
+          <Dropdown
+            selectedKey={selectedOperatorKey}
+            options={operatorOptions}
+            styles={operatorStyles}
+            onChange={handleOperatorChange}
+          ></Dropdown>
+          <TextField
+            styles={inputStyles}
+            value={value.toString()}
+            onChange={handleValueChange}
+            type={isNumeric ? "number" : "text"}
+          />
+        </Stack>
+        {instruction && (
+          <MessageBar messageBarType={MessageBarType.info}>{instruction}</MessageBar>
+        )}
       </Stack>
     </DropdownButton>
   );
@@ -134,23 +145,25 @@ const getLabeledValue = (
   operatorOptions: IDropdownOption[]
 ): [string | JSX.Element, string] => {
   const emptyText = "(Empty)";
+  const noPrefixRequired = ["eq"];
+  const optionForPrefix = operatorOptions.find(o => o.key === selectedOperatorKey);
+  const needsPrefix =
+    !noPrefixRequired.includes(selectedOperatorKey) && Boolean(optionForPrefix);
+
+  const valueText = needsPrefix ? `${optionForPrefix?.text} ${value}` : value;
   const emptyLabel = <Text styles={emptyStyles}>{emptyText}</Text>;
-  const formattedValue = value === "" ? emptyLabel : value;
+
+  const formattedValue = value === "" ? emptyLabel : valueText;
   const title = value === "" ? emptyText : value;
 
-  const noPrefixRequired = ["eq"];
-  if (noPrefixRequired.includes(selectedOperatorKey)) return [formattedValue, title];
-
-  const option = operatorOptions.find(o => o.key === selectedOperatorKey);
-  const labeledValue = option ? `${option.text} ${formattedValue}` : formattedValue;
-  return [labeledValue, title];
+  return [formattedValue, title];
 };
 
 const theme = getTheme();
 const stackStyles = {
   root: {
     width: 405,
-    padding: 10,
+    padding: 6,
     justifyContent: "space-between",
   },
 };

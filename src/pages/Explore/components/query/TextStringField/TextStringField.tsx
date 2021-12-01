@@ -1,3 +1,4 @@
+import { ITextStyles, Text, FontSizes } from "@fluentui/react";
 import {
   formatValue,
   operatorOptions,
@@ -20,6 +21,27 @@ export const TextStringField = ({ field }: TextStringFieldProps) => {
       onParseOperatorKey={parseOperatorToKey}
       onGenerateCqlExpression={toCqlExpression}
       onRenderDisplay={formatValue}
+      instructions={instructionMap}
     />
   );
+};
+
+const textStyle: Partial<ITextStyles> = {
+  root: {
+    fontSize: FontSizes.small,
+  },
+};
+const instructionMap = {
+  like: (
+    <Text styles={textStyle}>
+      Input will be evaluated as a partial match against the full attribute value.
+      Use <code>%</code> for additional wildcard characters.
+    </Text>
+  ),
+  in: (
+    <Text styles={textStyle}>
+      Use comma separated values (e.g. <code>one</code>, <code>two</code>,{" "}
+      <code>three</code>)
+    </Text>
+  ),
 };
