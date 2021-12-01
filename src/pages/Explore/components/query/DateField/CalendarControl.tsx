@@ -8,11 +8,13 @@ import {
   ICalendarDayStyles,
   Label,
   IStackStyles,
-  Text,
-  ITextStyles,
   ICalendarDayProps,
   ICalendarMonthStyles,
   ILabelStyles,
+  MessageBar,
+  MessageBarType,
+  IMessageBarStyles,
+  AnimationDirection,
 } from "@fluentui/react";
 import { dayjs, toAbsoluteDate, toDateString } from "utils";
 import { DateFieldContext } from "./context";
@@ -67,13 +69,13 @@ const CalendarControl = ({
         workingDates?.end &&
         day.isAfter(workingDates.end)
       ) {
-        return `* Start date must be before end date`;
+        return `Date must be before End Date`;
       } else if (
         rangeType === "end" &&
         workingDates?.start &&
         day.isBefore(workingDates.start)
       ) {
-        return `* End date must be after start date`;
+        return `Date must be after Start Date`;
       }
     }
     return "";
@@ -153,7 +155,11 @@ const CalendarControl = ({
         calendarDayProps={{ ...calendarDayProps, ...calDayNav }}
         calendarMonthProps={calendarMonthProps}
       />
-      <Text styles={errorMsgStyles}>{errorMessage}</Text>
+      {errorMessage && (
+        <MessageBar styles={errorMsgStyles} messageBarType={MessageBarType.error}>
+          {errorMessage}
+        </MessageBar>
+      )}
     </Stack>
   );
 };
@@ -164,6 +170,7 @@ const theme = getTheme();
 const controlStyles: Partial<IStackStyles> = {
   root: {
     maxWidth: 220,
+    marginRight: 3,
   },
 };
 
@@ -176,11 +183,10 @@ const labelStyles: ILabelStyles = {
   },
 };
 
-const errorMsgStyles: Partial<ITextStyles> = {
+const errorMsgStyles: Partial<IMessageBarStyles> = {
   root: {
-    color: theme.palette.redDark,
-    fontSize: FontSizes.size12,
-    paddingLeft: theme.spacing.m,
+    margin: 2,
+    borderRadius: 2,
   },
 };
 
@@ -245,6 +251,9 @@ const calendarStyles: Partial<ICalendarDayStyles> = {
       color: theme.palette.themePrimary,
     },
   },
+  table: {
+    paddingBottom: 0,
+  },
 };
 
 const monthStyles: Partial<ICalendarMonthStyles> = {
@@ -270,4 +279,5 @@ const calendarMonthProps: Partial<ICalendarDayProps> = {
     leftNavigation: "ChevronLeft",
     rightNavigation: "ChevronRight",
   },
+  animationDirection: AnimationDirection.Horizontal,
 };

@@ -10,15 +10,18 @@ import {
   ISeparatorStyles,
   IStackStyles,
   Link,
+  TooltipHost,
+  Text,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider, IDateFieldContext } from "./context";
-import { capitalize, getDayEnd, getDayStart } from "utils";
+import { capitalize, getDayEnd, getDayStart, toDateString } from "utils";
 import {
   getDateDisplayText,
+  isSingleDayRange,
   isValidToApply,
   toCqlExpression,
   toDateRange,
@@ -107,54 +110,66 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     handleSave();
   }, [handleSave, workingDateRange, operatorSelection.key]);
 
+  const disabled = isSingleDayRange(initialDateRange);
+  const disabledMsg = disabled ? (
+    <Text>
+      <Text style={{ fontWeight: 500 }}>{toDateString(initialDateRange.start)}</Text>{" "}
+      is the only date available for this dataset
+    </Text>
+  ) : (
+    ""
+  );
   return (
     <>
-      <DropdownButton
-        ref={panelRef}
-        key={"query-datetime-field"}
-        label="Date acquired"
-        directionalHint={DirectionalHint.rightTopEdge}
-        onRenderText={handleRenderText}
-      >
-        <DateFieldProvider state={providerState}>
-          <Stack
-            horizontal
-            styles={commandBarStyles}
-            horizontalAlign={"space-between"}
-          >
-            {OperatorSelector}
-            <Link onClick={resetOperatorSelection}>Reset</Link>
-          </Stack>
-          <Separator styles={separatorStyles} />
-          <Stack horizontal tokens={calendarTokens}>
-            <CalendarControl
-              label={isRange ? "Start date" : ""}
-              rangeType="start"
-              operator={operatorSelection.key}
-              onSelectDate={workingDateRangeDispatch}
-            />
-            {isRange && (
-              <>
-                <VerticalDivider styles={dividerStyles} />
-                <CalendarControl
-                  label="End date"
-                  rangeType="end"
-                  operator={operatorSelection.key}
-                  onSelectDate={workingDateRangeDispatch}
-                />
-              </>
-            )}
-          </Stack>
-          {!isValid && controlValidState.end}
-        </DateFieldProvider>
-      </DropdownButton>
+      <TooltipHost content={disabledMsg}>
+        <DropdownButton
+          ref={panelRef}
+          key={"query-datetime-field"}
+          label="Date acquired"
+          directionalHint={DirectionalHint.rightTopEdge}
+          onRenderText={handleRenderText}
+          disabled={disabled}
+        >
+          <DateFieldProvider state={providerState}>
+            <Stack
+              horizontal
+              styles={commandBarStyles}
+              horizontalAlign={"space-between"}
+            >
+              {OperatorSelector}
+              <Link onClick={resetOperatorSelection}>Reset</Link>
+            </Stack>
+            <Separator styles={separatorStyles} />
+            <Stack horizontal tokens={calendarTokens}>
+              <CalendarControl
+                label={isRange ? "Start date" : ""}
+                rangeType="start"
+                operator={operatorSelection.key}
+                onSelectDate={workingDateRangeDispatch}
+              />
+              {isRange && (
+                <>
+                  <VerticalDivider styles={dividerStyles} />
+                  <CalendarControl
+                    label="End date"
+                    rangeType="end"
+                    operator={operatorSelection.key}
+                    onSelectDate={workingDateRangeDispatch}
+                  />
+                </>
+              )}
+            </Stack>
+            {!isValid && controlValidState.end}
+          </DateFieldProvider>
+        </DropdownButton>
+      </TooltipHost>
     </>
   );
 };
 
 const theme = getTheme();
 const calendarTokens: IStackTokens = {
-  childrenGap: theme.spacing.s2,
+  childrenGap: 0,
 };
 
 const commandBarStyles: Partial<IStackStyles> = {
@@ -174,9 +189,11 @@ const separatorStyles: Partial<ISeparatorStyles> = {
 };
 
 const dividerStyles: IVerticalDividerStyles = {
-  wrapper: {},
+  wrapper: {
+    height: "auto",
+  },
   divider: {
-    height: 285,
+    height: "100%",
     backgroundColor: theme.palette.neutralLight,
   },
 };

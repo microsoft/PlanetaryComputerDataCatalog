@@ -29,6 +29,10 @@ export const getDateDisplayText = (dateExpression: CqlDate) => {
     : dateExpression.value;
 };
 
+export const isSingleDayRange = (initialDates: DateRangeState) => {
+  return initialDates.start.isSame(initialDates.end, "day");
+};
+
 export const isValidToApply = (
   validationState: ValidationState,
   initialDates: DateRangeState,
