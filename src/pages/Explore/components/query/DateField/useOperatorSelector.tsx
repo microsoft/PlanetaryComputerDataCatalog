@@ -5,6 +5,7 @@ import {
   IContextualMenuProps,
   IButtonStyles,
   getTheme,
+  FontWeights,
 } from "@fluentui/react";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 
@@ -92,6 +93,7 @@ const opDropdownStyles: IButtonStyles = {
   label: {
     margin: 0,
     color: theme.palette.themePrimary,
+    fontWeight: FontWeights.semibold,
   },
   menuIcon: {
     color: theme.palette.themePrimary,

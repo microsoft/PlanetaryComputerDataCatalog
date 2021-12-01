@@ -48,7 +48,7 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
       placeholder={title}
       options={options}
       onRenderTitle={renderPlaceholder(
-        "Filter",
+        "Options",
         title,
         displayTextStyles,
         displayIconStyles
@@ -98,6 +98,8 @@ const displayTextStyles: ITextStyles = {
 const displayIconStyles: IIconStyles = {
   root: {
     marginRight: 4,
+    width: 12,
+    height: 12,
   },
 };
 
@@ -111,6 +113,12 @@ const dropdownStyles: Partial<IDropdownStyles> = {
       color: theme.palette.themePrimary + " !important",
     },
     "&:focus": {
+      color: theme.palette.themePrimary + " !important",
+    },
+    "&:focus-visible": {
+      color: theme.palette.themePrimary + " !important",
+    },
+    "&:focus-within": {
       color: theme.palette.themePrimary + " !important",
     },
     lineHeight: "unset",
@@ -129,10 +137,11 @@ const dropdownStyles: Partial<IDropdownStyles> = {
     "&:focus-visible": {
       outline: "1px solid",
       outlineColor: theme.palette.neutralSecondary,
-      borderRadius: "3px",
+      borderRadius: 2,
     },
   },
   callout: {
     minWidth: 200,
+    marginTop: 5,
   },
 };

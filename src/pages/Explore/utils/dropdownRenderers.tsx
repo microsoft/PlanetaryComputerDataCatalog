@@ -34,10 +34,10 @@ export const renderPlaceholder = (
 ) => {
   return (): JSX.Element => {
     return (
-      <div>
+      <Stack horizontal verticalAlign="center">
         <Icon styles={iconStyle} iconName={iconName} aria-hidden="true" />
         <Text styles={textStyle}>{title}</Text>
-      </div>
+      </Stack>
     );
   };
 };
@@ -78,7 +78,5 @@ export const iconStyles: IIconStyles = {
   root: {
     marginRight: 10,
     color: palette.themePrimary,
-    width: 14,
-    height: 14,
   },
 };

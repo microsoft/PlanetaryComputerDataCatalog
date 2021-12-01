@@ -14,11 +14,13 @@ import Terms from "./pages/Terms";
 import { initializeFeatures } from "./utils/featureFlags";
 import CatalogGroup from "./pages/CatalogGroup";
 import Layout from "./components/Layout";
+import { registerCustomIcons } from "utils/icons";
 
 const Explore = React.lazy(() => import("./pages/Explore"));
 
 function App() {
   initializeIcons(undefined, { disableWarnings: true });
+  registerCustomIcons();
   initializeFeatures();
   usePrefetchContent();
 
