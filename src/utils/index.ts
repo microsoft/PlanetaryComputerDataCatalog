@@ -55,7 +55,8 @@ export const getDayEnd = (
   return d.endOf("day");
 };
 
-export const capitalize = (str: string) => {
+export const capitalize = (value: string) => {
+  const str = String(value);
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 

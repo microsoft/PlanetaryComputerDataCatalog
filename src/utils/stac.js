@@ -72,6 +72,9 @@ StacFields.Registry.addMetadataField("proj:wkt2", {
   formatter: value => <code>{value}</code>,
 });
 
+StacFields.Registry.addMetadataField("sat:orbit_state", {
+  formatter: capitalize,
+});
 StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
 });

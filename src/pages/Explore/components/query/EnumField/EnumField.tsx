@@ -9,6 +9,7 @@ import {
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import { CqlEqualExpression, CqlInExpression } from "pages/Explore/utils/cql/types";
+import { stacFormatter } from "utils/stac";
 
 type EnumFieldProps = {
   field: CqlExpressionParser<string>;
@@ -43,7 +44,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   };
 
   const title = field.fieldSchema.title || field.property;
-  const options = enumToOptions(field.fieldSchema.enum);
+  const options = enumToOptions(field.fieldSchema.enum, field.property);
 
   return (
     <Dropdown
@@ -58,9 +59,13 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   );
 };
 
-const enumToOptions = (enumValues: JSONSchema["enum"] = []) => {
+const enumToOptions = (
+  enumValues: JSONSchema["enum"] = [],
+  property: string
+): IDropdownOption[] => {
   return enumValues.map(value => {
-    return { key: String(value), text: String(value) };
+    const display = stacFormatter.format(String(value), property);
+    return { key: String(value), text: display };
   });
 };
 
