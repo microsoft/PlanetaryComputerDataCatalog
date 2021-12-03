@@ -16,7 +16,6 @@ describe("Explorer selector tests", () => {
     cy.getBySel("render-selector")
       .should("be.visible")
       .should("have.class", disabledClass);
-    cy.getBySel("reset").should("be.visible").should("be.disabled");
 
     cy.wait(["@getCollections"]);
     cy.getBySel("collection-selector").click();
@@ -37,6 +36,7 @@ describe("Explorer selector tests", () => {
 
     cy.getBySel("mosaic-selector").not("have.class", disabledClass);
     cy.getBySel("render-selector").not("have.class", disabledClass);
+    cy.getBySel("reset").should("be.visible");
 
     cy.wait(["@getS2search"]);
     cy.contains("matched your filter");
@@ -96,10 +96,12 @@ describe("Explorer selector tests", () => {
   });
 
   it("resets to default state", () => {
+    cy.getBySel("collection-selector").click();
+    cy.contains("Sentinel-2 Level-2A").click();
     cy.getBySel("reset").click();
     cy.getBySel("collection-selector").should("not.have.class", disabledClass);
     cy.getBySel("mosaic-selector").should("have.class", disabledClass);
     cy.getBySel("render-selector").should("have.class", disabledClass);
-    cy.getBySel("reset").should("be.disabled");
+    cy.getBySel("reset").should("not.exist");
   });
 });

@@ -89,7 +89,7 @@ test("it displays correct title and formatted value for BETWEEN", async () => {
 
   const label = screen.getByText(/Cloud Cover/i);
   expect(label).toBeInTheDocument();
-  const value = screen.getByText("25% - 75%");
+  const value = screen.getByText("25% – 75%");
   expect(value).toBeInTheDocument();
 
   fireEvent.click(screen.getByTestId("rangecontrol-eo:cloud_cover"));
