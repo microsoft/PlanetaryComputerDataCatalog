@@ -16,9 +16,13 @@ const useZoomToLayer = () => {
     map: { zoom },
     detail: { showAsLayer },
   } = useExploreSelector(s => s);
+  const searchIdLoaded = mosaic.isCustomQuery
+    ? Boolean(mosaic.customQuery.searchId)
+    : Boolean(mosaic.query.searchId);
+
   // TODO: check buffer around zoom
   const showZoomMsg =
-    zoom + 0.5 <= mosaic.layer.minZoom && !!mosaic.query.searchId && !showAsLayer;
+    zoom + 0.5 <= mosaic.layer.minZoom && searchIdLoaded && !showAsLayer;
 
   const zoomToLayer = useCallback(() => {
     dispatch(setZoom(mosaic.layer.minZoom));
