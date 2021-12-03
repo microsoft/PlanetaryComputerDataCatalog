@@ -202,7 +202,7 @@ const calendarStyles: Partial<ICalendarDayStyles> = {
   },
   daySelected: {
     backgroundColor: theme.palette.themePrimary,
-    color: theme.palette.white,
+    color: theme.palette.white + " !important",
     fontWeight: FontWeights.semibold,
     borderRadius: "100% !important",
     ":after": {

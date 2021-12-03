@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   IContextualMenuItem,
   CommandButton,
@@ -8,18 +8,30 @@ import {
   FontWeights,
 } from "@fluentui/react";
 import { CqlDate } from "pages/Explore/utils/cql/types";
+import { DateRangeState } from "./types";
 
-const useOperatorSelector = (dateExpression: CqlDate) => {
+const useOperatorSelector = (
+  dateExpression: CqlDate,
+  initialDateRange: DateRangeState
+) => {
+  const [initialExpression, setInitialExpression] = useState<CqlDate>();
+
+  useEffect(() => {
+    setInitialExpression(dateExpression);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleOperatorChange = (_: any, item: IContextualMenuItem | undefined) => {
     item && setOperatorSelection(item);
   };
 
   const [operatorSelection, setOperatorSelection] = useState<IContextualMenuItem>(
-    opItemFromExpression(dateExpression, menuItems)
+    opItemFromExpression(dateExpression)
   );
 
   const resetOperatorSelection = () => {
-    setOperatorSelection(opItemFromExpression(dateExpression, menuItems));
+    initialExpression &&
+      setOperatorSelection(opItemFromExpression(initialExpression));
   };
 
   const menu: IContextualMenuProps = {
@@ -47,10 +59,7 @@ const menuItems: IContextualMenuProps["items"] = [
   { key: "after", text: "On or after date" },
 ];
 
-const opItemFromExpression = (
-  dateExpression: CqlDate,
-  menuItems: IContextualMenuProps["items"]
-): IContextualMenuItem => {
+const opItemFromExpression = (dateExpression: CqlDate): IContextualMenuItem => {
   const item = menuItems.find(item => {
     // Range will be anyinteracts with two different days as values
     if (dateExpression.isRange) {

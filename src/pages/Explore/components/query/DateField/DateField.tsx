@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
+import {
+  useCallback,
+  useState,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from "react";
 import {
   Stack,
   IStackTokens,
@@ -12,6 +19,7 @@ import {
   Link,
   TooltipHost,
   Text,
+  IButtonStyles,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
@@ -46,6 +54,13 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const dispatch = useExploreDispatch();
   const panelRef = useRef<PanelControlHandlers>(null);
 
+  const [initialExpression, setInitialExpression] = useState<CqlDate>();
+
+  useEffect(() => {
+    setInitialExpression(dateExpression);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -64,7 +79,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const maxDay = getDayEnd(dateExpression.max, true);
 
   const { OperatorSelector, operatorSelection, resetOperatorSelection } =
-    useOperatorSelector(dateExpression);
+    useOperatorSelector(dateExpression, initialDateRange);
 
   const isValid = isValidToApply(
     controlValidState,
@@ -91,7 +106,14 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     workingDates: workingDateRange,
     setValidation: validationDispatch,
     validationState: controlValidState,
-    signalApply: handleSave,
+  };
+
+  const handleReset = () => {
+    if (!initialExpression) return;
+
+    resetOperatorSelection();
+    const drs = toDateRange(initialExpression);
+    workingDateRangeDispatch({ start: drs.start, end: drs.end });
   };
 
   const handleRenderText = () => {
@@ -137,7 +159,9 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               horizontalAlign={"space-between"}
             >
               {OperatorSelector}
-              <Link onClick={resetOperatorSelection}>Reset</Link>
+              <Link styles={resetStyles} onClick={handleReset}>
+                Reset
+              </Link>
             </Stack>
             <Separator styles={separatorStyles} />
             <Stack horizontal tokens={calendarTokens}>
@@ -159,7 +183,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
                 </>
               )}
             </Stack>
-            {!isValid && controlValidState.end}
           </DateFieldProvider>
         </DropdownButton>
       </TooltipHost>
@@ -195,5 +218,11 @@ const dividerStyles: IVerticalDividerStyles = {
   divider: {
     height: "100%",
     backgroundColor: theme.palette.neutralLight,
+  },
+};
+
+const resetStyles: Partial<IButtonStyles> = {
+  root: {
+    display: "none",
   },
 };

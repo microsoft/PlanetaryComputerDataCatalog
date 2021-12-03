@@ -67,8 +67,7 @@ export const CalendarNavControl = ({
     return (monthIndex: number): boolean => {
       const date = dayjs(new Date(year, monthIndex, 1));
       return (
-        (validMinDate && date < validMinDate) ||
-        (validMaxDate && date > validMaxDate)
+        validMinDate.isAfter(date, "month") || validMaxDate.isBefore(date, "month")
       );
     };
   };
