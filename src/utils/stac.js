@@ -80,6 +80,49 @@ StacFields.Registry.addMetadataField("s2:mgrs_tile", {
   label: "MGRS Tile",
 });
 
+StacFields.Registry.addMetadataField("s2:mean_solar_zenith", {
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("s2:mean_solar_azimuth", {
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("s2:unclassified_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:water_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:snow_ice_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:vegetation_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:thin_cirrus_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:cloud_shadow_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:nodata_pixel_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:dark_features_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:not_vegetated_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:medium_proba_clouds_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:saturated_defective_pixel_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:degraded_msi_data_percentage", {
+  formatter: fixedPct,
+});
+
 StacFields.Registry.addMetadataField("view:off_nadir", {
   label: "Off-Nadir Angle",
   formatter: fixedDeg,

@@ -26,7 +26,7 @@ export const getValueLabel = (
     case "lt":
       return `Under ${upper}`;
     case "between":
-      return `${lower} - ${upper}`;
+      return `${lower} – ${upper}`;
     default:
       return "";
   }
