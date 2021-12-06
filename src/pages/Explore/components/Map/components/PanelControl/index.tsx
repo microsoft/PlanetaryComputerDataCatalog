@@ -11,6 +11,7 @@ interface PanelControlProps {
   right?: number;
 }
 
+// TODO: move export to common folder
 export interface PanelControlHandlers {
   togglePanel: () => void;
 }

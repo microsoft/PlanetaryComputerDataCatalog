@@ -1,11 +1,14 @@
 {
   "mosaics": [
     {
-      "name": "Most recent (2010)",
+      "name": "Most recent",
       "description": "",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2010-12-31"]
+          "anyinteracts": [
+            { "property": "datetime" },
+            ["2010-12-31T00:00:00Z", "2010-12-31T23:59:59Z"]
+          ]
         }
       ]
     }

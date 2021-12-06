@@ -4,7 +4,7 @@ import { sortBy } from "lodash-es";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
-import { setCollection } from "../../../state/mosaicSlice";
+import { setCollectionDefaultState } from "../../../state/mosaicSlice";
 
 import { collections as collectionConfig } from "config/datasets.yml";
 import { useExploreSelector } from "pages/Explore/state/hooks";
@@ -16,7 +16,8 @@ const CollectionSelector = () => {
   const collections: IStacCollection[] = data?.collections;
   const collection = useExploreSelector(state => state.mosaic.collection);
 
-  // Sets selector values based off of url state
+  // Sets selector values based off of url state on load, and subsequently syncs
+  // selection to URL
   useCollectionUrlState(collections);
 
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];
@@ -29,7 +30,7 @@ const CollectionSelector = () => {
     <StateSelector
       title="Select a dataset to visualize"
       icon="World"
-      action={setCollection}
+      action={setCollectionDefaultState}
       options={collectionOptions}
       // null will reset the control, while undefined will not
       selectedKey={collection?.id || null}

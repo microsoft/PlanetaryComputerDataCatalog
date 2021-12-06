@@ -2,11 +2,13 @@ import { centerKey, zoomKey } from "../components/Map/hooks/useUrlState";
 import {
   renderQsKey,
   mosaicQsKey,
+  customQueryQsKey,
 } from "../components/Sidebar/selectors/hooks/useUrlState";
 
 export const resetMosaicQueryStringState = () => {
   updateQueryStringParam(renderQsKey, "");
   updateQueryStringParam(mosaicQsKey, "");
+  updateQueryStringParam(customQueryQsKey, "");
 };
 
 export const updateQueryStringParam = (
@@ -39,4 +41,9 @@ export const getCenterAndZoomQueryString = (): {
     center: center ? [center[0], center[1]] : undefined,
     zoom: zoom ? Number(zoom) : undefined,
   };
+};
+
+export const getIsCustomQueryString = () => {
+  const qs = new URL(window.location.href).searchParams;
+  return qs.has(customQueryQsKey);
 };

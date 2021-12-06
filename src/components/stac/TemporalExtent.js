@@ -1,12 +1,14 @@
 import { Text } from "@fluentui/react";
 import React from "react";
+import { toUtcDateString } from "utils";
 import LabeledValue from "../controls/LabeledValue";
 
 const TemporalExtent = ({ extent }) => {
   const formatted = extent.interval.map((period, idx) => {
     const [start, end] = period;
-    const startFormat = new Date(start).toLocaleDateString();
-    const endFormat = end ? new Date(end).toLocaleDateString() : "Present";
+    console.log(period);
+    const startFormat = toUtcDateString(start);
+    const endFormat = end ? toUtcDateString(end) : "Present";
     return (
       <Text block key={`temporal-${idx}`}>{`${startFormat} - ${endFormat}`}</Text>
     );

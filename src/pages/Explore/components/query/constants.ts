@@ -1,13 +1,15 @@
 export const operators = {
   eq: "=",
   lt: "<",
-  lte: "<=",
+  lte: "≤",
   gt: ">",
-  gte: ">=",
-  between: "BETWEEN",
+  gte: "≥",
+  between: "between",
   like: "LIKE",
   isnull: "IS NULL",
-  in: "IN",
+  in: "in",
+  anyinteracts: "",
+  intersects: "",
 };
 
 export const opEnglish = {
@@ -18,6 +20,8 @@ export const opEnglish = {
   eq: "on",
   between: "between",
   like: "like",
-  isnull: "is nulL",
+  isnull: "is null",
   in: "in",
+  anyinteracts: "",
+  intersects: "",
 };

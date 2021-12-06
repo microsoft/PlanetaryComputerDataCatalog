@@ -64,7 +64,10 @@
   "jest": {
     "moduleNameMapper": {
       "@fluentui/react/lib/(.*)$": "@fluentui/react/lib-commonjs/$1"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!lodash-es)"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"

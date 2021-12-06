@@ -7,8 +7,15 @@ import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 
 const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
-const fixedPct = value => value.toFixed(2) + "%";
-const fixedDeg = value => value.toFixed(3) + "°";
+const fixedPct = value => {
+  const n = Number(value);
+  if (Number.isInteger(n)) {
+    return `${n}%`;
+  }
+  return value.toFixed(2) + "%";
+};
+
+const fixedDeg = value => value.toFixed(2) + "°";
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
@@ -65,12 +72,58 @@ StacFields.Registry.addMetadataField("proj:wkt2", {
   formatter: value => <code>{value}</code>,
 });
 
+StacFields.Registry.addMetadataField("sat:orbit_state", {
+  formatter: capitalize,
+});
 StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
 });
 
 StacFields.Registry.addMetadataField("s2:mgrs_tile", {
   label: "MGRS Tile",
+});
+
+StacFields.Registry.addMetadataField("s2:mean_solar_zenith", {
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("s2:mean_solar_azimuth", {
+  formatter: fixedDeg,
+});
+StacFields.Registry.addMetadataField("s2:unclassified_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:water_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:snow_ice_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:vegetation_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:thin_cirrus_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:cloud_shadow_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:nodata_pixel_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:dark_features_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:not_vegetated_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:medium_proba_clouds_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:saturated_defective_pixel_percentage", {
+  formatter: fixedPct,
+});
+StacFields.Registry.addMetadataField("s2:degraded_msi_data_percentage", {
+  formatter: fixedPct,
 });
 
 StacFields.Registry.addMetadataField("view:off_nadir", {

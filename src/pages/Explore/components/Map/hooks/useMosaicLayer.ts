@@ -11,8 +11,10 @@ const useMosaicLayer = (
   mapReady: boolean
 ) => {
   const { mosaic, detail, map } = useExploreSelector(s => s);
-  const { collection, query, renderOption } = mosaic;
+  const { collection, query, customQuery, isCustomQuery, renderOption } = mosaic;
   const { useHighDef } = map;
+
+  const queryInfo = isCustomQuery ? customQuery : query;
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
@@ -25,12 +27,12 @@ const useMosaicLayer = (
     const map = mapRef.current;
     const mosaicLayer = map.layers.getLayerById("stac-mosaic");
     const isItemLayerValid = stacItemForMosaic && collection;
-    const isMosaicLayerValid = query.hash;
+    const isMosaicLayerValid = queryInfo.searchId;
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
         tileUrl: makeTileJsonUrl(
-          query,
+          queryInfo,
           renderOption,
           collection,
           stacItemForMosaic,
@@ -54,7 +56,7 @@ const useMosaicLayer = (
     }
   }, [
     collection,
-    query,
+    queryInfo,
     renderOption,
     mapRef,
     stacItemForMosaic,

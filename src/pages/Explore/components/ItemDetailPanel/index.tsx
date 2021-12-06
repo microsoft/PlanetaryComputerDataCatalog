@@ -13,6 +13,8 @@ import MetadataList from "./MetadataList";
 import AssetList from "./AssetList";
 import BackToListButton from "./BackToListButton";
 import { CSSProperties } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/ErrorFallback";
 
 const ItemDetailPanel = () => {
   const theme = useTheme();
@@ -64,7 +66,7 @@ const ItemDetailPanel = () => {
       styles={itemDetailStylesOuter}
       data-cy="detail-dialog-list"
     >
-      {content}
+      <ErrorBoundary FallbackComponent={ErrorFallback}>{content}</ErrorBoundary>
     </StackItem>
   );
 };

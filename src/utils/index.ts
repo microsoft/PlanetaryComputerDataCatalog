@@ -1,4 +1,4 @@
-import * as dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { IStacCollection, IStacItem } from "types/stac";
@@ -8,10 +8,55 @@ import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 dayjs.extend(utc);
+export { dayjs };
 
-export const toUtcDate = (dt: string) => dayjs.utc(dt).format("MM/DD/YYYY");
+// The represented date without consideration for the timezone
+export const toAbsoluteDate = (date: Dayjs) => {
+  return new Date(date.year(), date.month(), date.date());
+};
 
-export const capitalize = (str: string) => {
+export const toDateString = (
+  dt: string | Date | Dayjs,
+  includeTime: boolean = false
+) => {
+  const dateFormat = "MM/DD/YYYY";
+  const timeFormat = includeTime ? "THH:mm:ss" : "";
+
+  return dayjs(dt).format(dateFormat + timeFormat);
+};
+
+export const toUtcDateString = (dt: string | Date | Dayjs) => {
+  return toDateString(dayjs.utc(dt));
+};
+
+export const toIsoDateString = (
+  dt: string | Date | Dayjs,
+  includeTime: boolean = true
+) => {
+  const dateFormat = "YYYY-MM-DD";
+  const timeFormat = includeTime ? "[T]HH:mm:ss[Z]" : "";
+
+  return dayjs(dt).format(dateFormat + timeFormat);
+};
+
+export const getDayStart = (
+  date: string | Date | Dayjs | undefined,
+  fromUtc: boolean = false
+) => {
+  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
+  return d.startOf("day");
+};
+
+export const getDayEnd = (
+  date: string | Date | Dayjs | undefined,
+  fromUtc: boolean = false
+) => {
+  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
+  return d.endOf("day");
+};
+
+export const capitalize = (value: string) => {
+  const str = String(value);
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
@@ -181,7 +226,7 @@ export const makeTileJsonUrl = (
 
   // Rendering a STAC search mosaic
   const collectionParam = collection ? `&collection=${collection.id}` : "";
-  return `${DATA_URL}/mosaic/${query.hash}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
+  return `${DATA_URL}/mosaic/${query.searchId}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
 
 export const makeItemPreviewUrl = (

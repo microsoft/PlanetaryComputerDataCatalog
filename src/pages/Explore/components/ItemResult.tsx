@@ -34,6 +34,7 @@ const ItemResult = ({ item }: ItemResultProps) => {
     borderStyle: "solid",
     borderRadius: 4,
     color: theme.palette.black,
+    backgroundColor: theme.semanticColors.bodyBackground,
     marginBottom: 6,
     padding: 0,
     width: "99%",

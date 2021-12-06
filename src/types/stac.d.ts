@@ -12,7 +12,7 @@ export interface IStacCollection {
       bbox: Array<Array<number>>;
     };
     temporal: {
-      interval: Array<Array<string>>;
+      interval: Array<Array<string | null>>;
     };
   };
   keywords: string[];

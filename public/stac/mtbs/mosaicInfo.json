@@ -5,7 +5,7 @@
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["1984-01-01", "2018-12-31"]]
+          "anyinteracts": [{ "property": "datetime" }, ["1984-12-31", "2018-12-31"]]
         }
       ]
     },
@@ -320,7 +320,7 @@
       "description": "",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["1984-01-01", "1984-12-31"]]
+          "anyinteracts": [{ "property": "datetime" }, ["1984-12-31", "1984-12-31"]]
         }
       ]
     }

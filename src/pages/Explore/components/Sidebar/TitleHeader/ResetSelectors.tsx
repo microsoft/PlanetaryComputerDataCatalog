@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { FontSizes, Link, Stack } from "@fluentui/react";
 
-import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { resetMosaicState } from "pages/Explore/state/mosaicSlice";
 
 const ResetSelectors = () => {
@@ -19,6 +19,7 @@ const ResetSelectors = () => {
         disabled={disabled}
         styles={buttonStyles}
         onClick={handleClick}
+        title="Reset all selectors"
         data-cy="reset"
       >
         Reset
@@ -29,9 +30,8 @@ const ResetSelectors = () => {
 
 export default ResetSelectors;
 
-const buttonStyles = {
+export const buttonStyles = {
   root: {
-    marginRight: "2px",
     fontSize: FontSizes.small,
   },
 };

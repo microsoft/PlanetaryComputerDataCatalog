@@ -16,9 +16,11 @@ import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
+import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
 
 const QueryInfo = () => {
-  const { query, collection, renderOption } = useExploreSelector(s => s.mosaic);
+  const { collection, renderOption } = useExploreSelector(s => s.mosaic);
+  const cql = useExploreSelector(selectCurrentCql);
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("queryinfo-button");
   const labelId = useId("queryinfo-label");
@@ -37,7 +39,7 @@ const QueryInfo = () => {
     </Section>
   ) : null;
 
-  const querySection = <QuerySection query={query} />;
+  const querySection = <QuerySection cql={cql} />;
 
   const renderSection = (
     <Section title="Rendering" icon="MapLayers">

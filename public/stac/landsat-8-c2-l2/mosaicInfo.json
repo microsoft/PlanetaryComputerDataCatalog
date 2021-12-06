@@ -218,5 +218,6 @@
   "defaultLocation": {
     "zoom": 11,
     "coordinates": [37.4069, 118.8188]
-  }
+  },
+  "defaultCustomQuery": []
 }
