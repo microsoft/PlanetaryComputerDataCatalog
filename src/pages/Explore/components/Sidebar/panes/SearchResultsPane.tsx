@@ -11,6 +11,7 @@ import {
   Stack,
   getTheme,
   IMessageBarStyles,
+  IStackStyles,
 } from "@fluentui/react";
 import { UseQueryResult } from "react-query";
 
@@ -97,20 +98,23 @@ const SearchResultsPane = ({
     return <ItemResult item={item} />;
   };
 
+  const resultsListStyle: Partial<IStackStyles> = {
+    root: {
+      background: theme.palette.neutralLighterAlt,
+      display: visible ? "flex" : "none",
+      height: "100%",
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingBottom: 1,
+      borderTop: `1px solid ${theme.palette.neutralLight}`,
+      overflowY: "auto",
+      overflowX: "hidden",
+    },
+  };
+
   return (
     <>
-      <Stack
-        styles={{
-          root: {
-            background: theme.palette.neutralLighterAlt,
-            display: visible ? "flex" : "none",
-            height: "100%",
-            paddingLeft: 10,
-            paddingRight: 10,
-            borderTop: `1px solid ${theme.palette.neutralLight}`,
-          },
-        }}
-      >
+      <Stack styles={resultsListStyle}>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <SearchResultsHeader results={data} isLoading={isPreviousData} />
           <div className={scrollPos ? "hood on" : "hood"} />
