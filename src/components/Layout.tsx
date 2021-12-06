@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Announcement from "./Announcement";
@@ -10,6 +10,7 @@ interface Props {
   isShort?: boolean;
   onGrid?: boolean;
   allowAnnouncement?: boolean;
+  mainStyle?: CSSProperties;
 }
 
 const Layout: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const Layout: React.FC<Props> = ({
   onGrid = true,
   children,
   allowAnnouncement = true,
+  mainStyle,
 }) => {
   return (
     <>
@@ -26,7 +28,9 @@ const Layout: React.FC<Props> = ({
       {allowAnnouncement && <Announcement />}
       {bannerHeader && <div>{bannerHeader}</div>}
       <ScrollToTopOnMount />
-      <main className={isShort ? "short" : undefined}>{children}</main>
+      <main className={isShort ? "short" : undefined} style={mainStyle}>
+        {children}
+      </main>
       {bannerFooter}
       <Footer onGrid={onGrid} />
     </>
