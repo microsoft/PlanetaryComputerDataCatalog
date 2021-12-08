@@ -5,11 +5,12 @@ interface LabeledValueProps {
 }
 
 const LabeledValue: React.FC<LabeledValueProps> = ({ label, children = null }) => {
-  if (!label) return null;
+  if (label === null) return null;
   return (
     <div className="collection-content-item">
       <Text block styles={{ root: { fontWeight: 500 } }}>
-        {label}:
+        {label}
+        {label && ":"}
       </Text>
       <Text block style={{ maxHeight: 150, overflowY: "auto" }} tabIndex={0}>
         {children}

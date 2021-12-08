@@ -1,10 +1,17 @@
+import { Stack } from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
 import marked from "marked";
+import { isEmpty, isNil, isObject } from "lodash-es";
+
 import { capitalize } from ".";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
+
+const stringList = value => {
+  return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
+};
 
 const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
 const fixedPct = value => {
@@ -16,10 +23,14 @@ const fixedPct = value => {
 };
 
 const fixedDeg = value => value.toFixed(2) + "°";
+StacFields.Registry.addAssetField("roles", {
+  label: "Roles",
+  formatter: stringList,
+});
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
-  formatter: value => (value ? `${value} m` : "-"),
+  formatter: value => (value ? `${value} m` : "—"),
 });
 
 StacFields.Registry.addMetadataField("description", {
@@ -38,6 +49,16 @@ StacFields.Registry.addMetadataField("attrs", {
   formatter: value => value,
 });
 
+StacFields.Registry.addMetadataField("raster:bands", {
+  label: "Raster Info",
+  formatter: value => {
+    const values = Array.isArray(value) ? value : [value];
+    return values.map((band, idx) => (
+      <SimpleKeyValueList key={`rasterband-${idx}`} object={band} />
+    ));
+  },
+});
+
 StacFields.Registry.addMetadataField("label:classes", {
   label: "Classes",
   formatter: value => {
@@ -53,9 +74,14 @@ StacFields.Registry.addMetadataField("eo:cloud_cover", {
 
 StacFields.Registry.addMetadataField("proj:epsg", {
   label: "EPSG Code",
-  formatter: value => (
-    <NewTabLink href={`https://epsg.io/?q=${value}`}>{value}</NewTabLink>
-  ),
+  formatter: value => {
+    const values = Array.isArray(value) ? value : [value];
+    return values.map((value, idx) => (
+      <NewTabLink key={`epsg-${idx}`} href={`https://epsg.io/?q=${value}`}>
+        {value}
+      </NewTabLink>
+    ));
+  },
 });
 StacFields.Registry.addMetadataField("proj:transform", {
   formatter: codeNumberList,
@@ -79,10 +105,19 @@ StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
 });
 
+StacFields.Registry.addMetadataField("goes:image-type", {
+  label: "Image Type",
+});
+StacFields.Registry.addMetadataField("goes:mode", {
+  label: "GOES Mode",
+});
+StacFields.Registry.addMetadataField("goes:processing-level", {
+  label: "Processing Level",
+});
+
 StacFields.Registry.addMetadataField("s2:mgrs_tile", {
   label: "MGRS Tile",
 });
-
 StacFields.Registry.addMetadataField("s2:mean_solar_zenith", {
   formatter: fixedDeg,
 });
@@ -228,13 +263,8 @@ export const getRelativeSelfPath = links => {
 export const renderItemColumn = (item, _, column) => {
   let fieldContent = item[column.fieldName];
 
-  if (Array.isArray(fieldContent)) {
-    fieldContent = fieldContent.join(", ");
-  }
-
-  if (!fieldContent || !Object.keys(fieldContent).length) {
-    return null;
-  }
+  if (isNil(fieldContent)) return "–";
+  if (isObject(fieldContent) && isEmpty(fieldContent)) return "–";
 
   // Add tooltips to potentially long cells
   switch (column.key) {
@@ -247,10 +277,12 @@ export const renderItemColumn = (item, _, column) => {
         <NewTabLink href={fieldContent.href}>{fieldContent.name}</NewTabLink>
       );
     case "name":
-      return <span title={fieldContent}>{fieldContent}</span>;
     case "title":
     case "type":
     case "roles":
+      if (Array.isArray(fieldContent)) {
+        fieldContent = fieldContent.join(", ");
+      }
       return <span title={fieldContent}>{capitalize(fieldContent)}</span>;
     case "attrs":
       return (
@@ -261,6 +293,9 @@ export const renderItemColumn = (item, _, column) => {
     case "dimensions":
     case "shape":
     case "chunks":
+      if (Array.isArray(fieldContent)) {
+        fieldContent = fieldContent.join(", ");
+      }
       return <span>({fieldContent})</span>;
     case "description":
       return (
@@ -279,7 +314,23 @@ export const renderItemColumn = (item, _, column) => {
       );
     case "stac_key":
       return <code title={fieldContent}>{fieldContent}</code>;
+    case "file:values":
+      return (
+        <Stack>
+          {fieldContent.map(v => {
+            const values = v.values.join(",");
+            const desc = v.summary;
+            return <span key={`file-values-${values}`}>{`${values}: ${desc}`}</span>;
+          })}
+        </Stack>
+      );
+    case "raster:bands":
+      return stacFormatter.format(fieldContent, column.fieldName);
+
     default:
-      return fieldContent;
+      if (Array.isArray(fieldContent)) {
+        fieldContent = fieldContent.join(", ");
+      }
+      return stacFormatter.format(fieldContent, column.fieldName);
   }
 };
