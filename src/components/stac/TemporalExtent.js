@@ -6,11 +6,11 @@ import LabeledValue from "../controls/LabeledValue";
 const TemporalExtent = ({ extent }) => {
   const formatted = extent.interval.map((period, idx) => {
     const [start, end] = period;
-    console.log(period);
+
     const startFormat = toUtcDateString(start);
     const endFormat = end ? toUtcDateString(end) : "Present";
     return (
-      <Text block key={`temporal-${idx}`}>{`${startFormat} - ${endFormat}`}</Text>
+      <Text block key={`temporal-${idx}`}>{`${startFormat} – ${endFormat}`}</Text>
     );
   });
 

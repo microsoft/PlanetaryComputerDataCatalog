@@ -1,5 +1,4 @@
 // for the table extension
-import React from "react";
 import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
