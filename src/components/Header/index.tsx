@@ -1,69 +1,54 @@
 import { Stack, Text, useTheme } from "@fluentui/react";
-import HeaderLink from "./controls/HeaderLink";
+import HeaderLink from "./components/HeaderLink";
 
-import { product as siteProduct } from "../config/site.yml";
+import siteConfig from "config/site.yml";
+import {
+  headerStyleFactory,
+  innerHeaderStyle,
+  logoLinkStyle,
+  logoImageStyle,
+  headerPipeStyle,
+  productNameStyle,
+  breakStyle,
+} from "./styles";
+import { gridContentStyle, offGridContentStyle } from "styles";
 
 const Header = ({ onGrid = true }) => {
   const theme = useTheme();
-  const navClass = onGrid ? "grid-content" : "off-grid-content";
+  const navClass = onGrid ? gridContentStyle : offGridContentStyle;
 
   return (
-    <header
-      style={{
-        background: theme.semanticColors.bodyBackground,
-      }}
-    >
+    <header className={headerStyleFactory(theme)}>
       <nav className={navClass} aria-label="Main header navigation links">
         <Stack
-          className="inner-header"
+          className={innerHeaderStyle}
           horizontal
           wrap
-          style={{ margin: "1px 0" }}
-          tokens={{ childrenGap: "10px" }}
+          verticalAlign="center"
+          tokens={{ childrenGap: "10px 21px" }}
         >
           <a
-            id="uhfLogo"
+            className={logoLinkStyle}
             itemProp="url"
             href="https://www.microsoft.com"
             aria-label="Microsoft"
-            style={{
-              padding: "16px 6px 16px 10px",
-              float: "left",
-              height: "100%",
-              width: "113px",
-              outlineOffset: "-2px",
-            }}
           >
             <img
               alt=""
+              className={logoImageStyle}
               itemProp="logo"
               src="https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE1Mu3b?ver=5c31"
               role="presentation"
               aria-hidden="true"
-              style={{
-                marginTop: "-3px",
-                maxWidth: "none",
-                width: "108px",
-              }}
             />
           </a>
-          <span
-            style={{
-              fontSize: 23.5,
-              fontWeight: 500,
-              marginTop: 11.5,
-              marginRight: 15,
-              marginLeft: 7.5,
-            }}
-          >
-            |
-          </span>
-          <HeaderLink to="/" style={{ marginTop: "-1px", marginLeft: 2 }}>
-            <Text block variant="large" style={{ fontWeight: 600 }}>
-              {siteProduct}
+          <div className={headerPipeStyle}>|</div>
+          <HeaderLink to="/">
+            <Text block variant="large" className={productNameStyle}>
+              {siteConfig.product}
             </Text>
           </HeaderLink>
-          <div className="break" />
+          <div className={breakStyle} />
           <HeaderLink to="/explore">Explore</HeaderLink>
           <HeaderLink to="/catalog">Data Catalog</HeaderLink>
           <HeaderLink external to="/compute">
