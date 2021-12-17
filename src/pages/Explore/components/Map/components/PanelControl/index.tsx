@@ -45,7 +45,9 @@ const PanelControl = React.forwardRef<
       },
     }));
 
-    const panelDir = left ? DirectionalHint.rightCenter : DirectionalHint.leftCenter;
+    const panelDir = left
+      ? DirectionalHint.rightTopEdge
+      : DirectionalHint.leftTopEdge;
     return (
       <div style={buttonStyle}>
         <IconButton

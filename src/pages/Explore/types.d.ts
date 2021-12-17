@@ -1,3 +1,4 @@
+import { LegendTypes } from "./enums";
 import { ICqlExpressionList } from "./utils/cql/types";
 
 export interface IDefaultLocationInfo {
@@ -25,6 +26,11 @@ export interface IMosaicRenderOption {
   description: string;
   options: string;
   minZoom: number | undefined;
+  legend: ILegendConfig | undefined;
+}
+
+export interface ILegendConfig {
+  type: LegendTypes;
 }
 
 export interface IMapInfo {
