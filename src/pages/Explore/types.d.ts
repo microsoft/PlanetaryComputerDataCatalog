@@ -30,7 +30,10 @@ export interface IMosaicRenderOption {
 }
 
 export interface ILegendConfig {
-  type: LegendTypes;
+  type?: LegendTypes;
+  labels?: string[];
+  trimStart?: number;
+  trimEnd?: number;
 }
 
 export interface IMapInfo {

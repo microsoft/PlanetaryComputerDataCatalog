@@ -7,6 +7,7 @@ import {
   getTheme,
   IStackTokens,
   StackItem,
+  FontSizes,
 } from "@fluentui/react";
 import * as qs from "query-string";
 
@@ -29,7 +30,9 @@ export const LegendControl = () => {
   const legend = getLegendType(renderConfig, legendConfig, collection);
   const renderDesc =
     renderOpts.name && renderOpts?.name !== "Default" ? (
-      <Text block>{renderOpts.name}</Text>
+      <Text block styles={subHeaderStyles}>
+        {renderOpts.name}
+      </Text>
     ) : null;
 
   // If the legend was configured or determined to not be needed, don't render it
@@ -59,14 +62,16 @@ const getLegendType = (
       case LegendTypes.classmap:
         return <ClassMap params={params} collection={collection} />;
       case LegendTypes.continuous:
-        return <ColorMap params={params} />;
+        return <ColorMap params={params} legendConfig={legendConfig} />;
       case LegendTypes.none:
         return null;
+      default:
+        throw new Error(`Unknown legend type: ${legendConfig.type}`);
     }
   }
 
   if ("rescale" in params) {
-    return <ColorMap params={params} />;
+    return <ColorMap params={params} legendConfig={legendConfig} />;
   }
 
   if (hasClassmapValues(collection, params.assets)) {
@@ -87,11 +92,19 @@ const panelStyles: IStackStyles = {
     zIndex: 1,
     bottom: 40,
     right: 10,
+    boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
+    width: 300,
   },
 };
 
 const headerStyles: ITextStyles = {
   root: {
     fontWeight: FontWeights.semibold,
+  },
+};
+
+const subHeaderStyles: ITextStyles = {
+  root: {
+    fontSize: FontSizes.smallPlus,
   },
 };

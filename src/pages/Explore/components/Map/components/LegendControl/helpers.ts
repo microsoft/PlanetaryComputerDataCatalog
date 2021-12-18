@@ -14,7 +14,7 @@ export const hasClassmapValues = (
   if (!assets) return false;
 
   // Unclear how we would handle multiple categorical assets at once
-  if (Array.isArray(assets)) return false;
+  if (Array.isArray(assets) || assets.includes(",")) return false;
 
   // Check the collection for item_asset for the selected asset, and see if it uses file:values
   // which defines the labels for the categorical values
