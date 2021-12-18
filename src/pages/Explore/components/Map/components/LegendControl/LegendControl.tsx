@@ -15,16 +15,22 @@ import { LegendTypes } from "pages/Explore/enums";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import ColorMap from "./ColorMap";
 import ClassMap from "./ClassMap";
+import { hasClassmapValues } from "./helpers";
+import { IStacCollection } from "types/stac";
 
 export const LegendControl = () => {
   const renderOpts = useExploreSelector(s => s.mosaic.renderOption);
-  const title = useExploreSelector(s => s.mosaic.collection?.title);
+  const collection = useExploreSelector(s => s.mosaic.collection);
 
   if (!renderOpts) return null;
 
   const renderConfig = qs.parse(renderOpts.options || "");
   const legendConfig = renderOpts.legend;
-  const legend = getLegendType(renderConfig, legendConfig);
+  const legend = getLegendType(renderConfig, legendConfig, collection);
+  const renderDesc =
+    renderOpts.name && renderOpts?.name !== "Default" ? (
+      <Text block>{renderOpts.name}</Text>
+    ) : null;
 
   // If the legend was configured or determined to not be needed, don't render it
   if (!legend) return null;
@@ -33,24 +39,25 @@ export const LegendControl = () => {
     <Stack styles={panelStyles} tokens={stackTokens}>
       <StackItem>
         <Text block styles={headerStyles}>
-          {title}
+          {collection?.title}
         </Text>
-        <Text block>{renderOpts.name}</Text>
+        {renderDesc}
       </StackItem>
-      <StackItem>{legend}</StackItem>
+      {legend}
     </Stack>
   );
 };
 
 const getLegendType = (
   params: qs.ParsedQuery<string>,
-  legendConfig: ILegendConfig | undefined
+  legendConfig: ILegendConfig | undefined,
+  collection: IStacCollection | null
 ) => {
   // Legend configs are optional, but if they exist, use them to set the values
   if (legendConfig) {
     switch (legendConfig.type) {
       case LegendTypes.classmap:
-        return <ClassMap params={params} />;
+        return <ClassMap params={params} collection={collection} />;
       case LegendTypes.continuous:
         return <ColorMap params={params} />;
       case LegendTypes.none:
@@ -60,6 +67,10 @@ const getLegendType = (
 
   if ("rescale" in params) {
     return <ColorMap params={params} />;
+  }
+
+  if (hasClassmapValues(collection, params.assets)) {
+    return <ClassMap params={params} collection={collection} />;
   }
 };
 

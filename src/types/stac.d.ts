@@ -39,8 +39,13 @@ export interface IStacAsset {
   description?: string;
   type?: string;
   roles?: string[];
+  "file:values"?: FileExtValues[];
 }
 
+export interface FileExtValues {
+  values: number[];
+  summary: string;
+}
 export interface IStacFilter {
   filter: Record<string, any>;
   limit?: number;

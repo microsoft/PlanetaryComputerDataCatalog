@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+import { useBoolean } from "react-use";
 import {
   FontSizes,
   IImageStyles,
@@ -6,20 +8,23 @@ import {
   Stack,
   Text,
   getTheme,
+  ImageLoadState,
+  Shimmer,
+  ShimmerElementType,
 } from "@fluentui/react";
 import * as qs from "query-string";
-import { DATA_URL } from "utils/constants";
+
+import { rootColormapUrl } from "./helpers";
 
 const HEIGHT: number = 0.08;
-const WIDTH: number = 3.5;
+const WIDTH: number = 3;
 
 interface ColorMapProps {
   params: qs.ParsedQuery<string>;
 }
 
 const ColorMap = ({ params }: ColorMapProps) => {
-  console.log(params);
-  const img = makeColorRamp(params.colormap_name);
+  const img = useColorRamp(params.colormap_name);
   const scale = makeScale(params.rescale);
 
   return (
@@ -32,14 +37,32 @@ const ColorMap = ({ params }: ColorMapProps) => {
 
 export default ColorMap;
 
-const makeColorRamp = (colormapName: string | string[] | null) => {
+const useColorRamp = (colormapName: string | string[] | null) => {
+  const [loading, setLoading] = useBoolean(true);
+
+  const handleStateChange = useCallback(
+    (state: ImageLoadState) => {
+      setLoading(state === ImageLoadState.notLoaded);
+    },
+    [setLoading]
+  );
   if (!colormapName) return null;
 
   return (
-    <Image
-      styles={imageStyles}
-      src={`${DATA_URL}/legend/colormap/${colormapName}?height=${HEIGHT}&width=${WIDTH}`}
-    />
+    <>
+      {loading && (
+        <Shimmer
+          shimmerElements={[
+            { type: ShimmerElementType.line, height: 8, width: 233 },
+          ]}
+        />
+      )}
+      <Image
+        styles={imageStyles}
+        src={`${rootColormapUrl}/${colormapName}?height=${HEIGHT}&width=${WIDTH}`}
+        onLoadingStateChange={handleStateChange}
+      />
+    </>
   );
 };
 
