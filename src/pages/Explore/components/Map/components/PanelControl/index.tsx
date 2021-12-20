@@ -1,5 +1,11 @@
 import React, { useImperativeHandle } from "react";
-import { getTheme, Callout, DirectionalHint, IconButton } from "@fluentui/react";
+import {
+  getTheme,
+  Callout,
+  DirectionalHint,
+  IconButton,
+  Stack,
+} from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
 
 interface PanelControlProps {
@@ -45,9 +51,11 @@ const PanelControl = React.forwardRef<
       },
     }));
 
-    const panelDir = left ? DirectionalHint.rightCenter : DirectionalHint.leftCenter;
+    const panelDir = left
+      ? DirectionalHint.rightTopEdge
+      : DirectionalHint.leftTopEdge;
     return (
-      <div style={buttonStyle}>
+      <Stack style={buttonStyle}>
         <IconButton
           id={buttonId}
           ariaLabel={label}
@@ -69,14 +77,14 @@ const PanelControl = React.forwardRef<
             {children}
           </Callout>
         )}
-      </div>
+      </Stack>
     );
   }
 );
 
 export default PanelControl;
 
-const controlStyle: React.CSSProperties = {
+export const controlStyle: React.CSSProperties = {
   zIndex: 1,
   position: "absolute",
   display: "flex",
