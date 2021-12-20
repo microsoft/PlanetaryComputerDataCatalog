@@ -8,8 +8,11 @@ import {
   IStackTokens,
   StackItem,
   FontSizes,
+  IconButton,
+  IButtonStyles,
 } from "@fluentui/react";
 import * as qs from "query-string";
+import { useLocalStorage } from "react-use";
 
 import { ILegendConfig } from "pages/Explore/types";
 import { LegendTypes } from "pages/Explore/enums";
@@ -18,10 +21,12 @@ import ColorMap from "./ColorMap";
 import ClassMap from "./ClassMap";
 import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
+import { controlStyle } from "../PanelControl";
 
 export const LegendControl = () => {
   const renderOpts = useExploreSelector(s => s.mosaic.renderOption);
   const collection = useExploreSelector(s => s.mosaic.collection);
+  const [isOpen, setIsOpen] = useLocalStorage("legend-control-open", true);
 
   if (!renderOpts) return null;
 
@@ -36,19 +41,43 @@ export const LegendControl = () => {
     ) : null;
 
   // If the legend was configured or determined to not be needed, don't render it
-  if (!legend) return null;
 
-  return (
+  const legendPanel = (
     <Stack styles={panelStyles} tokens={stackTokens}>
       <StackItem>
-        <Text block styles={headerStyles}>
-          {collection?.title}
-        </Text>
+        <Stack horizontal horizontalAlign="space-between">
+          <Text block styles={headerStyles}>
+            {collection?.title}
+          </Text>
+          <IconButton
+            title="Hide Legend"
+            iconProps={{ iconName: "ChevronDown" }}
+            styles={minimizeButtonStyles}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+        </Stack>
         {renderDesc}
       </StackItem>
       {legend}
     </Stack>
   );
+
+  const buttonStyle = { right: 2, bottom: 32, ...controlStyle };
+  const legendButton = (
+    <div style={buttonStyle}>
+      <IconButton
+        ariaLabel={legend ? "Open legend" : "No legend available"}
+        title={"Open legend"}
+        onClick={() => setIsOpen(true)}
+        disabled={!legend}
+        styles={legendButtonStyles}
+        className="azure-maps-control-button"
+        iconProps={{ iconName: "ThumbnailView" }}
+      />
+    </div>
+  );
+
+  return isOpen && legend ? legendPanel : legendButton;
 };
 
 const getLegendType = (
@@ -87,7 +116,7 @@ const panelStyles: IStackStyles = {
   root: {
     background: theme.semanticColors.bodyBackground,
     padding: 10,
-    borderRadius: 4,
+    borderRadius: 2,
     position: "absolute",
     zIndex: 1,
     bottom: 40,
@@ -106,5 +135,20 @@ const headerStyles: ITextStyles = {
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
+  },
+};
+
+const legendButtonStyles: IButtonStyles = {
+  icon: { color: theme.semanticColors.bodyText },
+};
+
+const minimizeButtonStyles: IButtonStyles = {
+  root: {
+    width: 18,
+    height: 18,
+  },
+  icon: {
+    color: theme.semanticColors.bodyText,
+    fontSize: FontSizes.xSmall,
   },
 };
