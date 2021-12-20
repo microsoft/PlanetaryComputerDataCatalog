@@ -19,8 +19,8 @@ The Planetary Computer uses open source tools and supports open standards. In fa
 
 Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.
 
-|                                           GitHub repository                                           |                                                                                        Purpose                                                                                         |
-| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GitHub repository                                                                                     | Purpose                                                                                                                                                                                |
+|-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Microsoft/planetary-computer-apis](https://github.com/Microsoft/planetary-computer-apis)             | Deploys the [STAC](https://planetarycomputer.microsoft.com/docs/reference/stac/) and [data](https://planetarycomputer.microsoft.com/docs/reference/data/) APIs                         |
 | [Microsoft/planetary-computer-hub](https://github.com/Microsoft/planetary-computer-hub)               | Deploys the [Planetary Computer Hub](https://planetarycomputer.microsoft.com/docs/overview/environment/)                                                                               |
 | [Microsoft/planetary-computer-containers](https://github.com/Microsoft/planetary-computer-containers) | Builds the container images with the [software environment](https://planetarycomputer.microsoft.com/docs/overview/environment/#understanding-the-software-environment) used on the Hub |
@@ -47,8 +47,8 @@ We're just getting started. Check back for updated documentation and new feature
 - Check out the example notebooks for our datasets, for example:
   - [Landsat 8 Collection 2](http://planetarycomputer.microsoft.com/dataset/landsat-8-c2-l2#Example-Notebook)
   - [Sentinel-2  L2A](http://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Example-Notebook)
-  - [NAIP]((http://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook))
-  - [ASTER L1T]((http://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook))
+  - [NAIP](http://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook)
+  - [ASTER L1T](http://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook)
 - [Request a Planetary Computer account](https://planetarycomputer.microsoft.com/account/request)
 
 ## Beyond the Planetary Computer
