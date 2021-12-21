@@ -15,6 +15,7 @@ export const makeFilterBody = (
 ): IStacFilter => {
   const optimizedCql = optimizeCqlExpressions(cql);
   return {
+    "filter-lang": "cql-json",
     filter: { and: [...baseFilter, ...optimizedCql] },
     sortby: query.sortby || undefined,
     limit: limit,

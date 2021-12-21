@@ -92,7 +92,7 @@ div.prompt.output_prompt {
 }
 
 .admonition.note .admonition-title {
-  background: #2b88d8;
+  background: #267ac2;
 }
 
 .admonition-title {
@@ -105,7 +105,7 @@ div.prompt.output_prompt {
 }
 
 .admonition.tip .admonition-title {
-  background: rgba(255, 193, 7, 0.4);
+  background: rgba(255, 193, 7, 0.25);
   color: #000;
 }
 
