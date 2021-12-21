@@ -76,12 +76,14 @@ export const CalendarNavControl = ({
     <Stack horizontal horizontalAlign="space-between">
       <Stack horizontal styles={stackStyles} tokens={stackTokens}>
         <Dropdown
+          aria-label="Select month"
           styles={dropdownStyles}
           options={getMonthsOptions(makeValidator(year))}
           onChange={handleChange("month")}
           selectedKey={month}
         />
         <Dropdown
+          aria-label="Select year"
           styles={dropdownStyles}
           options={getYearOptions(validMinDate, validMaxDate)}
           onChange={handleChange("year")}
@@ -90,11 +92,13 @@ export const CalendarNavControl = ({
       </Stack>
       <Stack horizontal verticalAlign="center">
         <IconButton
+          aria-label="Previous month"
           styles={navStyles}
           iconProps={{ iconName: "ChevronLeft" }}
           onClick={handleNavMonth("previous")}
         />
         <IconButton
+          aria-label="Next month"
           styles={navStyles}
           iconProps={{ iconName: "ChevronRight" }}
           onClick={handleNavMonth("next")}

@@ -83,7 +83,11 @@ const ExploreMap = () => {
   const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
   const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
   const loadingIndicator = (
-    <ProgressIndicator barHeight={1} styles={progressIndicatorStyles} />
+    <ProgressIndicator
+      aria-label="Map tile loading indicator"
+      barHeight={1}
+      styles={progressIndicatorStyles}
+    />
   );
 
   return (
