@@ -346,7 +346,15 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-deltares-gfm
     thumbnailUrl: deltares-flood.png
     alt: Flood map of coastal Myanmar
-    keywords: [Global, Flood, Sea level rise, Water]
+    keywords: [Global, Flood, Sea level rise, Water, Deltares]
+
+  - title: Deltares Global Water Availability
+    shortTerm: Deltares water availability
+    description: Global coastal inundation maps at multiple resolutions
+    infoUrl: https://aka.ms/ai4edata-deltares-reservoirs
+    thumbnailUrl: deltares-reservoir.jpg
+    alt: Reservoir with access tower
+    keywords: [Global, Water, Reservoir, Deltares]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation
