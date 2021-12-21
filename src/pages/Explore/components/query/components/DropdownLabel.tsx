@@ -5,6 +5,8 @@ import {
   IVerticalDividerStyles,
   Text,
   VerticalDivider,
+  StackItem,
+  IStackStyles,
 } from "@fluentui/react";
 import { getTheme } from "@fluentui/style-utilities";
 
@@ -22,10 +24,13 @@ const DropdownLabel = ({ label, displayValue, title }: IDropdownLabelProps) => {
       horizontalAlign="start"
       tokens={labelTokens}
       verticalAlign="center"
+      styles={stackStyles}
     >
-      <Text block nowrap styles={labelStyle} title={label}>
-        {label}
-      </Text>
+      <StackItem shrink={0}>
+        <Text block nowrap styles={labelStyle} title={label}>
+          {label}
+        </Text>
+      </StackItem>
       <VerticalDivider styles={labelDividerStyles} />
       <Text block nowrap title={title} styles={labelValueStyle}>
         {displayValue}
@@ -40,6 +45,12 @@ const theme = getTheme();
 
 export const labelTokens: IStackTokens = {
   childrenGap: 4,
+};
+
+const stackStyles: Partial<IStackStyles> = {
+  root: {
+    width: "100%",
+  },
 };
 
 const labelDividerStyles: IVerticalDividerStyles = {
