@@ -4,6 +4,7 @@ import {
   CqlLteExpression,
   CqlEqualExpression,
   CqlExpression,
+  CqlBetweenExpression,
 } from "pages/Explore/utils/cql/types";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
@@ -17,13 +18,13 @@ export const getValueLabel = (
   const lower = stacFormatter.format(lowerValue, field.property);
 
   switch (field.operator) {
-    case "eq":
+    case "=":
       return `Exactly ${lower}`;
-    case "gte":
-    case "gt":
+    case ">=":
+    case ">":
       return `Over ${lower}`;
-    case "lte":
-    case "lt":
+    case "<=":
+    case "<":
       return `Under ${upper}`;
     case "between":
       return `${lower} – ${upper}`;
@@ -47,11 +48,11 @@ export const toCqlExpression = (
   if (isLowerClamped && isUpperClamped) {
     return toBetweenPredicate(field.property, lowerValue, upperValue);
   } else if (lowerValue === upperValue) {
-    return toSingleValuePredicate("eq", field.property, lowerValue);
+    return toSingleValuePredicate("=", field.property, lowerValue);
   } else if (isLowerClamped) {
-    return toSingleValuePredicate("lte", field.property, upperValue);
+    return toSingleValuePredicate("<=", field.property, upperValue);
   } else if (isUpperClamped) {
-    return toSingleValuePredicate("gte", field.property, lowerValue);
+    return toSingleValuePredicate(">=", field.property, lowerValue);
   } else {
     return toBetweenPredicate(field.property, lowerValue, upperValue);
   }
@@ -61,18 +62,15 @@ export const toBetweenPredicate = (
   property: string,
   lowerValue: number,
   upperValue: number
-): CqlExpression => {
+): CqlBetweenExpression => {
   return {
-    between: {
-      value: { property: property },
-      lower: lowerValue,
-      upper: upperValue,
-    },
+    op: "between",
+    args: [{ property: property }, [lowerValue, upperValue]],
   };
 };
 
 export const toSingleValuePredicate = (
-  operator: "gte" | "lte" | "eq",
+  operator: ">=" | "<=" | "=",
   property: string,
   value: number
 ):
@@ -82,17 +80,20 @@ export const toSingleValuePredicate = (
   // REFACTOR: can `operator` be successfully discriminated for use as a dynamic key in a single return type?
 
   switch (operator) {
-    case "gte":
+    case ">=":
       return {
-        gte: [{ property: property }, value],
+        op: ">=",
+        args: [{ property: property }, value],
       };
-    case "lte":
+    case "<=":
       return {
-        lte: [{ property: property }, value],
+        op: "<=",
+        args: [{ property: property }, value],
       };
-    case "eq":
+    case "=":
       return {
-        eq: [{ property: property }, value],
+        op: "=",
+        args: [{ property: property }, value],
       };
   }
 };
@@ -108,17 +109,17 @@ export const parseCqlValueToRange = (field: CqlExpressionParser<number>) => {
   } else {
     const range = schemaRange(fieldSchema);
     switch (field.operator) {
-      case "eq":
+      case "=":
         currentLower = value;
         currentUpper = value;
         break;
-      case "gte":
-      case "gt":
+      case ">=":
+      case ">":
         currentLower = value;
         currentUpper = range.maximum;
         break;
-      case "lte":
-      case "lt":
+      case "<=":
+      case "<":
         currentLower = range.minimum;
         currentUpper = value;
         break;

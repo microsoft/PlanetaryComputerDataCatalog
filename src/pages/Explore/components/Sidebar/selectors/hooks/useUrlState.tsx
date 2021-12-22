@@ -93,7 +93,7 @@ export const useCustomQueryUrlState = () => {
     if (searchMetadata && isSuccess) {
       // TODO: handle queries that can't be parsed (e.g. not created by Explorer)
       const queryInfo: IMosaic = {
-        cql: filterCoreExpressions(searchMetadata.search.filter.and),
+        cql: filterCoreExpressions(searchMetadata.search.filter.args),
         sortby: null, // TODO: use searchMetadata.orderby but convert to CQL format.
         name: "Custom",
         description: "Set via query string",

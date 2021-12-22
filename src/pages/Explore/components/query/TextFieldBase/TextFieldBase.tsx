@@ -145,7 +145,7 @@ const getLabeledValue = (
   operatorOptions: IDropdownOption[]
 ): [string | JSX.Element, string] => {
   const emptyText = "(Empty)";
-  const noPrefixRequired = ["eq"];
+  const noPrefixRequired = ["="];
   const optionForPrefix = operatorOptions.find(o => o.key === selectedOperatorKey);
   const needsPrefix =
     !noPrefixRequired.includes(selectedOperatorKey) && Boolean(optionForPrefix);

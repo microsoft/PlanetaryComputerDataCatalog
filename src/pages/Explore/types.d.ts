@@ -47,6 +47,6 @@ export interface IQueryable {
 
 export interface ISearchIdMetadata {
   hash: string;
-  search: { filter: { and: ICqlExpressionList } };
+  search: { filter: { args: ICqlExpressionList } };
   orderby: string;
 }

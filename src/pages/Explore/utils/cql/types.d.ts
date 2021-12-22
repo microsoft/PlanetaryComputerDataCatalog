@@ -1,9 +1,9 @@
 type CqlOperator =
-  | "eq"
-  | "gte"
-  | "gt"
-  | "lte"
-  | "lt"
+  | "="
+  | ">"
+  | ">="
+  | "<"
+  | "<="
   | "in"
   | "between"
   | "like"
@@ -11,28 +11,31 @@ type CqlOperator =
   | "intersects";
 
 type CqlPropertyObject = { property: string };
-type CqlBetweenPredicate<T> = {
-  value: CqlPropertyObject;
-  lower: T;
-  upper: T;
-};
-type CqlInPredicate<T> = {
-  value: CqlPropertyObject;
-  list: T[];
-};
 
-export type CqlEqualExpression<T> = { eq: [CqlPropertyObject, T] };
-export type CqlGteExpression<T> = { gte: [CqlPropertyObject, T] };
-export type CqlGtExpression<T> = { gt: [CqlPropertyObject, T] };
-export type CqlLteExpression<T> = { lte: [CqlPropertyObject, T] };
-export type CqlLtExpression<T> = { lt: [CqlPropertyObject, T] };
-export type CqlBetweenExpression<T> = { between: CqlBetweenPredicate<T> };
-export type CqlInExpression<T> = { in: CqlInPredicate<T> };
+export type CqlEqualExpression<T> = { op: "="; args: [CqlPropertyObject, T] };
+export type CqlGteExpression<T> = { op: ">="; args: [CqlPropertyObject, T] };
+export type CqlGtExpression<T> = { op: ">"; args: [CqlPropertyObject, T] };
+export type CqlLteExpression<T> = { op: "<="; args: [CqlPropertyObject, T] };
+export type CqlLtExpression<T> = { op: "<"; args: [CqlPropertyObject, T] };
+export type CqlBetweenExpression = {
+  op: "between";
+  args: [CqlPropertyObject, [number, number]];
+};
+export type CqlInExpression<T> = { op: "in"; args: [CqlPropertyObject, T[]] };
 export type CqlAnyinteractsExpression<T> = {
-  anyinteracts: [CqlPropertyObject, [T, T]];
+  op: "anyinteracts";
+  args: [CqlPropertyObject, [T, T]];
+};
+export type CqlLikeExpression = {
+  op: "like";
+  args: [CqlPropertyObject, string];
+};
+export type CqlIntersectsExpression<GeoJSON> = {
+  op: "s_intersects";
+  args: [CqlPropertyObject, GeoJSON];
 };
 
-type CqlSinglePreditcate<T> =
+type CqlSinglePredicate<T> =
   | CqlEqualExpression<T>
   | CqlGteExpression<T>
   | CqlGtExpression<T>
@@ -47,9 +50,9 @@ export type CqlExpression =
   | CqlLtExpression
   | CqlBetweenExpression
   | CqlAnyinteractsExpression
-  | CqlInPredicate
-  | { like: [CqlPropertyObject, string] }
-  | { intersects: [CqlPropertyObject, GeoJSON] };
+  | CqlInExpression
+  | CqlLikeExpression
+  | CqlIntersectsExpression;
 
 export type ICqlExpressionList = CqlExpression[] | [];
 

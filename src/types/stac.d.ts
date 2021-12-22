@@ -52,11 +52,13 @@ export interface IStacFilter {
 }
 
 export interface IStacFilterCollection {
-  eq: [{ property: "collection" }, string];
+  op: "=";
+  args: [{ property: "collection" }, string];
 }
 
 export interface IStacFilterGeom {
-  intersects: [{ property: "geometry" }, Geometry];
+  op: "s_intersects";
+  args: [{ property: "geometry" }, Geometry];
 }
 
 export interface IStacSearchResult extends FeatureCollection {

@@ -1,7 +1,13 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { dayjs } from "utils";
 import { CqlExpressionParser } from "..";
-import { ICqlExpressionList } from "../types";
+import {
+  CqlEqualExpression,
+  CqlGtExpression,
+  CqlInExpression,
+  CqlLteExpression,
+  ICqlExpressionList,
+} from "../types";
 
 export const rangeIsOnSameDay = (
   dateExpressionValue: string | string[] | undefined
@@ -47,17 +53,23 @@ export const makeDefaultCqlExpression = (
   }
 };
 
-const defaultStringCql = (property: string, fieldSchema: JSONSchema) => {
+const defaultStringCql = (
+  property: string,
+  fieldSchema: JSONSchema
+): CqlInExpression<string> | CqlEqualExpression<string> => {
   if (fieldSchema.enum) {
-    return { in: { value: { property: property }, list: [] } };
+    return { op: "in", args: [{ property: property }, []] };
   }
-  return { eq: [{ property: property }, ""] };
+  return { op: "=", args: [{ property: property }, ""] };
 };
 
-const defaultNumberCql = (property: string, fieldSchema: JSONSchema) => {
+const defaultNumberCql = (
+  property: string,
+  fieldSchema: JSONSchema
+): CqlLteExpression<number> | CqlGtExpression<number> => {
   if (fieldSchema.minimum !== undefined && fieldSchema.maximum !== undefined) {
     const midValue = (fieldSchema.minimum + fieldSchema.maximum) / 2;
-    return { lte: [{ property: property }, midValue] };
+    return { op: "<=", args: [{ property: property }, midValue] };
   }
-  return { gt: [{ property: property }, 0] };
+  return { op: ">", args: [{ property: property }, 0] };
 };

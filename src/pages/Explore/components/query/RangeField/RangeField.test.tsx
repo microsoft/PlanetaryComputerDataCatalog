@@ -28,11 +28,21 @@ const queryable: JSONSchema = {
   },
 };
 
-const gte: CqlGteExpression<number> = { gte: [{ property: "eo:cloud_cover" }, 10] };
-const lte: CqlLteExpression<number> = { lte: [{ property: "eo:cloud_cover" }, 10] };
-const eq: CqlEqualExpression<number> = { eq: [{ property: "eo:cloud_cover" }, 10] };
-const bt: CqlBetweenExpression<number> = {
-  between: { value: { property: "eo:cloud_cover" }, lower: 25, upper: 75 },
+const gte: CqlGteExpression<number> = {
+  op: ">=",
+  args: [{ property: "eo:cloud_cover" }, 10],
+};
+const lte: CqlLteExpression<number> = {
+  op: "<=",
+  args: [{ property: "eo:cloud_cover" }, 10],
+};
+const eq: CqlEqualExpression<number> = {
+  op: "=",
+  args: [{ property: "eo:cloud_cover" }, 10],
+};
+const bt: CqlBetweenExpression = {
+  op: "between",
+  args: [{ property: "eo:cloud_cover" }, [25, 75]],
 };
 
 test("it displays correct title and formatted value for GTE", async () => {

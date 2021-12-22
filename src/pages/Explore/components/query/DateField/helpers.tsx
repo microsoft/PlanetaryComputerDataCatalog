@@ -1,7 +1,9 @@
 import {
   CqlPropertyObject,
   CqlDate,
-  CqlExpression,
+  CqlAnyinteractsExpression,
+  CqlGteExpression,
+  CqlLteExpression,
 } from "pages/Explore/utils/cql/types";
 import {
   dayjs,
@@ -92,7 +94,10 @@ export const getValidDateText = (dateExpression: CqlDate, isRange: boolean) => {
 export const toCqlExpression = (
   dateRange: DateRangeState,
   operator: string
-): CqlExpression => {
+):
+  | CqlAnyinteractsExpression<string>
+  | CqlGteExpression<string>
+  | CqlLteExpression<string> => {
   const property: CqlPropertyObject = { property: "datetime" };
 
   // For precision, the date-only string needs to be manipulated to include UTC beginning/end of day
@@ -105,22 +110,26 @@ export const toCqlExpression = (
 
   switch (operator) {
     case "between":
-      if (!dateRange.end) throw new Error("Invalid date range: missing 'end'");
+      if (end === undefined) throw new Error("Invalid date range: missing 'end'");
 
       return {
-        anyinteracts: [property, [start, end]],
+        op: "anyinteracts",
+        args: [property, [start, end]],
       };
     case "on":
       return {
-        anyinteracts: [property, [start, startEndOfDay]],
+        op: "anyinteracts",
+        args: [property, [start, startEndOfDay]],
       };
     case "after":
       return {
-        gte: [property, start],
+        op: ">=",
+        args: [property, start],
       };
     case "before":
       return {
-        lte: [property, startEndOfDay],
+        op: "<=",
+        args: [property, startEndOfDay],
       };
     default:
       throw new Error(`Invalid operator: ${operator} for date range field`);

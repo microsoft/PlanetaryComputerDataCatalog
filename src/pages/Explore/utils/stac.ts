@@ -11,7 +11,8 @@ export const collectionFilter = (
   if (!collectionId) return null;
 
   return {
-    eq: [{ property: "collection" }, collectionId],
+    op: "=",
+    args: [{ property: "collection" }, collectionId],
   };
 };
 
@@ -21,7 +22,8 @@ export const geomFilter = (
   if (!bbox) return null;
 
   return {
-    intersects: [
+    op: "s_intersects",
+    args: [
       {
         property: "geometry",
       },
