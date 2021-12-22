@@ -5,7 +5,8 @@
       "description": "",
       "cql": [
         {
-          "lte": [{ "property": "datetime" }, "2020-05-06"]
+          "op": "<=",
+          "args": [{ "property": "datetime" }, "2020-05-06"]
         }
       ]
     }
