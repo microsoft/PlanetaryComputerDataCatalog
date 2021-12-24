@@ -98,7 +98,7 @@ const SnippetCopyPanel = ({
               href={HUB_URL}
               title="Open the Planetary Computer Hub"
             >
-              Launch Hub
+              Open Hub
             </NewTabLink>
           </Stack>
         </StackItem>

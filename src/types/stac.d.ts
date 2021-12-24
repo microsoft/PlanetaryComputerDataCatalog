@@ -1,4 +1,5 @@
 import { Feature, FeatureCollection, Geometry } from "geojson";
+import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 
 export interface IStacCollection {
   id: string;
@@ -47,7 +48,7 @@ export interface FileExtValues {
   summary: string;
 }
 export interface IStacFilter {
-  filter: Record<string, any>;
+  filter: { op: "and"; args: ICqlExpressionList };
   limit?: number;
 }
 
