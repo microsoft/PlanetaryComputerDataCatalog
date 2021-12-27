@@ -102,11 +102,12 @@ const SnippetCopyPanel = ({
             </NewTabLink>
           </Stack>
         </StackItem>
+        <StackItem>
+          <div className="input_area">
+            <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
+          </div>
+        </StackItem>
       </Stack>
-
-      <div className="input_area">
-        <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
-      </div>
     </Callout>
   );
 };

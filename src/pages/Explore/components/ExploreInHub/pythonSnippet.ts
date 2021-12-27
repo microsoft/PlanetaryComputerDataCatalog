@@ -22,6 +22,14 @@ export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
     .replace(aoi.replace.this, aoi.replace.with)
     .replace(datetime.replace.this, datetime.replace.with);
 
+  // Datetime expression is optional, only include the variable assignment if it exists
+  const datetimeAssignment = datetime.exp
+    ? `
+# Define your temporal range
+daterange = ${stringify(datetime.value)}
+`
+    : "";
+
   const template = `from pystac_client import Client
 import planetary_computer as pc
 
@@ -32,10 +40,7 @@ catalog = Client.open(
 
 # Define your area of interest
 aoi = ${stringify(aoi.value)}
-
-# Define your temporal range
-daterange = ${stringify(datetime.value)}
-
+${datetimeAssignment}
 # Define your search with CQL2 syntax
 search = catalog.search(filter=${body})
 
