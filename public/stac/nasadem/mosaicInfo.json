@@ -14,19 +14,19 @@
     {
       "name": "Elevation (terrain)",
       "description": "Elevation data scaled -1000 to 4000 with terrain colormap",
-      "options": "assets=elevation&rescale=-1000,4000&colormap_name=terrain",
+      "options": "assets=elevation&rescale=-1000&rescale=4000&colormap_name=terrain",
       "minZoom": 7
     },
     {
       "name": "Elevation (viridis)",
       "description": "Elevation data scaled -1000 to 4000 with viridis colormap",
-      "options": "assets=elevation&rescale=-1000,4000&colormap_name=viridis",
+      "options": "assets=elevation&rescale=-1000&rescale=4000&colormap_name=viridis",
       "minZoom": 7
     },
     {
       "name": "Elevation (gray)",
       "description": "Elevation data scaled -1000 to 4000 with gray colormap",
-      "options": "assets=elevation&rescale=-1000,4000&colormap_name=gray_r",
+      "options": "assets=elevation&rescale=-1000&rescale=4000&colormap_name=gray_r",
       "minZoom": 7
     }
   ],

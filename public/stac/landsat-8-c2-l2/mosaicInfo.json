@@ -191,43 +191,43 @@
     {
       "name": "Natural color",
       "description": "True color composite of visible bands (SR_B4, SR_B3, SR_B2)",
-      "options": "assets=SR_B4,SR_B3,SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "options": "assets=SR_B4&assets=SR_B3&assets=SR_B2&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
       "minZoom": 8
     },
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (SR_B5, SR_B4, SR_B3).",
-      "options": "assets=SR_B5,SR_B4,SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "options": "assets=SR_B5&assets=SR_B4&assets=SR_B3&nodata=0&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
       "minZoom": 8
     },
     {
       "name": "Short wave infrared",
       "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (SR_B7, SR_B6, SR_B4).",
-      "options": "assets=SR_B7,SR_B6,SR_B4&nodata=0",
+      "options": "assets=SR_B7&assets=SR_B6&assets=SR_B4&nodata=0",
       "minZoom": 8
     },
     {
       "name": "Agriculture",
       "description": "Darker shades of green indicate denser vegetation (SR_B6, SR_B5, SR_B2).",
-      "options": "assets=SR_B6,SR_B5,SR_B2&nodata=0",
+      "options": "assets=SR_B6&assets=SR_B5&assets=SR_B2&nodata=0",
       "minZoom": 8
     },
     {
       "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "Normalized Difference Vegetation Index (SR_B5-SR_B4)/(SR_B5+SR_B4), darker green indicates healthier vegetation.",
-      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=rdylgn",
+      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1&rescale=1&colormap_name=rdylgn",
       "minZoom": 8
     },
     {
       "name": "Moisture Index",
       "description": "Moisture index indicating water stress in plants (SR_B5-SR_B6)/(SR_B5+SR_B6)",
-      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1,1&colormap_name=rdbu",
+      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1&rescale=1&colormap_name=rdbu",
       "minZoom": 8
     },
     {
       "name": "Atmospheric penetration",
       "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (SR_B7, SR_B6, SR_B5).",
-      "options": "nodata=0&assets=SR_B7,SR_B6,SR_B5&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
+      "options": "nodata=0&assets=SR_B7&assets=SR_B6&assets=SR_B5&color_formula=gamma RGB 2.7, saturation 1.5, sigmoidal RGB 15 0.55",
       "minZoom": 8
     }
   ],

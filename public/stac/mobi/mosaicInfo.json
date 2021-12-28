@@ -16,81 +16,81 @@
   "renderOptions": [
     {
       "name": "Species richness for all species",
-      "options": "assets=SpeciesRichness_All&colormap_name=magma&rescale=0,14&nodata=128",
+      "options": "assets=SpeciesRichness_All&colormap_name=magma&rescale=0&rescale=14&nodata=128",
       "minZoom": 3
     },
     {
       "name": "Species richness for vertebrates",
-      "options": "assets=SpeciesRichness_Vertebrates&colormap_name=magma&rescale=0,11",
+      "options": "assets=SpeciesRichness_Vertebrates&colormap_name=magma&rescale=0&rescale=11",
       "minZoom": 3
     },
     {
       "name": "Species richness for aquatic invertebrates",
-      "options": "assets=SpeciesRichness_AquaticInverts&colormap_name=magma&rescale=0,19&nodata=128",
+      "options": "assets=SpeciesRichness_AquaticInverts&colormap_name=magma&rescale=0&rescale=19&nodata=128",
       "minZoom": 3
     },
     {
       "name": "Species richness for vascular plants",
-      "options": "assets=SpeciesRichness_Plants&colormap_name=magma&rescale=0,17",
+      "options": "assets=SpeciesRichness_Plants&colormap_name=magma&rescale=0&rescale=17",
       "minZoom": 3
     },
     {
       "name": "Species richness for pollinators",
-      "options": "assets=SpeciesRichness_PollinatorInverts&colormap_name=magma&rescale=0,4",
+      "options": "assets=SpeciesRichness_PollinatorInverts&colormap_name=magma&rescale=0&rescale=4",
       "minZoom": 3
     },
     {
       "name": "Protection-weighted range-size rarity for all species",
-      "options": "assets=PWRSR_GAP12_SUM_All&colormap_name=magma&rescale=0,.001",
+      "options": "assets=PWRSR_GAP12_SUM_All&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Protection-weighted range-size rarity for vertebrates",
-      "options": "assets=PWRSR_GAP12_SUM_Vertebrates&colormap_name=magma&rescale=0,.001",
+      "options": "assets=PWRSR_GAP12_SUM_Vertebrates&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Protection-weighted range-size rarity for aquatic invertebrates",
-      "options": "assets=PWRSR_GAP12_SUM_AquaticInverts&colormap_name=magma&rescale=0,.001",
+      "options": "assets=PWRSR_GAP12_SUM_AquaticInverts&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Protection-weighted range-size rarity for vascular plants",
-      "options": "assets=PWRSR_GAP12_SUM_PlantsInverts&colormap_name=magma&rescale=0,.001",
+      "options": "assets=PWRSR_GAP12_SUM_PlantsInverts&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Protection-weighted range-size rarity for pollinators",
-      "options": "assets=PWRSR_GAP12_SUM_PollinatorInverts&colormap_name=magma&rescale=0,.001",
+      "options": "assets=PWRSR_GAP12_SUM_PollinatorInverts&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Range-size rarity for all species",
       "description": "",
-      "options": "assets=RSR_All&colormap_name=magma&rescale=0,.001",
+      "options": "assets=RSR_All&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Range-size rarity for vertebrates",
       "description": "",
-      "options": "assets=RSR_Vertebrates&colormap_name=magma&rescale=0,.001",
+      "options": "assets=RSR_Vertebrates&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Range-size rarity for aquatic invertebrates",
       "description": "",
-      "options": "assets=RSR_AquaticInverts&colormap_name=magma&rescale=0,.001",
+      "options": "assets=RSR_AquaticInverts&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Range-size rarity for vascular plants",
       "description": "",
-      "options": "assets=RSR_Plants&colormap_name=magma&rescale=0,.001",
+      "options": "assets=RSR_Plants&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     },
     {
       "name": "Range-size rarity for pollinators",
-      "options": "assets=RSR_PollinatorInverts&colormap_name=magma&rescale=0,.001",
+      "options": "assets=RSR_PollinatorInverts&colormap_name=magma&rescale=0&rescale=.001",
       "minZoom": 3
     }
   ],

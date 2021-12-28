@@ -10,7 +10,7 @@
     {
       "name": "Fire Temperature",
       "description": "",
-      "options": "assets=Temp&rescale=0,3000&colormap_name=magma",
+      "options": "assets=Temp&rescale=0&rescale=3000&colormap_name=magma",
       "minZoom": 10
     }
   ]
