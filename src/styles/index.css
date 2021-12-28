@@ -259,22 +259,6 @@ a:not(header a):hover img {
 }
 /* Corporate footer styling from UHF */
 
-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-header a:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
-header .break {
-  flex-basis: 100%;
-  height: 0;
-  margin: 0;
-}
-
 /* All gridded content conforms to these margins */
 @media (min-width: 1080px) {
   .grid-content {
@@ -300,20 +284,6 @@ header .break {
   }
   footer .off-grid-content {
     padding-left: 5px;
-  }
-}
-
-/* Tablet size main header will break on first header link to new line */
-@media (min-width: 1023px) {
-  header .break {
-    display: none;
-  }
-}
-
-/* When header links are on a new line, add some padding to the bottom of the header */
-@media (max-width: 1023px) {
-  header .inner-header {
-    padding-bottom: 10px;
   }
 }
 
