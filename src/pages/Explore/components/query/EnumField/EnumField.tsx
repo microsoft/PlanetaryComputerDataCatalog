@@ -80,9 +80,12 @@ const parseKeysToCql = (
   const length = selectedKeys.length;
 
   if (length === 1) {
-    return { eq: [{ property: field.property }, selectedKeys[0]] };
+    return { op: "=", args: [{ property: field.property }, selectedKeys[0]] };
   }
   // This may result in an empty `list` value, which is fine and will get
   // filtered out when optimizing the query
-  return { in: { value: { property: field.property }, list: selectedKeys } };
+  return {
+    op: "in",
+    args: [{ property: field.property }, selectedKeys],
+  };
 };

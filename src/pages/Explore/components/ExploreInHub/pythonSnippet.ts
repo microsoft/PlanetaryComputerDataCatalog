@@ -5,14 +5,30 @@ import "highlight.js/styles/github.css";
 
 import { IStacFilter, IStacItem } from "types/stac";
 import { STAC_URL } from "utils/constants";
-import { DEFAULT_QUERY_LIMIT } from "pages/Explore/utils/constants";
+import { stripCommonFilterElements } from "./helpers";
 
 hljs.registerLanguage("python", python);
 
 export const createCqlPythonSnippet = (cql: IStacFilter | undefined) => {
   if (!cql) return null;
 
-  const pythonDict = stringify(cql.filter);
+  const templateValue = stripCommonFilterElements(cql);
+  if (!templateValue) return null;
+
+  const { aoi, datetime, fullBody } = templateValue;
+
+  const placeholderBody = stringify({ op: "and", args: fullBody });
+  const body = placeholderBody
+    .replace(aoi.replace.this, aoi.replace.with)
+    .replace(datetime.replace.this, datetime.replace.with);
+
+  // Datetime expression is optional, only include the variable assignment if it exists
+  const datetimeAssignment = datetime.exp
+    ? `
+# Define your temporal range
+daterange = ${stringify(datetime.value)}
+`
+    : "";
 
   const template = `from pystac_client import Client
 import planetary_computer as pc
@@ -21,12 +37,15 @@ import planetary_computer as pc
 catalog = Client.open(
   "${STAC_URL}"
 )
-search = catalog.search(limit=${DEFAULT_QUERY_LIMIT}, filter=${pythonDict})
 
-# Grab the first item from the search results
+# Define your area of interest
+aoi = ${stringify(aoi.value)}
+${datetimeAssignment}
+# Define your search with CQL2 syntax
+search = catalog.search(filter=${body})
+
+# Grab the first item from the search results and sign the assets
 first_item = next(search.get_items())
-
-# Sign it and view the assets it contains
 pc.sign_item(first_item).assets`;
 
   return hljs.highlight(template, { language: "python" });

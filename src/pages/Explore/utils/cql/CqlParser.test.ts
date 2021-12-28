@@ -59,7 +59,8 @@ it("parses an empty expression list with the default collection dates", () => {
 
 it("parses same day anyinteracts as a non-range value", () => {
   const dcql: CqlAnyinteractsExpression<string> = {
-    anyinteracts: [
+    op: "anyinteracts",
+    args: [
       { property: "datetime" },
       ["2021-01-01T00:00:00Z", "2021-01-01T23:59:59Z"],
     ],
@@ -73,7 +74,8 @@ it("parses same day anyinteracts as a non-range value", () => {
 
 it("parses multi day anyinteracts as a range value", () => {
   const dcql: CqlAnyinteractsExpression<string> = {
-    anyinteracts: [
+    op: "anyinteracts",
+    args: [
       { property: "datetime" },
       ["2021-01-01T00:00:00Z", "2021-02-01T23:59:59Z"],
     ],

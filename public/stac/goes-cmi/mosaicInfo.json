@@ -3,17 +3,21 @@
     {
       "name": "Most recent (Full disk)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "FULL DISK"] }]
+      "cql": [
+        { "op": "=", "args": [{ "property": "goes:image-type" }, "FULL DISK"] }
+      ]
     },
     {
       "name": "Most recent (CONUS)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "CONUS"] }]
+      "cql": [{ "op": "=", "args": [{ "property": "goes:image-type" }, "CONUS"] }]
     },
     {
       "name": "Most recent (Mesoscale)",
       "description": "",
-      "cql": [{ "eq": [{ "property": "goes:image-type" }, "MESOSCALE"] }]
+      "cql": [
+        { "op": "=", "args": [{ "property": "goes:image-type" }, "MESOSCALE"] }
+      ]
     },
     {
       "name": "Most recent (any type)",

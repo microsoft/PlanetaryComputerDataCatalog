@@ -18,13 +18,16 @@ const queryable: JSONSchema = {
 };
 
 const eq: CqlEqualExpression<string> = {
-  eq: [{ property: "goes:image-type" }, "FULL DISK"],
+  op: "=",
+  args: [{ property: "goes:image-type" }, "FULL DISK"],
 };
 const inExp: CqlInExpression<string> = {
-  in: { value: { property: "goes:image-type" }, list: ["FULL DISK", "MESOSCALE"] },
+  op: "in",
+  args: [{ property: "goes:image-type" }, ["FULL DISK", "MESOSCALE"]],
 };
 const inExpEmpty: CqlInExpression<string> = {
-  in: { value: { property: "goes:image-type" }, list: [] },
+  op: "in",
+  args: [{ property: "goes:image-type" }, []],
 };
 
 test("it displays correct title and formatted value for EQ", async () => {

@@ -4,7 +4,8 @@
       "name": "Most recent (2020)",
       "cql": [
         {
-          "anyinteracts": [
+          "op": "anyinteracts",
+          "args": [
             { "property": "datetime" },
             ["2020-04-14T00:00:00Z", "2020-04-14T23:59:59Z"]
           ]

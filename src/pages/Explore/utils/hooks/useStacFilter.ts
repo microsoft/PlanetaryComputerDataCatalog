@@ -3,7 +3,7 @@ import { useStacSearch } from "./useStacSearch";
 import { useExploreSelector } from "../../state/hooks";
 import { collectionFilter, geomFilter } from "../stac";
 import { IMosaic } from "pages/Explore/types";
-import { DEFAULT_QUERY_LIMIT } from "../constants";
+import { CQL_VALS_IDX, DEFAULT_QUERY_LIMIT } from "../constants";
 import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
 import { CqlExpression, CqlInExpression, ICqlExpressionList } from "../cql/types";
 
@@ -15,8 +15,8 @@ export const makeFilterBody = (
 ): IStacFilter => {
   const optimizedCql = optimizeCqlExpressions(cql);
   return {
-    "filter-lang": "cql-json",
-    filter: { and: [...baseFilter, ...optimizedCql] },
+    "filter-lang": "cql2-json",
+    filter: { op: "and", args: [...baseFilter, ...optimizedCql] },
     sortby: query.sortby || undefined,
     limit: limit,
   } as IStacFilter;
@@ -24,13 +24,13 @@ export const makeFilterBody = (
 
 const optimizeCqlExpressions = (cql: ICqlExpressionList): ICqlExpressionList => {
   // Some cql expressions can be filtered out of the list and still have the
-  // same function query:
+  // same functional query:
 
   // * IN predicate with an empty list
   const checkEmptyIn = (cql: CqlExpression) => {
     const cqlIn = cql as CqlInExpression<any>;
-    if (cqlIn.in !== undefined) {
-      return cql.in.list.length;
+    if (cqlIn.op === "in") {
+      return Boolean(cqlIn.args[CQL_VALS_IDX].length);
     }
     return true;
   };

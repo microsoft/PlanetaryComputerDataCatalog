@@ -5,7 +5,8 @@
       "description": "",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2020-07-01"]
+          "op": "=",
+          "args": [{ "property": "datetime" }, "2020-07-01"]
         }
       ]
     }

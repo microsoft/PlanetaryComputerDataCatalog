@@ -12,73 +12,80 @@ import {
 
 it("parses equal numeric expression", () => {
   const cql: CqlEqualExpression<number> = {
-    eq: [{ property: "eo:cloud_cover" }, 10],
+    op: "=",
+    args: [{ property: "eo:cloud_cover" }, 10],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual(10);
   expect(exp.property).toEqual("eo:cloud_cover");
-  expect(exp.operator).toEqual("eq");
+  expect(exp.operator).toEqual("=");
 });
 
 it("parses equal text expression", () => {
   const cql: CqlEqualExpression<string> = {
-    eq: [{ property: "sat:orbit_state" }, "ascending"],
+    op: "=",
+    args: [{ property: "sat:orbit_state" }, "ascending"],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual("ascending");
   expect(exp.property).toEqual("sat:orbit_state");
-  expect(exp.operator).toEqual("eq");
+  expect(exp.operator).toEqual("=");
 });
 
 it("parses gt expression", () => {
   const cql: CqlGtExpression<number> = {
-    gt: [{ property: "eo:cloud_cover" }, 10],
+    op: ">",
+    args: [{ property: "eo:cloud_cover" }, 10],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual(10);
   expect(exp.property).toEqual("eo:cloud_cover");
-  expect(exp.operator).toEqual("gt");
+  expect(exp.operator).toEqual(">");
 });
 
 it("parses gte expression", () => {
   const cql: CqlGteExpression<number> = {
-    gte: [{ property: "eo:cloud_cover" }, 10],
+    op: ">=",
+    args: [{ property: "eo:cloud_cover" }, 10],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual(10);
   expect(exp.property).toEqual("eo:cloud_cover");
-  expect(exp.operator).toEqual("gte");
+  expect(exp.operator).toEqual(">=");
 });
 
 it("parses lt expression", () => {
   const cql: CqlLtExpression<number> = {
-    lt: [{ property: "eo:cloud_cover" }, 10],
+    op: "<",
+    args: [{ property: "eo:cloud_cover" }, 10],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual(10);
   expect(exp.property).toEqual("eo:cloud_cover");
-  expect(exp.operator).toEqual("lt");
+  expect(exp.operator).toEqual("<");
 });
 
 it("parses lte expression", () => {
   const cql: CqlLteExpression<number> = {
-    lte: [{ property: "eo:cloud_cover" }, 10],
+    op: "<=",
+    args: [{ property: "eo:cloud_cover" }, 10],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
   expect(exp.value).toEqual(10);
   expect(exp.property).toEqual("eo:cloud_cover");
-  expect(exp.operator).toEqual("lte");
+  expect(exp.operator).toEqual("<=");
 });
 
 it("parses between expression", () => {
-  const cql: CqlBetweenExpression<number> = {
-    between: { value: { property: "eo:cloud_cover" }, lower: 10, upper: 20 },
+  const cql: CqlBetweenExpression = {
+    op: "between",
+    args: [{ property: "eo:cloud_cover" }, [10, 20]],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 
@@ -89,10 +96,8 @@ it("parses between expression", () => {
 
 it("parses in expression", () => {
   const cql: CqlInExpression<string> = {
-    in: {
-      value: { property: "sat:orbit_state" },
-      list: ["ascending", "descending"],
-    },
+    op: "in",
+    args: [{ property: "sat:orbit_state" }, ["ascending", "descending"]],
   };
   const exp = new CqlExpressionParser(cql, testQueryable);
 

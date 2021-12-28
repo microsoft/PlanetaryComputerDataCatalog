@@ -4,7 +4,8 @@
       "name": "Most recent",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2000-02-20"]
+          "op": "=",
+          "args": [{ "property": "datetime" }, "2000-02-20"]
         }
       ]
     }

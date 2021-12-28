@@ -5,7 +5,8 @@
       "description": "Most recent Land Use/Land Cover",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2020-06-01"]
+          "op": "=",
+          "args": [{ "property": "datetime" }, "2020-06-01"]
         }
       ]
     }

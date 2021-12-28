@@ -5,7 +5,8 @@
       "description": "",
       "cql": [
         {
-          "anyinteracts": [
+          "op": "anyinteracts",
+          "args": [
             { "property": "datetime" },
             ["2016-12-07T00:00:00Z", "2016-12-07T23:59:59Z"]
           ]

@@ -7,10 +7,11 @@ import {
   CqlExpression,
   CqlBetweenExpression,
   ParsedBetweenExpression,
-  CqlSinglePreditcate,
+  CqlSinglePredicate,
   CqlAnyinteractsExpression,
   CqlInExpression,
 } from "./types";
+import { CQL_PROP_IDX, CQL_VALS_IDX } from "../constants";
 
 export class CqlExpressionParser<T extends string | number> {
   readonly exp: CqlExpression;
@@ -21,25 +22,24 @@ export class CqlExpressionParser<T extends string | number> {
 
   constructor(exp: CqlExpression, queryable?: JSONSchema) {
     this.exp = exp;
-    const [op] = Object.entries(this.exp)[0];
-    this.operator = op as CqlOperator;
+    this.operator = this.exp.op;
 
     switch (this.operator) {
-      case "between":
-        const btParsed = this.parseBetween();
-        this.property = btParsed.property;
-        this.value = btParsed.value;
-        break;
-
-      case "lt":
-      case "lte":
-      case "gt":
-      case "gte":
-      case "eq":
+      case "<":
+      case "<=":
+      case ">":
+      case ">=":
+      case "=":
       case "like":
         const parsed = this.parseSinglePredicate();
         this.property = parsed.property;
         this.value = parsed.value;
+        break;
+
+      case "between":
+        const btParsed = this.parseBetween();
+        this.property = btParsed.property;
+        this.value = btParsed.value;
         break;
 
       case "in":
@@ -63,38 +63,36 @@ export class CqlExpressionParser<T extends string | number> {
 
   private parseAnyinteracts() {
     const exp = this.exp as CqlAnyinteractsExpression<T>;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, body] = Object.entries(exp)[0];
-    const [field, value] = body;
+    const property = exp.args[CQL_PROP_IDX].property;
+    const value = exp.args[CQL_VALS_IDX];
     return {
-      property: field.property,
+      property: property,
       value,
     };
   }
 
   private parseBetween(): ParsedBetweenExpression {
-    const exp = this.exp as CqlBetweenExpression<T>;
+    const exp = this.exp as CqlBetweenExpression;
     return {
-      value: [exp.between.lower, exp.between.upper],
-      property: exp.between.value.property,
+      property: exp.args[CQL_PROP_IDX].property,
+      value: exp.args[CQL_VALS_IDX],
     };
   }
 
   private parseInPredicate() {
     const exp = this.exp as CqlInExpression<T>;
     return {
-      value: exp.in.list,
-      property: exp.in.value.property,
+      property: exp.args[CQL_PROP_IDX].property,
+      value: exp.args[CQL_VALS_IDX],
     };
   }
 
   private parseSinglePredicate() {
-    const exp = this.exp as CqlSinglePreditcate<T>;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, body] = Object.entries(exp)[0];
-    const [field, value] = body;
+    const exp = this.exp as CqlSinglePredicate<T>;
+    const property = exp.args[CQL_PROP_IDX].property;
+    const value = exp.args[CQL_VALS_IDX];
     return {
-      property: field.property,
+      property: property,
       value,
     };
   }

@@ -40,7 +40,7 @@ def season_repeater():
                             [f"{syear}-{season['s']}", f"{year}-{season['e']}"],
                         ]
                     },
-                    {"lte": [{"property": "eo:cloud_cover"}, 10]},
+                    {"op": "<=", "args": [{"property": "eo:cloud_cover"}, 10]},
                 ],
             }
             chunks.append(x)
@@ -56,10 +56,11 @@ def year_repeater():
             "description": "",
             "cql": [
                 {
-                    "anyinteracts": [
+                    "op": "anyinteracts",
+                    "args": [
                         {"property": "datetime"},
                         [f"{year}-01-01:T00:00:00Z", f"{year}-12-31T23:59:59Z"],
-                    ]
+                    ],
                 }
             ],
         }

@@ -56,6 +56,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
 
   const [initialExpression, setInitialExpression] = useState<CqlDate>();
 
+  // Track initial state so we can determine if things have changed
   useEffect(() => {
     setInitialExpression(dateExpression);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,9 +1,9 @@
 export const operators = {
-  eq: "=",
-  lt: "<",
-  lte: "≤",
-  gt: ">",
-  gte: "≥",
+  "=": "=",
+  "<": "<",
+  "<=": "≤",
+  ">": ">",
+  ">=": "≥",
   between: "between",
   like: "LIKE",
   isnull: "IS NULL",
@@ -13,11 +13,11 @@ export const operators = {
 };
 
 export const opEnglish = {
-  gt: "after",
-  gte: "on or after",
-  lt: "before",
-  lte: "on or before",
-  eq: "on",
+  ">": "after",
+  ">=": "on or after",
+  "<": "before",
+  "<=": "on or before",
+  "=": "on",
   between: "between",
   like: "like",
   isnull: "is null",

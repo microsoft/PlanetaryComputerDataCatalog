@@ -69,16 +69,16 @@ const opItemFromExpression = (dateExpression: CqlDate): IContextualMenuItem => {
     // Equals is really an anyinteracts with a single day in both values
     if (
       dateExpression.operator === "anyinteracts" ||
-      dateExpression.operator === "eq"
+      dateExpression.operator === "="
     ) {
       return item.key === "on";
     }
 
-    if (dateExpression.operator === "lte") {
+    if (dateExpression.operator === "<=") {
       return item.key === "before";
     }
 
-    if (dateExpression.operator === "gte") {
+    if (dateExpression.operator === ">=") {
       return item.key === "after";
     }
 

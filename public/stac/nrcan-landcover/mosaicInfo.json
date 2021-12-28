@@ -5,7 +5,8 @@
       "description": "Most recent Land Use/Land Cover",
       "cql": [
         {
-          "gte": [{ "property": "datetime" }, "2015-01-01"]
+          "op": ">=",
+          "args": [{ "property": "datetime" }, "2015-01-01"]
         }
       ]
     }

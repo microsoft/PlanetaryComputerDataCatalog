@@ -98,15 +98,16 @@ const SnippetCopyPanel = ({
               href={HUB_URL}
               title="Open the Planetary Computer Hub"
             >
-              Launch Hub
+              Open Hub
             </NewTabLink>
           </Stack>
         </StackItem>
+        <StackItem>
+          <div className="input_area">
+            <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
+          </div>
+        </StackItem>
       </Stack>
-
-      <div className="input_area">
-        <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
-      </div>
     </Callout>
   );
 };
