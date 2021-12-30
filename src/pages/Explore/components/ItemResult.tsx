@@ -32,7 +32,8 @@ const ItemResult = ({ item }: ItemResultProps) => {
     borderWidth: 1,
     borderColor: theme.palette.neutralQuaternary,
     borderStyle: "solid",
-    borderRadius: 4,
+    borderRadius: 2,
+    overflow: "hidden",
     color: theme.palette.black,
     backgroundColor: theme.semanticColors.bodyBackground,
     marginBottom: 6,
@@ -73,15 +74,13 @@ const ItemResult = ({ item }: ItemResultProps) => {
             borderRightWidth: 1,
             borderRightStyle: "solid",
             backgroundColor: theme.palette.black,
-            borderRadius: "5px 0 0 3px",
+            borderRadius: "0",
           }}
         >
           <ItemPreview item={item} key={item.id} />
         </div>
-        <Stack verticalAlign={"space-evenly"}>
-          <Text
-            styles={{ root: { fontWeight: "bolder", overflowWrap: "anywhere" } }}
-          >
+        <Stack verticalAlign={"space-evenly"} style={{ paddingRight: "10px" }}>
+          <Text styles={{ root: { fontWeight: "600", overflowWrap: "anywhere" } }}>
             {item.id}
           </Text>
           <PriorityAttributes item={item} />

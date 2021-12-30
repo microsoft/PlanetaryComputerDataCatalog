@@ -30,6 +30,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
 
   const style = {
     root: {
+      fontSize: "12px",
       ...loadingStyle(isLoading),
     },
   };
@@ -58,6 +59,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         tokens={tokens}
         horizontalAlign="space-between"
         verticalAlign="center"
+        style={{ marginTop: 0 }}
       >
         {resultsText}
         <QueryInfo />
