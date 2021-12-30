@@ -16,10 +16,10 @@ const Keywords = ({
   const sections = keywords.map(keyword => {
     const pillStyle: ITextStyles = {
       root: {
-        backgroundColor: dark ? "rgba(0,0,0,0.05)" : "transparent",
-        borderRadius: "4px",
-        border: `0.5px solid ${color}`,
-        padding: "4px 6px",
+        backgroundColor: dark ? "rgba(0,0,0,0.05)" : "#edebe9",
+        borderRadius: "2px",
+        border: 0,
+        padding: "3px 8px",
         margin: "0 8px 8px 0",
         minWidth: "30px",
         display: "inline-block",
