@@ -108,9 +108,8 @@ const Catalog = () => {
       <SEO title="Data Catalog" />
       <section id="catalog-api-datasets">
         <div className="grid-content">
-          {dataFilter}
           <h2>Datasets available through the Planetary Computer API</h2>
-          <p style={{ maxWidth: 800, marginBottom: 40 }}>
+          <p style={{ maxWidth: 800 }}>
             Our largest data sets can be queried and accessed through our Planetary
             Computer API. We are continuing to expand the data available through the
             API, and continuing to bring new data sets to Azure. If you are
@@ -121,6 +120,7 @@ const Catalog = () => {
             </Link>
             .
           </p>
+          {dataFilter}
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <div className="layout-row">{primaryDatasets}</div>
