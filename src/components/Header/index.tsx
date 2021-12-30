@@ -10,6 +10,7 @@ import {
   headerPipeStyle,
   productNameStyle,
   breakStyle,
+  rightAligned,
 } from "./styles";
 import { gridContentStyle, offGridContentStyle } from "styles";
 
@@ -56,9 +57,11 @@ const Header = ({ onGrid = true }) => {
           </HeaderLink>
           <HeaderLink to="/applications">Applications</HeaderLink>
           <HeaderLink to="/docs">Documentation</HeaderLink>
-          <HeaderLink asButton to="/account/request">
-            Request access
-          </HeaderLink>
+          <div className={rightAligned}>
+            <HeaderLink asButton to="/account/request">
+              Request access
+            </HeaderLink>
+          </div>
         </Stack>
       </nav>
     </header>
