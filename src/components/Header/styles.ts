@@ -2,7 +2,7 @@ import { mergeStyles, Theme } from "@fluentui/react";
 
 export const headerStyleFactory = (theme: Theme) =>
   mergeStyles({
-    padding: "0 11px",
+    padding: "11px 0",
     background: theme.semanticColors.bodyBackground,
     boxShadow: "0 0 1px rgb(0 0 0 / 64%)",
     position: "relative",
@@ -11,7 +11,7 @@ export const headerStyleFactory = (theme: Theme) =>
 
 export const innerHeaderStyle = mergeStyles({
   margin: "0",
-  padding: "10px 0 16px",
+  padding: "0",
   /* When header links are on a new line, add some padding to the bottom of the header */
   "@media (max-width: 1023px)": {
     paddingBottom: "10px",
@@ -26,7 +26,6 @@ export const logoLinkStyle = mergeStyles({
 });
 
 export const logoImageStyle = mergeStyles({
-  marginTop: "-1px !important",
   maxWidth: "none",
   width: "108px",
   lineHeight: "1",
@@ -34,7 +33,8 @@ export const logoImageStyle = mergeStyles({
 
 export const headerPipeStyle = mergeStyles({
   marginTop: "0px !important",
-  marginLeft: "9px !important",
+  marginLeft: "7px !important",
+  marginRight: "14px !important",
   fontSize: "23.5px",
   fontWeight: 500,
   lineHeight: "1",
@@ -58,4 +58,8 @@ export const breakStyle = mergeStyles({
   "@media (min-width: 1023px)": {
     display: "none",
   },
+});
+
+export const rightAligned = mergeStyles({
+  marginLeft: "auto !important",
 });

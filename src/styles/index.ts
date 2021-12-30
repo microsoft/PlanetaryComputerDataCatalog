@@ -18,10 +18,6 @@ export const gridContentStyle = mergeStyles({
 });
 
 export const offGridContentStyle = mergeStyles({
-  "@media (min-width: 1080px)": {
-    paddingRight: "5% !important",
-  },
-  "@media (max-width: 1079px)": {
-    paddingRight: "20px !important",
-  },
+  paddingLeft: "10.5px",
+  paddingRight: "10.5px",
 });
