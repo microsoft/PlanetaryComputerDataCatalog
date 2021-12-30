@@ -4,7 +4,7 @@
 .layout-row {
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .api-item {
@@ -14,7 +14,7 @@
 }
 
 .header-banner-item {
-  flex-basis: 49%;
+  flex-basis: 48.5%;
 }
 
 /* Collection table header resize element override */
@@ -34,10 +34,8 @@
 /* Catalog datasets */
 
 .add-datasource-item {
-  flex-basis: 24%;
-  width: 259px;
+  flex-basis: 23%;
   position: relative;
-  padding-right: 20px;
   padding-bottom: 40px;
   box-sizing: border-box;
 }
@@ -48,19 +46,19 @@
 
 @media (max-width: 1333px) {
   .add-datasource-item {
-    flex-basis: 33.33%;
+    flex-basis: 32%;
   }
 }
 
 @media (max-width: 1073px) {
   .add-datasource-item {
-    flex-basis: 33.33%;
+    flex-basis: 32%;
   }
 }
 
 @media (max-width: 815px) {
   .add-datasource-item {
-    flex-basis: 50%;
+    flex-basis: 48.5%;
   }
 
   .api-item {
@@ -75,16 +73,15 @@
 }
 
 .api-datasource-item {
-  flex-basis: 49%;
-  width: 500px;
+  flex-basis: 48.5%;
   position: relative;
-  padding-right: 40px;
-  padding-bottom: 40px;
   box-sizing: border-box;
+  padding-bottom: 32px;
 }
+
 @media (max-width: 1333px) {
   .api-datasource-item {
-    flex-basis: 49%;
+    flex-basis: 48.5%;
   }
 }
 @media (max-width: 815px) {
@@ -133,7 +130,7 @@
 
 @media (max-width: 1073px) {
   .home-resource-item {
-    flex-basis: 49%;
+    flex-basis: 48.5%;
     padding-bottom: 40px;
   }
 
@@ -154,13 +151,12 @@
   background: #f9f9f9;
   min-height: 165px;
   margin-bottom: 40px;
+  justify-content: space-between;
 }
 
 .banner-item {
-  flex-basis: 49%;
-  width: 259px;
+  flex-basis: 48.5%;
   position: relative;
-  padding-right: 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -193,7 +189,7 @@
 }
 
 .home-footer-item {
-  flex-basis: 49%;
+  flex-basis: 48.5%;
   width: 259px;
   position: relative;
   padding-right: 20px;
