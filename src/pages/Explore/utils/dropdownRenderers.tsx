@@ -78,13 +78,15 @@ const { palette } = getTheme();
 export const iconStyles: IIconStyles = {
   root: {
     marginRight: 10,
+    position: "relative",
+    top: 4,
+    width: 20,
+    height: 20,
     color: palette.themePrimary,
+    fill: palette.themePrimary,
   },
 };
 
 export const textStyles: ITextStyles = {
-  root: {
-    position: "relative",
-    top: "-2px",
-  },
+  root: {},
 };

@@ -4,8 +4,9 @@ export const headerStyleFactory = (theme: Theme) =>
   mergeStyles({
     padding: "0 11px",
     background: theme.semanticColors.bodyBackground,
-    borderBottom: "1px solid",
-    borderColor: "rgba(0, 0, 0, 0.2)",
+    boxShadow: "0 0 1px rgb(0 0 0 / 64%)",
+    position: "relative",
+    zIndex: 1,
   });
 
 export const innerHeaderStyle = mergeStyles({

@@ -41,7 +41,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
     </Text>
   );
   const withoutResults = (
-    <Text block styles={style}>
+    <Text styles={style}>
       Sorry, no items matched your filter. Try adjusting the query parameters or
       expand the map area.
     </Text>
@@ -59,7 +59,6 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         tokens={tokens}
         horizontalAlign="space-between"
         verticalAlign="center"
-        style={{ marginTop: 0 }}
       >
         {resultsText}
         <QueryInfo />
@@ -75,7 +74,7 @@ const tokens: IStackTokens = {
 };
 
 const styles = {
-  root: { padding: "14px 5px 5px 5px" },
+  root: { padding: "14px 5px 14px 5px" },
 };
 
 const headerStyles = {
