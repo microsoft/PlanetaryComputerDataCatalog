@@ -120,29 +120,31 @@ const Collection = () => {
       itemKey="overview"
     >
       <CollectionProvider collection={collection}>
-        <div className="with-sidebar">
-          <div>
-            <div className="collection-content">
-              <h2>Overview</h2>
-              <Description />
-              <CollectionUrl />
-              <Providers />
-              <License />
-            </div>
-            <div style={{ maxWidth: 250 }}>
-              <CollectionDetail />
+        <div style={{ marginTop: 32 }}>
+          <div className="with-sidebar">
+            <div>
+              <div className="collection-content">
+                <h2 style={{ marginTop: 0 }}>Overview</h2>
+                <Description />
+                <CollectionUrl />
+                <Providers />
+                <License />
+              </div>
+              <div style={{ maxWidth: 250 }}>
+                <CollectionDetail />
+              </div>
             </div>
           </div>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Bands />
+            <ItemAssets />
+            <CubeDimensions />
+            <CubeVariables />
+            <TableTables />
+            <TableColumns />
+            <Assets />
+          </ErrorBoundary>
         </div>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Bands />
-          <ItemAssets />
-          <CubeDimensions />
-          <CubeVariables />
-          <TableTables />
-          <TableColumns />
-          <Assets />
-        </ErrorBoundary>
       </CollectionProvider>
     </PivotItem>
   );
@@ -181,7 +183,7 @@ const pivotHeaderStyle = {
   zIndex: 1,
   backgroundColor: theme.semanticColors.bodyBackground,
   borderBottom: `1px solid ${theme.semanticColors.bodyDivider}`,
-  paddingBottom: 6,
+  paddingBottom: 0,
   marginBottom: 4,
   "&.is-pinned": {
     boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.5)",
