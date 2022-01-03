@@ -40,7 +40,7 @@ Your server has a **home directory** at `/home/jovyan/` where you can store loca
 Everything *outside* of `/home/jovyan` is *not* persisted across sessions. For example, if you make a modification to the Python environment at `/srv/conda/envs/notebook` by manually `pip install`ing a package, that new package will not be available after stopping and starting your server.
 
 You should only store code, notebooks, and analysis documents in your home directory.
-Notably, you shouldn't store large amounts of data in your home directory. Instead, use something like [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) instead (make sure to use the West Europe region, which is where your server is running).
+Notably, you shouldn't store large amounts of data in your home directory. Instead, use something like [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) instead (make sure to use the West Europe region, which is where your server is running). If you must use a local filesystem for your workflow, then consider writing to `/tmp`. This will be cleared between sessions, but will give you more room to work with than your home directory.
 
 ## Environment Variables
 
