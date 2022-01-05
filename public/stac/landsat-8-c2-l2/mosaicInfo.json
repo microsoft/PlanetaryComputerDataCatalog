@@ -215,13 +215,13 @@
     {
       "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "Normalized Difference Vegetation Index (SR_B5-SR_B4)/(SR_B5+SR_B4), darker green indicates healthier vegetation.",
-      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1&rescale=1&colormap_name=rdylgn",
+      "options": "nodata=0&expression=(SR_B5-SR_B4)/(SR_B5+SR_B4)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 8
     },
     {
       "name": "Moisture Index",
       "description": "Moisture index indicating water stress in plants (SR_B5-SR_B6)/(SR_B5+SR_B6)",
-      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1&rescale=1&colormap_name=rdbu",
+      "options": "nodata=0&expression=(SR_B5-SR_B6)/(SR_B5+SR_B6)&rescale=-1,1&colormap_name=rdbu",
       "minZoom": 8
     },
     {

@@ -115,19 +115,19 @@
     {
       "name": "Natural color",
       "description": "RGB from visual assets",
-      "options": "assets=image&bidx=1&bidx=2&bidx=3",
+      "options": "assets=image&asset_bidx=image|1,2,3",
       "minZoom": 12
     },
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation.",
-      "options": "assets=image&bidx=4&bidx=1&bidx=2&color_formula=Sigmoidal RGB 15 0.35",
+      "options": "assets=image&asset_bidx=image|4,1,2&color_formula=Sigmoidal RGB 15 0.35",
       "minZoom": 12
     },
     {
       "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "Normalized Difference Vegetation Index (NIR-Red)/(NIR+Red), darker green indicates healthier vegetation.",
-      "options": "assets=image&asset_expression=(B4-B1)/(B4+B1)&rescale=-1&rescale=1&colormap_name=rdylgn",
+      "options": "assets=image&asset_expression=image|(B4-B1)/(B4+B1)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 12
     }
   ],

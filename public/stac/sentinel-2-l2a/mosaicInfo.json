@@ -200,7 +200,7 @@
     {
       "name": "Color infrared",
       "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B08, B04, B03).",
-      "options": "assets=B08B&assets=04&assets=B03&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
+      "options": "assets=B08&assets=B04&assets=B03&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
       "minZoom": 9
     },
     {
@@ -218,13 +218,13 @@
     {
       "name": "Normalized Difference Veg. Index (NDVI)",
       "description": "Normalized Difference Vegetation Index (B08-B04)/(B08+B04), darker green indicates healthier vegetation.",
-      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1&rescale=1&colormap_name=rdylgn",
+      "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn",
       "minZoom": 9
     },
     {
       "name": "Moisture Index (NDWI)",
       "description": "Index indicating water stress in plants (B8A-B11)/(B8A+B11)",
-      "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1&rescale=1&colormap_name=rdbu",
+      "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu",
       "minZoom": 9
     },
     {
