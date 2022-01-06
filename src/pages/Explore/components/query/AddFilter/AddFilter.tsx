@@ -107,6 +107,18 @@ const dropdownStyles: Partial<IDropdownStyles> = {
   title: {
     color: theme.palette.themePrimary,
     fontSize: FontSizes.small,
+    span: {
+      position: "relative",
+      top: 1,
+      color: theme.palette.themePrimary,
+      fontSize: FontSizes.small,
+    },
+    i: {
+      width: 14,
+      height: 14,
+      marginRight: 6,
+      top: 4,
+    },
     border: 0,
     padding: 0,
     "&:hover": {

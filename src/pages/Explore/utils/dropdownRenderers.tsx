@@ -18,8 +18,9 @@ export const renderTitle = (iconName: string, prefix: string = "") => {
     return (
       <div>
         <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text>
-          {prefix} {optionsText}
+        <Text styles={textStyles}>
+          {prefix}
+          {optionsText}
         </Text>
       </div>
     );
@@ -34,10 +35,10 @@ export const renderPlaceholder = (
 ) => {
   return (): JSX.Element => {
     return (
-      <Stack horizontal verticalAlign="center">
-        <Icon styles={iconStyle} iconName={iconName} aria-hidden="true" />
-        <Text styles={textStyle}>{title}</Text>
-      </Stack>
+      <div>
+        <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
+        <Text styles={textStyles}>{title}</Text>
+      </div>
     );
   };
 };
@@ -77,6 +78,15 @@ const { palette } = getTheme();
 export const iconStyles: IIconStyles = {
   root: {
     marginRight: 10,
+    position: "relative",
+    top: 4,
+    width: 20,
+    height: 20,
     color: palette.themePrimary,
+    fill: palette.themePrimary,
   },
+};
+
+export const textStyles: ITextStyles = {
+  root: {},
 };

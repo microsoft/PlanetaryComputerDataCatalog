@@ -51,7 +51,7 @@ const QueryInfo = () => {
   const size = 24;
 
   return (
-    <StackItem>
+    <StackItem style={{ marginTop: -8, marginBottom: -8 }}>
       <IconButton
         id={buttonId}
         iconProps={{ iconName: "Info" }}

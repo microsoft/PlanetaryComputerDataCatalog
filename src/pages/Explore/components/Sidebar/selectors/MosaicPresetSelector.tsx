@@ -36,7 +36,7 @@ const MosaicPresetSelector = () => {
   return (
     <StateSelector
       title="Select a preset filter to find data"
-      icon="PageListFilter"
+      icon="FluentFilter"
       action={setMosaicQuery}
       options={mosaicOptions}
       selectedKey={query.name}

@@ -29,7 +29,7 @@ const CollectionSelector = () => {
   return (
     <StateSelector
       title="Select a dataset to visualize"
-      icon="World"
+      icon="GlobeLocation"
       action={setCollectionDefaultState}
       options={collectionOptions}
       // null will reset the control, while undefined will not

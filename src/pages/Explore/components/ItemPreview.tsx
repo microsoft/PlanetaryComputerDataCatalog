@@ -57,7 +57,6 @@ const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) =>
           root: {
             background: theme.palette.black,
             display: loading ? "none" : "block",
-            borderRadius: border === "top" ? "4px 4px 0 0" : " 4px 0 0 4px",
             maxWidth: size,
             maxHeight: size,
             height: size,
