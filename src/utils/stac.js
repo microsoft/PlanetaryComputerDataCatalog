@@ -105,6 +105,18 @@ StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
 });
 
+StacFields.Registry.addMetadataField("cmip6:model", {
+  label: "CMIP6 model",
+});
+
+StacFields.Registry.addMetadataField("cmip6:variable", {
+  label: "CMIP6 variable",
+});
+
+StacFields.Registry.addMetadataField("cmip6:scenario", {
+  label: "CMIP6 scenario",
+});
+
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
 });
