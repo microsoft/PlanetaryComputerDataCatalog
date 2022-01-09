@@ -11,6 +11,7 @@ export const makeFilterBody = (
   limit: number | undefined = undefined
 ): IStacFilter => {
   return {
+    "filter-lang": "cql-json",
     filter: { and: [...baseFilter, ...(query.cql || [])] },
     sortby: query.sortby || undefined,
     limit: limit,
