@@ -29,6 +29,9 @@ export const toUtcDateString = (dt: string | Date | Dayjs) => {
   return toDateString(dayjs.utc(dt));
 };
 
+export const toUtcDateWithTime = (dt: string) =>
+  dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
+
 export const toIsoDateString = (
   dt: string | Date | Dayjs,
   includeTime: boolean = true
@@ -83,7 +86,7 @@ const sortAlphaByKey = (key: string) => {
 export const sortSpecialByKey = (key: string) => {
   const specialKeys = ["landsat", "sentinel"];
   const isSpecial = (val: any) =>
-    specialKeys.some(term => val[key].toLowerCase().includes(term));
+    specialKeys.some(term => val[key]?.toLowerCase()?.includes(term));
 
   return (a: any, b: any) => {
     const aSpecial = isSpecial(a);
