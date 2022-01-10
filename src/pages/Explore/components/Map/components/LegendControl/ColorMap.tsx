@@ -104,7 +104,8 @@ const makeCustomScale = (customScale: string[]) => {
   });
 };
 const makeNumericScale = (rescale: string | string[] | null) => {
-  const scale = Array.isArray(rescale) ? rescale : [rescale];
+  if (!rescale) return null;
+  const scale = Array.isArray(rescale) ? rescale : rescale.split(",");
   if (!scale || scale.filter(Boolean).length !== 2) return null;
 
   // @ts-ignore - null scale items are filtered out
