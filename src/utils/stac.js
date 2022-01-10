@@ -1,7 +1,7 @@
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
 import marked from "marked";
-import { capitalize } from ".";
+import { capitalize, toUtcDateWithTime } from ".";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
@@ -9,6 +9,10 @@ import Revealer from "../components/Revealer";
 const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
 const fixedPct = value => value.toFixed(2) + "%";
 const fixedDeg = value => value.toFixed(3) + "°";
+
+StacFields.Registry.addMetadataField("datetime", {
+  formatter: value => (value ? toUtcDateWithTime(value) : "n/a"),
+});
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
@@ -138,6 +142,13 @@ export const bandOverrideList = bands => {
     .join(", ");
 };
 
+// HOTFIX: can remove in trunk
+export const rasterBandOverrideList = bands => {
+  return bands.map((obj, idx) => (
+    <SimpleKeyValueList key={`rasterb-${idx}`} object={obj} />
+  ));
+};
+
 export const stacFormatter = StacFields;
 
 // Use for consistent column orders across table types
@@ -205,6 +216,9 @@ export const renderItemColumn = (item, _, column) => {
           <SimpleKeyValueList object={fieldContent} />
         </Revealer>
       );
+    case "raster:bands":
+      // HOTFIX: can remove in trunk
+      return item[column.fieldName];
     case "dimensions":
     case "shape":
     case "chunks":

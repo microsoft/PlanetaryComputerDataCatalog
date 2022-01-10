@@ -1,0 +1,180 @@
+{
+  "mosaics": [
+    {
+      "name": "All years",
+      "description": "",
+      "cql": []
+    },
+    {
+      "name": "2019",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2018-08-01", "2019-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2018",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2017-08-01", "2018-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2017",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2016-08-01", "2017-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2016",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2015-08-01", "2016-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2015",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2014-08-01", "2015-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2014",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2013-08-01", "2014-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2013",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2012-08-01", "2013-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2012",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2011-08-01", "2012-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2011",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2010-08-01", "2011-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2010",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2009-08-01", "2010-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2009",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2008-08-01", "2009-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2008",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2007-08-01", "2008-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2007",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2006-08-01", "2007-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2006",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2005-08-01", "2006-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2005",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2004-08-01", "2005-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2004",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2003-08-01", "2004-01-01"]]
+        }
+      ]
+    },
+    {
+      "name": "2003",
+      "description": "",
+      "cql": [
+        {
+          "anyinteracts": [{ "property": "datetime" }, ["2002-08-01", "2003-01-01"]]
+        }
+      ]
+    }
+  ],
+  "renderOptions": [
+    {
+      "name": "Aboveground Biomass (tonnes)",
+      "description": "Annual estimates of aboveground woody biomass",
+      "options": "assets=biomass_wm&colormap_name=chloris-biomass&rescale=1,750000",
+      "minZoom": 2
+    },
+    {
+      "name": "Biomass Change from prior year (tonnes)",
+      "description": "Annual estimates of changes (gains and losses) in aboveground woody biomass.",
+      "options": "assets=biomass_change_wm&colormap_name=spectral&rescale=-5000,5000",
+      "minZoom": 2
+    }
+  ],
+  "defaultLocation": {
+    "zoom": 4,
+    "coordinates": [-4.3028, -58.0357]
+  }
+}

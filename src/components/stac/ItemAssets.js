@@ -4,6 +4,7 @@ import {
   bandOverrideList,
   columnOrders,
   mediaTypeOverride,
+  rasterBandOverrideList,
   renderItemColumn,
   stacFormatter,
 } from "../../utils/stac";
@@ -68,6 +69,10 @@ const ItemAssets = () => {
             case "eo:bands":
               // Rather than a table, render a string of "name (common name)" bands
               formattedValue = bandOverrideList(property.value);
+              break;
+            case "raster:bands":
+              // HOTFIX: can remove in trunk
+              formattedValue = rasterBandOverrideList(property.value);
               break;
             case "type":
               // Shorten COG GeoTIFF type

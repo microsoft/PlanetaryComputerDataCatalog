@@ -63,6 +63,14 @@ collections:
       - title: Storage Documentation
         src: aster-storage.html
 
+  chloris-biomass:
+    category: Biomass
+    headerImg: ./images/chloris-biomass-hero.jpg
+    tabs:
+      - title: Example Notebook
+        src: chloris-biomass-example.html
+        launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
+
   cop-dem-glo-30:
     category: DEMs
     headerImg: ./images/cop-dem-glo-30-hero.png
@@ -197,7 +205,7 @@ collections:
         launch: datasets/gridmet/gridmet-example.ipynb
 
   hgb:
-    category: Biodiversity
+    category: Biomass
     headerImg: ./images/hgb-hero.png
     tabs:
       - title: Example Notebook

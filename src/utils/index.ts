@@ -10,6 +10,8 @@ import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 dayjs.extend(utc);
 
 export const toUtcDate = (dt: string) => dayjs.utc(dt).format("MM/DD/YYYY");
+export const toUtcDateWithTime = (dt: string) =>
+  dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
 
 export const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -38,7 +40,7 @@ const sortAlphaByKey = (key: string) => {
 export const sortSpecialByKey = (key: string) => {
   const specialKeys = ["landsat", "sentinel"];
   const isSpecial = (val: any) =>
-    specialKeys.some(term => val[key].toLowerCase().includes(term));
+    specialKeys.some(term => val[key]?.toLowerCase()?.includes(term));
 
   return (a: any, b: any) => {
     const aSpecial = isSpecial(a);
