@@ -224,7 +224,7 @@ export const makeTileJsonUrl = (
   // Rendering a single Item
   if (item && collection) {
     const forcePngRenderParams = renderParams.replace("jpg", "png");
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${forcePngRenderParams}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}&${forcePngRenderParams}`;
   }
 
   // Rendering a STAC search mosaic
@@ -241,7 +241,7 @@ export const makeItemPreviewUrl = (
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
   const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption.options));
 
-  const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
+  const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;
 
   return url + params;
 };
