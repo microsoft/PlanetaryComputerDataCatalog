@@ -65,13 +65,13 @@ const CubeTable = ({ stacKey, title, description }) => {
     <div style={{ marginTop: 40 }}>
       <h3>{title}</h3>
       <p>{description}</p>
-      {description}
+      {details}
     </div>
   );
 };
 
 export const CubeDimensions = () => {
-  return <CubeTable stacKey="cube:dimensions" title="Dimensions" description="The dataset users the following dimensions for coordinate labels."/>;
+  return <CubeTable stacKey="cube:dimensions" title="Dimensions" description="The dataset includes the following dimensions for coordinate labels."/>;
 };
 
 export const CubeVariables = () => {

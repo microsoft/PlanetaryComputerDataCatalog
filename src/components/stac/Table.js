@@ -51,12 +51,13 @@ const TableTable = ({ stacKey, title, description }) => {
   return (
     <div style={{ marginTop: 40 }}>
       <h3>{title}</h3>
+      <p>{description}</p>
       {details}
     </div>
   );
 };
 
-const ColumnTable = ({ stacKey, title }) => {
+const ColumnTable = ({ stacKey, title, description }) => {
   const tableColumns = useStac()[stacKey];
   if (!tableColumns) return null;
 
