@@ -293,6 +293,13 @@ collections:
       - title: Storage Documentation
         src: naip-storage.html
 
+  nasa-nex-gddp-cmip6:
+    category: Climate/Weather
+    tabs:
+      - title: Example Notebook
+        src: nasa-nex-gddp-cmip6-example.html
+        launch: datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
+
   nasadem:
     category: DEMs
     headerImg: ./images/nasadem-hero.png
