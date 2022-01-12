@@ -16,7 +16,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2021-09-01", "2021-11-30"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2021-09-01", "2021-11-30"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -27,7 +30,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2021-06-01", "2021-08-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2021-06-01", "2021-08-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -38,7 +44,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2021-03-01", "2021-05-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2021-03-01", "2021-05-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -49,7 +58,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2020-12-01", "2021-02-28"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2020-12-01", "2021-02-28"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -60,7 +72,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2020-09-01", "2020-11-30"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2020-09-01", "2020-11-30"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -71,7 +86,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2020-06-01", "2020-08-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2020-06-01", "2020-08-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -82,7 +100,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2020-03-01", "2020-05-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2020-03-01", "2020-05-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -93,7 +114,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2019-12-01", "2020-02-28"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2019-12-01", "2020-02-28"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -104,7 +128,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2019-09-01", "2019-11-30"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2019-09-01", "2019-11-30"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -129,7 +156,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2019-03-01", "2019-05-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2019-03-01", "2019-05-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -140,7 +170,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2018-12-01", "2019-02-28"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2018-12-01", "2019-02-28"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -151,7 +184,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2018-09-01", "2018-11-30"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2018-09-01", "2018-11-30"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -162,7 +198,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2018-06-01", "2018-08-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2018-06-01", "2018-08-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -173,7 +212,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2018-03-01", "2018-05-31"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2018-03-01", "2018-05-31"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]
@@ -184,7 +226,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["2017-12-01", "2018-02-28"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["2017-12-01", "2018-02-28"] }
+          ]
         },
         { "op": "<=", "args": [{ "property": "eo:cloud_cover" }, 10] }
       ]

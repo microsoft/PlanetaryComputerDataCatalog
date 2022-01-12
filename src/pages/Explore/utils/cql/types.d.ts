@@ -11,6 +11,8 @@ type CqlOperator =
   | "intersects";
 
 type CqlPropertyObject = { property: string };
+type CqlIntervalValue = { interval: [string, string] };
+export type CqlTimestampValue = { timestamp: string };
 
 export type CqlEqualExpression<T> = { op: "="; args: [CqlPropertyObject, T] };
 export type CqlGteExpression<T> = { op: ">="; args: [CqlPropertyObject, T] };
@@ -24,7 +26,7 @@ export type CqlBetweenExpression = {
 export type CqlInExpression<T> = { op: "in"; args: [CqlPropertyObject, T[]] };
 export type CqlAnyinteractsExpression<T> = {
   op: "anyinteracts";
-  args: [CqlPropertyObject, [T, T]];
+  args: [CqlPropertyObject, CqlIntervalValue<T>];
 };
 export type CqlLikeExpression = {
   op: "like";

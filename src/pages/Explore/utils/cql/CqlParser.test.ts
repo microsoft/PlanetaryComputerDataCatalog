@@ -62,7 +62,7 @@ it("parses same day anyinteracts as a non-range value", () => {
     op: "anyinteracts",
     args: [
       { property: "datetime" },
-      ["2021-01-01T00:00:00Z", "2021-01-01T23:59:59Z"],
+      { interval: ["2021-01-01T00:00:00Z", "2021-01-01T23:59:59Z"] },
     ],
   };
   const cql: ICqlExpressionList = [dcql];
@@ -77,7 +77,7 @@ it("parses multi day anyinteracts as a range value", () => {
     op: "anyinteracts",
     args: [
       { property: "datetime" },
-      ["2021-01-01T00:00:00Z", "2021-02-01T23:59:59Z"],
+      { interval: ["2021-01-01T00:00:00Z", "2021-02-01T23:59:59Z"] },
     ],
   };
   const cql: ICqlExpressionList = [dcql];

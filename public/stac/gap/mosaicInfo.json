@@ -5,7 +5,10 @@
       "cql": [
         {
           "op": "anyinteracts",
-          "args": [{ "property": "datetime" }, ["1998-01-01", "2012-01-01"]]
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["1998-01-01", "2012-01-01"] }
+          ]
         }
       ]
     }

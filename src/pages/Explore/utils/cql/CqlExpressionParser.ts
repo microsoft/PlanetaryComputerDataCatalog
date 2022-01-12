@@ -64,7 +64,8 @@ export class CqlExpressionParser<T extends string | number> {
   private parseAnyinteracts() {
     const exp = this.exp as CqlAnyinteractsExpression<T>;
     const property = exp.args[CQL_PROP_IDX].property;
-    const value = exp.args[CQL_VALS_IDX];
+    const value = exp.args[CQL_VALS_IDX].interval;
+
     return {
       property: property,
       value,
@@ -90,7 +91,13 @@ export class CqlExpressionParser<T extends string | number> {
   private parseSinglePredicate() {
     const exp = this.exp as CqlSinglePredicate<T>;
     const property = exp.args[CQL_PROP_IDX].property;
-    const value = exp.args[CQL_VALS_IDX];
+
+    const value =
+      property === "datetime"
+        ? //@ts-ignore
+          exp.args[CQL_VALS_IDX].timestamp
+        : exp.args[CQL_VALS_IDX];
+
     return {
       property: property,
       value,

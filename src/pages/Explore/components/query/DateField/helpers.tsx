@@ -4,6 +4,7 @@ import {
   CqlAnyinteractsExpression,
   CqlGteExpression,
   CqlLteExpression,
+  CqlTimestampValue,
 } from "pages/Explore/utils/cql/types";
 import {
   dayjs,
@@ -96,8 +97,8 @@ export const toCqlExpression = (
   operator: string
 ):
   | CqlAnyinteractsExpression<string>
-  | CqlGteExpression<string>
-  | CqlLteExpression<string> => {
+  | CqlGteExpression<string | CqlTimestampValue>
+  | CqlLteExpression<string | CqlTimestampValue> => {
   const property: CqlPropertyObject = { property: "datetime" };
 
   // For precision, the date-only string needs to be manipulated to include UTC beginning/end of day
@@ -114,22 +115,22 @@ export const toCqlExpression = (
 
       return {
         op: "anyinteracts",
-        args: [property, [start, end]],
+        args: [property, { interval: [start, end] }],
       };
     case "on":
       return {
         op: "anyinteracts",
-        args: [property, [start, startEndOfDay]],
+        args: [property, { interval: [start, startEndOfDay] }],
       };
     case "after":
       return {
         op: ">=",
-        args: [property, start],
+        args: [property, { timestamp: start }],
       };
     case "before":
       return {
         op: "<=",
-        args: [property, startEndOfDay],
+        args: [property, { timestamp: startEndOfDay }],
       };
     default:
       throw new Error(`Invalid operator: ${operator} for date range field`);
