@@ -16,7 +16,7 @@ const columnColumnWidths = {
   type: 55,
 };
 
-const TableTable = ({ stacKey, title }) => {
+const TableTable = ({ stacKey, title, description }) => {
   const tableTables = useStac()[stacKey];
   if (!tableTables) return null;
 
@@ -91,17 +91,18 @@ const ColumnTable = ({ stacKey, title }) => {
   return (
     <div style={{ marginTop: 40 }}>
       <h3>{title}</h3>
+      <p>{description}</p>
       {details}
     </div>
   );
 };
 
 export const TableTables = () => {
-  return <TableTable stacKey="table:tables" title="Tables" />;
+  return <TableTable stacKey="table:tables" title="Tables" description="The dataset includes the following tables."/>;
 };
 
 export const TableColumns = () => {
-  return <ColumnTable stacKey="table:columns" title="Columns" />;
+  return <ColumnTable stacKey="table:columns" title="Columns" description="Each table includes the following columns."/>;
 };
 
 export default TableTable;
