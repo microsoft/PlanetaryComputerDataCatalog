@@ -8,3 +8,15 @@
 .ms-Stack .ms-layer {
   margin-top: 0;
 }
+
+.map-copyright {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.azure-map-copyright {
+  margin-right: 0;
+  margin-left: 0;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}

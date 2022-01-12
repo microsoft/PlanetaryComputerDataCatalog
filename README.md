@@ -70,10 +70,11 @@ There are four main components to the application:
 First, copy `.env.sample` file to `.env`, and ensure the configuration values are set.
 
 | Name | Value | Description |
-|---|---|---|
-`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the PCE, either prod, staging or a local instance.
-|`REACT_APP_AZMAPS_KEY`| Retrieve from Azure Portal| The key used to authenticate the Azure Maps inset map on a dataset detail page.
-|`REACT_APP_HUB_URL`| Optional. URL to root Hub instance | Used to enable a request to launch the Hub with a specific git hosted file.|
+|------|-------|-------------|
+|`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the STAC API, either prod, staging or a local instance.
+|`REACT_APP_TILER_ROOT`| Optional | The root URL for the data tiler API, if not hosted from the domain of the STAC API.
+|`REACT_APP_AZMAPS_KEY`| Retrieve from Azure Portal | The key used to authenticate the Azure Maps inset map on a dataset detail page.
+|`REACT_APP_HUB_URL`| Optional. URL to root Hub instance | Used to enable a request to launch the Hub with a specific git hosted file.
 |`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 
 Run `./scripts/server` to launch a development server.
@@ -133,7 +134,7 @@ Both test suites are run from CI.
 | Name       | Description                                                                                                    |
 |------------|----------------------------------------------------------------------------------------------------------------|
 | `clean`    | Removes intermediate build files from docs and dataset codefiles                                               |
-| `mockstac` | Serves contents of `/mockstac/collections` at http://localhost:8866                                            |
+| `mockstac` | Serves contents of `/mockstac/collections` at <http://localhost:8866>                                          |
 | `server`   | Runs frontend development server                                                                               |
 | `test`     | Runs unit tests and linter                                                                                     |
 | `update`   | Install dependencies and build etl and docs content. Use `--devdocs` to develop against a local notebook repo. |

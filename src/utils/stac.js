@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import marked from "marked";
 import { isEmpty, isNil, isObject } from "lodash-es";
 
-import { capitalize } from ".";
+import { capitalize, toUtcDateWithTime } from ".";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
@@ -26,6 +26,10 @@ const fixedDeg = value => value.toFixed(2) + "°";
 StacFields.Registry.addAssetField("roles", {
   label: "Roles",
   formatter: stringList,
+});
+
+StacFields.Registry.addMetadataField("datetime", {
+  formatter: value => (value ? toUtcDateWithTime(value) : "n/a"),
 });
 
 StacFields.Registry.addMetadataField("gsd", {

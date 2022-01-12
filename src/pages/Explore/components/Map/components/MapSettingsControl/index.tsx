@@ -40,7 +40,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
           layer.layout["text-field"] &&
           layer.layout["text-field"] !== ""
         ) {
-          // @ts-ignore - "visbility" isn't in the type definition
+          // @ts-ignore - "visibility" isn't in the type definition
           mapRef.current.map.setLayoutProperty(layer.id, "visibility", vis);
         }
       });

@@ -84,7 +84,11 @@ const controlStackTokens: IStackTokens = {
 };
 
 const customStackStyles: IStackStyles = {
-  root: { alignItems: "flexStart", justifyContent: "space-between" },
+  root: {
+    alignItems: "flexStart",
+    justifyContent: "space-between",
+    marginBottom: "4px",
+  },
 };
 
 const customStackTokens: IStackTokens = {
@@ -99,5 +103,5 @@ const textStyle: Partial<ITextStyles> = {
 };
 
 const separatorStyles: Partial<ISeparatorStyles> = {
-  root: { padding: 0, margin: 0, height: 10 },
+  root: { padding: 0, margin: 0, height: 13 },
 };

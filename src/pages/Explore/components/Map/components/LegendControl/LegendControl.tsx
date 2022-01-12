@@ -40,8 +40,6 @@ export const LegendControl = () => {
       </Text>
     ) : null;
 
-  // If the legend was configured or determined to not be needed, don't render it
-
   const legendPanel = (
     <Stack styles={panelStyles} tokens={stackTokens}>
       <StackItem>

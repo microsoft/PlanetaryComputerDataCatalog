@@ -29,6 +29,9 @@ export const toUtcDateString = (dt: string | Date | Dayjs) => {
   return toDateString(dayjs.utc(dt));
 };
 
+export const toUtcDateWithTime = (dt: string) =>
+  dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
+
 export const toIsoDateString = (
   dt: string | Date | Dayjs,
   includeTime: boolean = true
@@ -83,7 +86,7 @@ const sortAlphaByKey = (key: string) => {
 export const sortSpecialByKey = (key: string) => {
   const specialKeys = ["landsat", "sentinel"];
   const isSpecial = (val: any) =>
-    specialKeys.some(term => val[key].toLowerCase().includes(term));
+    specialKeys.some(term => val[key]?.toLowerCase()?.includes(term));
 
   return (a: any, b: any) => {
     const aSpecial = isSpecial(a);
@@ -221,7 +224,7 @@ export const makeTileJsonUrl = (
   // Rendering a single Item
   if (item && collection) {
     const forcePngRenderParams = renderParams.replace("jpg", "png");
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&items=${item.id}&${forcePngRenderParams}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}&${forcePngRenderParams}`;
   }
 
   // Rendering a STAC search mosaic
@@ -238,7 +241,7 @@ export const makeItemPreviewUrl = (
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
   const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption.options));
 
-  const params = `?collection=${item.collection}&items=${item.id}&${renderParams}${maxSize}`;
+  const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;
 
   return url + params;
 };
