@@ -13,7 +13,7 @@ const columnWidths = {
   attrs: 200,
 };
 
-const CubeTable = ({ stacKey, title }) => {
+const CubeTable = ({ stacKey, title, description }) => {
   const dims = useStac()[stacKey];
   if (!dims) return null;
 
@@ -64,17 +64,18 @@ const CubeTable = ({ stacKey, title }) => {
   return (
     <div style={{ marginTop: 40 }}>
       <h3>{title}</h3>
+      <p>{description}</p>
       {details}
     </div>
   );
 };
 
 export const CubeDimensions = () => {
-  return <CubeTable stacKey="cube:dimensions" title="Dimensions" />;
+  return <CubeTable stacKey="cube:dimensions" title="Dimensions" description="The dataset includes the following dimensions for coordinate labels."/>;
 };
 
 export const CubeVariables = () => {
-  return <CubeTable stacKey="cube:variables" title="Variables" />;
+  return <CubeTable stacKey="cube:variables" title="Variables" description="The dataset includes the following data variables."/>;
 };
 
 export default CubeTable;
