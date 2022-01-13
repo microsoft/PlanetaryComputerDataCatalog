@@ -6,7 +6,7 @@
       "cql": [
         {
           "op": "=",
-          "args": [{ "property": "datetime" }, "2020-07-01"]
+          "args": [{ "property": "datetime" }, { "timestamp": "2020-07-01" }]
         }
       ]
     }

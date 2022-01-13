@@ -22,6 +22,7 @@ import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import ErrorFallback from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
+import NewTabLink from "components/controls/NewTabLink";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
@@ -67,7 +68,15 @@ const SearchResultsPane = ({
           messageBarType={MessageBarType.error}
           styles={errorMessageStyles}
         >
-          Sorry, we're having trouble completing this search.
+          Sorry, we're having trouble completing this search. If the issue persists,
+          please consider submitting an issue on our{" "}
+          <NewTabLink
+            style={{ padding: 0 }}
+            href="https://github.com/microsoft/PlanetaryComputer"
+          >
+            GitHub repo
+          </NewTabLink>
+          .
         </MessageBar>
       </>
     );

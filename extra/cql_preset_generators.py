@@ -37,7 +37,12 @@ def season_repeater():
                     {
                         "anyinteracts": [
                             {"property": "datetime"},
-                            [f"{syear}-{season['s']}", f"{year}-{season['e']}"],
+                            {
+                                "interval": [
+                                    f"{syear}-{season['s']}",
+                                    f"{year}-{season['e']}",
+                                ]
+                            },
                         ]
                     },
                     {"op": "<=", "args": [{"property": "eo:cloud_cover"}, 10]},
@@ -59,7 +64,12 @@ def year_repeater():
                     "op": "anyinteracts",
                     "args": [
                         {"property": "datetime"},
-                        [f"{year}-01-01:T00:00:00Z", f"{year}-12-31T23:59:59Z"],
+                        {
+                            "interval": [
+                                f"{year}-01-01:T00:00:00Z",
+                                f"{year}-12-31T23:59:59Z",
+                            ]
+                        },
                     ],
                 }
             ],

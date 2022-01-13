@@ -25,6 +25,7 @@ export const useStacSearch = (
     keepPreviousData: true, // intended to not clear out search results when panning the map
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    retry: false,
     enabled: !!search,
   });
 };

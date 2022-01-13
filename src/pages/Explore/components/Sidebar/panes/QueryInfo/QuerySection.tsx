@@ -15,28 +15,6 @@ import Section from "./Section";
 interface QuerySectionProps {
   cql: ICqlExpressionList;
 }
-const getDateLabel = (
-  property: string,
-  propertyLabel: string,
-  value: string[] | string,
-  op: CqlOperator
-) => {
-  if (Array.isArray(value)) {
-    const isSingleDate = rangeIsOnSameDay(value);
-
-    const labelText = isSingleDate
-      ? `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value[0])} `
-      : `${propertyLabel} between ${toUtcDateString(value[0])} and ${toUtcDateString(
-          value[1]
-        )}`;
-
-    return <Text>{labelText}</Text>;
-  } else if (property === "datetime" && !Array.isArray(value)) {
-    const labelText = `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value)}`;
-    return <Text>{labelText}</Text>;
-  }
-};
-
 const QuerySection = ({ cql }: QuerySectionProps) => {
   const expressions = (expression: CqlExpression) => {
     const exp = new CqlExpressionParser(expression);
@@ -44,13 +22,15 @@ const QuerySection = ({ cql }: QuerySectionProps) => {
     const opText = operators[exp.operator];
     const dateValue = exp.value as string | string[];
 
+    const value = Array.isArray(exp.value) ? exp.value.join(", ") : exp.value;
+
     // Special handling for datetime property
     const label =
       exp.property === "datetime" ? (
         getDateLabel(exp.property, propertyLabel, dateValue, exp.operator)
       ) : (
         <Text>
-          {propertyLabel} {opText} {stacFormatter.format(exp.value, exp.property)}
+          {propertyLabel} {opText} {stacFormatter.format(value, exp.property)}
         </Text>
       );
     return <Text key={`exp-${propertyLabel}-${exp.operator}`}>{label}</Text>;
@@ -77,3 +57,25 @@ const QuerySection = ({ cql }: QuerySectionProps) => {
 };
 
 export default QuerySection;
+
+const getDateLabel = (
+  property: string,
+  propertyLabel: string,
+  value: string[] | string,
+  op: CqlOperator
+) => {
+  if (Array.isArray(value)) {
+    const isSingleDate = rangeIsOnSameDay(value);
+
+    const labelText = isSingleDate
+      ? `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value[0])} `
+      : `${propertyLabel} between ${toUtcDateString(value[0])} and ${toUtcDateString(
+          value[1]
+        )}`;
+
+    return <Text>{labelText}</Text>;
+  } else if (property === "datetime" && !Array.isArray(value)) {
+    const labelText = `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value)}`;
+    return <Text>{labelText}</Text>;
+  }
+};
