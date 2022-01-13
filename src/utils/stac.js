@@ -14,6 +14,7 @@ const stringList = value => {
 };
 
 const codeNumberList = value => <code>{`[${value.join(", ")}]`}</code>;
+
 const fixedPct = value => {
   const n = Number(value);
   if (Number.isInteger(n)) {
@@ -69,6 +70,13 @@ StacFields.Registry.addMetadataField("label:classes", {
     const v = Array.isArray(value) ? value[0] : value;
     return v.classes.join(", ");
   },
+});
+StacFields.Registry.addMetadataField("label:properties", {
+  label: "Label Properties",
+  formatter: value => (value ? value : "Raster data"),
+});
+StacFields.Registry.addMetadataField("label:description", {
+  label: "Label Description",
 });
 
 StacFields.Registry.addMetadataField("eo:cloud_cover", {
