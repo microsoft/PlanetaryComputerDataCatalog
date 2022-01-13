@@ -90,7 +90,7 @@ const Catalog = () => {
       return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
     })
   ) : (
-    <NoResults typeText="Azure" />
+    <NoResults typeText="Blob Storage" />
   );
 
   const dataFilter = isSuccess ? (
@@ -116,7 +116,10 @@ const Catalog = () => {
             API, and continuing to bring new data sets to Azure. If you are
             interested in seeing additional data on-boarded or published through our
             API – or if you have data you'd like to contribute –{" "}
-            <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>.
+            <Link href="https://github.com/microsoft/PlanetaryComputer/discussions/categories/data-request">
+              let us know
+            </Link>
+            .
           </p>
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>

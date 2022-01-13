@@ -24,7 +24,7 @@ const NoResults = ({ typeText = "" }) => {
         <p style={{ marginTop: 0 }}>
           {`No ${typeText} datasets matched your filter term. `} Looking for
           something in particular?{" "}
-          <Link href="mailto:aiforearthdatasets@microsoft.com">
+          <Link href="https://github.com/microsoft/PlanetaryComputer/discussions/categories/data-request">
             Recommend a dataset
           </Link>{" "}
           to be included.
