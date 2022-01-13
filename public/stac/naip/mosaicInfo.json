@@ -3,15 +3,7 @@
     {
       "name": "Most recent available",
       "description": "",
-      "cql": [
-        {
-          "op": "anyinteracts",
-          "args": [
-            { "property": "datetime" },
-            { "interval": ["2010-01-01", "2019-12-31"] }
-          ]
-        }
-      ]
+      "cql": []
     },
     {
       "name": "2019",
@@ -21,7 +13,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2019-01-01", "2019-12-31"] }
+            { "interval": ["2019-01-01", "2019-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -34,7 +26,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2018-01-01", "2018-12-31"] }
+            { "interval": ["2018-01-01", "2018-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -47,7 +39,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2017-01-01", "2017-12-31"] }
+            { "interval": ["2017-01-01", "2017-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -60,7 +52,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2016-01-01", "2016-12-31"] }
+            { "interval": ["2016-01-01", "2016-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -73,7 +65,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2015-01-01", "2015-12-31"] }
+            { "interval": ["2015-01-01", "2015-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -86,7 +78,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2014-01-01", "2014-12-31"] }
+            { "interval": ["2014-01-01", "2014-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -99,7 +91,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2013-01-01", "2013-12-31"] }
+            { "interval": ["2013-01-01", "2013-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -112,7 +104,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2012-01-01", "2012-12-31"] }
+            { "interval": ["2012-01-01", "2012-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -125,7 +117,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2011-01-01", "2011-12-31"] }
+            { "interval": ["2011-01-01", "2011-12-31T23:59:59Z"] }
           ]
         }
       ]
@@ -138,7 +130,7 @@
           "op": "anyinteracts",
           "args": [
             { "property": "datetime" },
-            { "interval": ["2010-01-01", "2010-12-31"] }
+            { "interval": ["2010-01-01", "2010-12-31T23:59:59Z"] }
           ]
         }
       ]
