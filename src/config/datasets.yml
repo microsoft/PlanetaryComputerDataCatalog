@@ -197,6 +197,13 @@ collections:
       - title: Storage Documentation
         src: goes-r-storage.html
 
+  gpm-imerg-hhr:
+    headerImg: ./images/gpm-imerg-hhr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gpm-imerg-hhr-example.html
+        launch: datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
+
   gridmet:
     headerImg: ./images/gridmet-hero.png
     tabs:
