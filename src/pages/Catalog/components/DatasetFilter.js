@@ -101,7 +101,7 @@ const DatasetFilter = ({
   }, [preselectedTags, handleTagsChange]);
 
   return (
-    <div style={{ margin: "20px 0px 30px" }}>
+    <div>
       <TagPicker
         selectedItems={preselectedTags}
         onChange={handleTagsChange}

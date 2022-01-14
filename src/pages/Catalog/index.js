@@ -107,6 +107,7 @@ const Catalog = () => {
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
       <section id="catalog-api-datasets">
+        <div className="catalog-filter-container grid-content">{dataFilter}</div>
         <div className="grid-content">
           <h2>Datasets available through the Planetary Computer API</h2>
           <p style={{ maxWidth: 800 }}>
@@ -117,10 +118,9 @@ const Catalog = () => {
             API – or if you have data you'd like to contribute –{" "}
             <Link href="mailto:aiforearthdatasets@microsoft.com">contact us</Link>.
           </p>
-          {dataFilter}
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <div className="layout-row">{primaryDatasets}</div>
+              <div className="layout-row-primary">{primaryDatasets}</div>
             </ErrorBoundary>
           </div>
         </div>
@@ -135,7 +135,7 @@ const Catalog = () => {
           </p>
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <div className="layout-row">{otherDatasets}</div>
+              <div className="layout-row-other">{otherDatasets}</div>
             </ErrorBoundary>
           </div>
         </div>
