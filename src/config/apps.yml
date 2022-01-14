@@ -2,8 +2,8 @@
   description:
     Impact Observatory used the Planetary Computer to build a global land use and
     land cover map at 10-meter resolution, by applying machine learning tools to
-    satellite imagery.  The resulting map – which is now publicly available on the
-    Planetary Computer – will support ecosystem monitoring and land use planning.
+    satellite imagery.  The resulting map—which is now publicly available on the
+    Planetary Computer—will support ecosystem monitoring and land use planning.
   thumbnailUrl: ./images/apps/io-lulc-wide-fs8.jpg
   links:
     - title: Explore land classification
@@ -16,8 +16,8 @@
     Imazon, in partnership with Fundo Vale, is using satellite imagery from the
     Planetary Computer to identify areas of the Brazilian Amazon that are at risk of
     deforestation, based on topography, land cover, and indicators of human
-    settlement. The resulting risk predictions are presented via an online platform –
-    PrevisIA – that enables policy-makers to protect critical rainforest ecosystems.
+    settlement. The resulting risk predictions are presented via PrevisIA, an online
+    platform that enables policy-makers to protect critical rainforest ecosystems.
   thumbnailUrl: ./images/apps/previsia-wide-fs8.png
   links:
     - title: Explore PrevisIA

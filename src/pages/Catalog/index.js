@@ -115,7 +115,7 @@ const Catalog = () => {
             Computer API. We are continuing to expand the data available through the
             API, and continuing to bring new data sets to Azure. If you are
             interested in seeing additional data on-boarded or published through our
-            API – or if you have data you'd like to contribute –{" "}
+            API—or if you have data you'd like to contribute—
             <Link href="https://github.com/microsoft/PlanetaryComputer/discussions/categories/data-request">
               let us know
             </Link>
