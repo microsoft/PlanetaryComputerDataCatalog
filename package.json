@@ -34,7 +34,7 @@
     "highlight.js": "^11.3.1",
     "json-stringify-pretty-compact": "^3.0.0",
     "lodash-es": "^4.17.21",
-    "marked": "^3.0.4",
+    "marked": "^4.0.10",
     "number-abbreviate": "^2.0.0",
     "query-string": "^7.0.1",
     "react": "^17.0.2",
