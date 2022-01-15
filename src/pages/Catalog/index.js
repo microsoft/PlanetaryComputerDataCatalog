@@ -60,23 +60,32 @@ const Catalog = () => {
 
   const getStacCollections = () => {
     if (!filteredCollections) return null;
-    if (filteredCollections.length === 0) return <NoResults typeText="API" />;
-
-    return filteredCollections.sort(sortSpecialByKey("title")).map(collection => {
-      return collection.groupId ? (
-        <GroupedCollectionCard
-          key={`card-${collection.groupId}`}
-          group={collection}
-        />
-      ) : (
-        <ErrorBoundary
-          key={`card-${collection.id}`}
-          FallbackComponent={CardErrorFallback}
-        >
-          <CollectionCard key={`card-${collection.id}`} collection={collection} />
-        </ErrorBoundary>
+    if (filteredCollections.length === 0)
+      return (
+        <div className="layout-row">
+          <NoResults typeText="API" />
+        </div>
       );
-    });
+
+    const filtered = filteredCollections
+      .sort(sortSpecialByKey("title"))
+      .map(collection => {
+        return collection.groupId ? (
+          <GroupedCollectionCard
+            key={`card-${collection.groupId}`}
+            group={collection}
+          />
+        ) : (
+          <ErrorBoundary
+            key={`card-${collection.id}`}
+            FallbackComponent={CardErrorFallback}
+          >
+            <CollectionCard key={`card-${collection.id}`} collection={collection} />
+          </ErrorBoundary>
+        );
+      });
+
+    return <div className="layout-row-primary">{filtered}</div>;
   };
 
   const primaryDatasets = isLoading
@@ -86,11 +95,15 @@ const Catalog = () => {
     : getStacCollections();
 
   const otherDatasets = filteredDatasets.length ? (
-    filteredDatasets.map(dataset => {
-      return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
-    })
+    <div className="layout-row-other">
+      {filteredDatasets.map(dataset => {
+        return <DatasetCard key={`card-${dataset.title}`} resourceItem={dataset} />;
+      })}
+    </div>
   ) : (
-    <NoResults typeText="Blob Storage" />
+    <div className="layout-row">
+      <NoResults typeText="Blob Storage" />
+    </div>
   );
 
   const dataFilter = isSuccess ? (
@@ -123,7 +136,7 @@ const Catalog = () => {
           </p>
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <div className="layout-row-primary">{primaryDatasets}</div>
+              {primaryDatasets}
             </ErrorBoundary>
           </div>
         </div>
@@ -138,7 +151,7 @@ const Catalog = () => {
           </p>
           <div className="layout-container">
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <div className="layout-row-other">{otherDatasets}</div>
+              {otherDatasets}
             </ErrorBoundary>
           </div>
         </div>
