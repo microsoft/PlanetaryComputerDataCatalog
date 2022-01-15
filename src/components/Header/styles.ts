@@ -41,11 +41,6 @@ export const headerPipeStyle = mergeStyles({
 export const productNameStyle = mergeStyles({
   marginLeft: "-3px !important",
   fontWeight: "600",
-  ":hover": {
-    textDecoration: "underline",
-    textDecorationThickness: "2px",
-    textUnderlineOffset: "4px",
-  },
 });
 
 /* Tablet size main header will break on first header link to new line */

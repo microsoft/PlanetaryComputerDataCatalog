@@ -16,9 +16,9 @@ import ErrorFallback from "components/ErrorFallback";
 
 // TODO: track heights rather than hard code them
 const heights = {
-  header: 57.5,
+  header: 55,
   footer: 27,
-  buffer: 2,
+  buffer: 1,
 };
 
 const Explorer = () => {
