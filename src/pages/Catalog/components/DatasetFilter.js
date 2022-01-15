@@ -109,15 +109,15 @@ const DatasetFilter = ({
         onResolveSuggestions={filterSuggestedTags}
         getTextFromItem={({ name }) => name}
         inputProps={{
-          placeholder: "Filter by tags",
-          "aria-label": "Filter by tags",
+          placeholder: "Filter by keywords",
+          "aria-label": "Filter by keywords",
         }}
         pickerSuggestionsProps={{
-          suggestionsHeaderText: "Suggested tags",
-          noResultsFoundText: "No matching tags found",
+          suggestionsHeaderText: "Suggested keywords",
+          noResultsFoundText: "No matching keywords found",
         }}
-        removeButtonAriaLabel="Remove tag"
-        selectionAriaLabel="Selected tags"
+        removeButtonAriaLabel="Remove keyword"
+        selectionAriaLabel="Selected keyword"
       />
       {false && (
         // TODO: Remove this and related when we are sure we don't want it
