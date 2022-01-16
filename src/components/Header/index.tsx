@@ -10,6 +10,7 @@ import {
   headerPipeStyle,
   productNameStyle,
   breakStyle,
+  rightAligned,
 } from "./styles";
 import { gridContentStyle, offGridContentStyle } from "styles";
 
@@ -49,16 +50,26 @@ const Header = ({ onGrid = true }) => {
             </Text>
           </HeaderLink>
           <div className={breakStyle} />
-          <HeaderLink to="/explore">Explore</HeaderLink>
-          <HeaderLink to="/catalog">Data Catalog</HeaderLink>
+          <HeaderLink isNav to="/explore">
+            Explore
+          </HeaderLink>
+          <HeaderLink isNav to="/catalog">
+            Data Catalog
+          </HeaderLink>
           <HeaderLink external to="/compute">
             Hub
           </HeaderLink>
-          <HeaderLink to="/applications">Applications</HeaderLink>
-          <HeaderLink to="/docs">Documentation</HeaderLink>
-          <HeaderLink asButton to="/account/request">
-            Request access
+          <HeaderLink isNav to="/applications">
+            Applications
           </HeaderLink>
+          <HeaderLink isNav to="/docs">
+            Documentation
+          </HeaderLink>
+          <div className={rightAligned}>
+            <HeaderLink asButton to="/account/request">
+              Request access
+            </HeaderLink>
+          </div>
         </Stack>
       </nav>
     </header>
