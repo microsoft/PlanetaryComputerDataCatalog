@@ -244,6 +244,13 @@ collections:
       - title: Storage Documentation
         src: io-lulc-storage.html
 
+  io-lulc-9-class:
+    category: Land use/Land cover
+    tabs:
+      - title: Example Notebook
+        src: io-lulc-example.html
+        launch: datasets/io-lulc/io-lulc-example.ipynb
+
   jrc-gsw:
     category: Water
     headerImg: ./images/jrc-gsw-hero.png
