@@ -14,7 +14,7 @@
   "renderOptions": [
     {
       "name": "Default",
-      "description": "Land cover classification using 5 class custom colormap",
+      "description": "Land cover classification using 10 class custom colormap",
       "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc",
       "minZoom": 4
     }
