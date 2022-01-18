@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
-import { Dropdown, IDropdownOption } from "@fluentui/react";
+import {
+  Dropdown,
+  getTheme,
+  IDropdownOption,
+  IDropdownStyles,
+} from "@fluentui/react";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import {
   renderSegmentedPlaceholder,
@@ -55,6 +60,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
       onRenderTitle={renderSegmentedTitle(title)}
       onRenderPlaceholder={renderSegmentedPlaceholder(title, "Include all")}
       onChange={handleChange}
+      styles={dropdownStyles}
     />
   );
 };
@@ -88,4 +94,14 @@ const parseKeysToCql = (
     op: "in",
     args: [{ property: field.property }, selectedKeys],
   };
+};
+
+const theme = getTheme();
+const dropdownStyles: Partial<IDropdownStyles> = {
+  title: {
+    borderColor: theme.palette.neutralTertiaryAlt,
+    ":hover": {
+      borderColor: theme.palette.neutralTertiary + " !important",
+    },
+  },
 };

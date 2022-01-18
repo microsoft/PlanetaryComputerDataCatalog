@@ -1,5 +1,10 @@
 import { useCallback } from "react";
-import { Dropdown, IDropdownOption } from "@fluentui/react";
+import {
+  Dropdown,
+  IDropdownOption,
+  IDropdownStyles,
+  getTheme,
+} from "@fluentui/react";
 import { useExploreDispatch } from "../../../state/hooks";
 import {
   renderPlaceholder,
@@ -51,9 +56,20 @@ const StateSelector = ({
         title={title}
         disabled={disabled}
         data-cy={cyId}
+        styles={dropdownStyles}
       />
     </div>
   );
 };
 
 export default StateSelector;
+
+const theme = getTheme();
+const dropdownStyles: Partial<IDropdownStyles> = {
+  title: {
+    borderColor: theme.palette.neutralTertiaryAlt,
+    ":hover": {
+      borderColor: theme.palette.neutralTertiary + " !important",
+    },
+  },
+};
