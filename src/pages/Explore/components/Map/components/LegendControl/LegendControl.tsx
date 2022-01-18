@@ -70,7 +70,7 @@ export const LegendControl = () => {
         disabled={!legend}
         styles={legendButtonStyles}
         className="azure-maps-control-button"
-        iconProps={{ iconName: "ThumbnailView" }}
+        iconProps={{ iconName: "MapLegend" }}
       />
     </div>
   );
@@ -137,7 +137,12 @@ const subHeaderStyles: ITextStyles = {
 };
 
 const legendButtonStyles: IButtonStyles = {
-  icon: { color: theme.semanticColors.bodyText },
+  icon: {
+    color: theme.semanticColors.bodyText,
+
+    width: 18,
+    height: 18,
+  },
 };
 
 const minimizeButtonStyles: IButtonStyles = {

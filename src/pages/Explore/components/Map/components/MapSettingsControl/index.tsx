@@ -58,7 +58,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   const title = "Manage map settings";
 
   return (
-    <PanelControl label={title} iconName="Settings" top={178}>
+    <PanelControl label={title} iconName="FluentSettings" top={178}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
         <Slider
           min={0}
