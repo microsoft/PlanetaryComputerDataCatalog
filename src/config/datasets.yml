@@ -246,6 +246,7 @@ collections:
 
   io-lulc-9-class:
     category: Land use/Land cover
+    headerImg: ./images/io-lulc-9-class-hero.png
     tabs:
       - title: Example Notebook
         src: io-lulc-example.html
