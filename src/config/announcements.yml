@@ -21,3 +21,9 @@
     Search and visualize new datasets in the [Planetary Computer
     Explorer](https://planetarycomputer.microsoft.com/explore) (see
     [changelog](/docs/overview/changelog))
+- id: jan-release-notes
+  startDate: 2022-01-18
+  endDate: 2022-02-06
+  content: >
+    New datasets, features, and upgrades! [Check it out
+    &rarr;](/docs/overview/changelog)

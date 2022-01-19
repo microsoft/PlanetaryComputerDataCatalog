@@ -45,9 +45,20 @@ const SnippetCopyPanel = ({
       ? createCqlPythonSnippet(cql)
       : createItemPythonSnippet(item);
   const title =
-    snippetType === "query"
-      ? "Use the code below to recreate this search in the Planetary Computer Hub or other Python analytic environments."
-      : "Use the code below to access this individual item's data assets.";
+    snippetType === "query" ? (
+      <>
+        <Text>
+          Use the code below to recreate this search in the Planetary Computer Hub or
+          other Python analytic environments. Read more about searching using the{" "}
+          <NewTabLink href="https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#overview">
+            STAC API
+          </NewTabLink>
+          .
+        </Text>
+      </>
+    ) : (
+      "Use the code below to access this individual item's data assets."
+    );
 
   const isCopySuccess = clipboardState.value && isRecentCopy;
 
@@ -79,11 +90,11 @@ const SnippetCopyPanel = ({
       isBeakVisible={false}
       directionalHint={DirectionalHint.rightBottomEdge}
     >
-      <Stack>
+      <Stack tokens={{ childrenGap: 6 }}>
         <Text block className={styles.title}>
           Explore results
         </Text>
-        <Text styles={{ root: { paddingBottom: 6 } }}>{title}</Text>
+        <Text>{title}</Text>
         <StackItem>
           <Stack horizontal horizontalAlign={"start"} tokens={{ childrenGap: 6 }}>
             <DefaultButton
@@ -103,7 +114,7 @@ const SnippetCopyPanel = ({
           </Stack>
         </StackItem>
         <StackItem>
-          <div className="input_area">
+          <div className="input_area" style={{ marginTop: 6 }}>
             <pre dangerouslySetInnerHTML={{ __html: snippet.value }} />
           </div>
         </StackItem>
@@ -124,6 +135,5 @@ const styles = mergeStyleSets({
   title: {
     fontSize: FontSizes.mediumPlus,
     fontWeight: FontWeights.semibold,
-    padding: "6px 0",
   },
 });

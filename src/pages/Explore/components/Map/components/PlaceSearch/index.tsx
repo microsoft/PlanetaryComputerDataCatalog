@@ -19,7 +19,7 @@ const PlaceSearchControl = ({ mapRef }: PlaceSearchProps) => {
       ref={panelRef}
       label="Search for places on the map"
       top={142}
-      iconName="Search"
+      iconName="FluentSearch"
     >
       <Text block styles={{ root: { fontWeight: FontWeights.bold } }}>
         Place Finder

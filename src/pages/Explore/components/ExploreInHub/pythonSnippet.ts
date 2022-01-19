@@ -42,7 +42,7 @@ catalog = Client.open(
 aoi = ${stringify(aoi.value)}
 ${datetimeAssignment}
 # Define your search with CQL2 syntax
-search = catalog.search(filter=${body})
+search = catalog.search(filter_lang="cql2-json", filter=${body})
 
 # Grab the first item from the search results and sign the assets
 first_item = next(search.get_items())

@@ -5,6 +5,7 @@ import {
   DirectionalHint,
   IconButton,
   Stack,
+  IButtonStyles,
 } from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
 
@@ -38,7 +39,6 @@ const PanelControl = React.forwardRef<
     },
     ref
   ) => {
-    const theme = getTheme();
     const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] = useBoolean(false);
     const buttonId = useId("callout-button");
     const r = left ? undefined : right;
@@ -60,7 +60,7 @@ const PanelControl = React.forwardRef<
           id={buttonId}
           ariaLabel={label}
           title={label}
-          styles={{ icon: { color: theme.semanticColors.bodyText } }}
+          styles={iconStyles}
           className="azure-maps-control-button"
           iconProps={{ iconName: iconName }}
           onClick={toggleIsCalloutVisible}
@@ -84,14 +84,15 @@ const PanelControl = React.forwardRef<
 
 export default PanelControl;
 
+const theme = getTheme();
 export const controlStyle: React.CSSProperties = {
   zIndex: 1,
   position: "absolute",
   display: "flex",
   margin: 8,
-  background: getTheme().semanticColors.bodyBackground,
+  background: theme.semanticColors.bodyBackground,
   borderCollapse: "collapse",
-  borderRadius: getTheme().effects.roundedCorner2,
+  borderRadius: theme.effects.roundedCorner2,
   boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
 };
 
@@ -99,5 +100,20 @@ const calloutStyle = {
   calloutMain: {
     width: 320,
     padding: "6px 6px",
+  },
+};
+
+const iconStyles: Partial<IButtonStyles> = {
+  icon: {
+    color: theme.semanticColors.bodyText,
+    width: 20,
+    height: 20,
+    lineHeight: 20,
+    fontSize: 20,
+    selectors: {
+      svg: {
+        fill: theme.semanticColors.bodyText,
+      },
+    },
   },
 };

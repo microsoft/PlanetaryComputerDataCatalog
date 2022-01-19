@@ -101,6 +101,10 @@ const buttonStyles: Partial<IButtonStyles> = {
   root: {
     paddingLeft: 8,
     paddingRight: 30,
+    borderColor: theme.palette.neutralTertiaryAlt,
+    "&:hover": {
+      backgroundColor: theme.palette.neutralTertiary,
+    },
   },
 };
 
