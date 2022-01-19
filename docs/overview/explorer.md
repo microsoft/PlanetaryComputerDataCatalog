@@ -1,7 +1,7 @@
 # Planetary Computer Explorer
 
 ```{image} images/explorer-docs.jpg
-:height: 500
+:height: 550
 :name: Planetary Computer Explorer screenshot
 :class: no-scaled-link
 ```
@@ -90,6 +90,30 @@ to direct you to the valid extent.
 :class: no-scaled-link
 ```
 
+### Custom filters
+
+Each dataset is preconfigured with a set of filters that can be used to find
+representative items in a dataset quickly. The Explorer also has an Advanced mode
+that allows you to customize the filters for your query. To activate Advanced mode, simply select the dataset you're interested in and click the "Advanced" link.
+
+```{image} images/explorer-advanced.jpg
+:width: 400
+:name: Planetary Computer Explorer advanced mode
+:class: no-scaled-link
+```
+
+The custom filter will start with a date-range filter by default, but you can
+click the "Select filters" link to select any number of attributes on the
+dataset to use in a custom filter. Selected attributes will be displayed in a
+custom control relevant to its data type to help ensure that your filter is
+valid and will return results.
+
+```{image} images/explorer-advanced-filters.jpg
+:width: 500
+:name: Planetary Computer Explorer advanced filters
+:class: no-scaled-link
+```
+
 ### Rendering options
 
 The Explorer is pre-configured with appropriate rendering options for each asset
@@ -104,6 +128,23 @@ selected rendering option, click the info button next to the search results.
 ```{image} images/explorer-queryinfo.png
 :height: 500
 :name: Planetary Computer Explorer query info
+:class: no-scaled-link
+```
+
+#### Legends
+
+If the selected rendering option represents a categorical or continuous variable,
+a legend will appear showing the color map and value range, or the categories and their respective colors on the map.
+
+```{image} images/explorer-legend.jpg
+:height: 100
+:name: Planetary Computer Explorer legend
+:class: no-scaled-link
+```
+
+```{image} images/explorer-legend-class.jpg
+:height: 200
+:name: Planetary Computer Explorer classmap legend
 :class: no-scaled-link
 ```
 
@@ -138,16 +179,14 @@ our [data access documentation][pc-docs-sas] for more details.
 
 ## Coming soon
 
-This is just the initial release of the Explorer. Upcoming features include:
+We're constantly adding improvements to the Planetary Computer and the Explorer. Upcoming features include:
 
-- Legends for scaled and categorical data
-- Fully customizable query parameters, including date range, cloud cover, and other attributes
 - Visualization support for Zarr-backed datasets
 - Hub integration to build queries and visualize search results within a notebook
 - Loading multiple dataset search results as map layers
+- Layer comparison features
 
-Watch for future announcements, and please [get in
-touch](mailto:planetarycomputer@microsoft.com) with feedback or questions.
+Watch for future announcements, and [visit our GitHub Discussions](https://github.com/microsoft/PlanetaryComputer/discussions) for feedback or questions.
 
 [1]: https://planetarycomputer.microsoft.com/explore
 [pc-docs-hub]: https://planetarycomputer.microsoft.com/docs/overview/environment
