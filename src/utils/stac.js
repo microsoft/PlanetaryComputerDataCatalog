@@ -109,6 +109,9 @@ StacFields.Registry.addMetadataField("proj:wkt2", {
   label: "WKT2",
   formatter: value => <code>{value}</code>,
 });
+StacFields.Registry.addMetadataField("proj:geometry", {
+  formatter: value => <code>{JSON.stringify(value)}</code>,
+});
 
 StacFields.Registry.addMetadataField("sat:orbit_state", {
   formatter: capitalize,
