@@ -56,7 +56,9 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
               verticalAlign="center"
               tokens={itemStackTokens}
             >
-              <ColorSwatch color={color} />
+              <StackItem shrink={0}>
+                <ColorSwatch color={color} />
+              </StackItem>
               <Text styles={itemTextStyles}>{label}</Text>
             </Stack>
           )
