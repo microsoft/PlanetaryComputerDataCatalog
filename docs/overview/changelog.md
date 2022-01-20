@@ -2,6 +2,44 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## January 2022
+
+This release includes several new datasets, features, and updates to libraries.
+
+### Highlights
+
+### APIs
+
+#### STAC API
+
+##### New features
+
+#### Data API
+
+##### New features
+
+#### New datasets
+
+### Hub environments
+
+#### New package versions
+
+The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2021.09.27.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2021.09.27.0).
+Among other changes, these container images include
+
+- pystac-client 0.3.0b1
+- dask-geopandas 0.1.0a4
+- planetary-computer 0.4.2
+
+See the release notes for the changes in the various packages provided in the Planetary Computer's environment.
+
+```{note}
+pystac-client 0.2.0 doesn't recognize the new conformance classes provided by the Planetary Computer's STAC API. Either set "ignore_conformance=True" when creating your pystac Client, or upgrade to pystac-client>=0.3.0b1.
+```
+
+### Website
+
+
 ## September 2021
 
 This release includes several new datasets, features, and updates to libraries.
