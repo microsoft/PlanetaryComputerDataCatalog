@@ -20,6 +20,12 @@ This release includes several new datasets, features, and updates to libraries.
 
 #### New datasets
 
+- [GPM IMERG](https://planetarycomputer-staging.microsoft.com/dataset/gpm-imerg-hhr): A time series of precipitation over the majority of the earth.
+- [10m Annual Land Use Land Cover (9-class)](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc-9-class): A time series of annual global maps of land use and land cover.
+- [Earth Exchange Global Daily Downscaled Projections](https://planetarycomputer-staging.microsoft.com/dataset/nasa-nex-gddp-cmip6): Global downscaled climate scenarios derived from the General Circulation Model runs conducted under the Coupled Model Intercomparison Project Phase 6.
+- [Land Cover of Canada](https://planetarycomputer-staging.microsoft.com/dataset/nrcan-landcover): Collection of Land Cover products for Canada as produced by Natural Resources Canada using Landsat satellite imagery.
+- [Chloris Biomass](https://planetarycomputer.microsoft.com/dataset/chloris-biomass): Estimates of stock and change in aboveground biomass for Earth's terrestrial woody vegetation ecosystems.
+
 ### Hub environments
 
 #### New package versions
