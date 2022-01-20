@@ -7,69 +7,69 @@
   ],
   "renderOptions": [
     {
-      "name": "Available water storage estimate, aws0-100 (mm)",
-      "options": "assets=aws0-100&rescale=0.0,600.0&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_100 (mm)",
+      "options": "assets=aws0_100&rescale=0.0,600.0&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard zone 4 (0-100 cm depth), expressed in mm. the volume of plant available water that the soil can store in this zone based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws0-150 (mm)",
-      "options": "assets=aws0-150&rescale=0.0,879.1&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_150 (mm)",
+      "options": "assets=aws0_150&rescale=0.0,879.1&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard zone 5 (0-150 cm depth), expressed in mm. the volume of plant available water that the soil can store in this zone based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws0-20 (mm)",
-      "options": "assets=aws0-20&rescale=0.0,120.0&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_20 (mm)",
+      "options": "assets=aws0_20&rescale=0.0,120.0&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard zone 2 (0-20 cm depth), expressed in mm. the volume of plant available water that the soil can store in this zone based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws0-30 (mm)",
-      "options": "assets=aws0-30&rescale=0.0,180.0&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_30 (mm)",
+      "options": "assets=aws0_30&rescale=0.0,180.0&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard zone 3 (0-30 cm depth), expressed in mm. the volume of plant available water that the soil can store in this zone based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws0-5 (mm)",
-      "options": "assets=aws0-5&rescale=0.0,30.0&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_5 (mm)",
+      "options": "assets=aws0_5&rescale=0.0,30.0&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in a standard zone 1 (0-5 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws0-999 (mm)",
-      "options": "assets=aws0-999&rescale=0.0,1350.39&colormap_name=cividis",
+      "name": "Available water storage estimate, aws0_999 (mm)",
+      "options": "assets=aws0_999&rescale=0.0,1350.39&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in total soil profile (0 cm to the reported depth of the soil profile), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws100-150 (mm)",
-      "options": "assets=aws100-150&rescale=0.0,287.42&colormap_name=cividis",
+      "name": "Available water storage estimate, aws100_150 (mm)",
+      "options": "assets=aws100_150&rescale=0.0,287.42&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard layer 5 (100-150 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws150-999 (mm)",
-      "options": "assets=aws150-999&rescale=0.0,600.1&colormap_name=cividis",
+      "name": "Available water storage estimate, aws150_999 (mm)",
+      "options": "assets=aws150_999&rescale=0.0,600.1&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard layer 6 (150 cm to the reported depth of the soil profile), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws20-50 (mm)",
-      "options": "assets=aws20-50&rescale=0.0,180.0&colormap_name=cividis",
+      "name": "Available water storage estimate, aws20_50 (mm)",
+      "options": "assets=aws20_50&rescale=0.0,180.0&colormap_name=cividis",
       "description": "Available water storage estimate (aws) in standard layer 3 (20-50 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws5-20 (mm)",
-      "options": "assets=aws5-20&rescale=0.0,90.0&colormap_name=cividis",
-      "description": "Available water storage estimate (aws) in standard layer 2 (5-20 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
+      "name": "Available water storage estimate, aws50_100 (mm)",
+      "options": "assets=aws50_100&rescale=0.0,300.55&colormap_name=cividis",
+      "description": "Available water storage estimate (aws) in standard layer 3 (50-100 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Available water storage estimate, aws50-100 (mm)",
-      "options": "assets=aws50-100&rescale=0.0,300.55&colormap_name=cividis",
-      "description": "Available water storage estimate (aws) in standard layer 3 (50-100 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
+      "name": "Available water storage estimate, aws5_20 (mm)",
+      "options": "assets=aws5_20&rescale=0.0,90.0&colormap_name=cividis",
+      "description": "Available water storage estimate (aws) in standard layer 2 (5-20 cm depth), expressed in mm. the volume of plant available water that the soil can store in this layer based on all map unit components (weighted average). null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
@@ -121,69 +121,69 @@
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-100 (g/m2)",
-      "options": "assets=soc0-100&rescale=0.0,802441.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_100 (g/m2)",
+      "options": "assets=soc0_100&rescale=0.0,802441.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard zone 4 (0-100 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter to a depth of 100 cm. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-150 (g/m2)",
-      "options": "assets=soc0-150&rescale=0.0,1178783.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_150 (g/m2)",
+      "options": "assets=soc0_150&rescale=0.0,1178783.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard zone 5 (0-150 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter to a depth of 150 cm. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-20 (g/m2)",
-      "options": "assets=soc0-20&rescale=0.0,160518.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_20 (g/m2)",
+      "options": "assets=soc0_20&rescale=0.0,160518.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard zone 2 (0-20 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter to a depth of 20 cm. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-30 (g/m2)",
-      "options": "assets=soc0-30&rescale=0.0,240770.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_30 (g/m2)",
+      "options": "assets=soc0_30&rescale=0.0,240770.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard zone 3 (0-30 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter to a depth of 30 cm. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-5 (g/m2)",
-      "options": "assets=soc0-5&rescale=0.0,40130.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_5 (g/m2)",
+      "options": "assets=soc0_5&rescale=0.0,40130.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard layer 1 or standard zone 1 (0-5 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter to a depth of 5 cm. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc0-999 (g/m2)",
-      "options": "assets=soc0-999&rescale=0.0,1182344.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc0_999 (g/m2)",
+      "options": "assets=soc0_999&rescale=0.0,1182344.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in total soil profile (0 cm to the reported depth of the soil profile). the concentration of organic carbon present in the soil expressed in grams c per square meter for the total reported soil profile depth. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc100-150 (g/m2)",
-      "options": "assets=soc100-150&rescale=0.0,376342.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc100_150 (g/m2)",
+      "options": "assets=soc100_150&rescale=0.0,376342.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard layer 5 (100-150 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 100-150 cm layer. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc150-999 (g/m2)",
-      "options": "assets=soc150-999&rescale=0.0,126247.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc150_999 (g/m2)",
+      "options": "assets=soc150_999&rescale=0.0,126247.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard layer 6 (150 cm to the reported depth of the soil profile). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 150 cm and greater depth layer. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc20-50 (g/m2)",
-      "options": "assets=soc20-50&rescale=0.0,240743.0&colormap_name=cividis",
+      "name": "Soil organic carbon stock estimate, soc20_50 (g/m2)",
+      "options": "assets=soc20_50&rescale=0.0,240743.0&colormap_name=cividis",
       "description": "Soil organic carbon stock estimate (soc) in standard layer 3 (20-50 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 20-50 cm layer. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc5-20 (g/m2)",
-      "options": "assets=soc5-20&rescale=0.0,120389.0&colormap_name=cividis",
-      "description": "Soil organic carbon stock estimate (soc) in standard layer 2 (5-20 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 5-20 cm layer. null values are presented where data are incomplete or not available.",
+      "name": "Soil organic carbon stock estimate, soc50_100 (g/m2)",
+      "options": "assets=soc50_100&rescale=0.0,401179.0&colormap_name=cividis",
+      "description": "Soil organic carbon stock estimate (soc) in standard layer 4 (50-100 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 50-100 cm layer. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Soil organic carbon stock estimate, soc50-100 (g/m2)",
-      "options": "assets=soc50-100&rescale=0.0,401179.0&colormap_name=cividis",
-      "description": "Soil organic carbon stock estimate (soc) in standard layer 4 (50-100 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 50-100 cm layer. null values are presented where data are incomplete or not available.",
+      "name": "Soil organic carbon stock estimate, soc5_20 (g/m2)",
+      "options": "assets=soc5_20&rescale=0.0,120389.0&colormap_name=cividis",
+      "description": "Soil organic carbon stock estimate (soc) in standard layer 2 (5-20 cm depth). the concentration of organic carbon present in the soil expressed in grams c per square meter for the 5-20 cm layer. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
@@ -211,134 +211,134 @@
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 1 or std zone 1, tk0-5a (cm)",
-      "options": "assets=tk0-5a&rescale=0.05,5.5&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 1 or std zone 1, tk0_5a (cm)",
+      "options": "assets=tk0_5a&rescale=0.05,5.5&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 1 or standard zone 1 (0-5 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 1 or std zone 1, tk0-5s (cm)",
-      "options": "assets=tk0-5s&rescale=0.0,6.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 1 or std zone 1, tk0_5s (cm)",
+      "options": "assets=tk0_5s&rescale=0.0,6.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 1 or standard zone 1 (0-5 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 2, tk5-20a (cm)",
-      "options": "assets=tk5-20a&rescale=0.03,16.5&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 2, tk5_20a (cm)",
+      "options": "assets=tk5_20a&rescale=0.03,16.5&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 2 (5-20 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 2, tk5-20s (cm)",
-      "options": "assets=tk5-20s&rescale=0.0,17.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 2, tk5_20s (cm)",
+      "options": "assets=tk5_20s&rescale=0.0,17.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 2 (5-20 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 3, tk20-50a (cm)",
-      "options": "assets=tk20-50a&rescale=0.06,37.65&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 3, tk20_50a (cm)",
+      "options": "assets=tk20_50a&rescale=0.06,37.65&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 3 (20-50 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 3, tk20-50s (cm)",
-      "options": "assets=tk20-50s&rescale=0.0,38.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 3, tk20_50s (cm)",
+      "options": "assets=tk20_50s&rescale=0.0,38.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 3 (20-50 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 4, tk50-100a (cm)",
-      "options": "assets=tk50-100a&rescale=0.03,55.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 4, tk50_100a (cm)",
+      "options": "assets=tk50_100a&rescale=0.03,55.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 4 (50-100 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 4, tk50-100s (cm)",
-      "options": "assets=tk50-100s&rescale=0.0,55.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 4, tk50_100s (cm)",
+      "options": "assets=tk50_100s&rescale=0.0,55.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 4 (50-100 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 5, tk100-150a (cm)",
-      "options": "assets=tk100-150a&rescale=0.04,55.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 5, tk100_150a (cm)",
+      "options": "assets=tk100_150a&rescale=0.04,55.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 5 (100-150 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 5, tk100-150s (cm)",
-      "options": "assets=tk100-150s&rescale=0.0,55.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 5, tk100_150s (cm)",
+      "options": "assets=tk100_150s&rescale=0.0,55.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 5 (100-150 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 6, tk150-999a (cm)",
-      "options": "assets=tk150-999a&rescale=0.0,307.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 6, tk150_999a (cm)",
+      "options": "assets=tk150_999a&rescale=0.0,307.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 6 (150 cm to the reported depth of the soil profile) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std layer 6, tk150-999s (cm)",
-      "options": "assets=tk150-999s&rescale=0.0,307.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std layer 6, tk150_999s (cm)",
+      "options": "assets=tk150_999s&rescale=0.0,307.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard layer 6 (150 cm to the reported depth of the soil profile) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 2, tk0-20a (cm)",
-      "options": "assets=tk0-20a&rescale=0.08,22.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 2, tk0_20a (cm)",
+      "options": "assets=tk0_20a&rescale=0.08,22.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 2 (0-20 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 2, tk0-20s (cm)",
-      "options": "assets=tk0-20s&rescale=0.0,22.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 2, tk0_20s (cm)",
+      "options": "assets=tk0_20s&rescale=0.0,22.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 2 (0-20 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 3, tk0-30a (cm)",
-      "options": "assets=tk0-30a&rescale=0.08,33.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 3, tk0_30a (cm)",
+      "options": "assets=tk0_30a&rescale=0.08,33.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 3 (0-30 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 3, tk0-30s (cm)",
-      "options": "assets=tk0-30s&rescale=0.0,33.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 3, tk0_30s (cm)",
+      "options": "assets=tk0_30s&rescale=0.0,33.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 3 (0-30 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 4, tk0-100a (cm)",
-      "options": "assets=tk0-100a&rescale=0.08,110.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 4, tk0_100a (cm)",
+      "options": "assets=tk0_100a&rescale=0.08,110.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 4 (0-100 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 4, tk0-100s (cm)",
-      "options": "assets=tk0-100s&rescale=0.0,110.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 4, tk0_100s (cm)",
+      "options": "assets=tk0_100s&rescale=0.0,110.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 4 (0-100 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 5, tk0-150a (cm)",
-      "options": "assets=tk0-150a&rescale=0.08,165.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 5, tk0_150a (cm)",
+      "options": "assets=tk0_150a&rescale=0.08,165.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 5 (0-150 cm) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in std zone 5, tk0-150s (cm)",
-      "options": "assets=tk0-150s&rescale=0.0,165.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in std zone 5, tk0_150s (cm)",
+      "options": "assets=tk0_150s&rescale=0.0,165.0&colormap_name=cividis",
       "description": "Thickness of soil components used in standard zone 5 (0-150 cm) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in total soil profile, tk0-999a (cm)",
-      "options": "assets=tk0-999a&rescale=0.08,457.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in total soil profile, tk0_999a (cm)",
+      "options": "assets=tk0_999a&rescale=0.08,457.0&colormap_name=cividis",
       "description": "Thickness of soil components used in total soil profile (0 cm to the reported depth of the soil profile) expressed in cm (weighted average) for the available water storage calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },
     {
-      "name": "Thickness of soil comps used in total soil profile, tk0-999s (cm)",
-      "options": "assets=tk0-999s&rescale=0.0,457.0&colormap_name=cividis",
+      "name": "Thickness of soil comps used in total soil profile, tk0_999s (cm)",
+      "options": "assets=tk0_999s&rescale=0.0,457.0&colormap_name=cividis",
       "description": "Thickness of soil components used in total soil profile (0 cm to the reported depth of the soil profile) expressed in cm (weighted average) for the soil organic carbon calculation. null values are presented where data are incomplete or not available.",
       "minZoom": 4
     },

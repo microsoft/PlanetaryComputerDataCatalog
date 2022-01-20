@@ -174,8 +174,17 @@ collections:
         src: gap-example.html
         launch: datasets/gap/gap-example.ipynb
 
-  gnatsgo:
+  gnatsgo-rasters:
     category: Soils
+    headerImg: ./images/gnatsgo-rasters-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gnatsgo-example.html
+        launch: datasets/gnatsgo/gnatsgo-example.ipynb
+
+  gnatsgo-tables:
+    category: Soils
+    headerImg: ./images/gnatsgo-tables-hero.png
     tabs:
       - title: Example Notebook
         src: gnatsgo-example.html
