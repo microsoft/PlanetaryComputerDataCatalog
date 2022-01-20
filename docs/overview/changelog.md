@@ -29,7 +29,7 @@ This release includes several new datasets, features, and updates to libraries.
 - Our tiling endpoints were upgraded to the latest version of [TiTiler](https://developmentseed.org/titiler/). This has some breaking changes to the query string parameters, [see GitHub](https://github.com/developmentseed/titiler/discussions/396) for more details.
 - Added endpoints to generate map legend configuration from a set of TiTiler render parameters.
 
-#### New datasets
+#### New API datasets
 
 - [GPM IMERG](https://planetarycomputer-staging.microsoft.com/dataset/gpm-imerg-hhr): A time series of precipitation over the majority of the earth.
 - [10m Annual Land Use Land Cover (9-class)](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc-9-class): A time series of annual global maps of land use and land cover.
@@ -38,6 +38,8 @@ This release includes several new datasets, features, and updates to libraries.
 - [Chloris Biomass](https://planetarycomputer.microsoft.com/dataset/chloris-biomass): Estimates of stock and change in aboveground biomass for Earth's terrestrial woody vegetation ecosystems.
 - [gNATSGO Soil Database](https://planetarycomputer.microsoft.com/dataset/group/gnatsgo): A composite database that provides complete coverage of the best available soils information for all areas of the United States and Island Territories.
 
+#### New Blob Storage datasets
+- We've added Deltares [Global Flood Maps](https://microsoft.github.io/AIforEarthDataSets/data/deltares-floods.html) and [Global Water Supply](https://microsoft.github.io/AIforEarthDataSets/data/deltares-water-availability.html) datasets to our blob storage catalog.
 ### Hub environments
 
 #### Support for batch workflows
