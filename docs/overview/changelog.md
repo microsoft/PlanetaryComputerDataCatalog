@@ -8,15 +8,25 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Highlights
 
+- The [Explorer](https://planetarycomputer.microsoft.com/explore) tool now has an advanced mode which allows creating custom queries against our datasets.
+- Six new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
+- We've open sourced our STAC API, our Tiler API, and our frontend tools, in addition to the Hub. See more details in our main [repository](https://github.com/microsoft/planetarycomputer).
+
 ### APIs
 
 #### STAC API
 
 ##### New features
 
+- Our STAC API is now open-source! [Check out the code on GitHub](https://github.com/microsoft/planetary-computer-apis)
+- The API supports the latest version of the [OGC API - Features - Part 3: Filtering and the Common Query Language](https://docs.ogc.org/DRAFTS/21-065.html) language syntax, known as CQL2. The API supports CQL JSON currently, with CQL TEXT support planned for a future release.
+- Implements STAC API [v1.0.0-beta.4](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.4), the latest STAC API version at the time of release.
+
 #### Data API
 
 ##### New features
+
+- Our tiling endpoints were upgraded to the latest version of [TiTiler](https://developmentseed.org/titiler/). This has some breaking changes to the query string parameters, [see GitHub](https://github.com/developmentseed/titiler/discussions/396) for more details.
 
 #### New datasets
 
@@ -44,6 +54,8 @@ See the release notes for the changes in the various packages provided in the Pl
 
 ### Website
 
+- Updated styling and layout of the Planetary Computer Data Catalog and Explorer.
+- Explorer now supports CQL2 queries, and a custom query builder interface.
 
 ## September 2021
 
