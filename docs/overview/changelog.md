@@ -10,7 +10,7 @@ This release includes several new datasets, features, and updates to libraries.
 
 - The [Explorer](https://planetarycomputer.microsoft.com/explore) tool now has an advanced mode which allows creating custom queries against our datasets.
 - Six new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
-- We've open sourced our STAC API, our Tiler API, and our frontend tools, in addition to the Hub. See more details in our main [repository](https://github.com/microsoft/planetarycomputer).
+- We've open-sourced our STAC API, Tiler API, and our frontend tools — in addition to the Hub. See more details at our main [repository](https://github.com/microsoft/planetarycomputer).
 
 ### APIs
 
@@ -31,15 +31,17 @@ This release includes several new datasets, features, and updates to libraries.
 
 #### New API datasets
 
-- [GPM IMERG](https://planetarycomputer-staging.microsoft.com/dataset/gpm-imerg-hhr): A time series of precipitation over the majority of the earth.
-- [10m Annual Land Use Land Cover (9-class)](https://planetarycomputer-staging.microsoft.com/dataset/io-lulc-9-class): A time series of annual global maps of land use and land cover.
-- [Earth Exchange Global Daily Downscaled Projections](https://planetarycomputer-staging.microsoft.com/dataset/nasa-nex-gddp-cmip6): Global downscaled climate scenarios derived from the General Circulation Model runs conducted under the Coupled Model Intercomparison Project Phase 6.
-- [Land Cover of Canada](https://planetarycomputer-staging.microsoft.com/dataset/nrcan-landcover): Collection of Land Cover products for Canada as produced by Natural Resources Canada using Landsat satellite imagery.
+- [GPM IMERG](https://planetarycomputer.microsoft.com/dataset/gpm-imerg-hhr): A time series of precipitation over the majority of the earth.
+- [10m Annual Land Use Land Cover (9-class)](https://planetarycomputer.microsoft.com/dataset/io-lulc-9-class): A time series of annual global maps of land use and land cover.
+- [Earth Exchange Global Daily Downscaled Projections](https://planetarycomputer.microsoft.com/dataset/nasa-nex-gddp-cmip6): Global downscaled climate scenarios derived from the General Circulation Model runs conducted under the Coupled Model Intercomparison Project Phase 6.
+- [Land Cover of Canada](https://planetarycomputer.microsoft.com/dataset/nrcan-landcover): Collection of Land Cover products for Canada as produced by Natural Resources Canada using Landsat satellite imagery.
 - [Chloris Biomass](https://planetarycomputer.microsoft.com/dataset/chloris-biomass): Estimates of stock and change in aboveground biomass for Earth's terrestrial woody vegetation ecosystems.
 - [gNATSGO Soil Database](https://planetarycomputer.microsoft.com/dataset/group/gnatsgo): A composite database that provides complete coverage of the best available soils information for all areas of the United States and Island Territories.
 
 #### New Blob Storage datasets
+
 - We've added Deltares [Global Flood Maps](https://microsoft.github.io/AIforEarthDataSets/data/deltares-floods.html) and [Global Water Supply](https://microsoft.github.io/AIforEarthDataSets/data/deltares-water-availability.html) datasets to our blob storage catalog.
+
 ### Hub environments
 
 #### Support for batch workflows
@@ -58,9 +60,10 @@ See the release notes for the changes in the various packages provided in the Pl
 
 ### Website
 
-- Updated styling and layout of the Planetary Computer Data Catalog and Explorer.
-- Explorer now supports CQL2 queries, and a custom query builder interface.
-- Explorer now generates dynamic legends for continuous and categorical datasets.
+- Explorer advanced mode offers a custom query builder interface, and searches use the new CQL2 syntax
+- Explorer now generates dynamic legends for continuous and categorical datasets
+- Updated styling and layout of the Planetary Computer Data Catalog and Explorer
+- The Data Catalog and Explorer tools are [open-sourced](https://github.com/microsoft/PlanetaryComputerDataCatalog)
 
 ## September 2021
 
