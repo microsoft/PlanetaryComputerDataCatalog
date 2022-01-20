@@ -27,6 +27,7 @@ This release includes several new datasets, features, and updates to libraries.
 ##### New features
 
 - Our tiling endpoints were upgraded to the latest version of [TiTiler](https://developmentseed.org/titiler/). This has some breaking changes to the query string parameters, [see GitHub](https://github.com/developmentseed/titiler/discussions/396) for more details.
+- Added endpoints to generate map legend configuration from a set of TiTiler render parameters.
 
 #### New datasets
 
@@ -35,6 +36,7 @@ This release includes several new datasets, features, and updates to libraries.
 - [Earth Exchange Global Daily Downscaled Projections](https://planetarycomputer-staging.microsoft.com/dataset/nasa-nex-gddp-cmip6): Global downscaled climate scenarios derived from the General Circulation Model runs conducted under the Coupled Model Intercomparison Project Phase 6.
 - [Land Cover of Canada](https://planetarycomputer-staging.microsoft.com/dataset/nrcan-landcover): Collection of Land Cover products for Canada as produced by Natural Resources Canada using Landsat satellite imagery.
 - [Chloris Biomass](https://planetarycomputer.microsoft.com/dataset/chloris-biomass): Estimates of stock and change in aboveground biomass for Earth's terrestrial woody vegetation ecosystems.
+- [gNATSGO Soil Database](https://planetarycomputer.microsoft.com/dataset/group/gnatsgo): A composite database that provides complete coverage of the best available soils information for all areas of the United States and Island Territories.
 
 ### Hub environments
 
@@ -56,6 +58,7 @@ See the release notes for the changes in the various packages provided in the Pl
 
 - Updated styling and layout of the Planetary Computer Data Catalog and Explorer.
 - Explorer now supports CQL2 queries, and a custom query builder interface.
+- Explorer now generates dynamic legends for continuous and categorical datasets.
 
 ## September 2021
 
