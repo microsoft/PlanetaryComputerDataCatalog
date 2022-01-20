@@ -35,10 +35,6 @@ Use `kbatch submit` to submit a "job", which is just some commands to run. At a 
 
 List your jobs with `kbatch job list`:
 
-```{code-block} console
-❯ kbatch job list -o table
-```
-
 ![kbatch job list output showing a few jobs](images/kbatch-job-list.png)
 
 See the [kbatch examples gallery][gallery] for more.
