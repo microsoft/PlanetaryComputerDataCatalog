@@ -28,20 +28,19 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Hub environments
 
+#### Support for batch workflows
+
+The Planetary Computer Hub is now integrated with [kbatch](https://kbatch.readthedocs.io/en/latest/) to run asynchronous / batch workflow jobs, complementing JupyterHub's support
+for interactive computing. See the [kbatch overview](../overview/batch) and the [kbatch documentation](https://kbatch.readthedocs.io/en/latest/) for more.
+
 #### New package versions
 
-The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2021.09.27.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2021.09.27.0).
-Among other changes, these container images include
+The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2022.01.17.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2022.01.17.0). In particular, this release includes
 
-- pystac-client 0.3.0b1
-- dask-geopandas 0.1.0a4
-- planetary-computer 0.4.2
+- pystac-client 0.3.2, with support for cql2-json queries
+- leafmap 0.7.2, with support for adding STAC items from the Planetary Computer's STAC catalog and tiling with the Planetary Computer's data API
 
 See the release notes for the changes in the various packages provided in the Planetary Computer's environment.
-
-```{note}
-pystac-client 0.2.0 doesn't recognize the new conformance classes provided by the Planetary Computer's STAC API. Either set "ignore_conformance=True" when creating your pystac Client, or upgrade to pystac-client>=0.3.0b1.
-```
 
 ### Website
 
