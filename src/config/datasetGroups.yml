@@ -105,5 +105,5 @@ gnatsgo:
     headerImg:
       href: ./images/gnatsgo-rasters-hero.png
     thumbnail:
-      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gnatsgo.png
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gnatsgo-rasters.png
   keywords: [Soils, SSURGO, USDA]
