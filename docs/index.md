@@ -16,6 +16,7 @@ Explorer <overview/explorer>
 The Hub <overview/environment>
 Use VS Code <overview/ui-vscode>
 Use GitHub Codespaces <overview/ui-codespaces>
+Batch Jobs <overview/batch.md>
 Changelog <overview/changelog>
 ```
 
