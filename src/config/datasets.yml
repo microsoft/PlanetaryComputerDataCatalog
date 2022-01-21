@@ -249,8 +249,8 @@ collections:
     headerImg: ./images/io-lulc-9-class-hero.png
     tabs:
       - title: Example Notebook
-        src: io-lulc-example.html
-        launch: datasets/io-lulc/io-lulc-example.ipynb
+        src: io-lulc-9-class-example.html
+        launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
   jrc-gsw:
     category: Water
