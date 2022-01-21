@@ -9,7 +9,7 @@ const GroupedCollectionCard = ({ group }) => {
   if (!group) return null;
 
   const { assets, groupId, keywords, short_description, title } = group;
-  const href = `dataset/group/${group.groupId}`;
+  const href = `/dataset/group/${group.groupId}`;
 
   return (
     <div className="api-datasource-item" key={groupId}>

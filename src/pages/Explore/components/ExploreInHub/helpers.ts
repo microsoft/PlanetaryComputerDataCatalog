@@ -34,7 +34,7 @@ const getByProperty = (
   cqlFilter: IStacFilter
 ): CqlExpression | undefined => {
   const exp = cqlFilter.filter.args.find(
-    exp => exp.args[CQL_PROP_IDX].property === property
+    exp => exp.args[CQL_PROP_IDX]?.property === property
   );
   return exp;
 };

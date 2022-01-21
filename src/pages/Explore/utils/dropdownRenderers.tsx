@@ -6,6 +6,7 @@ import {
   Stack,
   IIconStyles,
   ITextStyles,
+  StackItem,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
 
@@ -16,13 +17,15 @@ export const renderTitle = (iconName: string, prefix: string = "") => {
     const optionsText = options.map(o => o.text).join(", ");
 
     return (
-      <div>
-        <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text styles={textStyles}>
+      <Stack horizontal>
+        <StackItem shrink={0}>
+          <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
+        </StackItem>
+        <Text block nowrap styles={textStyles} title={optionsText}>
           {prefix}
           {optionsText}
         </Text>
-      </div>
+      </Stack>
     );
   };
 };
