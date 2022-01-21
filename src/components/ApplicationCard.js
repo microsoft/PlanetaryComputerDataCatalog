@@ -7,12 +7,8 @@ const ApplicationCard = ({ app }) => {
 
   return (
     <div className="api-datasource-item">
-      <h2 style={{ color: "initial" }}>{title}</h2>
-      <Link
-        href={links[0].url}
-        underline={false}
-        style={{ textDecoration: "none" }}
-      >
+      <h2 style={{ color: "initial", marginTop: 0 }}>{title}</h2>
+      <Link href={links[0].url} underline={false} style={{ textDecoration: "none" }}>
         <div className="responsive-container-wide">
           <img alt="" src={thumbnailUrl} />
         </div>

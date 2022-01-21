@@ -1,7 +1,7 @@
 import { Stack, StackItem, useTheme } from "@fluentui/react";
 import { isNumber } from "lodash-es";
 
-import { toUtcDate } from "utils";
+import { toUtcDateString } from "utils";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 
@@ -26,7 +26,7 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
         },
       }}
     >
-      {dt && <span title="Acquisition date">{toUtcDate(dt)}</span>}
+      {dt && <span title="Acquisition date">{toUtcDateString(dt)}</span>}
       <StackItem styles={{ root: { paddingRight: 8 } }}>
         {isNumber(cloud) && (
           <IconValue

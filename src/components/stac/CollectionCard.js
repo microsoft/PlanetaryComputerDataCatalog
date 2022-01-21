@@ -14,7 +14,7 @@ const CollectionCard = ({ collection }) => {
       <Link to={href} aria-label={`Navigate to ${collection.id}`}>
         <AssetThumbnail assets={collection.assets} />
 
-        <h3>{collection.title}</h3>
+        <h3 style={{ marginBottom: 0 }}>{collection.title}</h3>
       </Link>
       <p style={{ color: "initial", minHeight: 40 }}>
         {collection["msft:short_description"]}

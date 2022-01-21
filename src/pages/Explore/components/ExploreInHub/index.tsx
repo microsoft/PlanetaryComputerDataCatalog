@@ -1,22 +1,13 @@
-import { PrimaryButton, Stack, useTheme } from "@fluentui/react";
+import { PrimaryButton, Stack, getTheme } from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
 import SnippetCopyPanel from "./SnippetCopyPanel";
 
 const ExploreInHub = () => {
-  const theme = useTheme();
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("callout-button");
 
   return (
-    <Stack
-      styles={{
-        root: {
-          padding: 6,
-          borderTop: "1px solid",
-          borderColor: theme.palette.neutralLighter,
-        },
-      }}
-    >
+    <Stack styles={styles}>
       <PrimaryButton id={buttonId} onClick={toggle} data-cy="explore-in-hub">
         Explore results in the Hub
       </PrimaryButton>
@@ -31,3 +22,14 @@ const ExploreInHub = () => {
 };
 
 export default ExploreInHub;
+
+const theme = getTheme();
+const styles = {
+  root: {
+    marginTop: 0,
+    padding: 8,
+    borderTop: "1px solid",
+    borderColor: theme.palette.neutralLighter,
+    backgroundColor: theme.semanticColors.bodyBackground,
+  },
+};

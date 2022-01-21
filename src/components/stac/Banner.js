@@ -5,7 +5,6 @@ import Keywords from "./Keywords";
 import { collections as collectionsConfig } from "../../config/datasets.yml";
 import groups from "../../config/datasetGroups.yml";
 import { useHistory } from "react-router";
-import { titleCase } from "utils";
 
 const Banner = ({ collection }) => {
   const history = useHistory();
@@ -25,7 +24,7 @@ const Banner = ({ collection }) => {
   const bannerBreadcrumbs = hasGroup ? (
     <>
       <Link to="/catalog">Datasets</Link> {" > "}
-      <Link to={`/dataset/group/${groupId}`}>{titleCase(groupId)}</Link>
+      <Link to={`/dataset/group/${groupId}`}>{groups[groupId].title}</Link>
     </>
   ) : (
     <Link to="/catalog">Datasets</Link>

@@ -5,7 +5,8 @@
       "description": "",
       "cql": [
         {
-          "lt": [{ "property": "datetime" }, "05-31-2020"]
+          "op": "<=",
+          "args": [{ "property": "datetime" }, { "timestamp": "2020-05-06" }]
         }
       ]
     }

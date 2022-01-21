@@ -174,6 +174,22 @@ collections:
         src: gap-example.html
         launch: datasets/gap/gap-example.ipynb
 
+  gnatsgo-rasters:
+    category: Soils
+    headerImg: ./images/gnatsgo-rasters-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gnatsgo-example.html
+        launch: datasets/gnatsgo/gnatsgo-example.ipynb
+
+  gnatsgo-tables:
+    category: Soils
+    headerImg: ./images/gnatsgo-tables-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gnatsgo-example.html
+        launch: datasets/gnatsgo/gnatsgo-example.ipynb
+
   gbif:
     headerImg: ./images/gbif-hero.png
     tabs:
@@ -196,6 +212,13 @@ collections:
         src: goes-r-abi-l2-mcmipf.html
       - title: Storage Documentation
         src: goes-r-storage.html
+
+  gpm-imerg-hhr:
+    headerImg: ./images/gpm-imerg-hhr-hero.png
+    tabs:
+      - title: Example Notebook
+        src: gpm-imerg-hhr-example.html
+        launch: datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
 
   gridmet:
     headerImg: ./images/gridmet-hero.png
@@ -236,6 +259,14 @@ collections:
         launch: datasets/io-lulc/io-lulc-example.ipynb
       - title: Storage Documentation
         src: io-lulc-storage.html
+
+  io-lulc-9-class:
+    category: Land use/Land cover
+    headerImg: ./images/io-lulc-9-class-hero.png
+    tabs:
+      - title: Example Notebook
+        src: io-lulc-9-class-example.html
+        launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
   jrc-gsw:
     category: Water
@@ -293,6 +324,13 @@ collections:
       - title: Storage Documentation
         src: naip-storage.html
 
+  nasa-nex-gddp-cmip6:
+    category: Climate/Weather
+    tabs:
+      - title: Example Notebook
+        src: nasa-nex-gddp-cmip6-example.html
+        launch: datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
+
   nasadem:
     category: DEMs
     headerImg: ./images/nasadem-hero.png
@@ -304,6 +342,14 @@ collections:
         src: nasadem-cog.html
       - title: Storage Documentation
         src: nasadem-storage.html
+
+  nrcan-landcover:
+    category: Land use/Land cover
+    headerImg: ./images/nrcan-landcover-hero.png
+    tabs:
+      - title: Example Notebook
+        src: nrcan-landcover-example.html
+        launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
 
   sentinel-2-l2a:
     category: Imagery
@@ -346,7 +392,15 @@ ai4e:
     infoUrl: https://aka.ms/ai4edata-deltares-gfm
     thumbnailUrl: deltares-flood.png
     alt: Flood map of coastal Myanmar
-    keywords: [Global, Flood, Sea level rise, Water]
+    keywords: [Global, Flood, Sea level rise, Water, Deltares]
+
+  - title: Deltares Global Water Availability
+    shortTerm: Deltares water availability
+    description: Global coastal inundation maps at multiple resolutions
+    infoUrl: https://aka.ms/ai4edata-deltares-reservoirs
+    thumbnailUrl: deltares-reservoir.jpg
+    alt: Reservoir with access tower
+    keywords: [Global, Water, Reservoir, Deltares]
 
   - title: Global Hydro Estimator
     shortTerm: global precipitation

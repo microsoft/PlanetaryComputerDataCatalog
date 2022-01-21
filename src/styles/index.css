@@ -141,7 +141,7 @@ h4 {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 main.short {
@@ -222,7 +222,7 @@ a:not(header a):hover img {
 }
 
 .toc-item {
-  margin-right: 8px;
+  margin-right: 18px;
   padding-top: 15px;
 }
 
@@ -259,22 +259,6 @@ a:not(header a):hover img {
 }
 /* Corporate footer styling from UHF */
 
-header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-header a:hover {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
-header .break {
-  flex-basis: 100%;
-  height: 0;
-  margin: 0;
-}
-
 /* All gridded content conforms to these margins */
 @media (min-width: 1080px) {
   .grid-content {
@@ -300,20 +284,6 @@ header .break {
   }
   footer .off-grid-content {
     padding-left: 5px;
-  }
-}
-
-/* Tablet size main header will break on first header link to new line */
-@media (min-width: 1023px) {
-  header .break {
-    display: none;
-  }
-}
-
-/* When header links are on a new line, add some padding to the bottom of the header */
-@media (max-width: 1023px) {
-  header .inner-header {
-    padding-bottom: 10px;
   }
 }
 
@@ -442,26 +412,27 @@ https://every-layout.dev/layouts/sidebar/
 }
 
 .custom-overflow::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
   background-color: #f5f5f5;
 }
 
 .custom-overflow::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
   background-color: #ccc;
 }
 
 .custom-overflow::-webkit-scrollbar-track {
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: #f5f5f5;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
 .hood {
   margin: -11px;
   overflow: hidden;
-  height: 10px;
+  height: 13px;
+  z-index: 1;
 }
 
 .hood:after {

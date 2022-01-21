@@ -1,0 +1,22 @@
+/* Styles that can't otherwise be overloaded via fluent ui components */
+
+.ms-CalendarDay-daySelected .ms-CalendarDay-dayIsToday {
+  color: white;
+  font-weight: 500;
+}
+
+.ms-Stack .ms-layer {
+  margin: 0;
+}
+
+.map-copyright {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.azure-map-copyright {
+  margin-right: 0;
+  margin-left: 0;
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
+    BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+}

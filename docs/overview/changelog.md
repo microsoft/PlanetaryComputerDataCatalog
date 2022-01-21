@@ -2,6 +2,70 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## January 2022
+
+This release includes several new datasets, features, and updates to libraries.
+
+### Highlights
+
+- The [Explorer](https://planetarycomputer.microsoft.com/explore) tool now has an advanced mode which allows creating custom queries against our datasets.
+- Six new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
+- We've open-sourced our STAC API, Tiler API, and our frontend tools — in addition to the Hub. See more details at our main [repository](https://github.com/microsoft/planetarycomputer).
+
+### APIs
+
+#### STAC API
+
+##### New features
+
+- Our STAC API is now open-source! [Check out the code on GitHub](https://github.com/microsoft/planetary-computer-apis)
+- The API supports the latest version of the [OGC API - Features - Part 3: Filtering and the Common Query Language](https://docs.ogc.org/DRAFTS/21-065.html) language syntax, known as CQL2. The API supports CQL JSON currently, with CQL TEXT support planned for a future release.
+- Implements STAC API [v1.0.0-beta.4](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-beta.4)
+- Upgraded to PgSTAC [v0.4.3](https://github.com/stac-utils/pgstac/releases/tag/v0.4.3) and stac-fastpi [v2.3.0](https://github.com/stac-utils/stac-fastapi/releases/tag/2.3.0)
+
+#### Data API
+
+##### New features
+
+- Our tiling endpoints were upgraded to the latest version of [TiTiler](https://developmentseed.org/titiler/). This has some breaking changes to the query string parameters, [see GitHub](https://github.com/developmentseed/titiler/discussions/396) for more details.
+- Added endpoints to generate map legend configuration from a set of TiTiler render parameters.
+
+#### New API datasets
+
+- [GPM IMERG](https://planetarycomputer.microsoft.com/dataset/gpm-imerg-hhr): A time series of precipitation over the majority of the earth.
+- [10m Annual Land Use Land Cover (9-class)](https://planetarycomputer.microsoft.com/dataset/io-lulc-9-class): A time series of annual global maps of land use and land cover.
+- [Earth Exchange Global Daily Downscaled Projections](https://planetarycomputer.microsoft.com/dataset/nasa-nex-gddp-cmip6): Global downscaled climate scenarios derived from the General Circulation Model runs conducted under the Coupled Model Intercomparison Project Phase 6.
+- [Land Cover of Canada](https://planetarycomputer.microsoft.com/dataset/nrcan-landcover): Collection of Land Cover products for Canada as produced by Natural Resources Canada using Landsat satellite imagery.
+- [Chloris Biomass](https://planetarycomputer.microsoft.com/dataset/chloris-biomass): Estimates of stock and change in aboveground biomass for Earth's terrestrial woody vegetation ecosystems.
+- [gNATSGO Soil Database](https://planetarycomputer.microsoft.com/dataset/group/gnatsgo): A composite database that provides complete coverage of the best available soils information for all areas of the United States and Island Territories.
+
+#### New Blob Storage datasets
+
+- We've added Deltares [Global Flood Maps](https://microsoft.github.io/AIforEarthDataSets/data/deltares-floods.html) and [Global Water Supply](https://microsoft.github.io/AIforEarthDataSets/data/deltares-water-availability.html) datasets to our blob storage catalog.
+
+### Hub environments
+
+#### Support for batch workflows
+
+The Planetary Computer Hub is now integrated with [kbatch](https://kbatch.readthedocs.io/en/latest/) to run asynchronous / batch workflow jobs, complementing JupyterHub's support
+for interactive computing. See the [kbatch overview](../overview/batch) and the [kbatch documentation](https://kbatch.readthedocs.io/en/latest/) for more.
+
+#### New package versions
+
+The Planetary Computer Hub has been upgraded to use container images from the [planetary-computer-containers 2022.01.17.0 release](https://github.com/microsoft/planetary-computer-containers/releases/tag/2022.01.17.0). In particular, this release includes
+
+- pystac-client 0.3.2, with support for cql2-json queries
+- leafmap 0.7.2, with support for adding STAC items from the Planetary Computer's STAC catalog and tiling with the Planetary Computer's data API
+
+See the release notes for the changes in the various packages provided in the Planetary Computer's environment.
+
+### Website
+
+- Explorer advanced mode offers a custom query builder interface, and searches use the new CQL2 syntax
+- Explorer now generates dynamic legends for continuous and categorical datasets
+- Updated styling and layout of the Planetary Computer Data Catalog and Explorer
+- The Data Catalog and Explorer tools are [open-sourced](https://github.com/microsoft/PlanetaryComputerDataCatalog)
+
 ## September 2021
 
 This release includes several new datasets, features, and updates to libraries.

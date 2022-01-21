@@ -4,7 +4,11 @@
       "name": "Most recent",
       "cql": [
         {
-          "anyinteracts": [{ "property": "datetime" }, ["1998-01-01", "2012-01-01"]]
+          "op": "anyinteracts",
+          "args": [
+            { "property": "datetime" },
+            { "interval": ["1998-01-01", "2012-01-01"] }
+          ]
         }
       ]
     }

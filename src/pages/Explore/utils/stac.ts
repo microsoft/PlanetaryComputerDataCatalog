@@ -2,7 +2,8 @@ import atlas from "azure-maps-control";
 import bboxToPolygon from "@turf/bbox-polygon";
 import { BBox } from "geojson";
 
-import { IStacFilterCollection, IStacFilterGeom } from "types/stac";
+import { IStacCollection, IStacFilterCollection, IStacFilterGeom } from "types/stac";
+import { CqlDateRange } from "./cql/types";
 
 export const collectionFilter = (
   collectionId: string | undefined
@@ -10,7 +11,8 @@ export const collectionFilter = (
   if (!collectionId) return null;
 
   return {
-    eq: [{ property: "collection" }, collectionId],
+    op: "=",
+    args: [{ property: "collection" }, collectionId],
   };
 };
 
@@ -20,11 +22,20 @@ export const geomFilter = (
   if (!bbox) return null;
 
   return {
-    intersects: [
+    op: "s_intersects",
+    args: [
       {
         property: "geometry",
       },
       bboxToPolygon(bbox as BBox).geometry,
     ],
   };
+};
+
+export const rangeFromTemporalExtent = (
+  interval: IStacCollection["extent"]["temporal"]["interval"]
+): CqlDateRange => {
+  const start = interval[0][0] || new Date().toUTCString();
+  const end = interval[0][1] || new Date().toUTCString();
+  return [start, end];
 };

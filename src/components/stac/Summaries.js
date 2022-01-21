@@ -6,15 +6,23 @@ const CollectionSummary = ({ collection }) => {
   const summaries = collection
     ? StacFields.formatSummaries(collection, key => key !== "eo:bands")
     : null;
+  const skipLabel = ["raster:bands"];
 
   const sections = summaries.map(summary => {
     const sectionLabel = summary.label || "General";
     return (
       <React.Fragment key={`summary-${sectionLabel}`}>
         {Object.entries(summary.properties).map(([key, val]) => {
+          const isHtml = typeof val.formatted === "string";
+          const label = skipLabel.includes(key) ? "" : val.spec.label;
+
           return (
-            <LabeledValue key={key} label={val.spec.label}>
-              <div dangerouslySetInnerHTML={{ __html: val.formatted }} />
+            <LabeledValue key={key} label={label}>
+              {isHtml ? (
+                <div dangerouslySetInnerHTML={{ __html: val.formatted }} />
+              ) : (
+                val.formatted
+              )}
             </LabeledValue>
           );
         })}

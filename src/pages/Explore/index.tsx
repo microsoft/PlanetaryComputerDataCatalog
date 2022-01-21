@@ -1,8 +1,10 @@
+import { CSSProperties } from "react";
 import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
-import { Stack, StackItem, IStackTokens, useTheme } from "@fluentui/react";
+import { IStackStyles, Stack, StackItem, useTheme } from "@fluentui/react";
 
 import { store } from "./state/store";
+import "./explorer.css";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
@@ -12,15 +14,11 @@ import { useWindowSize } from "react-use";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
 
-const stackTokens: IStackTokens = {
-  childrenGap: 5,
-};
-
 // TODO: track heights rather than hard code them
 const heights = {
-  header: 57.5,
+  header: 55,
   footer: 27,
-  buffer: 2,
+  buffer: 1,
 };
 
 const Explorer = () => {
@@ -28,16 +26,13 @@ const Explorer = () => {
   const { height } = useWindowSize();
 
   const bodyHeight = height - heights.header - heights.footer - heights.buffer;
+  const mainStyle: CSSProperties = { height: bodyHeight };
 
   return (
-    <Layout onGrid={false} allowAnnouncement={false}>
+    <Layout onGrid={false} allowAnnouncement={false} mainStyle={mainStyle}>
       <SEO title="Explorer" description="Explore Planetary Computer datasets" />
       <Provider store={store}>
-        <Stack
-          horizontal
-          tokens={stackTokens}
-          styles={{ root: { height: bodyHeight } }}
-        >
+        <Stack horizontal styles={contentStyles}>
           <Sidebar />
           <StackItem
             styles={{
@@ -59,3 +54,9 @@ const Explorer = () => {
 };
 
 export default Explorer;
+
+const contentStyles: Partial<IStackStyles> = {
+  root: {
+    height: "100%",
+  },
+};

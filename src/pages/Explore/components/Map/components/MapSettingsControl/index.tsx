@@ -40,7 +40,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
           layer.layout["text-field"] &&
           layer.layout["text-field"] !== ""
         ) {
-          // @ts-ignore - "visbility" isn't in the type definition
+          // @ts-ignore - "visibility" isn't in the type definition
           mapRef.current.map.setLayoutProperty(layer.id, "visibility", vis);
         }
       });
@@ -58,7 +58,7 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   const title = "Manage map settings";
 
   return (
-    <PanelControl label={title} iconName="Settings" top={178}>
+    <PanelControl label={title} iconName="FluentSettings" top={178}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
         <Slider
           min={0}

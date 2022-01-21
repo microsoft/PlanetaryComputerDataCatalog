@@ -9,9 +9,7 @@ import { useRenderUrlState } from "./hooks/useUrlState";
 
 const RenderOptionsSelector = () => {
   const dispatch = useExploreDispatch();
-  const { collection, query, renderOption } = useExploreSelector(
-    state => state.mosaic
-  );
+  const { collection, renderOption } = useExploreSelector(state => state.mosaic);
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   // Set a default render option if none is selected
@@ -36,12 +34,12 @@ const RenderOptionsSelector = () => {
   return (
     <StateSelector
       title="Select a rendering option"
-      icon="MapLayers"
+      icon="Layer"
       action={setRenderOption}
       options={options}
       selectedKey={renderOption?.name}
       getStateValFn={getOptionByName}
-      disabled={!query.name}
+      disabled={!Boolean(mosaicInfo?.renderOptions)}
       cyId="render-selector"
     />
   );

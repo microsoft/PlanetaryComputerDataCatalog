@@ -1,5 +1,15 @@
-import { Dropdown, IDropdownOption, Icon, useTheme } from "@fluentui/react";
+import { useCallback } from "react";
+import {
+  Dropdown,
+  IDropdownOption,
+  IDropdownStyles,
+  getTheme,
+} from "@fluentui/react";
 import { useExploreDispatch } from "../../../state/hooks";
+import {
+  renderPlaceholder,
+  renderTitle,
+} from "pages/Explore/utils/dropdownRenderers";
 
 type StateSelectorProps = {
   options: IDropdownOption[];
@@ -23,50 +33,16 @@ const StateSelector = ({
   getStateValFn,
 }: StateSelectorProps) => {
   const dispatch = useExploreDispatch();
-  const { palette } = useTheme();
 
-  const iconStyles = { marginRight: 8, color: palette.themePrimary };
-
-  const renderTitle = (iconName: string) => {
-    return (options: IDropdownOption[] | undefined): JSX.Element | null => {
-      if (!options) return null;
-
-      const option = options[0];
-
-      return (
-        <div>
-          <Icon
-            style={iconStyles}
-            iconName={iconName}
-            aria-hidden="true"
-            title={option.title}
-          />
-          <span>{option.text}</span>
-        </div>
-      );
-    };
-  };
-
-  const renderPlaceholder = (iconName: string, title: string) => {
-    return (): JSX.Element => {
-      return (
-        <div>
-          <Icon style={iconStyles} iconName={iconName} aria-hidden="true" />
-          <span>{title}</span>
-        </div>
-      );
-    };
-  };
-
-  const handleCollectionChange = (
-    _: any,
-    option: IDropdownOption | undefined
-  ): void => {
-    if (option) {
-      const payload = getStateValFn ? getStateValFn(option.key) : option.key;
-      dispatch(action(payload));
-    }
-  };
+  const handleCollectionChange = useCallback(
+    (_: any, option: IDropdownOption | undefined): void => {
+      if (option) {
+        const payload = getStateValFn ? getStateValFn(option.key) : option.key;
+        dispatch(action(payload));
+      }
+    },
+    [action, dispatch, getStateValFn]
+  );
 
   return (
     <div>
@@ -80,9 +56,20 @@ const StateSelector = ({
         title={title}
         disabled={disabled}
         data-cy={cyId}
+        styles={dropdownStyles}
       />
     </div>
   );
 };
 
 export default StateSelector;
+
+const theme = getTheme();
+const dropdownStyles: Partial<IDropdownStyles> = {
+  title: {
+    borderColor: theme.palette.neutralTertiaryAlt,
+    ":hover": {
+      borderColor: theme.palette.neutralTertiary + " !important",
+    },
+  },
+};

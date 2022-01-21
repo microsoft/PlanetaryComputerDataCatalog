@@ -4,7 +4,6 @@ import {
   bandOverrideList,
   columnOrders,
   mediaTypeOverride,
-  rasterBandOverrideList,
   renderItemColumn,
   stacFormatter,
 } from "../../utils/stac";
@@ -18,8 +17,9 @@ const defaultWidth = 100;
 const columnWidths = {
   title: 200,
   gsd: 30,
-  roles: 50,
+  roles: 60,
   description: 100,
+  "file:values": 250,
 };
 
 const ItemAssets = () => {
@@ -59,7 +59,7 @@ const ItemAssets = () => {
 
   // Make the rows
   const items = Object.entries(formatted).map(([assetKey, extensions]) => {
-    // Flatten all extension property attributres to a single list
+    // Flatten all extension property attributes to a single list
     const item = extensions
       .map(({ properties }) => {
         return Object.entries(properties).map(([key, property]) => {
@@ -70,17 +70,13 @@ const ItemAssets = () => {
               // Rather than a table, render a string of "name (common name)" bands
               formattedValue = bandOverrideList(property.value);
               break;
-            case "raster:bands":
-              // HOTFIX: can remove in trunk
-              formattedValue = rasterBandOverrideList(property.value);
-              break;
             case "type":
               // Shorten COG GeoTIFF type
               formattedValue = mediaTypeOverride(property.value);
               break;
             default:
               // Just use the default format
-              formattedValue = property.formatted;
+              formattedValue = property.value;
           }
           return [key, formattedValue];
         });

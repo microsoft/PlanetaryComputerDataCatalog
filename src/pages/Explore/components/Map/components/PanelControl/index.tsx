@@ -1,5 +1,12 @@
 import React, { useImperativeHandle } from "react";
-import { getTheme, Callout, DirectionalHint, IconButton } from "@fluentui/react";
+import {
+  getTheme,
+  Callout,
+  DirectionalHint,
+  IconButton,
+  Stack,
+  IButtonStyles,
+} from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
 
 interface PanelControlProps {
@@ -11,6 +18,7 @@ interface PanelControlProps {
   right?: number;
 }
 
+// TODO: move export to common folder
 export interface PanelControlHandlers {
   togglePanel: () => void;
 }
@@ -31,7 +39,6 @@ const PanelControl = React.forwardRef<
     },
     ref
   ) => {
-    const theme = getTheme();
     const [isCalloutVisible, { toggle: toggleIsCalloutVisible }] = useBoolean(false);
     const buttonId = useId("callout-button");
     const r = left ? undefined : right;
@@ -44,14 +51,16 @@ const PanelControl = React.forwardRef<
       },
     }));
 
-    const panelDir = left ? DirectionalHint.rightCenter : DirectionalHint.leftCenter;
+    const panelDir = left
+      ? DirectionalHint.rightTopEdge
+      : DirectionalHint.leftTopEdge;
     return (
-      <div style={buttonStyle}>
+      <Stack style={buttonStyle}>
         <IconButton
           id={buttonId}
           ariaLabel={label}
           title={label}
-          styles={{ icon: { color: theme.semanticColors.bodyText } }}
+          styles={iconStyles}
           className="azure-maps-control-button"
           iconProps={{ iconName: iconName }}
           onClick={toggleIsCalloutVisible}
@@ -68,21 +77,22 @@ const PanelControl = React.forwardRef<
             {children}
           </Callout>
         )}
-      </div>
+      </Stack>
     );
   }
 );
 
 export default PanelControl;
 
-const controlStyle: React.CSSProperties = {
+const theme = getTheme();
+export const controlStyle: React.CSSProperties = {
   zIndex: 1,
   position: "absolute",
   display: "flex",
   margin: 8,
-  background: getTheme().semanticColors.bodyBackground,
+  background: theme.semanticColors.bodyBackground,
   borderCollapse: "collapse",
-  borderRadius: getTheme().effects.roundedCorner2,
+  borderRadius: theme.effects.roundedCorner2,
   boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
 };
 
@@ -90,5 +100,20 @@ const calloutStyle = {
   calloutMain: {
     width: 320,
     padding: "6px 6px",
+  },
+};
+
+const iconStyles: Partial<IButtonStyles> = {
+  icon: {
+    color: theme.semanticColors.bodyText,
+    width: 20,
+    height: 20,
+    lineHeight: 20,
+    fontSize: 20,
+    selectors: {
+      svg: {
+        fill: theme.semanticColors.bodyText,
+      },
+    },
   },
 };

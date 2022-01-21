@@ -1,0 +1,67 @@
+import {
+  FontSizes,
+  FontWeights,
+  IStackStyles,
+  IStackTokens,
+  ITextStyles,
+  IVerticalDividerStyles,
+  Stack,
+  Text,
+  VerticalDivider,
+} from "@fluentui/react";
+import { useExploreSelector } from "pages/Explore/state/hooks";
+
+import AdvancedModeButton from "./AdvancedModeButton";
+import ResetSelectors from "./ResetSelectors";
+
+export const TitleHeader = () => {
+  const { collection } = useExploreSelector(state => state.mosaic);
+  const commandBar = (
+    <Stack
+      horizontal
+      horizontalAlign="end"
+      tokens={stackTokens}
+      styles={commandBarStyles}
+    >
+      <AdvancedModeButton />
+      <VerticalDivider styles={dividerStyles} />
+      <ResetSelectors />
+    </Stack>
+  );
+  return (
+    <Stack horizontal styles={stackStyles}>
+      <Text styles={sidebarTitleStyles} block>
+        Explore datasets
+      </Text>
+      {collection && commandBar}
+    </Stack>
+  );
+};
+
+const stackTokens: IStackTokens = {
+  childrenGap: 5,
+};
+const stackStyles: Partial<IStackStyles> = {
+  root: {
+    justifyContent: "space-between",
+  },
+};
+const dividerStyles: Partial<IVerticalDividerStyles> = {
+  wrapper: {
+    height: 15,
+    marginTop: 9,
+    marginLeft: 0,
+  },
+};
+const sidebarTitleStyles: Partial<ITextStyles> = {
+  root: {
+    padding: "5px 0",
+    fontSize: FontSizes.mediumPlus,
+    fontWeight: FontWeights.bold,
+  },
+};
+const commandBarStyles: Partial<IStackStyles> = {
+  root: {
+    marginRight: 2,
+  },
+};

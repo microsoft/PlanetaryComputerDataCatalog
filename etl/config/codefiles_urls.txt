@@ -35,6 +35,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-radiant-mlhub-api.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/goes/goes-cmi-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/hgb/hgb-example.ipynb
@@ -42,9 +43,11 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/hrea/hrea-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/mtbs/mtbs-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasadem/nasadem-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/terraclimate/terraclimate-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/daymet/daymet-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/io-lulc/io-lulc-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/io-lulc/io-lulc-9-class-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/3dep/3dep-seamless-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gap/gap-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/jrc-gsw/jrc-gsw-example.ipynb
@@ -52,6 +55,9 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/fia/fia-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gbif/gbif-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gridmet/gridmet-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/alos-dem/alos-dem-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/copernicus-dem/copernicus-dem-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nrcan-landcover/nrcan-landcover-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/chloris-biomass/chloris-biomass-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gnatsgo/gnatsgo-example.ipynb

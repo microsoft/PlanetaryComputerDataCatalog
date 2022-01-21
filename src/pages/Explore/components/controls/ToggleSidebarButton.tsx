@@ -21,8 +21,8 @@ const MinimizeButton = () => {
     <div
       style={{
         position: "absolute",
-        top: 190,
-        left: showSidebar ? SIDEBAR_WIDTH + 14 : 0,
+        top: 175,
+        left: showSidebar ? SIDEBAR_WIDTH - 1 : 8,
         zIndex: 1,
         padding: "8px 1px",
         borderRadius: "0  4px 4px 0",
@@ -32,9 +32,9 @@ const MinimizeButton = () => {
         borderTop: "1px solid",
         borderBottom: "1px solid",
         borderLeft: 0,
-        borderTopColor: theme.palette.neutralLighter,
-        borderBottomColor: theme.palette.neutralLighter,
-        borderRightColor: theme.palette.neutralLighter,
+        borderTopColor: theme.palette.neutralLight,
+        borderBottomColor: theme.palette.neutralLight,
+        borderRightColor: theme.palette.neutralLight,
       }}
     >
       <IconButton

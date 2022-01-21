@@ -1,15 +1,7 @@
 import React from "react";
-import {
-  DetailsList,
-  DetailsListLayoutMode,
-  SelectionMode,
-} from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
-import {
-  columnOrders,
-  renderItemColumn,
-  stacFormatter,
-} from "../../utils/stac";
+import { columnOrders, renderItemColumn, stacFormatter } from "../../utils/stac";
 import { useStac } from "./CollectionContext";
 import marked from "marked";
 import { capitalize, sortByLookup } from "../../utils";

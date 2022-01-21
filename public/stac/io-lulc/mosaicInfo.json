@@ -5,7 +5,8 @@
       "description": "Most recent Land Use/Land Cover",
       "cql": [
         {
-          "eq": [{ "property": "datetime" }, "2020-06-01"]
+          "op": "=",
+          "args": [{ "property": "datetime" }, { "timestamp": "2020-06-01" }]
         }
       ]
     }
@@ -13,7 +14,7 @@
   "renderOptions": [
     {
       "name": "Default",
-      "description": "Land cover classification using 5 class custom colormap",
+      "description": "Land cover classification using 10 class custom colormap",
       "options": "assets=data&exitwhenfull=False&skipcovered=False&colormap_name=io-lulc",
       "minZoom": 4
     }

@@ -94,9 +94,9 @@ const AccountSurvey = () => {
           Microsoft will use this information to communicate with you about the
           Planetary Computer, to evaluate your eligibility to participate in our
           preview, to prioritize new features, and to communicate non-identifying
-          information – both internally and externally – about the geographic regions
-          and focus areas that our users represent. For more information on how we
-          use your data please see{" "}
+          information—both internally and externally—about the geographic regions and
+          focus areas that our users represent. For more information on how we use
+          your data please see{" "}
           <NewTabLink href="https://go.microsoft.com/fwlink/?LinkId=521839">
             Privacy &amp; Cookies
           </NewTabLink>
@@ -161,8 +161,9 @@ const AccountSurvey = () => {
     <>
       <h2>Thank you for your interest!</h2>
       <p style={{ maxWidth: "50%" }}>
-        You've been added to our waiting list. We'll follow up with additional
-        information as we expand access to the Planetary Computer. Please email{" "}
+        You've been added to our waiting list and can expect to have your account
+        approved between 1 and 2 business days. We'll follow up with additional
+        information on using the Planetary Computer at that time. Please email{" "}
         <Link href="mailto:planetarycomputer@microsoft.com">
           planetarycomputer@microsoft.com
         </Link>{" "}

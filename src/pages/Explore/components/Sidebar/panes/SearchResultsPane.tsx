@@ -8,6 +8,10 @@ import {
   MessageBarType,
   Separator,
   Spinner,
+  Stack,
+  getTheme,
+  IMessageBarStyles,
+  IStackStyles,
 } from "@fluentui/react";
 import { UseQueryResult } from "react-query";
 
@@ -16,14 +20,20 @@ import ItemResult from "../../ItemResult";
 import ExploreInHub from "../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import ErrorFallback from "components/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
+import NewTabLink from "components/controls/NewTabLink";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
+  visible: boolean;
 }
 
 const SearchResultsPane = ({
   request: { data, isError, isLoading, isPreviousData },
+  visible,
 }: SearchResultsProps) => {
+  const theme = getTheme();
   const { collection } = useExploreSelector(s => s.mosaic);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
@@ -52,9 +62,23 @@ const SearchResultsPane = ({
 
   if (isError) {
     return (
-      <MessageBar messageBarType={MessageBarType.error}>
-        Sorry, we're having trouble completing this search.
-      </MessageBar>
+      <>
+        <Separator />
+        <MessageBar
+          messageBarType={MessageBarType.error}
+          styles={errorMessageStyles}
+        >
+          Sorry, we're having trouble completing this search. If the issue persists,
+          please consider submitting an issue on our{" "}
+          <NewTabLink
+            style={{ padding: 0 }}
+            href="https://github.com/microsoft/PlanetaryComputer"
+          >
+            GitHub repo
+          </NewTabLink>
+          .
+        </MessageBar>
+      </>
     );
   }
   const loadingIndicator = (
@@ -82,31 +106,49 @@ const SearchResultsPane = ({
     if (!item) return null;
     return <ItemResult item={item} />;
   };
+
+  const resultsListStyle: Partial<IStackStyles> = {
+    root: {
+      background: theme.palette.neutralLighterAlt,
+      display: visible ? "flex" : "none",
+      height: "100%",
+      paddingLeft: 10,
+      paddingRight: 10,
+      paddingBottom: 1,
+      borderTop: `1px solid ${theme.palette.neutralLight}`,
+      overflowY: "auto",
+      overflowX: "hidden",
+    },
+  };
+
   return (
     <>
-      <Separator />
-      <SearchResultsHeader results={data} isLoading={isPreviousData} />
-      <div className={scrollPos ? "hood on" : "hood"} />
-      <div
-        className="custom-overflow"
-        style={{
-          height: "100%",
-          overflowY: "auto",
-          overflowX: "hidden",
-          ...loadingStyle(isPreviousData),
-        }}
-        onScroll={handleScroll}
-        data-cy="search-results-list"
-      >
-        <FocusZone direction={FocusZoneDirection.vertical}>
-          <List
-            componentRef={listRef}
-            items={data?.features}
-            onRenderCell={renderCell}
-          />
-        </FocusZone>
-      </div>
-      <ExploreInHub />
+      <Stack styles={resultsListStyle}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <SearchResultsHeader results={data} isLoading={isPreviousData} />
+          <div className={scrollPos ? "hood on" : "hood"} />
+          <div
+            className="custom-overflow"
+            style={{
+              height: "100%",
+              overflowY: "auto",
+              overflowX: "hidden",
+              ...loadingStyle(isPreviousData),
+            }}
+            onScroll={handleScroll}
+            data-cy="search-results-list"
+          >
+            <FocusZone direction={FocusZoneDirection.vertical}>
+              <List
+                componentRef={listRef}
+                items={data?.features}
+                onRenderCell={renderCell}
+              />
+            </FocusZone>
+          </div>
+        </ErrorBoundary>
+      </Stack>
+      {visible && <ExploreInHub />}
     </>
   );
 };
@@ -117,3 +159,7 @@ export const loadingStyle = (inLoadingState: boolean) => ({
   opacity: inLoadingState ? 0.4 : 1,
   transition: "opacity 0.1s ease-in-out",
 });
+
+export const errorMessageStyles: IMessageBarStyles = {
+  root: { borderRadius: 4, margin: 8, width: "unset" },
+};
