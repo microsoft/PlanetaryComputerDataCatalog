@@ -1,6 +1,6 @@
 {
   "name": "pc-datacatalog",
-  "version": "1.4.6",
+  "version": "2022.1",
   "private": true,
   "proxy": "http://localhost:7071/",
   "dependencies": {
