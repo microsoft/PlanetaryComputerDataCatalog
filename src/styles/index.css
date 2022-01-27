@@ -253,7 +253,7 @@ a:not(header a):hover img {
 
 /* Documentation markup from generated sources */
 .generated-docs img {
-  object-fit: cover;
+  object-fit: contain;
   max-height: 100%;
   max-width: 100%;
 }

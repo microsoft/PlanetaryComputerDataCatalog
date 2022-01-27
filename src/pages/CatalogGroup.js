@@ -150,11 +150,10 @@ const CatalogGroup = () => {
       <section id="catalog-api-datasets">
         <div className="grid-content">
           <h2>Overview</h2>
-          <p style={{ maxWidth: 800, marginBottom: 40 }}>
-            <div
-              dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
-            />
-          </p>
+          <p
+            style={{ maxWidth: 800, marginBottom: 40 }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
+          ></p>
           <div className="layout-container">
             {<Separator />}
             {!isEmpty(groupedKeys) && pivot}
