@@ -63,14 +63,14 @@ export const TextFieldBase = ({
   const applyCql = useCallback(
     (value: string, operator: string) => {
       const cql = onGenerateCqlExpression(value, operator, field);
-      dispatch<any>(setCustomCqlExpressions(cql));
+      dispatch(setCustomCqlExpressions(cql));
     },
     [dispatch, field, onGenerateCqlExpression]
   );
 
   const handleOperatorChange = (
     _: React.FormEvent<HTMLDivElement>,
-    option?: IDropdownOption<any> | undefined
+    option?: IDropdownOption | undefined
   ) => {
     setSelectedOperatorKey(option?.key as string);
     applyCql(value, option?.key as string);

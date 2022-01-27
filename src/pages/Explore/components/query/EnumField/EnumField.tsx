@@ -44,7 +44,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
   const handleUpdate = (keys: string[]) => {
     const cql = parseKeysToCql(keys, field);
     if (cql) {
-      dispatch<any>(setCustomCqlExpressions(cql));
+      dispatch(setCustomCqlExpressions(cql));
     }
   };
 

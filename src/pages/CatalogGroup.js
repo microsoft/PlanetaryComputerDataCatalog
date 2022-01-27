@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useHistory, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
-import marked from "marked";
+import { marked } from "marked";
 import { isEmpty } from "lodash-es";
 
 import GroupBanner from "../components/stac/GroupBanner";

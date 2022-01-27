@@ -3,7 +3,7 @@ import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/rea
 
 import { columnOrders, renderItemColumn, stacFormatter } from "../../utils/stac";
 import { useStac } from "./CollectionContext";
-import marked from "marked";
+import { marked } from "marked";
 import { capitalize, sortByLookup } from "../../utils";
 
 const bandKey = "eo:bands";

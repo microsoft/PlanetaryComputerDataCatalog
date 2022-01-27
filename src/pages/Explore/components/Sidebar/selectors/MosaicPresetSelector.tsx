@@ -16,7 +16,7 @@ const MosaicPresetSelector = () => {
 
   useEffect(() => {
     if (mosaicInfo && query.name === null) {
-      dispatch<any>(setMosaicQuery(mosaicInfo.mosaics[0]));
+      dispatch(setMosaicQuery(mosaicInfo.mosaics[0]));
     }
   }, [dispatch, mosaicInfo, query.name]);
 

@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
-import marked from "marked";
+import { marked } from "marked";
 import { isEmpty, isNil, isObject } from "lodash-es";
 
 import { capitalize, toUtcDateWithTime } from ".";
