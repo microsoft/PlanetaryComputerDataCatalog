@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { initializeIcons } from "@uifabric/icons";
 
 import Catalog from "./pages/Catalog";
@@ -31,43 +31,26 @@ function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <div>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/terms">
-            <Terms />
-          </Route>
-          <Route exact path="/catalog">
-            <Catalog />
-          </Route>
-          <Route path="/docs/">
-            <Docs />
-          </Route>
-          <Route path="/applications">
-            <Applications />
-          </Route>
-          <Route path="/dataset/group/:groupId">
-            <CatalogGroup />
-          </Route>
-          <Route path="/dataset/:id">
-            <Collection />
-          </Route>
-          <Route path="/account/request">
-            <AccountSurvey />
-          </Route>
-          <Route path="/explore">
-            <Suspense fallback={pageFallback}>
-              <Explore />
-            </Suspense>
-          </Route>
-          <Route path="/404">
-            <NotFound />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/docs/*" element={<Docs />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/dataset/group/:groupId" element={<CatalogGroup />} />
+          <Route path="/dataset/:id" element={<Collection />} />
+          <Route path="/account/request" element={<AccountSurvey />} />
+          <Route
+            path="/explore"
+            element={
+              <Suspense fallback={pageFallback}>
+                <Explore />
+              </Suspense>
+            }
+          />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </Router>
   );

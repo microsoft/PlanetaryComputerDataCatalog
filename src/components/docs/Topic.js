@@ -1,6 +1,5 @@
 import { Separator } from "@fluentui/react";
-import React from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import GeneratedInternalToc from "./GeneratedInternalToc";
 import TopicNav from "./TopicNav";
 
@@ -31,7 +30,7 @@ const Topic = ({ topics }) => {
       </>
     );
   }
-  return <Redirect to={"/404"} />;
+  return <Navigate replace to={"/404"} />;
 };
 
 export default Topic;

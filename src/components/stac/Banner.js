@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import Keywords from "./Keywords";
 import { collections as collectionsConfig } from "../../config/datasets.yml";
 import groups from "../../config/datasetGroups.yml";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 
 const Banner = ({ collection }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   if (!collection) return null;
 
   const handleClick = keyword => {
-    history.push({ pathname: "/catalog", search: `tags=${keyword}` });
+    navigate({ pathname: "/catalog", search: `tags=${keyword}` });
   };
 
   const imgUrl =

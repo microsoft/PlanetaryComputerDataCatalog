@@ -1,11 +1,13 @@
 import { render } from "@testing-library/react";
 import { Home } from "./Home";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter, Routes, Route } from "react-router";
 
 test("smoke home render", () => {
   const { getByText } = render(
     <MemoryRouter>
-      <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </MemoryRouter>
   );
 

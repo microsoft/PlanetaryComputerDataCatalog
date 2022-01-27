@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
 import {
   MessageBar,
   MessageBarType,
@@ -34,7 +34,7 @@ import ErrorFallback from "components/ErrorFallback";
 const Collection = () => {
   const { id } = useParams();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const pivotRef = useRef();
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -75,7 +75,7 @@ const Collection = () => {
 
   const handleTabChange = pivotItem => {
     const { itemKey } = pivotItem.props;
-    history.replace({ hash: itemKey });
+    navigate({ replace: true, hash: itemKey });
 
     // Handle scroll to sticky-top when switching tabs
     const headerHeight = 360;
@@ -98,7 +98,7 @@ const Collection = () => {
   });
 
   if (notFound) {
-    return <Redirect to={"/404"} />;
+    return <Navigate replace to={"/404"} />;
   }
 
   const bannerHeader = <Banner collection={collection} />;

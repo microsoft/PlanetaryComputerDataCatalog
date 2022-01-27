@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import AssetThumbnail from "./AssetThumbnail";
 import Keywords from "./Keywords";
 
 const CollectionCard = ({ collection }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const href = `/dataset/${collection.id}`;
 
   return (
@@ -23,7 +23,7 @@ const CollectionCard = ({ collection }) => {
         keywords={collection.keywords}
         color="#4C4C51"
         onClick={keyword => {
-          history.push({ pathname: "/catalog", search: `tags=${keyword}` });
+          navigate({ pathname: "/catalog", search: `tags=${keyword}` });
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />

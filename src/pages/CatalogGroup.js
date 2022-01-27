@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
 import { marked } from "marked";
 import { isEmpty } from "lodash-es";
@@ -29,7 +29,7 @@ const valFormatter = key => {
 
 const CatalogGroup = () => {
   const { groupId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const [collections, setCollections] = useState([]);
   const [filteredCollections, setFilteredCollections] = useState([]);
@@ -122,7 +122,7 @@ const CatalogGroup = () => {
     if (pivotItem) {
       const { itemKey } = pivotItem.props;
       setSelectedKey(itemKey);
-      history.replace({ hash: itemKey });
+      navigate({ replace: true, hash: itemKey });
     }
   };
 

@@ -9,7 +9,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { useMutation } from "react-query";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import axios from "axios";
 import * as yup from "yup";
 
@@ -35,7 +35,7 @@ const stackTokens = {
 };
 
 const AccountSurvey = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const mutation = useMutation(survey => axios.post("./api/survey", survey));
 
   const handleSubmit = survey => {
@@ -178,7 +178,7 @@ const AccountSurvey = () => {
       <h2>Something went wrong...</h2>
       <Text block>
         Sorry, we seem to be having trouble with our signups at the moment. Please{" "}
-        <Link onClick={() => history.go(0)}>try again</Link> or email{" "}
+        <Link onClick={() => navigate(0)}>try again</Link> or email{" "}
         <Link href="mailto:planetarycomputer@microsoft.com">
           planetarycomputer@microsoft.com
         </Link>{" "}

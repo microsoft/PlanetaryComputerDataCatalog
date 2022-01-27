@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import AssetThumbnail from "components/stac/AssetThumbnail";
 import Keywords from "components/stac/Keywords";
 
 const GroupedCollectionCard = ({ group }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   if (!group) return null;
 
   const { assets, groupId, keywords, short_description, title } = group;
@@ -23,7 +23,7 @@ const GroupedCollectionCard = ({ group }) => {
         keywords={keywords}
         color="#4C4C51"
         onClick={keyword => {
-          history.push({ search: `tags=${keyword}` });
+          navigate({ search: `tags=${keyword}` });
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
