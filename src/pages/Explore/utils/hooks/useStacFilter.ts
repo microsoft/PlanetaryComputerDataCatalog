@@ -40,11 +40,11 @@ const optimizeCqlExpressions = (cql: ICqlExpressionList): ICqlExpressionList => 
 
 export const useCqlFormat = () => {
   const { map, mosaic } = useExploreSelector(s => s);
-  const { collection, query, options } = mosaic;
+  const { collection, query } = mosaic;
   const cql = useExploreSelector(selectCurrentCql);
 
   const shouldQuery = () => {
-    return collection && cql && options.showResults;
+    return collection && cql;
   };
 
   const collectionFragment = collectionFilter(collection?.id);
