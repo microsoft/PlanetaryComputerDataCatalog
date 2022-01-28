@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useNavigate, useLocation, useParams } from "react-router";
 import { Pivot, PivotItem, Separator } from "@fluentui/react";
-import marked from "marked";
+import { marked } from "marked";
 import { isEmpty } from "lodash-es";
 
 import GroupBanner from "../components/stac/GroupBanner";
@@ -29,7 +29,7 @@ const valFormatter = key => {
 
 const CatalogGroup = () => {
   const { groupId } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const [collections, setCollections] = useState([]);
   const [filteredCollections, setFilteredCollections] = useState([]);
@@ -122,7 +122,7 @@ const CatalogGroup = () => {
     if (pivotItem) {
       const { itemKey } = pivotItem.props;
       setSelectedKey(itemKey);
-      history.replace({ hash: itemKey });
+      navigate({ replace: true, hash: itemKey });
     }
   };
 
@@ -150,11 +150,10 @@ const CatalogGroup = () => {
       <section id="catalog-api-datasets">
         <div className="grid-content">
           <h2>Overview</h2>
-          <p style={{ maxWidth: 800, marginBottom: 40 }}>
-            <div
-              dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
-            />
-          </p>
+          <p
+            style={{ maxWidth: 800, marginBottom: 40 }}
+            dangerouslySetInnerHTML={{ __html: marked.parse(group.description) }}
+          ></p>
           <div className="layout-container">
             {<Separator />}
             {!isEmpty(groupedKeys) && pivot}

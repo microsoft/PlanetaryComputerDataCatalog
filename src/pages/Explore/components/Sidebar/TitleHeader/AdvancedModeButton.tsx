@@ -29,7 +29,7 @@ const AdvancedModeButton = () => {
 
     setShowAdvanceCoach(false);
     if (isSuccess && mosaicInfo) {
-      dispatch<any>(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
+      dispatch(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
     }
   }, [dispatch, isSuccess, mosaicInfo, setShowAdvanceCoach]);
 

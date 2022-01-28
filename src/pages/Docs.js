@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
@@ -22,12 +22,6 @@ const docTopics = Object.fromEntries(
 );
 
 const Docs = () => {
-  // Routes that are generated via the docs build system, but are matched with
-  // specialized React components for OpenAPI/Swagger routes.
-  const openApiStacRoute = "/docs/reference/stac";
-  const openApiSasRoute = "/docs/reference/sas";
-  const openApiDataRoute = "/docs/reference/data";
-
   const toc = docTopics["./index.json"];
   const tocComponent = (
     <nav
@@ -51,29 +45,40 @@ const Docs = () => {
       {tocComponent}
       <div style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}>
         <ScrollToTop />
-        <Switch>
-          <Route title="STAC API Reference" exact path={openApiStacRoute}>
-            <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${STAC_URL}/openapi.json`} />
-            </Suspense>
-          </Route>
-          <Route title="SAS API Reference" path={openApiSasRoute}>
-            <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${SAS_URL}/openapi.json`} />
-            </Suspense>
-          </Route>
-          <Route title="Data API Reference" path={openApiDataRoute}>
-            <Suspense fallback={<div />}>
-              <OpenApiSpec specUrl={`${DATA_URL}/openapi.json`} />
-            </Suspense>
-          </Route>
-          <Route path={`/docs/:topicId/:fileId`}>
-            <Topic topics={docTopics} />
-          </Route>
-          <Route exact path={"/docs"}>
-            <Redirect to="/docs/overview/about" />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route
+            title="STAC API Reference"
+            path={"/reference/stac"}
+            element={
+              <Suspense fallback={<div />}>
+                <OpenApiSpec specUrl={`${STAC_URL}/openapi.json`} />
+              </Suspense>
+            }
+          />
+          <Route
+            title="SAS API Reference"
+            path={"/reference/sas"}
+            element={
+              <Suspense fallback={<div />}>
+                <OpenApiSpec specUrl={`${SAS_URL}/openapi.json`} />
+              </Suspense>
+            }
+          />
+          <Route
+            title="Data API Reference"
+            path={"/reference/data"}
+            element={
+              <Suspense fallback={<div />}>
+                <OpenApiSpec specUrl={`${DATA_URL}/openapi.json`} />
+              </Suspense>
+            }
+          />
+          <Route path={`/:topicId/:fileId`} element={<Topic topics={docTopics} />} />
+          <Route
+            path={"/"}
+            element={<Navigate replace to="/docs/overview/about" />}
+          />
+        </Routes>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { a11yPostProcessDom } from "../../utils";
 
@@ -7,7 +7,7 @@ import { a11yPostProcessDom } from "../../utils";
 // internal links and capture their events to process them through the
 // React Router system.
 const DocsHtmlContent = ({ className, markupJson, children }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const contentRef = useRef();
 
   const { body, current_page_name } = markupJson;
@@ -57,7 +57,7 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
     if (anchor && !anchor.href.match(/\.[a-z]{1,4}$/i)) {
       const path = anchor.getAttribute("href");
       e.preventDefault();
-      history.push(path);
+      navigate(path);
     }
   };
 

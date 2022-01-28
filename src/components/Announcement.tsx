@@ -1,7 +1,7 @@
 import { IconButton, Stack, useTheme } from "@fluentui/react";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import marked from "marked";
+import { marked } from "marked";
 
 import { IAnnouncementType } from "types/index";
 import announcementConfig from "config/announcements.yml";
