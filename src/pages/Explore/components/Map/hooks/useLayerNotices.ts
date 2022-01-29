@@ -7,18 +7,17 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import { setCamera, setZoom } from "pages/Explore/state/mapSlice";
 import { BBox } from "geojson";
 import { stacCollectionDatasource } from "pages/Explore/utils/layers";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 // Handle zoom toast for layers with min zoom level
 const useZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
-    mosaic,
     map: { zoom },
     detail: { showAsLayer },
   } = useExploreSelector(s => s);
-  const searchIdLoaded = mosaic.isCustomQuery
-    ? Boolean(mosaic.customQuery.searchId)
-    : Boolean(mosaic.query.searchId);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
+  const searchIdLoaded = Boolean(mosaic.query.searchId);
 
   // TODO: check buffer around zoom
   const showZoomMsg =
@@ -33,7 +32,7 @@ const useZoomToLayer = () => {
 
 const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
-  const { mosaic } = useExploreSelector(s => s);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
 
   const viewport = mapRef.current
     ? bboxToPolygon(mapRef.current?.getCamera().bounds as BBox)?.geometry

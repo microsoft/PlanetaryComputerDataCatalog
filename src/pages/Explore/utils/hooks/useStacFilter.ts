@@ -4,7 +4,10 @@ import { useExploreSelector } from "../../state/hooks";
 import { collectionFilter, geomFilter } from "../stac";
 import { IMosaic } from "pages/Explore/types";
 import { CQL_VALS_IDX, DEFAULT_QUERY_LIMIT } from "../constants";
-import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import {
+  selectCurrentCql,
+  selectCurrentMosaic,
+} from "pages/Explore/state/mosaicSlice";
 import { CqlExpression, CqlInExpression, ICqlExpressionList } from "../cql/types";
 
 export const makeFilterBody = (
@@ -39,8 +42,8 @@ const optimizeCqlExpressions = (cql: ICqlExpressionList): ICqlExpressionList => 
 };
 
 export const useCqlFormat = () => {
-  const { map, mosaic } = useExploreSelector(s => s);
-  const { collection, query } = mosaic;
+  const { map } = useExploreSelector(s => s);
+  const { collection, query } = useExploreSelector(selectCurrentMosaic);
   const cql = useExploreSelector(selectCurrentCql);
 
   const shouldQuery = () => {

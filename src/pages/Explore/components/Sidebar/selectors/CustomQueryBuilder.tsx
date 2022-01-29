@@ -14,7 +14,7 @@ import {
 import { FontSizes, FontWeights } from "@fluentui/style-utilities";
 
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../../query/DateField";
@@ -23,8 +23,10 @@ import { useCustomQueryUrlState } from "./hooks/useUrlState";
 import { AddFilter } from "../../query/AddFilter/AddFilter";
 
 const CustomQueryBuilder = () => {
-  const collection = useExploreSelector(s => s.mosaic.collection);
-  const cql = useExploreSelector(selectCurrentCql);
+  const {
+    collection,
+    query: { cql },
+  } = useExploreSelector(selectCurrentMosaic);
 
   useCustomQueryUrlState();
 

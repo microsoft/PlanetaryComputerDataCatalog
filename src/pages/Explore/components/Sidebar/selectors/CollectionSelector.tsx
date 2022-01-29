@@ -4,7 +4,10 @@ import { sortBy } from "lodash-es";
 import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import StateSelector from "./StateSelector";
-import { setCollectionDefaultState } from "../../../state/mosaicSlice";
+import {
+  selectCurrentMosaic,
+  setCollectionDefaultState,
+} from "../../../state/mosaicSlice";
 
 import { collections as collectionConfig } from "config/datasets.yml";
 import { useExploreSelector } from "pages/Explore/state/hooks";
@@ -14,7 +17,7 @@ import { isValidExplorer } from "utils/collections";
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
   const collections: IStacCollection[] = data?.collections;
-  const collection = useExploreSelector(state => state.mosaic.collection);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
 
   // Sets selector values based off of url state on load, and subsequently syncs
   // selection to URL

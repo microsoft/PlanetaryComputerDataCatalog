@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal";
+import { createDraft } from "immer";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
@@ -25,18 +27,9 @@ export interface ILayerState {
 
 export type CurrentLayers = Record<string, ILayerState>;
 export interface IMosaicState {
-  collection: IStacCollection | null;
-  query: IMosaic;
-  isCustomQuery: boolean;
-  customQuery: IMosaic;
-  renderOption: IMosaicRenderOption | null;
-  layer: {
-    minZoom: number;
-    maxExtent: number[];
-  };
   layers: CurrentLayers;
+  currentEditingSearchId: string | null;
   options: {};
-  currendEditingSearchId: string | null;
 }
 
 const initialMosaicState: IMosaic = {
@@ -60,18 +53,9 @@ const initialLayerState: ILayerState = {
 };
 
 const initialState: IMosaicState = {
-  collection: null,
-  query: initialMosaicState,
-  isCustomQuery: isCustomQueryOnLoad,
-  customQuery: initialMosaicState,
-  renderOption: null,
-  layer: {
-    minZoom: DEFAULT_MIN_ZOOM,
-    maxExtent: [],
-  },
   layers: {},
   options: {},
-  currendEditingSearchId: null,
+  currentEditingSearchId: null,
 };
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
@@ -80,7 +64,8 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
     dispatch(setQuery(queryInfo));
 
     const state = getState() as ExploreState;
-    const collectionId = state.mosaic.collection?.id;
+    const mosaic = selectCurrentMosaic(state);
+    const collectionId = mosaic.collection?.id;
     const cql = selectCurrentCql(state);
 
     const searchId = await registerStacFilter(collectionId, queryInfo, cql);
@@ -125,75 +110,62 @@ export const mosaicSlice = createSlice({
   initialState,
   reducers: {
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
-      state.collection = action.payload;
-
-      state.currendEditingSearchId = "loading";
-      state.layers[state.currendEditingSearchId] = {
+      state.currentEditingSearchId = "loading";
+      state.layers[state.currentEditingSearchId] = {
         ...initialLayerState,
         collection: action.payload,
       };
     },
+
     setCollectionDefaultState: (
       state,
       action: PayloadAction<IStacCollection | null>
     ) => {
-      state.collection = action.payload;
-      state.query = initialMosaicState;
-      state.renderOption = null;
-      state.isCustomQuery = false;
-      state.customQuery = initialMosaicState;
-
-      state.currendEditingSearchId = "loading";
-      state.layers[state.currendEditingSearchId] = {
+      state.currentEditingSearchId = "loading";
+      state.layers[state.currentEditingSearchId] = {
         ...initialLayerState,
         collection: action.payload,
       };
     },
+
     setQuery: (state, action: PayloadAction<IMosaic>) => {
+      const mosaic = getCurrentMosaicDraft(state);
       const query = { ...action.payload, searchId: null };
-      state.query = query;
-
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-      state.layers[state.currendEditingSearchId].query = query;
+      mosaic.query = query;
     },
+
     setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
-      const renderOption = action.payload;
-      if (!action.payload.minZoom) {
-        renderOption.minZoom = DEFAULT_MIN_ZOOM;
-      }
-      state.renderOption = renderOption;
-
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-      state.layers[state.currendEditingSearchId].renderOption = renderOption;
+      const mosaic = getCurrentMosaicDraft(state);
+      const renderOption = Object.assign(
+        { minZoom: DEFAULT_MIN_ZOOM },
+        action.payload
+      );
+      mosaic.renderOption = renderOption;
     },
+
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
-      state.layer.minZoom = action.payload;
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.layer.minZoom = action.payload;
     },
+
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.customQuery = initialMosaicState;
-      }
-
-      state.isCustomQuery = action.payload;
-
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-      state.layers[state.currendEditingSearchId].isCustomQuery = action.payload;
-      state.layers[state.currendEditingSearchId].query = initialMosaicState;
+      const mosaic = getCurrentMosaicDraft(state);
+      const isCustomQuery = action.payload;
+      mosaic.isCustomQuery = isCustomQuery;
+      mosaic.query = initialMosaicState;
     },
+
     setCustomQueryBody: (state, action: PayloadAction<IMosaic>) => {
-      state.customQuery = action.payload;
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.query = action.payload;
     },
+
     addOrUpdateCustomCqlExpression: (
       state,
       action: PayloadAction<CqlExpression>
     ) => {
-      const draft = state.customQuery.cql;
+      const mosaic = getCurrentMosaicDraft(state);
+      const draft = mosaic.query.cql;
       const newExpProperty = new CqlExpressionParser(action.payload).property;
       const existingIndex = draft.findIndex(
         exp => new CqlExpressionParser(exp).property === newExpProperty
@@ -204,26 +176,11 @@ export const mosaicSlice = createSlice({
       } else {
         draft.splice(existingIndex, 1, action.payload);
       }
-
-      // ========================== Multi
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-
-      const draft1 = state.layers[state.currendEditingSearchId].query.cql;
-      const newExpProperty1 = new CqlExpressionParser(action.payload).property;
-      const existingIndex1 = draft.findIndex(
-        exp => new CqlExpressionParser(exp).property === newExpProperty1
-      );
-
-      if (existingIndex1 === -1) {
-        draft1.splice(draft1.length, 0, action.payload);
-      } else {
-        draft1.splice(existingIndex1, 1, action.payload);
-      }
     },
+
     removeCustomCqlProperty: (state, action: PayloadAction<string>) => {
-      const draft = state.customQuery.cql;
+      const mosaic = getCurrentMosaicDraft(state);
+      const draft = mosaic.query.cql;
       const property = action.payload;
       const existingIndex = draft.findIndex(
         exp => new CqlExpressionParser(exp).property === property
@@ -232,88 +189,58 @@ export const mosaicSlice = createSlice({
       if (existingIndex > -1) {
         draft.splice(existingIndex, 1);
       }
-
-      // ========================== Multi
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-      const draft1 = state.layers[state.currendEditingSearchId].query.cql;
-      const property1 = action.payload;
-      const existingIndex1 = draft1.findIndex(
-        exp => new CqlExpressionParser(exp).property === property1
-      );
-
-      if (existingIndex1 > -1) {
-        draft1.splice(existingIndex1, 1);
-      }
     },
+
     resetMosaic: () => {
-      // Explicitly set isCustomQuery since the initial state may have been
-      // informed by querystring
-      return { ...initialState, ...{ isCustomQuery: false } };
+      return initialState;
     },
   },
+
   extraReducers: builder => {
     builder.addCase(
       setMosaicQuery.fulfilled,
       (state, action: PayloadAction<string>) => {
+        const mosaic = getCurrentMosaicDraft(state);
         const newSearchId = action.payload;
-        state.query.searchId = newSearchId;
 
-        if (!state.currendEditingSearchId) {
-          return;
-        }
-
-        // ========================== Multi
         // Key the layer by the new searchId and remove the temporary loading key
-        const oldSearchId =
-          state.layers[state.currendEditingSearchId].query.searchId;
+        const oldSearchId = mosaic.query.searchId;
         if (newSearchId === oldSearchId) return;
 
-        state.layers[state.currendEditingSearchId].query.searchId = newSearchId;
-        state.layers[newSearchId] = state.layers[state.currendEditingSearchId];
-        delete state.layers[state.currendEditingSearchId];
-        state.currendEditingSearchId = newSearchId;
+        mosaic.query.searchId = newSearchId;
+        state.layers[newSearchId] = mosaic;
+        oldSearchId && delete state.layers[oldSearchId];
+        state.currentEditingSearchId = newSearchId;
       }
     );
 
     builder.addCase(
       setCustomCqlExpressions.fulfilled,
       (state, action: PayloadAction<string>) => {
-        state.customQuery.searchId = action.payload;
-
-        // ========================== Multi
-        if (!state.currendEditingSearchId) {
-          return;
-        }
+        const mosaic = getCurrentMosaicDraft(state);
         const newSearchId = action.payload;
-        const oldSearchId =
-          state.layers[state.currendEditingSearchId].query.searchId;
+        const oldSearchId = mosaic.query.searchId;
+
         if (newSearchId === oldSearchId) return;
 
-        state.layers[state.currendEditingSearchId].query.searchId = newSearchId;
-        state.layers[newSearchId] = state.layers[state.currendEditingSearchId];
-        delete state.layers[state.currendEditingSearchId];
-        state.currendEditingSearchId = newSearchId;
+        mosaic.query.searchId = newSearchId;
+        state.layers[newSearchId] = mosaic;
+        oldSearchId && delete state.layers[oldSearchId];
+        state.currentEditingSearchId = newSearchId;
       }
     );
 
     builder.addCase(removeCustomCqlExpression.fulfilled, (state, action) => {
-      state.customQuery.searchId = action.payload;
-
-      // ========================== Multi
-      if (!state.currendEditingSearchId) {
-        return;
-      }
-
+      const mosaic = getCurrentMosaicDraft(state);
       const newSearchId = action.payload;
-      const oldSearchId = state.layers[state.currendEditingSearchId].query.searchId;
+      const oldSearchId = mosaic.query.searchId;
+
       if (newSearchId === oldSearchId) return;
 
-      state.layers[state.currendEditingSearchId].query.searchId = newSearchId;
-      state.layers[newSearchId] = state.layers[state.currendEditingSearchId];
-      delete state.layers[state.currendEditingSearchId];
-      state.currendEditingSearchId = newSearchId;
+      mosaic.query.searchId = newSearchId;
+      state.layers[newSearchId] = mosaic;
+      oldSearchId && delete state.layers[oldSearchId];
+      state.currentEditingSearchId = newSearchId;
     });
   },
 });
@@ -331,18 +258,27 @@ export const {
   removeCustomCqlProperty,
 } = mosaicSlice.actions;
 
+// Custom selectors
 export const selectCurrentCql = (state: ExploreState) => {
-  if (!state.mosaic.currendEditingSearchId) {
-    return initialMosaicState.cql;
+  const mosaic = selectCurrentMosaic(state);
+  return mosaic?.query?.cql || [];
+};
+
+export const selectCurrentMosaic = (state: ExploreState) => {
+  if (
+    !state.mosaic.currentEditingSearchId ||
+    !state.mosaic.layers[state.mosaic.currentEditingSearchId]
+  ) {
+    return initialLayerState;
   }
 
-  return state.mosaic.layers[state.mosaic.currendEditingSearchId].query.cql;
+  return state.mosaic.layers[state.mosaic.currentEditingSearchId];
 };
 
 async function registerUpdatedSearch(getState: () => unknown) {
   const state = getState() as ExploreState;
 
-  const mosaic = getCurrentMosaic(state);
+  const mosaic = selectCurrentMosaic(state);
   const collectionId = mosaic.collection?.id;
   const queryInfo = mosaic.query;
   const cql = selectCurrentCql(state);
@@ -353,13 +289,11 @@ async function registerUpdatedSearch(getState: () => unknown) {
 
 export default mosaicSlice.reducer;
 
-const getCurrentMosaic = (state: ExploreState) => {
-  if (
-    !state.mosaic.currendEditingSearchId ||
-    !state.mosaic.layers[state.mosaic.currendEditingSearchId]
-  ) {
-    throw new Error("Specified current search does not exist");
+// Get the current mosaic info as an immer draft object
+const getCurrentMosaicDraft = (state: WritableDraft<IMosaicState>) => {
+  if (!state.currentEditingSearchId || !state.layers[state.currentEditingSearchId]) {
+    return createDraft(initialLayerState);
   }
 
-  return state.mosaic.layers[state.mosaic.currendEditingSearchId];
+  return state.layers[state.currentEditingSearchId];
 };

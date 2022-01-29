@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 export const mosaicLayerName = "stac-mosaic";
 
@@ -10,11 +11,10 @@ const useMosaicLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
 ) => {
-  const { mosaic, detail, map } = useExploreSelector(s => s);
-  const { collection, query, customQuery, isCustomQuery, renderOption } = mosaic;
+  const { detail, map } = useExploreSelector(s => s);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
+  const { collection, query, renderOption } = mosaic;
   const { useHighDef } = map;
-
-  const queryInfo = isCustomQuery ? customQuery : query;
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
@@ -27,12 +27,12 @@ const useMosaicLayer = (
     const map = mapRef.current;
     const mosaicLayer = map.layers.getLayerById("stac-mosaic");
     const isItemLayerValid = stacItemForMosaic && collection;
-    const isMosaicLayerValid = queryInfo.searchId;
+    const isMosaicLayerValid = query.searchId;
 
     if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
       const tileLayerOpts: atlas.TileLayerOptions = {
         tileUrl: makeTileJsonUrl(
-          queryInfo,
+          query,
           renderOption,
           collection,
           stacItemForMosaic,
@@ -56,7 +56,7 @@ const useMosaicLayer = (
     }
   }, [
     collection,
-    queryInfo,
+    query,
     renderOption,
     mapRef,
     stacItemForMosaic,

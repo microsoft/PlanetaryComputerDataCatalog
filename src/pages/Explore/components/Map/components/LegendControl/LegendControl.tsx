@@ -22,21 +22,21 @@ import ClassMap from "./ClassMap";
 import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 import { controlStyle } from "../PanelControl";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 export const LegendControl = () => {
-  const renderOpts = useExploreSelector(s => s.mosaic.renderOption);
-  const collection = useExploreSelector(s => s.mosaic.collection);
+  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const [isOpen, setIsOpen] = useLocalStorage("legend-control-open", true);
 
-  if (!renderOpts) return null;
+  if (!renderOption) return null;
 
-  const renderConfig = qs.parse(renderOpts.options || "");
-  const legendConfig = renderOpts.legend;
+  const renderConfig = qs.parse(renderOption.options || "");
+  const legendConfig = renderOption.legend;
   const legend = getLegendType(renderConfig, legendConfig, collection);
   const renderDesc =
-    renderOpts.name && renderOpts?.name !== "Default" ? (
+    renderOption.name && renderOption?.name !== "Default" ? (
       <Text block styles={subHeaderStyles}>
-        {renderOpts.name}
+        {renderOption.name}
       </Text>
     ) : null;
 

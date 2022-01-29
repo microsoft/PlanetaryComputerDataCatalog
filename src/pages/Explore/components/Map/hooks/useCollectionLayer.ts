@@ -9,6 +9,7 @@ import {
 } from "../../../utils/layers";
 import { MAX_ZOOM_FOR_COLLECTION_OUTLINE } from "pages/Explore/utils/constants";
 import { spatialExtentToMultipolygon } from "utils/collections";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 // Show highlighted stac item result footprint on the map
 
@@ -16,7 +17,7 @@ const useCollectionBoundsLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
 ) => {
-  const collection = useExploreSelector(s => s.mosaic.collection);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
   const { showCollectionOutline, zoom } = useExploreSelector(s => s.map);
 
   useEffect(() => {
