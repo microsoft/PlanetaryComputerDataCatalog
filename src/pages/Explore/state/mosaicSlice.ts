@@ -1,36 +1,16 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { WritableDraft } from "immer/dist/internal";
-import { createDraft } from "immer";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
-import { IMosaic, IMosaicRenderOption } from "../types";
+import { ILayerState, IMosaic, IMosaicRenderOption, IMosaicState } from "../types";
 import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
+import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
 import { AppThunk, ExploreState } from "./store";
 
 const isCustomQueryOnLoad = getIsCustomQueryString();
-
-export interface ILayerState {
-  collection: IStacCollection | null;
-  query: IMosaic;
-  isCustomQuery: boolean;
-  isPinned: boolean;
-  renderOption: IMosaicRenderOption | null;
-  layer: {
-    minZoom: number;
-    maxExtent: number[];
-  };
-}
-
-export type CurrentLayers = Record<string, ILayerState>;
-export interface IMosaicState {
-  layers: CurrentLayers;
-  currentEditingSearchId: string | null;
-  options: {};
-}
 
 const initialMosaicState: IMosaic = {
   name: null,
@@ -40,7 +20,7 @@ const initialMosaicState: IMosaic = {
   searchId: null,
 };
 
-const initialLayerState: ILayerState = {
+export const initialLayerState: ILayerState = {
   collection: null,
   query: initialMosaicState,
   isCustomQuery: isCustomQueryOnLoad,
@@ -54,16 +34,15 @@ const initialLayerState: ILayerState = {
 
 const initialState: IMosaicState = {
   layers: {},
-  options: {},
   currentEditingSearchId: null,
 };
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/registerQuery",
   async (queryInfo: IMosaic, { getState, dispatch }) => {
+    const state = getState() as ExploreState;
     dispatch(setQuery(queryInfo));
 
-    const state = getState() as ExploreState;
     const mosaic = selectCurrentMosaic(state);
     const collectionId = mosaic.collection?.id;
     const cql = selectCurrentCql(state);
@@ -150,8 +129,7 @@ export const mosaicSlice = createSlice({
 
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
       const mosaic = getCurrentMosaicDraft(state);
-      const isCustomQuery = action.payload;
-      mosaic.isCustomQuery = isCustomQuery;
+      mosaic.isCustomQuery = action.payload;
       mosaic.query = initialMosaicState;
     },
 
@@ -200,48 +178,23 @@ export const mosaicSlice = createSlice({
     builder.addCase(
       setMosaicQuery.fulfilled,
       (state, action: PayloadAction<string>) => {
-        const mosaic = getCurrentMosaicDraft(state);
-        const newSearchId = action.payload;
-
-        // Key the layer by the new searchId and remove the temporary loading key
-        const oldSearchId = mosaic.query.searchId;
-        if (newSearchId === oldSearchId) return;
-
-        mosaic.query.searchId = newSearchId;
-        state.layers[newSearchId] = mosaic;
-        oldSearchId && delete state.layers[oldSearchId];
-        state.currentEditingSearchId = newSearchId;
+        updateSearchId(state, action.payload);
       }
     );
 
     builder.addCase(
       setCustomCqlExpressions.fulfilled,
       (state, action: PayloadAction<string>) => {
-        const mosaic = getCurrentMosaicDraft(state);
-        const newSearchId = action.payload;
-        const oldSearchId = mosaic.query.searchId;
-
-        if (newSearchId === oldSearchId) return;
-
-        mosaic.query.searchId = newSearchId;
-        state.layers[newSearchId] = mosaic;
-        oldSearchId && delete state.layers[oldSearchId];
-        state.currentEditingSearchId = newSearchId;
+        updateSearchId(state, action.payload);
       }
     );
 
-    builder.addCase(removeCustomCqlExpression.fulfilled, (state, action) => {
-      const mosaic = getCurrentMosaicDraft(state);
-      const newSearchId = action.payload;
-      const oldSearchId = mosaic.query.searchId;
-
-      if (newSearchId === oldSearchId) return;
-
-      mosaic.query.searchId = newSearchId;
-      state.layers[newSearchId] = mosaic;
-      oldSearchId && delete state.layers[oldSearchId];
-      state.currentEditingSearchId = newSearchId;
-    });
+    builder.addCase(
+      removeCustomCqlExpression.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        updateSearchId(state, action.payload);
+      }
+    );
   },
 });
 
@@ -258,12 +211,13 @@ export const {
   removeCustomCqlProperty,
 } = mosaicSlice.actions;
 
-// Custom selectors
+// Custom selector to get the current mosaic CQL query
 export const selectCurrentCql = (state: ExploreState) => {
   const mosaic = selectCurrentMosaic(state);
   return mosaic?.query?.cql || [];
 };
 
+// Custom selector to get the current mosaic layer being edited / displayed
 export const selectCurrentMosaic = (state: ExploreState) => {
   if (
     !state.mosaic.currentEditingSearchId ||
@@ -275,6 +229,7 @@ export const selectCurrentMosaic = (state: ExploreState) => {
   return state.mosaic.layers[state.mosaic.currentEditingSearchId];
 };
 
+// Register the new CQL query and set the resulting searchId
 async function registerUpdatedSearch(getState: () => unknown) {
   const state = getState() as ExploreState;
 
@@ -288,12 +243,3 @@ async function registerUpdatedSearch(getState: () => unknown) {
 }
 
 export default mosaicSlice.reducer;
-
-// Get the current mosaic info as an immer draft object
-const getCurrentMosaicDraft = (state: WritableDraft<IMosaicState>) => {
-  if (!state.currentEditingSearchId || !state.layers[state.currentEditingSearchId]) {
-    return createDraft(initialLayerState);
-  }
-
-  return state.layers[state.currentEditingSearchId];
-};

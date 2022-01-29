@@ -1,5 +1,6 @@
-import { LegendTypes } from "./enums";
 import { ICqlExpressionList } from "./utils/cql/types";
+import { IStacCollection } from "types/stac";
+import { LegendTypes } from "./enums";
 
 export interface IDefaultLocationInfo {
   zoom: number;
@@ -49,4 +50,22 @@ export interface ISearchIdMetadata {
   hash: string;
   search: { filter: { args: ICqlExpressionList } };
   orderby: string;
+}
+
+export interface ILayerState {
+  collection: IStacCollection | null;
+  query: IMosaic;
+  isCustomQuery: boolean;
+  isPinned: boolean;
+  renderOption: IMosaicRenderOption | null;
+  layer: {
+    minZoom: number;
+    maxExtent: number[];
+  };
+}
+
+export type CurrentLayers = Record<string, ILayerState>;
+export interface IMosaicState {
+  layers: CurrentLayers;
+  currentEditingSearchId: string | null;
 }
