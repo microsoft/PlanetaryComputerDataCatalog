@@ -11,12 +11,20 @@ export const updateSearchId = (
   const mosaic = getCurrentMosaicDraft(state);
   const oldSearchId = mosaic.query.searchId;
 
-  // Change resulted in same hash, do nothing
-  if (newSearchId === oldSearchId) return;
+  // Change resulted in same hash, or nothing is being edited, do nothing
+  if (
+    newSearchId === oldSearchId ||
+    newSearchId === state.currentEditingSearchId ||
+    !state.currentEditingSearchId
+  )
+    return;
 
-  mosaic.query.searchId = newSearchId;
+  // Key the mosaic under the new search id, and update the id
   state.layers[newSearchId] = mosaic;
-  oldSearchId && delete state.layers[oldSearchId];
+  state.layers[newSearchId].query.searchId = newSearchId;
+
+  // Remove the old mosaic and update the pointer to the current editing search id
+  state.currentEditingSearchId && delete state.layers[state.currentEditingSearchId];
   state.currentEditingSearchId = newSearchId;
 };
 
