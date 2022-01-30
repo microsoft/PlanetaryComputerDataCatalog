@@ -13,6 +13,7 @@ import { useExploreSelector } from "pages/Explore/state/hooks";
 import { loadingStyle } from "./SearchResultsPane";
 import QueryInfo from "./QueryInfo";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import PinLayer from "../PinLayer";
 
 interface SearchResultsHeaderProps {
   results: IStacSearchResult | undefined;
@@ -62,7 +63,10 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         verticalAlign="center"
       >
         {resultsText}
-        <QueryInfo />
+        <Stack horizontal tokens={tokens} verticalAlign="center">
+          <PinLayer />
+          <QueryInfo />
+        </Stack>
       </Stack>
     </Stack>
   );

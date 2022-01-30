@@ -169,6 +169,12 @@ export const mosaicSlice = createSlice({
       }
     },
 
+    pinCurrentMosaic: state => {
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.isPinned = true;
+      state.currentEditingSearchId = null;
+    },
+
     resetMosaic: () => {
       return initialState;
     },
@@ -199,6 +205,7 @@ export const mosaicSlice = createSlice({
 });
 
 export const {
+  pinCurrentMosaic,
   resetMosaic,
   setCollection,
   setCollectionDefaultState,
@@ -227,6 +234,11 @@ export const selectCurrentMosaic = (state: ExploreState) => {
   }
 
   return state.mosaic.layers[state.mosaic.currentEditingSearchId];
+};
+
+// Custom selector to get all pinned mosaic layers
+export const selectPinnedMosaics = (state: ExploreState) => {
+  return Object.values(state.mosaic.layers).filter(layer => layer.isPinned);
 };
 
 // Register the new CQL query and set the resulting searchId

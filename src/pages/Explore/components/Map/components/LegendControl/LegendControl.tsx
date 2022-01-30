@@ -14,7 +14,12 @@ import {
 import * as qs from "query-string";
 import { useLocalStorage } from "react-use";
 
-import { ILegendConfig } from "pages/Explore/types";
+import {
+  ILayerState,
+  ILegendConfig,
+  IMosaic,
+  IMosaicInfo,
+} from "pages/Explore/types";
 import { LegendTypes } from "pages/Explore/enums";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import ColorMap from "./ColorMap";
@@ -22,12 +27,57 @@ import ClassMap from "./ClassMap";
 import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 import { controlStyle } from "../PanelControl";
-import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import {
+  selectCurrentMosaic,
+  selectPinnedMosaics,
+} from "pages/Explore/state/mosaicSlice";
 
 export const LegendControl = () => {
-  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const [isOpen, setIsOpen] = useLocalStorage("legend-control-open", true);
+  const currentLayer = useExploreSelector(selectCurrentMosaic);
+  const pinnedLayers = useExploreSelector(selectPinnedMosaics);
 
+  const currentLegend = makeLegend(currentLayer);
+  const pinnedLegends = pinnedLayers.map(makeLegend);
+
+  const legendPanel = (
+    <Stack styles={panelStyles} tokens={stackTokens}>
+      <StackItem>
+        <Stack horizontal horizontalAlign="space-between">
+          <Text block styles={headerStyles}>
+            Legend
+          </Text>
+          <IconButton
+            title="Hide Legend"
+            iconProps={{ iconName: "ChevronDown" }}
+            styles={minimizeButtonStyles}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+        </Stack>
+      </StackItem>
+      {currentLegend}
+      {pinnedLegends}
+    </Stack>
+  );
+
+  const legendButton = (
+    <div style={buttonStyle}>
+      <IconButton
+        ariaLabel="Open legend"
+        title={"Open legend"}
+        className="azure-maps-control-button"
+        styles={legendButtonStyles}
+        iconProps={{ iconName: "MapLegend" }}
+        onClick={() => setIsOpen(true)}
+      />
+    </div>
+  );
+
+  return isOpen ? legendPanel : legendButton;
+};
+
+const makeLegend = (mosaic: ILayerState) => {
+  const { renderOption, collection } = mosaic;
   if (!renderOption) return null;
 
   const renderConfig = qs.parse(renderOption.options || "");
@@ -40,42 +90,15 @@ export const LegendControl = () => {
       </Text>
     ) : null;
 
-  const legendPanel = (
-    <Stack styles={panelStyles} tokens={stackTokens}>
-      <StackItem>
-        <Stack horizontal horizontalAlign="space-between">
-          <Text block styles={headerStyles}>
-            {collection?.title}
-          </Text>
-          <IconButton
-            title="Hide Legend"
-            iconProps={{ iconName: "ChevronDown" }}
-            styles={minimizeButtonStyles}
-            onClick={() => setIsOpen(!isOpen)}
-          />
-        </Stack>
-        {renderDesc}
-      </StackItem>
+  return (
+    <StackItem>
+      <Text block styles={headerStyles}>
+        {collection?.title}
+      </Text>
+      {renderDesc}
       {legend}
-    </Stack>
+    </StackItem>
   );
-
-  const buttonStyle = { right: 2, bottom: 32, ...controlStyle };
-  const legendButton = (
-    <div style={buttonStyle}>
-      <IconButton
-        ariaLabel={legend ? "Open legend" : "No legend available"}
-        title={"Open legend"}
-        onClick={() => setIsOpen(true)}
-        disabled={!legend}
-        styles={legendButtonStyles}
-        className="azure-maps-control-button"
-        iconProps={{ iconName: "MapLegend" }}
-      />
-    </div>
-  );
-
-  return isOpen && legend ? legendPanel : legendButton;
 };
 
 const getLegendType = (
@@ -155,3 +178,5 @@ const minimizeButtonStyles: IButtonStyles = {
     fontSize: FontSizes.xSmall,
   },
 };
+
+const buttonStyle = { right: 2, bottom: 32, ...controlStyle };
