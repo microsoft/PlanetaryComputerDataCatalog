@@ -4,6 +4,8 @@ import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
 
+const mosaicLayerPrefix = "pc-mosaic-";
+
 const useMosaicLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
@@ -24,8 +26,9 @@ const useMosaicLayer = (
 
     const map = mapRef.current;
     Object.entries(mosaics).forEach(([id, mosaic]) => {
+      const layerId = makeLayerId(id);
       const { query, renderOption, collection } = mosaic;
-      const mosaicLayer = map.layers.getLayerById(id);
+      const mosaicLayer = map.layers.getLayerById(layerId);
       const isMosaicLayerValid = query.searchId;
 
       if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
@@ -42,10 +45,7 @@ const useMosaicLayer = (
         if (mosaicLayer) {
           (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
         } else {
-          const layer = new atlas.layer.TileLayer(
-            tileLayerOpts,
-            query.searchId || ""
-          );
+          const layer = new atlas.layer.TileLayer(tileLayerOpts, layerId);
           map.layers.add(layer, itemOutlineLayerName);
         }
       } else {
@@ -56,7 +56,20 @@ const useMosaicLayer = (
         }
       }
     });
+
+    // Remove any mosaic layers from the map that may have been unpinned
+    map.layers
+      .getLayers()
+      .filter(l => l.getId().startsWith(mosaicLayerPrefix))
+      .forEach(layer => {
+        const id = layer.getId().substring(mosaicLayerPrefix.length);
+        if (id in mosaics === false) {
+          map.layers.remove(layer);
+        }
+      });
   }, [mapRef, mapReady, stacItemForMosaic, isItemLayerValid, mosaics]);
 };
 
 export default useMosaicLayer;
+
+const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;

@@ -89,17 +89,14 @@ export const mosaicSlice = createSlice({
   initialState,
   reducers: {
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
-      state.currentEditingSearchId = "loading";
-      state.layers[state.currentEditingSearchId] = {
-        ...initialLayerState,
-        collection: action.payload,
-      };
-    },
+      // When setting a new collection, remove the currently edited mosaic layer
+      // if it is not pinned
+      const currentMosaic = getCurrentMosaicDraft(state);
+      if (!currentMosaic.isPinned) {
+        state.currentEditingSearchId &&
+          delete state.layers[state.currentEditingSearchId];
+      }
 
-    setCollectionDefaultState: (
-      state,
-      action: PayloadAction<IStacCollection | null>
-    ) => {
       state.currentEditingSearchId = "loading";
       state.layers[state.currentEditingSearchId] = {
         ...initialLayerState,
@@ -208,7 +205,6 @@ export const {
   pinCurrentMosaic,
   resetMosaic,
   setCollection,
-  setCollectionDefaultState,
   setQuery,
   setRenderOption,
   setLayerMinZoom,

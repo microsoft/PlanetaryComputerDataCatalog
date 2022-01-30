@@ -10,6 +10,7 @@ import {
   FontSizes,
   IconButton,
   IButtonStyles,
+  Separator,
 } from "@fluentui/react";
 import * as qs from "query-string";
 import { useLocalStorage } from "react-use";
@@ -49,6 +50,7 @@ export const LegendControl = () => {
             onClick={() => setIsOpen(!isOpen)}
           />
         </Stack>
+        <Separator styles={{ root: { padding: 0 } }} />
       </StackItem>
       {currentLegend}
       {pinnedLegends}
@@ -84,15 +86,22 @@ const makeLegend = (mosaic: ILayerState) => {
         {renderOption.name}
       </Text>
     ) : null;
+  const controlPanel = makeLegendControlPanel(mosaic.query.searchId);
 
   return (
-    <StackItem>
-      <Text block styles={headerStyles}>
-        {collection?.title}
-      </Text>
-      {renderDesc}
-      {legend}
-    </StackItem>
+    <>
+      <StackItem>
+        <Stack horizontal>
+          <Text block styles={headerStyles}>
+            {collection?.title}
+          </Text>
+          {controlPanel}
+        </Stack>
+        {renderDesc}
+        {legend}
+      </StackItem>
+      <Separator className="legend-item-separator" />
+    </>
   );
 };
 
@@ -138,7 +147,7 @@ const panelStyles: IStackStyles = {
     bottom: 40,
     right: 10,
     boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
-    width: 300,
+    width: 350,
   },
 };
 
@@ -175,3 +184,14 @@ const minimizeButtonStyles: IButtonStyles = {
 };
 
 const buttonStyle = { right: 2, bottom: 32, ...controlStyle };
+
+function makeLegendControlPanel(searchId: string | null | undefined) {
+  return (
+    <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
+      <IconButton
+        iconProps={{ iconName: "ChevronDown" }}
+        styles={legendButtonStyles}
+      />
+    </Stack>
+  );
+}
