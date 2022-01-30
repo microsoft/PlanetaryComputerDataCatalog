@@ -3,66 +3,60 @@ import { useEffect } from "react";
 import { makeTileJsonUrl } from "utils";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
-import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-
-export const mosaicLayerName = "stac-mosaic";
 
 const useMosaicLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
 ) => {
-  const { detail, map } = useExploreSelector(s => s);
-  const mosaic = useExploreSelector(selectCurrentMosaic);
-  const { collection, query, renderOption } = mosaic;
-  const { useHighDef } = map;
+  const { detail } = useExploreSelector(s => s);
+  // const currentLayer = useExploreSelector(selectCurrentMosaic);
+  // const { collection, query, renderOption } = currentLayer;
+  const mosaics = useExploreSelector(s => s.mosaic.layers);
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+  const isItemLayerValid = stacItemForMosaic;
 
   // Add a mosaic layer endpoint to the map
   useEffect(() => {
     if (!mapRef.current || !mapReady) return;
 
     const map = mapRef.current;
-    const mosaicLayer = map.layers.getLayerById("stac-mosaic");
-    const isItemLayerValid = stacItemForMosaic && collection;
-    const isMosaicLayerValid = query.searchId;
+    Object.entries(mosaics).forEach(([id, mosaic]) => {
+      const { query, renderOption, collection } = mosaic;
+      const mosaicLayer = map.layers.getLayerById(id);
+      const isMosaicLayerValid = query.searchId;
 
-    if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
-      const tileLayerOpts: atlas.TileLayerOptions = {
-        tileUrl: makeTileJsonUrl(
-          query,
-          renderOption,
-          collection,
-          stacItemForMosaic,
-          useHighDef
-        ),
-        visible: true,
-      };
+      if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
+        const tileLayerOpts: atlas.TileLayerOptions = {
+          tileUrl: makeTileJsonUrl(
+            query,
+            renderOption,
+            collection,
+            stacItemForMosaic
+          ),
+          visible: true,
+        };
 
-      if (mosaicLayer) {
-        (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
+        if (mosaicLayer) {
+          (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
+        } else {
+          const layer = new atlas.layer.TileLayer(
+            tileLayerOpts,
+            query.searchId || ""
+          );
+          map.layers.add(layer, itemOutlineLayerName);
+        }
       } else {
-        const layer = new atlas.layer.TileLayer(tileLayerOpts, mosaicLayerName);
-        map.layers.add(layer, itemOutlineLayerName);
+        if (mosaicLayer) {
+          // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
+          // the opacity settings will be retained
+          (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
+        }
       }
-    } else {
-      if (mosaicLayer) {
-        // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
-        // the opacity settings will be retained
-        (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
-      }
-    }
-  }, [
-    collection,
-    query,
-    renderOption,
-    mapRef,
-    stacItemForMosaic,
-    mapReady,
-    useHighDef,
-  ]);
+    });
+  }, [mapRef, mapReady, stacItemForMosaic, isItemLayerValid, mosaics]);
 };
 
 export default useMosaicLayer;

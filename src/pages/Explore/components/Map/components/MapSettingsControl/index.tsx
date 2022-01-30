@@ -2,25 +2,30 @@ import { useEffect, useState } from "react";
 import { Checkbox, Separator, Slider, Stack } from "@fluentui/react";
 import * as atlas from "azure-maps-control";
 import PanelControl from "../PanelControl";
-import { mosaicLayerName } from "../../hooks/useMosaicLayer";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import CollectionBoundaryToggle from "./CollectionBoundaryToggle";
+import { useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
 
 const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
+  const {
+    query: { searchId },
+  } = useExploreSelector(selectCurrentMosaic);
   const [opacity, setOpacity] = useState<number>(100);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>(DEFAULT_MAP_STYLE);
   const [showLabels, setShowLabels] = useState<boolean>(true);
 
   // Update opacity when slider changes
   useEffect(() => {
-    const mosaicLayer = mapRef?.current?.layers.getLayerById(mosaicLayerName);
+    if (!searchId) return;
+    const mosaicLayer = mapRef?.current?.layers.getLayerById(searchId);
     if (mosaicLayer) {
       (mosaicLayer as atlas.layer.TileLayer).setOptions({ opacity: opacity / 100 });
     }
-  }, [mapRef, opacity]);
+  }, [mapRef, opacity, searchId]);
 
   // Set label visibility when toggled or a new basemap style is selected
   useEffect(() => {

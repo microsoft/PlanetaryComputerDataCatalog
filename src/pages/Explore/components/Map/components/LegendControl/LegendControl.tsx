@@ -14,12 +14,7 @@ import {
 import * as qs from "query-string";
 import { useLocalStorage } from "react-use";
 
-import {
-  ILayerState,
-  ILegendConfig,
-  IMosaic,
-  IMosaicInfo,
-} from "pages/Explore/types";
+import { ILayerState, ILegendConfig } from "pages/Explore/types";
 import { LegendTypes } from "pages/Explore/enums";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import ColorMap from "./ColorMap";

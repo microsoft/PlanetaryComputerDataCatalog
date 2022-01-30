@@ -4,7 +4,6 @@ import atlas from "azure-maps-control";
 
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCamera } from "pages/Explore/state/mapSlice";
-import { mosaicLayerName } from "./useMosaicLayer";
 import {
   collectionLineLayer,
   collectionLineLayerName,
@@ -55,9 +54,10 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
           layerMgr.move(collectionOutlineLayer, collectionLineLayer);
         }
 
-        const hasMosaicLayer = layerMgr.getLayerById(mosaicLayerName);
+        // TODO: handle layer reordering
+        const hasMosaicLayer = layerMgr.getLayerById("todo");
         if (hasOutlineLayer && hasMosaicLayer) {
-          layerMgr.move(mosaicLayerName, itemLineLayerName);
+          layerMgr.move("todo", itemLineLayerName);
         }
 
         // To prevent runaway re-renders, move the base layer under the first
