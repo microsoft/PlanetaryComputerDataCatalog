@@ -1,4 +1,4 @@
-import { Slider, Stack } from "@fluentui/react";
+import { IStackStyles, Slider, Stack, Text } from "@fluentui/react";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setLayerOpacity } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
@@ -14,7 +14,10 @@ const LayerOptions = ({ layer }: LayerOptionsProps) => {
     layerId && dispatch(setLayerOpacity({ id: layerId, value }));
   };
   return (
-    <Stack>
+    <Stack styles={optionsStyles}>
+      <Stack horizontal horizontalAlign="end">
+        <Text variant="small">Opacity: {layer.layer.opacity}%</Text>
+      </Stack>
       <Slider
         aria-label="Layer opacity"
         min={0}
@@ -22,7 +25,7 @@ const LayerOptions = ({ layer }: LayerOptionsProps) => {
         step={1}
         value={layer.layer.opacity}
         onChange={handleChange}
-        valueFormat={(value: number) => `${value}%`}
+        showValue={false}
         styles={{ root: { width: "100%" } }}
       />
     </Stack>
@@ -30,3 +33,9 @@ const LayerOptions = ({ layer }: LayerOptionsProps) => {
 };
 
 export default LayerOptions;
+
+const optionsStyles: IStackStyles = {
+  root: {
+    padding: "8px 0px",
+  },
+};

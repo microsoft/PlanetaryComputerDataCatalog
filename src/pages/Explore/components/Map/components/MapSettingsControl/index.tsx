@@ -1,31 +1,16 @@
 import { useEffect, useState } from "react";
-import { Checkbox, Separator, Slider, Stack } from "@fluentui/react";
+import { Checkbox, Stack } from "@fluentui/react";
 import * as atlas from "azure-maps-control";
 import PanelControl from "../PanelControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import CollectionBoundaryToggle from "./CollectionBoundaryToggle";
-import { useExploreSelector } from "pages/Explore/state/hooks";
-import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 interface MapsOptionsControlProps {
   mapRef: React.MutableRefObject<atlas.Map | null>;
 }
 
 const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
-  const {
-    query: { searchId },
-  } = useExploreSelector(selectCurrentMosaic);
-  const [opacity, setOpacity] = useState<number>(100);
   const [currentMapStyle, setCurrentMapStyle] = useState<string>(DEFAULT_MAP_STYLE);
   const [showLabels, setShowLabels] = useState<boolean>(true);
-
-  // Update opacity when slider changes
-  useEffect(() => {
-    if (!searchId) return;
-    const mosaicLayer = mapRef?.current?.layers.getLayerById(searchId);
-    if (mosaicLayer) {
-      (mosaicLayer as atlas.layer.TileLayer).setOptions({ opacity: opacity / 100 });
-    }
-  }, [mapRef, opacity, searchId]);
 
   // Set label visibility when toggled or a new basemap style is selected
   useEffect(() => {
@@ -65,17 +50,6 @@ const MapSettingsControl = ({ mapRef }: MapsOptionsControlProps) => {
   return (
     <PanelControl label={title} iconName="FluentSettings" top={178}>
       <Stack tokens={{ childrenGap: 10 }} styles={{ root: { padding: 4 } }}>
-        <Slider
-          min={0}
-          max={100}
-          step={1}
-          value={opacity}
-          onChange={value => setOpacity(value)}
-          label="Layer opacity"
-          valueFormat={(value: number) => `${value}%`}
-          styles={{ root: { width: "100%" } }}
-        />
-        <Separator />
         <Checkbox
           label="Show map labels"
           checked={showLabels}

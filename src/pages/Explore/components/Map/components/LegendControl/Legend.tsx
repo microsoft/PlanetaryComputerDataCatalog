@@ -2,6 +2,7 @@ import React from "react";
 import {
   FontSizes,
   FontWeights,
+  Icon,
   ITextStyles,
   Separator,
   Stack,
@@ -36,12 +37,16 @@ const Legend = ({ layer }: LegendProps) => {
   const legend = getLegendType(renderConfig, legendConfig, collection);
   const layerOptions = <LayerOptions layer={layer} />;
 
-  const renderDesc =
-    renderOption.name && renderOption?.name !== "Default" ? (
-      <Text block styles={subHeaderStyles}>
-        {renderOption.name}
-      </Text>
-    ) : null;
+  const layerSubtitle = (
+    <Text styles={subHeaderStyles}>
+      {layer.isCustomQuery ? "Custom" : layer.query.name}
+    </Text>
+  );
+  const renderDesc = (
+    <Text block styles={subHeaderStyles}>
+      {layerSubtitle} | {renderOption.name}
+    </Text>
+  );
 
   const handleExpandChange = (value: boolean) => {
     setIsExpanded(value);
@@ -54,9 +59,10 @@ const Legend = ({ layer }: LegendProps) => {
     <>
       <StackItem>
         <Stack horizontal horizontalAlign="space-between">
-          <Text block styles={headerStyles}>
-            {collection?.title}
-          </Text>
+          <Stack horizontal horizontalAlign="start" verticalAlign="center">
+            <Icon iconName="GripperDotsVertical" />
+            <Text styles={headerStyles}>{collection?.title}</Text>
+          </Stack>
           <LegendCmdBar
             layer={layer}
             isExpanded={isExpanded}

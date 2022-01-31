@@ -31,10 +31,7 @@ export const LegendControl = () => {
   const legendPanel = (
     <Stack styles={panelStyles} tokens={stackTokens}>
       <StackItem>
-        <Stack horizontal horizontalAlign="space-between">
-          <Text block styles={headerStyles}>
-            Legend
-          </Text>
+        <Stack horizontal horizontalAlign="end">
           <IconButton
             title="Hide Legend"
             iconProps={{ iconName: "ChevronDown" }}

@@ -8,5 +8,13 @@ export const PinLayer = () => {
     dispatch(pinCurrentMosaic());
   };
 
-  return <IconButton iconProps={{ iconName: "Pin" }} onClick={handleClick} />;
+  const title = "Pin this layer to the map and perform a new search";
+  return (
+    <IconButton
+      title={title}
+      aria-label={title}
+      iconProps={{ iconName: "Pinned" }}
+      onClick={handleClick}
+    />
+  );
 };

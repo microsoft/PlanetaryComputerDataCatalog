@@ -53,7 +53,6 @@ export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
     const cql = selectCurrentCql(state);
 
     const searchId = await registerStacFilter(collectionId, queryInfo, cql);
-    console.log("registered new search", searchId);
     return searchId;
   }
 );

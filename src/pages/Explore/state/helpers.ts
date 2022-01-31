@@ -10,7 +10,6 @@ export const updateSearchId = (
   // After the search has been updated, update the current layer with the new search id
   const mosaic = getCurrentMosaicDraft(state);
   mosaic.query.searchId = newSearchId;
-  console.log("updateSearchId", newSearchId);
 };
 
 // Get the current mosaic info as an immer draft object

@@ -46,11 +46,9 @@ const useMosaicLayer = (
 
         // Valid and already added to the map, just update the options
         if (mosaicLayer) {
-          console.log("Updating mosaic layer", id);
           (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
         } else {
           // Valid but not yet added to the map, add it
-          console.log("Adding mosaic layer", id);
           const layer = new atlas.layer.TileLayer(tileLayerOpts, mapLayerId);
           map.layers.add(layer, itemOutlineLayerName);
         }
@@ -58,7 +56,6 @@ const useMosaicLayer = (
         if (mosaicLayer) {
           // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
           // the opacity settings will be retained
-          console.log("Invisible layer", id);
           (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
         }
       }
@@ -71,7 +68,6 @@ const useMosaicLayer = (
       .forEach(layer => {
         const id = layer.getId().substring(mosaicLayerPrefix.length);
         if (id in mosaics === false) {
-          console.log("removed layer", id);
           map.layers.remove(layer);
         }
       });

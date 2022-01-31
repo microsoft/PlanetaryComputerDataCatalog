@@ -63,7 +63,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         verticalAlign="center"
       >
         {resultsText}
-        <Stack horizontal tokens={tokens} verticalAlign="center">
+        <Stack horizontal verticalAlign="center">
           <PinLayer />
           <QueryInfo />
         </Stack>
