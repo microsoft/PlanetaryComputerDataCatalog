@@ -18,7 +18,7 @@ const useMosaicLayer = (
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
   const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
-  const isItemLayerValid = stacItemForMosaic;
+  const isItemLayerValid = Boolean(stacItemForMosaic);
 
   // Add a mosaic layer endpoint to the map
   useEffect(() => {
@@ -26,11 +26,12 @@ const useMosaicLayer = (
 
     const map = mapRef.current;
     Object.entries(mosaics).forEach(([id, mosaic]) => {
-      const layerId = makeLayerId(id);
+      const mapLayerId = makeLayerId(id);
       const { query, renderOption, collection } = mosaic;
-      const mosaicLayer = map.layers.getLayerById(layerId);
-      const isMosaicLayerValid = query.searchId;
+      const mosaicLayer = map.layers.getLayerById(mapLayerId);
+      const isMosaicLayerValid = Boolean(query.searchId);
 
+      // Check if the configuration valid to add a mosaic layer
       if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
         const tileLayerOpts: atlas.TileLayerOptions = {
           tileUrl: makeTileJsonUrl(
@@ -40,18 +41,24 @@ const useMosaicLayer = (
             stacItemForMosaic
           ),
           visible: true,
+          opacity: mosaic.layer.opacity / 100,
         };
 
+        // Valid and already added to the map, just update the options
         if (mosaicLayer) {
+          console.log("Updating mosaic layer", id);
           (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
         } else {
-          const layer = new atlas.layer.TileLayer(tileLayerOpts, layerId);
+          // Valid but not yet added to the map, add it
+          console.log("Adding mosaic layer", id);
+          const layer = new atlas.layer.TileLayer(tileLayerOpts, mapLayerId);
           map.layers.add(layer, itemOutlineLayerName);
         }
       } else {
         if (mosaicLayer) {
           // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
           // the opacity settings will be retained
+          console.log("Invisible layer", id);
           (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
         }
       }
@@ -64,6 +71,7 @@ const useMosaicLayer = (
       .forEach(layer => {
         const id = layer.getId().substring(mosaicLayerPrefix.length);
         if (id in mosaics === false) {
+          console.log("removed layer", id);
           map.layers.remove(layer);
         }
       });

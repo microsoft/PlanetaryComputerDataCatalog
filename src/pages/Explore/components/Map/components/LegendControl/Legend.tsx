@@ -18,18 +18,24 @@ import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 
 import LegendCmdBar from "./LegendCmdBar";
+import LayerOptions from "./LayerOptions";
 interface LegendProps {
   layer: ILayerState;
 }
 
 const Legend = ({ layer }: LegendProps) => {
   const [isExpanded, setIsExpanded] = React.useState(true);
+  const [showOptions, setShowOptions] = React.useState(false);
   const { renderOption, collection } = layer;
+
   if (!renderOption) return null;
 
   const renderConfig = qs.parse(renderOption.options || "");
   const legendConfig = renderOption.legend;
+
   const legend = getLegendType(renderConfig, legendConfig, collection);
+  const layerOptions = <LayerOptions layer={layer} />;
+
   const renderDesc =
     renderOption.name && renderOption?.name !== "Default" ? (
       <Text block styles={subHeaderStyles}>
@@ -37,8 +43,11 @@ const Legend = ({ layer }: LegendProps) => {
       </Text>
     ) : null;
 
-  const handleExpandChange = (isExpandedVal: boolean) => {
-    setIsExpanded(isExpandedVal);
+  const handleExpandChange = (value: boolean) => {
+    setIsExpanded(value);
+  };
+  const handleOptionsChange = (value: boolean) => {
+    setShowOptions(value);
   };
 
   return (
@@ -52,10 +61,13 @@ const Legend = ({ layer }: LegendProps) => {
             layer={layer}
             isExpanded={isExpanded}
             onExpandedChange={handleExpandChange}
+            showOptions={showOptions}
+            onShowOptionsChange={handleOptionsChange}
           />
         </Stack>
         {renderDesc}
         {isExpanded && legend}
+        {showOptions && layerOptions}
       </StackItem>
       <Separator className="legend-item-separator" />
     </>

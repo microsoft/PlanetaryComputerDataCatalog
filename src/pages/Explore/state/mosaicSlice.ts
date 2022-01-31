@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { uniqueId } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
@@ -21,6 +22,7 @@ const initialMosaicState: IMosaic = {
 };
 
 export const initialLayerState: ILayerState = {
+  layerId: "",
   collection: null,
   query: initialMosaicState,
   isCustomQuery: isCustomQueryOnLoad,
@@ -29,26 +31,29 @@ export const initialLayerState: ILayerState = {
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
+    opacity: 100,
   },
 };
 
 const initialState: IMosaicState = {
   layers: {},
   layerOrder: [],
-  currentEditingSearchId: null,
+  currentEditingLayerId: null,
 };
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/registerQuery",
   async (queryInfo: IMosaic, { getState, dispatch }) => {
-    const state = getState() as ExploreState;
+    // Update the new mosaic info into state
     dispatch(setQuery(queryInfo));
 
+    const state = getState() as ExploreState;
     const mosaic = selectCurrentMosaic(state);
     const collectionId = mosaic.collection?.id;
     const cql = selectCurrentCql(state);
 
     const searchId = await registerStacFilter(collectionId, queryInfo, cql);
+    console.log("registered new search", searchId);
     return searchId;
   }
 );
@@ -94,19 +99,20 @@ export const mosaicSlice = createSlice({
       // and the search order, if it is not pinned
       const currentMosaic = getCurrentMosaicDraft(state);
       if (!currentMosaic.isPinned) {
-        state.currentEditingSearchId &&
-          delete state.layers[state.currentEditingSearchId];
+        state.currentEditingLayerId &&
+          delete state.layers[state.currentEditingLayerId];
         state.layerOrder = state.layerOrder.filter(
-          id => id !== state.currentEditingSearchId
+          id => id !== state.currentEditingLayerId
         );
       }
 
-      state.currentEditingSearchId = "loading";
-      state.layers[state.currentEditingSearchId] = {
+      state.currentEditingLayerId = uniqueId(action.payload.id);
+      state.layers[state.currentEditingLayerId] = {
         ...initialLayerState,
         collection: action.payload,
+        layerId: state.currentEditingLayerId,
       };
-      state.layerOrder = [state.currentEditingSearchId].concat(state.layerOrder);
+      state.layerOrder = [state.currentEditingLayerId].concat(state.layerOrder);
     },
 
     setQuery: (state, action: PayloadAction<IMosaic>) => {
@@ -127,6 +133,14 @@ export const mosaicSlice = createSlice({
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.layer.minZoom = action.payload;
+    },
+
+    setLayerOpacity: (
+      state,
+      action: PayloadAction<{ id: string; value: number }>
+    ) => {
+      const mosaic = state.layers[action.payload.id];
+      mosaic.layer.opacity = action.payload.value;
     },
 
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
@@ -174,14 +188,14 @@ export const mosaicSlice = createSlice({
     pinCurrentMosaic: state => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.isPinned = true;
-      state.currentEditingSearchId = null;
+      state.currentEditingLayerId = null;
     },
 
     removePinnedLayer: (state, action: PayloadAction<string>) => {
-      const searchId = action.payload;
-      if (searchId in state.layers) {
-        delete state.layers[searchId];
-        state.layerOrder = state.layerOrder.filter(id => id !== searchId);
+      const layerId = action.payload;
+      if (layerId in state.layers) {
+        delete state.layers[layerId];
+        state.layerOrder = state.layerOrder.filter(id => id !== layerId);
       }
     },
 
@@ -222,6 +236,7 @@ export const {
   setQuery,
   setRenderOption,
   setLayerMinZoom,
+  setLayerOpacity,
   setIsCustomQuery,
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
@@ -237,13 +252,13 @@ export const selectCurrentCql = (state: ExploreState) => {
 // Custom selector to get the current mosaic layer being edited / displayed
 export const selectCurrentMosaic = (state: ExploreState) => {
   if (
-    !state.mosaic.currentEditingSearchId ||
-    !state.mosaic.layers[state.mosaic.currentEditingSearchId]
+    !state.mosaic.currentEditingLayerId ||
+    !state.mosaic.layers[state.mosaic.currentEditingLayerId]
   ) {
     return initialLayerState;
   }
 
-  return state.mosaic.layers[state.mosaic.currentEditingSearchId];
+  return state.mosaic.layers[state.mosaic.currentEditingLayerId];
 };
 
 // Custom selector to get all pinned mosaic layers

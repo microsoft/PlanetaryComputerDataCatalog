@@ -53,7 +53,6 @@
     "yup": "^0.32.11"
   },
   "resolutions": {
-    "//": "TODO: remove after upgrading react-scripts v5",
     "//": "See https://github.com/facebook/create-react-app/issues/11773",
     "react-error-overlay": "6.0.9"
   },

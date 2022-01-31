@@ -9,39 +9,15 @@ export const updateSearchId = (
 ) => {
   // After the search has been updated, update the current layer with the new search id
   const mosaic = getCurrentMosaicDraft(state);
-  const oldSearchId = mosaic.query.searchId;
-
-  // Change resulted in same hash, or nothing is being edited, do nothing
-  if (
-    newSearchId === oldSearchId ||
-    newSearchId === state.currentEditingSearchId ||
-    !state.currentEditingSearchId
-  )
-    return;
-
-  // Key the mosaic under the new search id, and update the id
-  state.layers[newSearchId] = mosaic;
-  state.layers[newSearchId].query.searchId = newSearchId;
-
-  // Remove the old mosaic and update the pointer to the current editing search id
-  state.currentEditingSearchId && delete state.layers[state.currentEditingSearchId];
-
-  // Update the entry in the layer order
-  const position = state.layerOrder.indexOf(state.currentEditingSearchId);
-  if (position !== -1) {
-    state.layerOrder[position] = newSearchId;
-  } else {
-    [newSearchId].concat(state.layerOrder);
-  }
-
-  state.currentEditingSearchId = newSearchId;
+  mosaic.query.searchId = newSearchId;
+  console.log("updateSearchId", newSearchId);
 };
 
 // Get the current mosaic info as an immer draft object
 export const getCurrentMosaicDraft = (state: WritableDraft<IMosaicState>) => {
-  if (!state.currentEditingSearchId || !state.layers[state.currentEditingSearchId]) {
+  if (!state.currentEditingLayerId || !state.layers[state.currentEditingLayerId]) {
     return createDraft(initialLayerState);
   }
 
-  return state.layers[state.currentEditingSearchId];
+  return state.layers[state.currentEditingLayerId];
 };

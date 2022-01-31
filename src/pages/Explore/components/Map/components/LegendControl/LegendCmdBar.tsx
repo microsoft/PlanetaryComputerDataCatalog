@@ -14,29 +14,41 @@ interface LegendCmdBarProps {
   layer: ILayerState;
   isExpanded: boolean;
   onExpandedChange: (value: boolean) => void;
+  showOptions: boolean;
+  onShowOptionsChange: (value: boolean) => void;
 }
 
 const LegendCmdBar = ({
   layer,
   isExpanded,
   onExpandedChange,
+  showOptions,
+  onShowOptionsChange,
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
 
   const handleUnpin = () => {
-    const searchId = layer.query.searchId;
-    searchId && dispatch(removePinnedLayer(searchId));
+    const layerId = layer.layerId;
+    layerId && dispatch(removePinnedLayer(layerId));
   };
 
   const expandedIcon = isExpanded ? "ChevronDown" : "ChevronUp";
   const handleExpandClick = () => onExpandedChange(!isExpanded);
+  const showOptionsIcon = showOptions ? "ColumnOptions" : "Settings";
+  const handleShowOptionsClick = () => onShowOptionsChange(!showOptions);
+
   return (
     <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
+      <IconButton
+        iconProps={{ iconName: showOptionsIcon }}
+        onClick={handleShowOptionsClick}
+        styles={buttonStyles}
+      />
       <IconButton
         aria-label="Unpin layer from map"
         title="Unpin layer from map"
         disabled={!layer.isPinned}
-        iconProps={{ iconName: "pin" }}
+        iconProps={{ iconName: "Unpin" }}
         onClick={handleUnpin}
         styles={buttonStyles}
       />

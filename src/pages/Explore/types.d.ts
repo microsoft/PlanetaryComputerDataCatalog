@@ -53,6 +53,7 @@ export interface ISearchIdMetadata {
 }
 
 export interface ILayerState {
+  layerId: string;
   collection: IStacCollection | null;
   query: IMosaic;
   isCustomQuery: boolean;
@@ -61,6 +62,7 @@ export interface ILayerState {
   layer: {
     minZoom: number;
     maxExtent: number[];
+    opacity: number;
   };
 }
 
@@ -68,5 +70,5 @@ export type CurrentLayers = Record<string, ILayerState>;
 export interface IMosaicState {
   layers: CurrentLayers;
   layerOrder: string[];
-  currentEditingSearchId: string | null;
+  currentEditingLayerId: string | null;
 }
