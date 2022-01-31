@@ -67,5 +67,6 @@ export interface ILayerState {
 export type CurrentLayers = Record<string, ILayerState>;
 export interface IMosaicState {
   layers: CurrentLayers;
+  layerOrder: string[];
   currentEditingSearchId: string | null;
 }

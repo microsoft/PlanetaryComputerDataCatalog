@@ -25,6 +25,15 @@ export const updateSearchId = (
 
   // Remove the old mosaic and update the pointer to the current editing search id
   state.currentEditingSearchId && delete state.layers[state.currentEditingSearchId];
+
+  // Update the entry in the layer order
+  const position = state.layerOrder.indexOf(state.currentEditingSearchId);
+  if (position !== -1) {
+    state.layerOrder[position] = newSearchId;
+  } else {
+    [newSearchId].concat(state.layerOrder);
+  }
+
   state.currentEditingSearchId = newSearchId;
 };
 

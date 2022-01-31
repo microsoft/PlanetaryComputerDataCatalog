@@ -34,6 +34,7 @@ export const initialLayerState: ILayerState = {
 
 const initialState: IMosaicState = {
   layers: {},
+  layerOrder: [],
   currentEditingSearchId: null,
 };
 
@@ -90,11 +91,14 @@ export const mosaicSlice = createSlice({
   reducers: {
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
       // When setting a new collection, remove the currently edited mosaic layer
-      // if it is not pinned
+      // and the search order, if it is not pinned
       const currentMosaic = getCurrentMosaicDraft(state);
       if (!currentMosaic.isPinned) {
         state.currentEditingSearchId &&
           delete state.layers[state.currentEditingSearchId];
+        state.layerOrder = state.layerOrder.filter(
+          id => id !== state.currentEditingSearchId
+        );
       }
 
       state.currentEditingSearchId = "loading";
@@ -102,6 +106,7 @@ export const mosaicSlice = createSlice({
         ...initialLayerState,
         collection: action.payload,
       };
+      state.layerOrder = [state.currentEditingSearchId].concat(state.layerOrder);
     },
 
     setQuery: (state, action: PayloadAction<IMosaic>) => {
@@ -172,6 +177,14 @@ export const mosaicSlice = createSlice({
       state.currentEditingSearchId = null;
     },
 
+    removePinnedLayer: (state, action: PayloadAction<string>) => {
+      const searchId = action.payload;
+      if (searchId in state.layers) {
+        delete state.layers[searchId];
+        state.layerOrder = state.layerOrder.filter(id => id !== searchId);
+      }
+    },
+
     resetMosaic: () => {
       return initialState;
     },
@@ -203,6 +216,7 @@ export const mosaicSlice = createSlice({
 
 export const {
   pinCurrentMosaic,
+  removePinnedLayer,
   resetMosaic,
   setCollection,
   setQuery,
