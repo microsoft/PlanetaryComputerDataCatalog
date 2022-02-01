@@ -3,10 +3,11 @@ import {
   FontSizes,
   FontWeights,
   Icon,
+  IStackStyles,
+  IStackTokens,
   ITextStyles,
   Separator,
   Stack,
-  StackItem,
   Text,
 } from "@fluentui/react";
 import * as qs from "query-string";
@@ -37,11 +38,7 @@ const Legend = ({ layer }: LegendProps) => {
   const legend = getLegendType(renderConfig, legendConfig, collection);
   const layerOptions = <LayerOptions layer={layer} />;
 
-  const layerSubtitle = (
-    <Text styles={subHeaderStyles}>
-      {layer.isCustomQuery ? "Custom" : layer.query.name}
-    </Text>
-  );
+  const layerSubtitle = layer.isCustomQuery ? "Custom" : layer.query.name;
   const renderDesc = (
     <Text block styles={subHeaderStyles}>
       {layerSubtitle} | {renderOption.name}
@@ -57,25 +54,33 @@ const Legend = ({ layer }: LegendProps) => {
 
   return (
     <>
-      <StackItem>
-        <Stack horizontal horizontalAlign="space-between">
-          <Stack horizontal horizontalAlign="start" verticalAlign="center">
-            <Icon iconName="GripperDotsVertical" />
-            <Text styles={headerStyles}>{collection?.title}</Text>
+      <Stack tokens={tokens}>
+        <Stack>
+          <Stack
+            horizontal
+            horizontalAlign="space-between"
+            styles={legendHeaderStyles}
+          >
+            <Stack horizontal horizontalAlign="start" verticalAlign="start">
+              <Icon iconName="GripperDotsVertical" styles={gripperStyles} />
+              <Text block nowrap styles={headerStyles} title={collection?.title}>
+                {collection?.title}
+              </Text>
+            </Stack>
+            <LegendCmdBar
+              layer={layer}
+              isExpanded={isExpanded}
+              onExpandedChange={handleExpandChange}
+              showOptions={showOptions}
+              onShowOptionsChange={handleOptionsChange}
+            />
           </Stack>
-          <LegendCmdBar
-            layer={layer}
-            isExpanded={isExpanded}
-            onExpandedChange={handleExpandChange}
-            showOptions={showOptions}
-            onShowOptionsChange={handleOptionsChange}
-          />
+          <div style={legendBodyStyles}>{renderDesc}</div>
         </Stack>
-        {renderDesc}
-        {isExpanded && legend}
-        {showOptions && layerOptions}
-      </StackItem>
-      <Separator className="legend-item-separator" />
+        {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
+        {showOptions && <div style={legendBodyStyles}>{layerOptions}</div>}
+      </Stack>
+      <Separator className="legend-item-separator" styles={legendSeparatorStyles} />
     </>
   );
 };
@@ -110,14 +115,45 @@ const getLegendType = (
   }
 };
 
+const tokens: IStackTokens = {
+  childrenGap: 6,
+};
+
+const legendHeaderStyles: IStackStyles = {
+  root: {
+    paddingLeft: 2,
+    paddingRight: 6,
+  },
+};
+
+const legendBodyStyles: React.CSSProperties = {
+  paddingLeft: 21,
+  paddingRight: 6,
+};
+
 const headerStyles: ITextStyles = {
   root: {
     fontWeight: FontWeights.semibold,
+    maxWidth: 240,
   },
 };
 
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
+  },
+};
+
+const gripperStyles = {
+  root: {
+    fontSize: 18,
+    marginTop: 2,
+  },
+};
+
+const legendSeparatorStyles = {
+  root: {
+    margin: 0,
+    padding: 0,
   },
 };

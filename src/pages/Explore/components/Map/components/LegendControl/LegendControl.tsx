@@ -1,16 +1,10 @@
 import {
-  FontWeights,
   IStackStyles,
-  ITextStyles,
   Stack,
-  Text,
   getTheme,
   IStackTokens,
-  StackItem,
-  FontSizes,
   IconButton,
   IButtonStyles,
-  Separator,
 } from "@fluentui/react";
 import { useLocalStorage } from "react-use";
 
@@ -30,17 +24,6 @@ export const LegendControl = () => {
   // const legendItems =
   const legendPanel = (
     <Stack styles={panelStyles} tokens={stackTokens}>
-      <StackItem>
-        <Stack horizontal horizontalAlign="end">
-          <IconButton
-            title="Hide Legend"
-            iconProps={{ iconName: "ChevronDown" }}
-            styles={minimizeButtonStyles}
-            onClick={() => setIsOpen(!isOpen)}
-          />
-        </Stack>
-        <Separator styles={{ root: { padding: 0 } }} />
-      </StackItem>
       {legends}
     </Stack>
   );
@@ -53,35 +36,34 @@ export const LegendControl = () => {
         className="azure-maps-control-button"
         styles={legendButtonStyles}
         iconProps={{ iconName: "MapLegend" }}
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen(!isOpen)}
       />
     </div>
   );
 
-  return isOpen ? legendPanel : legendButton;
+  return (
+    <>
+      {isOpen && legends.length > 0 && legendPanel}
+      {legendButton}
+    </>
+  );
 };
 
 const theme = getTheme();
 const stackTokens: IStackTokens = {
-  childrenGap: theme.spacing.s1,
+  childrenGap: 2,
 };
 const panelStyles: IStackStyles = {
   root: {
     background: theme.semanticColors.bodyBackground,
-    padding: 10,
+    padding: "10px 0px 10px 0px",
     borderRadius: 2,
     position: "absolute",
     zIndex: 1,
     bottom: 40,
-    right: 10,
+    right: 45,
     boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
     width: 350,
-  },
-};
-
-const headerStyles: ITextStyles = {
-  root: {
-    fontWeight: FontWeights.semibold,
   },
 };
 
@@ -91,17 +73,6 @@ const legendButtonStyles: IButtonStyles = {
 
     width: 18,
     height: 18,
-  },
-};
-
-const minimizeButtonStyles: IButtonStyles = {
-  root: {
-    width: 18,
-    height: 18,
-  },
-  icon: {
-    color: theme.semanticColors.bodyText,
-    fontSize: FontSizes.xSmall,
   },
 };
 

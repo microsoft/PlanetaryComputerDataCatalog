@@ -18,7 +18,7 @@ import { rootColormapUrl } from "./helpers";
 import { ILegendConfig } from "pages/Explore/types";
 
 const HEIGHT: number = 0.08;
-const WIDTH: number = 3.6;
+const WIDTH: number = 4.1;
 
 interface ColorMapProps {
   params: qs.ParsedQuery<string>;
