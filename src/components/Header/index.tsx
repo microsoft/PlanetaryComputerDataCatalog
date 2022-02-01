@@ -1,5 +1,6 @@
 import { Stack, Text, useTheme } from "@fluentui/react";
 import HeaderLink from "./components/HeaderLink";
+import { useSession } from "components/auth/hooks/SessionContext";
 
 import siteConfig from "config/site.yml";
 import {
@@ -13,9 +14,13 @@ import {
   rightAligned,
 } from "./styles";
 import { gridContentStyle, offGridContentStyle } from "styles";
+import Feature from "components/Feature";
+import Login from "components/auth/Login";
+import Logout from "components/auth/Logout";
 
 const Header = ({ onGrid = true }) => {
   const theme = useTheme();
+  const { loggedIn } = useSession();
   const navClass = onGrid ? gridContentStyle : offGridContentStyle;
 
   return (
@@ -66,9 +71,17 @@ const Header = ({ onGrid = true }) => {
             Documentation
           </HeaderLink>
           <div className={rightAligned}>
-            <HeaderLink asButton to="/account/request">
-              Request access
-            </HeaderLink>
+            <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 4 }}>
+              {!loggedIn && (
+                <HeaderLink asButton to="/account/request">
+                  Request access
+                </HeaderLink>
+              )}
+              <Feature name="login">
+                <Login />
+                <Logout />
+              </Feature>
+            </Stack>
           </div>
         </Stack>
       </nav>

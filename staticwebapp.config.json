@@ -1,6 +1,28 @@
 {
   "navigationFallback": {
     "rewrite": "index.html",
-    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/mock/*"]
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/mock/*", "/.auth/*"]
+  },
+  "auth": {
+    "identityProviders": {
+      "customOpenIdConnectProviders": {
+        "pcid": {
+          "registration": {
+            "clientIdSettingName": "PCID_CLIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "PCID_CLIENT_SECRET"
+            },
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://542a-69-242-68-241.ngrok.io/id/o/.well-known/openid-configuration/"
+            }
+          },
+          "login": {
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": ["openid", "email"],
+            "loginParameterNames": []
+          }
+        }
+      }
+    }
   }
 }
