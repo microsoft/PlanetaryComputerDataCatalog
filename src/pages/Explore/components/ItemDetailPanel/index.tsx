@@ -15,11 +15,13 @@ import BackToListButton from "./BackToListButton";
 import { CSSProperties } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 const ItemDetailPanel = () => {
   const theme = useTheme();
   const item = useExploreSelector(s => s.detail.selectedItem);
-  const collectionName = useExploreSelector(s => s.mosaic.collection?.title);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
+  const title = collection?.title;
 
   const itemDetailStylesOuter: Partial<IStackItemStyles> = {
     root: {
@@ -47,7 +49,7 @@ const ItemDetailPanel = () => {
       >
         <ItemPreview item={item} size={400} border="top" />
       </div>
-      <HeaderCard collectionName={collectionName} item={item} />
+      <HeaderCard collectionName={title} item={item} />
 
       <Pivot styles={{ link: { width: "50%" } }}>
         <PivotItem headerText="Metadata">

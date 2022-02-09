@@ -23,6 +23,7 @@ import { useExploreSelector } from "pages/Explore/state/hooks";
 import ErrorFallback from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
@@ -34,7 +35,7 @@ const SearchResultsPane = ({
   visible,
 }: SearchResultsProps) => {
   const theme = getTheme();
-  const { collection } = useExploreSelector(s => s.mosaic);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();

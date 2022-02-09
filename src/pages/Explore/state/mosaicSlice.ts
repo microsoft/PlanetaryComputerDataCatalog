@@ -1,31 +1,17 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { uniqueId } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
-import { IMosaic, IMosaicRenderOption } from "../types";
+import { ILayerState, IMosaic, IMosaicRenderOption, IMosaicState } from "../types";
 import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
+import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
 import { AppThunk, ExploreState } from "./store";
 
 const isCustomQueryOnLoad = getIsCustomQueryString();
-
-export interface IMosaicState {
-  collection: IStacCollection | null;
-  query: IMosaic;
-  isCustomQuery: boolean;
-  customQuery: IMosaic;
-  renderOption: IMosaicRenderOption | null;
-  layer: {
-    minZoom: number;
-    maxExtent: number[];
-  };
-  options: {
-    showEdit: boolean;
-    showResults: boolean;
-  };
-}
 
 const initialMosaicState: IMosaic = {
   name: null,
@@ -35,29 +21,35 @@ const initialMosaicState: IMosaic = {
   searchId: null,
 };
 
-const initialState: IMosaicState = {
+export const initialLayerState: ILayerState = {
+  layerId: "",
   collection: null,
   query: initialMosaicState,
   isCustomQuery: isCustomQueryOnLoad,
-  customQuery: initialMosaicState,
+  isPinned: false,
   renderOption: null,
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
+    opacity: 100,
   },
-  options: {
-    showResults: true,
-    showEdit: false,
-  },
+};
+
+const initialState: IMosaicState = {
+  layers: {},
+  layerOrder: [],
+  currentEditingLayerId: null,
 };
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/registerQuery",
   async (queryInfo: IMosaic, { getState, dispatch }) => {
+    // Update the new mosaic info into state
     dispatch(setQuery(queryInfo));
 
     const state = getState() as ExploreState;
-    const collectionId = state.mosaic.collection?.id;
+    const mosaic = selectCurrentMosaic(state);
+    const collectionId = mosaic.collection?.id;
     const cql = selectCurrentCql(state);
 
     const searchId = await registerStacFilter(collectionId, queryInfo, cql);
@@ -102,51 +94,71 @@ export const mosaicSlice = createSlice({
   initialState,
   reducers: {
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
-      state.collection = action.payload;
-    },
-    setCollectionDefaultState: (
-      state,
-      action: PayloadAction<IStacCollection | null>
-    ) => {
-      state.collection = action.payload;
-      state.query = initialMosaicState;
-      state.renderOption = null;
-      state.isCustomQuery = false;
-      state.customQuery = initialMosaicState;
-    },
-    setQuery: (state, action: PayloadAction<IMosaic>) => {
-      state.query = { ...action.payload, searchId: null };
-    },
-    setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
-      state.renderOption = action.payload;
-      if (!action.payload.minZoom) {
-        state.renderOption.minZoom = DEFAULT_MIN_ZOOM;
-      }
-    },
-    setShowResults: (state, action: PayloadAction<boolean>) => {
-      state.options.showResults = action.payload;
-    },
-    setShowEdit: (state, action: PayloadAction<boolean>) => {
-      state.options.showEdit = action.payload;
-    },
-    setLayerMinZoom: (state, action: PayloadAction<number>) => {
-      state.layer.minZoom = action.payload;
-    },
-    setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.customQuery = initialMosaicState;
+      // When setting a new collection, remove the currently edited mosaic layer
+      // and the search order, if it is not pinned
+      const currentMosaic = getCurrentMosaicDraft(state);
+      if (!currentMosaic.isPinned) {
+        state.currentEditingLayerId &&
+          delete state.layers[state.currentEditingLayerId];
+        state.layerOrder = state.layerOrder.filter(
+          id => id !== state.currentEditingLayerId
+        );
       }
 
-      state.isCustomQuery = action.payload;
+      state.currentEditingLayerId = uniqueId(action.payload.id);
+      state.layers[state.currentEditingLayerId] = {
+        ...initialLayerState,
+        collection: action.payload,
+        layerId: state.currentEditingLayerId,
+      };
+      state.layerOrder = [state.currentEditingLayerId].concat(state.layerOrder);
     },
+
+    setQuery: (state, action: PayloadAction<IMosaic>) => {
+      const mosaic = getCurrentMosaicDraft(state);
+      const query = { ...action.payload, searchId: null };
+      mosaic.query = query;
+    },
+
+    setRenderOption: (state, action: PayloadAction<IMosaicRenderOption>) => {
+      const mosaic = getCurrentMosaicDraft(state);
+      const renderOption = Object.assign(
+        { minZoom: DEFAULT_MIN_ZOOM },
+        action.payload
+      );
+      mosaic.renderOption = renderOption;
+    },
+
+    setLayerMinZoom: (state, action: PayloadAction<number>) => {
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.layer.minZoom = action.payload;
+    },
+
+    setLayerOpacity: (
+      state,
+      action: PayloadAction<{ id: string; value: number }>
+    ) => {
+      const mosaic = state.layers[action.payload.id];
+      mosaic.layer.opacity = action.payload.value;
+    },
+
+    setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.isCustomQuery = action.payload;
+      mosaic.query = initialMosaicState;
+    },
+
     setCustomQueryBody: (state, action: PayloadAction<IMosaic>) => {
-      state.customQuery = action.payload;
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.query = action.payload;
     },
+
     addOrUpdateCustomCqlExpression: (
       state,
       action: PayloadAction<CqlExpression>
     ) => {
-      const draft = state.customQuery.cql;
+      const mosaic = getCurrentMosaicDraft(state);
+      const draft = mosaic.query.cql;
       const newExpProperty = new CqlExpressionParser(action.payload).property;
       const existingIndex = draft.findIndex(
         exp => new CqlExpressionParser(exp).property === newExpProperty
@@ -158,8 +170,10 @@ export const mosaicSlice = createSlice({
         draft.splice(existingIndex, 1, action.payload);
       }
     },
+
     removeCustomCqlProperty: (state, action: PayloadAction<string>) => {
-      const draft = state.customQuery.cql;
+      const mosaic = getCurrentMosaicDraft(state);
+      const draft = mosaic.query.cql;
       const property = action.payload;
       const existingIndex = draft.findIndex(
         exp => new CqlExpressionParser(exp).property === property
@@ -169,58 +183,95 @@ export const mosaicSlice = createSlice({
         draft.splice(existingIndex, 1);
       }
     },
+
+    pinCurrentMosaic: state => {
+      const mosaic = getCurrentMosaicDraft(state);
+      mosaic.isPinned = true;
+      state.currentEditingLayerId = null;
+    },
+
+    removePinnedLayer: (state, action: PayloadAction<string>) => {
+      const layerId = action.payload;
+      if (layerId in state.layers) {
+        delete state.layers[layerId];
+        state.layerOrder = state.layerOrder.filter(id => id !== layerId);
+      }
+    },
+
     resetMosaic: () => {
-      // Explicitly set isCustomQuery since the initial state may have been
-      // informed by querystring
-      return { ...initialState, ...{ isCustomQuery: false } };
+      return initialState;
     },
   },
+
   extraReducers: builder => {
     builder.addCase(
       setMosaicQuery.fulfilled,
       (state, action: PayloadAction<string>) => {
-        state.query.searchId = action.payload;
+        updateSearchId(state, action.payload);
       }
     );
 
     builder.addCase(
       setCustomCqlExpressions.fulfilled,
       (state, action: PayloadAction<string>) => {
-        state.customQuery.searchId = action.payload;
+        updateSearchId(state, action.payload);
       }
     );
 
-    builder.addCase(removeCustomCqlExpression.fulfilled, (state, action) => {
-      state.customQuery.searchId = action.payload;
-    });
+    builder.addCase(
+      removeCustomCqlExpression.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        updateSearchId(state, action.payload);
+      }
+    );
   },
 });
 
 export const {
+  pinCurrentMosaic,
+  removePinnedLayer,
   resetMosaic,
   setCollection,
-  setCollectionDefaultState,
   setQuery,
   setRenderOption,
-  setShowEdit,
-  setShowResults,
   setLayerMinZoom,
+  setLayerOpacity,
   setIsCustomQuery,
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
   removeCustomCqlProperty,
 } = mosaicSlice.actions;
 
+// Custom selector to get the current mosaic CQL query
 export const selectCurrentCql = (state: ExploreState) => {
-  return state.mosaic.isCustomQuery
-    ? state.mosaic.customQuery.cql
-    : state.mosaic.query.cql;
+  const mosaic = selectCurrentMosaic(state);
+  return mosaic?.query?.cql || [];
 };
 
+// Custom selector to get the current mosaic layer being edited / displayed
+export const selectCurrentMosaic = (state: ExploreState) => {
+  if (
+    !state.mosaic.currentEditingLayerId ||
+    !state.mosaic.layers[state.mosaic.currentEditingLayerId]
+  ) {
+    return initialLayerState;
+  }
+
+  return state.mosaic.layers[state.mosaic.currentEditingLayerId];
+};
+
+// Custom selector to get all pinned mosaic layers
+export const selectPinnedMosaics = (state: ExploreState) => {
+  return Object.values(state.mosaic.layers).filter(layer => layer.isPinned);
+};
+
+// Register the new CQL query and set the resulting searchId
 async function registerUpdatedSearch(getState: () => unknown) {
   const state = getState() as ExploreState;
-  const collectionId = state.mosaic.collection?.id;
-  const queryInfo = state.mosaic.customQuery;
+
+  const mosaic = selectCurrentMosaic(state);
+  const collectionId = mosaic.collection?.id;
+  const queryInfo = mosaic.query;
   const cql = selectCurrentCql(state);
 
   const searchId = await registerStacFilter(collectionId, queryInfo, cql);

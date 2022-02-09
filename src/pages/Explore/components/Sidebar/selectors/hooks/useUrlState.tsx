@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useQueryString } from "utils/hooks";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
+  selectCurrentMosaic,
   setCollection,
   setCustomQueryBody,
   setMosaicQuery,
@@ -30,7 +31,8 @@ const useUrlState = (
   actionCreator: Function
 ) => {
   const dispatch = useExploreDispatch();
-  const currentState = useExploreSelector(state => state.mosaic[stateKey]);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
+  const currentState = mosaic[stateKey];
 
   // Set local state any initial render option specified in the URL
   const [qsValue, setQsValue] = useState<string | null>(
@@ -73,21 +75,21 @@ export const useCustomQueryUrlState = () => {
   const [qsSearchId, setQsSearchId] = useState<string | null>(
     useQueryString().get(customQueryQsKey)
   );
-  const { isCustomQuery, customQuery } = useExploreSelector(state => state.mosaic);
+  const { isCustomQuery, query } = useExploreSelector(selectCurrentMosaic);
 
   // TODO: handle failure
   const { data: searchMetadata, isSuccess } = useSearchIdMetadata(qsSearchId);
 
   useEffect(() => {
     if (isCustomQuery) {
-      updateQueryStringParam(customQueryQsKey, customQuery.searchId);
+      updateQueryStringParam(customQueryQsKey, query.searchId);
       updateQueryStringParam(mosaicQsKey, null);
     }
 
     return () => {
       updateQueryStringParam(customQueryQsKey, null);
     };
-  }, [customQuery.searchId, isCustomQuery]);
+  }, [query.searchId, isCustomQuery]);
 
   useEffect(() => {
     if (searchMetadata && isSuccess) {
@@ -108,7 +110,7 @@ export const useCustomQueryUrlState = () => {
 export const useCollectionUrlState = (collections: IStacCollection[] | null) => {
   const dispatch = useExploreDispatch();
   const qsCollectionId = useQueryString().get(collectionKey);
-  const { collection } = useExploreSelector(state => state.mosaic);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
 
   useEffect(() => {
     updateQueryStringParam(collectionKey, collection?.id);

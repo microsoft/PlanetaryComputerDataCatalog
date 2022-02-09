@@ -1,5 +1,6 @@
 import { Link, Stack, Text, useTheme } from "@fluentui/react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 interface MessageProps {
   onClick: () => void;
@@ -38,7 +39,7 @@ export const ZoomMessage = ({ onClick }: MessageProps) => {
 };
 
 export const ExtentMessage = ({ onClick }: MessageProps) => {
-  const collection = useExploreSelector(s => s.mosaic.collection);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
 
   return (
     <MapMessage>

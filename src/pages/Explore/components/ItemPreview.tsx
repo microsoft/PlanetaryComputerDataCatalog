@@ -11,6 +11,7 @@ import { useBoolean } from "react-use";
 import { IStacItem } from "types/stac";
 import { makeItemPreviewUrl } from "utils";
 import { useExploreSelector } from "../state/hooks";
+import { selectCurrentMosaic } from "../state/mosaicSlice";
 
 interface ItemPreviewProps {
   item: IStacItem;
@@ -21,7 +22,7 @@ interface ItemPreviewProps {
 const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) => {
   const theme = useTheme();
   const [loading, setLoading] = useBoolean(true);
-  const renderOption = useExploreSelector(s => s.mosaic.renderOption);
+  const { renderOption } = useExploreSelector(selectCurrentMosaic);
 
   const handleStateChange = useCallback(
     (state: ImageLoadState) => {

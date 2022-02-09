@@ -16,10 +16,13 @@ import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
-import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import {
+  selectCurrentCql,
+  selectCurrentMosaic,
+} from "pages/Explore/state/mosaicSlice";
 
 const QueryInfo = () => {
-  const { collection, renderOption } = useExploreSelector(s => s.mosaic);
+  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const cql = useExploreSelector(selectCurrentCql);
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("queryinfo-button");

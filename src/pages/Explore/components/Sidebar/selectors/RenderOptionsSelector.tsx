@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { IDropdownOption } from "@fluentui/react";
 
 import { useCollectionMosaicInfo } from "../../../utils/hooks";
-import { setRenderOption } from "../../../state/mosaicSlice";
+import { selectCurrentMosaic, setRenderOption } from "../../../state/mosaicSlice";
 import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
 import StateSelector from "./StateSelector";
 import { useRenderUrlState } from "./hooks/useUrlState";
 
 const RenderOptionsSelector = () => {
   const dispatch = useExploreDispatch();
-  const { collection, renderOption } = useExploreSelector(state => state.mosaic);
+  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   // Set a default render option if none is selected
