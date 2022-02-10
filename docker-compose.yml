@@ -13,9 +13,7 @@ services:
       - .:/usr/src
     networks:
       - pcdc-network
-    command: >
-      ./node_modules/@azure/static-web-apps-cli/dist/cli/bin.js start
-      http://0.0.0.0:3000 --run "yarn start" --api-location "http://172.20.0.10:7071"
+    command: ["./wait-for-it.sh", "api:7071", "--", "./app_init.sh"]
 
   api:
     build:
@@ -28,8 +26,7 @@ services:
       - ./api:/usr/src
     networks:
       pcdc-network:
-        ipv4_address: 172.20.0.10
-    command: func host start --cors "*" --port 7071
+    command: func host start --script-root ./ --cors "*" --port 7071
 
   azurite:
     container_name: pcdc-azurite
@@ -64,6 +61,3 @@ volumes:
 
 networks:
   pcdc-network:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16

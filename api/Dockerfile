@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/azure-functions/python:4-python3.8
+FROM mcr.microsoft.com/azure-functions/python:3.0-python3.8
 
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
@@ -19,4 +19,6 @@ RUN chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 RUN chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
 RUN apt-get update
-RUN apt-get install azure-functions-core-tools-4
+
+# Must use functions v3 to keep support for function proxies
+RUN apt-get install azure-functions-core-tools-3
