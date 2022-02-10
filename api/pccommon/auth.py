@@ -95,7 +95,8 @@ def get_invalidated_session_cookie():
 
 def make_session_cookie(session_id: str, max_age: int = 3600):
     """
-    Returns a cookie header that expires in one hour.
+    Returns a secure, httponly cookie header with an expiration
+    to identify the session.
     """
     frags = {
         SESSION_COOKIE: session_id,

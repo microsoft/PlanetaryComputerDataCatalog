@@ -1,5 +1,46 @@
 version: "2.4"
 services:
+  app:
+    image: node:14-slim
+    working_dir: /usr/src
+    ports:
+      - "3000:3000"
+      - "4280:4280"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    volumes:
+      - .:/usr/src
+    networks:
+      - pcdc-network
+    command: >
+      ./node_modules/@azure/static-web-apps-cli/dist/cli/bin.js start
+      http://0.0.0.0:3000 --run "yarn start" --api-location "http://172.20.0.10:7071"
+
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    working_dir: /usr/src
+    ports:
+      - "7071:7071"
+    volumes:
+      - ./api:/usr/src
+    networks:
+      pcdc-network:
+        ipv4_address: 172.20.0.10
+    command: func host start --cors "*" --port 7071
+
+  azurite:
+    container_name: pcdc-azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    command: "azurite --silent --tableHost 0.0.0.0 -l /workspace"
+    ports:
+      - "10002:10002"
+    volumes:
+      - "pcdc-azurite-data:/workspace"
+
   etl:
     build:
       context: etl
@@ -17,3 +58,12 @@ services:
     volumes:
       - ./mockstac/app:/app
       - ./mockstac/data:/data
+
+volumes:
+  pcdc-azurite-data: null
+
+networks:
+  pcdc-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

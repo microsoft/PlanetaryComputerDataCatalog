@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import requests
 import azure.functions as func
 
-from pccommon.auth import make_auth_url, get_oidc_prop
+from ..pccommon.auth import make_auth_url, get_oidc_prop
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:

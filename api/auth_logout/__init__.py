@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 import azure.functions as func
 
-from pccommon.auth import get_invalidated_session_cookie, get_oidc_prop
+from ..pccommon.auth import get_invalidated_session_cookie, get_oidc_prop
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
