@@ -1,18 +1,26 @@
-import logging
-from http.cookies import SimpleCookie
+import json
+
 import azure.functions as func
+
+from ..pccommon.session_manager import InvalidSessionCookie, SessionManager
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     """Return userinfo"""
-    cookie = SimpleCookie()
-    cookie.load(req.headers["Cookie"])
 
-    logging.info([i for i in req.headers.items()])
-
-    session_cookie = cookie.get("mspc_session_id")
-
-    if session_cookie:
-        return func.HttpResponse(f"{session_cookie.value}")
-
-    return func.HttpResponse(status_code=401)
+    try:
+        session = SessionManager(req)
+        body = {
+            "email": session.get_email(),
+            "expires": session.get_expires().isoformat(),
+        }
+        return func.HttpResponse(
+            body=json.dumps(body),
+            status_code=200,
+            mimetype="application/json",
+        )
+    except InvalidSessionCookie:
+        return func.HttpResponse(
+            status_code=401,
+            mimetype="application/json",
+        )

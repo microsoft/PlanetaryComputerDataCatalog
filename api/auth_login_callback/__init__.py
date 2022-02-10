@@ -1,6 +1,8 @@
 import logging
 import os
+
 from datetime import datetime
+from typing import cast
 from uuid import uuid4
 
 import azure.functions as func
@@ -13,8 +15,7 @@ from ..pccommon.auth import (
     make_session_cookie,
     make_token_form,
 )
-
-session = {}
+from ..pccommon.session_table import SessionTable
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -29,27 +30,21 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     authorization_code = req.params.get("_code")
 
     if authorization_code:
-        logging.info("We have an auth code")
         # Exchange the auth code for an access token
-        client_id = os.environ.get("pcidClientId")
+        client_id = os.environ.get("PCID_CLIENT_ID")
         token_url = get_oidc_prop("token_endpoint")
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
-        logging.info(f"token_url: {token_url}")
         form = make_token_form(authorization_code)
 
-        logging.info("Posting to token endpoint")
         resp = requests.post(token_url, data=form, headers=headers)
         if resp.status_code == 200:
-            logging.info("JWT recieved, decoding...")
             # Get the jwt from the access token and verify its signature
             jwt_encoded = resp.json().get("id_token")
 
-            logging.info("Generating public key")
             kid = jwt.get_unverified_header(jwt_encoded)["kid"]
             public_key = generate_rsa_pub(kid)
             try:
 
-                logging.info("Decoding JWT")
                 jwt_decoded = jwt.decode(
                     jwt_encoded,
                     public_key,
@@ -58,21 +53,19 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                     algorithms=["RS256"],
                 )
 
-                # TODO: Create a session
-                logging.info("Createing fake session")
+                # Create a session in the session table to store the jwt
+                # this is not stored in the cookie
                 session_id = str(uuid4())
-                session[session_id] = jwt_decoded
+                with SessionTable() as client:
+                    client.set_session_data(session_id, jwt_decoded, jwt_encoded)
 
-                # TODO: align expiration with session expiry
-                expirey = datetime.fromtimestamp(jwt_decoded.get("exp"))
+                expirey = datetime.fromtimestamp(cast(float, jwt_decoded.get("exp")))
                 age = expirey - datetime.now()
-                logging.info("Setting headers")
                 headers = {
                     "Location": "/",
                     "Set-Cookie": make_session_cookie(session_id, age.seconds),
                 }
 
-                logging.info("Returning redirect with cookie to user agent")
                 return func.HttpResponse(status_code=302, headers=headers)
             except Exception as e:
                 logging.exception("Error decoding JWT")

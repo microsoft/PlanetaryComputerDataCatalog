@@ -13,7 +13,7 @@ services:
       - .:/usr/src
     networks:
       - pcdc-network
-    command: ["./wait-for-it.sh", "api:7071", "--", "./app_init.sh"]
+    command: ["./wait-for-it.sh", "-t", "45", "api:7071", "--", "./app_init.sh"]
 
   api:
     build:
@@ -22,10 +22,16 @@ services:
     working_dir: /usr/src
     ports:
       - "7071:7071"
+    environment:
+      # Azurite uses well-known conntection strings for local dev
+      - SESSION_CONN_STR=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1
+      - SESSION_TABLE_NAME=pcdcsessions
     volumes:
       - ./api:/usr/src
     networks:
       pcdc-network:
+    depends_on:
+      - azurite
     command: func host start --script-root ./ --cors "*" --port 7071
 
   azurite:
@@ -37,6 +43,8 @@ services:
       - "10002:10002"
     volumes:
       - "pcdc-azurite-data:/workspace"
+    networks:
+      pcdc-network:
 
   etl:
     build:

@@ -14,7 +14,7 @@ SESSION_COOKIE = "mspc_session_id"
 @lru_cache(maxsize=1)
 def get_oidc_config():
     """Return the OIDC configuration from the identity provider."""
-    config_url = os.environ.get("pcidConfigUrl")
+    config_url = os.environ.get("PCID_CONFIG_URL")
     resp = requests.get(config_url)
 
     if resp.ok:
@@ -32,14 +32,14 @@ def get_oidc_prop(prop_name: str):
 
 def make_auth_url(auth_endpoint: str, scopes: List[str]):
     """Construct an authorization request URL for the provided auth endpoint."""
-    client_id = os.environ.get("pcidClientId")
-    redirect_uri = os.environ.get("pcidRedirectUri")
+    client_id = os.environ.get("PCID_CLIENT_ID")
+    redirect_uri = os.environ.get("PCID_REDIRECT_URL")
 
-    scopes = " ".join(scopes)
+    oidc_scopes = " ".join(scopes)
     params = {
         "client_id": client_id,
         "redirect_uri": redirect_uri,
-        "scope": scopes,
+        "scope": oidc_scopes,
         "response_type": "code",
         "response_mode": "form_post",
         "nonce": "zxcvbnm",
@@ -51,9 +51,9 @@ def make_auth_url(auth_endpoint: str, scopes: List[str]):
 
 def make_token_form(authorization_code: str):
     """Form encoded payload to exchange auth code for access token"""
-    client_id = os.environ.get("pcidClientId")
-    client_secret = os.environ.get("pcidClientSecret")
-    redirect_uri = os.environ.get("pcidRedirectUri")
+    client_id = os.environ.get("PCID_CLIENT_ID")
+    client_secret = os.environ.get("PCID_CLIENT_SECRET")
+    redirect_uri = os.environ.get("PCID_REDIRECT_URL")
 
     return "".join(
         [

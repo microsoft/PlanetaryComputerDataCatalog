@@ -1,38 +1,50 @@
 from typing import Union
-from http.cookies import SimpleCookie
-
+import os
 import requests
 import azure.functions as func
+
+from azure.core.exceptions import ResourceNotFoundError
+
+from ..pccommon.session_manager import InvalidSessionCookie, SessionManager
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     """Proxies the request to the API and includes the bearer token"""
+    # The proxy provides the templated path parameters in the route "restOfPath"
     rest = req.route_params.get("restOfPath")
-    # TODO: Settings
-    url = f"https://planetarycomputer-staging.microsoft.com/api/{rest}"
-    token = get_token_from_session(req.headers.get("Cookie"))
-    headers = get_request_headers(req.headers, token)
-    data = req.get_body() if req.method == "POST" else None
-    params = reconstruct_params(req.params)
+    upstream_url = os.environ.get("PROXY_API_ROOT")
+    url = f"{upstream_url}/{rest}"
 
-    # Fetch from upstream
-    resp = requests.request(
-        req.method, url, params=params, headers=headers, data=data, stream=True
-    )
+    try:
+        # Get the jwt from the session store and apply it to the auth header
+        session = SessionManager(req)
+        token = session.get_id_token()
+        headers = get_request_headers(req.headers, token)
+        data = req.get_body() if req.method == "POST" else None
+        params = reconstruct_params(req.params)
 
-    # Let the proxied response set the length and encoding of the body
-    if "content-length" in resp.headers:
-        del resp.headers["content-length"]
-    if "content-encoding" in resp.headers:
-        del resp.headers["content-encoding"]
+        # Fetch from upstream
+        resp = requests.request(
+            req.method, url, params=params, headers=headers, data=data, stream=True
+        )
 
-    # Proxy the response back to the client
-    return func.HttpResponse(
-        body=resp.content,
-        status_code=resp.status_code,
-        headers=resp.headers,
-        mimetype=resp.headers["Content-Type"],
-    )
+        # Let the proxied response set the length and encoding of the body
+        if "content-length" in resp.headers:
+            del resp.headers["content-length"]
+        if "content-encoding" in resp.headers:
+            del resp.headers["content-encoding"]
+
+        # Proxy the response back to the client
+        return func.HttpResponse(
+            body=resp.content,
+            status_code=resp.status_code,
+            headers=resp.headers,
+            mimetype=resp.headers["Content-Type"],
+        )
+    except (InvalidSessionCookie, ResourceNotFoundError):
+        return func.HttpResponse(
+            status_code=401,
+        )
 
 
 def get_request_headers(headers, token: str) -> dict:
@@ -58,7 +70,7 @@ def get_request_headers(headers, token: str) -> dict:
     return headers
 
 
-def reconstruct_params(params: dict) -> dict:
+def reconstruct_params(params: dict) -> Union[dict, None]:
     """
     Query string parameters with duplicate keys were consolidated to a list
     by the API. Reconstruct the original query string by separating them to
@@ -72,16 +84,3 @@ def reconstruct_params(params: dict) -> dict:
         formatted[key] = value.split(",") if key in splitable_list else value
 
     return formatted
-
-
-def get_token_from_session(cookie_header: Union[str, None]) -> str:
-    """
-    Get the token from the cookie session id.
-    """
-    cookie = SimpleCookie()
-    cookie.load(cookie_header)
-
-    # TODO: lookup token from session id
-    session_id = cookie.get("mspc_session_id").value
-
-    return f"FAKE_TOKEN::{session_id}"
