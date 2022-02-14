@@ -10,7 +10,7 @@ const Login: React.FC = () => {
     </>
   );
 
-  return !session.loggedIn ? login : null;
+  return !session.isLoggedIn ? login : null;
 };
 
 export default Login;

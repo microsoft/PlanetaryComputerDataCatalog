@@ -11,8 +11,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         session = SessionManager(req)
         body = {
-            "email": session.get_email(),
-            "expires": session.get_expires().isoformat(),
+            "isLoggedIn": True,
+            "email": session.email,
+            "expires": session.expires.isoformat(),
         }
         return func.HttpResponse(
             body=json.dumps(body),

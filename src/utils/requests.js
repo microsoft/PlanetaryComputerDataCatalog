@@ -12,7 +12,7 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  const { loggedIn } = useSession();
+  const { isLoggedIn: loggedIn } = useSession();
   const stacUrl = getStacUrl(loggedIn);
   return useQuery(["stac", stacUrl], getCollections, {
     refetchOnWindowFocus: false,

@@ -2,12 +2,12 @@ import React, { createContext, useState, useEffect } from "react";
 import { useAuthRefresh, useAuthStatus } from "./useAuthRefresh";
 
 type Session = {
-  loggedIn: boolean;
+  isLoggedIn: boolean;
   email: string;
 };
 
 const initialSession: Session = {
-  loggedIn: false,
+  isLoggedIn: false,
   email: "",
 };
 
@@ -19,8 +19,17 @@ export const SessionProvider: React.FC = ({ children }) => {
   const [refreshInterval, setRefreshInterval] = useState(0);
 
   const { data: statusData, isLoading: isStatusLoading } = useAuthStatus();
-  const { data: refreshData, isLoading: isRefreshLoading } =
-    useAuthRefresh(refreshInterval);
+  const {
+    data: refreshData,
+    isLoading: isRefreshLoading,
+    isError: isRefreshError,
+  } = useAuthRefresh(refreshInterval);
+
+  // Turn off the refresh interval when the request fails (will likely be a 401)
+  if (isRefreshError && refreshInterval !== 0) {
+    console.log("Refresh error, turning off refresh interval");
+    setRefreshInterval(0);
+  }
 
   useEffect(() => {
     if (isRefreshLoading) return;

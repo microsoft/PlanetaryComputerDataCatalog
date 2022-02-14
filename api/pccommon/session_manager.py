@@ -1,6 +1,6 @@
 from datetime import datetime
 from http.cookies import SimpleCookie
-from typing import Dict
+from typing import Optional
 
 import azure.functions as func
 
@@ -23,18 +23,27 @@ class SessionManager:
         cookie_reader.load(cookie_header)
         session_cookie = cookie_reader.get(SESSION_COOKIE)
 
+        if session_cookie == None:
+            raise InvalidSessionCookie()
+
+        self.session_id = None
+        self.session_data = {}
+
         if session_cookie:
             self.session_id = session_cookie.value
             with SessionTable() as client:
                 self.session_data = client.get_session_data(self.session_id)
 
-    def get_id_token(self) -> Dict:
+    @property
+    def id_token(self) -> Optional[str]:
         return self.session_data.get("token")
 
-    def get_email(self) -> str:
+    @property
+    def email(self) -> Optional[str]:
         return self.session_data.get("email")
 
-    def get_expires(self) -> datetime:
+    @property
+    def expires(self) -> Optional[datetime]:
         return self.session_data.get("expires")
 
     def destroy(self) -> None:

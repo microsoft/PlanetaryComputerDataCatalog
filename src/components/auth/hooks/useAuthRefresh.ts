@@ -18,8 +18,14 @@ export const useAuthRefresh = (refetchInterval: number) => {
 };
 
 export const useAuthStatus = () => {
-  return useQuery("user", async () => {
-    const res = await axios.get("/api/auth/refresh");
-    return res.data;
-  });
+  return useQuery(
+    "user",
+    async () => {
+      const res = await axios.get("/api/auth/me");
+      return res.data;
+    },
+    {
+      retry: false,
+    }
+  );
 };

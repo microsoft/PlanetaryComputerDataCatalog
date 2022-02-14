@@ -18,7 +18,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     try:
         # Get the jwt from the session store and apply it to the auth header
         session = SessionManager(req)
-        token = session.get_id_token()
+        token = session.id_token
         headers = get_request_headers(req.headers, token)
         data = req.get_body() if req.method == "POST" else None
         params = reconstruct_params(req.params)

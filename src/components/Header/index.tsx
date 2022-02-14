@@ -20,7 +20,7 @@ import Logout from "components/auth/Logout";
 
 const Header = ({ onGrid = true }) => {
   const theme = useTheme();
-  const { loggedIn } = useSession();
+  const { isLoggedIn: loggedIn } = useSession();
   const navClass = onGrid ? gridContentStyle : offGridContentStyle;
 
   return (

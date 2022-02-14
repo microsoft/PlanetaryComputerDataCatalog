@@ -1,17 +1,20 @@
-import { Link } from "@fluentui/react";
+import axios from "axios";
+import { DefaultButton } from "@fluentui/react";
+import { useMutation } from "react-query";
+
 import { useSession } from "./hooks/SessionContext";
 
 const Logout: React.FC = () => {
   const session = useSession();
-  const handleOnClick = () => {};
+  const mutation = useMutation(() => axios.post("./api/auth/logout"));
 
-  const logout = (
-    <Link href="/api/auth/logout" onClick={handleOnClick}>
-      Sign out
-    </Link>
-  );
+  const handleOnClick = () => {
+    mutation.mutate();
+  };
 
-  return session.loggedIn ? logout : null;
+  const logout = <DefaultButton onClick={handleOnClick}>Sign out</DefaultButton>;
+
+  return session.isLoggedIn ? logout : null;
 };
 
 export default Logout;
