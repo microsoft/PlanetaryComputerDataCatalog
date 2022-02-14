@@ -5,7 +5,7 @@ export const useAuthRefresh = (refetchInterval: number) => {
   return useQuery(
     "api/auth/refresh",
     async () => {
-      const res = await axios.get("/api/auth/refresh");
+      const res = await axios.post("/api/auth/refresh");
       return res.data;
     },
     {

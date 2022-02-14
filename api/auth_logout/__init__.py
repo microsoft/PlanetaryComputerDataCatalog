@@ -1,9 +1,9 @@
 from urllib.parse import urlparse
 import azure.functions as func
 
-from ..pccommon.session_manager import InvalidSessionCookie, SessionManager
-
 from ..pccommon.auth import get_invalidated_session_cookie, get_oidc_prop
+from ..pccommon.session_manager import InvalidSessionCookie, SessionManager
+from ..pccommon.csrf import check_csrf
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
@@ -12,7 +12,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     endpoint.
     """
 
-    # TODO: CRSF protection
+    check_csrf(req)
 
     try:
         # Terminate the session

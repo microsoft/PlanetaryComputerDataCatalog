@@ -4,11 +4,13 @@ import requests
 import azure.functions as func
 
 from ..pccommon.auth import make_auth_url, get_oidc_prop
+from ..pccommon.csrf import check_csrf
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     """Initiate the login sequence with the identity provider."""
-    # TODO: CSRF protection
+
+    check_csrf(req)
 
     auth_endpoint = get_oidc_prop("authorization_endpoint")
     url = make_auth_url(auth_endpoint, scopes=["openid", "email"])
