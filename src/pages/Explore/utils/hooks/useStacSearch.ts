@@ -22,8 +22,8 @@ const getStacItems = async (
 export const useStacSearch = (
   search: IStacFilter | undefined
 ): UseQueryResult<IStacSearchResult, Error> => {
-  const { isLoggedIn: loggedIn } = useSession();
-  const stacUrl = getStacUrl(loggedIn) as string;
+  const { status } = useSession();
+  const stacUrl = getStacUrl(status.isLoggedIn) as string;
   return useQuery(["items", search, stacUrl], getStacItems, {
     keepPreviousData: true, // intended to not clear out search results when panning the map
     refetchOnWindowFocus: false,

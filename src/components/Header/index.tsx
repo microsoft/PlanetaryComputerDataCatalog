@@ -20,7 +20,7 @@ import Logout from "components/auth/Logout";
 
 const Header = ({ onGrid = true }) => {
   const theme = useTheme();
-  const { isLoggedIn: loggedIn } = useSession();
+  const { status } = useSession();
   const navClass = onGrid ? gridContentStyle : offGridContentStyle;
 
   return (
@@ -72,7 +72,7 @@ const Header = ({ onGrid = true }) => {
           </HeaderLink>
           <div className={rightAligned}>
             <Stack horizontal verticalAlign="center" tokens={{ childrenGap: 4 }}>
-              {!loggedIn && (
+              {!status.isLoggedIn && (
                 <HeaderLink asButton to="/account/request">
                   Request access
                 </HeaderLink>

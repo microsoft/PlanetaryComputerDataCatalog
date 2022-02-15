@@ -1,15 +1,19 @@
+from typing import cast, Tuple
+from datetime import datetime
+from http.cookies import SimpleCookie
+from urllib.parse import unquote
+
 import logging
 import os
-
-from datetime import datetime
-from typing import cast
-from uuid import uuid4
+import secrets
 
 import azure.functions as func
 import jwt
 import requests
 
 from ..pccommon.auth import (
+    NONCE_SEPERATOR,
+    OAUTH_NONCE_COOKIE,
     generate_rsa_pub,
     get_oidc_prop,
     make_session_cookie,
@@ -29,54 +33,95 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     #     https://github.com/Azure/static-web-apps/issues/165
     authorization_code = req.params.get("_code")
 
-    if authorization_code:
-        # Exchange the auth code for an access token
-        client_id = os.environ.get("PCID_CLIENT_ID")
-        token_url = get_oidc_prop("token_endpoint")
-        headers = {"Content-Type": "application/x-www-form-urlencoded"}
-        form = make_token_form(authorization_code)
+    if authorization_code == None:
+        logging.info("oAuth2 code flow failed to provide callback code")
+        return func.HttpResponse(status_code=500, body="")
 
-        resp = requests.post(token_url, data=form, headers=headers)
-        if resp.status_code == 200:
-            # Get the jwt from the access token and verify its signature
-            jwt_encoded = resp.json().get("id_token")
+    if not is_response_state_valid(req):
+        raise Exception("Invalid oAuth2 state exchange")
 
-            kid = jwt.get_unverified_header(jwt_encoded)["kid"]
-            public_key = generate_rsa_pub(kid)
-            try:
+    # Exchange the auth code for an access token
+    client_id = os.environ.get("PCID_CLIENT_ID")
+    token_url = get_oidc_prop("token_endpoint")
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    form = make_token_form(authorization_code)
 
-                jwt_decoded = jwt.decode(
-                    jwt_encoded,
-                    public_key,
-                    audience=client_id,
-                    verify=["exp"],
-                    algorithms=["RS256"],
-                )
+    resp = requests.post(token_url, data=form, headers=headers)
 
-                # Create a session in the session table to store the jwt
-                # this is not stored in the cookie
-                session_id = str(uuid4())
-                with SessionTable() as client:
-                    client.set_session_data(session_id, jwt_decoded, jwt_encoded)
+    if resp.status_code == 200:
+        # Get the jwt from the access token and verify its signature
+        jwt_encoded = resp.json().get("id_token")
 
-                expirey = datetime.fromtimestamp(cast(float, jwt_decoded.get("exp")))
-                age = expirey - datetime.now()
-                headers = {
-                    "Location": "/",
-                    "Set-Cookie": make_session_cookie(session_id, age.seconds),
-                }
+        kid = jwt.get_unverified_header(jwt_encoded)["kid"]
+        public_key = generate_rsa_pub(kid)
+        try:
 
-                return func.HttpResponse(status_code=302, headers=headers)
-            except Exception as e:
-                logging.exception("Error decoding JWT")
-                return func.HttpResponse(status_code=500, body=str(e))
+            jwt_decoded = jwt.decode(
+                jwt_encoded,
+                public_key,
+                audience=client_id,
+                verify=["exp"],
+                algorithms=["RS256"],
+            )
 
-        logging.info(f"oAuth2 code flow failed: {resp.status_code} - {resp.text}")
-        return func.HttpResponse(
-            status_code=resp.status_code, body="Bad response for access token"
-        )
+            # Verify that the client nonce matches the nonce in the token
+            _, client_nonce = get_client_nonces(req)
+            if client_nonce != jwt_decoded.get("nonce"):
+                raise Exception("Nonce mismatch in token.")
 
-    logging.info("oAuth2 code flow failed to provide callback code")
+            # Create a session in the session table to store the jwt
+            # this is not stored in the cookie
+            session_id = secrets.token_hex()
+            with SessionTable() as client:
+                client.set_session_data(session_id, jwt_decoded, jwt_encoded)
+
+            expirey = datetime.fromtimestamp(cast(float, jwt_decoded.get("exp")))
+            age = expirey - datetime.now()
+            headers = {
+                "Location": "/",
+                "Set-Cookie": make_session_cookie(session_id, age.seconds),
+            }
+
+            return func.HttpResponse(status_code=302, headers=headers)
+        except Exception as e:
+            logging.exception("Error decoding JWT")
+            return func.HttpResponse(status_code=500, body=str(e))
+
+    logging.info(f"oAuth2 code flow failed: {resp.status_code} - {resp.text}")
     return func.HttpResponse(
-        status_code=500, body="Did not receive OIDC code from provider."
+        status_code=resp.status_code, body="Bad response for access token"
     )
+
+
+def is_response_state_valid(req: func.HttpRequest) -> bool:
+    """
+    Check that the state value returned from the auth provider matches the
+    value generated for the request and stored in the client cookie
+    """
+    resp_state_nonce = req.params.get("state")
+    state, _ = get_client_nonces(req)
+
+    return state == resp_state_nonce
+
+
+def get_client_nonces(req: func.HttpRequest) -> Tuple[str, str]:
+    """
+    Get the oAuth state and nonce values from the client cookie
+    """
+    cookie_reader: SimpleCookie = SimpleCookie(req.headers.get("Cookie"))
+    client_nonce = cookie_reader.get(OAUTH_NONCE_COOKIE)
+
+    if client_nonce is None:
+        raise Exception("No oAuth2 nonce in cookie")
+
+    try:
+        # NB: The cookie wasn't explicitly url-encoded, but the AZ function
+        # runtime does that automatically. The value needs to be unquoted.
+        state, nonce = unquote(client_nonce.value).split(NONCE_SEPERATOR)
+        assert state
+        assert nonce
+
+        return state, nonce
+    except:
+        logging.exception("Failed to get state and nonce from cookie")
+        raise Exception("Invalid oAuth2 state/nonce cookie")

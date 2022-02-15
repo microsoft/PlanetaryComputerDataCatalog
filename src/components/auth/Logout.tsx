@@ -3,6 +3,7 @@ import { DefaultButton } from "@fluentui/react";
 import { useMutation } from "react-query";
 
 import { useSession } from "./hooks/SessionContext";
+import { useEffect } from "react";
 
 const Logout: React.FC = () => {
   const session = useSession();
@@ -12,9 +13,15 @@ const Logout: React.FC = () => {
     mutation.mutate();
   };
 
+  useEffect(() => {
+    if (mutation.isSuccess) {
+      session.logout();
+    }
+  }, [mutation.isSuccess, session]);
+
   const logout = <DefaultButton onClick={handleOnClick}>Sign out</DefaultButton>;
 
-  return session.isLoggedIn ? logout : null;
+  return session.status.isLoggedIn ? logout : null;
 };
 
 export default Logout;

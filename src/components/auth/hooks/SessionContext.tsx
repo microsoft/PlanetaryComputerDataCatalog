@@ -6,13 +6,23 @@ type Session = {
   email: string;
 };
 
+type SessionContextType = {
+  status: Session;
+  logout: () => void;
+};
+
 const initialSession: Session = {
   isLoggedIn: false,
   email: "",
 };
 
-const DEFAULT_REFERESH_MS = 1 * 60 * 1000;
-const SessionContext = createContext<Session>(initialSession);
+const initialContext = {
+  status: initialSession,
+  logout: () => {},
+};
+
+const DEFAULT_REFERESH_MS = 1 * 1000 * 60;
+const SessionContext = createContext<SessionContextType>(initialContext);
 
 export const SessionProvider: React.FC = ({ children }) => {
   const [session, setSession] = useState<Session>(initialSession);
@@ -27,7 +37,7 @@ export const SessionProvider: React.FC = ({ children }) => {
 
   // Turn off the refresh interval when the request fails (will likely be a 401)
   if (isRefreshError && refreshInterval !== 0) {
-    console.log("Refresh error, turning off refresh interval");
+    setSession(initialSession);
     setRefreshInterval(0);
   }
 
@@ -37,7 +47,7 @@ export const SessionProvider: React.FC = ({ children }) => {
     setSession(refreshData || initialSession);
 
     // Not logged in, cease polling/refreshing
-    if (!refreshData?.loggedIn) {
+    if (!refreshData?.isLoggedIn) {
       setRefreshInterval(0);
     }
   }, [isRefreshLoading, refreshData]);
@@ -47,13 +57,19 @@ export const SessionProvider: React.FC = ({ children }) => {
     setSession(statusData || initialSession);
 
     // Logged in but not polling for refresh, start polling for refresh
-    if (statusData?.loggedIn && refreshInterval === 0) {
+    if (statusData?.isLoggedIn && refreshInterval === 0) {
       setRefreshInterval(DEFAULT_REFERESH_MS);
     }
   }, [isStatusLoading, refreshInterval, statusData]);
 
+  const context = {
+    status: session,
+    logout: () => {
+      setSession(initialSession);
+    },
+  };
   return (
-    <SessionContext.Provider value={session}>{children}</SessionContext.Provider>
+    <SessionContext.Provider value={context}>{children}</SessionContext.Provider>
   );
 };
 

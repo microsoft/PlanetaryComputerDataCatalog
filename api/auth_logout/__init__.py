@@ -19,18 +19,20 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         session = SessionManager(req)
         session.destroy()
 
-        # Invalidate session cookie and redirect to PCID logout endpoint
-        auth_endpoint = get_oidc_prop("authorization_endpoint")
-        id_url = urlparse(auth_endpoint)
-        host = req.headers.get("Host")
-        client_logout_url = f"{id_url.scheme}://{host}/api/auth/logout/callback"
-        id_logout_url = f"{id_url.scheme}://{id_url.netloc}/id/accounts/logout/?next={client_logout_url}"  # noqa E501
+        # Redirect to PCID logout endpoint - currently not used
+        # Do we want to log out of PCID or just the front end?
+        # ==============
+        # auth_endpoint = get_oidc_prop("authorization_endpoint")
+        # id_url = urlparse(auth_endpoint)
+        # host = req.headers.get("Host")
+        # client_logout_url = f"{id_url.scheme}://{host}/api/auth/logout/callback"
+        # id_logout_url = f"{id_url.scheme}://{id_url.netloc}/id/accounts/logout/?next={client_logout_url}"  # noqa E501
+        # "Location": id_logout_url,
 
         headers = {
-            "Location": id_logout_url,
             "Set-Cookie": get_invalidated_session_cookie(),
         }
-        return func.HttpResponse(status_code=302, headers=headers)
+        return func.HttpResponse(status_code=200, headers=headers)
 
     except InvalidSessionCookie:
         return func.HttpResponse(status_code=401)

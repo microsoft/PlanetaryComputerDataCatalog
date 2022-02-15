@@ -9,6 +9,8 @@ import requests
 
 
 SESSION_COOKIE = "mspc_session_id"
+OAUTH_NONCE_COOKIE = "mspc_oauth_nonce"
+NONCE_SEPERATOR = ":"
 
 
 @lru_cache(maxsize=1)
@@ -30,7 +32,7 @@ def get_oidc_prop(prop_name: str):
     return config.get(prop_name)
 
 
-def make_auth_url(auth_endpoint: str, scopes: List[str]):
+def make_auth_url(auth_endpoint: str, scopes: List[str], state: str, nonce: str):
     """Construct an authorization request URL for the provided auth endpoint."""
     client_id = os.environ.get("PCID_CLIENT_ID")
     redirect_uri = os.environ.get("PCID_REDIRECT_URL")
@@ -42,7 +44,8 @@ def make_auth_url(auth_endpoint: str, scopes: List[str]):
         "scope": oidc_scopes,
         "response_type": "code",
         "response_mode": "form_post",
-        "nonce": "zxcvbnm",
+        "state": state,
+        "nonce": nonce,
     }
     qs = "&".join([f"{k}={v}" for k, v in params.items()])
 
@@ -103,6 +106,22 @@ def make_session_cookie(session_id: str, max_age: int = 3600):
         "Max-Age": max_age,
         "Path": "/",
         "SameSite": "strict",
+    }
+    crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
+    return f"{crumbs}; HttpOnly; Secure"
+
+
+def make_oidc_state_nonce_cookie(state: str, nonce: str, max_age: int = 40):
+    """
+    Returns a secure, httponly cookie header with an quick expiration
+    to preserve the oAuth state and nonce for a single login attempt.
+    """
+    cookie_value = f"{state}{NONCE_SEPERATOR}{nonce}"
+    frags = {
+        OAUTH_NONCE_COOKIE: cookie_value,
+        "Max-Age": max_age,
+        "Path": "/",
+        "SameSite": "lax",
     }
     crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
     return f"{crumbs}; HttpOnly; Secure"

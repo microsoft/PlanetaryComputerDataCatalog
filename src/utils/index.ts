@@ -238,9 +238,9 @@ export const useItemPreviewUrl = (
   renderOption: IMosaicRenderOption | null,
   size?: number
 ) => {
-  const { isLoggedIn: loggedIn } = useSession();
+  const { status } = useSession();
   const maxSize = size ? `&max_size=${size}` : "";
-  const url = encodeURI(`${getDataUrl(loggedIn)}/item/preview.png`);
+  const url = encodeURI(`${getDataUrl(status.isLoggedIn)}/item/preview.png`);
   const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption?.options));
 
   const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;
