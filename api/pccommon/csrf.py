@@ -1,3 +1,4 @@
+import logging
 from urllib.parse import urlparse
 
 import azure.functions as func
@@ -8,10 +9,9 @@ class CSRFException(Exception):
 
 
 def check_csrf(req: func.HttpRequest) -> None:
-    origin = req.headers.get("Origin")
-    host = req.headers.get("Host") or req.headers.get("X-Forwarded-Host")
+    """Check that the origin of the request matches the """
+    origin = urlparse(req.headers.get("Origin"))
+    host = urlparse(req.headers.get("x-ms-original-url"))
 
-    og_parsed = urlparse(origin)
-
-    if (og_parsed.netloc != host) or origin == None:
-        raise CSRFException(f"Request made from {og_parsed.netloc} to {host}")
+    if (origin.netloc != host.netloc) or origin == None:
+        raise CSRFException(f"CSRF request made from {origin.netloc} to {host.netloc}")

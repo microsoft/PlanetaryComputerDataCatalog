@@ -24,7 +24,7 @@ services:
       - "7071:7071"
     environment:
       # Azurite uses well-known conntection strings for local dev
-      - SESSION_CONN_STR=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1
+      - SESSION_CONN_STR=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10022/devstoreaccount1
       - SESSION_TABLE_NAME=pcdcsessions
     volumes:
       - ./api:/usr/src
@@ -38,9 +38,9 @@ services:
     container_name: pcdc-azurite
     image: mcr.microsoft.com/azure-storage/azurite
     hostname: azurite
-    command: "azurite --silent --tableHost 0.0.0.0 -l /workspace"
+    command: "azurite --silent --tableHost 0.0.0.0 --tablePort 10022 -l /workspace"
     ports:
-      - "10002:10002"
+      - "10022:10022"
     volumes:
       - "pcdc-azurite-data:/workspace"
     networks:

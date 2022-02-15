@@ -13,9 +13,16 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         check_csrf(req)
         _ = SessionManager(req)
         # TODO: Refresh token flow
-        return func.HttpResponse(body=json.dumps({"isLoggedIn": True}))
+        return func.HttpResponse(
+            body=json.dumps({"isLoggedIn": True}),
+            mimetype="application/json",
+        )
     except (InvalidSessionCookie, ResourceNotFoundError, CSRFException):
         logging.exception("Invalid session or CSRF")
         return func.HttpResponse(
-            status_code=401, body=json.dumps({"isLoggedIn": False})
+            status_code=401,
+            body=json.dumps(
+                {"isLoggedIn": False},
+            ),
+            mimetype="application/json",
         )

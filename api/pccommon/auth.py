@@ -91,9 +91,10 @@ def get_invalidated_session_cookie():
         "Max-Age": "0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Path": "/",
+        "SameSite": "strict",
     }
     crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
-    return f"{crumbs}; HttpOnly"
+    return f"{crumbs}; HttpOnly; Secure"
 
 
 def make_session_cookie(session_id: str, max_age: int = 3600):
