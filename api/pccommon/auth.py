@@ -87,8 +87,8 @@ def generate_rsa_pub(kid: str) -> str:
 def get_invalidated_session_cookie():
     """Returns a cookie header that expires immediately."""
     frags = {
-        SESSION_COOKIE: "",
-        "Max-Age": "0",
+        SESSION_COOKIE: "_",
+        "Max-Age": "1",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Path": "/",
         "SameSite": "strict",

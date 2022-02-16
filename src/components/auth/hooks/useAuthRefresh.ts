@@ -13,6 +13,7 @@ export const useAuthRefresh = (refetchInterval: number) => {
       refetchInterval: refetchInterval,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
+      retry: false,
     }
   );
 };
