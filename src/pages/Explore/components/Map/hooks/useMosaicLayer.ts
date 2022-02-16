@@ -11,8 +11,6 @@ const useMosaicLayer = (
   mapReady: boolean
 ) => {
   const { detail } = useExploreSelector(s => s);
-  // const currentLayer = useExploreSelector(selectCurrentMosaic);
-  // const { collection, query, renderOption } = currentLayer;
   const mosaics = useExploreSelector(s => s.mosaic.layers);
 
   // If we are showing the detail as a tile layer, craft the tileJSON request

@@ -1,5 +1,51 @@
 version: "2.4"
 services:
+  app:
+    image: node:14-slim
+    working_dir: /usr/src
+    ports:
+      - "3000:3000"
+      - "4280:4280"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    volumes:
+      - .:/usr/src
+    networks:
+      - pcdc-network
+    command: ["./wait-for-it.sh", "-t", "45", "api:7071", "--", "./app_init.sh"]
+
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    working_dir: /usr/src
+    ports:
+      - "7071:7071"
+    environment:
+      # Azurite uses well-known conntection strings for local dev
+      - SESSION_CONN_STR=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10022/devstoreaccount1
+      - SESSION_TABLE_NAME=pcdcsessions
+    volumes:
+      - ./api:/usr/src
+    networks:
+      pcdc-network:
+    depends_on:
+      - azurite
+    command: func host start --script-root ./ --cors "*" --port 7071
+
+  azurite:
+    container_name: pcdc-azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    command: "azurite --silent --tableHost 0.0.0.0 --tablePort 10022 -l /workspace"
+    ports:
+      - "10022:10022"
+    volumes:
+      - "pcdc-azurite-data:/workspace"
+    networks:
+      pcdc-network:
+
   etl:
     build:
       context: etl
@@ -17,3 +63,9 @@ services:
     volumes:
       - ./mockstac/app:/app
       - ./mockstac/data:/data
+
+volumes:
+  pcdc-azurite-data: null
+
+networks:
+  pcdc-network:

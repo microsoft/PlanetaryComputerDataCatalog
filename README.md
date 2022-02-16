@@ -1,6 +1,6 @@
 # Planetary Computer Data Catalog
 
-⚠️ Note: This repository serves as a reference implementation for interacting with
+Note: This repository serves as a reference implementation for interacting with
 Planetary Computer APIs on Azure. Ths code supports the production deployment of
 the Planetary Computer Data Catalog and Explorer applications. This repository
 is not meant to be reusable in other situations without significant
@@ -22,36 +22,30 @@ A homepage, data catalog, and visualizations for the Planetary Computer.
 
 ## Requirements
 
-- Node v14.15 (LTS)
-- Yarn
 - Docker
 - docker-compose
 
 ## Getting started
 
-The easiest way to ensure your node environment matches the requirements is to use [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), and in the project root, run:
-
-```sh
-nvm use
-```
-
-You can install `yarn` globally for that node version with:
-
-```sh
-npm install -g yarn
-```
-
-Now install the app dependencies and build the docs and external notebooks for the project:
+The entire development environment is created as part of a multi-container docker-compose setup. To
+fetch and build the images, run:
 
 ```sh
 ./scripts/update
 
 ```
 
-Now you can start the development server, and the site should be accessible at <http://localhost:3000>.
+Now you can start the development server, and the site should be accessible at <http://localhost:4280>.
 
 ```sh
 ./scripts/server
+```
+
+If you want to run just the frontend development server on your host, ensure you have Node 14 installed and run:
+
+```sh
+yarn install
+yarn start
 ```
 
 To build the latest docs or external notebook, or if any new dependencies have been added, re-run `./scripts/update` (you may need to refresh the app in your browser if the site was running).

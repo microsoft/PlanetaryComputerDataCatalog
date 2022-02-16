@@ -9,6 +9,7 @@ function CollectionProvider({ collection, children }) {
     </CollectionContext.Provider>
   );
 }
+
 function useStac() {
   const context = React.useContext(CollectionContext);
   if (context === undefined) {

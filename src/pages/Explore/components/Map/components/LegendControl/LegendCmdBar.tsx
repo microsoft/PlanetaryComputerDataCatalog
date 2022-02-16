@@ -6,6 +6,7 @@ import {
   IStackTokens,
   Stack,
 } from "@fluentui/react";
+import Feature from "components/Feature";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import {
   pinCurrentMosaic,
@@ -52,21 +53,22 @@ const LegendCmdBar = ({
         onClick={handleShowOptionsClick}
         styles={buttonStyles}
       />
-      <IconButton
-        aria-label={pin.title}
-        title={pin.title}
-        iconProps={{ iconName: pin.icon }}
-        onClick={handlePin}
-        styles={buttonStyles}
-      />
-
-      <IconButton
-        aria-label={expand.title}
-        title={expand.title}
-        iconProps={{ iconName: expand.icon }}
-        onClick={handleExpandClick}
-        styles={buttonStyles}
-      />
+      <Feature name="pin">
+        <IconButton
+          aria-label={pin.title}
+          title={pin.title}
+          iconProps={{ iconName: pin.icon }}
+          onClick={handlePin}
+          styles={buttonStyles}
+        />
+        <IconButton
+          aria-label={expand.title}
+          title={expand.title}
+          iconProps={{ iconName: expand.icon }}
+          onClick={handleExpandClick}
+          styles={buttonStyles}
+        />
+      </Feature>
     </Stack>
   );
 };

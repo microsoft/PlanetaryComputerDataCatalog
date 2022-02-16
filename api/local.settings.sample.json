@@ -5,6 +5,11 @@
     "AuthAdminUrl": "",
     "SignupUrl": "",
     "SignupToken": "",
+    "PCID_CLIENT_ID": "",
+    "PCID_CLIENT_SECRET": "",
+    "PCID_CONFIG_URL": "",
+    "PCID_REDIRECT_URL": "",
+
     "FUNCTIONS_WORKER_RUNTIME": "python"
   }
 }

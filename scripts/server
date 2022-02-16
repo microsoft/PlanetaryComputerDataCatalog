@@ -5,13 +5,16 @@ set -e
 function usage() {
     echo -n "Usage: $(basename "$0")
 Run webpack dev server with hot reloading for development
+    --local: run a frontend-only dev server on host
 "
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
-    else
+    elif [[ "${1:-}" == "--local" ]]; then
         yarn start
+    else
+        docker-compose up app api azurite
     fi
 fi

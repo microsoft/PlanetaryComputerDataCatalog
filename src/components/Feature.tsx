@@ -1,16 +1,22 @@
+import React from "react";
 import { getFlags } from "../utils/featureFlags";
 
-const Feature = ({ name, fallback, children }) => {
+interface FeatureProps {
+  name: string;
+  fallback?: React.ReactNode;
+}
+
+const Feature: React.FC<FeatureProps> = ({ name, children, fallback = null }) => {
   const flags = getFlags();
   const feature = flags.find(feature => feature.name === name);
 
   if (feature) {
     if (feature.active) {
-      return children;
+      return <>{children}</>;
     }
 
     if (fallback) {
-      return fallback;
+      return <>{fallback}</>;
     }
   }
 
