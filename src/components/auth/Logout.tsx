@@ -10,14 +10,7 @@ const Logout: React.FC = () => {
   const mutation = useMutation(() => axios.post("./api/auth/logout"));
 
   const handleOnClick = () => {
-    axios.get("./api/auth/logout/callback");
-    // mutation.mutate();
-  };
-  const handleOnClick1 = () => {
-    axios.post("./api/auth/logout/callback");
-  };
-  const handleOnClick2 = () => {
-    axios.post("./api/auth/logout/callback?rc=302");
+    mutation.mutate();
   };
 
   useEffect(() => {
@@ -26,13 +19,7 @@ const Logout: React.FC = () => {
     }
   }, [mutation.isSuccess, session]);
 
-  const logout = (
-    <>
-      <DefaultButton onClick={handleOnClick}>Sign out</DefaultButton>
-      <DefaultButton onClick={handleOnClick1}>Sign out</DefaultButton>
-      <DefaultButton onClick={handleOnClick2}>Sign out</DefaultButton>
-    </>
-  );
+  const logout = <DefaultButton onClick={handleOnClick}>Sign out</DefaultButton>;
 
   return session.status.isLoggedIn ? logout : null;
 };

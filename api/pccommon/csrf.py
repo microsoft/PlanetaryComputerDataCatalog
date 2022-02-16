@@ -9,8 +9,10 @@ class CSRFException(Exception):
 
 
 def check_csrf(req: func.HttpRequest) -> None:
-    """Check that the origin of the request matches the """
+    """Check that the origin of the request matches the host"""
     origin = urlparse(req.headers.get("Origin"))
+
+    # Functions are proxied, so can't use host directly
     host = urlparse(req.headers.get("x-ms-original-url"))
 
     if (origin.netloc != host.netloc) or origin == None:
