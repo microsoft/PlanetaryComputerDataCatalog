@@ -91,9 +91,11 @@ def get_invalidated_session_cookie():
         "Max-Age": "1",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Path": "/",
-        "SameSite": "strict",
+        "SameSite": "Strict",
     }
-    crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
+
+    frags.update(add_domain_cookie_setting())
+    crumbs = "; ".join([f"{k}={v}" for k, v in frags.items()])
     return f"{crumbs}; HttpOnly; Secure"
 
 
@@ -106,9 +108,11 @@ def make_session_cookie(session_id: str, max_age: int = 3600):
         SESSION_COOKIE: session_id,
         "Max-Age": max_age,
         "Path": "/",
-        "SameSite": "strict",
+        "SameSite": "Strict",
     }
-    crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
+
+    frags.update(add_domain_cookie_setting())
+    crumbs = "; ".join([f"{k}={v}" for k, v in frags.items()])
     return f"{crumbs}; HttpOnly; Secure"
 
 
@@ -122,7 +126,25 @@ def make_oidc_state_nonce_cookie(state: str, nonce: str, max_age: int = 40):
         OAUTH_NONCE_COOKIE: cookie_value,
         "Max-Age": max_age,
         "Path": "/",
-        "SameSite": "lax",
+        "Samesite": "Lax",
     }
-    crumbs = ";".join([f"{k}={v}" for k, v in frags.items()])
+    frags.update(add_domain_cookie_setting())
+    crumbs = "; ".join([f"{k}={v}" for k, v in frags.items()])
+
     return f"{crumbs}; HttpOnly; Secure"
+
+
+def add_domain_cookie_setting():
+    """
+    In environments proxied by frontdoor, the cookie domain must be set via an env var
+    because the upstream domain is used by default otherwise. Local dev and ephemeral
+    staging environments do not need this.
+    """
+    domain = os.environ.get("PCID_COOKIE_DOMAIN")
+
+    if domain:
+        return {
+            "Domain": domain,
+        }
+
+    return {}
