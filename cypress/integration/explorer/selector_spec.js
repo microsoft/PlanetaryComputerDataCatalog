@@ -28,7 +28,9 @@ describe("Explorer selector tests", () => {
   });
 
   it("loads mosaic spec for selected collection", () => {
-    cy.intercept("/stac/sentinel-2-l2a/mosaicInfo.json").as("getS2mosaic");
+    cy.intercept("/api/data/v1/mosaic/info?collection=sentinel-2-l2a").as(
+      "getS2mosaic"
+    );
     cy.intercept("/api/stac/v1/search").as("getS2search");
 
     cy.contains("Sentinel-2 Level-2A").click();
