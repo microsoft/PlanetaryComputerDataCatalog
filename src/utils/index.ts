@@ -2,11 +2,11 @@ import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL, getDataUrl, HUB_URL } from "./constants";
+import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
-import { useSession } from "components/auth/hooks/SessionContext";
+// import { useSession } from "components/auth/hooks/SessionContext";
 
 dayjs.extend(utc);
 export { dayjs };
@@ -238,9 +238,9 @@ export const useItemPreviewUrl = (
   renderOption: IMosaicRenderOption | null,
   size?: number
 ) => {
-  const { status } = useSession();
+  // TODO: add auth to request: const { status } = useSession();
   const maxSize = size ? `&max_size=${size}` : "";
-  const url = encodeURI(`${getDataUrl(status.isLoggedIn)}/item/preview.png`);
+  const url = encodeURI(`${DATA_URL}/item/preview.png`);
   const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption?.options));
 
   const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;

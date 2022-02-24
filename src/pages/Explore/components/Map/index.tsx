@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
@@ -26,6 +26,8 @@ import {
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
+import { useSession } from "components/auth/hooks/SessionContext";
+import { DATA_URL } from "utils/constants";
 
 const mapContainerId: string = "viewer-map";
 
@@ -34,6 +36,18 @@ const ExploreMap = () => {
   const { center, zoom } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
+  const { status: sessionStatus } = useSession();
+
+  const addAuthHeaders = useCallback(
+    (url: string, resourceType: atlas.ResourceType): atlas.RequestParameters => {
+      resourceType === "Tile" && console.log(url, resourceType, DATA_URL);
+      if (resourceType === "Tile" && url?.startsWith(DATA_URL)) {
+        return { headers: { Authorization: `Bearer ${sessionStatus.token}` } };
+      }
+      return {};
+    },
+    [sessionStatus]
+  );
 
   // Initialize the map
   useEffect(() => {
@@ -69,6 +83,21 @@ const ExploreMap = () => {
     mapHandlers.onStyleDataLoaded,
     mapHandlers.onDataEvent,
   ]);
+
+  // When logged in, transform requests to include auth header
+  useEffect(() => {
+    if (sessionStatus.isLoggedIn) {
+      console.log("Activating auth headers for tile requests");
+      mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
+    } else {
+      console.log("Deactivating auth headers for tile requests");
+      mapRef.current?.setServiceOptions({
+        transformRequest: () => {
+          return {};
+        },
+      });
+    }
+  }, [addAuthHeaders, sessionStatus]);
 
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);

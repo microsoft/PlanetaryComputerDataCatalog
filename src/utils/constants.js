@@ -15,15 +15,7 @@ export const DATA_URL = apiRoot.endsWith("stac")
   ? tilerRoot.replace("stac", "data")
   : `${tilerRoot}/api/data/v1`;
 
-export const AUTH_STAC_URL = "/api/px/stac/v1";
-export const AUTH_DATA_URL = "/api/px/data/v1";
-
 export const HUB_URL = process.env.REACT_APP_HUB_URL || "";
-
-export const getStacUrl = isLoggedIn => {
-  return isLoggedIn ? AUTH_STAC_URL : STAC_URL;
-};
-
-export const getDataUrl = isLoggedIn => {
-  return isLoggedIn ? AUTH_DATA_URL : DATA_URL;
-};
+export const AUTH_URL =
+  process.env.REACT_APP_AUTH_URL ||
+  "https://planetarycomputer-staging.microsoft.com";

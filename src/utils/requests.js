@@ -3,8 +3,8 @@ import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useQuery } from "react-query";
 import { makeTileJsonUrl } from "utils";
-import { getDataUrl, getStacUrl } from "./constants";
-import { useSession } from "components/auth/hooks/SessionContext";
+import { DATA_URL, STAC_URL } from "./constants";
+// import { useSession } from "components/auth/hooks/SessionContext";
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
@@ -12,8 +12,8 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  const { isLoggedIn: loggedIn } = useSession();
-  const stacUrl = getStacUrl(loggedIn);
+  // TODO: add auth to request: const { isLoggedIn: loggedIn } = useSession();
+  const stacUrl = STAC_URL;
   return useQuery(["stac", stacUrl], getCollections, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -49,7 +49,7 @@ export const registerStacFilter = async (collectionId, queryInfo, cql) => {
   registerCancelToken && registerCancelToken();
 
   // Make a new request
-  const dataUrl = getDataUrl();
+  const dataUrl = DATA_URL;
   const body = makeFilterBody([collectionFilter(collectionId)], queryInfo, cql);
   const r = await axios.post(`${dataUrl}/mosaic/register`, body, {
     cancelToken: new axios.CancelToken(c => (registerCancelToken = c)),

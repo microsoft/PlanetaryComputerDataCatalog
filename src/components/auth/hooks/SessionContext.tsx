@@ -4,6 +4,7 @@ import { useAuthRefresh, useAuthStatus } from "./useAuthRefresh";
 type Session = {
   isLoggedIn: boolean;
   email: string;
+  token: string | null;
 };
 
 type SessionContextType = {
@@ -14,6 +15,7 @@ type SessionContextType = {
 const initialSession: Session = {
   isLoggedIn: false,
   email: "",
+  token: null,
 };
 
 const initialContext = {
@@ -28,14 +30,18 @@ export const SessionProvider: React.FC = ({ children }) => {
   const [session, setSession] = useState<Session>(initialSession);
   const [refreshInterval, setRefreshInterval] = useState(0);
 
-  const { data: statusData, isLoading: isStatusLoading } = useAuthStatus();
+  const {
+    data: statusData,
+    isLoading: isStatusLoading,
+    isError: isStatusError,
+  } = useAuthStatus();
   const {
     data: refreshData,
     isLoading: isRefreshLoading,
     isError: isRefreshError,
   } = useAuthRefresh(refreshInterval);
 
-  // Turn off the refresh interval when the request fails (will likely be a 401)
+  // Turn off the refresh interval when the request fails (will be a 401)
   if (isRefreshError && refreshInterval !== 0) {
     setSession(initialSession);
     setRefreshInterval(0);
@@ -54,13 +60,21 @@ export const SessionProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (isStatusLoading) return;
-    setSession(statusData || initialSession);
+
+    if (isStatusError) {
+      setSession(initialSession);
+      return;
+    }
+
+    if (!statusData?.isLoggedIn) {
+      setSession(statusData);
+    }
 
     // Logged in but not polling for refresh, start polling for refresh
     if (statusData?.isLoggedIn && refreshInterval === 0) {
       setRefreshInterval(DEFAULT_REFERESH_MS);
     }
-  }, [isStatusLoading, refreshInterval, statusData]);
+  }, [isStatusError, isStatusLoading, refreshInterval, statusData]);
 
   const context = {
     status: session,
