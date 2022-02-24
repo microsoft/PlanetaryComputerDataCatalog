@@ -1,16 +1,4 @@
 {
   "$schema": "http://json.schemastore.org/proxies",
-  "proxies": {
-    "login_callback_proxy": {
-      "matchCondition": {
-        "methods": ["GET"],
-        "route": "/api/auth/login/callback"
-      },
-      "backendUri": "http://localhost/api/auth/login/callback-proxy",
-      "requestOverrides": {
-        "backend.request.querystring.code": "",
-        "backend.request.querystring._code": "{request.querystring.code}"
-      }
-    }
-  }
+  "proxies": {}
 }
