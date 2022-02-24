@@ -3,7 +3,7 @@ ipython==7.31.1
 nbconvert==6.0.*
 
 # Sphinx docs rendering
-Jinja2==2.11.3
+Jinja2==3.0.*
 myst-parser>=0.13.5
 nbsphinx==0.8.3
 nbconvert==6.0.*

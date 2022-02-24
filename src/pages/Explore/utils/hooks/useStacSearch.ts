@@ -1,20 +1,20 @@
 import axios from "axios";
-import { useSession } from "components/auth/hooks/SessionContext";
+// import { useSession } from "components/auth/hooks/SessionContext";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { IStacFilter, IStacSearchResult } from "types/stac";
-import { getStacUrl } from "utils/constants";
+import { STAC_URL } from "utils/constants";
 
 const getStacItems = async (
-  queryParam: QueryFunctionContext<[string, IStacFilter | undefined, string]>
+  queryParam: QueryFunctionContext<[string, IStacFilter | undefined]>
 ): Promise<IStacSearchResult> => {
   // eslint-disable-next-line
-  const [_, search, stacUrl] = queryParam.queryKey;
+  const [_, search] = queryParam.queryKey;
 
   if (typeof search === "undefined") {
     return Promise.reject();
   }
 
-  const resp = await axios.post(`${stacUrl}/search`, search);
+  const resp = await axios.post(`${STAC_URL}/search`, search);
 
   return resp.data;
 };
@@ -22,9 +22,8 @@ const getStacItems = async (
 export const useStacSearch = (
   search: IStacFilter | undefined
 ): UseQueryResult<IStacSearchResult, Error> => {
-  const { status } = useSession();
-  const stacUrl = getStacUrl(status.isLoggedIn) as string;
-  return useQuery(["items", search, stacUrl], getStacItems, {
+  // const { status } = useSession();
+  return useQuery(["items", search], getStacItems, {
     keepPreviousData: true, // intended to not clear out search results when panning the map
     refetchOnWindowFocus: false,
     refetchOnMount: false,
