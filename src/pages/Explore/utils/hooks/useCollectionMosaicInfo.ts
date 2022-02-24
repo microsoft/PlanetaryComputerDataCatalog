@@ -1,6 +1,7 @@
 import axios from "axios";
 import { IMosaicInfo } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
+import { DATA_URL } from "utils/constants";
 
 export const useCollectionMosaicInfo = (collectionId: string | undefined) => {
   return useQuery(["mosaicinfo", collectionId], getCollectionMosaicParams, {
@@ -17,6 +18,6 @@ const getCollectionMosaicParams = async (
   const [_, collectionId] = queryParam.queryKey;
 
   return await (
-    await axios.get(`stac/${collectionId}/mosaicInfo.json`)
+    await axios.get(`${DATA_URL}/mosaic/info?collection=${collectionId}`)
   ).data;
 };

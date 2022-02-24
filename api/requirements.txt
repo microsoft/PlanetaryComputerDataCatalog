@@ -3,6 +3,4 @@
 # Manually managing azure-functions-worker may cause unexpected issues
 
 azure-functions
-azure-data-tables==12.2
 requests
-pyjwt[crypto]

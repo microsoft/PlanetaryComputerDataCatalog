@@ -24,9 +24,6 @@ function run() {
 
     # Run etl to build documentation and external notebook/md files
     docker-compose run --rm --no-deps etl "${params[@]}"
-
-    # Ensure azurite tables are up to date
-    docker-compose run --rm api python scripts/setup_tables.py
 }
 
 params=()
