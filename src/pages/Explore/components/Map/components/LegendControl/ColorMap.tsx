@@ -73,7 +73,9 @@ const useColorRamp = (
       )}
       <Image
         styles={imageStyles}
-        src={`${rootColormapUrl}/${colormapName}?${qs.stringify(config)}`}
+        src={`${rootColormapUrl}/${colormapName}?${qs.stringify(config, {
+          skipNull: true,
+        })}`}
         onLoadingStateChange={handleStateChange}
         alt={`Legend color ramp using ${colormapName}`}
       />
