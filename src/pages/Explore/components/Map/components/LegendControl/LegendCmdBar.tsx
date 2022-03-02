@@ -11,7 +11,7 @@ import Feature from "components/Feature";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import {
   pinCurrentMosaic,
-  removePinnedLayer,
+  removeLayerById,
   setLayerVisible,
 } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
@@ -37,7 +37,7 @@ const LegendCmdBar = ({
   const handlePin = () => {
     const layerId = layer.layerId;
     const isPinned = layer.isPinned;
-    isPinned ? dispatch(removePinnedLayer(layerId)) : dispatch(pinCurrentMosaic());
+    isPinned ? dispatch(removeLayerById(layerId)) : dispatch(pinCurrentMosaic());
   };
 
   const handleVisible = () => {
@@ -51,8 +51,8 @@ const LegendCmdBar = ({
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
   const view = settings.view[isVisible ? "true" : "false"];
 
-  const handleExpandClick = () => onExpandedChange(!isExpanded);
-  const handleShowOptionsClick = () => onShowOptionsChange(!showOptions);
+  const handleExpand = () => onExpandedChange(!isExpanded);
+  const handleShowOptions = () => onShowOptionsChange(!showOptions);
 
   return (
     <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
@@ -67,7 +67,7 @@ const LegendCmdBar = ({
         aria-label={options.title}
         title={options.title}
         iconProps={{ iconName: options.icon }}
-        onClick={handleShowOptionsClick}
+        onClick={handleShowOptions}
         styles={buttonStyles}
       />
       <Feature name="pin">
@@ -82,7 +82,7 @@ const LegendCmdBar = ({
           aria-label={expand.title}
           title={expand.title}
           iconProps={{ iconName: expand.icon }}
-          onClick={handleExpandClick}
+          onClick={handleExpand}
           styles={buttonStyles}
         />
       </Feature>

@@ -85,10 +85,12 @@ export const removeCustomCqlExpression = createAsyncThunk<string, string>(
   }
 );
 
-export const resetMosaicState = (): AppThunk => dispatch => {
-  resetMosaicQueryStringState();
-  dispatch(resetMosaic());
-};
+export const resetMosaicState =
+  (layerId: string): AppThunk =>
+  dispatch => {
+    resetMosaicQueryStringState();
+    dispatch(removeLayerById(layerId));
+  };
 
 export const mosaicSlice = createSlice({
   name: "mosaic",
@@ -199,7 +201,7 @@ export const mosaicSlice = createSlice({
       state.currentEditingLayerId = null;
     },
 
-    removePinnedLayer: (state, action: PayloadAction<string>) => {
+    removeLayerById: (state, action: PayloadAction<string>) => {
       const layerId = action.payload;
       if (layerId in state.layers) {
         delete state.layers[layerId];
@@ -238,7 +240,7 @@ export const mosaicSlice = createSlice({
 
 export const {
   pinCurrentMosaic,
-  removePinnedLayer,
+  removeLayerById,
   resetMosaic,
   setCollection,
   setQuery,
