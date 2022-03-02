@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FontSizes,
   getTheme,
@@ -11,6 +12,7 @@ import { useExploreDispatch } from "pages/Explore/state/hooks";
 import {
   pinCurrentMosaic,
   removePinnedLayer,
+  setLayerVisible,
 } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
 
@@ -30,6 +32,7 @@ const LegendCmdBar = ({
   onShowOptionsChange,
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
+  const [isVisible, setIsVisible] = useState(true);
 
   const handlePin = () => {
     const layerId = layer.layerId;
@@ -37,15 +40,29 @@ const LegendCmdBar = ({
     isPinned ? dispatch(removePinnedLayer(layerId)) : dispatch(pinCurrentMosaic());
   };
 
+  const handleVisible = () => {
+    const visible = isVisible ? false : true;
+    dispatch(setLayerVisible({ id: layer.layerId, value: visible }));
+    setIsVisible(!isVisible);
+  };
+
   const expand = settings.expand[isExpanded ? "true" : "false"];
   const options = settings.showOptions[showOptions ? "true" : "false"];
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
+  const view = settings.view[isVisible ? "true" : "false"];
 
   const handleExpandClick = () => onExpandedChange(!isExpanded);
   const handleShowOptionsClick = () => onShowOptionsChange(!showOptions);
 
   return (
     <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
+      <IconButton
+        aria-label={view.title}
+        title={view.title}
+        iconProps={{ iconName: view.icon }}
+        onClick={handleVisible}
+        styles={buttonStyles}
+      />
       <IconButton
         aria-label={options.title}
         title={options.title}
@@ -81,12 +98,16 @@ const settings = {
     false: { icon: "ChevronUp", title: "Expand legend" },
   },
   showOptions: {
-    true: { icon: "ColumnOptions", title: "Hide layer options" },
-    false: { icon: "Settings", title: "Show layer options" },
+    true: { icon: "FluentSettingsFilled", title: "Hide layer options" },
+    false: { icon: "FluentSettings", title: "Show layer options" },
   },
   pin: {
     true: { icon: "Unpin", title: "Unpin layer and remove from map" },
     false: { icon: "Pinned", title: "Pin layer to map and perform new search" },
+  },
+  view: {
+    true: { icon: "FluentView", title: "Hide layer from map" },
+    false: { icon: "FluentUnview", title: "Show layer on map" },
   },
 };
 
@@ -102,5 +123,6 @@ const buttonStyles: IButtonStyles = {
   icon: {
     color: theme.semanticColors.bodyText,
     fontSize: FontSizes.small,
+    width: 16,
   },
 };

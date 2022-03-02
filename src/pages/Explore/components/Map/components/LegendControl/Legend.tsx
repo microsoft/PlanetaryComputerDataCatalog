@@ -77,8 +77,10 @@ const Legend = ({ layer }: LegendProps) => {
           </Stack>
           <div style={legendBodyStyles}>{renderDesc}</div>
         </Stack>
+        {showOptions && isExpanded && (
+          <div style={legendBodyStyles}>{layerOptions}</div>
+        )}
         {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
-        {showOptions && <div style={legendBodyStyles}>{layerOptions}</div>}
       </Stack>
       <Separator className="legend-item-separator" styles={legendSeparatorStyles} />
     </>

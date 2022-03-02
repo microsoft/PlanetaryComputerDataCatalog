@@ -63,6 +63,7 @@ export interface ILayerState {
     minZoom: number;
     maxExtent: number[];
     opacity: number;
+    visible: boolean;
   };
 }
 

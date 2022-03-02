@@ -32,6 +32,7 @@ export const initialLayerState: ILayerState = {
     minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
     opacity: 100,
+    visible: true,
   },
 };
 
@@ -142,6 +143,14 @@ export const mosaicSlice = createSlice({
       mosaic.layer.opacity = action.payload.value;
     },
 
+    setLayerVisible: (
+      state,
+      action: PayloadAction<{ id: string; value: boolean }>
+    ) => {
+      const mosaic = state.layers[action.payload.id];
+      mosaic.layer.visible = action.payload.value;
+    },
+
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.isCustomQuery = action.payload;
@@ -236,6 +245,7 @@ export const {
   setRenderOption,
   setLayerMinZoom,
   setLayerOpacity,
+  setLayerVisible,
   setIsCustomQuery,
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
