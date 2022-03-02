@@ -1,5 +1,6 @@
 import axios from "axios";
 import { QueryFunctionContext, useQuery } from "react-query";
+import { QsParamType } from "types";
 import { FileExtValues, IStacCollection } from "types/stac";
 import { DATA_URL } from "utils/constants";
 
@@ -8,7 +9,7 @@ export const rootClassmapUrl = `${DATA_URL}/legend/classmap`;
 
 export const hasClassmapValues = (
   collection: IStacCollection | null,
-  assets: string | string[] | null
+  assets: QsParamType
 ) => {
   // If the rendering options don't include an asset, it's not a categorical
   if (!assets) return false;
