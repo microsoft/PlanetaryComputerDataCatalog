@@ -23,8 +23,9 @@ const getCollectionMosaicParams = async (
 export const fetchCollectionMosaicInfo = async (
   collectionId: string | undefined
 ): Promise<IMosaicInfo> => {
-  return await (console.log("fetchCollectionMosaicInfo", collectionId),
-  await axios.get(`${DATA_URL}/mosaic/info?collection=${collectionId}`)).data;
+  return await (
+    await axios.get(`${DATA_URL}/mosaic/info?collection=${collectionId}`)
+  ).data;
 };
 
 export const fetchCollection = async (

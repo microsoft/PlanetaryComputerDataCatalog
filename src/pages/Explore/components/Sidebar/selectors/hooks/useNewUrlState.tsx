@@ -2,7 +2,8 @@ import { useExploreSelector } from "pages/Explore/state/hooks";
 import { updateQueryStringParam } from "pages/Explore/utils";
 import { useEffect } from "react";
 
-const QS_SEPARATOR = ",";
+export const QS_SEPARATOR = "||";
+export const QS_CUSTOM_KEY = "cql:";
 
 export const useNewUrlState = () => {
   const layers = useExploreSelector(s => s.mosaic.layers);
@@ -17,7 +18,9 @@ export const useNewUrlState = () => {
     const mosaics = Object.values(layers)
       .map(l => {
         // If layer has a custom query, use the search key, otherwise use the named mosaic
-        return l.isCustomQuery ? `cql:${l.query.searchId}` : l.query.name;
+        return l.isCustomQuery
+          ? `${QS_CUSTOM_KEY}${l.query.searchId}`
+          : l.query.name;
       })
       .join(QS_SEPARATOR);
     updateQueryStringParam("m", mosaics);
@@ -27,7 +30,5 @@ export const useNewUrlState = () => {
       .filter(Boolean)
       .join(QS_SEPARATOR);
     updateQueryStringParam("r", renders);
-
-    console.log(collections, "\n", mosaics, "\n", renders);
   }, [layers]);
 };

@@ -1,7 +1,10 @@
-import axios from "axios";
+import axios, { Canceler } from "axios";
+import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
+import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
-import { useQuery } from "react-query";
+import { QueryFunctionContext, useQuery } from "react-query";
+import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
 // import { useSession } from "components/auth/hooks/SessionContext";
@@ -12,46 +15,54 @@ export const usePrefetchContent = () => {
 };
 
 export const useCollections = () => {
-  // TODO: add auth to request: const { isLoggedIn: loggedIn } = useSession();
-  const stacUrl = STAC_URL;
-  return useQuery(["stac", stacUrl], getCollections, {
+  return useQuery(["stac-collections"], getCollections, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
 };
 
-export const useStaticMetadata = staticFileName => {
-  return useQuery([staticFileName], getStaticMetadata);
+export const useStaticMetadata = (staticFileName: string) => {
+  return useQuery(["static-file", staticFileName], getStaticMetadata);
 };
 
-export const useTileJson = (query, renderOption, collection, item) => {
+export const useTileJson = (
+  query: IMosaic,
+  renderOption: IMosaicRenderOption | null,
+  collection: IStacCollection | null,
+  item: IStacItem | null
+) => {
   return useQuery([query, renderOption, collection, item], getTileJson, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
-    enabled: Boolean(collection) && Boolean(query.hash),
+    enabled: Boolean(collection) && Boolean(query.searchId),
   });
 };
 
-export const getTileJson = async ({ queryKey }) => {
-  const [query, renderOption, collection, item] = queryKey;
+export const getTileJson = async (
+  queryParam: QueryFunctionContext<
+    [IMosaic, IMosaicRenderOption | null, IStacCollection | null, IStacItem | null]
+  >
+) => {
+  const [query, renderOption, collection, item] = queryParam.queryKey;
   const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
 
   const resp = await axios.get(tileJsonUrl);
   return resp.data;
 };
 
-let registerCancelToken = null;
+let registerCancelToken: Canceler | null = null;
 export const registerStacFilter = async (
-  collectionId,
-  queryInfo,
-  cql,
-  cancelPrevious = true
-) => {
+  collectionId: string | undefined,
+  queryInfo: IMosaic,
+  cql: ICqlExpressionList,
+  shouldCancelPrevious: boolean = true
+): Promise<string> => {
+  if (!collectionId) return "";
   // If there is a register request in-flight, cancel it. This is important because
   // this function is called as a result of an async thunk. If two register requests
   // are made very quickly, the first request may return after the second, causing the
   // map layer to reference the wrong mosaic hash tiles
-  cancelPrevious && registerCancelToken && registerCancelToken();
+  shouldCancelPrevious && registerCancelToken && registerCancelToken();
 
   // Make a new request
   const dataUrl = DATA_URL;
@@ -62,15 +73,16 @@ export const registerStacFilter = async (
   return r.data.searchid;
 };
 
-const getCollections = async ({ queryKey }) => {
-  // eslint-disable-next-line
-  const [_key, collectionsUrl] = queryKey;
-  const resp = await axios.get(`${collectionsUrl}/collections`);
+const getCollections = async (queryParam: QueryFunctionContext<[string]>) => {
+  const resp = await axios.get(`${STAC_URL}/collections`);
   return resp.data;
 };
 
-const getStaticMetadata = async ({ queryKey }) => {
-  const [file] = queryKey;
+const getStaticMetadata = async (
+  queryParam: QueryFunctionContext<[string, string]>
+) => {
+  // eslint-disable-next-line
+  const [_key, file] = queryParam.queryKey;
   const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
 };

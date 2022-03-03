@@ -4,6 +4,10 @@ import { uniqueId } from "lodash-es";
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
 import {
+  QS_CUSTOM_KEY,
+  QS_SEPARATOR,
+} from "../components/Sidebar/selectors/hooks/useNewUrlState";
+import {
   ILayerState,
   IMosaic,
   IMosaicRenderOption,
@@ -18,6 +22,7 @@ import {
   fetchCollection,
   fetchCollectionMosaicInfo,
 } from "../utils/hooks/useCollectionMosaicInfo";
+import { fetchSearchIdMetadata } from "../utils/hooks/useSearchIdMetadata";
 import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
 import { AppThunk, ExploreState } from "./store";
 
@@ -59,9 +64,9 @@ export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
     const collectionIds = qs.get("d");
 
     if (collectionIds) {
-      const collectionIdsArray = collectionIds.split(",");
-      const mosaicNames = qs.get("m")?.split(",") ?? [];
-      const renderOptionNames = qs.get("r")?.split(",") ?? [];
+      const collectionIdsArray = collectionIds.split(QS_SEPARATOR);
+      const mosaicNames = qs.get("m")?.split(QS_SEPARATOR) ?? [];
+      const renderOptionNames = qs.get("r")?.split(QS_SEPARATOR) ?? [];
 
       const collections = await Promise.all(
         collectionIdsArray.map(async id => {
@@ -72,39 +77,51 @@ export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
         collectionIdsArray.map(async id => {
           return await fetchCollectionMosaicInfo(id);
         })
-      );
+      ).catch(reason => {
+        console.error(reason);
+        throw new Error(reason);
+      });
 
       const layerEntries = await Promise.all(
         collections.map(
           async (collection, index): Promise<[string, ILayerState]> => {
             const mosaicName = mosaicNames[index];
-            const mosaic = mosaicInfos[index].mosaics.find(
-              m => m.name === mosaicName
-            );
+            const isCustomQuery = mosaicName.startsWith(QS_CUSTOM_KEY);
+            const customSearchId = mosaicName.substring(QS_CUSTOM_KEY.length);
+
+            const mosaic: IMosaic | undefined = isCustomQuery
+              ? {
+                  ...initialMosaicState,
+                  searchId: customSearchId,
+                }
+              : mosaicInfos[index].mosaics.find(m => m.name === mosaicName);
             const renderOptionName = renderOptionNames[index];
             const renderOption = mosaicInfos[index].renderOptions?.find(
               r => r.name === renderOptionName
             );
+
             if (!mosaic || !renderOption) {
               throw new Error("Invalid mosaic or render option");
             }
 
-            // Register the cql
-            const searchId = await registerStacFilter(
-              collection.id,
-              mosaic,
-              mosaic.cql,
-              false
-            );
+            // Register the cql to get the search Id, custom queries don't have
+            // cql but already have a searchId
+            const searchId = isCustomQuery
+              ? customSearchId
+              : await registerStacFilter(collection.id, mosaic, mosaic.cql, false);
+            console.log(`SearchId: ${searchId}`);
+            // Get the named mosaic's cql, or fetch the cql for a custom query's searchId
+            const cql = isCustomQuery
+              ? (await fetchSearchIdMetadata(searchId)).search.filter.args
+              : mosaic.cql;
 
-            console.log(collection.id, searchId);
             const layerId = uniqueId(collection.id);
             const layer: ILayerState = {
               layerId,
               collection,
-              query: { ...mosaic, searchId },
+              query: { ...mosaic, searchId, cql },
               renderOption,
-              isCustomQuery: false,
+              isCustomQuery: isCustomQuery,
               isPinned: true,
               layer: {
                 minZoom: DEFAULT_MIN_ZOOM,
@@ -119,7 +136,8 @@ export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
       );
 
       const layers = Object.fromEntries(layerEntries);
-      dispatch(setBulkLayers({ layers, layerOrder: Object.keys(layers) }));
+      const layerOrder = Object.keys(layers).reverse();
+      dispatch(setBulkLayers({ layers, layerOrder }));
 
       return false;
     }
@@ -360,7 +378,7 @@ export const selectCurrentCql = (state: ExploreState) => {
 };
 
 // Custom selector to get the current mosaic layer being edited / displayed
-export const selectCurrentMosaic = (state: ExploreState) => {
+export const selectCurrentMosaic = (state: ExploreState): ILayerState => {
   if (
     !state.mosaic.currentEditingLayerId ||
     !state.mosaic.layers[state.mosaic.currentEditingLayerId]
