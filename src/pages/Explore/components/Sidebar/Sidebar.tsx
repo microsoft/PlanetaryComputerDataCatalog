@@ -11,6 +11,7 @@ import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import SelectorPane from "./panes/SelectorPane";
 import TitleHeader from "./TitleHeader";
+import InitialStateLoader from "./selectors/InitialStateLoader";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
@@ -43,6 +44,7 @@ export const Sidebar = () => {
   }, [dispatch]);
 
   const stacFilter = useStacFilter();
+
   const sidebarStyles: Partial<IStackStyles> = {
     root: {
       width: width,
@@ -75,6 +77,7 @@ export const Sidebar = () => {
         <Stack styles={sidebarStackStyles}>
           <Stack styles={searchPanelStyles} tokens={stackTokens}>
             <TitleHeader />
+            <InitialStateLoader />
             <SelectorPane isCustomQuery={isCustomQuery} />
           </Stack>
           <SearchResultsPane request={stacFilter} visible={!isDetailView} />

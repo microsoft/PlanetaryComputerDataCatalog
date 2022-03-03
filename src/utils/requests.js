@@ -41,12 +41,17 @@ export const getTileJson = async ({ queryKey }) => {
 };
 
 let registerCancelToken = null;
-export const registerStacFilter = async (collectionId, queryInfo, cql) => {
+export const registerStacFilter = async (
+  collectionId,
+  queryInfo,
+  cql,
+  cancelPrevious = true
+) => {
   // If there is a register request in-flight, cancel it. This is important because
   // this function is called as a result of an async thunk. If two register requests
   // are made very quickly, the first request may return after the second, causing the
   // map layer to reference the wrong mosaic hash tiles
-  registerCancelToken && registerCancelToken();
+  cancelPrevious && registerCancelToken && registerCancelToken();
 
   // Make a new request
   const dataUrl = DATA_URL;

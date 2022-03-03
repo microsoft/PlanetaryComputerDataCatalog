@@ -42,8 +42,3 @@ export const getCenterAndZoomQueryString = (): {
     zoom: zoom ? Number(zoom) : undefined,
   };
 };
-
-export const getIsCustomQueryString = () => {
-  const qs = new URL(window.location.href).searchParams;
-  return qs.has(customQueryQsKey);
-};

@@ -3,15 +3,23 @@ import { uniqueId } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
-import { ILayerState, IMosaic, IMosaicRenderOption, IMosaicState } from "../types";
-import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
+import {
+  ILayerState,
+  IMosaic,
+  IMosaicRenderOption,
+  IMosaicState,
+  IOrderedLayers,
+} from "../types";
+import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
+import {
+  fetchCollection,
+  fetchCollectionMosaicInfo,
+} from "../utils/hooks/useCollectionMosaicInfo";
 import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
 import { AppThunk, ExploreState } from "./store";
-
-const isCustomQueryOnLoad = getIsCustomQueryString();
 
 const initialMosaicState: IMosaic = {
   name: null,
@@ -25,7 +33,7 @@ export const initialLayerState: ILayerState = {
   layerId: "",
   collection: null,
   query: initialMosaicState,
-  isCustomQuery: isCustomQueryOnLoad,
+  isCustomQuery: false,
   isPinned: false,
   renderOption: null,
   layer: {
@@ -40,7 +48,85 @@ const initialState: IMosaicState = {
   layers: {},
   layerOrder: [],
   currentEditingLayerId: null,
+  isLoadingInitialState: true,
 };
+
+export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
+  "initial-load",
+  async (_, { dispatch }) => {
+    // Fetch the mosaicInfo of all the initial collections, and the cql of any custom queries
+    const qs = new URLSearchParams(window.location.search);
+    const collectionIds = qs.get("d");
+
+    if (collectionIds) {
+      const collectionIdsArray = collectionIds.split(",");
+      const mosaicNames = qs.get("m")?.split(",") ?? [];
+      const renderOptionNames = qs.get("r")?.split(",") ?? [];
+
+      const collections = await Promise.all(
+        collectionIdsArray.map(async id => {
+          return await fetchCollection(id);
+        })
+      );
+      const mosaicInfos = await Promise.all(
+        collectionIdsArray.map(async id => {
+          return await fetchCollectionMosaicInfo(id);
+        })
+      );
+
+      const layerEntries = await Promise.all(
+        collections.map(
+          async (collection, index): Promise<[string, ILayerState]> => {
+            const mosaicName = mosaicNames[index];
+            const mosaic = mosaicInfos[index].mosaics.find(
+              m => m.name === mosaicName
+            );
+            const renderOptionName = renderOptionNames[index];
+            const renderOption = mosaicInfos[index].renderOptions?.find(
+              r => r.name === renderOptionName
+            );
+            if (!mosaic || !renderOption) {
+              throw new Error("Invalid mosaic or render option");
+            }
+
+            // Register the cql
+            const searchId = await registerStacFilter(
+              collection.id,
+              mosaic,
+              mosaic.cql,
+              false
+            );
+
+            console.log(collection.id, searchId);
+            const layerId = uniqueId(collection.id);
+            const layer: ILayerState = {
+              layerId,
+              collection,
+              query: { ...mosaic, searchId },
+              renderOption,
+              isCustomQuery: false,
+              isPinned: true,
+              layer: {
+                minZoom: DEFAULT_MIN_ZOOM,
+                maxExtent: [],
+                opacity: 100,
+                visible: true,
+              },
+            };
+            return [layerId, layer];
+          }
+        )
+      );
+
+      const layers = Object.fromEntries(layerEntries);
+      dispatch(setBulkLayers({ layers, layerOrder: Object.keys(layers) }));
+
+      return false;
+    }
+
+    return false;
+  }
+);
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/registerQuery",
@@ -130,6 +216,11 @@ export const mosaicSlice = createSlice({
         action.payload
       );
       mosaic.renderOption = renderOption;
+    },
+
+    setBulkLayers: (state, action: PayloadAction<IOrderedLayers>) => {
+      state.layers = action.payload.layers;
+      state.layerOrder = action.payload.layerOrder;
     },
 
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
@@ -235,6 +326,13 @@ export const mosaicSlice = createSlice({
         updateSearchId(state, action.payload);
       }
     );
+
+    builder.addCase(
+      loadDataFromQuery.fulfilled,
+      (state, action: PayloadAction<boolean>) => {
+        state.isLoadingInitialState = action.payload;
+      }
+    );
   },
 });
 
@@ -245,6 +343,7 @@ export const {
   setCollection,
   setQuery,
   setRenderOption,
+  setBulkLayers,
   setLayerMinZoom,
   setLayerOpacity,
   setLayerVisible,

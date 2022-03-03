@@ -4,7 +4,6 @@ import { useCollectionMosaicInfo } from "../../../utils/hooks";
 import { useExploreDispatch, useExploreSelector } from "../../../state/hooks";
 import { selectCurrentMosaic, setMosaicQuery } from "../../../state/mosaicSlice";
 import StateSelector from "./StateSelector";
-import { useMosaicUrlState } from "./hooks/useUrlState";
 
 const MosaicPresetSelector = () => {
   const { collection, query, isCustomQuery } =
@@ -18,8 +17,6 @@ const MosaicPresetSelector = () => {
       dispatch(setMosaicQuery(mosaicInfo.mosaics[0]));
     }
   }, [dispatch, mosaicInfo, query.name]);
-
-  useMosaicUrlState(mosaicInfo?.mosaics);
 
   const mosaicOptions =
     isSuccess && mosaicInfo?.mosaics
