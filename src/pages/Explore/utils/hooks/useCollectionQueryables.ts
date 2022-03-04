@@ -14,8 +14,7 @@ export const useCollectionQueryables = (collectionId: string | undefined) => {
 const getCollectionQueryables = async (
   queryParam: QueryFunctionContext<["queryable", string | undefined]>
 ): Promise<JSONSchema> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, collectionId] = queryParam.queryKey;
+  const [, collectionId] = queryParam.queryKey;
 
   const schema = await $RefParser.dereference(
     `${STAC_URL}/collections/${collectionId}/queryables`

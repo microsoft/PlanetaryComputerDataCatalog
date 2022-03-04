@@ -3,17 +3,22 @@ import { uniqueId } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
-import { ILayerState, IMosaic, IMosaicRenderOption, IMosaicState } from "../types";
-import { getIsCustomQueryString, resetMosaicQueryStringState } from "../utils";
+import {
+  ILayerState,
+  IMosaic,
+  IMosaicRenderOption,
+  IMosaicState,
+  IOrderedLayers,
+} from "../types";
+import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
 import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
+import { loadMosaicState } from "./inititalStateHelper";
 import { AppThunk, ExploreState } from "./store";
 
-const isCustomQueryOnLoad = getIsCustomQueryString();
-
-const initialMosaicState: IMosaic = {
+export const initialMosaicState: IMosaic = {
   name: null,
   description: null,
   cql: [],
@@ -25,13 +30,14 @@ export const initialLayerState: ILayerState = {
   layerId: "",
   collection: null,
   query: initialMosaicState,
-  isCustomQuery: isCustomQueryOnLoad,
+  isCustomQuery: false,
   isPinned: false,
   renderOption: null,
   layer: {
     minZoom: DEFAULT_MIN_ZOOM,
     maxExtent: [],
     opacity: 100,
+    visible: true,
   },
 };
 
@@ -39,7 +45,21 @@ const initialState: IMosaicState = {
   layers: {},
   layerOrder: [],
   currentEditingLayerId: null,
+  isLoadingInitialState: true,
 };
+
+export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
+  "initial-load",
+  async (_, { dispatch }) => {
+    try {
+      loadMosaicState(dispatch);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      return false;
+    }
+  }
+);
 
 export const setMosaicQuery = createAsyncThunk<string, IMosaic>(
   "cql-api/registerQuery",
@@ -84,15 +104,21 @@ export const removeCustomCqlExpression = createAsyncThunk<string, string>(
   }
 );
 
-export const resetMosaicState = (): AppThunk => dispatch => {
-  resetMosaicQueryStringState();
-  dispatch(resetMosaic());
-};
+export const resetMosaicState =
+  (layerId: string): AppThunk =>
+  dispatch => {
+    resetMosaicQueryStringState();
+    dispatch(removeLayerById(layerId));
+  };
 
 export const mosaicSlice = createSlice({
   name: "mosaic",
   initialState,
   reducers: {
+    setCurrentEditingLayerId: (state, action: PayloadAction<string>) => {
+      state.currentEditingLayerId = action.payload;
+    },
+
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
       // When setting a new collection, remove the currently edited mosaic layer
       // and the search order, if it is not pinned
@@ -129,6 +155,11 @@ export const mosaicSlice = createSlice({
       mosaic.renderOption = renderOption;
     },
 
+    setBulkLayers: (state, action: PayloadAction<IOrderedLayers>) => {
+      state.layers = action.payload.layers;
+      state.layerOrder = action.payload.layerOrder;
+    },
+
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.layer.minZoom = action.payload;
@@ -140,6 +171,14 @@ export const mosaicSlice = createSlice({
     ) => {
       const mosaic = state.layers[action.payload.id];
       mosaic.layer.opacity = action.payload.value;
+    },
+
+    setLayerVisible: (
+      state,
+      action: PayloadAction<{ id: string; value: boolean }>
+    ) => {
+      const mosaic = state.layers[action.payload.id];
+      mosaic.layer.visible = action.payload.value;
     },
 
     setIsCustomQuery: (state, action: PayloadAction<boolean>) => {
@@ -190,7 +229,7 @@ export const mosaicSlice = createSlice({
       state.currentEditingLayerId = null;
     },
 
-    removePinnedLayer: (state, action: PayloadAction<string>) => {
+    removeLayerById: (state, action: PayloadAction<string>) => {
       const layerId = action.payload;
       if (layerId in state.layers) {
         delete state.layers[layerId];
@@ -224,18 +263,28 @@ export const mosaicSlice = createSlice({
         updateSearchId(state, action.payload);
       }
     );
+
+    builder.addCase(
+      loadDataFromQuery.fulfilled,
+      (state, action: PayloadAction<boolean>) => {
+        state.isLoadingInitialState = action.payload;
+      }
+    );
   },
 });
 
 export const {
   pinCurrentMosaic,
-  removePinnedLayer,
+  removeLayerById,
   resetMosaic,
+  setCurrentEditingLayerId,
   setCollection,
   setQuery,
   setRenderOption,
+  setBulkLayers,
   setLayerMinZoom,
   setLayerOpacity,
+  setLayerVisible,
   setIsCustomQuery,
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
@@ -249,7 +298,7 @@ export const selectCurrentCql = (state: ExploreState) => {
 };
 
 // Custom selector to get the current mosaic layer being edited / displayed
-export const selectCurrentMosaic = (state: ExploreState) => {
+export const selectCurrentMosaic = (state: ExploreState): ILayerState => {
   if (
     !state.mosaic.currentEditingLayerId ||
     !state.mosaic.layers[state.mosaic.currentEditingLayerId]

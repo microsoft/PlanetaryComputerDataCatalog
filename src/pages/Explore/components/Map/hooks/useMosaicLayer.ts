@@ -38,7 +38,7 @@ const useMosaicLayer = (
             collection,
             stacItemForMosaic
           ),
-          visible: true,
+          visible: mosaic.layer.visible,
           opacity: mosaic.layer.opacity / 100,
         };
 

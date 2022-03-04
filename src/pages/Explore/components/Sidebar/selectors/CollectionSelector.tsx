@@ -8,17 +8,15 @@ import { selectCurrentMosaic, setCollection } from "../../../state/mosaicSlice";
 
 import { collections as collectionConfig } from "config/datasets.yml";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import { useCollectionUrlState } from "./hooks/useUrlState";
 import { isValidExplorer } from "utils/collections";
+import { useUrlStateV2 } from "./hooks/useUrlStateV2";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
   const collections: IStacCollection[] = data?.collections;
   const { collection } = useExploreSelector(selectCurrentMosaic);
 
-  // Sets selector values based off of url state on load, and subsequently syncs
-  // selection to URL
-  useCollectionUrlState(collections);
+  useUrlStateV2();
 
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];
 

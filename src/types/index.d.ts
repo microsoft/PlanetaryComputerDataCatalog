@@ -4,3 +4,5 @@ export interface IAnnouncementType {
   endDate: string;
   content: string;
 }
+
+export type QsParamType = string | (string | null)[] | null;

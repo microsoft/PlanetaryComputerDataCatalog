@@ -77,8 +77,8 @@ const Legend = ({ layer }: LegendProps) => {
           </Stack>
           <div style={legendBodyStyles}>{renderDesc}</div>
         </Stack>
-        {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
         {showOptions && <div style={legendBodyStyles}>{layerOptions}</div>}
+        {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
       </Stack>
       <Separator className="legend-item-separator" styles={legendSeparatorStyles} />
     </>
@@ -113,6 +113,7 @@ const getLegendType = (
   if (hasClassmapValues(collection, params.assets)) {
     return <ClassMap params={params} collection={collection} />;
   }
+  return <Text variant="smallPlus">No legend for this render option.</Text>;
 };
 
 const tokens: IStackTokens = {

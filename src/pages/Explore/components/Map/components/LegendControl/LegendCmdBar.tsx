@@ -6,11 +6,11 @@ import {
   IStackTokens,
   Stack,
 } from "@fluentui/react";
-import Feature from "components/Feature";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import {
   pinCurrentMosaic,
-  removePinnedLayer,
+  removeLayerById,
+  setLayerVisible,
 } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
 
@@ -34,41 +34,51 @@ const LegendCmdBar = ({
   const handlePin = () => {
     const layerId = layer.layerId;
     const isPinned = layer.isPinned;
-    isPinned ? dispatch(removePinnedLayer(layerId)) : dispatch(pinCurrentMosaic());
+    isPinned ? dispatch(removeLayerById(layerId)) : dispatch(pinCurrentMosaic());
+  };
+
+  const handleVisible = () => {
+    dispatch(setLayerVisible({ id: layer.layerId, value: !layer.layer.visible }));
   };
 
   const expand = settings.expand[isExpanded ? "true" : "false"];
   const options = settings.showOptions[showOptions ? "true" : "false"];
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
+  const view = settings.view[layer.layer.visible ? "true" : "false"];
 
-  const handleExpandClick = () => onExpandedChange(!isExpanded);
-  const handleShowOptionsClick = () => onShowOptionsChange(!showOptions);
+  const handleExpand = () => onExpandedChange(!isExpanded);
+  const handleShowOptions = () => onShowOptionsChange(!showOptions);
 
   return (
     <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
       <IconButton
+        aria-label={view.title}
+        title={view.title}
+        iconProps={{ iconName: view.icon }}
+        onClick={handleVisible}
+        styles={buttonStyles}
+      />
+      <IconButton
         aria-label={options.title}
         title={options.title}
         iconProps={{ iconName: options.icon }}
-        onClick={handleShowOptionsClick}
+        onClick={handleShowOptions}
         styles={buttonStyles}
       />
-      <Feature name="pin">
-        <IconButton
-          aria-label={pin.title}
-          title={pin.title}
-          iconProps={{ iconName: pin.icon }}
-          onClick={handlePin}
-          styles={buttonStyles}
-        />
-        <IconButton
-          aria-label={expand.title}
-          title={expand.title}
-          iconProps={{ iconName: expand.icon }}
-          onClick={handleExpandClick}
-          styles={buttonStyles}
-        />
-      </Feature>
+      <IconButton
+        aria-label={pin.title}
+        title={pin.title}
+        iconProps={{ iconName: pin.icon }}
+        onClick={handlePin}
+        styles={buttonStyles}
+      />
+      <IconButton
+        aria-label={expand.title}
+        title={expand.title}
+        iconProps={{ iconName: expand.icon }}
+        onClick={handleExpand}
+        styles={buttonStyles}
+      />
     </Stack>
   );
 };
@@ -81,12 +91,16 @@ const settings = {
     false: { icon: "ChevronUp", title: "Expand legend" },
   },
   showOptions: {
-    true: { icon: "ColumnOptions", title: "Hide layer options" },
-    false: { icon: "Settings", title: "Show layer options" },
+    true: { icon: "FluentSettingsFilled", title: "Hide layer options" },
+    false: { icon: "FluentSettings", title: "Show layer options" },
   },
   pin: {
     true: { icon: "Unpin", title: "Unpin layer and remove from map" },
     false: { icon: "Pinned", title: "Pin layer to map and perform new search" },
+  },
+  view: {
+    true: { icon: "FluentView", title: "Hide layer from map" },
+    false: { icon: "FluentUnview", title: "Show layer on map" },
   },
 };
 
@@ -102,5 +116,6 @@ const buttonStyles: IButtonStyles = {
   icon: {
     color: theme.semanticColors.bodyText,
     fontSize: FontSizes.small,
+    width: 16,
   },
 };

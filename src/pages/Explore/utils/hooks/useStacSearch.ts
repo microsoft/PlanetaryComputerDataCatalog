@@ -7,8 +7,7 @@ import { STAC_URL } from "utils/constants";
 const getStacItems = async (
   queryParam: QueryFunctionContext<[string, IStacFilter | undefined]>
 ): Promise<IStacSearchResult> => {
-  // eslint-disable-next-line
-  const [_, search] = queryParam.queryKey;
+  const [, search] = queryParam.queryKey;
 
   if (typeof search === "undefined") {
     return Promise.reject();

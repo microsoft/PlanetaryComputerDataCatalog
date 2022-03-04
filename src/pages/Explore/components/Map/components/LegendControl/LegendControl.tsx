@@ -21,9 +21,10 @@ export const LegendControl = () => {
     .map(id => id && <Legend key={`legend-${id}`} layer={layers[id]} />)
     .filter(Boolean);
 
-  // const legendItems =
+  // Keep the panel rendered even if it's closed to preserve the state of any command options
+  const openStyle = { display: isOpen ? "block" : "none" };
   const legendPanel = (
-    <Stack styles={panelStyles} tokens={stackTokens}>
+    <Stack styles={panelStyles} style={openStyle} tokens={stackTokens}>
       {legends}
     </Stack>
   );
@@ -43,7 +44,7 @@ export const LegendControl = () => {
 
   return (
     <>
-      {isOpen && legends.length > 0 && legendPanel}
+      {legends.length > 0 && legendPanel}
       {legendButton}
     </>
   );

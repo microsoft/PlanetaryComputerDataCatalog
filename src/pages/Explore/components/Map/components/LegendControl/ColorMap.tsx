@@ -16,6 +16,7 @@ import * as qs from "query-string";
 
 import { rootColormapUrl } from "./helpers";
 import { ILegendConfig } from "pages/Explore/types";
+import { QsParamType } from "types";
 
 const HEIGHT: number = 0.08;
 const WIDTH: number = 4.1;
@@ -41,7 +42,7 @@ const ColorMap = ({ params, legendConfig }: ColorMapProps) => {
 export default ColorMap;
 
 const useColorRamp = (
-  colormapName: string | string[] | null,
+  colormapName: QsParamType,
   legendConfig: ILegendConfig | undefined
 ) => {
   const [loading, setLoading] = useBoolean(true);
@@ -72,7 +73,9 @@ const useColorRamp = (
       )}
       <Image
         styles={imageStyles}
-        src={`${rootColormapUrl}/${colormapName}?${qs.stringify(config)}`}
+        src={`${rootColormapUrl}/${colormapName}?${qs.stringify(config, {
+          skipNull: true,
+        })}`}
         onLoadingStateChange={handleStateChange}
         alt={`Legend color ramp using ${colormapName}`}
       />
@@ -80,10 +83,7 @@ const useColorRamp = (
   );
 };
 
-const makeScale = (
-  rescale: string | string[] | null,
-  customScale: string[] | undefined
-) => {
+const makeScale = (rescale: QsParamType, customScale: string[] | undefined) => {
   const items = customScale
     ? makeCustomScale(customScale)
     : makeNumericScale(rescale);
@@ -104,7 +104,7 @@ const makeCustomScale = (customScale: string[]) => {
     );
   });
 };
-const makeNumericScale = (rescale: string | string[] | null) => {
+const makeNumericScale = (rescale: QsParamType) => {
   if (!rescale) return null;
   const scale = Array.isArray(rescale) ? rescale : rescale.split(",");
   if (!scale || scale.filter(Boolean).length !== 2) return null;

@@ -19,7 +19,6 @@ import { CqlParser } from "pages/Explore/utils/cql";
 import { useCollectionQueryables } from "pages/Explore/utils/hooks/useCollectionQueryables";
 import { DateField } from "../../query/DateField";
 import defaultQueryable from "pages/Explore/utils/cql/datetimeDefaultQueryable";
-import { useCustomQueryUrlState } from "./hooks/useUrlState";
 import { AddFilter } from "../../query/AddFilter/AddFilter";
 
 const CustomQueryBuilder = () => {
@@ -27,8 +26,6 @@ const CustomQueryBuilder = () => {
     collection,
     query: { cql },
   } = useExploreSelector(selectCurrentMosaic);
-
-  useCustomQueryUrlState();
 
   const {
     data: apiQueryable,

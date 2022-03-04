@@ -63,6 +63,7 @@ export interface ILayerState {
     minZoom: number;
     maxExtent: number[];
     opacity: number;
+    visible: boolean;
   };
 }
 
@@ -71,4 +72,10 @@ export interface IMosaicState {
   layers: CurrentLayers;
   layerOrder: string[];
   currentEditingLayerId: string | null;
+  isLoadingInitialState: Boolean;
+}
+
+export interface IOrderedLayers {
+  layers: CurrentLayers;
+  layerOrder: string[];
 }
