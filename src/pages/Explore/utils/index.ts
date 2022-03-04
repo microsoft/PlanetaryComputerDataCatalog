@@ -1,14 +1,20 @@
 import { centerKey, zoomKey } from "../components/Map/hooks/useUrlState";
 import {
-  renderQsKey,
-  mosaicQsKey,
-  customQueryQsKey,
-} from "../components/Sidebar/selectors/hooks/useUrlState";
+  QS_COLLECTION_KEY,
+  QS_MOSAIC_KEY,
+  QS_RENDER_KEY,
+  QS_V1_CUSTOM_KEY,
+  QS_VERSION_KEY,
+} from "../components/Sidebar/selectors/hooks/useUrlStateV2";
 
 export const resetMosaicQueryStringState = () => {
-  updateQueryStringParam(renderQsKey, "");
-  updateQueryStringParam(mosaicQsKey, "");
-  updateQueryStringParam(customQueryQsKey, "");
+  [
+    QS_COLLECTION_KEY,
+    QS_MOSAIC_KEY,
+    QS_RENDER_KEY,
+    QS_V1_CUSTOM_KEY,
+    QS_VERSION_KEY,
+  ].map(key => updateQueryStringParam(key, ""));
 };
 
 export const updateQueryStringParam = (

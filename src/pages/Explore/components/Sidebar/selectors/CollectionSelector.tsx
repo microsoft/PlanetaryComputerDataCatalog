@@ -9,14 +9,14 @@ import { selectCurrentMosaic, setCollection } from "../../../state/mosaicSlice";
 import { collections as collectionConfig } from "config/datasets.yml";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { isValidExplorer } from "utils/collections";
-import { useNewUrlState } from "./hooks/useNewUrlState";
+import { useUrlStateV2 } from "./hooks/useUrlStateV2";
 
 const CollectionSelector = () => {
   const { isSuccess, data } = useCollections();
   const collections: IStacCollection[] = data?.collections;
   const { collection } = useExploreSelector(selectCurrentMosaic);
 
-  useNewUrlState();
+  useUrlStateV2();
 
   const collectionOptions = isSuccess ? sortedOptions(collections) : [];
 

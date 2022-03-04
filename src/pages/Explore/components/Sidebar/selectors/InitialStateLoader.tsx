@@ -1,4 +1,4 @@
-import { Spinner } from "@fluentui/react";
+import { Spinner, SpinnerSize } from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { loadDataFromQuery } from "pages/Explore/state/mosaicSlice";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ const InitialStateLoader = () => {
   }, [dispatch]);
 
   if (isLoadingInitialState) {
-    return <Spinner />;
+    return <Spinner size={SpinnerSize.large} label="Loading initial state..." />;
   }
   return null;
 };

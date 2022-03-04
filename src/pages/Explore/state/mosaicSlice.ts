@@ -4,10 +4,6 @@ import { uniqueId } from "lodash-es";
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
 import {
-  QS_CUSTOM_KEY,
-  QS_SEPARATOR,
-} from "../components/Sidebar/selectors/hooks/useNewUrlState";
-import {
   ILayerState,
   IMosaic,
   IMosaicRenderOption,
@@ -18,15 +14,11 @@ import { resetMosaicQueryStringState } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import { CqlExpressionParser } from "../utils/cql";
 import { CqlExpression, ICqlExpressionList } from "../utils/cql/types";
-import {
-  fetchCollection,
-  fetchCollectionMosaicInfo,
-} from "../utils/hooks/useCollectionMosaicInfo";
-import { fetchSearchIdMetadata } from "../utils/hooks/useSearchIdMetadata";
 import { getCurrentMosaicDraft, updateSearchId } from "./helpers";
+import { loadMosaicState } from "./inititalStateHelper";
 import { AppThunk, ExploreState } from "./store";
 
-const initialMosaicState: IMosaic = {
+export const initialMosaicState: IMosaic = {
   name: null,
   description: null,
   cql: [],
@@ -59,90 +51,13 @@ const initialState: IMosaicState = {
 export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
   "initial-load",
   async (_, { dispatch }) => {
-    // Fetch the mosaicInfo of all the initial collections, and the cql of any custom queries
-    const qs = new URLSearchParams(window.location.search);
-    const collectionIds = qs.get("d");
-
-    if (collectionIds) {
-      const collectionIdsArray = collectionIds.split(QS_SEPARATOR);
-      const mosaicNames = qs.get("m")?.split(QS_SEPARATOR) ?? [];
-      const renderOptionNames = qs.get("r")?.split(QS_SEPARATOR) ?? [];
-
-      const collections = await Promise.all(
-        collectionIdsArray.map(async id => {
-          return await fetchCollection(id);
-        })
-      );
-      const mosaicInfos = await Promise.all(
-        collectionIdsArray.map(async id => {
-          return await fetchCollectionMosaicInfo(id);
-        })
-      ).catch(reason => {
-        console.error(reason);
-        throw new Error(reason);
-      });
-
-      const layerEntries = await Promise.all(
-        collections.map(
-          async (collection, index): Promise<[string, ILayerState]> => {
-            const mosaicName = mosaicNames[index];
-            const isCustomQuery = mosaicName.startsWith(QS_CUSTOM_KEY);
-            const customSearchId = mosaicName.substring(QS_CUSTOM_KEY.length);
-
-            const mosaic: IMosaic | undefined = isCustomQuery
-              ? {
-                  ...initialMosaicState,
-                  searchId: customSearchId,
-                }
-              : mosaicInfos[index].mosaics.find(m => m.name === mosaicName);
-            const renderOptionName = renderOptionNames[index];
-            const renderOption = mosaicInfos[index].renderOptions?.find(
-              r => r.name === renderOptionName
-            );
-
-            if (!mosaic || !renderOption) {
-              throw new Error("Invalid mosaic or render option");
-            }
-
-            // Register the cql to get the search Id, custom queries don't have
-            // cql but already have a searchId
-            const searchId = isCustomQuery
-              ? customSearchId
-              : await registerStacFilter(collection.id, mosaic, mosaic.cql, false);
-            console.log(`SearchId: ${searchId}`);
-            // Get the named mosaic's cql, or fetch the cql for a custom query's searchId
-            const cql = isCustomQuery
-              ? (await fetchSearchIdMetadata(searchId)).search.filter.args
-              : mosaic.cql;
-
-            const layerId = uniqueId(collection.id);
-            const layer: ILayerState = {
-              layerId,
-              collection,
-              query: { ...mosaic, searchId, cql },
-              renderOption,
-              isCustomQuery: isCustomQuery,
-              isPinned: true,
-              layer: {
-                minZoom: DEFAULT_MIN_ZOOM,
-                maxExtent: [],
-                opacity: 100,
-                visible: true,
-              },
-            };
-            return [layerId, layer];
-          }
-        )
-      );
-
-      const layers = Object.fromEntries(layerEntries);
-      const layerOrder = Object.keys(layers).reverse();
-      dispatch(setBulkLayers({ layers, layerOrder }));
-
+    try {
+      loadMosaicState(dispatch);
+    } catch (e) {
+      console.error(e);
+    } finally {
       return false;
     }
-
-    return false;
   }
 );
 
