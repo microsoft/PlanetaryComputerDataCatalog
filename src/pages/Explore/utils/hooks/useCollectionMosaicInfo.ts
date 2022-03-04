@@ -15,8 +15,7 @@ export const useCollectionMosaicInfo = (collectionId: string | undefined) => {
 const getCollectionMosaicParams = async (
   queryParam: QueryFunctionContext<["mosaicinfo", string | undefined]>
 ): Promise<IMosaicInfo> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, collectionId] = queryParam.queryKey;
+  const [, collectionId] = queryParam.queryKey;
   return await fetchCollectionMosaicInfo(collectionId);
 };
 

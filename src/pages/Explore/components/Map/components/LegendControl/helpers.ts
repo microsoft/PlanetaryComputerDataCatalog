@@ -33,8 +33,7 @@ export const useClassmap = (classmapName: string | null) => {
 const getClassmapByName = async (
   queryParam: QueryFunctionContext<["classmap", string | null]>
 ): Promise<Record<string, number[]>> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, classmapName] = queryParam.queryKey;
+  const [, classmapName] = queryParam.queryKey;
 
   return await (
     await axios.get(`${rootClassmapUrl}/${classmapName}`)

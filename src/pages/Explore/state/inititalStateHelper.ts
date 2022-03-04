@@ -3,22 +3,29 @@ import { isEmpty, uniqueId } from "lodash-es";
 
 import { registerStacFilter } from "utils/requests";
 import {
+  deserializeSettings,
   QS_COLLECTION_KEY,
   QS_CUSTOM_PREFIX,
   QS_MOSAIC_KEY,
   QS_RENDER_KEY,
   QS_SEPARATOR,
+  QS_SETTINGS_KEY,
   QS_V1_CUSTOM_KEY,
   QS_VERSION_KEY,
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
 import { ILayerState, IMosaic } from "../types";
+import { updateQueryStringParam } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import {
   fetchCollection,
   fetchCollectionMosaicInfo,
 } from "../utils/hooks/useCollectionMosaicInfo";
 import { fetchSearchIdMetadata } from "../utils/hooks/useSearchIdMetadata";
-import { initialMosaicState, setBulkLayers } from "./mosaicSlice";
+import {
+  initialMosaicState,
+  setBulkLayers,
+  setCurrentEditingLayerId,
+} from "./mosaicSlice";
 
 export const loadMosaicState = (
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
@@ -48,7 +55,16 @@ const loadQsV1 = (
   const renderOptionName = qs.get(QS_RENDER_KEY);
 
   if (collectionId && mosaicName && renderOptionName) {
-    loadMosaicStateV2([collectionId], [mosaicName], [renderOptionName], dispatch);
+    loadMosaicStateV2(
+      [collectionId],
+      [mosaicName],
+      [renderOptionName],
+      [],
+      dispatch
+    );
+
+    // Remove the v1 custom parameter
+    updateQueryStringParam(QS_V1_CUSTOM_KEY, "");
   }
 };
 
@@ -57,14 +73,33 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
   const collectionIds = qs.get(QS_COLLECTION_KEY)?.split(QS_SEPARATOR) ?? [];
   const mosaicNames = qs.get(QS_MOSAIC_KEY)?.split(QS_SEPARATOR) ?? [];
   const renderOptionNames = qs.get(QS_RENDER_KEY)?.split(QS_SEPARATOR) ?? [];
+  const settings = qs.get(QS_SETTINGS_KEY)?.split(QS_SEPARATOR) ?? [];
 
-  loadMosaicStateV2(collectionIds, mosaicNames, renderOptionNames, dispatch);
+  loadMosaicStateV2(
+    collectionIds,
+    mosaicNames,
+    renderOptionNames,
+    settings,
+    dispatch
+  );
 };
 
+/**
+ *  Loads the mosaic state from v2 query string params. All values are assumed to be
+ *  sequenced in the same order, separated by `QS_SEPARATOR`.
+ * @param collectionIds
+ * @param mosaicNames Mosaic name from a mosaicInfo entry, or a cql:<searchid>
+ * representing a custom search
+ * @param renderOptionNames RenderOption name from a mosaicInfo entry
+ * @param settings Layer specific settings: isPinned, opacity, isVisible
+ * @param dispatch
+ * @returns
+ */
 const loadMosaicStateV2 = async (
   collectionIds: string[],
   mosaicNames: string[],
   renderOptionNames: string[],
+  settings: string[],
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
 ) => {
   const collections = await Promise.all(
@@ -86,6 +121,7 @@ const loadMosaicStateV2 = async (
       const mosaicName = mosaicNames[index];
       const isCustomQuery = mosaicName.startsWith(QS_CUSTOM_PREFIX);
       const customSearchId = mosaicName.substring(QS_CUSTOM_PREFIX.length);
+      const config = deserializeSettings(settings[index]);
 
       const mosaic: IMosaic | undefined = isCustomQuery
         ? {
@@ -120,12 +156,12 @@ const loadMosaicStateV2 = async (
         query: { ...mosaic, searchId, cql },
         renderOption,
         isCustomQuery: isCustomQuery,
-        isPinned: true,
+        isPinned: config.isPinned,
         layer: {
           minZoom: DEFAULT_MIN_ZOOM,
           maxExtent: [],
-          opacity: 100,
-          visible: true,
+          opacity: config.opacity,
+          visible: config.visible,
         },
       };
       return [layerId, layer];
@@ -137,7 +173,11 @@ const loadMosaicStateV2 = async (
 
   const layers = Object.fromEntries(layerEntries);
   const layerOrder = Object.keys(layers).reverse();
+  const activeLayerId = layerEntries.find(([, layer]) => !layer.isPinned)?.[0];
   dispatch(setBulkLayers({ layers, layerOrder }));
+
+  // If there was a layer that was not pinned, make it the active one
+  activeLayerId && dispatch(setCurrentEditingLayerId(activeLayerId));
 
   return false;
 };

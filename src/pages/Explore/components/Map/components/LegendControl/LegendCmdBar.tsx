@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   FontSizes,
   getTheme,
@@ -32,7 +31,6 @@ const LegendCmdBar = ({
   onShowOptionsChange,
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
-  const [isVisible, setIsVisible] = useState(true);
 
   const handlePin = () => {
     const layerId = layer.layerId;
@@ -41,15 +39,13 @@ const LegendCmdBar = ({
   };
 
   const handleVisible = () => {
-    const visible = isVisible ? false : true;
-    dispatch(setLayerVisible({ id: layer.layerId, value: visible }));
-    setIsVisible(!isVisible);
+    dispatch(setLayerVisible({ id: layer.layerId, value: !layer.layer.visible }));
   };
 
   const expand = settings.expand[isExpanded ? "true" : "false"];
   const options = settings.showOptions[showOptions ? "true" : "false"];
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
-  const view = settings.view[isVisible ? "true" : "false"];
+  const view = settings.view[layer.layer.visible ? "true" : "false"];
 
   const handleExpand = () => onExpandedChange(!isExpanded);
   const handleShowOptions = () => onShowOptionsChange(!showOptions);

@@ -115,6 +115,10 @@ export const mosaicSlice = createSlice({
   name: "mosaic",
   initialState,
   reducers: {
+    setCurrentEditingLayerId: (state, action: PayloadAction<string>) => {
+      state.currentEditingLayerId = action.payload;
+    },
+
     setCollection: (state, action: PayloadAction<IStacCollection>) => {
       // When setting a new collection, remove the currently edited mosaic layer
       // and the search order, if it is not pinned
@@ -273,6 +277,7 @@ export const {
   pinCurrentMosaic,
   removeLayerById,
   resetMosaic,
+  setCurrentEditingLayerId,
   setCollection,
   setQuery,
   setRenderOption,

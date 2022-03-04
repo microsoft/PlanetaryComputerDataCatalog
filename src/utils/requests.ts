@@ -81,8 +81,7 @@ const getCollections = async (queryParam: QueryFunctionContext<[string]>) => {
 const getStaticMetadata = async (
   queryParam: QueryFunctionContext<[string, string]>
 ) => {
-  // eslint-disable-next-line
-  const [_key, file] = queryParam.queryKey;
+  const [, file] = queryParam.queryKey;
   const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
 };

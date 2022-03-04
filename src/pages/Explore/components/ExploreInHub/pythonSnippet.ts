@@ -58,10 +58,10 @@ export const createItemPythonSnippet = (item: IStacItem | null) => {
   if (!itemLink) return null;
 
   let dataAssetEntries = Object.entries(item.assets).filter(
-    ([_, asset]) => asset.roles?.includes("data") && asset.type?.includes("geotiff")
+    ([, asset]) => asset.roles?.includes("data") && asset.type?.includes("geotiff")
   );
   if (!dataAssetEntries?.length) {
-    dataAssetEntries = Object.entries(item.assets).filter(([_, asset]) =>
+    dataAssetEntries = Object.entries(item.assets).filter(([, asset]) =>
       asset.type?.includes("geotiff")
     );
   }
