@@ -233,6 +233,21 @@ StacFields.Registry.addMetadataField("landsat:cloud_cover_land", {
 StacFields.Registry.addMetadataField("naip:state", {
   formatter: value => value && value.toUpperCase(),
 });
+
+StacFields.Registry.addMetadataField("ecmwf:reference_times", {
+  label: "Reference time"
+})
+StacFields.Registry.addMetadataField("ecmwf:streams", {
+  label: "ECMWF stream"
+})
+StacFields.Registry.addMetadataField("ecmwf:types", {
+  label: "ECMWF model type"
+})
+StacFields.Registry.addMetadataField("ecmwf:pressure_levels", {
+  label: "Pressure levels"
+})
+
+
 export const mediaTypeOverride = value => {
   switch (value) {
     case "image/tiff; application=geotiff; profile=cloud-optimized":
