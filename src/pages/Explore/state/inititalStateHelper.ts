@@ -13,7 +13,7 @@ import {
   QS_V1_CUSTOM_KEY,
   QS_VERSION_KEY,
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
-import { ILayerState, IMosaic } from "../types";
+import { ILayerState, IMosaic, IMosaicInfo } from "../types";
 import { updateQueryStringParam } from "../utils";
 import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import {
@@ -118,18 +118,24 @@ const loadMosaicStateV2 = async (
 
   const layerEntries = await Promise.all(
     collections.map(async (collection, index): Promise<[string, ILayerState]> => {
-      const mosaicName = mosaicNames[index];
+      const config = deserializeSettings(settings[index]);
+      const mosaicName = getDefaultMosaicName(
+        mosaicNames[index],
+        mosaicInfos[index]
+      );
       const isCustomQuery = mosaicName.startsWith(QS_CUSTOM_PREFIX);
       const customSearchId = mosaicName.substring(QS_CUSTOM_PREFIX.length);
-      const config = deserializeSettings(settings[index]);
-
       const mosaic: IMosaic | undefined = isCustomQuery
         ? {
             ...initialMosaicState,
             searchId: customSearchId,
           }
         : mosaicInfos[index].mosaics.find(m => m.name === mosaicName);
-      const renderOptionName = renderOptionNames[index];
+
+      const renderOptionName = getDefaultRenderName(
+        renderOptionNames[index],
+        mosaicInfos[index]
+      );
       const renderOption = mosaicInfos[index].renderOptions?.find(
         r => r.name === renderOptionName
       );
@@ -180,4 +186,20 @@ const loadMosaicStateV2 = async (
   activeLayerId && dispatch(setCurrentEditingLayerId(activeLayerId));
 
   return false;
+};
+
+const getDefaultMosaicName = (
+  mosaicName: string | undefined,
+  mosaicInfo: IMosaicInfo
+): string => {
+  const defaultName = mosaicInfo.mosaics[0].name || "";
+  return mosaicName ? mosaicName : defaultName;
+};
+
+const getDefaultRenderName = (
+  renderName: string | undefined,
+  mosaicInfo: IMosaicInfo
+): string => {
+  const defaultName = mosaicInfo.renderOptions?.[0].name || "";
+  return renderName ? renderName : defaultName;
 };

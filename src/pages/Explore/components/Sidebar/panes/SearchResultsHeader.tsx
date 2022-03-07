@@ -14,7 +14,6 @@ import { loadingStyle } from "./SearchResultsPane";
 import QueryInfo from "./QueryInfo";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import PinLayer from "../PinLayer";
-import Feature from "components/Feature";
 
 interface SearchResultsHeaderProps {
   results: IStacSearchResult | undefined;
@@ -65,9 +64,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
       >
         {resultsText}
         <Stack horizontal verticalAlign="center">
-          <Feature name="pin">
-            <PinLayer />
-          </Feature>
+          <PinLayer />
           <QueryInfo />
         </Stack>
       </Stack>
