@@ -24,6 +24,9 @@ const fixedPct = value => {
 };
 
 const fixedDeg = value => value.toFixed(2) + "°";
+
+const upperCase = value => value.toUpperCase();
+
 StacFields.Registry.addAssetField("roles", {
   label: "Roles",
   formatter: stringList,
@@ -235,18 +238,19 @@ StacFields.Registry.addMetadataField("naip:state", {
 });
 
 StacFields.Registry.addMetadataField("ecmwf:reference_times", {
-  label: "Reference time"
-})
+  label: "Reference time",
+});
 StacFields.Registry.addMetadataField("ecmwf:streams", {
-  label: "ECMWF stream"
-})
+  label: "ECMWF stream",
+  formatter: upperCase,
+});
 StacFields.Registry.addMetadataField("ecmwf:types", {
-  label: "ECMWF model type"
-})
+  label: "ECMWF model type",
+  formatter: upperCase,
+});
 StacFields.Registry.addMetadataField("ecmwf:pressure_levels", {
-  label: "Pressure levels"
-})
-
+  label: "Pressure levels",
+});
 
 export const mediaTypeOverride = value => {
   switch (value) {
