@@ -7,8 +7,25 @@ import {
   IIconStyles,
   ITextStyles,
   StackItem,
+  IRenderFunction,
+  IButtonProps,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
+
+export const renderText = (iconName: string, prefix: string = "") => {
+  return (props: IButtonProps | undefined) => {
+    return (
+      <Stack horizontal>
+        <StackItem shrink={0}>
+          <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
+        </StackItem>
+        <Text block nowrap styles={textStyles}>
+          {prefix}
+        </Text>
+      </Stack>
+    );
+  };
+};
 
 export const renderTitle = (iconName: string, prefix: string = "") => {
   return (options: IDropdownOption[] | undefined): JSX.Element | null => {
