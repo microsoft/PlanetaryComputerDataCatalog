@@ -7,8 +7,8 @@ import {
   IIconStyles,
   ITextStyles,
   StackItem,
-  IRenderFunction,
   IButtonProps,
+  mergeStyleSets,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
 
@@ -17,9 +17,9 @@ export const renderText = (iconName: string, prefix: string = "") => {
     return (
       <Stack horizontal>
         <StackItem shrink={0}>
-          <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
+          <Icon styles={contextIcon} iconName={iconName} aria-hidden="true" />
         </StackItem>
-        <Text block nowrap styles={textStyles}>
+        <Text nowrap styles={{ root: { lineHeight: 30 } }}>
           {prefix}
         </Text>
       </Stack>
@@ -38,7 +38,7 @@ export const renderTitle = (iconName: string, prefix: string = "") => {
         <StackItem shrink={0}>
           <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
         </StackItem>
-        <Text block nowrap styles={textStyles} title={optionsText}>
+        <Text block nowrap title={optionsText}>
           {prefix}
           {optionsText}
         </Text>
@@ -57,7 +57,7 @@ export const renderPlaceholder = (
     return (
       <div>
         <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text styles={textStyles}>{title}</Text>
+        <Text>{title}</Text>
       </div>
     );
   };
@@ -107,6 +107,9 @@ export const iconStyles: IIconStyles = {
   },
 };
 
-export const textStyles: ITextStyles = {
-  root: {},
+const contextButtonIconStyles: IIconStyles = {
+  root: { top: 5 },
 };
+
+const contextIcon = mergeStyleSets(iconStyles, contextButtonIconStyles);
+console.log(contextIcon);

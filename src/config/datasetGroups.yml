@@ -107,3 +107,16 @@ gnatsgo:
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gnatsgo-rasters.png
   keywords: [Soils, SSURGO, USDA]
+
+modis:
+  title: MODIS Collection
+  short_description: >
+    TODO
+  description: >
+    TODO
+  assets:
+    headerImg:
+      href: https://via.placeholder.com/1200x800
+    thumbnail:
+      href: https://via.placeholder.com/500x300?text=MODIS TODO
+    keywords: ["MODIS", "TODO"]

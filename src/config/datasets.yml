@@ -288,6 +288,50 @@ collections:
       - title: Storage Documentation
         src: landsat-8-storage.html
 
+  modis-MOD14A1-061:
+    category: Fire
+    headerImg: ./images/modis-fire-hero.png
+
+  modis-MYD14A1-061:
+    category: Fire
+    headerImg: ./images/modis-fire-hero.png
+
+  modis-MYD14A2-061:
+    category: Fire
+    headerImg: ./images/modis-fire-hero.png
+
+  modis-MOD14A2-061:
+    category: Fire
+    headerImg: ./images/modis-fire-hero.png
+
+  modis-MCD64A1-061:
+    category: Fire
+    headerImg: ./images/modis-fire-hero.png
+
+  modis-MOD11A2-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
+  modis-MYD11A2-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
+  modis-MOD21A2-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
+  modis-MYD11A1-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
+  modis-MYD21A2-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
+  modis-MOD11A1-061:
+    category: Weather/Climate
+    headerImg: ./images/modis-weather-hero.png
+
   mobi:
     category: Biodiversity
     headerImg: ./images/mobi-hero.png
@@ -342,6 +386,14 @@ collections:
         src: nasadem-cog.html
       - title: Storage Documentation
         src: nasadem-storage.html
+
+  noaa-c-cap:
+    category: Land use/Land cover
+    headerImg: https://via.placeholder.com/500x300?text=CCAP TODO
+    tabs:
+      - title: Example Notebook
+        src: noaa-c-cap-example.html
+        launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
   nrcan-landcover:
     category: Land use/Land cover
