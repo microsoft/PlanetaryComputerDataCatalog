@@ -9,18 +9,29 @@ import {
   StackItem,
   IButtonProps,
   mergeStyleSets,
+  Spinner,
+  SpinnerSize,
+  ISpinnerStyles,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
 
-export const renderText = (iconName: string, prefix: string = "") => {
+export const renderText = (
+  iconName: string,
+  text: string = "",
+  isLoading: boolean = false
+) => {
   return (props: IButtonProps | undefined) => {
     return (
       <Stack horizontal>
         <StackItem shrink={0}>
-          <Icon styles={contextIcon} iconName={iconName} aria-hidden="true" />
+          {isLoading ? (
+            <Spinner styles={spinnerStyles} size={SpinnerSize.small} />
+          ) : (
+            <Icon styles={contextIcon} iconName={iconName} aria-hidden="true" />
+          )}
         </StackItem>
-        <Text nowrap styles={{ root: { lineHeight: 30 } }}>
-          {prefix}
+        <Text nowrap styles={renderTextStyles} title={text}>
+          {text}
         </Text>
       </Stack>
     );
@@ -57,7 +68,7 @@ export const renderPlaceholder = (
     return (
       <div>
         <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text>{title}</Text>
+        <Text styles={textStyle}>{title}</Text>
       </div>
     );
   };
@@ -112,4 +123,20 @@ const contextButtonIconStyles: IIconStyles = {
 };
 
 const contextIcon = mergeStyleSets(iconStyles, contextButtonIconStyles);
-console.log(contextIcon);
+const spinnerStyles: ISpinnerStyles = {
+  root: {
+    top: 4,
+    marginRight: 10,
+    marginTop: 4,
+    height: 20,
+    width: 20,
+  },
+};
+
+const renderTextStyles: ITextStyles = {
+  root: {
+    lineHeight: 30,
+    width: 346,
+    textAlign: "left",
+  },
+};

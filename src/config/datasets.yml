@@ -308,6 +308,38 @@ collections:
     category: Fire
     headerImg: ./images/modis-fire-hero.png
 
+  modis-MYD15A2H-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MOD15A2H-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MCD15A2H-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MCD15A3H-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MOD13Q1-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MYD13A1-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MYD13Q1-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
+  modis-MOD13A1-061:
+    category: Biomass
+    headerImg: ./images/modis-biomass-hero.png
+
   modis-MOD11A2-061:
     category: Weather/Climate
     headerImg: ./images/modis-weather-hero.png
