@@ -3,11 +3,8 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import CustomQueryBuilder from "../selectors/CustomQueryBuilder";
 import ErrorFallback from "components/ErrorFallback";
-import {
-  CollectionSelector,
-  MosaicPresetSelector,
-  RenderOptionsSelector,
-} from "../selectors";
+import { MosaicPresetSelector, RenderOptionsSelector } from "../selectors";
+import CollectionSelector from "../selectors/CollectionSelector";
 
 interface SelectorPaneProps {
   isCustomQuery: boolean;

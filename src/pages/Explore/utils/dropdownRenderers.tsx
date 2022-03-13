@@ -7,8 +7,36 @@ import {
   IIconStyles,
   ITextStyles,
   StackItem,
+  IButtonProps,
+  mergeStyleSets,
+  Spinner,
+  SpinnerSize,
+  ISpinnerStyles,
 } from "@fluentui/react";
 import DropdownLabel from "../components/query/components/DropdownLabel";
+
+export const renderText = (
+  iconName: string,
+  text: string = "",
+  isLoading: boolean = false
+) => {
+  return (props: IButtonProps | undefined) => {
+    return (
+      <Stack horizontal>
+        <StackItem shrink={0}>
+          {isLoading ? (
+            <Spinner styles={spinnerStyles} size={SpinnerSize.small} />
+          ) : (
+            <Icon styles={contextIcon} iconName={iconName} aria-hidden="true" />
+          )}
+        </StackItem>
+        <Text nowrap styles={renderTextStyles} title={text}>
+          {text}
+        </Text>
+      </Stack>
+    );
+  };
+};
 
 export const renderTitle = (iconName: string, prefix: string = "") => {
   return (options: IDropdownOption[] | undefined): JSX.Element | null => {
@@ -21,7 +49,7 @@ export const renderTitle = (iconName: string, prefix: string = "") => {
         <StackItem shrink={0}>
           <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
         </StackItem>
-        <Text block nowrap styles={textStyles} title={optionsText}>
+        <Text block nowrap title={optionsText}>
           {prefix}
           {optionsText}
         </Text>
@@ -40,7 +68,7 @@ export const renderPlaceholder = (
     return (
       <div>
         <Icon styles={iconStyles} iconName={iconName} aria-hidden="true" />
-        <Text styles={textStyles}>{title}</Text>
+        <Text styles={textStyle}>{title}</Text>
       </div>
     );
   };
@@ -90,6 +118,25 @@ export const iconStyles: IIconStyles = {
   },
 };
 
-export const textStyles: ITextStyles = {
-  root: {},
+const contextButtonIconStyles: IIconStyles = {
+  root: { top: 5 },
+};
+
+const contextIcon = mergeStyleSets(iconStyles, contextButtonIconStyles);
+const spinnerStyles: ISpinnerStyles = {
+  root: {
+    top: 4,
+    marginRight: 10,
+    marginTop: 4,
+    height: 20,
+    width: 20,
+  },
+};
+
+const renderTextStyles: ITextStyles = {
+  root: {
+    lineHeight: 30,
+    width: 346,
+    textAlign: "left",
+  },
 };
