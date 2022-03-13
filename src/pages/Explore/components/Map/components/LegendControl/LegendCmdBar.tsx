@@ -4,6 +4,7 @@ import {
   IButtonStyles,
   IconButton,
   IStackTokens,
+  mergeStyleSets,
   Stack,
 } from "@fluentui/react";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
@@ -13,21 +14,18 @@ import {
   setLayerVisible,
 } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
+import { OpacityCmdButton } from "./LayerOptions";
 
 interface LegendCmdBarProps {
   layer: ILayerState;
   isExpanded: boolean;
   onExpandedChange: (value: boolean) => void;
-  showOptions: boolean;
-  onShowOptionsChange: (value: boolean) => void;
 }
 
 const LegendCmdBar = ({
   layer,
   isExpanded,
   onExpandedChange,
-  showOptions,
-  onShowOptionsChange,
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
 
@@ -42,12 +40,10 @@ const LegendCmdBar = ({
   };
 
   const expand = settings.expand[isExpanded ? "true" : "false"];
-  const options = settings.showOptions[showOptions ? "true" : "false"];
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
   const view = settings.view[layer.layer.visible ? "true" : "false"];
 
   const handleExpand = () => onExpandedChange(!isExpanded);
-  const handleShowOptions = () => onShowOptionsChange(!showOptions);
 
   return (
     <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
@@ -56,28 +52,22 @@ const LegendCmdBar = ({
         title={view.title}
         iconProps={{ iconName: view.icon }}
         onClick={handleVisible}
-        styles={buttonStyles}
+        styles={cmdButtonStyles}
       />
-      <IconButton
-        aria-label={options.title}
-        title={options.title}
-        iconProps={{ iconName: options.icon }}
-        onClick={handleShowOptions}
-        styles={buttonStyles}
-      />
+      <OpacityCmdButton layer={layer} />
       <IconButton
         aria-label={pin.title}
         title={pin.title}
         iconProps={{ iconName: pin.icon }}
         onClick={handlePin}
-        styles={buttonStyles}
+        styles={cmdButtonStyles}
       />
       <IconButton
         aria-label={expand.title}
         title={expand.title}
         iconProps={{ iconName: expand.icon }}
         onClick={handleExpand}
-        styles={buttonStyles}
+        styles={cmdButtonStyles}
       />
     </Stack>
   );
@@ -89,10 +79,6 @@ const settings = {
   expand: {
     true: { icon: "ChevronDown", title: "Collapse legend" },
     false: { icon: "ChevronUp", title: "Expand legend" },
-  },
-  showOptions: {
-    true: { icon: "FluentSettingsFilled", title: "Hide layer options" },
-    false: { icon: "FluentSettings", title: "Show layer options" },
   },
   pin: {
     true: { icon: "Unpin", title: "Unpin layer and remove from map" },
@@ -108,14 +94,18 @@ const theme = getTheme();
 const stackTokens: IStackTokens = {
   childrenGap: 2,
 };
-const buttonStyles: IButtonStyles = {
+export const cmdButtonStyles: IButtonStyles = {
   root: {
     width: 18,
     height: 18,
   },
   icon: {
-    color: theme.semanticColors.bodyText,
+    color: theme.palette.neutralSecondaryAlt,
     fontSize: FontSizes.small,
     width: 16,
   },
 };
+
+export const activeCmdButtonStyles = mergeStyleSets(cmdButtonStyles, {
+  icon: { path: { fill: theme.palette.themePrimary } },
+});
