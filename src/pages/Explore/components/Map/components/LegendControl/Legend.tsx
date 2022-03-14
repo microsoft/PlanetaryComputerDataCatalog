@@ -2,6 +2,7 @@ import React from "react";
 import {
   FontSizes,
   FontWeights,
+  getTheme,
   Icon,
   IStackStyles,
   IStackTokens,
@@ -20,11 +21,13 @@ import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 
 import LegendCmdBar from "./LegendCmdBar";
+import { useExploreSelector } from "pages/Explore/state/hooks";
 interface LegendProps {
   layer: ILayerState;
 }
 
 const Legend = ({ layer }: LegendProps) => {
+  const { zoom } = useExploreSelector(s => s.map);
   const [isExpanded, setIsExpanded] = React.useState(true);
   const { renderOption, collection } = layer;
 
@@ -32,12 +35,14 @@ const Legend = ({ layer }: LegendProps) => {
 
   const renderConfig = qs.parse(renderOption.options || "");
   const legendConfig = renderOption.legend;
+  const styles =
+    zoom + 0.5 >= layer.layer.minZoom ? visibleStyles : nonVisibleStyles;
 
   const legend = getLegendType(renderConfig, legendConfig, collection);
 
   const layerSubtitle = layer.isCustomQuery ? "Custom" : layer.query.name;
   const renderDesc = (
-    <Text block styles={subHeaderStyles}>
+    <Text block styles={styles.subHeader}>
       {layerSubtitle} | {renderOption.name}
     </Text>
   );
@@ -57,7 +62,7 @@ const Legend = ({ layer }: LegendProps) => {
           >
             <Stack horizontal horizontalAlign="start" verticalAlign="start">
               <Icon iconName="GripperDotsVertical" styles={gripperStyles} />
-              <Text block nowrap styles={headerStyles} title={collection?.title}>
+              <Text block nowrap styles={styles.header} title={collection?.title}>
                 {collection?.title}
               </Text>
             </Stack>
@@ -107,6 +112,7 @@ const getLegendType = (
   return <Text variant="smallPlus">No legend for this render option.</Text>;
 };
 
+const theme = getTheme();
 const tokens: IStackTokens = {
   childrenGap: 6,
 };
@@ -130,10 +136,37 @@ const headerStyles: ITextStyles = {
   },
 };
 
+const nonVisibleHeaderStyles: ITextStyles = {
+  root: {
+    color: theme.semanticColors.disabledBodyText,
+    fontStyle: "italic",
+    fontWeight: FontWeights.semibold,
+    maxWidth: 240,
+  },
+};
+
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
   },
+};
+
+const nonVisibleSubHeaderStyles: ITextStyles = {
+  root: {
+    fontSize: FontSizes.smallPlus,
+    color: theme.semanticColors.disabledBodyText,
+    fontStyle: "italic",
+  },
+};
+
+const visibleStyles = {
+  header: headerStyles,
+  subHeader: subHeaderStyles,
+};
+
+const nonVisibleStyles = {
+  header: nonVisibleHeaderStyles,
+  subHeader: nonVisibleSubHeaderStyles,
 };
 
 const gripperStyles = {

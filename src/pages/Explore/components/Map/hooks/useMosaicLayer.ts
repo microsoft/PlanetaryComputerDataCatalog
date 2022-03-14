@@ -26,7 +26,9 @@ const useMosaicLayer = (
     Object.entries(mosaics).forEach(([id, mosaic]) => {
       const mapLayerId = makeLayerId(id);
       const { query, renderOption, collection } = mosaic;
-      const mosaicLayer = map.layers.getLayerById(mapLayerId);
+      const mosaicLayer = map.layers.getLayerById(
+        mapLayerId
+      ) as atlas.layer.TileLayer;
       const isMosaicLayerValid = Boolean(query.searchId);
 
       // Check if the configuration valid to add a mosaic layer
@@ -44,7 +46,7 @@ const useMosaicLayer = (
 
         // Valid and already added to the map, just update the options
         if (mosaicLayer) {
-          (mosaicLayer as atlas.layer.TileLayer).setOptions(tileLayerOpts);
+          mosaicLayer.setOptions(tileLayerOpts);
         } else {
           // Valid but not yet added to the map, add it
           const layer = new atlas.layer.TileLayer(tileLayerOpts, mapLayerId);
@@ -54,7 +56,7 @@ const useMosaicLayer = (
         if (mosaicLayer) {
           // Remove visibility of the mosaic layer, rather than remove it from the map. As a result,
           // the opacity settings will be retained
-          (mosaicLayer as atlas.layer.TileLayer).setOptions({ visible: false });
+          mosaicLayer.setOptions({ visible: false });
         }
       }
     });

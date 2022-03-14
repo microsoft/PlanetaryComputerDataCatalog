@@ -106,11 +106,15 @@ const ExploreMap = () => {
   useMapControls(mapRef, mapReady);
   useUrlState();
 
-  const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
-  const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
+  const { zoomToLayer, showZoomMsg, nonVisibleLayers } = useMapZoomToLayer();
+  const zoomMsg = (
+    <ZoomMessage onClick={zoomToLayer} layerVisibility={nonVisibleLayers} />
+  );
 
   const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
-  const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
+  const extentMsg = (
+    <ExtentMessage onClick={zoomToExtent} layerVisibility={nonVisibleLayers} />
+  );
   const loadingIndicator = (
     <ProgressIndicator
       aria-label="Map tile loading indicator"
