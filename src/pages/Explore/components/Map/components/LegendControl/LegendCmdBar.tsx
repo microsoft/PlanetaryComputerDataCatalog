@@ -15,6 +15,7 @@ import {
 } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
 import { OpacityCmdButton } from "./LayerOptions";
+import LayerOverflowOptions from "./LayerOverflowOptions";
 
 interface LegendCmdBarProps {
   layer: ILayerState;
@@ -42,26 +43,42 @@ const LegendCmdBar = ({
   const expand = settings.expand[isExpanded ? "true" : "false"];
   const pin = settings.pin[layer.isPinned ? "true" : "false"];
   const view = settings.view[layer.layer.visible ? "true" : "false"];
-
   const handleExpand = () => onExpandedChange(!isExpanded);
 
+  const btnOpacity = <OpacityCmdButton layer={layer} />;
+  const btnVisible = (
+    <IconButton
+      role="menuitem"
+      aria-label={view.title}
+      title={view.title}
+      iconProps={{ iconName: view.icon }}
+      onClick={handleVisible}
+      styles={cmdButtonStyles}
+    />
+  );
+  const btnPin = (
+    <IconButton
+      role="menuitem"
+      aria-label={pin.title}
+      title={pin.title}
+      iconProps={{ iconName: pin.icon }}
+      onClick={handlePin}
+      styles={cmdButtonStyles}
+    />
+  );
+
   return (
-    <Stack horizontal horizontalAlign="center" tokens={stackTokens}>
-      <IconButton
-        aria-label={view.title}
-        title={view.title}
-        iconProps={{ iconName: view.icon }}
-        onClick={handleVisible}
-        styles={cmdButtonStyles}
-      />
-      <OpacityCmdButton layer={layer} />
-      <IconButton
-        aria-label={pin.title}
-        title={pin.title}
-        iconProps={{ iconName: pin.icon }}
-        onClick={handlePin}
-        styles={cmdButtonStyles}
-      />
+    <Stack
+      horizontal
+      horizontalAlign="center"
+      tokens={stackTokens}
+      role="menubar"
+      aria-orientation="horizontal"
+    >
+      {btnVisible}
+      {btnOpacity}
+      {btnPin}
+      <LayerOverflowOptions layer={layer} />
       <IconButton
         aria-label={expand.title}
         title={expand.title}
@@ -98,8 +115,19 @@ export const cmdButtonStyles: IButtonStyles = {
   root: {
     width: 18,
     height: 18,
+    padding: 2,
+  },
+  rootHasMenu: {
+    width: 18,
+    height: 18,
+    padding: 2,
   },
   icon: {
+    color: theme.palette.neutralSecondaryAlt,
+    fontSize: FontSizes.small,
+    width: 16,
+  },
+  menuIcon: {
     color: theme.palette.neutralSecondaryAlt,
     fontSize: FontSizes.small,
     width: 16,

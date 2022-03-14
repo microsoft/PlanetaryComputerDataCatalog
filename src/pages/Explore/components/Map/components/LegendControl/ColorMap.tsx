@@ -130,6 +130,7 @@ const scaleStyles: ITextStyles = {
 
 const imageStyles: Partial<IImageStyles> = {
   image: {
+    width: "100%",
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: theme.palette.neutralQuaternary,

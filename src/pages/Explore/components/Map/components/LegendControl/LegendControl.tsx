@@ -64,7 +64,7 @@ const panelStyles: IStackStyles = {
     bottom: 75,
     right: 10,
     boxShadow: "rgb(0 0 0 / 16%) 0 0 4px",
-    width: 350,
+    width: 370,
   },
 };
 
