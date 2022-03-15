@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FontSizes,
   FontWeights,
@@ -28,7 +28,7 @@ interface LegendProps {
 
 const Legend = ({ layer }: LegendProps) => {
   const { zoom } = useExploreSelector(s => s.map);
-  const [isExpanded, setIsExpanded] = React.useState(true);
+  const [isExpanded, setIsExpanded] = useState(true);
   const { renderOption, collection } = layer;
 
   if (!renderOption) return null;
@@ -41,9 +41,10 @@ const Legend = ({ layer }: LegendProps) => {
   const legend = getLegendType(renderConfig, legendConfig, collection);
 
   const layerSubtitle = layer.isCustomQuery ? "Custom" : layer.query.name;
+  const subtitle = `${layerSubtitle} | ${renderOption.name}`;
   const renderDesc = (
-    <Text block styles={styles.subHeader}>
-      {layerSubtitle} | {renderOption.name}
+    <Text block nowrap styles={styles.subHeader} title={subtitle}>
+      {subtitle}
     </Text>
   );
 
@@ -70,6 +71,7 @@ const Legend = ({ layer }: LegendProps) => {
               layer={layer}
               isExpanded={isExpanded}
               onExpandedChange={handleExpandChange}
+              isExpandDisabled={!legend}
             />
           </Stack>
           <div style={legendBodyStyles}>{renderDesc}</div>
@@ -109,7 +111,7 @@ const getLegendType = (
   if (hasClassmapValues(collection, params.assets)) {
     return <ClassMap params={params} collection={collection} />;
   }
-  return <Text variant="smallPlus">No legend for this render option.</Text>;
+  return null; //<Text variant="smallPlus">No legend for this render option.</Text>;
 };
 
 const theme = getTheme();
@@ -126,7 +128,7 @@ const legendHeaderStyles: IStackStyles = {
 
 const legendBodyStyles: React.CSSProperties = {
   paddingLeft: 21,
-  paddingRight: 6,
+  paddingRight: 25,
 };
 
 const headerStyles: ITextStyles = {

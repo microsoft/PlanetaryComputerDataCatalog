@@ -237,6 +237,24 @@ export const mosaicSlice = createSlice({
       }
     },
 
+    moveLayerUp: (state, action: PayloadAction<string>) => {
+      const layerId = action.payload;
+      const index = state.layerOrder.indexOf(layerId);
+      if (index > 0) {
+        state.layerOrder.splice(index, 1);
+        state.layerOrder.splice(index - 1, 0, layerId);
+      }
+    },
+
+    moveLayerDown: (state, action: PayloadAction<string>) => {
+      const layerId = action.payload;
+      const index = state.layerOrder.indexOf(layerId);
+      if (index < state.layerOrder.length - 1) {
+        state.layerOrder.splice(index, 1);
+        state.layerOrder.splice(index + 1, 0, layerId);
+      }
+    },
+
     resetMosaic: () => {
       return initialState;
     },
@@ -289,6 +307,8 @@ export const {
   setCustomQueryBody,
   addOrUpdateCustomCqlExpression,
   removeCustomCqlProperty,
+  moveLayerDown,
+  moveLayerUp,
 } = mosaicSlice.actions;
 
 // Custom selector to get the current mosaic CQL query

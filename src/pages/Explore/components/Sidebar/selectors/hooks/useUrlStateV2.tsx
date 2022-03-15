@@ -1,6 +1,6 @@
 import { isNumber } from "lodash-es";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import { CurrentLayers, ILayerState } from "pages/Explore/types";
+import { ILayerState } from "pages/Explore/types";
 import { updateQueryStringParam } from "pages/Explore/utils";
 import { useCallback, useEffect } from "react";
 
@@ -18,18 +18,19 @@ export const QS_V1_CUSTOM_KEY = "q";
  * sharing and recreating the app state
  */
 export const useUrlStateV2 = () => {
-  const layers = useExploreSelector(s => s.mosaic.layers);
+  const { layers, layerOrder } = useExploreSelector(s => s.mosaic);
+  const orderedLayers = layerOrder.map(id => layers[id]);
 
-  const setRenderQs = useCallback((layers: CurrentLayers) => {
-    const renders = Object.values(layers)
+  const setRenderQs = useCallback((ol: ILayerState[]) => {
+    const renders = ol
       .map(l => l.renderOption?.name)
       .filter(Boolean)
       .join(QS_SEPARATOR);
     updateQueryStringParam(QS_RENDER_KEY, renders);
   }, []);
 
-  const setMosiacQs = useCallback((layers: CurrentLayers) => {
-    const mosaics = Object.values(layers)
+  const setMosiacQs = useCallback((ol: ILayerState[]) => {
+    const mosaics = ol
       .map(l => {
         // If layer has a custom query, use the search key, otherwise use the named mosaic
         return l.isCustomQuery
@@ -41,8 +42,8 @@ export const useUrlStateV2 = () => {
     updateQueryStringParam(QS_MOSAIC_KEY, mosaics);
   }, []);
 
-  const setCollectionQs = useCallback((layers: CurrentLayers) => {
-    const collections = Object.values(layers)
+  const setCollectionQs = useCallback((ol: ILayerState[]) => {
+    const collections = ol
       .map(l => l.collection?.id)
       .filter(Boolean)
       .join(QS_SEPARATOR);
@@ -51,20 +52,25 @@ export const useUrlStateV2 = () => {
     updateQueryStringParam(QS_VERSION_KEY, "2");
   }, []);
 
-  const setLayerSettingsQs = useCallback((layers: CurrentLayers) => {
-    const settings = Object.values(layers)
-      .map(l => serializeSettings(l))
-      .join(QS_SEPARATOR);
+  const setLayerSettingsQs = useCallback((ol: ILayerState[]) => {
+    const settings = ol.map(l => serializeSettings(l)).join(QS_SEPARATOR);
 
     updateQueryStringParam(QS_SETTINGS_KEY, settings);
   }, []);
 
   useEffect(() => {
-    setCollectionQs(layers);
-    setMosiacQs(layers);
-    setRenderQs(layers);
-    setLayerSettingsQs(layers);
-  }, [layers, setCollectionQs, setLayerSettingsQs, setMosiacQs, setRenderQs]);
+    setCollectionQs(orderedLayers);
+    setMosiacQs(orderedLayers);
+    setRenderQs(orderedLayers);
+    setLayerSettingsQs(orderedLayers);
+  }, [
+    layers,
+    orderedLayers,
+    setCollectionQs,
+    setLayerSettingsQs,
+    setMosiacQs,
+    setRenderQs,
+  ]);
 };
 
 /**

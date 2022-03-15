@@ -21,12 +21,14 @@ interface LegendCmdBarProps {
   layer: ILayerState;
   isExpanded: boolean;
   onExpandedChange: (value: boolean) => void;
+  isExpandDisabled: boolean;
 }
 
 const LegendCmdBar = ({
   layer,
   isExpanded,
   onExpandedChange,
+  isExpandDisabled = false,
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
 
@@ -82,6 +84,7 @@ const LegendCmdBar = ({
       <IconButton
         aria-label={expand.title}
         title={expand.title}
+        disabled={isExpandDisabled}
         iconProps={{ iconName: expand.icon }}
         onClick={handleExpand}
         styles={cmdButtonStyles}

@@ -182,7 +182,7 @@ const loadMosaicStateV2 = async (
   });
 
   const layers = Object.fromEntries(layerEntries);
-  const layerOrder = Object.keys(layers).reverse();
+  const layerOrder = Object.keys(layers);
   const activeLayerId = layerEntries.find(([, layer]) => !layer.isPinned)?.[0];
   dispatch(setBulkLayers({ layers, layerOrder }));
 
