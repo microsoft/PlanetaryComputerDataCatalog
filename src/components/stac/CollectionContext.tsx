@@ -1,14 +1,22 @@
 import * as React from "react";
+import { IStacCollection } from "types/stac";
 
-const CollectionContext = React.createContext();
+const CollectionContext = React.createContext<IStacCollection | null>(null);
 
-function CollectionProvider({ collection, children }) {
+interface CollectionProviderProps {
+  collection: IStacCollection;
+}
+
+const CollectionProvider: React.FC<CollectionProviderProps> = ({
+  collection,
+  children,
+}) => {
   return (
     <CollectionContext.Provider value={collection}>
       {children}
     </CollectionContext.Provider>
   );
-}
+};
 
 function useStac() {
   const context = React.useContext(CollectionContext);

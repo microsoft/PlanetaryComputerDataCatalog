@@ -5,6 +5,7 @@ export interface IStacCollection {
   id: string;
   title: string;
   description: string;
+  summaries?: Record<string, []>;
   license: string;
   assets: Record<string, IStacAsset>;
   item_assets: Record<string, IStacAsset>;

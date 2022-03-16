@@ -11,7 +11,7 @@ const LabeledValue: React.FC<LabeledValueProps> = ({ label, children = null }) =
       <Text block as="h3" styles={{ root: { fontWeight: 600, margin: "0 0 4px" } }}>
         {label}
       </Text>
-      <Text block style={{ maxHeight: 150, overflowY: "auto" }} tabIndex={0}>
+      <Text style={{ maxHeight: 150, overflowY: "auto" }} tabIndex={0}>
         {children}
       </Text>
     </div>
