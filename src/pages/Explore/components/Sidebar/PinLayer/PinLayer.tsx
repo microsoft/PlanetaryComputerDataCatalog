@@ -1,4 +1,4 @@
-import { IconButton } from "@fluentui/react";
+import { IButtonStyles, IconButton } from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
   pinCurrentMosaic,
@@ -23,6 +23,14 @@ export const PinLayer = () => {
       aria-label={title}
       iconProps={{ iconName: isPinned ? "PencilReply" : "Pinned" }}
       onClick={handleClick}
+      styles={searchHeaderButtonStyle}
+      data-cy="pin-layer-header-button"
     />
   );
+};
+
+export const searchHeaderButtonStyle: IButtonStyles = {
+  root: {
+    height: 18,
+  },
 };
