@@ -334,7 +334,10 @@ export const cubeColumOrders = [
   "dimensions",
   "shape",
   "chunks",
-  "attrs",
+  "cell_methods",
+  "cell_measures",
+  "comments",
+  "long_name",
 ];
 
 export const tableColumnOrders = ["name", "description", "type"];
@@ -410,9 +413,6 @@ export const renderItemColumn = (item, _, column) => {
           })}
         </Stack>
       );
-    // case "raster:bands":
-    //   // return stacFormatter.format(fieldContent, column.fieldName);
-    //   return <RasterBands bandValues={fieldContent} asset={item} />;
     case "asset_details":
       return <AssetDetails asset={item} />;
 

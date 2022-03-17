@@ -1,4 +1,3 @@
-import React from "react";
 import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 import { useStac } from "./CollectionContext";
@@ -8,9 +7,9 @@ import { sortByPosition } from "../../utils";
 const defaultWidth = 95;
 const columnWidths = {
   title: 150,
-  description: 200,
+  // description: 200,
+  comments: 200,
   type: 55,
-  attrs: 200,
 };
 
 const CubeTable = ({ stacKey, title, description }) => {
@@ -19,13 +18,13 @@ const CubeTable = ({ stacKey, title, description }) => {
 
   // Get a set of unique attributes for each dimension, these will be columns.
   // The list is modified to include/remove keys in the table
-  const removeList = ["reference_system"];
+  const removeList = ["reference_system", "attrs"];
   const addList = ["name"];
   const columnKeys = addList.concat(
     Array.from(
       new Set(
         Object.values(dims)
-          .map(Object.keys)
+          .map(getDimensionKeys)
           .flat()
           .filter(k => !removeList.includes(k))
       )
@@ -41,12 +40,13 @@ const CubeTable = ({ stacKey, title, description }) => {
       fieldName: key,
       isResizable: true,
       isPadded: true,
-      isMultiline: ["name", "description", "attrs"].includes(key),
+      isMultiline: true,
     };
   });
 
-  const items = Object.entries(dims).map(([key, values]) => {
-    return { name: key, ...values };
+  const items = Object.entries(dims).map(([key, dim]) => {
+    const expanded = dim.attrs || {};
+    return { name: key, ...dim, ...expanded };
   });
 
   const details = (
@@ -71,11 +71,28 @@ const CubeTable = ({ stacKey, title, description }) => {
 };
 
 export const CubeDimensions = () => {
-  return <CubeTable stacKey="cube:dimensions" title="Dimensions" description="The dataset includes the following dimensions for coordinate labels."/>;
+  return (
+    <CubeTable
+      stacKey="cube:dimensions"
+      title="Dimensions"
+      description="The dataset includes the following dimensions for coordinate labels."
+    />
+  );
 };
 
 export const CubeVariables = () => {
-  return <CubeTable stacKey="cube:variables" title="Variables" description="The dataset includes the following data variables."/>;
+  return (
+    <CubeTable
+      stacKey="cube:variables"
+      title="Variables"
+      description="The dataset includes the following data variables."
+    />
+  );
 };
 
 export default CubeTable;
+
+const getDimensionKeys = dim => {
+  const attrKeys = dim.attrs ? Object.keys(dim.attrs) : [];
+  return attrKeys.concat(Object.keys(dim));
+};
