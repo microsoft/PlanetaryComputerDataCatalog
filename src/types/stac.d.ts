@@ -75,3 +75,9 @@ export interface IStacSearchResult extends FeatureCollection {
     returned: number;
   };
 }
+
+export interface IStacExtension {
+  label: string;
+  extension: string;
+  properties: Record<string, any>;
+}
