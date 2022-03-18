@@ -1,9 +1,22 @@
-import { Link, Stack, Text, useTheme } from "@fluentui/react";
+import {
+  FontSizes,
+  getTheme,
+  Icon,
+  IIconStyles,
+  ITextStyles,
+  Link,
+  Stack,
+  Text,
+  useTheme,
+} from "@fluentui/react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import { ILayerZoomVisibility } from "pages/Explore/types";
+import { useState } from "react";
 
 interface MessageProps {
   onClick: () => void;
+  layerVisibility: ILayerZoomVisibility;
 }
 
 const MapMessage: React.FC = ({ children }) => {
@@ -30,10 +43,46 @@ const MapMessage: React.FC = ({ children }) => {
   );
 };
 
-export const ZoomMessage = ({ onClick }: MessageProps) => {
+export const ZoomMessage: React.FC<MessageProps> = ({
+  onClick,
+  layerVisibility,
+}) => {
+  const [showDetails, setShowDetails] = useState(false);
+  const isCurrentLayerInvisible = Boolean(layerVisibility.current);
+  const hasOtherNonVisibleLayers = layerVisibility.others.length > 0;
+  const hasBoth = hasOtherNonVisibleLayers && isCurrentLayerInvisible;
+
+  const pinnedLayerMsg = "Some pinned layers not visible at this zoom level";
   return (
     <MapMessage>
-      <Link onClick={onClick}>Zoom in</Link> to see layer
+      {isCurrentLayerInvisible && (
+        <Text block style={{ textAlign: "center" }}>
+          <Link onClick={onClick}>Zoom in</Link> to see search results
+        </Text>
+      )}
+
+      {hasOtherNonVisibleLayers && (
+        <Stack
+          horizontal
+          tokens={{ childrenGap: 4 }}
+          onMouseLeave={() => {
+            setShowDetails(false);
+          }}
+          verticalAlign="center"
+        >
+          <Icon
+            iconName="Info"
+            aria-label={pinnedLayerMsg}
+            styles={warningIconStyles}
+            onMouseEnter={() => {
+              setShowDetails(true);
+            }}
+          />
+          {(showDetails || hasBoth) && (
+            <Text styles={warningTextStyles}>{pinnedLayerMsg}</Text>
+          )}
+        </Stack>
+      )}
     </MapMessage>
   );
 };
@@ -54,4 +103,19 @@ export const ExtentMessage = ({ onClick }: MessageProps) => {
       </Stack>
     </MapMessage>
   );
+};
+
+const theme = getTheme();
+const warningIconStyles: IIconStyles = {
+  root: {
+    fontSize: FontSizes.small,
+    color: theme.palette.neutralSecondary,
+  },
+};
+
+const warningTextStyles: ITextStyles = {
+  root: {
+    fontSize: FontSizes.small,
+    fontStyle: "italic",
+  },
 };

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FontSizes,
   FontWeights,
+  getTheme,
   Icon,
   IStackStyles,
   IStackTokens,
@@ -20,36 +21,35 @@ import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 
 import LegendCmdBar from "./LegendCmdBar";
-import LayerOptions from "./LayerOptions";
+import { useExploreSelector } from "pages/Explore/state/hooks";
 interface LegendProps {
   layer: ILayerState;
 }
 
 const Legend = ({ layer }: LegendProps) => {
-  const [isExpanded, setIsExpanded] = React.useState(true);
-  const [showOptions, setShowOptions] = React.useState(false);
+  const { zoom } = useExploreSelector(s => s.map);
+  const [isExpanded, setIsExpanded] = useState(true);
   const { renderOption, collection } = layer;
 
   if (!renderOption) return null;
 
   const renderConfig = qs.parse(renderOption.options || "");
   const legendConfig = renderOption.legend;
+  const styles =
+    zoom + 0.5 >= layer.layer.minZoom ? visibleStyles : nonVisibleStyles;
 
   const legend = getLegendType(renderConfig, legendConfig, collection);
-  const layerOptions = <LayerOptions layer={layer} />;
 
   const layerSubtitle = layer.isCustomQuery ? "Custom" : layer.query.name;
+  const subtitle = `${layerSubtitle} | ${renderOption.name}`;
   const renderDesc = (
-    <Text block styles={subHeaderStyles}>
-      {layerSubtitle} | {renderOption.name}
+    <Text block nowrap styles={styles.subHeader} title={subtitle}>
+      {subtitle}
     </Text>
   );
 
   const handleExpandChange = (value: boolean) => {
     setIsExpanded(value);
-  };
-  const handleOptionsChange = (value: boolean) => {
-    setShowOptions(value);
   };
 
   return (
@@ -63,7 +63,7 @@ const Legend = ({ layer }: LegendProps) => {
           >
             <Stack horizontal horizontalAlign="start" verticalAlign="start">
               <Icon iconName="GripperDotsVertical" styles={gripperStyles} />
-              <Text block nowrap styles={headerStyles} title={collection?.title}>
+              <Text block nowrap styles={styles.header} title={collection?.title}>
                 {collection?.title}
               </Text>
             </Stack>
@@ -71,13 +71,11 @@ const Legend = ({ layer }: LegendProps) => {
               layer={layer}
               isExpanded={isExpanded}
               onExpandedChange={handleExpandChange}
-              showOptions={showOptions}
-              onShowOptionsChange={handleOptionsChange}
+              isExpandDisabled={!legend}
             />
           </Stack>
           <div style={legendBodyStyles}>{renderDesc}</div>
         </Stack>
-        {showOptions && <div style={legendBodyStyles}>{layerOptions}</div>}
         {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
       </Stack>
       <Separator className="legend-item-separator" styles={legendSeparatorStyles} />
@@ -113,9 +111,10 @@ const getLegendType = (
   if (hasClassmapValues(collection, params.assets)) {
     return <ClassMap params={params} collection={collection} />;
   }
-  return <Text variant="smallPlus">No legend for this render option.</Text>;
+  return null; //<Text variant="smallPlus">No legend for this render option.</Text>;
 };
 
+const theme = getTheme();
 const tokens: IStackTokens = {
   childrenGap: 6,
 };
@@ -129,7 +128,7 @@ const legendHeaderStyles: IStackStyles = {
 
 const legendBodyStyles: React.CSSProperties = {
   paddingLeft: 21,
-  paddingRight: 6,
+  paddingRight: 25,
 };
 
 const headerStyles: ITextStyles = {
@@ -139,10 +138,37 @@ const headerStyles: ITextStyles = {
   },
 };
 
+const nonVisibleHeaderStyles: ITextStyles = {
+  root: {
+    color: theme.semanticColors.disabledBodyText,
+    fontStyle: "italic",
+    fontWeight: FontWeights.semibold,
+    maxWidth: 240,
+  },
+};
+
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
   },
+};
+
+const nonVisibleSubHeaderStyles: ITextStyles = {
+  root: {
+    fontSize: FontSizes.smallPlus,
+    color: theme.semanticColors.disabledBodyText,
+    fontStyle: "italic",
+  },
+};
+
+const visibleStyles = {
+  header: headerStyles,
+  subHeader: subHeaderStyles,
+};
+
+const nonVisibleStyles = {
+  header: nonVisibleHeaderStyles,
+  subHeader: nonVisibleSubHeaderStyles,
 };
 
 const gripperStyles = {

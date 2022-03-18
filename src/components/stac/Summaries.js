@@ -3,8 +3,9 @@ import StacFields from "@radiantearth/stac-fields";
 import LabeledValue from "../controls/LabeledValue";
 
 const CollectionSummary = ({ collection }) => {
+  const skipSummaries = ["sci:doi", "eo:bands"];
   const summaries = collection
-    ? StacFields.formatSummaries(collection, key => key !== "eo:bands")
+    ? StacFields.formatSummaries(collection, key => !skipSummaries.includes(key))
     : null;
   const skipLabel = ["raster:bands"];
 

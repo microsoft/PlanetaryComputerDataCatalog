@@ -5,6 +5,7 @@ export interface IStacCollection {
   id: string;
   title: string;
   description: string;
+  summaries?: Record<string, []>;
   license: string;
   assets: Record<string, IStacAsset>;
   item_assets: Record<string, IStacAsset>;
@@ -73,4 +74,10 @@ export interface IStacSearchResult extends FeatureCollection {
     matched: number;
     returned: number;
   };
+}
+
+export interface IStacExtension {
+  label: string;
+  extension: string;
+  properties: Record<string, any>;
 }
