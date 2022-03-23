@@ -119,7 +119,7 @@ modis:
       href: https://via.placeholder.com/1200x800
     thumbnail:
       href: https://via.placeholder.com/500x300?text=MODIS TODO
-    keywords: ["MODIS", "TODO"]
+  keywords: ["MODIS", "TODO"]
 
 landsat:
   title: Landsat Collection
@@ -149,4 +149,4 @@ landsat:
       href: ./images/landsat-hero.jpg
     thumbnail:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png"
-    keywords: ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"]
+  keywords: ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"]
