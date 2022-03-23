@@ -119,7 +119,7 @@ modis:
       href: https://via.placeholder.com/1200x800
     thumbnail:
       href: https://via.placeholder.com/500x300?text=MODIS TODO
-    keywords: ["MODIS", "TODO"]
+  keywords: ["MODIS", "TODO"]
 
 landsat:
   title: Landsat Collection
@@ -135,17 +135,18 @@ landsat:
     Landsat data from [Landsat Collection 2](https://www.usgs.gov/landsat-missions/landsat-collection-2).
 
 
-    Level-1 data is provided for imagery acquired from the Multispectral Scanner
-    System (MSS) onboard Landsat 1 through Landsat 5 from July 1972 to January
-    2013. Level-2 data is provided for imagery acquired from the Thematic Mapper 
-    TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+)
-    onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal
-    Infrared Sensor (TIRS) onboard Landsat 8 and 9. The Level-2 data are
-    available from August 1982 to present. All images are stored in
-    [cloud-optimized GeoTiff](https://www.cogeo.org/) format.
+    Collection 2 Level-1 data is provided for imagery acquired by the
+    Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5 from
+    July 1972 to January 2013. Collection 2 Level-2 data is provided for imagery
+    acquired by the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced
+    Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land
+    Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.
+    Collection 2 Level-2 data is available from August 1982 to present. All
+    images are stored in [cloud-optimized GeoTiff](https://www.cogeo.org/)
+    format.
   assets:
     headerImg:
-      href: https://via.placeholder.com/1200x800
+      href: ./images/landsat-hero.jpg
     thumbnail:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png"
-    keywords: ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"]
+  keywords: ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"]
