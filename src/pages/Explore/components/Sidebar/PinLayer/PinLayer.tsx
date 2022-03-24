@@ -21,7 +21,7 @@ export const PinLayer = () => {
     <IconButton
       title={title}
       aria-label={title}
-      iconProps={{ iconName: isPinned ? "PencilReply" : "Pinned" }}
+      iconProps={{ iconName: isPinned ? "PencilReply" : "FluentPinOutline" }}
       onClick={handleClick}
       styles={searchHeaderButtonStyle}
       data-cy="pin-layer-header-button"
@@ -31,6 +31,6 @@ export const PinLayer = () => {
 
 export const searchHeaderButtonStyle: IButtonStyles = {
   root: {
-    height: 18,
+    height: 16,
   },
 };

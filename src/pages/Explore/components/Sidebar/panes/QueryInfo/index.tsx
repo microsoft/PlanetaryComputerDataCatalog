@@ -4,7 +4,6 @@ import {
   Text,
   mergeStyleSets,
   Separator,
-  StackItem,
   DirectionalHint,
   Icon,
 } from "@fluentui/react";
@@ -52,16 +51,12 @@ const QueryInfo = () => {
   );
 
   const title = "Current filter details";
-  const size = 24;
 
   return (
-    <StackItem style={{ marginTop: -8, marginBottom: -8 }}>
+    <>
       <IconButton
         id={buttonId}
         iconProps={{ iconName: "Info" }}
-        height={size}
-        width={size}
-        title={title}
         ariaLabel={title}
         onClick={toggle}
         data-cy="query-detail-button"
@@ -87,7 +82,7 @@ const QueryInfo = () => {
           </ErrorBoundary>
         </Callout>
       )}
-    </StackItem>
+    </>
   );
 };
 export default QueryInfo;
