@@ -29,11 +29,11 @@ export const LegendControl = () => {
     </Stack>
   );
 
+  const legendTitle = isOpen ? "Hide Legend" : "Open Legend";
   const legendButton = (
-    <div style={buttonStyle}>
+    <div style={buttonStyle} title={legendTitle}>
       <IconButton
         ariaLabel="Open legend"
-        title={"Open legend"}
         className="azure-maps-control-button"
         styles={legendButtonStyles}
         iconProps={{ iconName: "MapLegend" }}
@@ -42,12 +42,13 @@ export const LegendControl = () => {
     </div>
   );
 
-  return (
+  const hasLegends = legends.length > 0;
+  return hasLegends ? (
     <>
-      {legends.length > 0 && legendPanel}
+      {legendPanel}
       {legendButton}
     </>
-  );
+  ) : null;
 };
 
 const theme = getTheme();

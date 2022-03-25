@@ -29,7 +29,7 @@ const Assets = () => {
     };
   });
 
-  const items = Object.keys(assets)
+  const items = Object.keys(assets || {})
     .map(key => {
       const asset = assets[key];
       return {

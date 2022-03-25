@@ -7,6 +7,7 @@ import {
   Icon,
   IContextualMenuItem,
   IContextualMenuProps,
+  IContextualMenuStyles,
   IIconStyles,
 } from "@fluentui/react";
 import { sortBy } from "lodash-es";
@@ -64,15 +65,7 @@ const CollectionSelectorV2 = () => {
       onMenuDismissed: handleFilterAbort,
       directionalHint: DirectionalHint.topAutoEdge,
       useTargetWidth: true,
-      styles: {
-        header: { fontSize: 14 },
-        title: {
-          fontSize: 14,
-          background: theme.palette.neutralLighter,
-          fontWeight: 500,
-          color: theme.palette.themePrimary,
-        },
-      },
+      styles: contextMenuStyles,
     }),
     [collectionOptions, handleFilterAbort, handleItemClick, renderMenuList]
   );
@@ -115,7 +108,7 @@ const getSelectorItems = (
   const renderable =
     collections.filter(isValidExplorer).map(c => ({
       key: c.id,
-      text: c.title,
+      text: c.title || c.id,
       title: c["msft:short_description"],
       category: collectionConfig[c.id]?.category || "Other",
       groupId: c["msft:group_id"],
@@ -148,7 +141,7 @@ const getSelectorItems = (
         subMenus[catKey] = [];
         menuItems.push({
           key: catKey,
-          text: groups[groupId]?.title || "[Group Missing]",
+          text: groups[groupId]?.title || groupId,
           subMenuProps: { items: subMenus[catKey] },
         });
       }
@@ -171,6 +164,16 @@ const getSelectorItems = (
 };
 
 const theme = getTheme();
+const contextMenuStyles: Partial<IContextualMenuStyles> = {
+  header: { fontSize: 14 },
+  title: {
+    fontSize: 14,
+    background: theme.palette.neutralLighter,
+    fontWeight: 500,
+    color: theme.palette.themePrimary,
+  },
+};
+
 const chevronStyle: IIconStyles = {
   root: {
     position: "absolute",
