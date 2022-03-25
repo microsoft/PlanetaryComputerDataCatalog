@@ -80,7 +80,6 @@ const LegendCmdBar = ({
       {btnVisible}
       {btnOpacity}
       {btnPin}
-      <LayerOverflowOptions layer={layer} />
       <IconButton
         aria-label={expand.title}
         title={expand.title}
@@ -89,6 +88,7 @@ const LegendCmdBar = ({
         onClick={handleExpand}
         styles={cmdButtonStyles}
       />
+      <LayerOverflowOptions layer={layer} />
     </Stack>
   );
 };
