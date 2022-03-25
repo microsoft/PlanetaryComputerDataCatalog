@@ -17,6 +17,7 @@ interface datasetEntry {
   category: string;
   headerImg: string;
   tabs: tabEntry[];
+  hideInExplorer?: boolean;
 }
 declare module "config/datasets.yml" {
   export const collections: Record<string, datasetEntry>;

@@ -11,6 +11,9 @@
 # `category` attribute determines which header the dataset is included under in the
 # Explorer collection selector
 
+# `hideInExplorer` attribute determines if the dataset is hidden in the Explorer, even
+# if would otherwise be available
+
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
 
@@ -442,6 +445,14 @@ collections:
       - title: Example Notebook
         src: nrcan-landcover-example.html
         launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
+
+  planet-nicfi-visual:
+    hideInExplorer: true
+    category: Imagery
+
+  planet-nicfi-analytic:
+    hideInExplorer: true
+    category: Imagery
 
   sentinel-2-l2a:
     category: Imagery
