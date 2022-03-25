@@ -6,9 +6,9 @@ import { renderItemColumn, stacFormatter } from "../../utils/stac";
 const columnWidths = {
   asset: 300,
   content_type: 75,
-  stac_key: 75,
+  stac_key: 150,
   roles: 75,
-  description: 200,
+  description: 300,
 };
 
 const Assets = () => {

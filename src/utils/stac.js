@@ -1,4 +1,10 @@
-import { Stack } from "@fluentui/react";
+import {
+  DetailsList,
+  DetailsListLayoutMode,
+  SelectionMode,
+  Stack,
+  Text,
+} from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
@@ -8,6 +14,7 @@ import { capitalize, toUtcDateWithTime } from ".";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
+import AssetDetails from "components/stac/AssetDetails";
 
 const stringList = value => {
   return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
@@ -41,6 +48,10 @@ StacFields.Registry.addMetadataField("gsd", {
   formatter: value => (value ? `${value} m` : "—"),
 });
 
+StacFields.Registry.addMetadataField("spatial_resolution", {
+  formatter: value => (value ? `${value} m` : "—"),
+});
+
 StacFields.Registry.addMetadataField("description", {
   label: "Description",
   formatter: value =>
@@ -62,8 +73,54 @@ StacFields.Registry.addMetadataField("raster:bands", {
   formatter: value => {
     const values = Array.isArray(value) ? value : [value];
     return values.map((band, idx) => (
-      <SimpleKeyValueList key={`rasterband-${idx}`} object={band} />
+      <Stack>
+        <Text
+          as="h4"
+          styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
+        >
+          Raster Band {idx + 1}
+        </Text>
+        <div style={{ paddingLeft: 4 }}>
+          <SimpleKeyValueList
+            key={`rasterband-${idx}`}
+            object={band}
+            indent={true}
+          />
+        </div>
+      </Stack>
     ));
+  },
+});
+
+StacFields.Registry.addMetadataField("file:values", {
+  label: "File Values",
+  formatter: fileValues => {
+    const items = fileValues.map(v => {
+      const code = v.values.join(",");
+      const desc = v.summary;
+      return { code, desc };
+    });
+    return (
+      <DetailsList
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        compact={true}
+        columns={[
+          {
+            key: "code",
+            name: "Code",
+            fieldName: "code",
+            isMultiline: false,
+            isPadded: false,
+            maxWidth: 35,
+            minWidth: 10,
+          },
+          { key: "desc", name: "Description", fieldName: "desc", isMultiline: true },
+        ]}
+        items={items}
+      />
+    );
   },
 });
 
@@ -285,6 +342,7 @@ export const columnOrders = {
   gsd: 30,
   "eo:bands": 40,
   description: 100,
+  asset_details: 1001,
 };
 
 export const cubeColumOrders = [
@@ -295,7 +353,10 @@ export const cubeColumOrders = [
   "dimensions",
   "shape",
   "chunks",
-  "attrs",
+  "cell_methods",
+  "cell_measures",
+  "comments",
+  "long_name",
 ];
 
 export const tableColumnOrders = ["name", "description", "type"];
@@ -307,7 +368,8 @@ export const getRelativeSelfPath = links => {
 };
 
 export const renderItemColumn = (item, _, column) => {
-  let fieldContent = item[column.fieldName];
+  let fieldContent =
+    column.fieldName === "asset_details" ? item : item[column.fieldName];
 
   if (isNil(fieldContent)) return "–";
   if (isObject(fieldContent) && isEmpty(fieldContent)) return "–";
@@ -370,8 +432,8 @@ export const renderItemColumn = (item, _, column) => {
           })}
         </Stack>
       );
-    case "raster:bands":
-      return stacFormatter.format(fieldContent, column.fieldName);
+    case "asset_details":
+      return <AssetDetails asset={item} />;
 
     default:
       if (Array.isArray(fieldContent)) {

@@ -20,6 +20,7 @@ import {
   selectCurrentCql,
   selectCurrentMosaic,
 } from "pages/Explore/state/mosaicSlice";
+import { searchHeaderButtonStyle } from "../../PinLayer/PinLayer";
 
 const QueryInfo = () => {
   const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
@@ -64,6 +65,7 @@ const QueryInfo = () => {
         ariaLabel={title}
         onClick={toggle}
         data-cy="query-detail-button"
+        styles={searchHeaderButtonStyle}
       />
       {isCalloutVisible && (
         <Callout

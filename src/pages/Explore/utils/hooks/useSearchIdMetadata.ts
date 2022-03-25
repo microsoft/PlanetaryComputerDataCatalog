@@ -21,7 +21,6 @@ const getSearchIdMetadata = async (
 export const fetchSearchIdMetadata = async (
   searchId: string | null
 ): Promise<ISearchIdMetadata> => {
-  console.log("fetchSearchIdMetadata", searchId);
   return await (
     await axios.get(`${DATA_URL}/mosaic/${searchId}/info`)
   ).data;

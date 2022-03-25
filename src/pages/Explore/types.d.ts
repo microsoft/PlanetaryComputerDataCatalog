@@ -79,3 +79,8 @@ export interface IOrderedLayers {
   layers: CurrentLayers;
   layerOrder: string[];
 }
+
+export interface ILayerZoomVisibility {
+  current: ILayerState | null;
+  others: ILayerState[];
+}

@@ -9,37 +9,54 @@ import {
 } from "../../utils/stac";
 import { sortByLookup } from "../../utils";
 import { useStac } from "./CollectionContext";
+import { IStacExtension } from "types/stac";
 
 // The list component does not size columns to fit content. We need to set min
 // and max widths in order to set an initial size. Based on a known set of
 // values, set the desired widths by key
 const defaultWidth = 100;
-const columnWidths = {
-  title: 200,
-  gsd: 30,
-  roles: 60,
-  description: 100,
-  "file:values": 250,
+const columnWidths: Record<string, { min?: number; max?: number }> = {
+  title: { min: 100, max: 300 },
+  gsd: { max: 30 },
+  roles: { max: 70 },
+  stac_key: { max: 150 },
+  type: { max: 100 },
+  "eo:bands": { max: 100 },
 };
 
+export const ASSET_DETAIL_KEYS = ["file:values", "raster:bands"];
+
 const ItemAssets = () => {
-  const { item_assets: itemAssets } = useStac();
+  const collection = useStac();
+  if (!collection) return null;
 
-  if (!itemAssets) return null;
+  const { item_assets: itemAssets } = collection;
 
-  const formatted = stacFormatter.formatAssets(itemAssets);
+  const formatted: Record<string, IStacExtension[]> =
+    stacFormatter.formatAssets(itemAssets);
 
   // Get a unique list of asset properties, which will become columns. Add a
   // special "key" column which will hold the asset key from the asset object.
-  const columnKeys = Array.from(
+  let columnKeys = Array.from(
     new Set(
       Object.values(formatted)
         .map(extensions => {
-          return extensions.map(({ properties }) => Object.keys(properties)).flat();
+          return extensions.map(getKeysFromExtension).flat();
         })
         .flat()
     )
   ).concat(["stac_key"]);
+
+  // Special keys which can be long or many-to-one with an asset get plucked out
+  // and ultimately rendered in a detail pane. Remove these keys, and if they existed
+  // replace them with a synthetic key "asset_details". This key is later used to render
+  // any possible "detail" keys removed here.
+  const hasDetails = ASSET_DETAIL_KEYS.some(key => columnKeys.includes(key));
+
+  if (hasDetails) {
+    columnKeys = columnKeys.filter(key => !ASSET_DETAIL_KEYS.includes(key));
+    columnKeys.push("asset_details");
+  }
 
   // Use specified, consistent ordering for columns
   columnKeys.sort(sortByLookup(columnOrders));
@@ -48,8 +65,8 @@ const ItemAssets = () => {
     return {
       key: key,
       name: stacFormatter.label(key),
-      minWidth: columnWidths[key] || defaultWidth,
-      maxWidth: columnWidths[key] || defaultWidth,
+      minWidth: columnWidths[key]?.min || defaultWidth,
+      maxWidth: columnWidths[key]?.max || undefined,
       fieldName: key,
       isResizable: true,
       isPadded: true,
@@ -105,3 +122,7 @@ const ItemAssets = () => {
 };
 
 export default ItemAssets;
+
+const getKeysFromExtension = ({ properties }: IStacExtension) => {
+  return Object.keys(properties);
+};

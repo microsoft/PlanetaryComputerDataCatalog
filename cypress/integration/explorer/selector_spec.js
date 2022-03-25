@@ -20,11 +20,7 @@ describe("Explorer selector tests", () => {
     cy.wait(["@getCollections"]);
     cy.getBySel("collection-selector").click();
 
-    cy.get(".ms-Callout")
-      .contains("Imagery")
-      .parent()
-      .parent()
-      .contains("Sentinel-2 Level-2A");
+    cy.get(".ms-Callout").contains("Sentinel-2 Level-2A");
   });
 
   it("loads mosaic spec for selected collection", () => {

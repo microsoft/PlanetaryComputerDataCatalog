@@ -43,7 +43,15 @@ export const getTileJson = async (
     [IMosaic, IMosaicRenderOption | null, IStacCollection | null, IStacItem | null]
   >
 ) => {
-  const [query, renderOption, collection, item] = queryParam.queryKey;
+  return fetchTileJson(...queryParam.queryKey);
+};
+
+export const fetchTileJson = async (
+  query: IMosaic,
+  renderOption: IMosaicRenderOption | null,
+  collection: IStacCollection | null,
+  item: IStacItem | null = null
+) => {
   const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
 
   const resp = await axios.get(tileJsonUrl);
@@ -73,7 +81,7 @@ export const registerStacFilter = async (
   return r.data.searchid;
 };
 
-const getCollections = async (queryParam: QueryFunctionContext<[string]>) => {
+const getCollections = async (): Promise<{ collections: IStacCollection[] }> => {
   const resp = await axios.get(`${STAC_URL}/collections`);
   return resp.data;
 };

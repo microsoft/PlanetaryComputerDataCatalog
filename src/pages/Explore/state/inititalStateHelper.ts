@@ -1,7 +1,7 @@
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { isEmpty, uniqueId } from "lodash-es";
 
-import { registerStacFilter } from "utils/requests";
+import { fetchTileJson, registerStacFilter } from "utils/requests";
 import {
   deserializeSettings,
   QS_COLLECTION_KEY,
@@ -15,7 +15,6 @@ import {
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
 import { ILayerState, IMosaic, IMosaicInfo } from "../types";
 import { updateQueryStringParam } from "../utils";
-import { DEFAULT_MIN_ZOOM } from "../utils/constants";
 import {
   fetchCollection,
   fetchCollectionMosaicInfo,
@@ -107,12 +106,12 @@ const loadMosaicStateV2 = async (
       return await fetchCollection(id);
     })
   );
+
   const mosaicInfos = await Promise.all(
     collectionIds.map(async id => {
       return await fetchCollectionMosaicInfo(id);
     })
   ).catch(reason => {
-    console.error(reason);
     throw new Error(reason);
   });
 
@@ -155,16 +154,21 @@ const loadMosaicStateV2 = async (
         ? (await fetchSearchIdMetadata(searchId)).search.filter.args
         : mosaic.cql;
 
+      const query = { ...mosaic, searchId, cql };
+
+      // Fetch the minzoom from the tilejson endpoint for this collection/renderOption
+      const minZoom = (await fetchTileJson(query, renderOption, collection)).minzoom;
+
       const layerId = uniqueId(collection.id);
       const layer: ILayerState = {
         layerId,
         collection,
-        query: { ...mosaic, searchId, cql },
+        query,
         renderOption,
         isCustomQuery: isCustomQuery,
         isPinned: config.isPinned,
         layer: {
-          minZoom: DEFAULT_MIN_ZOOM,
+          minZoom: minZoom,
           maxExtent: [],
           opacity: config.opacity,
           visible: config.visible,
@@ -178,7 +182,7 @@ const loadMosaicStateV2 = async (
   });
 
   const layers = Object.fromEntries(layerEntries);
-  const layerOrder = Object.keys(layers).reverse();
+  const layerOrder = Object.keys(layers);
   const activeLayerId = layerEntries.find(([, layer]) => !layer.isPinned)?.[0];
   dispatch(setBulkLayers({ layers, layerOrder }));
 

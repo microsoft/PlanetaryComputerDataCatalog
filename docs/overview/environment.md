@@ -58,6 +58,17 @@ Your software environment is determined by the environment you selected when sta
 
 The exact versions available can be viewed in the environment's `conda-linux-64.lock` file. For example, see the [Python](https://github.com/microsoft/planetary-computer-containers/blob/main/python/conda-linux-64.lock) or [R](https://github.com/microsoft/planetary-computer-containers/blob/main/r/conda-linux-64.lock) lock files. If you have a notebook server running, you can [open a new terminal](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html) and run `conda list`.
 
+## Accessing other processes and services
+
+Some processes might start HTTP servers on your JuptyerHub notebook server, which you'd like to securely access through JupyterHub. For example, [Shiny](https://shiny.rstudio.com/) dashboards or [tensorboard](https://www.tensorflow.org/tensorboard/).
+
+The page [accessing ports or hosts](https://jupyter-server-proxy.readthedocs.io/en/latest/arbitrary-ports-hosts.html) documents how to proxy these services using [Jupyter Server Proxy](https://jupyter-server-proxy.readthedocs.io/en/latest/). For example, we can proxy the Tensorboard UI by [opening a terminal](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html) on our notebook server and starting the tensorboard server.
+```
+$ tensorboard --logdir=mylogdir
+```
+
+Then we can access the Tensorboard UI at the URL ending with `/proxy/<port>/` (note that the trailing `/` is important). Tensorboard uses `6006` by default. So the full URL would be `https://pccompute.westeurope.cloudapp.azure.com/compute/user/<your-username>/proxy/6006/`.
+
 ### Installing additional packages at runtime
 
 You can install additional packages "at runtime", after starting your notebook server. We recommend using `conda` (specifically, the `mamba` solver) to install additional packages, which will ensure that your environment stays in a consistent state. Most of the packages already present come from the [conda-forge](https://conda-forge.org/) channel, so you should prefer it with `-c conda-forge`.
