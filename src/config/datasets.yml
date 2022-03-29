@@ -158,6 +158,13 @@ collections:
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
+  ecmwf-forecast:
+    headerImg: ./images/ecmwf-forecast-hero.png
+    tabs:
+      - title: Example Notebook
+        src: ecmwf-forecast.html
+        launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
+
   fia:
     headerImg: ./images/fia-hero.png
     tabs:
