@@ -7,6 +7,10 @@ import { DATA_URL } from "utils/constants";
 export const rootColormapUrl = `${DATA_URL}/legend/colormap`;
 export const rootClassmapUrl = `${DATA_URL}/legend/classmap`;
 
+// [[[min, max], [r,g,b,a]],...]
+export type IntervalMap = [[number, number], [number, number, number, number]][];
+export type ClassMap = Record<string, number[]>;
+
 export const hasClassmapValues = (
   collection: IStacCollection | null,
   assets: QsParamType
@@ -31,8 +35,8 @@ export const useClassmap = (classmapName: string | null) => {
 };
 
 const getClassmapByName = async (
-  queryParam: QueryFunctionContext<["classmap", string | null]>
-): Promise<Record<string, number[]>> => {
+  queryParam: QueryFunctionContext<["classmap" | "interval", string | null]>
+): Promise<ClassMap> => {
   const [, classmapName] = queryParam.queryKey;
 
   return await (
@@ -43,4 +47,22 @@ const getClassmapByName = async (
 export const getClassNameByValue = (value: string, fileValues: FileExtValues[]) => {
   const matchingValue = fileValues.find(fv => fv.values.includes(Number(value)));
   return matchingValue?.summary;
+};
+
+export const useInterval = (intervalName: string | null) => {
+  return useQuery(["interval", intervalName], getIntervalClassmapByName, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    enabled: Boolean(intervalName),
+  });
+};
+
+const getIntervalClassmapByName = async (
+  queryParam: QueryFunctionContext<["classmap" | "interval", string | null]>
+): Promise<IntervalMap> => {
+  const [, classmapName] = queryParam.queryKey;
+
+  return await (
+    await axios.get(`${rootClassmapUrl}/${classmapName}`)
+  ).data;
 };

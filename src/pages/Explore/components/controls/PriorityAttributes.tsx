@@ -13,7 +13,24 @@ interface PriorityAttributesProps {
 const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
   const theme = useTheme();
   const cloud = item.properties?.["eo:cloud_cover"];
-  const dt = item.properties?.datetime;
+
+  // Items typically have a datetime, if not, they'll have start_/end_datetime
+  const date = item.properties?.datetime;
+  const dateRange = [
+    item.properties?.start_datetime,
+    item.properties?.end_datetime,
+  ].filter(Boolean);
+  const hasRange = dateRange.length > 0;
+
+  const dtRangeTitle = hasRange && (
+    <span title="Acquired between">
+      {toUtcDateString(dateRange[0])} — {toUtcDateString(dateRange[1])}
+    </span>
+  );
+
+  const dtTitle = !hasRange && date && (
+    <span title="Acquisition date">{toUtcDateString(date)}</span>
+  );
 
   return (
     <Stack
@@ -26,7 +43,8 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
         },
       }}
     >
-      {dt && <span title="Acquisition date">{toUtcDateString(dt)}</span>}
+      {dtTitle}
+      {dtRangeTitle}
       <StackItem styles={{ root: { paddingRight: 8 } }}>
         {isNumber(cloud) && (
           <IconValue

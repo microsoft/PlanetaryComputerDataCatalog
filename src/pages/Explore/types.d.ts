@@ -35,6 +35,7 @@ export interface ILegendConfig {
   labels?: string[];
   trimStart?: number;
   trimEnd?: number;
+  scaleFactor?: number;
 }
 
 export interface IMapInfo {

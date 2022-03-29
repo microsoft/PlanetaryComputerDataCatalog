@@ -15,13 +15,14 @@ import * as qs from "query-string";
 
 import { ILayerState, ILegendConfig } from "pages/Explore/types";
 import { LegendTypes } from "pages/Explore/enums";
-import ColorMap from "./ColorMap";
-import ClassMap from "./ClassMap";
+import ColorMap from "./legendTypes/ColorMap";
+import ClassMap from "./legendTypes/ClassMap";
 import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 
 import LegendCmdBar from "./LegendCmdBar";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import Interval from "./legendTypes/Interval";
 interface LegendProps {
   layer: ILayerState;
 }
@@ -103,6 +104,8 @@ const getLegendType = (
         return <ClassMap params={params} collection={collection} />;
       case LegendTypes.continuous:
         return <ColorMap params={params} legendConfig={legendConfig} />;
+      case LegendTypes.interval:
+        return <Interval params={params} legendConfig={legendConfig} />;
       case LegendTypes.none:
         return null;
       default:
