@@ -109,17 +109,60 @@ gnatsgo:
   keywords: [Soils, SSURGO, USDA]
 
 modis:
-  title: MODIS Collection
+  title: MODIS Version 6.1 Products
   short_description: >
-    TODO
+    The MODIS instrument has a viewing swath width of 2,330 km and views the
+    entire surface of the Earth every one to two days. The many data products
+    derived from MODIS observations describe features of the land, oceans and
+    the atmosphere that can be used for studies of processes and trends on local
+    to global scales.
   description: >
-    TODO
+    The MODIS instrument is operating on both the
+    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/)
+    spacecraft.  It has a viewing swath width of 2,330 km and views the entire
+    surface of the Earth every one to two days.  Its detectors measure 36
+    spectral bands between 0.405 and 14.385 µm, and it acquires data at three
+    spatial resolutions -- 250m, 500m, and 1,000m.
+
+
+    MODIS Collection 6.1 (061) processing began in September 2017. A wide
+    variety of Level 2 or higher 6.1 products are available, spread across four
+    main categories:
+
+
+    - Atmosphere products
+
+
+    - Land products
+
+
+    - Cryosphere products
+
+
+    - Ocean products
+
+    Within each category, multiple products are available which vary in
+    information content (variables), spatial resolution, and/or temporal
+    resolution and aggregation. Each product type is contained in its own
+    collection in the Planetary Computer, and each collection's home page has
+    more information about its attributes and uses.
   assets:
     headerImg:
-      href: https://via.placeholder.com/1200x800
+      href: ./images/modis-11A1-hero.png
     thumbnail:
       href: https://via.placeholder.com/500x300?text=MODIS TODO
-  keywords: ["MODIS", "TODO"]
+  keywords:
+    [
+      MODIS,
+      NASA,
+      USGS,
+      Satellite,
+      Global,
+      Imagery,
+      Reflectance,
+      Temperature,
+      Land Cover,
+    ]
 
 landsat:
   title: Landsat Collection
@@ -149,4 +192,14 @@ landsat:
       href: ./images/landsat-hero.jpg
     thumbnail:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png"
-  keywords: ["Landsat", "USGS", "NASA", "Satellite", "Global", "Imagery", "Reflectance", "Temperature"]
+  keywords:
+    [
+      "Landsat",
+      "USGS",
+      "NASA",
+      "Satellite",
+      "Global",
+      "Imagery",
+      "Reflectance",
+      "Temperature",
+    ]
