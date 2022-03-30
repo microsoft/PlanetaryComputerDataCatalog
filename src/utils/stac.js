@@ -192,6 +192,37 @@ StacFields.Registry.addMetadataField("cmip6:scenario", {
   label: "CMIP6 scenario",
 });
 
+StacFields.Registry.addMetadataField("cmip6:Conventions", { label: "Convention version" });
+StacFields.Registry.addMetadataField("cmip6:activity_id", { label: "Activity  identifier(s) (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:creation_date", { label: "Date file was created" });
+StacFields.Registry.addMetadataField("cmip6:data_specs_version", { label: "Version identifier" });
+StacFields.Registry.addMetadataField("cmip6:experiment", { label: "Short experiment description" });
+StacFields.Registry.addMetadataField("cmip6:experiment_id", { label: "Root experiment identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:forcing_index", { label: "Index for variant of forcing" });
+StacFields.Registry.addMetadataField("cmip6:frequency", { label: "Sampling frequency" });
+StacFields.Registry.addMetadataField("cmip6:further_info_url", { label: "Location of documentation" });
+StacFields.Registry.addMetadataField("cmip6:grid", { label: "Grid" });
+StacFields.Registry.addMetadataField("cmip6:grid_label", { label: "Grid identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:initialization_index", { label: "Index for variant of initialization method" });
+StacFields.Registry.addMetadataField("cmip6:institution", { label: "Institution name" });
+StacFields.Registry.addMetadataField("cmip6:institution_id", { label: "Institution identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:license", { label: "License restrictions" });
+StacFields.Registry.addMetadataField("cmip6:mip_era", { label: "Activity's associated CMIP cycle (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:nominal_resolution", { label: "Approximate horizontal resolution" });
+StacFields.Registry.addMetadataField("cmip6:physics_index", { label: "Index for model physics variant" });
+StacFields.Registry.addMetadataField("cmip6:product", { label: "Product type (part of DRS) " });
+StacFields.Registry.addMetadataField("cmip6:realization_index", { label: "Realization number" });
+StacFields.Registry.addMetadataField("cmip6:realm", { label: "Realm(s) where variable is defined (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:source", { label: "Full model name / version" });
+StacFields.Registry.addMetadataField("cmip6:source_id", { label: "Model identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:source_type", { label: "Model configuration " });
+StacFields.Registry.addMetadataField("cmip6:sub_experiment", { label: "Description of sub-experiment " });
+StacFields.Registry.addMetadataField("cmip6:sub_experiment_id", { label: "Sub-experiment identifier (part of DRS 'member_id')" });
+StacFields.Registry.addMetadataField("cmip6:table_id", { label: "Table identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:tracking_id", { label: "Unique file identifier" });
+StacFields.Registry.addMetadataField("cmip6:variable_id", { label: "Variable identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:variant_label", { label: "'Variant' label (part of DRS 'member_id')" });
+
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
 });
