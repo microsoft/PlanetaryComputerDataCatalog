@@ -1,12 +1,15 @@
 import axios, { Canceler } from "axios";
+import { QueryFunctionContext, useQuery } from "react-query";
+
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
-import { QueryFunctionContext, useQuery } from "react-query";
 import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
+import { collections as datasetConfig } from "config/datasets.yml";
+
 // import { useSession } from "components/auth/hooks/SessionContext";
 
 // Query content can be prefetched if it's likely to be used
@@ -83,7 +86,16 @@ export const registerStacFilter = async (
 
 const getCollections = async (): Promise<{ collections: IStacCollection[] }> => {
   const resp = await axios.get(`${STAC_URL}/collections`);
-  return resp.data;
+
+  // Collections in the API can be configured to be hidden in all frontend contexts.
+  const hiddenCollections = Object.entries(datasetConfig)
+    .filter(([, config]) => config.isHidden)
+    .map(([id]) => id);
+  const filteredCollections = resp.data.collections.filter(
+    (c: IStacCollection) => !hiddenCollections.includes(c.id)
+  );
+
+  return { ...resp.data, collections: filteredCollections };
 };
 
 const getStaticMetadata = async (

@@ -3,5 +3,6 @@
 export enum LegendTypes {
   classmap = "classmap",
   continuous = "continuous",
+  interval = "interval",
   none = "none",
 }

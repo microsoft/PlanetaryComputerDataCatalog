@@ -1,7 +1,5 @@
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/aster.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/aster-storage.md
-https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/landsat-8.ipynb
-https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/landsat-8-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/naip.ipynb
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs/naip-storage.md
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/sentinel-2.ipynb
@@ -31,7 +29,6 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/storage-docs
 https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/alos-dem.ipynb
 
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
-https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
@@ -52,6 +49,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gap/gap-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/jrc-gsw/jrc-gsw-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/us-census/us-census-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/fia/fia-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gbif/gbif-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gridmet/gridmet-example.ipynb

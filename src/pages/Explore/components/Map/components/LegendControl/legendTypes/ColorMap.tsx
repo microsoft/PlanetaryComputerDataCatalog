@@ -14,7 +14,7 @@ import {
 } from "@fluentui/react";
 import * as qs from "query-string";
 
-import { rootColormapUrl } from "./helpers";
+import { rootColormapUrl } from "../helpers";
 import { ILegendConfig } from "pages/Explore/types";
 import { QsParamType } from "types";
 

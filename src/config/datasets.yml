@@ -11,6 +11,12 @@
 # `category` attribute determines which header the dataset is included under in the
 # Explorer collection selector
 
+# `isHidden` attribute determines if the dataset is hidden in any frontend component, including
+# the Explorer.
+
+# `hideInExplorer` attribute determines if the dataset is hidden in the Explorer, even
+# if would otherwise be available. It is still visible in the catalog.
+
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
 
@@ -155,6 +161,13 @@ collections:
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
+  ecmwf-forecast:
+    headerImg: ./images/ecmwf-forecast-hero.png
+    tabs:
+      - title: Example Notebook
+        src: ecmwf-forecast.html
+        launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
+
   fia:
     headerImg: ./images/fia-hero.png
     tabs:
@@ -285,92 +298,27 @@ collections:
     headerImg: ./images/landsat-c2-l2-hero.png
 
   landsat-8-c2-l2:
-    category: Imagery
-    headerImg: ./images/landsat-hero.jpg
-    tabs:
-      - title: Example Notebook
-        src: landsat-8-c2-l2-example.html
-        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
-      - title: Blob Storage Notebook
-        src: landsat-8.html
-      - title: Storage Documentation
-        src: landsat-8-storage.html
+    isHidden: true
 
-  modis-MOD14A1-061:
+  modis-14A1-061:
     category: Fire
     headerImg: ./images/modis-fire-hero.png
 
-  modis-MYD14A1-061:
+  modis-14A2-061:
     category: Fire
     headerImg: ./images/modis-fire-hero.png
 
-  modis-MYD14A2-061:
+  modis-64A1-061:
     category: Fire
     headerImg: ./images/modis-fire-hero.png
 
-  modis-MOD14A2-061:
-    category: Fire
-    headerImg: ./images/modis-fire-hero.png
-
-  modis-MCD64A1-061:
-    category: Fire
-    headerImg: ./images/modis-fire-hero.png
-
-  modis-MYD15A2H-061:
+  modis-15A2H-061:
     category: Biomass
     headerImg: ./images/modis-biomass-hero.png
 
-  modis-MOD15A2H-061:
+  modis-15A3H-061:
     category: Biomass
     headerImg: ./images/modis-biomass-hero.png
-
-  modis-MCD15A2H-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MCD15A3H-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MOD13Q1-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MYD13A1-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MYD13Q1-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MOD13A1-061:
-    category: Biomass
-    headerImg: ./images/modis-biomass-hero.png
-
-  modis-MOD11A2-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
-
-  modis-MYD11A2-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
-
-  modis-MOD21A2-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
-
-  modis-MYD11A1-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
-
-  modis-MYD21A2-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
-
-  modis-MOD11A1-061:
-    category: Weather/Climate
-    headerImg: ./images/modis-weather-hero.png
 
   mobi:
     category: Biodiversity
@@ -442,6 +390,14 @@ collections:
       - title: Example Notebook
         src: nrcan-landcover-example.html
         launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
+
+  planet-nicfi-visual:
+    hideInExplorer: true
+    category: Imagery
+
+  planet-nicfi-analytic:
+    hideInExplorer: true
+    category: Imagery
 
   sentinel-2-l2a:
     category: Imagery

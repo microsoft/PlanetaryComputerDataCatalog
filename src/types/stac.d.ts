@@ -21,6 +21,7 @@ export interface IStacCollection {
   links: IStacLink[];
   "msft:short_description": string;
   "msft:group_id"?: string;
+  summaries?: Record<string, string>;
 }
 
 export interface IStacLink {

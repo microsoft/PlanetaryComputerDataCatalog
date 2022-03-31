@@ -12,7 +12,7 @@ import {
 } from "@fluentui/react";
 import * as qs from "query-string";
 import { IStacCollection } from "types/stac";
-import { getClassNameByValue, useClassmap } from "./helpers";
+import { getClassNameByValue, useClassmap } from "../helpers";
 
 interface ClassMapProps {
   params: qs.ParsedQuery<string>;
@@ -54,12 +54,12 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
               key={elKey}
               horizontal
               verticalAlign="center"
-              tokens={itemStackTokens}
+              tokens={mappedItemStackTokens}
             >
               <StackItem shrink={0}>
                 <ColorSwatch color={color} />
               </StackItem>
-              <Text styles={itemTextStyles}>{label}</Text>
+              <Text styles={mappedItemTextStyles}>{label}</Text>
             </Stack>
           )
         );
@@ -67,15 +67,15 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
     : null;
 
   return (
-    <StackItem styles={legendStyles} className="custom-overflow">
+    <StackItem styles={mappedItemLegendStyles} className="custom-overflow">
       {loading}
-      <Stack tokens={legendStackTokens}>{legendItems}</Stack>
+      <Stack tokens={mappedItemLegendStackTokens}>{legendItems}</Stack>
     </StackItem>
   );
 };
 
 const theme = getTheme();
-const ColorSwatch = ({ color }: { color: number[] }) => {
+export const ColorSwatch = ({ color }: { color: number[] }) => {
   return (
     <div
       style={{
@@ -93,18 +93,21 @@ const ColorSwatch = ({ color }: { color: number[] }) => {
 
 export default ClassMap;
 
-const itemStackTokens: IStackTokens = {
+export const mappedItemStackTokens: IStackTokens = {
   childrenGap: 5,
 };
-const legendStackTokens: IStackTokens = {
-  childrenGap: 5,
+
+export const mappedItemLegendStackTokens: IStackTokens = {
+  childrenGap: 3,
 };
-const itemTextStyles: Partial<ITextStyles> = {
+
+export const mappedItemTextStyles: Partial<ITextStyles> = {
   root: {
     fontSize: FontSizes.smallPlus,
   },
 };
-const legendStyles: IStackItemStyles = {
+
+export const mappedItemLegendStyles: IStackItemStyles = {
   root: {
     maxHeight: 150,
     overflowY: "auto",
