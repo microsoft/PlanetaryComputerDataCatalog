@@ -21,9 +21,17 @@ type Summary = {
 };
 
 const CollectionSummary = ({ collection }: Props) => {
+  // Some summaries are taken care of by other sections and should be excluded
+  // in the side panel
+  const skipSummaries = ["eo:bands", "sci:doi"];
   const summaries = collection
-    ? stacFormatter.formatSummaries(collection, (key: string) => key !== "eo:bands")
+    ? stacFormatter.formatSummaries(
+        collection,
+        (key: string) => !skipSummaries.includes(key)
+      )
     : [];
+
+  // Some summaries produce extraneous labels, and can be ignored
   const skipLabel = ["raster:bands"];
 
   const sections = (summaries as Summary[]).map(summary => {
