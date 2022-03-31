@@ -1,4 +1,6 @@
 import React from "react";
+import DOMPurify from "dompurify";
+
 import { IStacCollection } from "types/stac";
 import { stacFormatter } from "utils/stac";
 import LabeledValue from "../controls/LabeledValue";
@@ -14,6 +16,7 @@ type Summary = {
     string,
     {
       formatted: any;
+      label: string | null;
       spec: { label: string };
       value: any;
     }
@@ -37,12 +40,13 @@ const CollectionSummary = ({ collection }: Props) => {
   const sections = (summaries as Summary[]).map(summary => {
     const sectionLabel = summary.label || "General";
     const items = Object.entries(summary.properties).map(([key, val]) => {
-      const label = skipLabel.includes(key) ? "" : val.spec.label;
+      const label = skipLabel.includes(key) ? "" : val.label || val.spec.label;
       let isHtml = typeof val.formatted === "string";
+      const isComponent = React.isValidElement(val.formatted?.[0]);
       let formatted = val.formatted;
 
       // Handle arrays directly, formatting each value, and joining to a string
-      if (Array.isArray(val.value)) {
+      if (!isComponent && Array.isArray(val.value)) {
         formatted = val.value
           .slice()
           .sort((a, b) => a - b)
@@ -56,7 +60,9 @@ const CollectionSummary = ({ collection }: Props) => {
       return (
         <LabeledValue key={key} label={label}>
           {isHtml ? (
-            <div dangerouslySetInnerHTML={{ __html: val.formatted }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(val.formatted) }}
+            />
           ) : (
             formatted
           )}
