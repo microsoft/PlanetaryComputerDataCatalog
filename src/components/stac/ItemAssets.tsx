@@ -24,7 +24,11 @@ const columnWidths: Record<string, { min?: number; max?: number }> = {
   "eo:bands": { max: 100 },
 };
 
-export const ASSET_DETAIL_KEYS = ["file:values", "raster:bands"];
+export const ASSET_DETAIL_KEYS = [
+  "file:values",
+  "raster:bands",
+  "classification:classes",
+];
 
 const ItemAssets = () => {
   const collection = useStac();

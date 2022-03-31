@@ -44,12 +44,19 @@ export interface IStacAsset {
   type?: string;
   roles?: string[];
   "file:values"?: FileExtValues[];
+  "classification:classes"?: ClassificationExtClasses[];
 }
 
 export interface FileExtValues {
   values: number[];
   summary: string;
 }
+
+export interface ClassificationExtClasses {
+  value: number;
+  description: string;
+}
+
 export interface IStacFilter {
   filter: { op: "and"; args: ICqlExpressionList };
   limit?: number;

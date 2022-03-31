@@ -12,7 +12,11 @@ import {
 } from "@fluentui/react";
 import * as qs from "query-string";
 import { IStacCollection } from "types/stac";
-import { getClassNameByValue, useClassmap } from "../helpers";
+import {
+  fileValuesToClassificationClasses,
+  getClassNameByValue,
+  useClassmap,
+} from "../helpers";
 
 interface ClassMapProps {
   params: qs.ParsedQuery<string>;
@@ -37,7 +41,10 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
   const asset = collection?.item_assets[assetName];
   if (!asset) return null;
 
-  const classValues = asset["file:values"];
+  const classValues =
+    asset["classification:classes"] ||
+    fileValuesToClassificationClasses(asset["file:values"]);
+
   if (!classValues) return null;
 
   const legendItems = classes
