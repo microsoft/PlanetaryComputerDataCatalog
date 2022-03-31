@@ -70,7 +70,7 @@ collections:
         src: aster-storage.html
 
   chloris-biomass:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/chloris-biomass-hero.jpg
     tabs:
       - title: Example Notebook
@@ -241,7 +241,7 @@ collections:
         launch: datasets/gridmet/gridmet-example.ipynb
 
   hgb:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/hgb-hero.png
     tabs:
       - title: Example Notebook
@@ -325,11 +325,11 @@ collections:
     headerImg: ./images/modis-11a2-hero.png
 
   modis-13A1-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-13a1-hero.png
 
   modis-13Q1-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-13q1-hero.png
 
   modis-14A1-061:
@@ -341,27 +341,27 @@ collections:
     headerImg: ./images/modis-14a2-hero.png
 
   modis-15A2H-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-15a2h-hero.png
 
   modis-15A3H-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-15a3h-hero.png
 
   modis-16A3GF-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-15a3gf-hero.png
 
   modis-17A2H-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-17a2h-hero.png
 
   modis-17A2HGF-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-17a2hgf-hero.png
 
   modis-17A3HGF-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-17a3hgf-hero.png
 
   modis-21A2-061:
@@ -369,7 +369,7 @@ collections:
     headerImg: ./images/modis-17a2-hero.png
 
   modis-43A4-061:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/modis-43a4-hero.png
 
   modis-64A1-061:
