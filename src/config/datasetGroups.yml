@@ -25,6 +25,20 @@ daymet:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg
   keywords: [Daymet, Weather, Climate, North America, Puerto Rico, Hawaii]
 
+cil-gdpcir:
+  title: CIL Global Downscaled Projections for Climate Impacts Research
+  short_description:
+    Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
+
+  description: >
+    Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
+  assets:
+    headerImg:
+      href: ./images/cil-gdpcir.png
+    thumbnail:
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gdpcir.png
+  keywords: [CMIP6, Climate Impact Lab, Rhodium Group, Precipitation, Temperature]
+
 copernicus-dem:
   title: Copernicus DEM Collection
   short_description:
