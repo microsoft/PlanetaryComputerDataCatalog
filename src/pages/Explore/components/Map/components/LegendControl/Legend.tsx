@@ -15,13 +15,14 @@ import * as qs from "query-string";
 
 import { ILayerState, ILegendConfig } from "pages/Explore/types";
 import { LegendTypes } from "pages/Explore/enums";
-import ColorMap from "./ColorMap";
-import ClassMap from "./ClassMap";
+import ColorMap from "./legendTypes/ColorMap";
+import ClassMap from "./legendTypes/ClassMap";
 import { hasClassmapValues } from "./helpers";
 import { IStacCollection } from "types/stac";
 
 import LegendCmdBar from "./LegendCmdBar";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import Interval from "./legendTypes/Interval";
 interface LegendProps {
   layer: ILayerState;
 }
@@ -35,15 +36,16 @@ const Legend = ({ layer }: LegendProps) => {
 
   const renderConfig = qs.parse(renderOption.options || "");
   const legendConfig = renderOption.legend;
-  const styles =
-    zoom + 0.5 >= layer.layer.minZoom ? visibleStyles : nonVisibleStyles;
+  const isZoomVisible = zoom + 0.5 >= layer.layer.minZoom;
+  const styles = isZoomVisible ? visibleStyles : nonVisibleStyles;
+  const zoomMsg = isZoomVisible ? "" : "Layer not visible at this zoom level. ";
 
   const legend = getLegendType(renderConfig, legendConfig, collection);
 
   const layerSubtitle = layer.isCustomQuery ? "Custom" : layer.query.name;
   const subtitle = `${layerSubtitle} | ${renderOption.name}`;
   const renderDesc = (
-    <Text block nowrap styles={styles.subHeader} title={subtitle}>
+    <Text block nowrap styles={styles.subHeader} title={zoomMsg || subtitle}>
       {subtitle}
     </Text>
   );
@@ -63,7 +65,12 @@ const Legend = ({ layer }: LegendProps) => {
           >
             <Stack horizontal horizontalAlign="start" verticalAlign="start">
               <Icon iconName="GripperDotsVertical" styles={gripperStyles} />
-              <Text block nowrap styles={styles.header} title={collection?.title}>
+              <Text
+                block
+                nowrap
+                styles={styles.header}
+                title={zoomMsg || collection?.title}
+              >
                 {collection?.title}
               </Text>
             </Stack>
@@ -97,6 +104,8 @@ const getLegendType = (
         return <ClassMap params={params} collection={collection} />;
       case LegendTypes.continuous:
         return <ColorMap params={params} legendConfig={legendConfig} />;
+      case LegendTypes.interval:
+        return <Interval params={params} legendConfig={legendConfig} />;
       case LegendTypes.none:
         return null;
       default:
@@ -171,16 +180,16 @@ const nonVisibleStyles = {
   subHeader: nonVisibleSubHeaderStyles,
 };
 
-const gripperStyles = {
-  root: {
-    fontSize: 18,
-    marginTop: 2,
-  },
-};
-
 const legendSeparatorStyles = {
   root: {
     margin: 0,
     padding: 0,
+  },
+};
+
+const gripperStyles = {
+  root: {
+    fontSize: 18,
+    marginTop: 2,
   },
 };

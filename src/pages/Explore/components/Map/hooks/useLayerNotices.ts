@@ -13,7 +13,7 @@ import { ILayerState, ILayerZoomVisibility } from "pages/Explore/types";
 /*
  *  Handle zoom toast for layers with min zoom level
  */
-const useZoomToLayer = () => {
+const useMapZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
     map: { zoom },
@@ -79,4 +79,4 @@ const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) =>
   return { showExtentMsg, zoomToExtent };
 };
 
-export { useZoomToLayer as useMapZoomToLayer, useMapZoomToExtent };
+export { useMapZoomToLayer, useMapZoomToExtent };
