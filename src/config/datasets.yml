@@ -295,7 +295,7 @@ collections:
 
   landsat-c2-l2:
     category: Imagery
-    headerImg: ./images/landsat-hero.png
+    headerImg: ./images/landsat-hero.jpg
 
   landsat-8-c2-l2:
     isHidden: true
