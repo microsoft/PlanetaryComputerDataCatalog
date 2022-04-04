@@ -1,6 +1,28 @@
 # Metadata for a "group" page, which consolidates related collections.
 # `description` property accepts markdown
 
+3dep-lidar:
+  title: USGS 3DEP Lidar Collection
+  short_description:
+    Elevation data as 3D point clouds and derived Cloud Optimized GeoTIFFs using data
+    from the USGS 3D Elevation Program.
+
+  description: >
+    To respond to growing needs for high-quality elevation data, the goal of 3DEP is to
+    complete acquisition of nationwide lidar (IfSAR in AK) to provide the first-ever
+    national baseline of consistent high-resolution topographic elevation data –
+    both bare earth and 3D point clouds.
+
+    This dataset provides the raw 3D point clouds in the
+    [Cloud Optimized Point Cloud](https://copc.io/) format, and various derived products
+    as [Cloud Optimized GeoTIFFs](https://www.cogeo.org/).
+  assets:
+    headerImg:
+      href: ./images/cop-dem-collection-hero.png
+    thumbnail:
+      href: https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/USGS_ID_green_0.png
+  keywords: [USGS, 3DEP, Elevation, Lidar, Point Cloud]
+
 daymet:
   title: Daymet Collection
   short_description:
