@@ -57,7 +57,15 @@ collections:
       - title: Storage Documentation
         src: alos-dem-storage.html
 
-  alos-palsar:
+  alos-fnf-mosaic:
+    category: Land use/Land cover
+    headerImg: ./images/alos-fnf-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
+  alos-palsar-mosaic:
     category: SAR
     headerImg: ./images/alos-palsar-hero.png
     tabs:
