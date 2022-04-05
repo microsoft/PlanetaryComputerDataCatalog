@@ -103,4 +103,4 @@ const useMosaicLayer = (
 
 export default useMosaicLayer;
 
-const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;
+export const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;

@@ -133,13 +133,13 @@ const legendHeaderStyles: IStackStyles = {
 };
 
 const legendBodyStyles: React.CSSProperties = {
-  paddingLeft: 2,
+  paddingLeft: 1,
 };
 
 const headerStyles: ITextStyles = {
   root: {
     fontWeight: FontWeights.semibold,
-    maxWidth: 240,
+    maxWidth: 250,
   },
 };
 
@@ -148,7 +148,7 @@ const nonVisibleHeaderStyles: ITextStyles = {
     color: theme.semanticColors.disabledBodyText,
     fontStyle: "italic",
     fontWeight: FontWeights.semibold,
-    maxWidth: 240,
+    maxWidth: 250,
   },
 };
 
