@@ -32,13 +32,15 @@ export const LegendControl = () => {
   const legendTitle = isOpen ? "Hide Legend" : "Open Legend";
   const legendButton = (
     <div style={buttonStyle} title={legendTitle}>
-      <IconButton
-        ariaLabel="Open legend"
-        className="azure-maps-control-button"
-        styles={legendButtonStyles}
-        iconProps={{ iconName: "MapLegend" }}
-        onClick={() => setIsOpen(!isOpen)}
-      />
+      <div>
+        <IconButton
+          ariaLabel="Open legend"
+          className="azure-maps-control-button"
+          styles={legendButtonStyles}
+          iconProps={{ iconName: "MapLegend" }}
+          onClick={() => setIsOpen(!isOpen)}
+        />
+      </div>
     </div>
   );
 

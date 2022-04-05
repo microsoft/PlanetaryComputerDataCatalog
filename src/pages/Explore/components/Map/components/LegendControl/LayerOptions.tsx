@@ -38,7 +38,7 @@ export const OpacityCmdButton: React.FC<LayerOptionsProps> = ({
         checked={showOpacity}
         title="Adjust layer opacity"
         aria-label={`Set ${layer.collection?.title} ${layer.renderOption?.name} opacity`}
-        iconProps={{ iconName: "FluentBrightness" }}
+        iconProps={{ iconName: "CircleHalfFull" }}
         styles={
           layer.layer.opacity === 100 ? cmdButtonStyles : activeCmdButtonStyles
         }
