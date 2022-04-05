@@ -57,6 +57,14 @@ collections:
       - title: Storage Documentation
         src: alos-dem-storage.html
 
+  alos-palsar:
+    category: SAR
+    headerImg: ./images/alos-palsar-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
   aster-l1t:
     category: Imagery
     headerImg: ./images/aster-hero.jpg
