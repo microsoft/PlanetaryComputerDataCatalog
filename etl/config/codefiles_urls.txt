@@ -55,6 +55,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gridmet/gridmet-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/alos-dem/alos-dem-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/alos-palsar/alos-palsar-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/copernicus-dem/copernicus-dem-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nrcan-landcover/nrcan-landcover-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/chloris-biomass/chloris-biomass-example.ipynb
