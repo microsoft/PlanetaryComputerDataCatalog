@@ -243,7 +243,6 @@ planet-nicfi:
     headerImg:
       href: ./images/planet-nicfi-visual-hero.png
     thumbnail:
-      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png"
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/nicfi_tropics_basemap_map_d1.jpg
   keywords:
     [
