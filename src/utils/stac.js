@@ -434,10 +434,14 @@ export const renderItemColumn = (item, _, column) => {
         </Revealer>
       );
     case "dimensions":
+      fieldContent = fieldContent.join(", ");
+      return <span>({fieldContent})</span>;
     case "shape":
     case "chunks":
       if (Array.isArray(fieldContent)) {
-        fieldContent = fieldContent.join(", ");
+        fieldContent = fieldContent.map(v => {
+          return (isNil(v) ? 'varies' : v);
+        }).join(", ");
       }
       return <span>({fieldContent})</span>;
     case "description":
