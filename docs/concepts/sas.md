@@ -56,11 +56,19 @@ Rate limiting and token expiry are dependent on two aspects of each requests:
   * Whether or not the request is originating from within the same data center as the Planetary Computer service (West Europe)
   * Whether or not a valid API subscription key has been supplied on the request
 
-These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most unthrottled access, we recommend utilizing a Planetary Computer subscription key and doing your work in the West Europe Azure region.
+These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most un-throttled access, we recommend utilizing a Planetary Computer subscription key and doing your work in the West Europe Azure region.
+
+Most datasets in the Planetary Computer are anonymously accessible: you don't need to supply a subscription key to get a SAS token for downloading the data.
+Some datasets do require a subscription key, and some datasets are only available to certain approved users even if a subscription key is provided. This will be noted in
+the dataset detail page in the [data catalog](https://planetarycomputer.microsoft.com/catalog).
 
 #### Supplying a subscription key
 
-You can supply you subscription key in an HTTP request in two ways:
+When your Planetary Computer [account request](http://planetarycomputer.microsoft.com/account/request) was approved, a pair of subscription keys were automatically generated
+for you. You can view your keys by singing in to the [developer portal](https://planetarycomputer.developer.azure-api.net/).
+
+You can supply your subscription key in an HTTP request in two ways:
+
   * Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
 
 ```bash
