@@ -433,7 +433,11 @@ export const renderItemColumn = (item, _, column) => {
     case "shape":
     case "chunks":
       if (Array.isArray(fieldContent)) {
-        fieldContent = fieldContent.join(", ");
+        let newContent = fieldContent.map(v => {
+          return (Number.isNaN ? 'varies' : v);
+        });
+
+        fieldContent = newContent.join(", ");
       }
       return <span>({fieldContent})</span>;
     case "description":
