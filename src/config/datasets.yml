@@ -466,10 +466,20 @@ collections:
   planet-nicfi-visual:
     hideInExplorer: true
     category: Imagery
+    headerImg: ./images/planet-nicfi-visual-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
   planet-nicfi-analytic:
     hideInExplorer: true
     category: Imagery
+    headerImg: ./images/planet-nicfi-analytic-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
   sentinel-2-l2a:
     category: Imagery
