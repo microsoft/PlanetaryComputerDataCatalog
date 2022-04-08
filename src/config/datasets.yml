@@ -183,7 +183,8 @@ collections:
       - title: Example Notebook
         src: ecmwf-forecast.html
         launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
-  era5:
+
+  era5-pds:
     category: Climate/Weather
     headerImg: ./images/era5-hero.png
     tabs:
