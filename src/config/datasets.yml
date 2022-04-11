@@ -93,6 +93,30 @@ collections:
         src: chloris-biomass-example.html
         launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
 
+  cil-gdpcir-cc0:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+
+  cil-gdpcir-cc-by:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+
+  cil-gdpcir-cc-by-sa:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+
   cop-dem-glo-30:
     category: DEMs
     headerImg: ./images/cop-dem-glo-30-hero.png
