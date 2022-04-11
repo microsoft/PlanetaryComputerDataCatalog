@@ -216,6 +216,10 @@ collections:
         src: era5-example.html
         launch: datasets/era5/era5-example.ipynb
 
+  esa-worldcover:
+    category: Land use/Land cover
+    headerImg: ./images/esa-worldcover-hero.png
+
   fia:
     headerImg: ./images/fia-hero.png
     tabs:
