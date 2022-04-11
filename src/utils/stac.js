@@ -124,6 +124,38 @@ StacFields.Registry.addMetadataField("file:values", {
   },
 });
 
+StacFields.Registry.addMetadataField("classification:classes", {
+  label: "Classification",
+  formatter: fileValues => {
+    const items = fileValues.map(v => {
+      const code = v.value;
+      const desc = v.description;
+      return { code, desc };
+    });
+    return (
+      <DetailsList
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        compact={true}
+        columns={[
+          {
+            key: "code",
+            name: "Code",
+            fieldName: "code",
+            isMultiline: false,
+            isPadded: false,
+            maxWidth: 35,
+            minWidth: 10,
+          },
+          { key: "desc", name: "Description", fieldName: "desc", isMultiline: true },
+        ]}
+        items={items}
+      />
+    );
+  },
+});
+
 StacFields.Registry.addMetadataField("label:classes", {
   label: "Classes",
   formatter: value => {
@@ -461,16 +493,6 @@ export const renderItemColumn = (item, _, column) => {
       );
     case "stac_key":
       return <code title={fieldContent}>{fieldContent}</code>;
-    case "file:values":
-      return (
-        <Stack>
-          {fieldContent.map(v => {
-            const values = v.values.join(",");
-            const desc = v.summary;
-            return <span key={`file-values-${values}`}>{`${values}: ${desc}`}</span>;
-          })}
-        </Stack>
-      );
     case "asset_details":
       return <AssetDetails asset={item} />;
 

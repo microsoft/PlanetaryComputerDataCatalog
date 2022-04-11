@@ -12,7 +12,11 @@ import {
 } from "@fluentui/react";
 import * as qs from "query-string";
 import { IStacCollection } from "types/stac";
-import { getClassNameByValue, useClassmap } from "../helpers";
+import {
+  fileValuesToClassificationClasses,
+  getClassNameByValue,
+  useClassmap,
+} from "../helpers";
 
 interface ClassMapProps {
   params: qs.ParsedQuery<string>;
@@ -25,6 +29,8 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
     : params.colormap_name;
 
   const { isLoading, data: classes } = useClassmap(classmapName);
+  const definition = classmapName ? classes : JSON.parse(params.colormap as string);
+
   const loading = isLoading && (
     <Shimmer
       shimmerElements={[{ type: ShimmerElementType.line, height: 20, width: 233 }]}
@@ -37,12 +43,15 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
   const asset = collection?.item_assets[assetName];
   if (!asset) return null;
 
-  const classValues = asset["file:values"];
+  const classValues =
+    asset["classification:classes"] ||
+    fileValuesToClassificationClasses(asset["file:values"]);
+
   if (!classValues) return null;
 
-  const legendItems = classes
-    ? Object.keys(classes).map(key => {
-        const color = classes[key];
+  const legendItems = definition
+    ? Object.keys(definition).map(key => {
+        const color = definition[key];
         const label = getClassNameByValue(key, classValues);
         const elKey = `legend-class-${key}`;
 

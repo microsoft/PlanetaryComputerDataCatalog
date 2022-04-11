@@ -16,6 +16,7 @@
     "@turf/boolean-intersects": "^6.5.0",
     "@turf/centroid": "^6.5.0",
     "@turf/union": "^6.5.0",
+    "@types/dompurify": "^2.3.3",
     "@types/geojson": "^7946.0.8",
     "@types/jest": "^27.4.1",
     "@types/lodash-es": "^4.17.6",

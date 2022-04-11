@@ -5,20 +5,25 @@ import CustomQueryBuilder from "../selectors/CustomQueryBuilder";
 import ErrorFallback from "components/ErrorFallback";
 import { MosaicPresetSelector, RenderOptionsSelector } from "../selectors";
 import CollectionSelector from "../selectors/CollectionSelector";
+import { useExploreSelector } from "pages/Explore/state/hooks";
 
 interface SelectorPaneProps {
   isCustomQuery: boolean;
 }
 
 const SelectorPane = ({ isCustomQuery }: SelectorPaneProps) => {
+  const { isLoadingInitialState } = useExploreSelector(state => state.mosaic);
+  const contents = !isLoadingInitialState && (
+    <>
+      <CollectionSelector />
+      {!isCustomQuery && <MosaicPresetSelector />}
+      {isCustomQuery && <CustomQueryBuilder />}
+      <RenderOptionsSelector />
+    </>
+  );
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Stack tokens={stackTokens}>
-        <CollectionSelector />
-        {!isCustomQuery && <MosaicPresetSelector />}
-        {isCustomQuery && <CustomQueryBuilder />}
-        <RenderOptionsSelector />
-      </Stack>
+      <Stack tokens={stackTokens}>{contents}</Stack>
     </ErrorBoundary>
   );
 };

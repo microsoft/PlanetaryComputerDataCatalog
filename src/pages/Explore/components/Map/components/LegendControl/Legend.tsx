@@ -155,6 +155,7 @@ const nonVisibleHeaderStyles: ITextStyles = {
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
+    maxWidth: 325,
   },
 };
 
@@ -163,6 +164,7 @@ const nonVisibleSubHeaderStyles: ITextStyles = {
     fontSize: FontSizes.smallPlus,
     color: theme.semanticColors.disabledBodyText,
     fontStyle: "italic",
+    maxWidth: 325,
   },
 };
 
