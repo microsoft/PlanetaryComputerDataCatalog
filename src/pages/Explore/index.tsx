@@ -12,7 +12,7 @@ import ExploreMap from "./components/Map";
 import Sidebar from "./components/Sidebar";
 import { useWindowSize } from "react-use";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "components/ErrorFallback";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 
 // TODO: track heights rather than hard code them
 const heights = {
@@ -43,7 +43,10 @@ const Explorer = () => {
             }}
             grow={1}
           >
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={handleErrorBoundaryError}
+            >
               <ExploreMap />
             </ErrorBoundary>
           </StackItem>

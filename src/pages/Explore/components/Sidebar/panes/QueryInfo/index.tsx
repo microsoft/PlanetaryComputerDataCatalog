@@ -14,7 +14,7 @@ import QuerySection from "./QuerySection";
 import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "components/ErrorFallback";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import {
   selectCurrentCql,
   selectCurrentMosaic,
@@ -73,7 +73,10 @@ const QueryInfo = () => {
           directionalHint={DirectionalHint.rightCenter}
           setInitialFocus
         >
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onError={handleErrorBoundaryError}
+          >
             {collectionSection}
             <Separator />
             {querySection}
