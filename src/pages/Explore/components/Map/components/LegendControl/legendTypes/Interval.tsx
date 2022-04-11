@@ -29,7 +29,9 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
 
   const { isLoading, data: intervals } = useInterval(classmapName);
 
-  const def = classmapName ? intervals : JSON.parse(params.colormap as string);
+  const definition = classmapName
+    ? intervals
+    : JSON.parse(params.colormap as string);
   const loading = isLoading && (
     <Shimmer
       shimmerElements={[{ type: ShimmerElementType.line, height: 20, width: 233 }]}
@@ -42,7 +44,7 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
     <StackItem styles={mappedItemLegendStyles} className="custom-overflow">
       {loading}
       <Stack tokens={mappedItemLegendStackTokens}>
-        {def && makeSwatches(def, labelScaleFactor)}
+        {definition && makeSwatches(definition, labelScaleFactor)}
       </Stack>
     </StackItem>
   );

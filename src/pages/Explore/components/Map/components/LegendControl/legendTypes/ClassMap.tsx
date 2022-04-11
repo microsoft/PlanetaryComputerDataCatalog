@@ -29,6 +29,8 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
     : params.colormap_name;
 
   const { isLoading, data: classes } = useClassmap(classmapName);
+  const definition = classmapName ? classes : JSON.parse(params.colormap as string);
+
   const loading = isLoading && (
     <Shimmer
       shimmerElements={[{ type: ShimmerElementType.line, height: 20, width: 233 }]}
@@ -47,9 +49,9 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
 
   if (!classValues) return null;
 
-  const legendItems = classes
-    ? Object.keys(classes).map(key => {
-        const color = classes[key];
+  const legendItems = definition
+    ? Object.keys(definition).map(key => {
+        const color = definition[key];
         const label = getClassNameByValue(key, classValues);
         const elKey = `legend-class-${key}`;
 
