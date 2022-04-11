@@ -31,7 +31,7 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
 
   const definition = classmapName
     ? intervals
-    : JSON.parse(params.colormap as string);
+    : params.colormap && JSON.parse(params.colormap as string);
   const loading = isLoading && (
     <Shimmer
       shimmerElements={[{ type: ShimmerElementType.line, height: 20, width: 233 }]}

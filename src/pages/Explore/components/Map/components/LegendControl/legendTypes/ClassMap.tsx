@@ -29,7 +29,9 @@ const ClassMap = ({ params, collection }: ClassMapProps) => {
     : params.colormap_name;
 
   const { isLoading, data: classes } = useClassmap(classmapName);
-  const definition = classmapName ? classes : JSON.parse(params.colormap as string);
+  const definition = classmapName
+    ? classes
+    : params.colormap && JSON.parse(params.colormap as string);
 
   const loading = isLoading && (
     <Shimmer

@@ -18,7 +18,10 @@ import { ai4e as datasetsConfig } from "config/datasets.yml";
 
 import "styles/catalog.css";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback, { CardErrorFallback } from "components/ErrorFallback";
+import ErrorFallback, {
+  CardErrorFallback,
+  handleErrorBoundaryError,
+} from "components/ErrorFallback";
 
 const computeTags = (collections, datasetsConfig) => {
   if (!collections) return null;
@@ -135,7 +138,10 @@ const Catalog = () => {
             .
           </p>
           <div className="layout-container">
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={handleErrorBoundaryError}
+            >
               {primaryDatasets}
             </ErrorBoundary>
           </div>
@@ -150,7 +156,10 @@ const Catalog = () => {
             Blob Storage, but are not yet available through our API.
           </p>
           <div className="layout-container">
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={handleErrorBoundaryError}
+            >
               {otherDatasets}
             </ErrorBoundary>
           </div>
