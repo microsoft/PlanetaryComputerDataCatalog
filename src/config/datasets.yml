@@ -57,6 +57,22 @@ collections:
       - title: Storage Documentation
         src: alos-dem-storage.html
 
+  alos-fnf-mosaic:
+    category: Land use/Land cover
+    headerImg: ./images/alos-fnf-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
+  alos-palsar-mosaic:
+    category: SAR
+    headerImg: ./images/alos-palsar-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
   aster-l1t:
     category: Imagery
     headerImg: ./images/aster-hero.jpg
@@ -76,6 +92,30 @@ collections:
       - title: Example Notebook
         src: chloris-biomass-example.html
         launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
+
+  cil-gdpcir-cc0:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+
+  cil-gdpcir-cc-by:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+
+  cil-gdpcir-cc-by-sa:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
 
   cop-dem-glo-30:
     category: DEMs
@@ -167,6 +207,14 @@ collections:
       - title: Example Notebook
         src: ecmwf-forecast.html
         launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
+
+  era5-pds:
+    category: Climate/Weather
+    headerImg: ./images/era5-hero.png
+    tabs:
+      - title: Example Notebook
+        src: era5-example.html
+        launch: datasets/era5/era5-example.ipynb
 
   fia:
     headerImg: ./images/fia-hero.png
@@ -450,10 +498,20 @@ collections:
   planet-nicfi-visual:
     hideInExplorer: true
     category: Imagery
+    headerImg: ./images/planet-nicfi-visual-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
   planet-nicfi-analytic:
     hideInExplorer: true
     category: Imagery
+    headerImg: ./images/planet-nicfi-analytic-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
   sentinel-2-l2a:
     category: Imagery
