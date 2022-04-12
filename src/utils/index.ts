@@ -73,10 +73,13 @@ export const isort = (a: string, b: string) =>
 
 const sortAlphaByKey = (key: string) => {
   return (a: any, b: any) => {
-    if (a[key] < b[key]) {
+    const al = a[key].toLowerCase();
+    const bl = b[key].toLowerCase();
+
+    if (al < bl) {
       return -1;
     }
-    if (a[key] > b[key]) {
+    if (al > bl) {
       return 1;
     }
     return 0;

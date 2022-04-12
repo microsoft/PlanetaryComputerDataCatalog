@@ -151,7 +151,7 @@ const loadMosaicStateV2 = async (
 
       // Get the named mosaic's cql, or fetch the cql for a custom query's searchId
       const cql = isCustomQuery
-        ? (await fetchSearchIdMetadata(searchId)).search.filter.args
+        ? (await fetchSearchIdMetadata(searchId)).search.search.filter.args
         : mosaic.cql;
 
       const query = { ...mosaic, searchId, cql };
