@@ -24,7 +24,12 @@ export const LegendControl = () => {
   // Keep the panel rendered even if it's closed to preserve the state of any command options
   const openStyle = { display: isOpen ? "block" : "none" };
   const legendPanel = (
-    <Stack styles={panelStyles} style={openStyle} tokens={stackTokens}>
+    <Stack
+      styles={panelStyles}
+      style={openStyle}
+      tokens={stackTokens}
+      data-cy={"explore-legend"}
+    >
       {legends}
     </Stack>
   );
