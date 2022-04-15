@@ -421,7 +421,7 @@ collections:
     headerImg: ./images/modis-17a2-hero.png
 
   modis-43A4-061:
-    category: Biomass/Vegetation
+    category: Imagery
     headerImg: ./images/modis-43a4-hero.png
 
   modis-64A1-061:
