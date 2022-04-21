@@ -4,7 +4,6 @@ import {
   Text,
   mergeStyleSets,
   Separator,
-  StackItem,
   DirectionalHint,
   Icon,
 } from "@fluentui/react";
@@ -15,7 +14,7 @@ import QuerySection from "./QuerySection";
 import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "components/ErrorFallback";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import {
   selectCurrentCql,
   selectCurrentMosaic,
@@ -52,16 +51,12 @@ const QueryInfo = () => {
   );
 
   const title = "Current filter details";
-  const size = 24;
 
   return (
-    <StackItem style={{ marginTop: -8, marginBottom: -8 }}>
+    <>
       <IconButton
         id={buttonId}
         iconProps={{ iconName: "Info" }}
-        height={size}
-        width={size}
-        title={title}
         ariaLabel={title}
         onClick={toggle}
         data-cy="query-detail-button"
@@ -78,7 +73,10 @@ const QueryInfo = () => {
           directionalHint={DirectionalHint.rightCenter}
           setInitialFocus
         >
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onError={handleErrorBoundaryError}
+          >
             {collectionSection}
             <Separator />
             {querySection}
@@ -87,7 +85,7 @@ const QueryInfo = () => {
           </ErrorBoundary>
         </Callout>
       )}
-    </StackItem>
+    </>
   );
 };
 export default QueryInfo;

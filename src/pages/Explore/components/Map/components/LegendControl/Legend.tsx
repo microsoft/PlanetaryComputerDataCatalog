@@ -3,7 +3,6 @@ import {
   FontSizes,
   FontWeights,
   getTheme,
-  Icon,
   IStackStyles,
   IStackTokens,
   ITextStyles,
@@ -23,6 +22,8 @@ import { IStacCollection } from "types/stac";
 import LegendCmdBar from "./LegendCmdBar";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import Interval from "./legendTypes/Interval";
+import LegendBumperBar from "./LegendBumperBar";
+
 interface LegendProps {
   layer: ILayerState;
 }
@@ -56,15 +57,11 @@ const Legend = ({ layer }: LegendProps) => {
 
   return (
     <>
-      <Stack tokens={tokens}>
-        <Stack>
-          <Stack
-            horizontal
-            horizontalAlign="space-between"
-            styles={legendHeaderStyles}
-          >
+      <Stack horizontal>
+        <LegendBumperBar layer={layer} />
+        <Stack tokens={tokens} styles={legendHeaderStyles} grow={true}>
+          <Stack horizontal horizontalAlign="space-between">
             <Stack horizontal horizontalAlign="start" verticalAlign="start">
-              <Icon iconName="GripperDotsVertical" styles={gripperStyles} />
               <Text
                 block
                 nowrap
@@ -82,8 +79,8 @@ const Legend = ({ layer }: LegendProps) => {
             />
           </Stack>
           <div style={legendBodyStyles}>{renderDesc}</div>
+          {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
         </Stack>
-        {isExpanded && <div style={legendBodyStyles}>{legend}</div>}
       </Stack>
       <Separator className="legend-item-separator" styles={legendSeparatorStyles} />
     </>
@@ -120,7 +117,7 @@ const getLegendType = (
   if (hasClassmapValues(collection, params.assets)) {
     return <ClassMap params={params} collection={collection} />;
   }
-  return null; //<Text variant="smallPlus">No legend for this render option.</Text>;
+  return null;
 };
 
 const theme = getTheme();
@@ -136,14 +133,13 @@ const legendHeaderStyles: IStackStyles = {
 };
 
 const legendBodyStyles: React.CSSProperties = {
-  paddingLeft: 21,
-  paddingRight: 25,
+  paddingLeft: 1,
 };
 
 const headerStyles: ITextStyles = {
   root: {
     fontWeight: FontWeights.semibold,
-    maxWidth: 240,
+    maxWidth: 250,
   },
 };
 
@@ -152,13 +148,14 @@ const nonVisibleHeaderStyles: ITextStyles = {
     color: theme.semanticColors.disabledBodyText,
     fontStyle: "italic",
     fontWeight: FontWeights.semibold,
-    maxWidth: 240,
+    maxWidth: 250,
   },
 };
 
 const subHeaderStyles: ITextStyles = {
   root: {
     fontSize: FontSizes.smallPlus,
+    maxWidth: 325,
   },
 };
 
@@ -167,6 +164,7 @@ const nonVisibleSubHeaderStyles: ITextStyles = {
     fontSize: FontSizes.smallPlus,
     color: theme.semanticColors.disabledBodyText,
     fontStyle: "italic",
+    maxWidth: 325,
   },
 };
 
@@ -181,13 +179,6 @@ const nonVisibleStyles = {
 };
 
 const legendSeparatorStyles = {
-  root: {
-    margin: 0,
-    padding: 0,
-  },
-};
-
-const gripperStyles = {
   root: {
     fontSize: 18,
     marginTop: 2,

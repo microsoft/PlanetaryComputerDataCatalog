@@ -124,6 +124,38 @@ StacFields.Registry.addMetadataField("file:values", {
   },
 });
 
+StacFields.Registry.addMetadataField("classification:classes", {
+  label: "Classification",
+  formatter: fileValues => {
+    const items = fileValues.map(v => {
+      const code = v.value;
+      const desc = v.description;
+      return { code, desc };
+    });
+    return (
+      <DetailsList
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        compact={true}
+        columns={[
+          {
+            key: "code",
+            name: "Code",
+            fieldName: "code",
+            isMultiline: false,
+            isPadded: false,
+            maxWidth: 35,
+            minWidth: 10,
+          },
+          { key: "desc", name: "Description", fieldName: "desc", isMultiline: true },
+        ]}
+        items={items}
+      />
+    );
+  },
+});
+
 StacFields.Registry.addMetadataField("label:classes", {
   label: "Classes",
   formatter: value => {
@@ -172,6 +204,10 @@ StacFields.Registry.addMetadataField("proj:wkt2", {
 StacFields.Registry.addMetadataField("proj:geometry", {
   formatter: value => <code>{JSON.stringify(value)}</code>,
 });
+StacFields.Registry.addMetadataField("proj:projjson", {
+  formatter: value => <code>{JSON.stringify(value)}</code>,
+});
+
 
 StacFields.Registry.addMetadataField("sat:orbit_state", {
   formatter: capitalize,
@@ -193,35 +229,35 @@ StacFields.Registry.addMetadataField("cmip6:scenario", {
 });
 
 StacFields.Registry.addMetadataField("cmip6:Conventions", { label: "Convention version" });
-StacFields.Registry.addMetadataField("cmip6:activity_id", { label: "Activity  identifier(s) (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:activity_id", { label: "Activity  identifier(s)" });
 StacFields.Registry.addMetadataField("cmip6:creation_date", { label: "Date file was created" });
 StacFields.Registry.addMetadataField("cmip6:data_specs_version", { label: "Version identifier" });
 StacFields.Registry.addMetadataField("cmip6:experiment", { label: "Short experiment description" });
-StacFields.Registry.addMetadataField("cmip6:experiment_id", { label: "Root experiment identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:experiment_id", { label: "Root experiment identifier" });
 StacFields.Registry.addMetadataField("cmip6:forcing_index", { label: "Index for variant of forcing" });
 StacFields.Registry.addMetadataField("cmip6:frequency", { label: "Sampling frequency" });
 StacFields.Registry.addMetadataField("cmip6:further_info_url", { label: "Location of documentation" });
 StacFields.Registry.addMetadataField("cmip6:grid", { label: "Grid" });
-StacFields.Registry.addMetadataField("cmip6:grid_label", { label: "Grid identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:grid_label", { label: "Grid identifier" });
 StacFields.Registry.addMetadataField("cmip6:initialization_index", { label: "Index for variant of initialization method" });
 StacFields.Registry.addMetadataField("cmip6:institution", { label: "Institution name" });
-StacFields.Registry.addMetadataField("cmip6:institution_id", { label: "Institution identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:institution_id", { label: "Institution identifier" });
 StacFields.Registry.addMetadataField("cmip6:license", { label: "License restrictions" });
-StacFields.Registry.addMetadataField("cmip6:mip_era", { label: "Activity's associated CMIP cycle (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:mip_era", { label: "Activity's associated CMIP cycle" });
 StacFields.Registry.addMetadataField("cmip6:nominal_resolution", { label: "Approximate horizontal resolution" });
 StacFields.Registry.addMetadataField("cmip6:physics_index", { label: "Index for model physics variant" });
 StacFields.Registry.addMetadataField("cmip6:product", { label: "Product type (part of DRS) " });
 StacFields.Registry.addMetadataField("cmip6:realization_index", { label: "Realization number" });
-StacFields.Registry.addMetadataField("cmip6:realm", { label: "Realm(s) where variable is defined (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:realm", { label: "Realm(s) where variable is defined" });
 StacFields.Registry.addMetadataField("cmip6:source", { label: "Full model name / version" });
-StacFields.Registry.addMetadataField("cmip6:source_id", { label: "Model identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:source_id", { label: "Model identifier" });
 StacFields.Registry.addMetadataField("cmip6:source_type", { label: "Model configuration " });
 StacFields.Registry.addMetadataField("cmip6:sub_experiment", { label: "Description of sub-experiment " });
-StacFields.Registry.addMetadataField("cmip6:sub_experiment_id", { label: "Sub-experiment identifier (part of DRS 'member_id')" });
-StacFields.Registry.addMetadataField("cmip6:table_id", { label: "Table identifier (part of DRS)" });
+StacFields.Registry.addMetadataField("cmip6:sub_experiment_id", { label: "Sub-experiment identifier" });
+StacFields.Registry.addMetadataField("cmip6:table_id", { label: "Table identifier" });
 StacFields.Registry.addMetadataField("cmip6:tracking_id", { label: "Unique file identifier" });
-StacFields.Registry.addMetadataField("cmip6:variable_id", { label: "Variable identifier (part of DRS)" });
-StacFields.Registry.addMetadataField("cmip6:variant_label", { label: "'Variant' label (part of DRS 'member_id')" });
+StacFields.Registry.addMetadataField("cmip6:variable_id", { label: "Variable identifier" });
+StacFields.Registry.addMetadataField("cmip6:variant_label", { label: "'Variant' label" });
 
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
@@ -430,10 +466,14 @@ export const renderItemColumn = (item, _, column) => {
         </Revealer>
       );
     case "dimensions":
+      fieldContent = fieldContent.join(", ");
+      return <span>({fieldContent})</span>;
     case "shape":
     case "chunks":
       if (Array.isArray(fieldContent)) {
-        fieldContent = fieldContent.join(", ");
+        fieldContent = fieldContent.map(v => {
+          return (isNil(v) ? 'varies' : v);
+        }).join(", ");
       }
       return <span>({fieldContent})</span>;
     case "description":
@@ -453,16 +493,6 @@ export const renderItemColumn = (item, _, column) => {
       );
     case "stac_key":
       return <code title={fieldContent}>{fieldContent}</code>;
-    case "file:values":
-      return (
-        <Stack>
-          {fieldContent.map(v => {
-            const values = v.values.join(",");
-            const desc = v.summary;
-            return <span key={`file-values-${values}`}>{`${values}: ${desc}`}</span>;
-          })}
-        </Stack>
-      );
     case "asset_details":
       return <AssetDetails asset={item} />;
 

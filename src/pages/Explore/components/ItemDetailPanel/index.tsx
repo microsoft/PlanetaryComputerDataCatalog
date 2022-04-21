@@ -14,7 +14,7 @@ import AssetList from "./AssetList";
 import BackToListButton from "./BackToListButton";
 import { CSSProperties } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "components/ErrorFallback";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 const ItemDetailPanel = () => {
@@ -68,7 +68,12 @@ const ItemDetailPanel = () => {
       styles={itemDetailStylesOuter}
       data-cy="detail-dialog-list"
     >
-      <ErrorBoundary FallbackComponent={ErrorFallback}>{content}</ErrorBoundary>
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onError={handleErrorBoundaryError}
+      >
+        {content}
+      </ErrorBoundary>
     </StackItem>
   );
 };

@@ -8,11 +8,7 @@ import {
   Stack,
 } from "@fluentui/react";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import {
-  pinCurrentMosaic,
-  removeLayerById,
-  setLayerVisible,
-} from "pages/Explore/state/mosaicSlice";
+import { setLayerVisible } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
 import { OpacityCmdButton } from "./LayerOptions";
 import LayerOverflowOptions from "./LayerOverflowOptions";
@@ -32,18 +28,11 @@ const LegendCmdBar = ({
 }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
 
-  const handlePin = () => {
-    const layerId = layer.layerId;
-    const isPinned = layer.isPinned;
-    isPinned ? dispatch(removeLayerById(layerId)) : dispatch(pinCurrentMosaic());
-  };
-
   const handleVisible = () => {
     dispatch(setLayerVisible({ id: layer.layerId, value: !layer.layer.visible }));
   };
 
   const expand = settings.expand[isExpanded ? "true" : "false"];
-  const pin = settings.pin[layer.isPinned ? "true" : "false"];
   const view = settings.view[layer.layer.visible ? "true" : "false"];
   const handleExpand = () => onExpandedChange(!isExpanded);
 
@@ -58,16 +47,6 @@ const LegendCmdBar = ({
       styles={cmdButtonStyles}
     />
   );
-  const btnPin = (
-    <IconButton
-      role="menuitem"
-      aria-label={pin.title}
-      title={pin.title}
-      iconProps={{ iconName: pin.icon }}
-      onClick={handlePin}
-      styles={cmdButtonStyles}
-    />
-  );
 
   return (
     <Stack
@@ -79,7 +58,6 @@ const LegendCmdBar = ({
     >
       {btnVisible}
       {btnOpacity}
-      {btnPin}
       <IconButton
         aria-label={expand.title}
         title={expand.title}
@@ -99,10 +77,6 @@ const settings = {
   expand: {
     true: { icon: "ChevronDown", title: "Collapse legend" },
     false: { icon: "ChevronUp", title: "Expand legend" },
-  },
-  pin: {
-    true: { icon: "Unpin", title: "Unpin layer and remove from map" },
-    false: { icon: "Pinned", title: "Pin layer to map and perform new search" },
   },
   view: {
     true: { icon: "FluentView", title: "Hide layer from map" },
@@ -138,5 +112,5 @@ export const cmdButtonStyles: IButtonStyles = {
 };
 
 export const activeCmdButtonStyles = mergeStyleSets(cmdButtonStyles, {
-  icon: { path: { fill: theme.palette.themePrimary } },
+  icon: { color: theme.palette.themePrimary },
 });

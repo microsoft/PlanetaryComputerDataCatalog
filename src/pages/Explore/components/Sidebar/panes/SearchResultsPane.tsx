@@ -20,7 +20,7 @@ import ItemResult from "../../ItemResult";
 import ExploreInHub from "../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import ErrorFallback from "components/ErrorFallback";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
@@ -125,7 +125,10 @@ const SearchResultsPane = ({
   return (
     <>
       <Stack styles={resultsListStyle}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onError={handleErrorBoundaryError}
+        >
           <SearchResultsHeader results={data} isLoading={isPreviousData} />
           <div className={scrollPos ? "hood on" : "hood"} />
           <div

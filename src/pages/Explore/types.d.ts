@@ -1,5 +1,5 @@
 import { ICqlExpressionList } from "./utils/cql/types";
-import { IStacCollection } from "types/stac";
+import { IStacCollection, IStacLink } from "types/stac";
 import { LegendTypes } from "./enums";
 
 export interface IDefaultLocationInfo {
@@ -48,9 +48,14 @@ export interface IQueryable {
 }
 
 export interface ISearchIdMetadata {
-  hash: string;
-  search: { filter: { args: ICqlExpressionList } };
+  links: IStacLink[];
+  metadata: { type: string };
   orderby: string;
+  search: {
+    hash: string;
+    search: { filter: { args: ICqlExpressionList } };
+    orderby: string;
+  };
 }
 
 export interface ILayerState {

@@ -24,7 +24,8 @@ Select *Stop My Server* to stop your server and release all of the resources you
 
 ![JupyterHub menu to stop the server](images/hub-home.png)
 
-Note that we will automatically stop servers that seem to be idle.
+Note that we will automatically stop notebook servers that appear idle or are older that 24 hours. If you expect a job to take longer
+than 24 hours, then see [running batch jobs](./batch) for a way to submit long-running jobs.
 
 ## Using JupyterLab
 
