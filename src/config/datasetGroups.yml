@@ -242,3 +242,22 @@ planet-nicfi:
       "Tropics",
       "Imagery"
     ]
+
+chesapeake-lulc:
+  title: Chesapeake Bay Watershed Land Use and Land Cover
+  short_description: >
+    Land Use and Land Cover maps for the Chesapeake Bay Watershed from the Conservation Innovation Center at the Chesapeake Conservancy.
+  description: >
+    One-meter resolution land use and land cover maps for the entire Chesapeake Bay watershed, an area of over 250,000 square kilomters that spans New York, Pennsylvania, Maryland, Delaware, West Virginia, Virginia, and the District of Columbia. The data are made available by the [Conservation Innovation Center](https://www.chesapeakeconservancy.org/conservation-innovation-center/) at the [Chesapeake Conservancy](https://www.chesapeakeconservancy.org/). Based on 2013-2014 imagery from the National Agriculture Imagery Program, the high resolution classification data provides 900 times the amount of information as conventional 30-meter land cover data that has traditionally been utilized for this area.
+  assets:
+    headerImg:
+      href: ./images/chesapeake-lulc-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc.png"
+  keywords:
+    [
+      "Land Use"
+      "Land Cover",
+      "Chesapeake Bay Watershed",
+      "Chesapeake Conservancy"
+    ]

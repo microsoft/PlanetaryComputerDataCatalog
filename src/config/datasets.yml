@@ -85,6 +85,18 @@ collections:
       - title: Storage Documentation
         src: aster-storage.html
 
+  chesapeake-lc-7:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lc-7-hero.png
+
+  chesapeake-lc-13:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lc-13-hero.png
+
+  chesapeake-lu:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lu-hero.png
+
   chloris-biomass:
     category: Biomass/Vegetation
     headerImg: ./images/chloris-biomass-hero.jpg
