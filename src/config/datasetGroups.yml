@@ -256,7 +256,7 @@ chesapeake-lulc:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc.png"
   keywords:
     [
-      "Land Use"
+      "Land Use",
       "Land Cover",
       "Chesapeake Bay Watershed",
       "Chesapeake Conservancy"
