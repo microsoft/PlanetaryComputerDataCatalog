@@ -253,7 +253,7 @@ chesapeake-lulc:
     headerImg:
       href: ./images/chesapeake-lulc-hero.png
     thumbnail:
-      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc.png"
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc-thumb.png"
   keywords:
     [
       "Land Use",
