@@ -112,6 +112,12 @@ collections:
       - title: Example Notebook
         src: cil-gdpcir-example.html
         launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
 
   cil-gdpcir-cc-by:
     category: Climate/Weather
@@ -120,6 +126,12 @@ collections:
       - title: Example Notebook
         src: cil-gdpcir-example.html
         launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
 
   cil-gdpcir-cc-by-sa:
     category: Climate/Weather
@@ -128,6 +140,12 @@ collections:
       - title: Example Notebook
         src: cil-gdpcir-example.html
         launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
 
   cop-dem-glo-30:
     category: DEMs

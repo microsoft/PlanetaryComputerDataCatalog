@@ -30,6 +30,8 @@ https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/alos-de
 
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/ensemble.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/indicators.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
