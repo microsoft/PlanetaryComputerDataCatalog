@@ -244,7 +244,7 @@ planet-nicfi:
     ]
 
 chesapeake-lulc:
-  title: Chesapeake Bay Watershed Land Use and Land Cover
+  title: Chesapeake Land Use Land Cover
   short_description: >
     Land Use and Land Cover maps for the Chesapeake Bay Watershed from the Conservation Innovation Center at the Chesapeake Conservancy.
   description: >
