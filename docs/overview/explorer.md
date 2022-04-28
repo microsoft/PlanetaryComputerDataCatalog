@@ -148,6 +148,17 @@ a legend will appear showing the color map and value range, or the categories an
 :class: no-scaled-link
 ```
 
+### Working with multiple layers
+
+The Explorer works with multiple layers at once, allowing overlays and comparisons
+between different datasets or different search results and rendering options of hte same layer. To pin the current search results to the map, click on the pin icon next to the search results or in the legend. This will clear out the current search, but leave the mosaic on the map. You can continue to search and pin layers to the map. The legend will show options for moving the layer order, toggling visibility, changing opacity, or re-editing the mosaic search or render options. By adjusting the opacity of layers, you can also compare spatially overlapping data items from different temporal ranges.
+
+```{image} images/explorer-pinned-layers-sm.png
+:width: 800
+:name: Planetary Computer Explorer multi layer legend
+:class: no-scaled-link
+```
+
 ### Working with results in the Hub
 
 Finding and visualizing data items is likely only the first step in your data
@@ -183,7 +194,6 @@ We're constantly adding improvements to the Planetary Computer and the Explorer.
 
 - Visualization support for Zarr-backed datasets
 - Hub integration to build queries and visualize search results within a notebook
-- Loading multiple dataset search results as map layers
 - Layer comparison features
 
 Watch for future announcements, and [visit our GitHub Discussions](https://github.com/microsoft/PlanetaryComputer/discussions) for feedback or questions.
