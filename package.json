@@ -2,7 +2,7 @@
   "name": "pc-datacatalog",
   "version": "2022.1.1",
   "private": true,
-  "proxy": "http://localhost:7071/",
+  "proxy": "http://api:7071/",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@craco/craco": "^6.4.3",
