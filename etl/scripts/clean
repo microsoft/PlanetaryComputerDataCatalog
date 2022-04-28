@@ -10,7 +10,7 @@ echo "Removing previously synced external doc files"
 if [ -d "${DOCS_WORKING_DIR}" ]; then rm -rf "${DOCS_WORKING_DIR}"; fi
 
 echo "Removing public _images content"
-rm ../public/_images/*.{png,jpg} || true
+rm ../public/_images/*.{png,jpg,gif} || true
 
 echo "Removing built docs JSON files"
 shopt -s extglob

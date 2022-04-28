@@ -150,12 +150,31 @@ a legend will appear showing the color map and value range, or the categories an
 
 ### Working with multiple layers
 
-The Explorer works with multiple layers at once, allowing overlays and comparisons
-between different datasets or different search results and rendering options of hte same layer. To pin the current search results to the map, click on the pin icon next to the search results or in the legend. This will clear out the current search, but leave the mosaic on the map. You can continue to search and pin layers to the map. The legend will show options for moving the layer order, toggling visibility, changing opacity, or re-editing the mosaic search or render options. By adjusting the opacity of layers, you can also compare spatially overlapping data items from different temporal ranges.
+The Explorer works with multiple layers at once, allowing overlays and
+comparisons between different datasets or different search results and rendering
+options of the same layer. To pin the current search results to the map, click
+on the pin icon next to the search results or in the legend. This will clear out
+the current search, but leave the mosaic on the map. You can continue to search
+and pin layers to the map. The legend will show options for moving the layer
+order, toggling visibility, changing opacity, or re-editing the mosaic search or
+render options.
 
 ```{image} images/explorer-pinned-layers-sm.png
 :width: 800
 :name: Planetary Computer Explorer multi layer legend
+:class: no-scaled-link
+```
+
+#### Comparing multiple layers
+
+By adjusting the opacity of layers, you can also compare spatially overlapping
+data items from different temporal ranges. Here's an [example of imagery from
+NAIP 2011 vs NAIP 2018][pc-naip-explore] showing dramatic differences in the
+water extent of Lake Powell, UT.
+
+```{image} images/explorer-opacity-compare-sm.gif
+:width: 800
+:name: Planetary Computer Explorer compare layers
 :class: no-scaled-link
 ```
 
@@ -204,3 +223,4 @@ Watch for future announcements, and [visit our GitHub Discussions](https://githu
 [pc-docs-sas]: https://planetarycomputer.microsoft.com/docs/concepts/sas/
 [pc-catalog]: https://planetarycomputer.microsoft.com/catalog
 [hgb]: https://planetarycomputer.microsoft.com/dataset/hgb
+[pc-naip-explore]: https://planetarycomputer.microsoft.com/explore?c=-110.7523%2C37.5224&z=11.61&v=2&d=naip%7C%7Cnaip&s=true%3A%3A100%3A%3Atrue%7C%7Ctrue%3A%3A100%3A%3Atrue&m=2011%7C%7C2018&r=Natural+color%7C%7CNatural+color

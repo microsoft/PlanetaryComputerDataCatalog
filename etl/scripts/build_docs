@@ -46,7 +46,7 @@ done
 # directory. Since these aren't imported into the app, they are not put in the
 # src tree.
 pushd $DOCS_OUTPUT
-cp --parents _images/*.{png,jpg} ../../public || true
+cp --parents _images/*.{png,jpg,gif} ../../public || true
 popd
 
 # We also need the contents of the _downloads directory moved to the static build
