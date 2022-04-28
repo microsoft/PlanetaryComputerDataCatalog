@@ -10,6 +10,7 @@ export const QS_COLLECTION_KEY = "d";
 export const QS_MOSAIC_KEY = "m";
 export const QS_RENDER_KEY = "r";
 export const QS_SETTINGS_KEY = "s";
+export const QS_ACTIVE_EDIT_KEY = "ae";
 export const QS_VERSION_KEY = "v";
 export const QS_V1_CUSTOM_KEY = "q";
 
@@ -18,7 +19,9 @@ export const QS_V1_CUSTOM_KEY = "q";
  * sharing and recreating the app state
  */
 export const useUrlStateV2 = () => {
-  const { layers, layerOrder } = useExploreSelector(s => s.mosaic);
+  const { layers, layerOrder, currentEditingLayerId } = useExploreSelector(
+    s => s.mosaic
+  );
   const orderedLayers = layerOrder.map(id => layers[id]);
 
   const setRenderQs = useCallback((ol: ILayerState[]) => {
@@ -58,15 +61,30 @@ export const useUrlStateV2 = () => {
     updateQueryStringParam(QS_SETTINGS_KEY, settings);
   }, []);
 
+  const setLayerEditingQs = useCallback(
+    (ol: ILayerState[]) => {
+      // Since the layer id is generated when added to the map, specify the index
+      // of the ordered layer that is being edited so it can be restored when the
+      // url is reloaded
+      const idx = currentEditingLayerId
+        ? ol.findIndex(l => l.layerId === currentEditingLayerId).toString()
+        : "";
+      updateQueryStringParam(QS_ACTIVE_EDIT_KEY, idx);
+    },
+    [currentEditingLayerId]
+  );
+
   useEffect(() => {
     setCollectionQs(orderedLayers);
     setMosiacQs(orderedLayers);
     setRenderQs(orderedLayers);
     setLayerSettingsQs(orderedLayers);
+    setLayerEditingQs(orderedLayers);
   }, [
     layers,
     orderedLayers,
     setCollectionQs,
+    setLayerEditingQs,
     setLayerSettingsQs,
     setMosiacQs,
     setRenderQs,
