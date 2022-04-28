@@ -2,6 +2,66 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## April 2022
+
+This release includes several new datasets, features, and updates to libraries.
+
+### Highlights
+
+- **Higher performance and scalability of our STAC API**. See the [pgstac 0.5 release notes](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) for more.
+- The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries.
+- Many new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
+
+### APIs
+
+#### STAC API
+
+##### New features
+
+#### Data API
+
+##### New features
+
+#### New API datasets
+
+* [ALOS Forest/Non-Forest Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-fnf-mosaic): Global 25m resolution map classifying "forest" and "non-forest" landcover.
+* [ALOS PALSAR Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-palsar-mosaic): Global 25m resolution SAR image mosaic.
+* [CIL Global Downscaled Projections for Climate Impacts Research Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/cil-gdpcir): Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
+* [ECMWF Open Data (real-time)](https://planetarycomputer-staging.microsoft.com/dataset/ecmwf-forecast): ECMWF Open Data (Real Time) forecasts
+* [ERA5 - PDS](https://planetarycomputer-staging.microsoft.com/dataset/era5-pds): A comprehensive reanalysis, which assimilates as many observations as possible in the upper air and near surface.
+* [ESA WorldCover 2020](https://planetarycomputer-staging.microsoft.com/dataset/esa-worldcover): Global land cover product at 10 meter resolution for 2020 based on Sentinel-1 and Sentinel-2 data
+* [Landsat Collection 2 Level-1](https://planetarycomputer-staging.microsoft.com/dataset/landsat-c2-l1): Landsat Collection 2 Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.
+* [Landsat Collection 2 Level-2](https://planetarycomputer-staging.microsoft.com/dataset/landsat-c2-l2): Landsat Collection 2 Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.
+* [MODIS Burned Area Monthly](https://planetarycomputer-staging.microsoft.com/dataset/modis-64A1-061): MODIS Burned Area Monthly
+* [MODIS Gross Primary Productivity 8-Day Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A2HGF-061): MODIS Gross Primary Productivity 8-Day Gap-Filled
+* [MODIS Gross Primary Productivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A2H-061): MODIS Gross Primary Productivity 8-Day
+* [MODIS Land Surface Temperature/3-Band Emissivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-21A2-061): MODIS Land Surface Temperature/3-Band Emissivity 8-Day
+* [MODIS Land Surface Temperature/Emissivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-11A2-061): MODIS Land Surface Temperature/Emissivity 8-Day
+* [MODIS Land Surface Temperature/Emissivity Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-11A1-061): MODIS Land Surface Temperature/Emissivity Daily
+* [MODIS Leaf Area Index/FPAR 4-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-15A3H-061): MODIS Leaf Area Index/FPAR 4-Day
+* [MODIS Leaf Area Index/FPAR 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-15A2H-061): MODIS Leaf Area Index/FPAR 8-Day
+* [MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-43A4-061): MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily
+* [MODIS Net Evapotranspiration Yearly Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-16A3GF-061): MODIS Net Evapotranspiration Yearly Gap-Filled
+* [MODIS Net Primary Production Yearly Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A3HGF-061): MODIS Net Primary Production Yearly Gap-Filled
+* [MODIS Snow Cover 8-day](https://planetarycomputer-staging.microsoft.com/dataset/modis-10A2-061): MODIS Snow Cover 8-day
+* [MODIS Snow Cover Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-10A1-061): MODIS Snow Cover Daily
+* [MODIS Surface Reflectance 8-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-09Q1-061): MODIS Surface Reflectance 8-Day (250m)
+* [MODIS Surface Reflectance 8-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-09A1-061): MODIS Surface Reflectance 8-Day (500m)
+* [MODIS Thermal Anomalies/Fire 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A2-061): MODIS Thermal Anomalies/Fire 8-Day
+* [MODIS Thermal Anomalies/Fire Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A1-061): MODIS Thermal Anomalies/Fire Daily
+* [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
+* [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
+* [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
+* [Planet-NICFI Basemaps (Visual)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
+
+#### New Blob Storage datasets
+
+### Hub environments
+
+#### New package versions
+
+### Website
+
 ## January 2022
 
 This release includes several new datasets, features, and updates to libraries.
