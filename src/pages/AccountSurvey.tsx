@@ -21,13 +21,12 @@ import FormCheckbox from "../components/forms/FormCheckbox";
 import DefaultBanner from "../components/DefaultBanner";
 import NewTabLink from "../components/controls/NewTabLink";
 
-import { languageOptions, industryOptions } from "../config/account.yml";
-import countries from "../config/countries.yml";
+import options from "config/account.yml";
+import countries from "config/countries.yml";
 
 import { marginVStyle } from "../styles";
 import { ScrollToTopOnMount } from "../components/ScrollToTopOnMount";
 
-const rowProps = { horizontal: true, verticalAlign: "center" };
 const stackTokens = {
   spinnerStack: {
     childrenGap: 20,
@@ -36,18 +35,17 @@ const stackTokens = {
 
 const AccountSurvey = () => {
   const navigate = useNavigate();
-  const mutation = useMutation(survey => axios.post("./api/survey", survey));
+  const mutation = useMutation((survey: Record<string, any>) =>
+    axios.post("./api/survey", survey)
+  );
 
-  const handleSubmit = survey => {
+  const handleSubmit = (survey: Record<string, any>) => {
     mutation.mutate(survey);
   };
 
   const validationSchema = yup.object({
-    email: yup
-      .string("Enter your email")
-      .email("Enter a valid email")
-      .required("Email is required"),
-    name: yup.string("Enter your full name").required("Your name is required"),
+    email: yup.string().email("Enter a valid email").required("Email is required"),
+    name: yup.string().required("Your name is required"),
     affiliation: yup.string(),
     industry: yup.string(),
     languages: yup.array(),
@@ -110,12 +108,16 @@ const AccountSurvey = () => {
             label="Affiliated Organization"
             placeholder="Company, institution, university, etc."
           />
-          <FormSelect name="industry" label="Sector" options={industryOptions} />
+          <FormSelect
+            name="industry"
+            label="Sector"
+            options={options.industryOptions}
+          />
           <FormSelect
             multiSelect
             name="languages"
             label="Primary programming languages"
-            options={languageOptions}
+            options={options.languageOptions}
           />
           <FormSelect
             name="country"
@@ -134,7 +136,11 @@ const AccountSurvey = () => {
           />
           <FormCheckbox name="terms" label={tosLabel} required={true} />
         </Stack>
-        <Stack {...rowProps} tokens={stackTokens.spinnerStack}>
+        <Stack
+          horizontal={true}
+          verticalAlign="center"
+          tokens={stackTokens.spinnerStack}
+        >
           <PrimaryButton
             disabled={mutation.isLoading}
             type="submit"
