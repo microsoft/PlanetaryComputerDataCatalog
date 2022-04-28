@@ -16,7 +16,12 @@ describe("URL state is loaded to Explorer", () => {
     );
     cy.intercept("/api/stac/v1/search").as("getS2search");
 
-    cy.visit("/explore?d=sentinel-2-l2a");
+    cy.visit({
+      url: "/explore",
+      qs: {
+        d: "sentinel-2-l2a",
+      },
+    });
 
     cy.wait(["@getS2", "@getS2mosaic"]);
 
@@ -41,6 +46,7 @@ describe("URL state is loaded to Explorer", () => {
         d: "sentinel-2-l2a",
         m: "Dec – Feb, 2022 (low cloud)",
         r: "Color infrared",
+        ae: "0",
       },
     });
 
@@ -96,6 +102,7 @@ describe("URL state is loaded to Explorer", () => {
         s: "true::100::true||true::100::true",
         m: "Most recent||All years",
         r: "Elevation (terrain)||Aboveground Biomass (tonnes)",
+        ae: "1",
       },
     });
 
@@ -108,5 +115,7 @@ describe("URL state is loaded to Explorer", () => {
       .should("be.visible")
       .and("contain", "Chloris Biomass")
       .and("contain", "NASADEM");
+
+    cy.getBySel("collection-selector").contains("Chloris Biomass");
   });
 });
