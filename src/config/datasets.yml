@@ -47,7 +47,7 @@ collections:
 
    3dep-lidar-dsm:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-dsm-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -55,7 +55,7 @@ collections:
 
    3dep-lidar-pointsourceid:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-pointsourceid-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -63,7 +63,7 @@ collections:
 
    3dep-lidar-intensity:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-intensity-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -71,7 +71,7 @@ collections:
 
    3dep-lidar-hag:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-hag-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -79,7 +79,7 @@ collections:
 
    3dep-lidar-dtm:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-dtm-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -87,7 +87,7 @@ collections:
 
    3dep-lidar-returns:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-returns-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -95,7 +95,7 @@ collections:
 
    3dep-lidar-classification:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-classification-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
@@ -103,7 +103,7 @@ collections:
 
    3dep-lidar-dtm-native:
     category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
+    headerImg: ./images/3dep-lidar-dtm-native-hero.png
     tabs:
       - title: Example Notebook
         src: 3dep-lidar-example.html
