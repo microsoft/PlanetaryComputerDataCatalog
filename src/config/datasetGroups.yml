@@ -20,7 +20,7 @@
     headerImg:
       href: ./images/3dep-lidar-copc-hero.png
     thumbnail:
-      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/3dep-lidar-copc-thumbnail.png 
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/3dep-lidar-copc-thumbnail.png
   keywords: [USGS, 3DEP, Elevation, Lidar, Point Cloud]
 
 daymet:
