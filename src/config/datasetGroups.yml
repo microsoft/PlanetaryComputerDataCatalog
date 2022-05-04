@@ -153,7 +153,7 @@ modis:
     describe atmosphere, cryosphere, land, and ocean features utilized in studies across various disciplines. 
   description: >
     The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on both the
-    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/)spacecraft. The instrument 
+    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/) spacecraft. The instrument 
     has a swath width of 2,330 km and covers the entire surface of the Earth within one or two days. 
     The sensor measures 36 spectral bands between 0.405-14.385 µm and acquires data at three
     spatial resolutions: 250, 500, and 1,000 m.
