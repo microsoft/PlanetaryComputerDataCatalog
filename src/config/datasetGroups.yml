@@ -18,9 +18,9 @@
     as [Cloud Optimized GeoTIFFs](https://www.cogeo.org/).
   assets:
     headerImg:
-      href: ./images/cop-dem-collection-hero.png
+      href: ./images/3dep-lidar-copc-hero.png
     thumbnail:
-      href: https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/USGS_ID_green_0.png
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/3dep-lidar-copc-thumbnail.png
   keywords: [USGS, 3DEP, Elevation, Lidar, Point Cloud]
 
 daymet:
