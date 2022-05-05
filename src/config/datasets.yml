@@ -504,23 +504,23 @@ collections:
 
   modis-16A3GF-061:
     category: Biomass/Vegetation
-    headerImg: ./images/modis-15a3gf-hero.png
+    headerImg: ./images/modis-16a3gf-hero.jpeg
 
   modis-17A2H-061:
     category: Biomass/Vegetation
-    headerImg: ./images/modis-17a2h-hero.png
+    headerImg: ./images/modis-17a2h-hero.jpeg
 
   modis-17A2HGF-061:
     category: Biomass/Vegetation
-    headerImg: ./images/modis-17a2hgf-hero.png
+    headerImg: ./images/modis-17a2hgf-hero.jpeg
 
   modis-17A3HGF-061:
     category: Biomass/Vegetation
-    headerImg: ./images/modis-17a3hgf-hero.png
+    headerImg: ./images/modis-17a3hgf-hero.jpeg
 
   modis-21A2-061:
     category: Temperature
-    headerImg: ./images/modis-17a2-hero.png
+    headerImg: ./images/modis-21a2-hero.png
 
   modis-43A4-061:
     category: Imagery
@@ -528,7 +528,7 @@ collections:
 
   modis-64A1-061:
     category: Fire
-    headerImg: ./images/modis-64A1-hero.png
+    headerImg: ./images/modis-64a1-hero.png
 
   mobi:
     category: Biodiversity
