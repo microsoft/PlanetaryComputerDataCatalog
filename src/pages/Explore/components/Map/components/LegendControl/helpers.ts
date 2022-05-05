@@ -10,6 +10,7 @@ import { DATA_URL } from "utils/constants";
 
 export const rootColormapUrl = `${DATA_URL}/legend/colormap`;
 export const rootClassmapUrl = `${DATA_URL}/legend/classmap`;
+export const rootIntervalUrl = `${DATA_URL}/legend/interval`;
 
 // [[[min, max], [r,g,b,a]],...]
 export type IntervalMap = [[number, number], [number, number, number, number]][];
@@ -83,6 +84,6 @@ const getIntervalClassmapByName = async (
   const [, classmapName] = queryParam.queryKey;
 
   return await (
-    await axios.get(`${rootClassmapUrl}/${classmapName}`)
+    await axios.get(`${rootIntervalUrl}/${classmapName}`)
   ).data;
 };
