@@ -402,7 +402,7 @@ collections:
 
   modis-16A3GF-061:
     category: Biomass/Vegetation
-    headerImg: ./images/modis-15a3gf-hero.jpeg
+    headerImg: ./images/modis-16a3gf-hero.jpeg
 
   modis-17A2H-061:
     category: Biomass/Vegetation
@@ -418,7 +418,7 @@ collections:
 
   modis-21A2-061:
     category: Temperature
-    headerImg: ./images/modis-17a2-hero.png
+    headerImg: ./images/modis-21a2-hero.png
 
   modis-43A4-061:
     category: Imagery
