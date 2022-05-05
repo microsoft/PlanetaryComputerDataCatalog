@@ -426,7 +426,7 @@ collections:
 
   modis-64A1-061:
     category: Fire
-    headerImg: ./images/modis-64A1-hero.png
+    headerImg: ./images/modis-64a1-hero.png
 
   mobi:
     category: Biodiversity
