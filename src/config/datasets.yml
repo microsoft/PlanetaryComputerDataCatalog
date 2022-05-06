@@ -124,10 +124,6 @@ collections:
       - title: Example Notebook
         src: alos-dem-example.html
         launch: datasets/alos-dem/alos-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: alos-dem.html
-      - title: Storage Documentation
-        src: alos-dem-storage.html
 
   alos-fnf-mosaic:
     category: Land use/Land cover
@@ -152,10 +148,6 @@ collections:
       - title: Example Notebook
         src: aster-l1t-example.html
         launch: datasets/aster-l1t/aster-l1t-example.ipynb
-      - title: Blob Storage Notebook
-        src: aster.html
-      - title: Storage Documentation
-        src: aster-storage.html
 
   chesapeake-lc-7:
     category: Land use/Land cover
@@ -226,10 +218,6 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: copernicus-dem.html
-      - title: Storage Documentation
-        src: copernicus-dem-storage.html
 
   cop-dem-glo-90:
     category: DEMs
@@ -238,10 +226,6 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: copernicus-dem.html
-      - title: Storage Documentation
-        src: copernicus-dem-storage.html
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
@@ -328,10 +312,6 @@ collections:
       - title: Example Notebook
         src: fia-example.html
         launch: datasets/fia/fia-example.ipynb
-      - title: Blob Storage Notebook
-        src: forest-inventory-and-analysis.html
-      - title: Storage Documentation
-        src: gbif-storage.html
 
   gap:
     category: Land use/Land cover
@@ -363,10 +343,6 @@ collections:
       - title: Example Notebook
         src: gbif-example.html
         launch: datasets/gbif/gbif-example.ipynb
-      - title: Blob Storage Notebook
-        src: gbif.html
-      - title: Storage Documentation
-        src: gbif-storage.html
 
   goes-cmi:
     category: Imagery
@@ -375,10 +351,6 @@ collections:
       - title: Example Notebook
         src: goes-cmi-example.html
         launch: datasets/goes/goes-cmi-example.ipynb
-      - title: Blob Storage Notebook
-        src: goes-r-abi-l2-mcmipf.html
-      - title: Storage Documentation
-        src: goes-r-storage.html
 
   gpm-imerg-hhr:
     headerImg: ./images/gpm-imerg-hhr-hero.png
@@ -401,10 +373,6 @@ collections:
       - title: Example Notebook
         src: hgb-example.html
         launch: datasets/hgb/hgb-example.ipynb
-      - title: Blob Storage Notebook
-        src: hgb.html
-      - title: Storage Documentation
-        src: hgb-storage.html
 
   hrea:
     category: Infrastructure
@@ -413,10 +381,6 @@ collections:
       - title: Example Notebook
         src: hrea-example.html
         launch: datasets/hrea/hrea-example.ipynb
-      - title: Blob Storage Notebook
-        src: hrea.html
-      - title: Storage Documentation
-        src: hrea-storage.html
 
   io-lulc:
     category: Land use/Land cover
@@ -424,8 +388,6 @@ collections:
       - title: Example Notebook
         src: io-lulc-example.html
         launch: datasets/io-lulc/io-lulc-example.ipynb
-      - title: Storage Documentation
-        src: io-lulc-storage.html
 
   io-lulc-9-class:
     category: Land use/Land cover
@@ -537,10 +499,6 @@ collections:
       - title: Example Notebook
         src: mobi-example.html
         launch: datasets/mobi/mobi-example.ipynb
-      - title: Blob Storage Notebook
-        src: mobi.html
-      - title: Storage Documentation
-        src: mobi-storage.html
 
   mtbs:
     category: Fire
@@ -549,10 +507,6 @@ collections:
       - title: Example Notebook
         src: mtbs-example.html
         launch: datasets/mtbs/mtbs-example.ipynb
-      - title: Blob Storage Notebook
-        src: mtbs.html
-      - title: Storage Documentation
-        src: mtbs-storage.html
 
   naip:
     category: Imagery
@@ -561,10 +515,6 @@ collections:
       - title: Example Notebook
         src: naip-example.html
         launch: datasets/naip/naip-example.ipynb
-      - title: Blob Storage Notebook
-        src: naip.html
-      - title: Storage Documentation
-        src: naip-storage.html
 
   nasa-nex-gddp-cmip6:
     category: Climate/Weather
@@ -580,10 +530,6 @@ collections:
       - title: Example Notebook
         src: nasadem-example.html
         launch: datasets/nasadem/nasadem-example.ipynb
-      - title: Blob Storage Notebook
-        src: nasadem-cog.html
-      - title: Storage Documentation
-        src: nasadem-storage.html
 
   noaa-c-cap:
     category: Land use/Land cover
@@ -626,10 +572,6 @@ collections:
       - title: Example Notebook
         src: sentinel-2-l2a-example.html
         launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
-      - title: Blob Storage Notebook
-        src: sentinel-2.html
-      - title: Storage Documentation
-        src: sentinel-2-storage.html
 
   terraclimate:
     category: Climate/Weather
@@ -638,10 +580,6 @@ collections:
       - title: Example Notebook
         src: terraclimate-example.html
         launch: datasets/terraclimate/terraclimate-example.ipynb
-      - title: Blob Storage Notebook
-        src: terraclimate.html
-      - title: Storage Documentation
-        src: terraclimate-storage.html
 
   us-census:
     headerImg: ./images/us-census-hero.png
@@ -695,15 +633,6 @@ ai4e:
     alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
-  - title: Landsat TM/MSS Collection 2
-    shortTerm: Landsat TM/MSS
-    description:
-      Global imagery from the MSS and TM instruments on the Landsat 1-5 satellites
-    infoUrl: https://aka.ms/ai4edata-landsat-tm-mss
-    thumbnailUrl: landsat_tm_mms_small.jpg
-    alt: Earth from above
-    keywords: [Landsat, Global, Imagery, Satellite]
-
   - title: LILA BC
     shortTerm: LILA BC
     description: Labeled images related to wildlife conservation
@@ -711,16 +640,6 @@ ai4e:
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
     keywords: [LILA, Labels, Wildlife, Biodiversity]
-
-  - title: MODIS
-    shortTerm: MODIS
-    description:
-      Satellite imagery from the Moderate Resolution Imaging Spectroradiometer
-      (MODIS)
-    infoUrl: https://aka.ms/ai4edata-modis
-    thumbnailUrl: RE3BTDt.jpg
-    alt: View of Earth from space.
-    keywords: [MODIS, Satellite, Imagery, Global]
 
   - title: National Land Cover Database
     shortTerm: land cover
