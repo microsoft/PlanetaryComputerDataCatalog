@@ -633,15 +633,6 @@ ai4e:
     alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
-  - title: Landsat TM/MSS Collection 2
-    shortTerm: Landsat TM/MSS
-    description:
-      Global imagery from the MSS and TM instruments on the Landsat 1-5 satellites
-    infoUrl: https://aka.ms/ai4edata-landsat-tm-mss
-    thumbnailUrl: landsat_tm_mms_small.jpg
-    alt: Earth from above
-    keywords: [Landsat, Global, Imagery, Satellite]
-
   - title: LILA BC
     shortTerm: LILA BC
     description: Labeled images related to wildlife conservation
@@ -649,16 +640,6 @@ ai4e:
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
     keywords: [LILA, Labels, Wildlife, Biodiversity]
-
-  - title: MODIS
-    shortTerm: MODIS
-    description:
-      Satellite imagery from the Moderate Resolution Imaging Spectroradiometer
-      (MODIS)
-    infoUrl: https://aka.ms/ai4edata-modis
-    thumbnailUrl: RE3BTDt.jpg
-    alt: View of Earth from space.
-    keywords: [MODIS, Satellite, Imagery, Global]
 
   - title: National Land Cover Database
     shortTerm: land cover
