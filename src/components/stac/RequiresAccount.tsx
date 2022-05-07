@@ -19,7 +19,7 @@ const RequiresAccount = () => {
       messageBarType={MessageBarType.info}
     >
       <Text>
-        A Planetary Computer account is required to access the data assets in this
+        A Planetary Computer account is required to access the assets in this
         dataset.{" "}
         <Link to="/docs/concepts/sas/#when-an-account-is-needed">
           See documentation.
