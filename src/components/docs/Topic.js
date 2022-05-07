@@ -4,6 +4,8 @@ import GeneratedInternalToc from "./GeneratedInternalToc";
 import TopicNav from "./TopicNav";
 
 import DocsHtmlContent from "./DocsHtmlContent";
+import { useEffect } from "react";
+import { scrollToHash } from "utils";
 
 const centerPanelWidth = "75%";
 
@@ -11,6 +13,10 @@ const Topic = ({ topics }) => {
   const { topicId, fileId } = useParams();
   const docsKey = `./${topicId}/${fileId}.json`;
   const doc = topics[docsKey];
+
+  useEffect(() => {
+    scrollToHash(window.location.hash);
+  });
 
   const bottomNav = <TopicNav topic={topicId} prev={doc.prev} next={doc.next} />;
 

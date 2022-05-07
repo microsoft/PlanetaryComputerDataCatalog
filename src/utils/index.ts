@@ -203,13 +203,11 @@ export const scrollToHash = (
 ) => {
   // Remove the hash
   const id = elementId.substring(elementId.lastIndexOf("#") + 1);
+  const el = document.getElementById(id);
 
-  return () => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: behavior });
-    }
-  };
+  if (el) {
+    el.scrollIntoView({ behavior: behavior });
+  }
 };
 
 // TODO: Refactor to parse into params, not string manipulation

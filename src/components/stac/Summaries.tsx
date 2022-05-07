@@ -50,8 +50,20 @@ const CollectionSummary = ({ collection }: Props) => {
         formatted = val.value
           .slice()
           .sort((a, b) => a - b)
-          .map(v => stacFormatter.format(v, key))
-          .join(", ");
+          .map(v => stacFormatter.format(v, key));
+        // If the summary is an array of arrays, use a an actual list
+        if (Array.isArray(val.value[0])) {
+          formatted = (
+            <ul className="summary-list">
+              {formatted.map((e: string) => (
+                <li key={`${val.label}-${e}`}>{e}</li>
+              ))}
+            </ul>
+          );
+        } else {
+          // Otherwise, join to a string
+          formatted = formatted.join(", ");
+        }
 
         // Override original formatting
         isHtml = false;

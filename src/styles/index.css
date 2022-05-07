@@ -354,17 +354,21 @@ https://every-layout.dev/layouts/sidebar/
 
 /* Convert collection detail <ul> to comma seperated list */
 
-.collection-content-item ul {
+ul.summary-list {
+  margin: 0;
+}
+
+.collection-content-item ul:not(.summary-list) {
   display: inline;
   list-style: none;
   padding-left: 0;
 }
 
-.collection-content-item li {
+.collection-content-item ul:not(.summary-list) li {
   display: inline;
 }
 
-.collection-content-item li:after {
+.collection-content-item ul:not(.summary-list) li:after {
   content: ", ";
 }
 
