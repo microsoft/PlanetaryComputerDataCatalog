@@ -37,3 +37,6 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/chloris-biomass/chloris-biomass-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gnatsgo/gnatsgo-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/planet-nicfi/planet-nicfi-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-c2/landsat-c2-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/esa-worldcover/esa-worldcover-example.ipynb
+
