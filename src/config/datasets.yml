@@ -305,6 +305,10 @@ collections:
   esa-worldcover:
     category: Land use/Land cover
     headerImg: ./images/esa-worldcover-hero.png
+    tabs:
+      - title: Example Notebook
+        src: esa-worldcover-example.html
+        launch: datasets/esa-worldcover/esa-worldcover-example.ipynb
 
   fia:
     headerImg: ./images/fia-hero.png
@@ -408,10 +412,18 @@ collections:
   landsat-c2-l1:
     category: Imagery
     headerImg: ./images/landsat-c2-l1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: landsat-c2-example.html
+        launch: datasets/landsat-c2/landsat-c2-example.ipynb
 
   landsat-c2-l2:
     category: Imagery
     headerImg: ./images/landsat-c2-l2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: landsat-c2-example.html
+        launch: datasets/landsat-c2/landsat-c2-example.ipynb
 
   landsat-8-c2-l2:
     isHidden: true
