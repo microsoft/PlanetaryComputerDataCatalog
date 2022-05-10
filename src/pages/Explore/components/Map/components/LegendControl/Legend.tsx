@@ -98,7 +98,13 @@ const getLegendType = (
   if (legendConfig) {
     switch (legendConfig.type) {
       case LegendTypes.classmap:
-        return <ClassMap params={params} collection={collection} />;
+        return (
+          <ClassMap
+            params={params}
+            collection={collection}
+            legendConfig={legendConfig}
+          />
+        );
       case LegendTypes.continuous:
         return <ColorMap params={params} legendConfig={legendConfig} />;
       case LegendTypes.interval:
@@ -115,7 +121,13 @@ const getLegendType = (
   }
 
   if (hasClassmapValues(collection, params.assets)) {
-    return <ClassMap params={params} collection={collection} />;
+    return (
+      <ClassMap
+        params={params}
+        collection={collection}
+        legendConfig={legendConfig}
+      />
+    );
   }
   return null;
 };

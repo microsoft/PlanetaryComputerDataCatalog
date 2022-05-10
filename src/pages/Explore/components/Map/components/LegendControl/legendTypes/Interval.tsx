@@ -18,7 +18,7 @@ import {
 
 interface IntervalProps {
   params: qs.ParsedQuery<string>;
-  legendConfig: ILegendConfig | undefined;
+  legendConfig?: ILegendConfig;
 }
 
 const DEFAULT_SCALE_FACTOR = 1;
@@ -29,7 +29,7 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
       ? params.colormap_name[0]
       : params.colormap_name;
 
-  const { isLoading, data: intervals } = useInterval(classmapName);
+  const { isLoading, data: intervals } = useInterval(classmapName, legendConfig);
 
   const definition = classmapName
     ? intervals
