@@ -8,6 +8,8 @@ import {
   Icon,
 } from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import QuerySection from "./QuerySection";
@@ -44,9 +46,18 @@ const QueryInfo = () => {
 
   const querySection = <QuerySection cql={cql} />;
 
+  const renderDesc = renderOption?.description ? (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: marked.parseInline(DOMPurify.sanitize(renderOption.description)),
+      }}
+    />
+  ) : (
+    renderOption?.name
+  );
   const renderSection = (
     <Section title="Rendering" icon="MapLayers">
-      {renderOption?.description || renderOption?.name}
+      {renderDesc}
     </Section>
   );
 
