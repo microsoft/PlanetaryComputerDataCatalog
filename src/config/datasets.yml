@@ -485,7 +485,7 @@ collections:
 
   noaa-c-cap:
     category: Land use/Land cover
-    headerImg: https://via.placeholder.com/500x300?text=CCAP TODO
+    headerImg: ./images/noaa-c-cap-hero.png
     tabs:
       - title: Example Notebook
         src: noaa-c-cap-example.html
