@@ -4,6 +4,7 @@ import { isEmpty, uniqueId } from "lodash-es";
 import { fetchTileJson, registerStacFilter } from "utils/requests";
 import {
   deserializeSettings,
+  QS_ACTIVE_EDIT_KEY,
   QS_COLLECTION_KEY,
   QS_CUSTOM_PREFIX,
   QS_MOSAIC_KEY,
@@ -59,6 +60,7 @@ const loadQsV1 = (
       [mosaicName],
       [renderOptionName],
       [],
+      undefined,
       dispatch
     );
 
@@ -73,12 +75,16 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
   const mosaicNames = qs.get(QS_MOSAIC_KEY)?.split(QS_SEPARATOR) ?? [];
   const renderOptionNames = qs.get(QS_RENDER_KEY)?.split(QS_SEPARATOR) ?? [];
   const settings = qs.get(QS_SETTINGS_KEY)?.split(QS_SEPARATOR) ?? [];
+  const editingIdx = qs.get(QS_ACTIVE_EDIT_KEY)
+    ? parseInt(qs.get(QS_ACTIVE_EDIT_KEY) as string)
+    : undefined;
 
   loadMosaicStateV2(
     collectionIds,
     mosaicNames,
     renderOptionNames,
     settings,
+    editingIdx,
     dispatch
   );
 };
@@ -99,6 +105,7 @@ const loadMosaicStateV2 = async (
   mosaicNames: string[],
   renderOptionNames: string[],
   settings: string[],
+  editingIndex: number | undefined = undefined,
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
 ) => {
   const collections = await Promise.all(
@@ -183,11 +190,16 @@ const loadMosaicStateV2 = async (
 
   const layers = Object.fromEntries(layerEntries);
   const layerOrder = Object.keys(layers);
-  const activeLayerId = layerEntries.find(([, layer]) => !layer.isPinned)?.[0];
+
+  const activeEditingLayerId =
+    editingIndex !== undefined ? layerEntries[editingIndex][0] : undefined;
+  const unppinnedLayerId = layerOrder.find(layerId => !layers[layerId].isPinned);
+
   dispatch(setBulkLayers({ layers, layerOrder }));
 
   // If there was a layer that was not pinned, make it the active one
-  activeLayerId && dispatch(setCurrentEditingLayerId(activeLayerId));
+  const activeId = activeEditingLayerId ?? unppinnedLayerId;
+  activeId && dispatch(setCurrentEditingLayerId(activeId));
 
   return false;
 };

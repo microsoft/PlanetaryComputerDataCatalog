@@ -18,9 +18,9 @@
     as [Cloud Optimized GeoTIFFs](https://www.cogeo.org/).
   assets:
     headerImg:
-      href: ./images/cop-dem-collection-hero.png
+      href: ./images/3dep-lidar-copc-hero.png
     thumbnail:
-      href: https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/thumbnails/image/USGS_ID_green_0.png
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/3dep-lidar-copc-thumbnail.png
   keywords: [USGS, 3DEP, Elevation, Lidar, Point Cloud]
 
 daymet:
@@ -153,7 +153,7 @@ modis:
     describe atmosphere, cryosphere, land, and ocean features utilized in studies across various disciplines. 
   description: >
     The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on both the
-    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/)spacecraft. The instrument 
+    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/) spacecraft. The instrument 
     has a swath width of 2,330 km and covers the entire surface of the Earth within one or two days. 
     The sensor measures 36 spectral bands between 0.405-14.385 µm and acquires data at three
     spatial resolutions: 250, 500, and 1,000 m.
@@ -241,4 +241,23 @@ planet-nicfi:
       "Satellite",
       "Tropics",
       "Imagery"
+    ]
+
+chesapeake-lulc:
+  title: Chesapeake Land Use Land Cover
+  short_description: >
+    Land Use and Land Cover maps for the Chesapeake Bay Watershed from the Conservation Innovation Center at the Chesapeake Conservancy.
+  description: >
+    One-meter resolution land use and land cover maps for the entire Chesapeake Bay watershed, an area of over 250,000 square kilomters that spans New York, Pennsylvania, Maryland, Delaware, West Virginia, Virginia, and the District of Columbia. The data are made available by the [Conservation Innovation Center](https://www.chesapeakeconservancy.org/conservation-innovation-center/) at the [Chesapeake Conservancy](https://www.chesapeakeconservancy.org/). Based on 2013-2014 imagery from the National Agriculture Imagery Program, the high resolution classification data provides 900 times the amount of information as conventional 30-meter land cover data that has traditionally been utilized for this area.
+  assets:
+    headerImg:
+      href: ./images/chesapeake-lulc-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc-thumb.png"
+  keywords:
+    [
+      "Land Use",
+      "Land Cover",
+      "Chesapeake Bay Watershed",
+      "Chesapeake Conservancy"
     ]

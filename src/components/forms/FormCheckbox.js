@@ -1,7 +1,7 @@
 import { Checkbox } from "@fluentui/react";
 import { useFormikContext } from "formik";
 
-const FormCheckbox = ({ name, label, placeholder, required = false }) => {
+const FormCheckbox = ({ name, label, placeholder = null, required = false }) => {
   const { values, touched, errors, setFieldValue } = useFormikContext();
 
   return (

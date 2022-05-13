@@ -18,8 +18,10 @@ import {
 
 interface IntervalProps {
   params: qs.ParsedQuery<string>;
-  legendConfig: ILegendConfig | undefined;
+  legendConfig?: ILegendConfig;
 }
+
+const DEFAULT_SCALE_FACTOR = 1;
 
 const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
   const classmapName =
@@ -27,7 +29,7 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
       ? params.colormap_name[0]
       : params.colormap_name;
 
-  const { isLoading, data: intervals } = useInterval(classmapName);
+  const { isLoading, data: intervals } = useInterval(classmapName, legendConfig);
 
   const definition = classmapName
     ? intervals
@@ -38,7 +40,7 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
     />
   );
 
-  const labelScaleFactor = legendConfig?.scaleFactor ?? 0.0001;
+  const labelScaleFactor = legendConfig?.scaleFactor ?? DEFAULT_SCALE_FACTOR;
 
   return (
     <StackItem styles={mappedItemLegendStyles} className="custom-overflow">
@@ -52,7 +54,10 @@ const Interval: FC<IntervalProps> = ({ params, legendConfig }) => {
 
 export default Interval;
 
-const makeSwatches = (intervals: IntervalMap, scaleFactor: number = 1) => {
+const makeSwatches = (
+  intervals: IntervalMap,
+  scaleFactor: number = DEFAULT_SCALE_FACTOR
+) => {
   return intervals.map(([[min, max], rgba]) => {
     const formattedMin = (min * scaleFactor).toLocaleString();
     const formattedMax = (max * scaleFactor).toLocaleString();

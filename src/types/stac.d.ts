@@ -19,9 +19,10 @@ export interface IStacCollection {
   };
   keywords: string[];
   links: IStacLink[];
+  summaries?: Record<string, string>;
   "msft:short_description": string;
   "msft:group_id"?: string;
-  summaries?: Record<string, string>;
+  "msft:requires_account"?: boolean;
 }
 
 export interface IStacLink {

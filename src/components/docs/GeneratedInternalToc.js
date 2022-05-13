@@ -34,7 +34,7 @@ const GeneratedInternalToc = ({ nohash = false, html }) => {
     return (
       <li key={hash} className="toctree-l1">
         {nohash ? (
-          <Link onClick={scrollToHash(hash)}>{text}</Link>
+          <Link onClick={() => scrollToHash(hash)}>{text}</Link>
         ) : (
           <HashLink smooth to={hash}>
             {text}

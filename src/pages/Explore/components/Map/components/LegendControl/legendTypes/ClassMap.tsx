@@ -10,6 +10,7 @@ import {
   StackItem,
   Text,
 } from "@fluentui/react";
+import { ILegendConfig } from "pages/Explore/types";
 import * as qs from "query-string";
 import { IStacCollection } from "types/stac";
 import {
@@ -21,14 +22,15 @@ import {
 interface ClassMapProps {
   params: qs.ParsedQuery<string>;
   collection: IStacCollection | null;
+  legendConfig?: ILegendConfig;
 }
 
-const ClassMap = ({ params, collection }: ClassMapProps) => {
+const ClassMap = ({ params, collection, legendConfig }: ClassMapProps) => {
   const classmapName = Array.isArray(params.colormap_name)
     ? params.colormap_name[0]
     : params.colormap_name;
 
-  const { isLoading, data: classes } = useClassmap(classmapName);
+  const { isLoading, data: classes } = useClassmap(classmapName, legendConfig);
   const definition = classmapName
     ? classes
     : params.colormap && JSON.parse(params.colormap as string);

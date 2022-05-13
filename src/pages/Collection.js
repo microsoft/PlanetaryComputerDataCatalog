@@ -8,6 +8,7 @@ import {
   Spinner,
   SpinnerSize,
   getTheme,
+  Separator,
 } from "@fluentui/react";
 
 import Bands from "../components/stac/Bands";
@@ -30,6 +31,7 @@ import Assets from "../components/stac/Assets";
 import CollectionUrl from "components/stac/CollectionUrl";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
+import RequiresAccount from "components/stac/RequiresAccount";
 
 const Collection = () => {
   const { id } = useParams();
@@ -126,6 +128,8 @@ const Collection = () => {
               <div className="collection-content">
                 <h2 style={{ marginTop: 0 }}>Overview</h2>
                 <Description />
+                <RequiresAccount />
+                <Separator />
                 <CollectionUrl />
                 <Providers />
                 <License />

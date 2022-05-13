@@ -33,7 +33,7 @@ While the Planetary Computer data and APIs are publicly accessible, certain feat
 In the meantime, the core components of the Planetary Computer are usable without an account:
 
 - The [STAC API](../reference/stac) is public and can be accessed anonymously.
-- Data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
+- Most data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data. Some datasets require a Planetary Computer API subscription key.
 
 We're just getting started. Check back for updated documentation and new features!
 

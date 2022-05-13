@@ -22,6 +22,7 @@ const FormInput = ({
       value={values[name]}
       errorMessage={touched[name] && errors[name]}
       onChange={handleChange}
+      maxLength={multiline ? 1000 : 255}
     />
   );
 };

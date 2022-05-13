@@ -4,7 +4,6 @@ The data hosted by the Planetary Computer is free for anyone to use. For some da
 
 The Data Authentication API enables users to create access tokens that can be used to read Planetary Computer data. Getting a token is a simple HTTP GET request or a single method call to the [planetary-computer](https://github.com/microsoft/planetary-computer-sdk-for-python) Python package. Anyone can get a token from our Data Authentication API - you don't have to be a registered Planetary Computer user to get an access token. If you are a registered user, and/or if you are requesting data inside the West Europe Azure Region, the rate limiting and token expiry will be more favorable to doing large-scale work with our data.
 
-
 ### When a token is needed
 
 A SAS token is needed whenever you want to access Planetary Computer data at an Azure Blob URL. For example, an Azure Blob URL looks like:
@@ -48,6 +47,29 @@ The `sign` endpoint makes it easy to convert an unsigned blob URL to a signed UR
 
 The `href` field here contains the full, signed URL which may be used directly.
 
+### When an account is needed
+
+The STAC metatdata API is available to all users and does not require an account or a token to use. While all data assets require a token for accessing files on Azure Blob storage, some datasets also require an account key to be used when generating the token. This requirement is inidcated on the Data Catalog page of affected datasets. For these datasets, be sure to include your subscription key when requesting a token, as described below.
+
+### Supplying a subscription key
+
+When your Planetary Computer [account request](http://planetarycomputer.microsoft.com/account/request) was approved, a pair of subscription keys were automatically generated
+for you. You can view your keys by singing in to the [developer portal](https://planetarycomputer.developer.azure-api.net/).
+
+You can supply your subscription key in an HTTP request in two ways:
+
+* Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
+
+```bash
+curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
+```
+
+* Supply it in a `subscription-key` query parameter, for example:
+
+```bash
+curl https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
+```
+
 ### Rate limits and access restrictions
 
 The token has an expiry time, and when the token has expired a new token must be issued. Rate limiting is put into place in certain cases to limit the amount of egress against our datasets. These limits should be generous - if you find they are getting in the way of your work, please let us know!
@@ -56,21 +78,12 @@ Rate limiting and token expiry are dependent on two aspects of each requests:
   * Whether or not the request is originating from within the same data center as the Planetary Computer service (West Europe)
   * Whether or not a valid API subscription key has been supplied on the request
 
-These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most unthrottled access, we recommend utilizing a Planetary Computer subscription key and doing your work in the West Europe Azure region.
+These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most un-throttled access, we recommend utilizing a Planetary Computer subscription key and doing your work in the West Europe Azure region.
 
-#### Supplying a subscription key
+Most datasets in the Planetary Computer are anonymously accessible: you don't need to supply a subscription key to get a SAS token for downloading the data.
+Some datasets do require a subscription key, and some datasets are only available to certain approved users even if a subscription key is provided. This will be noted in
+the dataset detail page in the [data catalog](https://planetarycomputer.microsoft.com/catalog).
 
-You can supply you subscription key in an HTTP request in two ways:
-  * Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
-
-```bash
-curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
-```
-  * Supply it in a `subscription-key` query parameter, for example:
-
-```bash
-curl https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
-```
 
 ### `planetary-computer` Python package
 

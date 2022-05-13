@@ -6,6 +6,8 @@ import azure.functions as func
 
 from .card import make_card
 
+MAX_SIZE = 8000  # 8kb
+
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
@@ -15,6 +17,12 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     az_env = os.environ.get("AZURE_FUNCTIONS_ENVIRONMENT")
     signup_url = os.environ.get("SignupUrl")
     signup_token = os.environ.get("SignupToken")
+
+    # Prevent excessive request body size
+    payload_size = len(req.get_body())
+    if payload_size > MAX_SIZE:
+        logging.error(f"Request payload too large: {payload_size} bytes")
+        return func.HttpResponse("Request payload too large", status_code=413)
 
     try:
         req_body = req.get_json()
