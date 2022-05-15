@@ -243,6 +243,25 @@ planet-nicfi:
       "Imagery"
     ]
 
+sentinel-1:
+  title: Sentinel-1 Synthetic Aperture Radar (SAR)
+  short_description: >
+    Sentinel-1 comprises a constellation of two polar-orbiting satellites, operating day and night performing C-band synthetic aperture radar imaging.
+  description: >
+    [Sentinel 1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1) is an imaging radar mission conducted by the European Space Agency providing continuous all-weather, day-and-night imagery at C-band.
+    The Sentinel-1 constellation provides high reliability, improved revisit time, geographical coverage and rapid data dissemination to support operational
+    applications in the priority areas of marine monitoring, land monitoring and emergency services.
+
+
+    See the [Sentinel-1 documentation](https://sentinel.esa.int/web/sentinel/user-guides/sentinel-1-sar/overview) on the ESA's site
+    for more information about the mission and products.
+  assets:
+    headerImg:
+      href: ./images/sentinel-1-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/sentinel-1.png"
+  keywords: ["ESA", "Copernicus", "Sentinel", "C-Band", "SAR"]
+
 chesapeake-lulc:
   title: Chesapeake Land Use Land Cover
   short_description: >
