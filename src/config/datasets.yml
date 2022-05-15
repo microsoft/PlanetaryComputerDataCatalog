@@ -577,6 +577,22 @@ collections:
         src: planet-nicfi-example.html
         launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
+  sentinel-1-grd:
+    category: SAR
+    headerImg: ./images/sentinel-1-grd-hero.png
+    tabs:
+      - title: Example Notebook
+        src: sentinel-1-grd-example.html
+        launch: datasets/sentinel-1/sentinel-1-grd-example.ipynb
+
+  sentinel-1-rtc:
+    category: SAR
+    headerImg: ./images/sentinel-1-rtc-hero.png
+    tabs:
+      - title: Example Notebook
+        src: sentinel-1-rtc-example.html
+        launch: datasets/sentinel-1/sentinel-1-rtc-example.ipynb
+
   sentinel-2-l2a:
     category: Imagery
     headerImg: ./images/sentinel-hero.jpg
