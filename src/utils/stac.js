@@ -544,6 +544,13 @@ export const renderItemColumn = (item, _, column) => {
           <SimpleKeyValueList object={fieldContent} />
         </Revealer>
       );
+    case "classification:bitfields":
+      fieldContent = fieldContent
+        .map(v => {
+          return v.description;
+        })
+        .join(", ");
+      return <span>{fieldContent}</span>
     case "dimensions":
       if (Array.isArray(fieldContent)) {
         fieldContent = fieldContent.join(", ");
