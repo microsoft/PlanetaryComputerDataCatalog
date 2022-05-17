@@ -1,4 +1,5 @@
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/eclipse/eclipse-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/cil-gdpcir-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/ensemble.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/indicators.ipynb
