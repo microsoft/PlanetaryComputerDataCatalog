@@ -287,6 +287,12 @@ collections:
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
+  eclipse:
+    tabs:
+      - title: Example Notebook
+        src: eclipse-example.html
+        launch: datasets/eclipse/eclipse-example.ipynb
+
   ecmwf-forecast:
     headerImg: ./images/ecmwf-forecast-hero.png
     tabs:
