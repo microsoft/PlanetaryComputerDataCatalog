@@ -8,13 +8,15 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Highlights
 
-- **Higher performance and scalability of our STAC API**. See the [pgstac 0.5 release notes](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) for more.
-- The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries.
+- **Improved performance and scalability of our STAC API**. Requests to our STAC API, including searches, will be faster and scale to larger results sets See the pgstac [0.5](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) and [0.6](https://github.com/stac-utils/pgstac/releases/tag/v0.6.0) release notes for more.
+- The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries. See [working with multiple layers](https://planetarycomputer-staging.microsoft.com/docs/overview/explorer/#working-with-multiple-layers) for more.
 - Many new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
 
 ### APIs
 
 #### STAC API
+
+- Updated the STAC API to [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-rc.1)
 
 ##### New features
 
@@ -22,10 +24,12 @@ This release includes several new datasets, features, and updates to libraries.
 
 ##### New features
 
-#### New API datasets
+#### New datasets
 
-* [ALOS Forest/Non-Forest Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-fnf-mosaic): Global 25m resolution map classifying "forest" and "non-forest" landcover.
-* [ALOS PALSAR Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-palsar-mosaic): Global 25m resolution SAR image mosaic.
+* [Sentinel-1 RTC](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-rtc): Global radiometrically terrain corrected SAR imagery derived from the Sentinel 1 Level 1 GRD product.
+* [Sentinel-1 GRD](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-grd): Focused SAR data that has been detected, multi-looked and projected to ground range using an Earth ellipsoid model.
+* [ALOS Forest/Non-Forest Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-fnf-mosaic): Global 25-meter resolution map classifying "forest" and "non-forest" landcover.
+* [ALOS PALSAR Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-palsar-mosaic): Global 25-meter resolution SAR image mosaic.
 * [CIL Global Downscaled Projections for Climate Impacts Research Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/cil-gdpcir): Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
 * [ECMWF Open Data (real-time)](https://planetarycomputer-staging.microsoft.com/dataset/ecmwf-forecast): ECMWF Open Data (Real Time) forecasts
 * [ERA5 - PDS](https://planetarycomputer-staging.microsoft.com/dataset/era5-pds): A comprehensive reanalysis, which assimilates as many observations as possible in the upper air and near surface.
@@ -51,14 +55,17 @@ This release includes several new datasets, features, and updates to libraries.
 * [MODIS Thermal Anomalies/Fire Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A1-061): MODIS Thermal Anomalies/Fire Daily
 * [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
 * [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
+* [NOAA C-CAP Regional Land Cover and Change](https://planetarycomputer-staging.microsoft.com/dataset/noaa-c-cap): Periodic coastal landcover classifications back to 1975
 * [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 * [Planet-NICFI Basemaps (Visual)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 
-#### New Blob Storage datasets
+### Documentation and Tutorials
+
+* [Customizable radiometric terrain correction of Sentinel-1 products](https://nbviewer.org/github/microsoft/PlanetaryComputerExamples/blob/main/tutorials/customizable-rtc-sentinel1.ipynb) using the open-source [sarsen](https://github.com/bopen/sarsen) package.
 
 ### Hub environments
 
-#### New package versions
+- Updated to [planetary-computer-containers 2022.05.11.0](https://github.com/microsoft/planetary-computer-containers/releases/tag/2022.05.11.0)
 
 ### Website
 
