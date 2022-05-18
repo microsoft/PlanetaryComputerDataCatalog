@@ -22,12 +22,17 @@ export interface IMosaic {
   searchId?: string | null;
 }
 
+export interface IMosaicRenderOptionCondition {
+  property: string;
+  value: any;
+}
 export interface IMosaicRenderOption {
   name: string;
   description: string;
   options: string;
   minZoom: number | undefined;
   legend: ILegendConfig | undefined;
+  conditions?: IMosaicRenderOptionCondition[];
 }
 
 export interface ILegendConfig {
