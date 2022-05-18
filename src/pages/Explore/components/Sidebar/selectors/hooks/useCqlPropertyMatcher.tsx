@@ -1,3 +1,4 @@
+import { isEqual } from "lodash-es";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
 import { CqlExpressionParser } from "pages/Explore/utils/cql";
@@ -22,7 +23,8 @@ const useCqlPropertyMatcher = () => {
       ? expression.value
       : [expression.value];
     return (
-      values.includes(value) && inclusiveOperators.includes(expression.operator)
+      (isEqual(values, value) || values.includes(value)) &&
+      inclusiveOperators.includes(expression.operator)
     );
   };
 };
