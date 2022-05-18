@@ -7,6 +7,14 @@ describe("Explorer selector tests", () => {
 
     cy.visit("/explore");
 
+    // Work around flake introduced by the Azure Maps service occassionally failing
+    // to load assets and throwing. Don't fail the test under that circumstance.
+    cy.on("uncaught:exception", e => {
+      if (e.message.includes("Failed to retrieve the style definitions")) {
+        return false;
+      }
+    });
+
     cy.getBySel("collection-selector")
       .should("be.visible")
       .not("have.class", disabledClass);
