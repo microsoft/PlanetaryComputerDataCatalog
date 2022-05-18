@@ -171,8 +171,8 @@ StacFields.Registry.addMetadataField("classification:bitfields", {
             <Text>{v.description}</Text>
           </Stack>
           <Stack horizontal tokens={gap4}>
-            <StackItem>Length: {v.length}, </StackItem>
-            <StackItem>Offset: {v.offset}</StackItem>
+            <StackItem>Offset: {v.offset}, </StackItem>
+            <StackItem>Length: {v.length}</StackItem>
           </Stack>
           <DetailsList
             styles={{ root: { paddingBottom: 10 } }}
