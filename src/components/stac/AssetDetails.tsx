@@ -21,7 +21,7 @@ const AssetDetails = ({ asset }: AssetDetailsProps) => {
     .map(({ key, detail }) => {
       return (
         <>
-          <h3 style={{ marginBottom: 2 }}>{stacFormatter.label(key)}</h3>
+          <h3>{stacFormatter.label(key)}</h3>
           {stacFormatter.format(detail, key)}
         </>
       );
@@ -39,7 +39,7 @@ const AssetDetails = ({ asset }: AssetDetailsProps) => {
       />
       <Panel
         type={PanelType.custom}
-        customWidth={"400px"}
+        customWidth={"450px"}
         headerText={asset.title || "Asset details"}
         isOpen={isOpen}
         isLightDismiss={true}
