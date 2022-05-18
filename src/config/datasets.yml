@@ -437,78 +437,154 @@ collections:
   modis-09A1-061:
     category: Imagery
     headerImg: ./images/modis-09a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
 
   modis-09Q1-061:
     category: Imagery
     headerImg: ./images/modis-09q1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
 
   modis-10A1-061:
     category: Water/Snow
     headerImg: ./images/modis-10a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-snow-example.html
+        launch: datasets/modis/modis-snow-example.ipynb
 
   modis-10A2-061:
     category: Water/Snow
     headerImg: ./images/modis-10a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-snow-example.html
+        launch: datasets/modis/modis-snow-example.ipynb
 
   modis-11A1-061:
     category: Temperature
     headerImg: ./images/modis-11a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
 
   modis-11A2-061:
     category: Temperature
     headerImg: ./images/modis-11a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
 
   modis-13A1-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-13a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-13Q1-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-13q1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-14A1-061:
     category: Fire
     headerImg: ./images/modis-14a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
 
   modis-14A2-061:
     category: Fire
     headerImg: ./images/modis-14a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
 
   modis-15A2H-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-15a2h-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-15A3H-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-15a3h-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-16A3GF-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-16a3gf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-17A2H-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-17a2h-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-17A2HGF-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-17a2hgf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-17A3HGF-061:
     category: Biomass/Vegetation
     headerImg: ./images/modis-17a3hgf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
 
   modis-21A2-061:
     category: Temperature
     headerImg: ./images/modis-21a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
 
   modis-43A4-061:
     category: Imagery
     headerImg: ./images/modis-43a4-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
 
   modis-64A1-061:
     category: Fire
     headerImg: ./images/modis-64a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
 
   mobi:
     category: Biodiversity
