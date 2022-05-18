@@ -42,7 +42,7 @@ collections:
     headerImg: ./images/3dep-lidar-copc-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-copc-example.html
         launch: datasets/3dep-lidar/3dep-lidar-copc-example.ipynb
 
   3dep-lidar-dsm:
@@ -50,7 +50,7 @@ collections:
     headerImg: ./images/3dep-lidar-dsm-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-pointsourceid:
@@ -58,7 +58,7 @@ collections:
     headerImg: ./images/3dep-lidar-pointsourceid-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-intensity:
@@ -66,7 +66,7 @@ collections:
     headerImg: ./images/3dep-lidar-intensity-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-hag:
@@ -74,7 +74,7 @@ collections:
     headerImg: ./images/3dep-lidar-hag-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-dtm:
@@ -82,7 +82,7 @@ collections:
     headerImg: ./images/3dep-lidar-dtm-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-returns:
@@ -90,7 +90,7 @@ collections:
     headerImg: ./images/3dep-lidar-returns-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-classification:
@@ -98,7 +98,7 @@ collections:
     headerImg: ./images/3dep-lidar-classification-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-lidar-dtm-native:
@@ -106,7 +106,7 @@ collections:
     headerImg: ./images/3dep-lidar-dtm-native-hero.png
     tabs:
       - title: Example Notebook
-        src: 3dep-lidar-example.html
+        src: 3dep-lidar-cog-example.html
         launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 
   3dep-seamless:
