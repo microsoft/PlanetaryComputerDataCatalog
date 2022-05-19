@@ -31,7 +31,6 @@ export const EnumArrayField = ({ field }: EnumFieldProps) => {
     item: IDropdownOption | undefined
   ): void => {
     if (item) {
-      console.log(item.key);
       const key = (item.key as string).split(",");
       setSelectedKey(key);
       handleUpdate(key);
