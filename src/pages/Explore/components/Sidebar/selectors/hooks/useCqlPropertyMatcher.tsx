@@ -14,10 +14,13 @@ const useCqlPropertyMatcher = () => {
       .map((exp: CqlExpression) => new CqlExpressionParser(exp))
       .find(parser => parser.property === property);
 
+    // If the expression does not include this property at all, then we must
+    // assume this render option is potentially valid.
     if (!expression) {
-      return false;
+      return true;
     }
 
+    // Check that the operator and value indicate that we want to include the render option
     const inclusiveOperators = ["=", ">", ">=", "in", "between", "like"];
     const values = Array.isArray(expression.value)
       ? expression.value
