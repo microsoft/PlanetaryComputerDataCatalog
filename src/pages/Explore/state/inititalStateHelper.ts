@@ -168,7 +168,7 @@ const loadMosaicStateV2 = async (
         exp => new CqlExpressionParser(exp).property !== "collection"
       );
 
-      const query = { ...mosaic, searchId, cqlClean };
+      const query = { ...mosaic, searchId, cql: cqlClean };
 
       // Fetch the minzoom from the tilejson endpoint for this collection/renderOption
       const minZoom = (await fetchTileJson(query, renderOption, collection)).minzoom;
