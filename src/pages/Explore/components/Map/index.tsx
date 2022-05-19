@@ -84,13 +84,24 @@ const ExploreMap = () => {
     mapHandlers.onDataEvent,
   ]);
 
+  useEffect(() => {
+    // Azure maps is putting 2 shortcut elements with the same id on the page,
+    // and it's causing an accessibility error.
+    const elNames = ["#atlas-map-shortcuts", "#atlas-map-style", "#atlas-map-state"];
+    elNames.forEach(elName => {
+      const els = document.querySelectorAll(elName);
+      if (els.length === 2) {
+        els[1].remove();
+      }
+    });
+  }, [mapReady]);
+
   // When logged in, transform requests to include auth header
   useEffect(() => {
     if (sessionStatus.isLoggedIn) {
       console.log("Activating auth headers for tile requests");
       mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
     } else {
-      console.log("Deactivating auth headers for tile requests");
       mapRef.current?.setServiceOptions({
         transformRequest: () => {
           return {};

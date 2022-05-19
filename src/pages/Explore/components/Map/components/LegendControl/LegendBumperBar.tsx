@@ -22,7 +22,6 @@ const LegendBumperBar = ({ layer }: LegendCmdBarProps) => {
 
   const btnPin = (
     <IconButton
-      role="menuitem"
       aria-label={info.title}
       title={info.title}
       iconProps={{ iconName: info.icon }}

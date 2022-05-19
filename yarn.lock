@@ -3236,10 +3236,10 @@ axobject-query@^2.2.0:
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
   integrity sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==
 
-azure-maps-control@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/azure-maps-control/-/azure-maps-control-2.1.8.tgz#696cbbf2596efeb8c4a864c3ac0d13a3c2535e5f"
-  integrity sha512-3JcdeO5JR2hC21YCw4Xp6S9bi2zJ53lOOvPwq6nyJshG4wiT75yJNOqu5PzwA3958lQhy4S22Z4Kv93LhgzQiw==
+azure-maps-control@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/azure-maps-control/-/azure-maps-control-2.1.10.tgz#1f0b22f020724faa9e78beb70ac04220d640dc95"
+  integrity sha512-dfU1xfk5KJQLsWPGnbLQdIj/3iWgIR6Zin+/NDmWBE2txqoNzToENsU/njfQBRDjzYpW/46IEidysqcJUEqCAg==
   dependencies:
     "@types/adal-angular" "^1.0.1"
 

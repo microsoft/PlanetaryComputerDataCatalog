@@ -28,7 +28,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@uifabric/icons": "^7.6.2",
     "axios": "^0.26.0",
-    "azure-maps-control": "^2.1.8",
+    "azure-maps-control": "^2.1.10",
     "dayjs": "^1.10.8",
     "dompurify": "^2.3.6",
     "formik": "^2.2.9",
