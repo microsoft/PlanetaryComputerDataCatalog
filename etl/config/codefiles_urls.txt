@@ -5,8 +5,8 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/indicators.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
-https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-grd/sentinel-1-grd.ipynb
-https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-rtc/sentinel-1-rtc.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-radiant-mlhub-api.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
