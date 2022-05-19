@@ -39,6 +39,7 @@ quickstarts/storage
 :caption: Tutorials
 
 tutorials/cloudless-mosaic-sentinel2
+tutorials/customizable-rtc-sentinel1
 tutorials/landcover
 tutorials/hurricane-florence-animation
 See all tutorials <https://github.com/microsoft/PlanetaryComputerExamples/tree/main/tutorials>
