@@ -3,12 +3,20 @@ import { EnumField } from "pages/Explore/components/query/EnumField";
 import { RangeField } from "pages/Explore/components/query/RangeField";
 import { TextNumberField } from "pages/Explore/components/query/TextNumberField/TextNumberField";
 import { TextStringField } from "pages/Explore/components/query/TextStringField";
+import { EnumArrayField } from "pages/Explore/components/query/EnumArrayField";
 
-export const getControlForField = (field: CqlExpressionParser<string | number>) => {
+export const getControlForField = (
+  field: CqlExpressionParser<string | number | string[]>
+) => {
   const schemaType = field.fieldSchema?.type;
   if (!schemaType) return null;
 
   switch (schemaType) {
+    case "array":
+      if (fieldSchemaIsEnum(field)) {
+        return getArrayControl(field as CqlExpressionParser<string[]>);
+      }
+      return null;
     case "string":
       if (fieldSchemaIsEnum(field)) {
         return getEnumControl(field as CqlExpressionParser<string>);
@@ -50,6 +58,12 @@ const getEnumControl = (field: CqlExpressionParser<string>) => {
   return <EnumField field={field} key={`enumcontrol-${field.property}`} />;
 };
 
-const fieldSchemaIsEnum = (field: CqlExpressionParser<string | number>) => {
+const getArrayControl = (field: CqlExpressionParser<string[]>) => {
+  return <EnumArrayField key={`arraycontrol-${field.property}`} field={field} />;
+};
+
+const fieldSchemaIsEnum = (
+  field: CqlExpressionParser<string | number | string[]>
+) => {
   return field.fieldSchema?.enum !== undefined;
 };

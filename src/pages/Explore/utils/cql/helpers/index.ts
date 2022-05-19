@@ -48,6 +48,9 @@ export const makeDefaultCqlExpression = (
     case "number":
     case "integer":
       return defaultNumberCql(property, fieldSchema);
+    case "array":
+      const defaultValue = fieldSchema?.enum ? fieldSchema.enum[0] : [];
+      return { op: "=", args: [{ property: property }, defaultValue] };
     default:
       throw new Error(`Unsupported field type: ${fieldSchema.type}`);
   }

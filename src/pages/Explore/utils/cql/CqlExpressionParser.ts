@@ -13,7 +13,7 @@ import {
 } from "./types";
 import { CQL_PROP_IDX, CQL_VALS_IDX } from "../constants";
 
-export class CqlExpressionParser<T extends string | number> {
+export class CqlExpressionParser<T extends string | number | string[]> {
   readonly exp: CqlExpression;
   readonly operator: CqlOperator;
   readonly property: string;
