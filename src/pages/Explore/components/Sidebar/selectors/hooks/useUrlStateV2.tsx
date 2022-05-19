@@ -67,9 +67,11 @@ export const useUrlStateV2 = () => {
       // of the ordered layer that is being edited so it can be restored when the
       // url is reloaded
       const idx = currentEditingLayerId
-        ? ol.findIndex(l => l.layerId === currentEditingLayerId).toString()
-        : "";
-      updateQueryStringParam(QS_ACTIVE_EDIT_KEY, idx);
+        ? ol.findIndex(l => l.layerId === currentEditingLayerId)
+        : -1;
+
+      const newVal = idx >= 0 ? idx.toString() : "";
+      updateQueryStringParam(QS_ACTIVE_EDIT_KEY, newVal);
     },
     [currentEditingLayerId]
   );

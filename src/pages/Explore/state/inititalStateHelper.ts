@@ -16,6 +16,7 @@ import {
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
 import { ILayerState, IMosaic, IMosaicInfo } from "../types";
 import { updateQueryStringParam } from "../utils";
+import { CqlExpressionParser } from "../utils/cql";
 import {
   fetchCollection,
   fetchCollectionMosaicInfo,
@@ -161,7 +162,13 @@ const loadMosaicStateV2 = async (
         ? (await fetchSearchIdMetadata(searchId)).search.search.filter.args
         : mosaic.cql;
 
-      const query = { ...mosaic, searchId, cql };
+      // The registered cql will have had the collection id property added
+      // which we don't need. It's stored directly on the state.
+      const cqlClean = cql.filter(
+        exp => new CqlExpressionParser(exp).property !== "collection"
+      );
+
+      const query = { ...mosaic, searchId, cql: cqlClean };
 
       // Fetch the minzoom from the tilejson endpoint for this collection/renderOption
       const minZoom = (await fetchTileJson(query, renderOption, collection)).minzoom;
