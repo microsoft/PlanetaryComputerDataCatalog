@@ -856,14 +856,6 @@ ai4e:
     alt: Image from ocean floor video
     keywords: [OOI, Video, Ocean, Pacific]
 
-  - title: Sentinel-1 GRD
-    shortTerm: Sentinel-1 GRD
-    description: Global synthetic aperture radar (SAR) data from 2017-present
-    infoUrl: https://aka.ms/ai4edata-sentinel-1
-    thumbnailUrl: sentinel-1-grd.jpg
-    alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
-
   - title: Sentinel-1 SLC
     shortTerm: Sentinel-1 SLC
     description: Global synthetic aperture radar data for the last 90 days
