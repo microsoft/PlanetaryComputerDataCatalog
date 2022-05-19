@@ -10,6 +10,7 @@
 #     - tutorials/images/another.png
 ---
 - file_url: tutorials/cloudless-mosaic-sentinel2.ipynb
+- file_url: tutorials/customizable-rtc-sentinel1.ipynb
 - file_url: tutorials/landcover.ipynb
 - file_url: tutorials/hurricane-florence-animation.ipynb
   image_urls:
