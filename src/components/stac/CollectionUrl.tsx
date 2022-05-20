@@ -1,10 +1,11 @@
 import NewTabLink from "../controls/NewTabLink";
 import LabeledValue from "../controls/LabeledValue";
 import { useStac } from "./CollectionContext";
-import { IStacCollection } from "types/stac";
 
 const CollectionUrl = () => {
-  const collection: IStacCollection = useStac();
+  const collection = useStac();
+
+  if (!collection) return null;
   const { links } = collection;
   const href = links.find(l => l.rel === "self")?.href;
 

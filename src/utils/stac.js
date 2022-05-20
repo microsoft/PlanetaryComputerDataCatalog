@@ -1,13 +1,21 @@
-import { Stack } from "@fluentui/react";
+import {
+  DetailsList,
+  DetailsListLayoutMode,
+  SelectionMode,
+  Stack,
+  StackItem,
+  Text,
+} from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
 import DOMPurify from "dompurify";
-import marked from "marked";
+import { marked } from "marked";
 import { isEmpty, isNil, isObject } from "lodash-es";
 
 import { capitalize, toUtcDateWithTime } from ".";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
+import AssetDetails from "components/stac/AssetDetails";
 
 const stringList = value => {
   return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
@@ -24,6 +32,9 @@ const fixedPct = value => {
 };
 
 const fixedDeg = value => value.toFixed(2) + "°";
+const upperCase = value => value.toUpperCase();
+const meters = value => (value ? `${value} m` : "—");
+
 StacFields.Registry.addAssetField("roles", {
   label: "Roles",
   formatter: stringList,
@@ -35,7 +46,11 @@ StacFields.Registry.addMetadataField("datetime", {
 
 StacFields.Registry.addMetadataField("gsd", {
   label: "GSD",
-  formatter: value => (value ? `${value} m` : "—"),
+  formatter: meters,
+});
+
+StacFields.Registry.addMetadataField("spatial_resolution", {
+  formatter: meters,
 });
 
 StacFields.Registry.addMetadataField("description", {
@@ -58,9 +73,144 @@ StacFields.Registry.addMetadataField("raster:bands", {
   label: "Raster Info",
   formatter: value => {
     const values = Array.isArray(value) ? value : [value];
-    return values.map((band, idx) => (
-      <SimpleKeyValueList key={`rasterband-${idx}`} object={band} />
-    ));
+    return values.map((band, idx) => {
+      const key = Object.entries(band)[0][1];
+      return (
+        <Stack key={`bandwrapper-${key}-${idx}`}>
+          <Text
+            as="h4"
+            styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
+          >
+            Raster Band {idx + 1}
+          </Text>
+          <div style={{ paddingLeft: 4 }}>
+            <SimpleKeyValueList
+              key={`rasterband-${key}-${idx}`}
+              object={band}
+              indent={true}
+            />
+          </div>
+        </Stack>
+      );
+    });
+  },
+});
+
+StacFields.Registry.addMetadataField("file:values", {
+  label: "File Values",
+  formatter: fileValues => {
+    const items = fileValues.map(v => {
+      const code = v.values.join(",");
+      const desc = v.summary;
+      return { code, desc };
+    });
+    return (
+      <DetailsList
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        compact={true}
+        columns={[
+          {
+            key: "code",
+            name: "Code",
+            fieldName: "code",
+            isMultiline: false,
+            isPadded: false,
+            maxWidth: 35,
+            minWidth: 10,
+          },
+          { key: "desc", name: "Description", fieldName: "desc", isMultiline: true },
+        ]}
+        items={items}
+      />
+    );
+  },
+});
+
+StacFields.Registry.addMetadataField("classification:classes", {
+  label: "Classification",
+  formatter: fileValues => {
+    const items = fileValues.map(v => {
+      const code = v.value;
+      const desc = v.description;
+      return { code, desc };
+    });
+    return (
+      <DetailsList
+        selectionMode={SelectionMode.none}
+        layoutMode={DetailsListLayoutMode.justified}
+        isHeaderVisible={true}
+        compact={true}
+        columns={[
+          {
+            key: "code",
+            name: "Code",
+            fieldName: "code",
+            isMultiline: false,
+            isPadded: false,
+            maxWidth: 35,
+            minWidth: 10,
+          },
+          { key: "desc", name: "Description", fieldName: "desc", isMultiline: true },
+        ]}
+        items={items}
+      />
+    );
+  },
+});
+
+StacFields.Registry.addMetadataField("classification:bitfields", {
+  label: "Classfication Bitfields",
+  formatter: fileValues => {
+    return fileValues.map(v => {
+      return (
+        <Stack key={`bitfield-${v.name}`} tokens={gap4}>
+          <Stack horizontal tokens={gap4}>
+            <Text styles={boldStyle}>{capitalize(v.name)}</Text>
+            <Text>{v.description}</Text>
+          </Stack>
+          <Stack horizontal tokens={gap4}>
+            <StackItem>Offset: {v.offset}, </StackItem>
+            <StackItem>Length: {v.length}</StackItem>
+          </Stack>
+          <DetailsList
+            styles={{ root: { paddingBottom: 10 } }}
+            selectionMode={SelectionMode.none}
+            layoutMode={DetailsListLayoutMode.justified}
+            isHeaderVisible={true}
+            compact={true}
+            columns={[
+              {
+                key: "name",
+                name: "Name",
+                fieldName: "name",
+                isMultiline: false,
+                isPadded: false,
+                maxWidth: 55,
+                minWidth: 10,
+              },
+              {
+                key: "value",
+                name: "Value",
+                fieldName: "value",
+                isMultiline: false,
+                isPadded: false,
+                maxWidth: 35,
+                minWidth: 10,
+              },
+              {
+                key: "description",
+                name: "Description",
+                fieldName: "description",
+                isMultiline: false,
+              },
+            ]}
+            items={v.classes}
+          />
+        </Stack>
+      );
+    });
   },
 });
 
@@ -112,12 +262,40 @@ StacFields.Registry.addMetadataField("proj:wkt2", {
 StacFields.Registry.addMetadataField("proj:geometry", {
   formatter: value => <code>{JSON.stringify(value)}</code>,
 });
+StacFields.Registry.addMetadataField("proj:projjson", {
+  formatter: value => <code>{JSON.stringify(value)}</code>,
+});
+
+StacFields.Registry.addMetadataField("sar:center_frequency", {
+  formatter: value => (value ? `${value} GHz` : "—"),
+});
+StacFields.Registry.addMetadataField("sar:resolution_range", {
+  formatter: meters,
+});
+StacFields.Registry.addMetadataField("sar:resolution_azimuth", {
+  formatter: meters,
+});
+StacFields.Registry.addMetadataField("sar:pixel_spacing_range", {
+  formatter: meters,
+});
+StacFields.Registry.addMetadataField("sar:pixel_spacing_azimuth", {
+  formatter: meters,
+});
+StacFields.Registry.addMetadataField("sar:looks_equivalent_number", {
+  label: "Equivalent Number of Looks",
+});
 
 StacFields.Registry.addMetadataField("sat:orbit_state", {
   formatter: capitalize,
 });
 StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
+});
+StacFields.Registry.addMetadataField("sat:absolute_orbit", {
+  label: "Absolute Orbit No.",
+});
+StacFields.Registry.addMetadataField("sat:platform_international_designator", {
+  label: "Platform Designator",
 });
 
 StacFields.Registry.addMetadataField("cmip6:model", {
@@ -132,6 +310,95 @@ StacFields.Registry.addMetadataField("cmip6:scenario", {
   label: "CMIP6 scenario",
 });
 
+StacFields.Registry.addMetadataField("cmip6:Conventions", {
+  label: "Convention version",
+});
+StacFields.Registry.addMetadataField("cmip6:activity_id", {
+  label: "Activity  identifier(s)",
+});
+StacFields.Registry.addMetadataField("cmip6:creation_date", {
+  label: "Date file was created",
+});
+StacFields.Registry.addMetadataField("cmip6:data_specs_version", {
+  label: "Version identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:experiment", {
+  label: "Short experiment description",
+});
+StacFields.Registry.addMetadataField("cmip6:experiment_id", {
+  label: "Root experiment identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:forcing_index", {
+  label: "Index for variant of forcing",
+});
+StacFields.Registry.addMetadataField("cmip6:frequency", {
+  label: "Sampling frequency",
+});
+StacFields.Registry.addMetadataField("cmip6:further_info_url", {
+  label: "Location of documentation",
+});
+StacFields.Registry.addMetadataField("cmip6:grid", { label: "Grid" });
+StacFields.Registry.addMetadataField("cmip6:grid_label", {
+  label: "Grid identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:initialization_index", {
+  label: "Index for variant of initialization method",
+});
+StacFields.Registry.addMetadataField("cmip6:institution", {
+  label: "Institution name",
+});
+StacFields.Registry.addMetadataField("cmip6:institution_id", {
+  label: "Institution identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:license", {
+  label: "License restrictions",
+});
+StacFields.Registry.addMetadataField("cmip6:mip_era", {
+  label: "Activity's associated CMIP cycle",
+});
+StacFields.Registry.addMetadataField("cmip6:nominal_resolution", {
+  label: "Approximate horizontal resolution",
+});
+StacFields.Registry.addMetadataField("cmip6:physics_index", {
+  label: "Index for model physics variant",
+});
+StacFields.Registry.addMetadataField("cmip6:product", {
+  label: "Product type (part of DRS) ",
+});
+StacFields.Registry.addMetadataField("cmip6:realization_index", {
+  label: "Realization number",
+});
+StacFields.Registry.addMetadataField("cmip6:realm", {
+  label: "Realm(s) where variable is defined",
+});
+StacFields.Registry.addMetadataField("cmip6:source", {
+  label: "Full model name / version",
+});
+StacFields.Registry.addMetadataField("cmip6:source_id", {
+  label: "Model identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:source_type", {
+  label: "Model configuration ",
+});
+StacFields.Registry.addMetadataField("cmip6:sub_experiment", {
+  label: "Description of sub-experiment ",
+});
+StacFields.Registry.addMetadataField("cmip6:sub_experiment_id", {
+  label: "Sub-experiment identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:table_id", {
+  label: "Table identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:tracking_id", {
+  label: "Unique file identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:variable_id", {
+  label: "Variable identifier",
+});
+StacFields.Registry.addMetadataField("cmip6:variant_label", {
+  label: "'Variant' label",
+});
+
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
 });
@@ -140,6 +407,10 @@ StacFields.Registry.addMetadataField("goes:mode", {
 });
 StacFields.Registry.addMetadataField("goes:processing-level", {
   label: "Processing Level",
+});
+
+StacFields.Registry.addMetadataField("s1:shape", {
+  formatter: codeNumberList,
 });
 
 StacFields.Registry.addMetadataField("s2:mgrs_tile", {
@@ -233,6 +504,22 @@ StacFields.Registry.addMetadataField("landsat:cloud_cover_land", {
 StacFields.Registry.addMetadataField("naip:state", {
   formatter: value => value && value.toUpperCase(),
 });
+
+StacFields.Registry.addMetadataField("ecmwf:reference_times", {
+  label: "Reference time",
+});
+StacFields.Registry.addMetadataField("ecmwf:streams", {
+  label: "ECMWF stream",
+  formatter: upperCase,
+});
+StacFields.Registry.addMetadataField("ecmwf:types", {
+  label: "ECMWF model type",
+  formatter: upperCase,
+});
+StacFields.Registry.addMetadataField("ecmwf:pressure_levels", {
+  label: "Pressure levels",
+});
+
 export const mediaTypeOverride = value => {
   switch (value) {
     case "image/tiff; application=geotiff; profile=cloud-optimized":
@@ -248,7 +535,7 @@ export const bandOverrideList = bands => {
   return bands
     .map(({ name, common_name }) => {
       const common = common_name ? `(${common_name})` : "";
-      return `${name} ${common}`.trim();
+      return name ? `${name} ${common}`.trim() : common_name;
     })
     .join(", ");
 };
@@ -266,6 +553,7 @@ export const columnOrders = {
   gsd: 30,
   "eo:bands": 40,
   description: 100,
+  asset_details: 1001,
 };
 
 export const cubeColumOrders = [
@@ -276,7 +564,10 @@ export const cubeColumOrders = [
   "dimensions",
   "shape",
   "chunks",
-  "attrs",
+  "cell_methods",
+  "cell_measures",
+  "comments",
+  "long_name",
 ];
 
 export const tableColumnOrders = ["name", "description", "type"];
@@ -288,7 +579,8 @@ export const getRelativeSelfPath = links => {
 };
 
 export const renderItemColumn = (item, _, column) => {
-  let fieldContent = item[column.fieldName];
+  let fieldContent =
+    column.fieldName === "asset_details" ? item : item[column.fieldName];
 
   if (isNil(fieldContent)) return "–";
   if (isObject(fieldContent) && isEmpty(fieldContent)) return "–";
@@ -318,10 +610,18 @@ export const renderItemColumn = (item, _, column) => {
         </Revealer>
       );
     case "dimensions":
+      if (Array.isArray(fieldContent)) {
+        fieldContent = fieldContent.join(", ");
+      }
+      return <span>({fieldContent})</span>;
     case "shape":
     case "chunks":
       if (Array.isArray(fieldContent)) {
-        fieldContent = fieldContent.join(", ");
+        fieldContent = fieldContent
+          .map(v => {
+            return isNil(v) ? "varies" : v;
+          })
+          .join(", ");
       }
       return <span>({fieldContent})</span>;
     case "description":
@@ -341,18 +641,8 @@ export const renderItemColumn = (item, _, column) => {
       );
     case "stac_key":
       return <code title={fieldContent}>{fieldContent}</code>;
-    case "file:values":
-      return (
-        <Stack>
-          {fieldContent.map(v => {
-            const values = v.values.join(",");
-            const desc = v.summary;
-            return <span key={`file-values-${values}`}>{`${values}: ${desc}`}</span>;
-          })}
-        </Stack>
-      );
-    case "raster:bands":
-      return stacFormatter.format(fieldContent, column.fieldName);
+    case "asset_details":
+      return <AssetDetails asset={item} />;
 
     default:
       if (Array.isArray(fieldContent)) {
@@ -361,3 +651,6 @@ export const renderItemColumn = (item, _, column) => {
       return stacFormatter.format(fieldContent, column.fieldName);
   }
 };
+
+const boldStyle = { root: { fontWeight: "bold" } };
+const gap4 = { childrenGap: 4 };

@@ -7,33 +7,56 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import { setCamera, setZoom } from "pages/Explore/state/mapSlice";
 import { BBox } from "geojson";
 import { stacCollectionDatasource } from "pages/Explore/utils/layers";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import { ILayerState, ILayerZoomVisibility } from "pages/Explore/types";
 
-// Handle zoom toast for layers with min zoom level
-const useZoomToLayer = () => {
+/*
+ *  Handle zoom toast for layers with min zoom level
+ */
+const useMapZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
-    mosaic,
     map: { zoom },
     detail: { showAsLayer },
   } = useExploreSelector(s => s);
-  const searchIdLoaded = mosaic.isCustomQuery
-    ? Boolean(mosaic.customQuery.searchId)
-    : Boolean(mosaic.query.searchId);
+  const currentMosaic = useExploreSelector(selectCurrentMosaic);
+  const { currentEditingLayerId, layers: allMosaics } = useExploreSelector(
+    s => s.mosaic
+  );
+  const searchIdLoaded = Boolean(currentMosaic.query.searchId);
 
-  // TODO: check buffer around zoom
-  const showZoomMsg =
-    zoom + 0.5 <= mosaic.layer.minZoom && searchIdLoaded && !showAsLayer;
+  const visibleInZoom = useCallback(
+    (layer: ILayerState) => {
+      return zoom + 0.5 >= layer.layer.minZoom;
+    },
+    [zoom]
+  );
+
+  // Check zoom visibility for the currently edited layer
+  const currentLayerNotVisible =
+    !visibleInZoom(currentMosaic) && searchIdLoaded && !showAsLayer;
 
   const zoomToLayer = useCallback(() => {
-    dispatch(setZoom(mosaic.layer.minZoom));
-  }, [dispatch, mosaic.layer.minZoom]);
+    dispatch(setZoom(currentMosaic.layer.minZoom));
+  }, [dispatch, currentMosaic.layer.minZoom]);
 
-  return { showZoomMsg, zoomToLayer };
+  // Check zoom visibility for all pinned layers
+  const layersOutOfZoom = Object.entries(allMosaics).filter(
+    ([id, layer]) => id !== currentEditingLayerId && !visibleInZoom(layer)
+  );
+  const nonVisibleLayers: ILayerState[] = layersOutOfZoom.map(([, layer]) => layer);
+  const layers: ILayerZoomVisibility = {
+    current: currentLayerNotVisible ? currentMosaic : null,
+    others: nonVisibleLayers,
+  };
+
+  const showZoomMsg = currentLayerNotVisible || nonVisibleLayers.length > 0;
+  return { showZoomMsg, zoomToLayer, nonVisibleLayers: layers };
 };
 
 const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
-  const { mosaic } = useExploreSelector(s => s);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
 
   const viewport = mapRef.current
     ? bboxToPolygon(mapRef.current?.getCamera().bounds as BBox)?.geometry
@@ -56,4 +79,4 @@ const useMapZoomToExtent = (mapRef: React.MutableRefObject<atlas.Map | null>) =>
   return { showExtentMsg, zoomToExtent };
 };
 
-export { useZoomToLayer as useMapZoomToLayer, useMapZoomToExtent };
+export { useMapZoomToLayer, useMapZoomToExtent };

@@ -7,6 +7,14 @@ describe("Explorer selector tests", () => {
 
     cy.visit("/explore");
 
+    // Work around flake introduced by the Azure Maps service occassionally failing
+    // to load assets and throwing. Don't fail the test under that circumstance.
+    cy.on("uncaught:exception", e => {
+      if (e.message.includes("Failed to retrieve the style definitions")) {
+        return false;
+      }
+    });
+
     cy.getBySel("collection-selector")
       .should("be.visible")
       .not("have.class", disabledClass);
@@ -20,15 +28,13 @@ describe("Explorer selector tests", () => {
     cy.wait(["@getCollections"]);
     cy.getBySel("collection-selector").click();
 
-    cy.get(".ms-Callout")
-      .contains("Imagery")
-      .parent()
-      .parent()
-      .contains("Sentinel-2 Level-2A");
+    cy.get(".ms-Callout").contains("Sentinel-2 Level-2A");
   });
 
   it("loads mosaic spec for selected collection", () => {
-    cy.intercept("/stac/sentinel-2-l2a/mosaicInfo.json").as("getS2mosaic");
+    cy.intercept("/api/data/v1/mosaic/info?collection=sentinel-2-l2a").as(
+      "getS2mosaic"
+    );
     cy.intercept("/api/stac/v1/search").as("getS2search");
 
     cy.contains("Sentinel-2 Level-2A").click();

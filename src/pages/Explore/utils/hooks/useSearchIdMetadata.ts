@@ -14,9 +14,13 @@ export const useSearchIdMetadata = (searchId: string | null) => {
 const getSearchIdMetadata = async (
   queryParam: QueryFunctionContext<["searchId", string | null]>
 ): Promise<ISearchIdMetadata> => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, searchId] = queryParam.queryKey;
+  const [, searchId] = queryParam.queryKey;
+  return await fetchSearchIdMetadata(searchId);
+};
 
+export const fetchSearchIdMetadata = async (
+  searchId: string | null
+): Promise<ISearchIdMetadata> => {
   return await (
     await axios.get(`${DATA_URL}/mosaic/${searchId}/info`)
   ).data;

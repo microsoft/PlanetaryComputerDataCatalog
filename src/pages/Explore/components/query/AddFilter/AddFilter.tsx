@@ -33,9 +33,9 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
 
     if (item?.selected) {
       const cql = makeDefaultCqlExpression(property, field);
-      dispatch<any>(setCustomCqlExpressions(cql));
+      dispatch(setCustomCqlExpressions(cql));
     } else {
-      dispatch<any>(removeCustomCqlExpression(property));
+      dispatch(removeCustomCqlExpression(property));
     }
   };
 

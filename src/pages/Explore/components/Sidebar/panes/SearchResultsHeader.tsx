@@ -12,6 +12,8 @@ import { IStacSearchResult } from "types/stac";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { loadingStyle } from "./SearchResultsPane";
 import QueryInfo from "./QueryInfo";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import PinLayer from "../PinLayer";
 
 interface SearchResultsHeaderProps {
   results: IStacSearchResult | undefined;
@@ -19,7 +21,7 @@ interface SearchResultsHeaderProps {
 }
 
 const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) => {
-  const collection = useExploreSelector(s => s.mosaic.collection);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
 
   if (results === undefined) return null;
 
@@ -61,7 +63,10 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
         verticalAlign="center"
       >
         {resultsText}
-        <QueryInfo />
+        <Stack horizontal verticalAlign="center">
+          <PinLayer />
+          <QueryInfo />
+        </Stack>
       </Stack>
     </Stack>
   );

@@ -1,14 +1,22 @@
 import { centerKey, zoomKey } from "../components/Map/hooks/useUrlState";
 import {
-  renderQsKey,
-  mosaicQsKey,
-  customQueryQsKey,
-} from "../components/Sidebar/selectors/hooks/useUrlState";
+  QS_ACTIVE_EDIT_KEY,
+  QS_COLLECTION_KEY,
+  QS_MOSAIC_KEY,
+  QS_RENDER_KEY,
+  QS_V1_CUSTOM_KEY,
+  QS_VERSION_KEY,
+} from "../components/Sidebar/selectors/hooks/useUrlStateV2";
 
 export const resetMosaicQueryStringState = () => {
-  updateQueryStringParam(renderQsKey, "");
-  updateQueryStringParam(mosaicQsKey, "");
-  updateQueryStringParam(customQueryQsKey, "");
+  [
+    QS_COLLECTION_KEY,
+    QS_MOSAIC_KEY,
+    QS_RENDER_KEY,
+    QS_ACTIVE_EDIT_KEY,
+    QS_VERSION_KEY,
+    QS_V1_CUSTOM_KEY,
+  ].map(key => updateQueryStringParam(key, ""));
 };
 
 export const updateQueryStringParam = (
@@ -41,9 +49,4 @@ export const getCenterAndZoomQueryString = (): {
     center: center ? [center[0], center[1]] : undefined,
     zoom: zoom ? Number(zoom) : undefined,
   };
-};
-
-export const getIsCustomQueryString = () => {
-  const qs = new URL(window.location.href).searchParams;
-  return qs.has(customQueryQsKey);
 };

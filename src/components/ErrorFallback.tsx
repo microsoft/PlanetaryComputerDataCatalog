@@ -25,6 +25,13 @@ export const CardErrorFallback = () => {
 
 export default ErrorFallback;
 
+export const handleErrorBoundaryError = (
+  error: Error,
+  info: { componentStack: string }
+) => {
+  console.error(error);
+};
+
 export const errorMessageStyles: IMessageBarStyles = {
   root: { borderRadius: 4 },
 };

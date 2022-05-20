@@ -4,7 +4,7 @@ The Azure Static Web App service includes an auto-deployed Function API that is 
 
 ## Local development
 
-The API can be run locally following [these instructions](https://docs.microsoft.com/en-us/azure/static-web-apps/add-api#run-the-api-locally).
+The API can be run locally following [these instructions](https://docs.microsoft.com/en-us/azure/static-web-apps/add-api#run-the-api-locally) or by running `./scripts/server --api`.
 
 To set appropriate configuration values for the Function app, copy the `local.settings.sample.json` file to [`local.settings.json`](https://docs.microsoft.com/en-us/azure/static-web-apps/application-settings#about-api-app-settings). This settings file is `.gitignored` and will contain sensitive secrets, so take appropriate precautions.
 

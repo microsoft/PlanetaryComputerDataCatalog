@@ -48,7 +48,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
 
       const [lower, upper] = range;
       const cql = toCqlExpression(lower, upper, field);
-      dispatch<any>(setCustomCqlExpressions(cql));
+      dispatch(setCustomCqlExpressions(cql));
     }
   };
 

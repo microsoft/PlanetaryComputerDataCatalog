@@ -9,6 +9,7 @@ import { useLocalStorage } from "react-use";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { buttonStyles } from "./ResetSelectors";
 import {
+  selectCurrentMosaic,
   setCustomCqlExpressions,
   setIsCustomQuery,
 } from "pages/Explore/state/mosaicSlice";
@@ -16,7 +17,7 @@ import { useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 
 const AdvancedModeButton = () => {
   const dispatch = useExploreDispatch();
-  const { isCustomQuery, collection } = useExploreSelector(s => s.mosaic);
+  const { isCustomQuery, collection } = useExploreSelector(selectCurrentMosaic);
   const { data: mosaicInfo, isSuccess } = useCollectionMosaicInfo(collection?.id);
   const [showAdvancedCoach, setShowAdvanceCoach] = useLocalStorage(
     "coach-show-advanced-mode",
@@ -29,7 +30,7 @@ const AdvancedModeButton = () => {
 
     setShowAdvanceCoach(false);
     if (isSuccess && mosaicInfo) {
-      dispatch<any>(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
+      dispatch(setCustomCqlExpressions(mosaicInfo.defaultCustomQuery));
     }
   }, [dispatch, isSuccess, mosaicInfo, setShowAdvanceCoach]);
 

@@ -2,16 +2,19 @@ import { useCallback } from "react";
 import { FontSizes, Link, Stack } from "@fluentui/react";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { resetMosaicState } from "pages/Explore/state/mosaicSlice";
+import {
+  resetMosaicState,
+  selectCurrentMosaic,
+} from "pages/Explore/state/mosaicSlice";
 
 const ResetSelectors = () => {
   const dispatch = useExploreDispatch();
-  const { collection } = useExploreSelector(state => state.mosaic);
-  const disabled = !collection;
+  const mosaic = useExploreSelector(selectCurrentMosaic);
+  const disabled = !mosaic.collection;
 
   const handleClick = useCallback(() => {
-    dispatch<any>(resetMosaicState());
-  }, [dispatch]);
+    dispatch(resetMosaicState(mosaic.layerId));
+  }, [dispatch, mosaic.layerId]);
 
   return (
     <Stack horizontal horizontalAlign={"end"}>
@@ -19,10 +22,10 @@ const ResetSelectors = () => {
         disabled={disabled}
         styles={buttonStyles}
         onClick={handleClick}
-        title="Reset all selectors"
+        title="Clear all selectors for current layer"
         data-cy="reset"
       >
-        Reset
+        Clear
       </Link>
     </Stack>
   );

@@ -1,7 +1,10 @@
 import * as atlas from "azure-maps-control";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setLayerMinZoom } from "pages/Explore/state/mosaicSlice";
+import {
+  selectCurrentMosaic,
+  setLayerMinZoom,
+} from "pages/Explore/state/mosaicSlice";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { useEffect } from "react";
 import { useTileJson } from "utils/requests";
@@ -12,10 +15,10 @@ const SIDEBAR_DURATION = 350;
 const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();
   const {
-    map: { center, zoom, bounds, showSidebar },
-    mosaic,
     detail,
+    map: { center, zoom, bounds, showSidebar },
   } = useExploreSelector(s => s);
+  const mosaic = useExploreSelector(selectCurrentMosaic);
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item

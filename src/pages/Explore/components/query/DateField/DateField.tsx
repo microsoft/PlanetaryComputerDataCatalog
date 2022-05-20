@@ -93,7 +93,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const handleSave = useCallback(() => {
     if (isValid) {
       const exp = toCqlExpression(workingDateRange, operatorSelection.key);
-      dispatch<any>(setCustomCqlExpressions(exp));
+      dispatch(setCustomCqlExpressions(exp));
     }
   }, [isValid, workingDateRange, operatorSelection.key, dispatch]);
 

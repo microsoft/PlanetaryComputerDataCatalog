@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DefaultButton, IButtonProps } from "@fluentui/react";
 
 type Props = {
@@ -7,11 +7,11 @@ type Props = {
 } & Omit<IButtonProps, "href">;
 
 const ButtonLink: React.FC<Props> = ({ to, ...rest }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = e => {
     e.preventDefault();
-    history.push(to);
+    navigate(to);
   };
 
   return <DefaultButton href={to} onClick={handleClick} {...rest} />;

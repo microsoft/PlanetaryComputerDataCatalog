@@ -10,13 +10,16 @@ import "./styles/index.css";
 import App from "./App";
 
 import { QueryClient, QueryClientProvider } from "react-query";
+import { SessionProvider } from "components/auth/hooks/SessionContext";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
   <ThemeProvider>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <SessionProvider>
+        <App />
+      </SessionProvider>
     </QueryClientProvider>
   </ThemeProvider>,
   document.getElementById("root")

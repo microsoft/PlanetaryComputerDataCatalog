@@ -1,6 +1,6 @@
 const { addBeforeLoader, loaderByName } = require("@craco/craco");
 const CopyPlugin = require("copy-webpack-plugin");
-const marked = require("marked");
+const { marked } = require("marked");
 const renderer = new marked.Renderer();
 
 // Allows import of yaml files as json

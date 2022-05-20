@@ -34,7 +34,7 @@ const StateSelector = ({
 }: StateSelectorProps) => {
   const dispatch = useExploreDispatch();
 
-  const handleCollectionChange = useCallback(
+  const handleSelectionChange = useCallback(
     (_: any, option: IDropdownOption | undefined): void => {
       if (option) {
         const payload = getStateValFn ? getStateValFn(option.key) : option.key;
@@ -49,7 +49,7 @@ const StateSelector = ({
       <Dropdown
         options={options}
         selectedKey={selectedKey}
-        onChange={handleCollectionChange}
+        onChange={handleSelectionChange}
         onRenderTitle={renderTitle(icon)}
         onRenderPlaceholder={renderPlaceholder(icon, title)}
         ariaLabel={title}

@@ -14,7 +14,10 @@ Options:
 function run() {
 
     # Install JS dependencies on host
-    yarn
+    docker-compose \
+        -f docker-compose.yml \
+        run --rm --no-deps app \
+        yarn
 
     # Ensure container images are current
     docker-compose build

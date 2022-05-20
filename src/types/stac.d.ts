@@ -5,6 +5,7 @@ export interface IStacCollection {
   id: string;
   title: string;
   description: string;
+  summaries?: Record<string, []>;
   license: string;
   assets: Record<string, IStacAsset>;
   item_assets: Record<string, IStacAsset>;
@@ -18,7 +19,10 @@ export interface IStacCollection {
   };
   keywords: string[];
   links: IStacLink[];
+  summaries?: Record<string, string>;
   "msft:short_description": string;
+  "msft:group_id"?: string;
+  "msft:requires_account"?: boolean;
 }
 
 export interface IStacLink {
@@ -41,12 +45,19 @@ export interface IStacAsset {
   type?: string;
   roles?: string[];
   "file:values"?: FileExtValues[];
+  "classification:classes"?: ClassificationExtClasses[];
 }
 
 export interface FileExtValues {
   values: number[];
   summary: string;
 }
+
+export interface ClassificationExtClasses {
+  value: number;
+  description: string;
+}
+
 export interface IStacFilter {
   filter: { op: "and"; args: ICqlExpressionList };
   limit?: number;
@@ -72,4 +83,10 @@ export interface IStacSearchResult extends FeatureCollection {
     matched: number;
     returned: number;
   };
+}
+
+export interface IStacExtension {
+  label: string;
+  extension: string;
+  properties: Record<string, any>;
 }

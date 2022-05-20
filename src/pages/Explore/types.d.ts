@@ -1,5 +1,6 @@
-import { LegendTypes } from "./enums";
 import { ICqlExpressionList } from "./utils/cql/types";
+import { IStacCollection, IStacLink } from "types/stac";
+import { LegendTypes } from "./enums";
 
 export interface IDefaultLocationInfo {
   zoom: number;
@@ -21,12 +22,17 @@ export interface IMosaic {
   searchId?: string | null;
 }
 
+export interface IMosaicRenderOptionCondition {
+  property: string;
+  value: any;
+}
 export interface IMosaicRenderOption {
   name: string;
   description: string;
   options: string;
   minZoom: number | undefined;
   legend: ILegendConfig | undefined;
+  conditions?: IMosaicRenderOptionCondition[];
 }
 
 export interface ILegendConfig {
@@ -34,6 +40,7 @@ export interface ILegendConfig {
   labels?: string[];
   trimStart?: number;
   trimEnd?: number;
+  scaleFactor?: number;
 }
 
 export interface IMapInfo {
@@ -46,7 +53,45 @@ export interface IQueryable {
 }
 
 export interface ISearchIdMetadata {
-  hash: string;
-  search: { filter: { args: ICqlExpressionList } };
+  links: IStacLink[];
+  metadata: { type: string };
   orderby: string;
+  search: {
+    hash: string;
+    search: { filter: { args: ICqlExpressionList } };
+    orderby: string;
+  };
+}
+
+export interface ILayerState {
+  layerId: string;
+  collection: IStacCollection | null;
+  query: IMosaic;
+  isCustomQuery: boolean;
+  isPinned: boolean;
+  renderOption: IMosaicRenderOption | null;
+  layer: {
+    minZoom: number;
+    maxExtent: number[];
+    opacity: number;
+    visible: boolean;
+  };
+}
+
+export type CurrentLayers = Record<string, ILayerState>;
+export interface IMosaicState {
+  layers: CurrentLayers;
+  layerOrder: string[];
+  currentEditingLayerId: string | null;
+  isLoadingInitialState: Boolean;
+}
+
+export interface IOrderedLayers {
+  layers: CurrentLayers;
+  layerOrder: string[];
+}
+
+export interface ILayerZoomVisibility {
+  current: ILayerState | null;
+  others: ILayerState[];
 }

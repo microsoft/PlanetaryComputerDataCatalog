@@ -1,0 +1,4 @@
+# Dev dependencies
+black
+mypy
+types-requests

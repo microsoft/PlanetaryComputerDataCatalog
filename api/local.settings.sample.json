@@ -5,6 +5,7 @@
     "AuthAdminUrl": "",
     "SignupUrl": "",
     "SignupToken": "",
+
     "FUNCTIONS_WORKER_RUNTIME": "python"
   }
 }

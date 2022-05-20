@@ -4,22 +4,27 @@ import {
   Text,
   mergeStyleSets,
   Separator,
-  StackItem,
   DirectionalHint,
   Icon,
 } from "@fluentui/react";
 import { useBoolean, useId } from "@fluentui/react-hooks";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import QuerySection from "./QuerySection";
 import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
 import { ErrorBoundary } from "react-error-boundary";
-import ErrorFallback from "components/ErrorFallback";
-import { selectCurrentCql } from "pages/Explore/state/mosaicSlice";
+import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
+import {
+  selectCurrentCql,
+  selectCurrentMosaic,
+} from "pages/Explore/state/mosaicSlice";
+import { searchHeaderButtonStyle } from "../../PinLayer/PinLayer";
 
 const QueryInfo = () => {
-  const { collection, renderOption } = useExploreSelector(s => s.mosaic);
+  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const cql = useExploreSelector(selectCurrentCql);
   const [isCalloutVisible, { toggle }] = useBoolean(false);
   const buttonId = useId("queryinfo-button");
@@ -41,26 +46,32 @@ const QueryInfo = () => {
 
   const querySection = <QuerySection cql={cql} />;
 
+  const renderDesc = renderOption?.description ? (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: marked.parseInline(DOMPurify.sanitize(renderOption.description)),
+      }}
+    />
+  ) : (
+    renderOption?.name
+  );
   const renderSection = (
     <Section title="Rendering" icon="MapLayers">
-      {renderOption?.description || renderOption?.name}
+      {renderDesc}
     </Section>
   );
 
   const title = "Current filter details";
-  const size = 24;
 
   return (
-    <StackItem style={{ marginTop: -8, marginBottom: -8 }}>
+    <>
       <IconButton
         id={buttonId}
         iconProps={{ iconName: "Info" }}
-        height={size}
-        width={size}
-        title={title}
         ariaLabel={title}
         onClick={toggle}
         data-cy="query-detail-button"
+        styles={searchHeaderButtonStyle}
       />
       {isCalloutVisible && (
         <Callout
@@ -73,7 +84,10 @@ const QueryInfo = () => {
           directionalHint={DirectionalHint.rightCenter}
           setInitialFocus
         >
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ErrorBoundary
+            FallbackComponent={ErrorFallback}
+            onError={handleErrorBoundaryError}
+          >
             {collectionSection}
             <Separator />
             {querySection}
@@ -82,7 +96,7 @@ const QueryInfo = () => {
           </ErrorBoundary>
         </Callout>
       )}
-    </StackItem>
+    </>
   );
 };
 export default QueryInfo;

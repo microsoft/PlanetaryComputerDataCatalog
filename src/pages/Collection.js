@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Redirect, useHistory, useLocation, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
 import {
   MessageBar,
   MessageBarType,
@@ -8,6 +8,7 @@ import {
   Spinner,
   SpinnerSize,
   getTheme,
+  Separator,
 } from "@fluentui/react";
 
 import Bands from "../components/stac/Bands";
@@ -30,11 +31,12 @@ import Assets from "../components/stac/Assets";
 import CollectionUrl from "components/stac/CollectionUrl";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/ErrorFallback";
+import RequiresAccount from "components/stac/RequiresAccount";
 
 const Collection = () => {
   const { id } = useParams();
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const pivotRef = useRef();
   const [collection, setCollection] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -75,7 +77,7 @@ const Collection = () => {
 
   const handleTabChange = pivotItem => {
     const { itemKey } = pivotItem.props;
-    history.replace({ hash: itemKey });
+    navigate({ replace: true, hash: itemKey });
 
     // Handle scroll to sticky-top when switching tabs
     const headerHeight = 360;
@@ -98,7 +100,7 @@ const Collection = () => {
   });
 
   if (notFound) {
-    return <Redirect to={"/404"} />;
+    return <Navigate replace to={"/404"} />;
   }
 
   const bannerHeader = <Banner collection={collection} />;
@@ -126,6 +128,8 @@ const Collection = () => {
               <div className="collection-content">
                 <h2 style={{ marginTop: 0 }}>Overview</h2>
                 <Description />
+                <RequiresAccount />
+                <Separator />
                 <CollectionUrl />
                 <Providers />
                 <License />

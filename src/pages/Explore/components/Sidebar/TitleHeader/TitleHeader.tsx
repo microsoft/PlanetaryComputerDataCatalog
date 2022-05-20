@@ -10,12 +10,13 @@ import {
   VerticalDivider,
 } from "@fluentui/react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 import AdvancedModeButton from "./AdvancedModeButton";
 import ResetSelectors from "./ResetSelectors";
 
 export const TitleHeader = () => {
-  const { collection } = useExploreSelector(state => state.mosaic);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
   const commandBar = (
     <Stack
       horizontal

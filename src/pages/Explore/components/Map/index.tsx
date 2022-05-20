@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
@@ -26,6 +26,8 @@ import {
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
+import { useSession } from "components/auth/hooks/SessionContext";
+import { DATA_URL } from "utils/constants";
 
 const mapContainerId: string = "viewer-map";
 
@@ -34,6 +36,18 @@ const ExploreMap = () => {
   const { center, zoom } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
+  const { status: sessionStatus } = useSession();
+
+  const addAuthHeaders = useCallback(
+    (url: string, resourceType: atlas.ResourceType): atlas.RequestParameters => {
+      resourceType === "Tile" && console.log(url, resourceType, DATA_URL);
+      if (resourceType === "Tile" && url?.startsWith(DATA_URL)) {
+        return { headers: { Authorization: `Bearer ${sessionStatus.token}` } };
+      }
+      return {};
+    },
+    [sessionStatus]
+  );
 
   // Initialize the map
   useEffect(() => {
@@ -70,6 +84,32 @@ const ExploreMap = () => {
     mapHandlers.onDataEvent,
   ]);
 
+  useEffect(() => {
+    // Azure maps is putting 2 shortcut elements with the same id on the page,
+    // and it's causing an accessibility error.
+    const elNames = ["#atlas-map-shortcuts", "#atlas-map-style", "#atlas-map-state"];
+    elNames.forEach(elName => {
+      const els = document.querySelectorAll(elName);
+      if (els.length === 2) {
+        els[1].remove();
+      }
+    });
+  }, [mapReady]);
+
+  // When logged in, transform requests to include auth header
+  useEffect(() => {
+    if (sessionStatus.isLoggedIn) {
+      console.log("Activating auth headers for tile requests");
+      mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
+    } else {
+      mapRef.current?.setServiceOptions({
+        transformRequest: () => {
+          return {};
+        },
+      });
+    }
+  }, [addAuthHeaders, sessionStatus]);
+
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
   useMosaicLayer(mapRef, mapReady);
@@ -77,11 +117,15 @@ const ExploreMap = () => {
   useMapControls(mapRef, mapReady);
   useUrlState();
 
-  const { zoomToLayer, showZoomMsg } = useMapZoomToLayer();
-  const zoomMsg = <ZoomMessage onClick={zoomToLayer} />;
+  const { zoomToLayer, showZoomMsg, nonVisibleLayers } = useMapZoomToLayer();
+  const zoomMsg = (
+    <ZoomMessage onClick={zoomToLayer} layerVisibility={nonVisibleLayers} />
+  );
 
   const { showExtentMsg, zoomToExtent } = useMapZoomToExtent(mapRef);
-  const extentMsg = <ExtentMessage onClick={zoomToExtent} />;
+  const extentMsg = (
+    <ExtentMessage onClick={zoomToExtent} layerVisibility={nonVisibleLayers} />
+  );
   const loadingIndicator = (
     <ProgressIndicator
       aria-label="Map tile loading indicator"

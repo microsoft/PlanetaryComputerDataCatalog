@@ -16,3 +16,6 @@ export const DATA_URL = apiRoot.endsWith("stac")
   : `${tilerRoot}/api/data/v1`;
 
 export const HUB_URL = process.env.REACT_APP_HUB_URL || "";
+export const AUTH_URL =
+  process.env.REACT_APP_AUTH_URL ||
+  "https://planetarycomputer-staging.microsoft.com";

@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { IStackStyles, IStackTokens, Stack, StackItem } from "@fluentui/react";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { resetMosaic } from "pages/Explore/state/mosaicSlice";
+import { resetMosaic, selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { resetDetail } from "pages/Explore/state/detailSlice";
 import MinimizeButton from "../controls/ToggleSidebarButton";
 import ItemDetailPanel from "../ItemDetailPanel";
@@ -11,11 +11,12 @@ import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import SelectorPane from "./panes/SelectorPane";
 import TitleHeader from "./TitleHeader";
+import InitialStateLoader from "./selectors/InitialStateLoader";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const showSidebar = useExploreSelector(s => s.map.showSidebar);
-  const isCustomQuery = useExploreSelector(s => s.mosaic.isCustomQuery);
+  const { isCustomQuery } = useExploreSelector(selectCurrentMosaic);
   const selectedItem = useExploreSelector(s => s.detail.selectedItem);
   const isDetailView = Boolean(selectedItem);
 
@@ -43,6 +44,7 @@ export const Sidebar = () => {
   }, [dispatch]);
 
   const stacFilter = useStacFilter();
+
   const sidebarStyles: Partial<IStackStyles> = {
     root: {
       width: width,
@@ -75,6 +77,7 @@ export const Sidebar = () => {
         <Stack styles={sidebarStackStyles}>
           <Stack styles={searchPanelStyles} tokens={stackTokens}>
             <TitleHeader />
+            <InitialStateLoader />
             <SelectorPane isCustomQuery={isCustomQuery} />
           </Stack>
           <SearchResultsPane request={stacFilter} visible={!isDetailView} />

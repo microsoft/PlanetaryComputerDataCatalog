@@ -1,8 +1,11 @@
 import { Link, Stack, Text, useTheme } from "@fluentui/react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import { ILayerZoomVisibility } from "pages/Explore/types";
 
 interface MessageProps {
   onClick: () => void;
+  layerVisibility: ILayerZoomVisibility;
 }
 
 const MapMessage: React.FC = ({ children }) => {
@@ -29,16 +32,23 @@ const MapMessage: React.FC = ({ children }) => {
   );
 };
 
-export const ZoomMessage = ({ onClick }: MessageProps) => {
-  return (
+export const ZoomMessage: React.FC<MessageProps> = ({
+  onClick,
+  layerVisibility,
+}) => {
+  const isCurrentLayerInvisible = Boolean(layerVisibility.current);
+
+  return isCurrentLayerInvisible ? (
     <MapMessage>
-      <Link onClick={onClick}>Zoom in</Link> to see layer
+      <Text block style={{ textAlign: "center" }}>
+        <Link onClick={onClick}>Zoom in</Link> to see search results
+      </Text>
     </MapMessage>
-  );
+  ) : null;
 };
 
 export const ExtentMessage = ({ onClick }: MessageProps) => {
-  const collection = useExploreSelector(s => s.mosaic.collection);
+  const { collection } = useExploreSelector(selectCurrentMosaic);
 
   return (
     <MapMessage>

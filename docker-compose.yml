@@ -1,5 +1,34 @@
 version: "2.4"
 services:
+  app:
+    image: node:14-slim
+    working_dir: /usr/src
+    ports:
+      - "3000:3000"
+      - "4280:4280"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    volumes:
+      - .:/usr/src
+    networks:
+      - pcdc-network
+    command: yarn start
+
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    working_dir: /usr/src
+    ports:
+      - "7071:7071"
+      - "8000:8000"
+    volumes:
+      - ./api:/usr/src
+    networks:
+      pcdc-network:
+    command: func host start --script-root ./ --cors "*" --port 7071
+
   etl:
     build:
       context: etl
@@ -17,3 +46,6 @@ services:
     volumes:
       - ./mockstac/app:/app
       - ./mockstac/data:/data
+
+networks:
+  pcdc-network:

@@ -11,6 +11,12 @@
 # `category` attribute determines which header the dataset is included under in the
 # Explorer collection selector
 
+# `isHidden` attribute determines if the dataset is hidden in any frontend component, including
+# the Explorer.
+
+# `hideInExplorer` attribute determines if the dataset is hidden in the Explorer, even
+# if would otherwise be available. It is still visible in the catalog.
+
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
 
@@ -31,6 +37,78 @@
 
 ---
 collections:
+  3dep-lidar-copc:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-copc-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-copc-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-copc-example.ipynb
+
+  3dep-lidar-dsm:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-dsm-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-pointsourceid:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-pointsourceid-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-intensity:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-intensity-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-hag:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-hag-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-dtm:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-dtm-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-returns:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-returns-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-classification:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-classification-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+  3dep-lidar-dtm-native:
+    category: DEMs
+    headerImg: ./images/3dep-lidar-dtm-native-hero.png
+    tabs:
+      - title: Example Notebook
+        src: 3dep-lidar-cog-example.html
+        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
   3dep-seamless:
     category: DEMs
     headerImg: ./images/threedep-seamless-hero.png
@@ -46,10 +124,22 @@ collections:
       - title: Example Notebook
         src: alos-dem-example.html
         launch: datasets/alos-dem/alos-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: alos-dem.html
-      - title: Storage Documentation
-        src: alos-dem-storage.html
+
+  alos-fnf-mosaic:
+    category: Land use/Land cover
+    headerImg: ./images/alos-fnf-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
+  alos-palsar-mosaic:
+    category: SAR
+    headerImg: ./images/alos-palsar-hero.png
+    tabs:
+      - title: Example Notebook
+        src: alos-palsar-example.html
+        launch: datasets/alos-palsar/alos-palsar-example.ipynb
 
   aster-l1t:
     category: Imagery
@@ -58,18 +148,68 @@ collections:
       - title: Example Notebook
         src: aster-l1t-example.html
         launch: datasets/aster-l1t/aster-l1t-example.ipynb
-      - title: Blob Storage Notebook
-        src: aster.html
-      - title: Storage Documentation
-        src: aster-storage.html
+
+  chesapeake-lc-7:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lc-7-hero.png
+
+  chesapeake-lc-13:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lc-13-hero.png
+
+  chesapeake-lu:
+    category: Land use/Land cover
+    headerImg: ./images/chesapeake-lu-hero.png
 
   chloris-biomass:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/chloris-biomass-hero.jpg
     tabs:
       - title: Example Notebook
         src: chloris-biomass-example.html
         launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
+
+  cil-gdpcir-cc0:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
+
+  cil-gdpcir-cc-by:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
+
+  cil-gdpcir-cc-by-sa:
+    category: Climate/Weather
+    headerImg: ./images/cil-gdpcir.png
+    tabs:
+      - title: Example Notebook
+        src: cil-gdpcir-example.html
+        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+      - title: Ensemble example
+        src: ensemble.html
+        launch: datasets/cil-gdpcir/ensemble.ipynb
+      - title: Climate indicators
+        src: indicators.html
+        launch: datasets/cil-gdpcir/indicators.ipynb
 
   cop-dem-glo-30:
     category: DEMs
@@ -78,10 +218,6 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: copernicus-dem.html
-      - title: Storage Documentation
-        src: copernicus-dem-storage.html
 
   cop-dem-glo-90:
     category: DEMs
@@ -90,10 +226,6 @@ collections:
       - title: Example Notebook
         src: copernicus-dem-example.html
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-      - title: Blob Storage Notebook
-        src: copernicus-dem.html
-      - title: Storage Documentation
-        src: copernicus-dem-storage.html
 
   daymet-daily-pr:
     headerImg: ./images/daymet-daily-pr-hero.png
@@ -155,16 +287,41 @@ collections:
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
+  eclipse:
+    tabs:
+      - title: Example Notebook
+        src: eclipse-example.html
+        launch: datasets/eclipse/eclipse-example.ipynb
+
+  ecmwf-forecast:
+    headerImg: ./images/ecmwf-forecast-hero.png
+    tabs:
+      - title: Example Notebook
+        src: ecmwf-forecast-example.html
+        launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
+
+  era5-pds:
+    category: Climate/Weather
+    headerImg: ./images/era5-hero.png
+    tabs:
+      - title: Example Notebook
+        src: era5-example.html
+        launch: datasets/era5/era5-example.ipynb
+
+  esa-worldcover:
+    category: Land use/Land cover
+    headerImg: ./images/esa-worldcover-hero.png
+    tabs:
+      - title: Example Notebook
+        src: esa-worldcover-example.html
+        launch: datasets/esa-worldcover/esa-worldcover-example.ipynb
+
   fia:
     headerImg: ./images/fia-hero.png
     tabs:
       - title: Example Notebook
         src: fia-example.html
         launch: datasets/fia/fia-example.ipynb
-      - title: Blob Storage Notebook
-        src: forest-inventory-and-analysis.html
-      - title: Storage Documentation
-        src: gbif-storage.html
 
   gap:
     category: Land use/Land cover
@@ -196,10 +353,6 @@ collections:
       - title: Example Notebook
         src: gbif-example.html
         launch: datasets/gbif/gbif-example.ipynb
-      - title: Blob Storage Notebook
-        src: gbif.html
-      - title: Storage Documentation
-        src: gbif-storage.html
 
   goes-cmi:
     category: Imagery
@@ -208,10 +361,6 @@ collections:
       - title: Example Notebook
         src: goes-cmi-example.html
         launch: datasets/goes/goes-cmi-example.ipynb
-      - title: Blob Storage Notebook
-        src: goes-r-abi-l2-mcmipf.html
-      - title: Storage Documentation
-        src: goes-r-storage.html
 
   gpm-imerg-hhr:
     headerImg: ./images/gpm-imerg-hhr-hero.png
@@ -228,16 +377,12 @@ collections:
         launch: datasets/gridmet/gridmet-example.ipynb
 
   hgb:
-    category: Biomass
+    category: Biomass/Vegetation
     headerImg: ./images/hgb-hero.png
     tabs:
       - title: Example Notebook
         src: hgb-example.html
         launch: datasets/hgb/hgb-example.ipynb
-      - title: Blob Storage Notebook
-        src: hgb.html
-      - title: Storage Documentation
-        src: hgb-storage.html
 
   hrea:
     category: Infrastructure
@@ -246,10 +391,6 @@ collections:
       - title: Example Notebook
         src: hrea-example.html
         launch: datasets/hrea/hrea-example.ipynb
-      - title: Blob Storage Notebook
-        src: hrea.html
-      - title: Storage Documentation
-        src: hrea-storage.html
 
   io-lulc:
     category: Land use/Land cover
@@ -257,8 +398,6 @@ collections:
       - title: Example Notebook
         src: io-lulc-example.html
         launch: datasets/io-lulc/io-lulc-example.ipynb
-      - title: Storage Documentation
-        src: io-lulc-storage.html
 
   io-lulc-9-class:
     category: Land use/Land cover
@@ -269,24 +408,183 @@ collections:
         launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
   jrc-gsw:
-    category: Water
+    category: Water/Snow
     headerImg: ./images/jrc-gsw-hero.png
     tabs:
       - title: Example Notebook
         src: jrc-gsw-example.html
         launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
 
-  landsat-8-c2-l2:
+  landsat-c2-l1:
     category: Imagery
-    headerImg: ./images/landsat-hero.jpg
+    headerImg: ./images/landsat-c2-l1-hero.png
     tabs:
       - title: Example Notebook
-        src: landsat-8-c2-l2-example.html
-        launch: datasets/landsat-8-c2-l2/landsat-8-c2-l2-example.ipynb
-      - title: Blob Storage Notebook
-        src: landsat-8.html
-      - title: Storage Documentation
-        src: landsat-8-storage.html
+        src: landsat-c2-example.html
+        launch: datasets/landsat-c2/landsat-c2-example.ipynb
+
+  landsat-c2-l2:
+    category: Imagery
+    headerImg: ./images/landsat-c2-l2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: landsat-c2-example.html
+        launch: datasets/landsat-c2/landsat-c2-example.ipynb
+
+  landsat-8-c2-l2:
+    isHidden: true
+
+  modis-09A1-061:
+    category: Imagery
+    headerImg: ./images/modis-09a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
+
+  modis-09Q1-061:
+    category: Imagery
+    headerImg: ./images/modis-09q1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
+
+  modis-10A1-061:
+    category: Water/Snow
+    headerImg: ./images/modis-10a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-snow-example.html
+        launch: datasets/modis/modis-snow-example.ipynb
+
+  modis-10A2-061:
+    category: Water/Snow
+    headerImg: ./images/modis-10a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-snow-example.html
+        launch: datasets/modis/modis-snow-example.ipynb
+
+  modis-11A1-061:
+    category: Temperature
+    headerImg: ./images/modis-11a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
+
+  modis-11A2-061:
+    category: Temperature
+    headerImg: ./images/modis-11a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
+
+  modis-13A1-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-13a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-13Q1-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-13q1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-14A1-061:
+    category: Fire
+    headerImg: ./images/modis-14a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
+
+  modis-14A2-061:
+    category: Fire
+    headerImg: ./images/modis-14a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
+
+  modis-15A2H-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-15a2h-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-15A3H-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-15a3h-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-16A3GF-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-16a3gf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-17A2H-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-17a2h-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-17A2HGF-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-17a2hgf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-17A3HGF-061:
+    category: Biomass/Vegetation
+    headerImg: ./images/modis-17a3hgf-hero.jpeg
+    tabs:
+      - title: Example Notebook
+        src: modis-vegetation-example.html
+        launch: datasets/modis/modis-vegetation-example.ipynb
+
+  modis-21A2-061:
+    category: Temperature
+    headerImg: ./images/modis-21a2-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-temperature-example.html
+        launch: datasets/modis/modis-temperature-example.ipynb
+
+  modis-43A4-061:
+    category: Imagery
+    headerImg: ./images/modis-43a4-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-imagery-example.html
+        launch: datasets/modis/modis-imagery-example.ipynb
+
+  modis-64A1-061:
+    category: Fire
+    headerImg: ./images/modis-64a1-hero.png
+    tabs:
+      - title: Example Notebook
+        src: modis-fire-example.html
+        launch: datasets/modis/modis-fire-example.ipynb
 
   mobi:
     category: Biodiversity
@@ -295,10 +593,6 @@ collections:
       - title: Example Notebook
         src: mobi-example.html
         launch: datasets/mobi/mobi-example.ipynb
-      - title: Blob Storage Notebook
-        src: mobi.html
-      - title: Storage Documentation
-        src: mobi-storage.html
 
   mtbs:
     category: Fire
@@ -307,10 +601,6 @@ collections:
       - title: Example Notebook
         src: mtbs-example.html
         launch: datasets/mtbs/mtbs-example.ipynb
-      - title: Blob Storage Notebook
-        src: mtbs.html
-      - title: Storage Documentation
-        src: mtbs-storage.html
 
   naip:
     category: Imagery
@@ -319,10 +609,6 @@ collections:
       - title: Example Notebook
         src: naip-example.html
         launch: datasets/naip/naip-example.ipynb
-      - title: Blob Storage Notebook
-        src: naip.html
-      - title: Storage Documentation
-        src: naip-storage.html
 
   nasa-nex-gddp-cmip6:
     category: Climate/Weather
@@ -338,10 +624,14 @@ collections:
       - title: Example Notebook
         src: nasadem-example.html
         launch: datasets/nasadem/nasadem-example.ipynb
-      - title: Blob Storage Notebook
-        src: nasadem-cog.html
-      - title: Storage Documentation
-        src: nasadem-storage.html
+
+  noaa-c-cap:
+    category: Land use/Land cover
+    headerImg: ./images/noaa-c-cap-hero.png
+    tabs:
+      - title: Example Notebook
+        src: noaa-c-cap-example.html
+        launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
   nrcan-landcover:
     category: Land use/Land cover
@@ -351,6 +641,40 @@ collections:
         src: nrcan-landcover-example.html
         launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
 
+  planet-nicfi-visual:
+    hideInExplorer: true
+    category: Imagery
+    headerImg: ./images/planet-nicfi-visual-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
+
+  planet-nicfi-analytic:
+    hideInExplorer: true
+    category: Imagery
+    headerImg: ./images/planet-nicfi-analytic-hero.png
+    tabs:
+      - title: Example Notebook
+        src: planet-nicfi-example.html
+        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
+
+  sentinel-1-grd:
+    category: SAR
+    headerImg: ./images/sentinel-1-grd-hero.png
+    tabs:
+      - title: Example Notebook
+        src: sentinel-1-grd-example.html
+        launch: datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
+
+  sentinel-1-rtc:
+    category: SAR
+    headerImg: ./images/sentinel-1-rtc-hero.png
+    tabs:
+      - title: Example Notebook
+        src: sentinel-1-rtc-example.html
+        launch: datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
+
   sentinel-2-l2a:
     category: Imagery
     headerImg: ./images/sentinel-hero.jpg
@@ -358,10 +682,6 @@ collections:
       - title: Example Notebook
         src: sentinel-2-l2a-example.html
         launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
-      - title: Blob Storage Notebook
-        src: sentinel-2.html
-      - title: Storage Documentation
-        src: sentinel-2-storage.html
 
   terraclimate:
     category: Climate/Weather
@@ -370,10 +690,6 @@ collections:
       - title: Example Notebook
         src: terraclimate-example.html
         launch: datasets/terraclimate/terraclimate-example.ipynb
-      - title: Blob Storage Notebook
-        src: terraclimate.html
-      - title: Storage Documentation
-        src: terraclimate-storage.html
 
   us-census:
     headerImg: ./images/us-census-hero.png
@@ -427,15 +743,6 @@ ai4e:
     alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
-  - title: Landsat TM/MSS Collection 2
-    shortTerm: Landsat TM/MSS
-    description:
-      Global imagery from the MSS and TM instruments on the Landsat 1-5 satellites
-    infoUrl: https://aka.ms/ai4edata-landsat-tm-mss
-    thumbnailUrl: landsat_tm_mms_small.jpg
-    alt: Earth from above
-    keywords: [Landsat, Global, Imagery, Satellite]
-
   - title: LILA BC
     shortTerm: LILA BC
     description: Labeled images related to wildlife conservation
@@ -443,16 +750,6 @@ ai4e:
     thumbnailUrl: RE3BWhq.jpg
     alt: Fox pup stands on a rock.
     keywords: [LILA, Labels, Wildlife, Biodiversity]
-
-  - title: MODIS
-    shortTerm: MODIS
-    description:
-      Satellite imagery from the Moderate Resolution Imaging Spectroradiometer
-      (MODIS)
-    infoUrl: https://aka.ms/ai4edata-modis
-    thumbnailUrl: RE3BTDt.jpg
-    alt: View of Earth from space.
-    keywords: [MODIS, Satellite, Imagery, Global]
 
   - title: National Land Cover Database
     shortTerm: land cover
@@ -558,14 +855,6 @@ ai4e:
     thumbnailUrl: RE4KiKZ.jpg
     alt: Image from ocean floor video
     keywords: [OOI, Video, Ocean, Pacific]
-
-  - title: Sentinel-1 GRD
-    shortTerm: Sentinel-1 GRD
-    description: Global synthetic aperture radar (SAR) data from 2017-present
-    infoUrl: https://aka.ms/ai4edata-sentinel-1
-    thumbnailUrl: sentinel-1-grd.jpg
-    alt: False color rendering of Sentinel-1 GRD data near Seattle, WA, USA
-    keywords: [Global, Sentinel, Satellite, ESA, SAR, Radar]
 
   - title: Sentinel-1 SLC
     shortTerm: Sentinel-1 SLC

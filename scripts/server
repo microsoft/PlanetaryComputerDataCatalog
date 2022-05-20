@@ -5,13 +5,16 @@ set -e
 function usage() {
     echo -n "Usage: $(basename "$0")
 Run webpack dev server with hot reloading for development
+    --api: run a local api server in addtion to the webpack dev server
 "
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
+    elif [[ "${1:-}" == "--api" ]]; then
+        docker-compose up app api
     else
-        yarn start
+        docker-compose up app
     fi
 fi

@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { SearchBox, TagPicker } from "@fluentui/react";
 import { filter, stacTagFilter, tagFilter } from "utils/filter";
 import { useQueryString } from "utils/hooks";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const stacKeys = ["title", "msft:short_description", "description", "keywords"];
 const datasetKeys = ["title", "description", "tags"];
@@ -14,7 +14,7 @@ const DatasetFilter = ({
   onStacMatch,
   onDatasetMatch,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [filterTerm, setFilterTerm] = useState("");
   const qsTags = useQueryString().get("tags");
 
@@ -67,9 +67,9 @@ const DatasetFilter = ({
       const qs = selectedTags.length
         ? `tags=${selectedTags.map(({ name }) => name)}`
         : null;
-      history.push({ search: qs });
+      navigate({ search: qs });
     },
-    [history, onDatasetMatch, onStacMatch, datasets, stacCollection]
+    [navigate, onDatasetMatch, onStacMatch, datasets, stacCollection]
   );
 
   // Is a key present in selectedTags

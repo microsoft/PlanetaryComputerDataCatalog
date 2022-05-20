@@ -6,6 +6,7 @@ import { DATA_URL, HUB_URL } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
+// import { useSession } from "components/auth/hooks/SessionContext";
 
 dayjs.extend(utc);
 export { dayjs };
@@ -72,10 +73,13 @@ export const isort = (a: string, b: string) =>
 
 const sortAlphaByKey = (key: string) => {
   return (a: any, b: any) => {
-    if (a[key] < b[key]) {
+    const al = a[key].toLowerCase();
+    const bl = b[key].toLowerCase();
+
+    if (al < bl) {
       return -1;
     }
-    if (a[key] > b[key]) {
+    if (al > bl) {
       return 1;
     }
     return 0;
@@ -199,13 +203,11 @@ export const scrollToHash = (
 ) => {
   // Remove the hash
   const id = elementId.substring(elementId.lastIndexOf("#") + 1);
+  const el = document.getElementById(id);
 
-  return () => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: behavior });
-    }
-  };
+  if (el) {
+    el.scrollIntoView({ behavior: behavior });
+  }
 };
 
 // TODO: Refactor to parse into params, not string manipulation
@@ -232,14 +234,15 @@ export const makeTileJsonUrl = (
   return `${DATA_URL}/mosaic/${query.searchId}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
 
-export const makeItemPreviewUrl = (
+export const useItemPreviewUrl = (
   item: IStacItem,
-  renderOption: IMosaicRenderOption,
+  renderOption: IMosaicRenderOption | null,
   size?: number
 ) => {
+  // TODO: add auth to request: const { status } = useSession();
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
-  const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption.options));
+  const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption?.options));
 
   const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;
 
@@ -263,6 +266,6 @@ const encodeRenderOpts = (renderOpts: string | undefined) => {
 };
 
 // Remove the suffix that designates the mercator assets from the render options
-const removeMercatorAssets = (renderOpts: string) => {
+const removeMercatorAssets = (renderOpts: string = "") => {
   return renderOpts.replaceAll("_wm", "");
 };
