@@ -297,7 +297,7 @@ collections:
     headerImg: ./images/ecmwf-forecast-hero.png
     tabs:
       - title: Example Notebook
-        src: ecmwf-forecast.html
+        src: ecmwf-forecast-example.html
         launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
 
   era5-pds:
