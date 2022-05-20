@@ -20,10 +20,13 @@ This release includes several new datasets, features, and updates to libraries.
 
 ##### New features
 
+- Initial support for [queryables](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#queryables) in the STAC API. See [Sentinel-2-l2a](https://planetarycomputer-staging.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/queryables) for an example. Additional queryables and more metadata description in coming releases.
+
 #### Data API
 
 ##### New features
 
+- Upgrades to pgstac-titiler [0.1.0a7](https://github.com/stac-utils/titiler-pgstac/blob/master/CHANGES.md#010a7-2022-04-05-pre-release)
 #### New datasets
 
 * [Sentinel-1 RTC](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-rtc): Global radiometrically terrain corrected SAR imagery derived from the Sentinel 1 Level 1 GRD product.
@@ -55,6 +58,7 @@ This release includes several new datasets, features, and updates to libraries.
 * [MODIS Thermal Anomalies/Fire Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A1-061): MODIS Thermal Anomalies/Fire Daily
 * [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
 * [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
+* [NAIP](https://planetarycomputer-staging.microsoft.com/dataset/naip): National Agriculture Imagery Program (NAIP) imagery updated for 2020
 * [NOAA C-CAP Regional Land Cover and Change](https://planetarycomputer-staging.microsoft.com/dataset/noaa-c-cap): Periodic coastal landcover classifications back to 1975
 * [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 * [Planet-NICFI Basemaps (Visual)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
@@ -66,8 +70,6 @@ This release includes several new datasets, features, and updates to libraries.
 ### Hub environments
 
 - Updated to [planetary-computer-containers 2022.05.11.0](https://github.com/microsoft/planetary-computer-containers/releases/tag/2022.05.11.0)
-
-### Website
 
 ## January 2022
 
