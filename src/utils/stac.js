@@ -291,6 +291,9 @@ StacFields.Registry.addMetadataField("sat:orbit_state", {
 StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
 });
+StacFields.Registry.addMetadataField("sat:absolute_orbit", {
+  label: "Absolute Orbit No.",
+});
 StacFields.Registry.addMetadataField("sat:platform_international_designator", {
   label: "Platform Designator",
 });
@@ -404,6 +407,10 @@ StacFields.Registry.addMetadataField("goes:mode", {
 });
 StacFields.Registry.addMetadataField("goes:processing-level", {
   label: "Processing Level",
+});
+
+StacFields.Registry.addMetadataField("s1:shape", {
+  formatter: codeNumberList,
 });
 
 StacFields.Registry.addMetadataField("s2:mgrs_tile", {
