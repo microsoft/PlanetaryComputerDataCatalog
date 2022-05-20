@@ -4,22 +4,21 @@ This document highlights the new features, datasets, and breaking changes betwee
 
 ## April 2022
 
-This release includes several new datasets, features, and updates to libraries.
+This release includes many new datasets, API enhancements, and updates to libraries.
 
 ### Highlights
 
-- **Improved performance and scalability of our STAC API**. Requests to our STAC API, including searches, will be faster and scale to larger results sets See the pgstac [0.5](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) and [0.6](https://github.com/stac-utils/pgstac/releases/tag/v0.6.0) release notes for more.
+- **Improved performance and scalability of our STAC API**. Requests to our STAC API, including searches, will return faster and scale to larger results sets. See the pgstac [0.5](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) and [0.6](https://github.com/stac-utils/pgstac/releases/tag/v0.6.0) release notes for more.
 - The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries. See [working with multiple layers](https://planetarycomputer-staging.microsoft.com/docs/overview/explorer/#working-with-multiple-layers) for more.
-- Many new datasets have been added to our [catalog](https://planetarycomputer.microsoft.com/catalog).
+- Many new datasets are available through our [catalog](https://planetarycomputer.microsoft.com/catalog). See the datasets section below for more.
 
 ### APIs
 
 #### STAC API
 
-- Updated the STAC API to [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-rc.1)
-
 ##### New features
 
+- Updated the STAC API to [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-rc.1)
 - Initial support for [queryables](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#queryables) in the STAC API. See [Sentinel-2-l2a](https://planetarycomputer-staging.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/queryables) for an example. Additional queryables and more metadata description in coming releases.
 
 #### Data API
@@ -27,7 +26,10 @@ This release includes several new datasets, features, and updates to libraries.
 ##### New features
 
 - Upgrades to pgstac-titiler [0.1.0a7](https://github.com/stac-utils/titiler-pgstac/blob/master/CHANGES.md#010a7-2022-04-05-pre-release)
+
 #### New datasets
+
+This release includes many new datasets. Each of these links to the dataset details page, which includes an example notebook.
 
 * [Sentinel-1 RTC](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-rtc): Global radiometrically terrain corrected SAR imagery derived from the Sentinel 1 Level 1 GRD product.
 * [Sentinel-1 GRD](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-grd): Focused SAR data that has been detected, multi-looked and projected to ground range using an Earth ellipsoid model.
@@ -67,7 +69,10 @@ This release includes several new datasets, features, and updates to libraries.
 
 ### Documentation and Tutorials
 
-* [Customizable radiometric terrain correction of Sentinel-1 products](https://nbviewer.org/github/microsoft/PlanetaryComputerExamples/blob/main/tutorials/customizable-rtc-sentinel1.ipynb) using the open-source [sarsen](https://github.com/bopen/sarsen) package.
+In addition to the dataset examples, we have several new tutorials going in-depth on a specific topic.
+
+* [Customizable radiometric terrain correction of Sentinel-1 products](https://planetarycomputer-staging.microsoft.com/docs/tutorials/customizable-rtc-sentinel1/) using the open-source [sarsen](https://github.com/bopen/sarsen) package.
+* [Computing climate indicators with xclim](https://planetarycomputer-staging.microsoft.com/dataset/cil-gdpcir-cc0#Climate-indicators)
 
 ### Hub environments
 
