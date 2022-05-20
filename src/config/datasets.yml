@@ -665,7 +665,7 @@ collections:
     tabs:
       - title: Example Notebook
         src: sentinel-1-grd-example.html
-        launch: datasets/sentinel-1/sentinel-1-grd-example.ipynb
+        launch: datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
 
   sentinel-1-rtc:
     category: SAR
@@ -673,7 +673,7 @@ collections:
     tabs:
       - title: Example Notebook
         src: sentinel-1-rtc-example.html
-        launch: datasets/sentinel-1/sentinel-1-rtc-example.ipynb
+        launch: datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
 
   sentinel-2-l2a:
     category: Imagery
