@@ -9,68 +9,68 @@ This release includes many new datasets, API enhancements, and updates to librar
 ### Highlights
 
 - **Improved performance and scalability of our STAC API**. Requests to our STAC API, including searches, will return faster and scale to larger concurrent loads. See the pgstac [0.5](https://github.com/stac-utils/pgstac/blob/main/CHANGELOG.md#v050) and [0.6](https://github.com/stac-utils/pgstac/releases/tag/v0.6.0) release notes for more.
-- The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries. See [working with multiple layers](https://planetarycomputer-staging.microsoft.com/docs/overview/explorer/#working-with-multiple-layers) for more.
+- The [Explorer](https://planetarycomputer.microsoft.com/explore) now includes the ability to pin layers, allowing you to compare multiple queries. See [working with multiple layers](https://planetarycomputer.microsoft.com/docs/overview/explorer/#working-with-multiple-layers) for more.
 - Many new datasets are available through our [catalog](https://planetarycomputer.microsoft.com/catalog). See the datasets section below for more.
 
 ### New datasets
 
 This release includes many new datasets. Each of these links to the dataset details page, which includes an example notebook.
 
-* [Sentinel-1](https://planetarycomputer-staging.microsoft.com/dataset/group/sentinel-1): Synthetic Aperture Radar raster products, including the world's first openly licensed (_CC-BY-4.0_), globally available radiometrically terrain corrected Sentinel 1 product.
-  * [Sentinel-1 RTC](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-rtc): Global radiometrically terrain corrected SAR imagery derived from the Sentinel 1 Level 1 GRD product.
-  * [Sentinel-1 GRD](https://planetarycomputer-staging.microsoft.com/dataset/sentinel-1-grd): Focused SAR data that has been detected, multi-looked and projected to ground range using an Earth ellipsoid model.
-* [Landsat](https://planetarycomputer-staging.microsoft.com/dataset/group/landsat): Imagery from Landsat 1-9, starting from 1972.
-  * [Landsat Collection 2 Level-1](https://planetarycomputer-staging.microsoft.com/dataset/landsat-c2-l1): Landsat Collection 2 Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.
-  * [Landsat Collection 2 Level-2](https://planetarycomputer-staging.microsoft.com/dataset/landsat-c2-l2): Landsat Collection 2 Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.
-* [MODIS](https://planetarycomputer-staging.microsoft.com/dataset/group/modis) imagery and derived products, starting from 2000.
-  * [MODIS Burned Area Monthly](https://planetarycomputer-staging.microsoft.com/dataset/modis-64A1-061): MODIS Burned Area Monthly
-  * [MODIS Gross Primary Productivity 8-Day Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A2HGF-061): MODIS Gross Primary Productivity 8-Day Gap-Filled
-  * [MODIS Gross Primary Productivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A2H-061): MODIS Gross Primary Productivity 8-Day
-  * [MODIS Land Surface Temperature/3-Band Emissivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-21A2-061): MODIS Land Surface Temperature/3-Band Emissivity 8-Day
-  * [MODIS Land Surface Temperature/Emissivity 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-11A2-061): MODIS Land Surface Temperature/Emissivity 8-Day
-  * [MODIS Land Surface Temperature/Emissivity Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-11A1-061): MODIS Land Surface Temperature/Emissivity Daily
-  * [MODIS Leaf Area Index/FPAR 4-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-15A3H-061): MODIS Leaf Area Index/FPAR 4-Day
-  * [MODIS Leaf Area Index/FPAR 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-15A2H-061): MODIS Leaf Area Index/FPAR 8-Day
-  * [MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-43A4-061): MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily
-  * [MODIS Net Evapotranspiration Yearly Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-16A3GF-061): MODIS Net Evapotranspiration Yearly Gap-Filled
-  * [MODIS Net Primary Production Yearly Gap-Filled](https://planetarycomputer-staging.microsoft.com/dataset/modis-17A3HGF-061): MODIS Net Primary Production Yearly Gap-Filled
-  * [MODIS Snow Cover 8-day](https://planetarycomputer-staging.microsoft.com/dataset/modis-10A2-061): MODIS Snow Cover 8-day
-  * [MODIS Snow Cover Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-10A1-061): MODIS Snow Cover Daily
-  * [MODIS Surface Reflectance 8-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-09Q1-061): MODIS Surface Reflectance 8-Day (250m)
-  * [MODIS Surface Reflectance 8-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-09A1-061): MODIS Surface Reflectance 8-Day (500m)
-  * [MODIS Thermal Anomalies/Fire 8-Day](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A2-061): MODIS Thermal Anomalies/Fire 8-Day
-  * [MODIS Thermal Anomalies/Fire Daily](https://planetarycomputer-staging.microsoft.com/dataset/modis-14A1-061): MODIS Thermal Anomalies/Fire Daily
-  * [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
-  * [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
-* [USGS 3DEP](https://planetarycomputer-staging.microsoft.com/dataset/group/3dep-lidar): Lidar elevation data as Cloud Optimized Point Cloud (COPC) and derived Cloud Optimized GeoTIFF (COG) data processed from the USGS 3D Elevation Program.
-  * [USGS 3DEP Lidar Point Cloud](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-copc)
-  * [USGS 3DEP Lidar Height Above Ground (HAG)](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-hag)
-  * [USGS 3DEP Lidar Classification](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-classification)
-  * [USGS 3DEP Lidar Digital Surfice Model (DSM)](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-dsm)
-  * [USGS 3DEP Digital Terrain Model (DTM)](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-dtm)
-  * [USGS 3DEP Digital Terrain Model (Native)](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-dtm-native)
-  * [USGS 3DEP Lidar Point Source](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-pointsourceid)
-  * [USGS 3DEP Lidar Intensity](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-intensity)
-  * [USGS 3DEP Lidar Returns](https://planetarycomputer-staging.microsoft.com/dataset/3dep-lidar-returns)
-* [NAIP](https://planetarycomputer-staging.microsoft.com/dataset/naip): National Agriculture Imagery Program (NAIP) imagery updated for 2020
-* [CIL Global Downscaled Projections for Climate Impacts Research Collection](https://planetarycomputer-staging.microsoft.com/dataset/group/cil-gdpcir): Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
-* [ECMWF Open Data (real-time)](https://planetarycomputer-staging.microsoft.com/dataset/ecmwf-forecast): ECMWF Open Data (Real Time) forecasts
-* [ERA5 - PDS](https://planetarycomputer-staging.microsoft.com/dataset/era5-pds): A comprehensive reanalysis, which assimilates as many observations as possible in the upper air and near surface.
-* [ESA WorldCover 2020](https://planetarycomputer-staging.microsoft.com/dataset/esa-worldcover): Global land cover product at 10 meter resolution for 2020 based on Sentinel-1 and Sentinel-2 data
-* [ALOS Forest/Non-Forest Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-fnf-mosaic): Global 25-meter resolution map classifying "forest" and "non-forest" landcover.
-* [ALOS PALSAR Annual Mosaic](https://planetarycomputer-staging.microsoft.com/dataset/alos-palsar-mosaic): Global 25-meter resolution SAR image mosaic.
-* [NOAA C-CAP Regional Land Cover and Change](https://planetarycomputer-staging.microsoft.com/dataset/noaa-c-cap): Periodic coastal landcover classifications back to 1975
-* [Urban Innovation Eclipse Sensor Data](https://planetarycomputer-staging.microsoft.com/dataset/eclipse): A network of low-cost air quality sensing network for cities and led by the Urban Innovation Group at Microsoft Research
-* [Planet NICFI](https://planetarycomputer-staging.microsoft.com/dataset/group/planet-nicfi):
-  * [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
-  * [Planet-NICFI Basemaps (Visual)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
+* [Sentinel-1](https://planetarycomputer.microsoft.com/dataset/group/sentinel-1): Synthetic Aperture Radar raster products, including the world's first openly licensed (_CC-BY-4.0_), globally available radiometrically terrain corrected Sentinel 1 product.
+  * [Sentinel-1 RTC](https://planetarycomputer.microsoft.com/dataset/sentinel-1-rtc): Global radiometrically terrain corrected SAR imagery derived from the Sentinel 1 Level 1 GRD product.
+  * [Sentinel-1 GRD](https://planetarycomputer.microsoft.com/dataset/sentinel-1-grd): Focused SAR data that has been detected, multi-looked and projected to ground range using an Earth ellipsoid model.
+* [Landsat](https://planetarycomputer.microsoft.com/dataset/group/landsat): Imagery from Landsat 1-9, starting from 1972.
+  * [Landsat Collection 2 Level-1](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l1): Landsat Collection 2 Level-1 data from the Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5.
+  * [Landsat Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2): Landsat Collection 2 Level-2 data from the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.
+* [MODIS](https://planetarycomputer.microsoft.com/dataset/group/modis) imagery and derived products, starting from 2000.
+  * [MODIS Burned Area Monthly](https://planetarycomputer.microsoft.com/dataset/modis-64A1-061): MODIS Burned Area Monthly
+  * [MODIS Gross Primary Productivity 8-Day Gap-Filled](https://planetarycomputer.microsoft.com/dataset/modis-17A2HGF-061): MODIS Gross Primary Productivity 8-Day Gap-Filled
+  * [MODIS Gross Primary Productivity 8-Day](https://planetarycomputer.microsoft.com/dataset/modis-17A2H-061): MODIS Gross Primary Productivity 8-Day
+  * [MODIS Land Surface Temperature/3-Band Emissivity 8-Day](https://planetarycomputer.microsoft.com/dataset/modis-21A2-061): MODIS Land Surface Temperature/3-Band Emissivity 8-Day
+  * [MODIS Land Surface Temperature/Emissivity 8-Day](https://planetarycomputer.microsoft.com/dataset/modis-11A2-061): MODIS Land Surface Temperature/Emissivity 8-Day
+  * [MODIS Land Surface Temperature/Emissivity Daily](https://planetarycomputer.microsoft.com/dataset/modis-11A1-061): MODIS Land Surface Temperature/Emissivity Daily
+  * [MODIS Leaf Area Index/FPAR 4-Day](https://planetarycomputer.microsoft.com/dataset/modis-15A3H-061): MODIS Leaf Area Index/FPAR 4-Day
+  * [MODIS Leaf Area Index/FPAR 8-Day](https://planetarycomputer.microsoft.com/dataset/modis-15A2H-061): MODIS Leaf Area Index/FPAR 8-Day
+  * [MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily](https://planetarycomputer.microsoft.com/dataset/modis-43A4-061): MODIS Nadir BRDF-Adjusted Reflectance (NBAR) Daily
+  * [MODIS Net Evapotranspiration Yearly Gap-Filled](https://planetarycomputer.microsoft.com/dataset/modis-16A3GF-061): MODIS Net Evapotranspiration Yearly Gap-Filled
+  * [MODIS Net Primary Production Yearly Gap-Filled](https://planetarycomputer.microsoft.com/dataset/modis-17A3HGF-061): MODIS Net Primary Production Yearly Gap-Filled
+  * [MODIS Snow Cover 8-day](https://planetarycomputer.microsoft.com/dataset/modis-10A2-061): MODIS Snow Cover 8-day
+  * [MODIS Snow Cover Daily](https://planetarycomputer.microsoft.com/dataset/modis-10A1-061): MODIS Snow Cover Daily
+  * [MODIS Surface Reflectance 8-Day (250m)](https://planetarycomputer.microsoft.com/dataset/modis-09Q1-061): MODIS Surface Reflectance 8-Day (250m)
+  * [MODIS Surface Reflectance 8-Day (500m)](https://planetarycomputer.microsoft.com/dataset/modis-09A1-061): MODIS Surface Reflectance 8-Day (500m)
+  * [MODIS Thermal Anomalies/Fire 8-Day](https://planetarycomputer.microsoft.com/dataset/modis-14A2-061): MODIS Thermal Anomalies/Fire 8-Day
+  * [MODIS Thermal Anomalies/Fire Daily](https://planetarycomputer.microsoft.com/dataset/modis-14A1-061): MODIS Thermal Anomalies/Fire Daily
+  * [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
+  * [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
+* [USGS 3DEP](https://planetarycomputer.microsoft.com/dataset/group/3dep-lidar): Lidar elevation data as Cloud Optimized Point Cloud (COPC) and derived Cloud Optimized GeoTIFF (COG) data processed from the USGS 3D Elevation Program.
+  * [USGS 3DEP Lidar Point Cloud](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-copc)
+  * [USGS 3DEP Lidar Height Above Ground (HAG)](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-hag)
+  * [USGS 3DEP Lidar Classification](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-classification)
+  * [USGS 3DEP Lidar Digital Surfice Model (DSM)](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-dsm)
+  * [USGS 3DEP Digital Terrain Model (DTM)](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-dtm)
+  * [USGS 3DEP Digital Terrain Model (Native)](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-dtm-native)
+  * [USGS 3DEP Lidar Point Source](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-pointsourceid)
+  * [USGS 3DEP Lidar Intensity](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-intensity)
+  * [USGS 3DEP Lidar Returns](https://planetarycomputer.microsoft.com/dataset/3dep-lidar-returns)
+* [NAIP](https://planetarycomputer.microsoft.com/dataset/naip): National Agriculture Imagery Program (NAIP) imagery updated for 2020
+* [CIL Global Downscaled Projections for Climate Impacts Research Collection](https://planetarycomputer.microsoft.com/dataset/group/cil-gdpcir): Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
+* [ECMWF Open Data (real-time)](https://planetarycomputer.microsoft.com/dataset/ecmwf-forecast): ECMWF Open Data (Real Time) forecasts
+* [ERA5 - PDS](https://planetarycomputer.microsoft.com/dataset/era5-pds): A comprehensive reanalysis, which assimilates as many observations as possible in the upper air and near surface.
+* [ESA WorldCover 2020](https://planetarycomputer.microsoft.com/dataset/esa-worldcover): Global land cover product at 10 meter resolution for 2020 based on Sentinel-1 and Sentinel-2 data
+* [ALOS Forest/Non-Forest Annual Mosaic](https://planetarycomputer.microsoft.com/dataset/alos-fnf-mosaic): Global 25-meter resolution map classifying "forest" and "non-forest" landcover.
+* [ALOS PALSAR Annual Mosaic](https://planetarycomputer.microsoft.com/dataset/alos-palsar-mosaic): Global 25-meter resolution SAR image mosaic.
+* [NOAA C-CAP Regional Land Cover and Change](https://planetarycomputer.microsoft.com/dataset/noaa-c-cap): Periodic coastal landcover classifications back to 1975
+* [Urban Innovation Eclipse Sensor Data](https://planetarycomputer.microsoft.com/dataset/eclipse): A network of low-cost air quality sensing network for cities and led by the Urban Innovation Group at Microsoft Research
+* [Planet NICFI](https://planetarycomputer.microsoft.com/dataset/group/planet-nicfi):
+  * [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
+  * [Planet-NICFI Basemaps (Visual)](https://planetarycomputer.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 
 ### API updates
 
 #### STAC API
 
 - Updated the STAC API to [v1.0.0-rc.1](https://github.com/radiantearth/stac-api-spec/releases/tag/v1.0.0-rc.1)
-- Initial support for [queryables](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#queryables) in the STAC API. See [Sentinel-2-l2a](https://planetarycomputer-staging.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/queryables) for an example. Additional queryables and more metadata description in coming releases.
+- Initial support for [queryables](https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#queryables) in the STAC API. See [Sentinel-2-l2a](https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a/queryables) for an example. Additional queryables and more metadata description in coming releases.
 - Scalability and performance improvements.
 
 #### Data API
@@ -82,8 +82,8 @@ This release includes many new datasets. Each of these links to the dataset deta
 
 In addition to the dataset examples, we have several new tutorials going in-depth on a specific topic.
 
-* [Customizable radiometric terrain correction of Sentinel-1 products](https://planetarycomputer-staging.microsoft.com/docs/tutorials/customizable-rtc-sentinel1/) using the open-source [sarsen](https://github.com/bopen/sarsen) package.
-* [Computing climate indicators with xclim](https://planetarycomputer-staging.microsoft.com/dataset/cil-gdpcir-cc0#Climate-indicators)
+* [Customizable radiometric terrain correction of Sentinel-1 products](https://planetarycomputer.microsoft.com/docs/tutorials/customizable-rtc-sentinel1/) using the open-source [sarsen](https://github.com/bopen/sarsen) package.
+* [Computing climate indicators with xclim](https://planetarycomputer.microsoft.com/dataset/cil-gdpcir-cc0#Climate-indicators)
 
 ### Hub environments
 
