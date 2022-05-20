@@ -56,6 +56,8 @@ This release includes several new datasets, features, and updates to libraries.
 * [MODIS Vegetation Indices 16-Day (250m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13Q1-061): MODIS Vegetation Indices 16-Day (250m)
 * [MODIS Vegetation Indices 16-Day (500m)](https://planetarycomputer-staging.microsoft.com/dataset/modis-13A1-061): MODIS Vegetation Indices 16-Day (500m)
 * [NOAA C-CAP Regional Land Cover and Change](https://planetarycomputer-staging.microsoft.com/dataset/noaa-c-cap): Periodic coastal landcover classifications back to 1975
+* [Urban Innovation Eclipse Sensor Data](https://planetarycomputer-staging.microsoft.com/dataset/eclipse): A network of low-cost air quality sensing network for cities and led by the Urban Innovation Group at Microsoft Research
+* [USGS 3DEP Lidar](https://planetarycomputer-staging.microsoft.com/dataset/group/3dep-lidar): Lidar elevation data as 3D point clouds and derived Cloud Optimized GeoTIFFs using data from the USGS 3D Elevation Program.
 * [Planet-NICFI Basemaps (Analytic)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-analytic): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 * [Planet-NICFI Basemaps (Visual)](https://planetarycomputer-staging.microsoft.com/dataset/planet-nicfi-visual): Planet's high-resolution, analysis-ready mosaics of the world's tropics (Microsoft - GEO RFP winners only)
 
