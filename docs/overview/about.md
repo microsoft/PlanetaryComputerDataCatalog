@@ -45,10 +45,10 @@ We're just getting started. Check back for updated documentation and new feature
 - [Browse the data available in the Planetary Computer through the Data Catalog](https://planetarycomputer.microsoft.com/catalog)
 - [Learn how to search for Planetary Computer data using the STAC API](../quickstarts/reading-stac.ipynb)
 - Check out the example notebooks for our datasets, for example:
-  - [Landsat Collection 2 Level-2](http://planetarycomputer.microsoft.com/dataset/landsat-c2-l2#Example-Notebook)
-  - [Sentinel-2  L2A](http://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Example-Notebook)
-  - [NAIP](http://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook)
-  - [ASTER L1T](http://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook)
+  - [Landsat Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2#Example-Notebook)
+  - [Sentinel-2  L2A](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Example-Notebook)
+  - [NAIP](https://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook)
+  - [ASTER L1T](https://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook)
 - [Request a Planetary Computer account](https://planetarycomputer.microsoft.com/account/request)
 
 ## Beyond the Planetary Computer
