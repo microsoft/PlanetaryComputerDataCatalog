@@ -47,20 +47,6 @@ daymet:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/daymet-na.jpg
   keywords: [Daymet, Weather, Climate, North America, Puerto Rico, Hawaii]
 
-cil-gdpcir:
-  title: CIL Global Downscaled Projections for Climate Impacts Research
-  short_description:
-    Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
-
-  description: >
-    Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
-  assets:
-    headerImg:
-      href: ./images/cil-gdpcir.png
-    thumbnail:
-      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gdpcir.png
-  keywords: [CMIP6, Climate Impact Lab, Rhodium Group, Precipitation, Temperature]
-
 copernicus-dem:
   title: Copernicus DEM Collection
   short_description:
@@ -280,3 +266,25 @@ chesapeake-lulc:
       "Chesapeake Bay Watershed",
       "Chesapeake Conservancy"
     ]
+
+cil-gdpcir:
+  title: CIL Global Downscaled Projections for Climate Impacts Research
+  short_description:
+    Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
+
+  description: >
+    The World Climate Research Programme's [6th Coupled Model Intercomparison Project (CMIP6)](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6) represents an enormous advance in the quality, detail, and scope of climate modeling.
+
+
+    The [Global Downscaled Projections for Climate Impacts Research](https://github.com/ClimateImpactLab/downscaleCMIP6) dataset makes this modeling more applicable to understanding the impacts of changes in the climate on humans and society with two key developments: trend-preserving bias correction and downscaling. In this dataset, the [Climate Impact Lab](https://impactlab.org/) provides global, daily minimum and maximum air temperature at the surface (`tasmin` and `tasmax`) and daily cumulative surface precipitation (`pr`) corresponding to the CMIP6 historical, ssp1-2.6, ssp2-4.5, ssp3-7.0, and ssp5-8.5 scenarios for 25 global climate models on a 1/4-degree regular global grid.
+
+
+    GDPCIR data can be accessed on the Microsoft Planetary Computer. The dataset is made of of three collections, distinguished by data license.
+    More information about the dataset is available in these collections, including access instructions and examples, data formats, available models, methods, and citation/licensing requirements, on each dataset's homepage linked below.
+
+  assets:
+    headerImg:
+      href: ./images/cil-gdpcir.png
+    thumbnail:
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gdpcir.png
+  keywords: [CMIP6, Climate Impact Lab, Rhodium Group, Precipitation, Temperature]
