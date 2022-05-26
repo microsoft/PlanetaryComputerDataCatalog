@@ -61,5 +61,5 @@ const generateNav = (categories: string[]): INavLinkGroup[] => {
 
 const tocStyle: Partial<INavStyles> = {
   link: { padding: 2 },
-  root: { marginRight: 35 },
+  root: { marginRight: 35, maxHeight: "100vh" },
 };

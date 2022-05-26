@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   ISeparatorStyles,
   IStackStyles,
@@ -15,20 +14,15 @@ import groups from "config/datasetGroups.yml";
 import { CatalogCollection } from "./Catalog.Collection";
 import { useCollections } from "utils/requests";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
-// import { scrollToHash } from "utils";
 
 export const GROUP_PREFIX = "group::";
 
-export const CatalogCollectionList: React.FC = () => {
-  const { isLoading, data } = useCollections();
+interface CatalogCollectionListProps {
+  filterText?: string | null;
+}
 
-  useEffect(() => {
-    if (data?.collections) {
-      const hash = window.location.hash.replace("#", "");
-      console.log("Hash:", hash);
-      // scrollToHash(hash);
-    }
-  }, [data?.collections]);
+export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = () => {
+  const { isLoading, data } = useCollections();
 
   const groupedCollections = getGroupedCollections(data?.collections, isLoading);
   const sortedKeys = Object.keys(groupedCollections).sort();

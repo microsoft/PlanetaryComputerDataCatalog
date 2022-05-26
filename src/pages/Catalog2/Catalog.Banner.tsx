@@ -2,7 +2,15 @@ import { IStackTokens, ITextStyles, Stack, Text } from "@fluentui/react";
 import DefaultBanner from "components/DefaultBanner";
 import { CatalogFilter } from "./Catalog.Filter";
 
-export const Banner = () => {
+interface CatalogBannerProps {
+  onFilterChange: (_: any, newValue?: string | undefined) => void;
+  filterText: string | undefined;
+}
+
+export const CatalogBanner: React.FC<CatalogBannerProps> = ({
+  filterText,
+  onFilterChange,
+}) => {
   return (
     <DefaultBanner>
       <h1>Data Catalog</h1>
@@ -13,7 +21,7 @@ export const Banner = () => {
           below can be accessed via Azure Blob Storage, and can be used by developers
           whether you're working within or outside of our Planetary Computer Hub.
         </Text>
-        <CatalogFilter />
+        <CatalogFilter filterText={filterText} onFilterChange={onFilterChange} />
       </Stack>
     </DefaultBanner>
   );
