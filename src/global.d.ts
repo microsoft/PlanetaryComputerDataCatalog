@@ -24,3 +24,8 @@ declare module "config/datasets.yml" {
   export const collections: Record<string, DatasetEntry>;
   export const ai4e: any;
 }
+
+declare module "config/datasetFeatured.yml" {
+  const featuredDatasetIds: string[];
+  export default featuredDatasetIds;
+}

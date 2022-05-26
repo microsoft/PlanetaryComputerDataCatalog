@@ -228,6 +228,7 @@ collections:
         launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
 
   daymet-daily-pr:
+    category: Climate/Weather
     headerImg: ./images/daymet-daily-pr-hero.png
     tabs:
       - title: Example Notebook
@@ -235,6 +236,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-pr:
+    category: Climate/Weather
     headerImg: ./images/daymet-monthly-pr-hero.png
     tabs:
       - title: Example Notebook
@@ -242,6 +244,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-pr:
+    category: Climate/Weather
     headerImg: ./images/daymet-annual-pr-hero.png
     tabs:
       - title: Example Notebook
@@ -249,6 +252,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-daily-hi:
+    category: Climate/Weather
     headerImg: ./images/daymet-daily-hi-hero.png
     tabs:
       - title: Example Notebook
@@ -256,6 +260,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-hi:
+    category: Climate/Weather
     headerImg: ./images/daymet-monthly-hi-hero.png
     tabs:
       - title: Example Notebook
@@ -263,6 +268,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-hi:
+    category: Climate/Weather
     headerImg: ./images/daymet-annual-hi-hero.png
     tabs:
       - title: Example Notebook
@@ -270,30 +276,35 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-daily-na:
+    category: Climate/Weather
     tabs:
       - title: Example Notebook
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-monthly-na:
+    category: Climate/Weather
     tabs:
       - title: Example Notebook
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
   daymet-annual-na:
+    category: Climate/Weather
     tabs:
       - title: Example Notebook
         src: daymet-example.html
         launch: datasets/daymet/daymet-example.ipynb
 
   eclipse:
+    category: Sensors
     tabs:
       - title: Example Notebook
         src: eclipse-example.html
         launch: datasets/eclipse/eclipse-example.ipynb
 
   ecmwf-forecast:
+    category: Climate/Weather
     headerImg: ./images/ecmwf-forecast-hero.png
     tabs:
       - title: Example Notebook
@@ -317,6 +328,7 @@ collections:
         launch: datasets/esa-worldcover/esa-worldcover-example.ipynb
 
   fia:
+    category: Biomass/Vegetation
     headerImg: ./images/fia-hero.png
     tabs:
       - title: Example Notebook
@@ -348,6 +360,7 @@ collections:
         launch: datasets/gnatsgo/gnatsgo-example.ipynb
 
   gbif:
+    category: Biodiversity
     headerImg: ./images/gbif-hero.png
     tabs:
       - title: Example Notebook
@@ -363,6 +376,7 @@ collections:
         launch: datasets/goes/goes-cmi-example.ipynb
 
   gpm-imerg-hhr:
+    category: Climate/Weather
     headerImg: ./images/gpm-imerg-hhr-hero.png
     tabs:
       - title: Example Notebook
@@ -370,6 +384,7 @@ collections:
         launch: datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
 
   gridmet:
+    category: Climate/Weather
     headerImg: ./images/gridmet-hero.png
     tabs:
       - title: Example Notebook
@@ -692,6 +707,7 @@ collections:
         launch: datasets/terraclimate/terraclimate-example.ipynb
 
   us-census:
+    category: Demographics
     headerImg: ./images/us-census-hero.png
     tabs:
       - title: Example Notebook

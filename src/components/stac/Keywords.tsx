@@ -3,8 +3,8 @@ import { ITextStyles, Text } from "@fluentui/react";
 interface IKeywordsProp {
   keywords: string[];
   onClick?: (keyword: string) => void;
-  color: string;
-  dark: boolean;
+  color?: string;
+  dark?: boolean;
 }
 
 const Keywords = ({
