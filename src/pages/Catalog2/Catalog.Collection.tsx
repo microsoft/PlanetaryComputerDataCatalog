@@ -10,6 +10,7 @@ import Keywords from "components/stac/Keywords";
 import { Link } from "react-router-dom";
 
 import { IStacCollection } from "types/stac";
+import { GROUP_PREFIX } from "./Catalog.CollectionList";
 import { CatalogCollectionThumbnail } from "./Catalog.Thumbnail";
 
 interface CatalogCollectionProps {
@@ -19,7 +20,10 @@ interface CatalogCollectionProps {
 export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
   collection,
 }) => {
-  const href = `/dataset/${collection.id}`;
+  const href = collection.id.startsWith(GROUP_PREFIX)
+    ? `/dataset/group/${collection.id.substring(GROUP_PREFIX.length)}`
+    : `/dataset/${collection.id}`;
+
   return (
     <Stack horizontal styles={cardStyles} tokens={cardTokens}>
       <StackItem shrink={0}>

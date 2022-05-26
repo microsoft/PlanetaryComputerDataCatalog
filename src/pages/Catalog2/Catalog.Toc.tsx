@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Nav, INavLink, INavLinkGroup, INavStyles } from "@fluentui/react/lib/Nav";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { collections as collectionConfig } from "config/datasets.yml";
 import { scrollToHash } from "utils";
@@ -8,16 +8,10 @@ import { scrollToHash } from "utils";
 const ungroupedName = "Other";
 
 export const CatalogToc: React.FC = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(location.hash.replace("#", ""));
-  }, [location]);
 
   // Generate categories from the local dataset configuration
   const categories = useMemo(() => {
-    console.log("generating categories");
     const categories = new Set<string>();
     Object.entries(collectionConfig).forEach(([_, dataset]) => {
       categories.add(dataset.category || ungroupedName);
@@ -38,7 +32,7 @@ export const CatalogToc: React.FC = () => {
   const handleClick = (_: any, item?: INavLink | undefined) => {
     if (item && item.key) {
       navigate(`#${item.key}`, { replace: true });
-      scrollToHash(item.key);
+      scrollToHash(item.key, "auto");
     }
   };
 

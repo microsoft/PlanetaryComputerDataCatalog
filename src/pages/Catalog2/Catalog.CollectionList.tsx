@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   ISeparatorStyles,
   IStackStyles,
@@ -5,7 +6,7 @@ import {
   Separator,
   Stack,
 } from "@fluentui/react";
-import { sortBy } from "lodash-es";
+import { isEmpty, sortBy } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { collections as collectionConfig } from "config/datasets.yml";
@@ -13,23 +14,23 @@ import featuredDatasetIds from "config/datasetFeatured.yml";
 import groups from "config/datasetGroups.yml";
 import { CatalogCollection } from "./Catalog.Collection";
 import { useCollections } from "utils/requests";
+import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
+// import { scrollToHash } from "utils";
+
+export const GROUP_PREFIX = "group::";
 
 export const CatalogCollectionList: React.FC = () => {
   const { isLoading, data } = useCollections();
 
-  // TODO shimmer
-  if (isLoading) return null;
-
-  const groupedCollections: Record<string, IStacCollection[]> = {};
-
-  data?.collections.forEach(collection => {
-    const category = collectionConfig[collection.id].category;
-    if (!groupedCollections[category]) {
-      groupedCollections[category] = [];
+  useEffect(() => {
+    if (data?.collections) {
+      const hash = window.location.hash.replace("#", "");
+      console.log("Hash:", hash);
+      // scrollToHash(hash);
     }
-    groupedCollections[category].push(collection);
-  });
+  }, [data?.collections]);
 
+  const groupedCollections = getGroupedCollections(data?.collections, isLoading);
   const sortedKeys = Object.keys(groupedCollections).sort();
 
   sortedKeys.unshift("Featured");
@@ -38,13 +39,21 @@ export const CatalogCollectionList: React.FC = () => {
   const groupedList = sortedKeys.map(category => {
     const collections = groupedCollections[category];
     const sortedCollections = sortBy(collections, "title");
+    console.log("Grouping list");
+
+    const items =
+      isEmpty(collections) && isLoading ? (
+        getCollectionShimmers(3)
+      ) : (
+        <List items={sortedCollections} onRenderCell={handleCellRender} />
+      );
     return (
       <Stack key={`category-${category}`} styles={groupStyles}>
         <h2 id={category} style={headerStyle}>
           {category}
         </h2>
         <Separator styles={separatorStyles} />
-        <List items={sortedCollections} onRenderCell={handleCellRender} />
+        {items}
       </Stack>
     );
   });
@@ -55,20 +64,46 @@ export const CatalogCollectionList: React.FC = () => {
 const getFeaturedDatasets = (
   collections: IStacCollection[] | undefined
 ): IStacCollection[] => {
-  console.log(featuredDatasetIds);
+  console.log("Getting featured datasets");
   const featured = featuredDatasetIds.map(datasetId => {
     if (groups[datasetId]) {
       // Construct a minimal StacCollection from the dataset details
       const { short_description, description, ...group } = groups[datasetId];
       return Object.assign({}, group, {
         "msft:short_description": groups[datasetId].short_description,
-        id: "group::" + datasetId,
+        id: GROUP_PREFIX + datasetId,
       });
     }
     return collections?.find(collection => collection.id === datasetId) || null;
   });
 
   return featured.filter(Boolean) as IStacCollection[];
+};
+
+const getGroupedCollections = (
+  collections: IStacCollection[] | undefined,
+  isLoading: boolean
+): Record<string, IStacCollection[]> => {
+  const groupedCollections: Record<string, IStacCollection[]> = {};
+  // If collections have loaded, group them by category
+  if (collections) {
+    collections?.forEach(collection => {
+      const category = collectionConfig?.[collection.id]?.category || "Other";
+      if (!groupedCollections[category]) {
+        groupedCollections[category] = [];
+      }
+      groupedCollections[category].push(collection);
+    });
+  } else if (!collections && isLoading) {
+    // If they're still loading, show a placeholder for each category from the main config
+    Object.entries(collectionConfig).forEach(([_, config]) => {
+      if (config.category) {
+        groupedCollections[config.category] = [];
+      }
+    });
+  }
+
+  return groupedCollections;
 };
 
 const handleCellRender = (item: IStacCollection | undefined) => {
