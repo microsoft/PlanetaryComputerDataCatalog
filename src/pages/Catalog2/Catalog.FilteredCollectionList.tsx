@@ -1,9 +1,9 @@
 import { IStackStyles, List, Stack } from "@fluentui/react";
 import { isEmpty } from "lodash-es";
-import NoResults from "pages/Catalog/components/NoResults";
 import { IStacCollection } from "types/stac";
 import { useCollections } from "utils/requests";
 import { CatalogCollection } from "./Catalog.Collection";
+import { NoResults } from "./Catalog.NoResults";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 
 interface CatalogFilteredCollectionListProps {

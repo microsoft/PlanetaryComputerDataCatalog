@@ -6,7 +6,7 @@ const iconClass = mergeStyles({
   paddingRight: 15,
 });
 
-const NoResults = ({ typeText = "" }) => {
+export const NoResults = ({ typeText = "" }) => {
   return (
     <div
       style={{
@@ -33,5 +33,3 @@ const NoResults = ({ typeText = "" }) => {
     </div>
   );
 };
-
-export default NoResults;
