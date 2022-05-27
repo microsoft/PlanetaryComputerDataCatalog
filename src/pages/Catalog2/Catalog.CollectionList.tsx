@@ -14,15 +14,26 @@ import groups from "config/datasetGroups.yml";
 import { CatalogCollection } from "./Catalog.Collection";
 import { useCollections } from "utils/requests";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
+import { useCallback } from "react";
 
 export const GROUP_PREFIX = "group::";
 
 interface CatalogCollectionListProps {
-  filterText?: string | null;
+  setFilterText: (filterText: string | undefined) => void;
 }
 
-export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = () => {
+export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
+  setFilterText,
+}) => {
   const { isLoading, data } = useCollections();
+
+  const handleCellRender = useCallback(
+    (item: IStacCollection | undefined) => {
+      if (!item) return null;
+      return <CatalogCollection collection={item} onKeywordClick={setFilterText} />;
+    },
+    [setFilterText]
+  );
 
   const groupedCollections = getGroupedCollections(data?.collections, isLoading);
   const sortedKeys = Object.keys(groupedCollections).sort();
@@ -33,7 +44,6 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = () =>
   const groupedList = sortedKeys.map(category => {
     const collections = groupedCollections[category];
     const sortedCollections = sortBy(collections, "title");
-    console.log("Grouping list");
 
     const items =
       isEmpty(collections) && isLoading ? (
@@ -98,11 +108,6 @@ const getGroupedCollections = (
   }
 
   return groupedCollections;
-};
-
-const handleCellRender = (item: IStacCollection | undefined) => {
-  if (!item) return null;
-  return <CatalogCollection collection={item} />;
 };
 
 const headerStyle: React.CSSProperties = {

@@ -8,11 +8,12 @@ import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 
 interface CatalogFilteredCollectionListProps {
   filterText: string | undefined;
+  setFilterText: (filterText: string | undefined) => void;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
-> = ({ filterText }) => {
+> = ({ filterText, setFilterText }) => {
   const { isLoading, data } = useCollections();
 
   const filteredCollections = data?.collections?.filter(
@@ -21,7 +22,13 @@ export const CatalogFilteredCollectionList: React.FC<
 
   const handleCellRender = (collection: IStacCollection | undefined) => {
     if (!collection) return null;
-    return <CatalogCollection key={collection.id} collection={collection} />;
+    return (
+      <CatalogCollection
+        key={collection.id}
+        collection={collection}
+        onKeywordClick={setFilterText}
+      />
+    );
   };
 
   const hasResults = !isEmpty(filteredCollections) && !isLoading;

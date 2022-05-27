@@ -1,12 +1,12 @@
 import { SearchBox } from "@fluentui/react";
 
 interface CatalogFilterProps {
-  onFilterChange: (_: any, newValue?: string | undefined) => void;
   filterText: string | undefined;
+  onFilterChange: (_: any, newValue?: string | undefined) => void;
 }
 export const CatalogFilter: React.FC<CatalogFilterProps> = ({
-  onFilterChange,
   filterText,
+  onFilterChange,
 }) => {
   return (
     <SearchBox

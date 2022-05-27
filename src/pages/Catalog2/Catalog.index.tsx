@@ -33,8 +33,13 @@ export const Catalog = () => {
       <SEO title="Data Catalog" />
       <Stack horizontal className="grid-content">
         {!filterText && <CatalogToc />}
-        {!filterText && <CatalogCollectionList />}
-        {filterText && <CatalogFilteredCollectionList filterText={filterText} />}
+        {!filterText && <CatalogCollectionList setFilterText={setFilterText} />}
+        {filterText && (
+          <CatalogFilteredCollectionList
+            setFilterText={setFilterText}
+            filterText={filterText}
+          />
+        )}
       </Stack>
     </Layout>
   );

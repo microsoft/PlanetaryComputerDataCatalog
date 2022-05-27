@@ -133,9 +133,8 @@ gnatsgo:
 modis:
   title: MODIS Version 6.1 Products
   short_description: >
-    The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on
-    both the Terra and Aqua spacecraft, covering the entire surface of the Earth
-    within one or two days. The data products derived from MODIS observations
+    The MODIS instrument operates on both the Terra and Aqua spacecraft, covering the
+    entire surface of the Earth within one or two days. The derived data products
     describe atmosphere, cryosphere, land, and ocean features utilized in studies
     across various disciplines.
   description: >

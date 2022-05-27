@@ -15,10 +15,12 @@ import { CatalogCollectionThumbnail } from "./Catalog.Thumbnail";
 
 interface CatalogCollectionProps {
   collection: IStacCollection;
+  onKeywordClick: (keyword: string | undefined) => void;
 }
 
 export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
   collection,
+  onKeywordClick,
 }) => {
   const href = collection.id.startsWith(GROUP_PREFIX)
     ? `/dataset/group/${collection.id.substring(GROUP_PREFIX.length)}`
@@ -44,7 +46,11 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
           {collection["msft:short_description"]}
         </Text>
         <div style={keywordContainerStyle}>
-          <Keywords keywords={collection.keywords} color="#4C4C51" />
+          <Keywords
+            keywords={collection.keywords}
+            color="#4C4C51"
+            onClick={onKeywordClick}
+          />
         </div>
       </StackItem>
     </Stack>
