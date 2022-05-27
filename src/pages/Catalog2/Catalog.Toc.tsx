@@ -38,7 +38,7 @@ export const CatalogToc: React.FC = () => {
 
   return (
     <Nav
-      className="sticky"
+      className="catalog-toc sticky"
       styles={tocStyle}
       ariaLabel="Dataset category navigation"
       groups={navLinkGroups}

@@ -25,13 +25,18 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
     : `/dataset/${collection.id}`;
 
   return (
-    <Stack horizontal styles={cardStyles} tokens={cardTokens}>
-      <StackItem shrink={0}>
+    <Stack
+      horizontal
+      styles={cardStyles}
+      tokens={cardTokens}
+      className="catalog-collection-item"
+    >
+      <StackItem shrink={0} className="catalog-collection-item--thumbnail">
         <Link to={href}>
           <CatalogCollectionThumbnail assets={collection.assets} />
         </Link>
       </StackItem>
-      <StackItem>
+      <StackItem styles={contentStyles} className="catalog-collection-item--content">
         <h3 style={titleStyle}>
           <Link to={href}>{collection.title || collection.id}</Link>{" "}
         </h3>
@@ -56,14 +61,18 @@ const cardTokens: IStackTokens = {
   childrenGap: 10,
 };
 
+const contentStyles: IStackStyles = {
+  root: {
+    maxWidth: 600,
+  },
+};
+
 const titleStyle: React.CSSProperties = {
   marginTop: 0,
   marginBottom: 10,
 };
 
-const descStyles: ITextStyles = {
-  root: { maxWidth: 600 },
-};
+const descStyles: ITextStyles = {};
 
 const keywordContainerStyle: React.CSSProperties = {
   marginTop: 10,

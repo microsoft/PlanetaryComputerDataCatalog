@@ -7,6 +7,7 @@ import { CatalogCollectionList } from "./Catalog.CollectionList";
 import { CatalogToc } from "./Catalog.Toc";
 
 import "styles/catalog.css";
+import "./css/Catalog.css";
 import { useState } from "react";
 import { CatalogFilteredCollectionList } from "./Catalog.FilteredCollectionList";
 

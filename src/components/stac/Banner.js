@@ -46,7 +46,12 @@ const Banner = ({ collection }) => {
           {bannerBreadcrumbs}
         </Text>
         <h1 style={{ color: "#fff" }}>{collection.title}</h1>
-        <Keywords dark keywords={collection.keywords} onClick={handleClick} />
+        <Keywords
+          dark
+          keywords={collection.keywords}
+          maxDisplayed={8}
+          onClick={handleClick}
+        />
       </div>
       <div></div>
     </div>
