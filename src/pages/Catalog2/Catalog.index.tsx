@@ -1,18 +1,24 @@
+import { useEffect, useState } from "react";
 import { Stack } from "@fluentui/react";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
 import { CatalogBanner } from "./Catalog.Banner";
 import { CatalogCollectionList } from "./Catalog.CollectionList";
+import { CatalogFilteredCollectionList } from "./Catalog.FilteredCollectionList";
 import { CatalogToc } from "./Catalog.Toc";
+import { updateQueryStringParam } from "pages/Explore/utils";
 
 import "styles/catalog.css";
 import "./css/Catalog.css";
-import { useState } from "react";
-import { CatalogFilteredCollectionList } from "./Catalog.FilteredCollectionList";
 
 export const Catalog = () => {
-  const [filterText, setFilterText] = useState<string>();
+  const [filterText, setFilterText] = useState<string | undefined>(getInitialFilter);
+
+  // Keep the URL in sync with the filter text
+  useEffect(() => {
+    updateQueryStringParam("filter", filterText);
+  }, [filterText]);
 
   const handleFilter = (_: any, newValue?: string | undefined) => {
     setFilterText(newValue);
@@ -21,6 +27,7 @@ export const Catalog = () => {
   const banner = (
     <CatalogBanner onFilterChange={handleFilter} filterText={filterText} />
   );
+
   return (
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
@@ -31,4 +38,9 @@ export const Catalog = () => {
       </Stack>
     </Layout>
   );
+};
+
+const getInitialFilter = () => {
+  const filter = new URLSearchParams(window.location.search).get("filter");
+  return filter || undefined;
 };

@@ -63,11 +63,10 @@ const Keywords = ({
     };
 
     const overflow = (
-      <div ref={linkRef}>
+      <div ref={linkRef} key={"kw-overflow"}>
         <Text
           as="button"
           title={"Additional keywords"}
-          key={"kw-overflow"}
           styles={pillStyle}
           onClick={onShowContextualMenu}
         >
