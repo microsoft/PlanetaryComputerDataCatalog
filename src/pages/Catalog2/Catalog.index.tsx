@@ -9,10 +9,24 @@ import { CatalogFilteredCollectionList } from "./Catalog.FilteredCollectionList"
 import { CatalogToc } from "./Catalog.Toc";
 import { updateQueryStringParam } from "pages/Explore/utils";
 
+import { collections as datasetConfig } from "config/datasets.yml";
+import featuredDatasetIds from "config/datasetFeatured.yml";
+import groups from "config/datasetGroups.yml";
+
 import "styles/catalog.css";
 import "./css/Catalog.css";
 
-export const Catalog = () => {
+interface CatalogProps {
+  collectionConfig?: Record<string, DatasetEntry>;
+  groupConfig?: Record<string, DatasetGroup>;
+  featuredIds?: string[];
+}
+
+export const Catalog: React.FC<CatalogProps> = ({
+  collectionConfig = datasetConfig,
+  groupConfig = groups,
+  featuredIds = featuredDatasetIds,
+}) => {
   const [filterText, setFilterText] = useState<string | undefined>(getInitialFilter);
 
   // Keep the URL in sync with the filter text
@@ -32,8 +46,15 @@ export const Catalog = () => {
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
       <Stack horizontal className="grid-content">
-        {!filterText && <CatalogToc />}
-        {!filterText && <CatalogCollectionList setFilterText={setFilterText} />}
+        {!filterText && <CatalogToc collectionConfig={collectionConfig} />}
+        {!filterText && (
+          <CatalogCollectionList
+            setFilterText={setFilterText}
+            collectionConfig={collectionConfig}
+            datasetGroups={groupConfig}
+            featuredDatasetIds={featuredIds}
+          />
+        )}
         {filterText && (
           <CatalogFilteredCollectionList
             setFilterText={setFilterText}

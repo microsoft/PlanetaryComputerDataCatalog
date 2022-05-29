@@ -9,6 +9,7 @@ const iconClass = mergeStyles({
 export const NoResults = ({ typeText = "" }) => {
   return (
     <div
+      data-cy="no-filtered-collection-results"
       style={{
         display: "flex",
         alignItems: "center",

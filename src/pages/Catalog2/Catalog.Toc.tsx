@@ -2,12 +2,15 @@ import { useMemo } from "react";
 import { Nav, INavLink, INavLinkGroup, INavStyles } from "@fluentui/react/lib/Nav";
 import { useNavigate } from "react-router-dom";
 
-import { collections as collectionConfig } from "config/datasets.yml";
 import { scrollToHash } from "utils";
 
 const ungroupedName = "Other";
 
-export const CatalogToc: React.FC = () => {
+interface CatalogTocProps {
+  collectionConfig: Record<string, DatasetEntry>;
+}
+
+export const CatalogToc: React.FC<CatalogTocProps> = ({ collectionConfig }) => {
   const navigate = useNavigate();
 
   // Generate categories from the local dataset configuration
@@ -23,7 +26,7 @@ export const CatalogToc: React.FC = () => {
     cats.unshift("Featured");
 
     return cats;
-  }, []);
+  }, [collectionConfig]);
 
   // Generate the navigation elements from the categories
   const navLinkGroups = useMemo(() => generateNav(categories), [categories]);
@@ -39,6 +42,7 @@ export const CatalogToc: React.FC = () => {
   return (
     <Nav
       className="catalog-toc sticky"
+      data-cy="catalog-toc"
       styles={tocStyle}
       ariaLabel="Dataset category navigation"
       groups={navLinkGroups}

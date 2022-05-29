@@ -37,5 +37,9 @@ export const getCollectionShimmers = (count: number) => {
   const shimmers = Array.from(Array(count).keys()).map(key => {
     return <CatalogCollectionShimmer key={`collection-shimmer-${key}`} />;
   });
-  return <Stack tokens={gap}>{shimmers}</Stack>;
+  return (
+    <Stack data-cy="collection-loading-shimmers" tokens={gap}>
+      {shimmers}
+    </Stack>
+  );
 };

@@ -13,6 +13,7 @@ export const CatalogFilter: React.FC<CatalogFilterProps> = ({
       placeholder="Filter datasets"
       value={filterText}
       onChange={onFilterChange}
+      data-cy="catalog-filter-input"
     />
   );
 };

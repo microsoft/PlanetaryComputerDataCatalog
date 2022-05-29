@@ -33,10 +33,14 @@ export const CatalogFilteredCollectionList: React.FC<
 
   const hasResults = !isEmpty(filteredCollections) && !isLoading;
   return (
-    <Stack styles={resultStyles}>
+    <Stack styles={resultStyles} data-cy="catalog-filter-results">
       <h2>Search results</h2>
       {hasResults && (
-        <List items={filteredCollections} onRenderCell={handleCellRender} />
+        <List
+          data-cy="filtered-collection-results"
+          items={filteredCollections}
+          onRenderCell={handleCellRender}
+        />
       )}
       {!hasResults && !isLoading && <NoResults />}
       {isLoading && getCollectionShimmers(3)}

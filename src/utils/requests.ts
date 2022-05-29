@@ -88,7 +88,7 @@ const getCollections = async (): Promise<{ collections: IStacCollection[] }> => 
   const resp = await axios.get(`${STAC_URL}/collections`);
 
   // Collections in the API can be configured to be hidden in all frontend contexts.
-  const hiddenCollections = Object.entries(datasetConfig)
+  const hiddenCollections = Object.entries(datasetConfig || {})
     .filter(([, config]) => config.isHidden)
     .map(([id]) => id);
   const filteredCollections = resp.data.collections.filter(

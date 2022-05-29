@@ -32,6 +32,7 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
       styles={cardStyles}
       tokens={cardTokens}
       className="catalog-collection-item"
+      data-cy="catalog-collection-item"
     >
       <StackItem shrink={0} className="catalog-collection-item--thumbnail">
         <Link to={href}>

@@ -8,9 +8,6 @@ import {
 import { isEmpty, sortBy } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
-import { collections as collectionConfig } from "config/datasets.yml";
-import featuredDatasetIds from "config/datasetFeatured.yml";
-import groups from "config/datasetGroups.yml";
 import { CatalogCollection } from "./Catalog.Collection";
 import { useCollections } from "utils/requests";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
@@ -20,10 +17,16 @@ export const GROUP_PREFIX = "group::";
 
 interface CatalogCollectionListProps {
   setFilterText: (filterText: string | undefined) => void;
+  collectionConfig: Record<string, DatasetEntry>;
+  featuredDatasetIds: string[];
+  datasetGroups: Record<string, DatasetGroup>;
 }
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
+  collectionConfig,
+  featuredDatasetIds,
+  datasetGroups,
 }) => {
   const { isLoading, data } = useCollections();
 
@@ -35,11 +38,19 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     [setFilterText]
   );
 
-  const groupedCollections = getGroupedCollections(data?.collections, isLoading);
+  const groupedCollections = getGroupedCollections(
+    data?.collections,
+    isLoading,
+    collectionConfig
+  );
   const sortedKeys = Object.keys(groupedCollections).sort();
 
   sortedKeys.unshift("Featured");
-  groupedCollections["Featured"] = getFeaturedDatasets(data?.collections);
+  groupedCollections["Featured"] = getFeaturedDatasets(
+    data?.collections,
+    featuredDatasetIds,
+    datasetGroups
+  );
 
   const groupedList = sortedKeys.map(category => {
     const collections = groupedCollections[category];
@@ -52,7 +63,11 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
         <List items={sortedCollections} onRenderCell={handleCellRender} />
       );
     return (
-      <Stack key={`category-${category}`} styles={groupStyles}>
+      <Stack
+        key={`category-${category}`}
+        styles={groupStyles}
+        data-cy={`catalog-category-section-${category}`}
+      >
         <h2 id={category} style={headerStyle}>
           {category}
         </h2>
@@ -66,15 +81,16 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
 };
 
 const getFeaturedDatasets = (
-  collections: IStacCollection[] | undefined
+  collections: IStacCollection[] | undefined,
+  featuredDatasetIds: string[],
+  datasetGroups: Record<string, DatasetGroup>
 ): IStacCollection[] => {
-  console.log("Getting featured datasets");
   const featured = featuredDatasetIds.map(datasetId => {
-    if (groups[datasetId]) {
+    if (datasetGroups[datasetId]) {
       // Construct a minimal StacCollection from the dataset details
-      const { short_description, description, ...group } = groups[datasetId];
+      const { short_description, description, ...group } = datasetGroups[datasetId];
       return Object.assign({}, group, {
-        "msft:short_description": groups[datasetId].short_description,
+        "msft:short_description": datasetGroups[datasetId].short_description,
         id: GROUP_PREFIX + datasetId,
       });
     }
@@ -86,7 +102,8 @@ const getFeaturedDatasets = (
 
 const getGroupedCollections = (
   collections: IStacCollection[] | undefined,
-  isLoading: boolean
+  isLoading: boolean,
+  collectionConfig: Record<string, DatasetEntry>
 ): Record<string, IStacCollection[]> => {
   const groupedCollections: Record<string, IStacCollection[]> = {};
   // If collections have loaded, group them by category
