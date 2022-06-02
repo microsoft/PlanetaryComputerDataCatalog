@@ -1,6 +1,7 @@
 import {
   ContextualMenu,
   DirectionalHint,
+  Icon,
   IContextualMenuProps,
   IStackStyles,
   ITextStyles,
@@ -70,7 +71,7 @@ const Keywords = ({
           styles={pillStyle}
           onClick={onShowContextualMenu}
         >
-          ...
+          <Icon iconName="More" />
         </Text>
         <ContextualMenu
           items={overflowProps.items}
