@@ -20,9 +20,19 @@ interface DatasetEntry {
   hideInExplorer?: boolean;
   isHidden?: boolean;
 }
+
+interface NonApiDatasetEntry {
+  title: string;
+  category: string;
+  short_description: string;
+  infoUrl: string;
+  thumbnailUrl: string;
+  keywords: string[];
+}
+
 declare module "config/datasets.yml" {
   export const collections: Record<string, DatasetEntry>;
-  export const ai4e: any;
+  export const nonApiCollections: Record<string, NonApiDatasetEntry>;
 }
 
 declare module "config/datasetFeatured.yml" {

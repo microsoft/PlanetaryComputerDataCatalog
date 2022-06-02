@@ -14,17 +14,26 @@ const ungroupedName = "Other";
 
 interface CatalogTocProps {
   collectionConfig: Record<string, DatasetEntry>;
+  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
 }
 
-export const CatalogToc: React.FC<CatalogTocProps> = ({ collectionConfig }) => {
+export const CatalogToc: React.FC<CatalogTocProps> = ({
+  collectionConfig,
+  nonApiCollectionConfig,
+}) => {
   const navigate = useNavigate();
 
   // Generate categories from the local dataset configuration
   const categories = useMemo(() => {
     const categories = new Set<string>();
+    // Catalog entries from api and non-api datasets
     Object.entries(collectionConfig).forEach(([_, dataset]) => {
       categories.add(dataset.category || ungroupedName);
     });
+    Object.entries(nonApiCollectionConfig).forEach(([_, dataset]) => {
+      categories.add(dataset.category || ungroupedName);
+    });
+
     const cats = Array.from(categories);
     cats.sort();
 
@@ -32,7 +41,7 @@ export const CatalogToc: React.FC<CatalogTocProps> = ({ collectionConfig }) => {
     cats.unshift("Featured");
 
     return cats;
-  }, [collectionConfig]);
+  }, [collectionConfig, nonApiCollectionConfig]);
 
   // Generate the navigation elements from the categories
   const navLinkGroups = useMemo(() => generateNav(categories), [categories]);

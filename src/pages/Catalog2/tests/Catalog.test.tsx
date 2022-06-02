@@ -3,7 +3,6 @@ import nock from "nock";
 
 import { STAC_URL } from "utils/constants";
 import { Catalog } from "../Catalog.index";
-import { screen } from "@testing-library/react";
 
 const defaultConfig: Record<string, DatasetEntry> = {
   red: { category: "Color" },
@@ -11,6 +10,17 @@ const defaultConfig: Record<string, DatasetEntry> = {
   one: { category: "Number" },
   two: { category: "Number" },
   "two-a": { category: "Number" },
+};
+
+const defaultNonApiConfig: Record<string, NonApiDatasetEntry> = {
+  cat: {
+    category: "animal",
+    title: "Cat",
+    keywords: ["cat"],
+    infoUrl: "",
+    thumbnailUrl: "",
+    short_description: "",
+  },
 };
 
 const defaultCollectionsResponse = {
@@ -23,9 +33,7 @@ const defaultCollectionsResponse = {
   ],
 };
 
-const defaultSetFilter = () => {};
 const setup = (
-  setFilterText: (text: string | undefined) => void = defaultSetFilter,
   groups: Record<string, DatasetGroup> = {},
   featuredIds: string[] = []
 ) => {
@@ -37,6 +45,7 @@ const setup = (
   const utils = render(
     <Catalog
       collectionConfig={defaultConfig}
+      nonApiCollectionConfig={defaultNonApiConfig}
       groupConfig={groups}
       featuredIds={featuredIds}
     />

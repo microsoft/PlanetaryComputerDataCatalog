@@ -423,7 +423,7 @@ collections:
         launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
   jrc-gsw:
-    category: Water/Snow
+    category: Water
     headerImg: ./images/jrc-gsw-hero.png
     tabs:
       - title: Example Notebook
@@ -466,7 +466,7 @@ collections:
         launch: datasets/modis/modis-imagery-example.ipynb
 
   modis-10A1-061:
-    category: Water/Snow
+    category: Snow
     headerImg: ./images/modis-10a1-hero.png
     tabs:
       - title: Example Notebook
@@ -474,7 +474,7 @@ collections:
         launch: datasets/modis/modis-snow-example.ipynb
 
   modis-10A2-061:
-    category: Water/Snow
+    category: Snow
     headerImg: ./images/modis-10a2-hero.png
     tabs:
       - title: Example Notebook
@@ -717,207 +717,210 @@ collections:
 # Configuration for "other dataset" section. This list is rendered
 # in the order represented here, which is mostly alphabetical, with
 # some custom prioritization.
-ai4e:
-  - title: Deltares Global Flood Maps
-    shortTerm: Deltares flood
-    description: Global coastal inundation maps at multiple resolutions
+nonApiCollections:
+  deltares-flood:
+    title: Deltares Global Flood Maps
+    category: Water
+    short_description: Global coastal inundation maps at multiple resolutions
     infoUrl: https://aka.ms/ai4edata-deltares-gfm
     thumbnailUrl: deltares-flood.png
-    alt: Flood map of coastal Myanmar
     keywords: [Global, Flood, Sea level rise, Water, Deltares]
 
-  - title: Deltares Global Water Availability
-    shortTerm: Deltares water availability
-    description: Global coastal inundation maps at multiple resolutions
+  deltares-reservoir:
+    title: Deltares Global Water Availability
+    category: Water
+    short_description: Estimates of global water availablity
     infoUrl: https://aka.ms/ai4edata-deltares-reservoirs
     thumbnailUrl: deltares-reservoir.jpg
-    alt: Reservoir with access tower
     keywords: [Global, Water, Reservoir, Deltares]
 
-  - title: Global Hydro Estimator
-    shortTerm: global precipitation
-    description: Global precipitation estimates
+  ghe:
+    title: Global Hydro Estimator
+    category: Climate/Weather
+    short_description: Global precipitation estimates
     infoUrl: http://aka.ms/ai4edata-ghe
     thumbnailUrl: RE4ucH7.jpg
-    alt: Clouds at sunset
     keywords: [NOAA, Global, Precipitation]
 
-  - title: High Resolution Ocean Surface Wave Hindcast
-    shortTerm: wave hindcast
-    description:
+  doe-wave:
+    title: High Resolution Ocean Surface Wave Hindcast
+    category: Water
+    short_description:
       Long-term wave hindcast data for the U.S. Exclusive Economic Zone (EEZ)
     infoUrl: https://aka.ms/ai4edata-doe-wave
     thumbnailUrl: wave-hindcast_small.jpg
-    alt: Ocean waves
     keywords: [Wave, hindcast, United States]
 
-  - title: Harmonized Landsat Sentinel-2
-    shortTerm: HLS
-    description: 30m-resolution satellite imagery for North America
+  hls:
+    title: Harmonized Landsat Sentinel-2
+    category: Imagery
+    short_description: 30m-resolution satellite imagery for North America
     infoUrl: http://aka.ms/ai4edata-hls
     thumbnailUrl: RE3OM3E.jpg
-    alt: Map of Chesapeake Bay
     keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
 
-  - title: LILA BC
-    shortTerm: LILA BC
-    description: Labeled images related to wildlife conservation
+  lila-bc:
+    title: LILA BC
+    category: Biodiversity
+    short_description: Labeled images related to wildlife conservation
     infoUrl: http://lila.science/
     thumbnailUrl: RE3BWhq.jpg
-    alt: Fox pup stands on a rock.
     keywords: [LILA, Labels, Wildlife, Biodiversity]
 
-  - title: National Land Cover Database
-    shortTerm: land cover
-    description: US-wide data on land cover and land cover change
+  nlcd:
+    title: National Land Cover Database
+    category: Land use/Land cover
+    short_description: US-wide data on land cover and land cover change
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
-    alt: Landcover map of the United States
     keywords: [Land Cover, United States]
 
-  - title: National Solar Radiation Database
-    shortTerm: solar radiation
-    description:
+  nsrdb:
+    title: National Solar Radiation Database
+    category: Solar
+    short_description:
       Half-hourly measurements of incident solar radiation from 1998-present
     infoUrl: https://aka.ms/ai4edata-nsrdb
     thumbnailUrl: solar_radiation_small.jpg
-    alt: Bright sun over the ocean
     keywords: [United States, Solar, Radiation]
 
-  - title: NOAA Climate Data Records
-    shortTerm: NOAA climate
-    description: Historical global climate information
+  noaa-cdr:
+    title: NOAA Climate Data Records
+    category: Climate/Weather
+    short_description: Historical global climate information
     infoUrl: https://aka.ms/ai4edata-cdr
     thumbnailUrl: global_weather_1.jpg
-    alt: Weather pattern from space
     keywords: [Global, NOAA, Climate]
 
-  - title: NOAA Climate Forecast System
-    shortTerm: NOAA climate forecast
-    description: Global weather forecasts at approximately 56km resolution
+  noaa-cfs:
+    title: NOAA Climate Forecast System
+    category: Climate/Weather
+    short_description: Global weather forecasts at approximately 56km resolution
     infoUrl: https://aka.ms/ai4edata-cfs
     thumbnailUrl: global_weather_2.jpg
-    alt: Weather pattern from space
     keywords: [Global, NOAA, Climate, Forecast]
 
-  - title: NOAA Global Ensemble Forecast System (GEFS)
-    shortTerm: NOAA ensemble forecast
-    description: Ensembled global weather forecasts
+  noaa-gefs:
+    title: NOAA Global Ensemble Forecast System (GEFS)
+    category: Climate/Weather
+    short_description: Ensembled global weather forecasts
     infoUrl: https://aka.ms/ai4edata-gefs
     thumbnailUrl: global_weather_3.jpg
-    alt: Weather pattern from space
     keywords: [Global, NOAA, Weather, Forecast]
 
-  - title: NOAA Global Forecast System
-    shortTerm: NOAA global forecast
-    description: 15-day US hourly weather forecast data
+  noaa-gfs:
+    title: NOAA Global Forecast System
+    category: Climate/Weather
+    short_description: 15-day US hourly weather forecast data
     infoUrl: https://aka.ms/ai4edata-gfs
     thumbnailUrl: RE4rvnx.jpg
     alt: Earth viewed from space station with a satellite
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-  - title: NOAA GFS Warm Start Conditions
-    shortTerm: NOAA warm start
-    description: Six-hourly initial conditions for the NOAA Global Forecast System
+  noaa-gfs-ws:
+    title: NOAA GFS Warm Start Conditions
+    category: Climate/Weather
+    short_description:
+      Six-hourly initial conditions for the NOAA Global Forecast System
     infoUrl: https://aka.ms/ai4edata-gfs-warm-start
     thumbnailUrl: RE4MHyn.jpg
-    alt: High altitude view of cloud cover with moon
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-  - title: NOAA High-Resolution Rapid Refresh (HRRR)
-    shortTerm: NOAA HRRR
-    description: Weather forecasts for North America at 3km resolution
+  noaa-hrrr:
+    title: NOAA High-Resolution Rapid Refresh (HRRR)
+    category: Climate/Weather
+    short_description: Weather forecasts for North America at 3km resolution
     infoUrl: https://aka.ms/ai4edata-hrrr
     thumbnailUrl: hrrr_small.jpg
-    alt: Temperature rendering of North America
     keywords: [North America, NOAA, Weather, Forecast]
 
-  - title: NOAA Integrated Surface Data
-    shortTerm: NOAA surface
-    description: Worldwide hourly weather history data
+  noaa-isd:
+    title: NOAA Integrated Surface Data
+    category: Climate/Weather
+    short_description: Worldwide hourly weather history data
     infoUrl: https://aka.ms/ai4edata-isd
     thumbnailUrl: RE4rsOQ.jpg
-    alt: High altitude view of clouds
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-  - title: NOAA US Climate Gridded Dataset (NClimGrid)
-    shortTerm: NOAA US climate
-    description: Gridded climate data for the U.S. from 1895 to the present
+  noaa-nclimgrid:
+    title: NOAA US Climate Gridded Dataset (NClimGrid)
+    category: Climate/Weather
+    short_description: Gridded climate data for the U.S. from 1895 to the present
     infoUrl: https://aka.ms/ai4edata-nclimgrid
     thumbnailUrl: nclimgrid.png
-    alt: Rendering of precipitation in NW USA
     keywords: [United States, NOAA, Climate, Historical]
 
-  - title: NOAA Rapid Refresh (RAP)
-    shortTerm: NOAA RAP
-    description: Weather forecasts for North America at 13km resolution
+  noaa-rap:
+    title: NOAA Rapid Refresh (RAP)
+    category: Climate/Weather
+    short_description: Weather forecasts for North America at 13km resolution
     infoUrl: https://aka.ms/ai4edata-rap
     thumbnailUrl: thunder_storm.jpg
-    alt: Lightning and thunder storm
     keywords: [North America, NOAA, Weather]
 
-  - title: NOAA US Climate Normals
-    shortTerm: NOAA climate normals
-    description: Typical climate conditions for the U.S. from 1981-present
+  noaa-climate-normals:
+    title: NOAA US Climate Normals
+    category: Climate/Weather
+    short_description: Typical climate conditions for the U.S. from 1981-present
     infoUrl: https://aka.ms/ai4edata-climatenormals
     thumbnailUrl: climate_normals.jpg
-    alt: Pink cloudy sky
     keywords: [North America, NOAA, Weather]
 
-  - title: Ocean Observatories Initiative CAMHD
-    shortTerm: OOI
-    description: High-resolution video from the floor of the Pacific Ocean
+  camhd:
+    title: Ocean Observatories Initiative CAMHD
+    category: Biodiversity
+    short_description: High-resolution video from the floor of the Pacific Ocean
     infoUrl: https://aka.ms/ai4edata-ooi-camhd
     thumbnailUrl: RE4KiKZ.jpg
-    alt: Image from ocean floor video
     keywords: [OOI, Video, Ocean, Pacific]
 
-  - title: Sentinel-1 SLC
-    shortTerm: Sentinel-1 SLC
-    description: Global synthetic aperture radar data for the last 90 days
+  sentinel-1-slc:
+    title: Sentinel-1 SLC
+    category: SAR
+    short_description: Global synthetic aperture radar data for the last 90 days
     infoUrl: https://aka.ms/ai4edata-sentinel-1-slc
     thumbnailUrl: sentinel-1-sat.jpg
-    alt: Earth from space showing panel of satellite
     keywords: [Global, Sentinel, Satellite, ESA, SAR]
 
-  - title: Sentinel-3 L2
-    shortTerm: Sentinel-3 L2
-    description:
+  sentinel-3-l2:
+    title: Sentinel-3 L2
+    category: Imagery
+    short_description:
       Global multispectral imagery at a resolution of 300m-500m from 2016-present
     infoUrl: https://aka.ms/ai4edata-sentinel-3
     thumbnailUrl: sentinel-3-l2.png
-    alt: Satellite image of Grand Canyon from Sentinel-3 L2
     keywords: [Global, Sentinel, Satellite, ESA, Temperature, SAR, Ocean, Imagery]
 
-  - title: Sentinel-5P
-    shortTerm: Sentinel-5P
-    description: Global atmospheric data from 2018-present
+  sentinel-5p:
+    title: Sentinel-5P
+    category: Climate/Weather
+    short_description: Global atmospheric data from 2018-present
     infoUrl: https://aka.ms/ai4edata-sentinel-5p
     thumbnailUrl: sentinel-5.png
-    alt: Rendering of sentinel 5 swath
     keywords: [Global, Sentinel, Satellite, ESA, Atmosphere]
 
-  - title: UK Met Office CSSP China 20CRDS
-    shortTerm: CSSP China 20CRDS
-    description: Historical climate data for China, from 1851-2010
+  uk-met-20crds:
+    title: UK Met Office CSSP China 20CRDS
+    category: Climate/Weather
+    short_description: Historical climate data for China, from 1851-2010
     infoUrl: https://aka.ms/ai4edata-uk-met-20crds
     thumbnailUrl: cssp-china.jpg
-    alt: Sky and clouds over mountain range
     keywords: [Met Office, China, Climate, Historical]
 
-  - title: UK Met Office Global Weather Data for COVID-19 Analysis
-    shortTerm: UK Met COVID-19
-    description:
+  uk-met-covid:
+    title: UK Met Office Global Weather Data for COVID-19 Analysis
+    category: Climate/Weather
+    short_description:
       Data to explore relationships between COVID-19 and environmental factors
     infoUrl: https://aka.ms/ai4edata-metofficecovid19
     thumbnailUrl: covid-dot-map.jpg
-    alt: Global map rendered as dots showing hotspot areas
     keywords: [Met Office, Global, COVID-19, Weather]
 
-  - title: UMCM Hurricanes
-    shortTerm: UMCM Hurricane
-    description: Modeled wind, wave, and current data for Hurricanes Ike and Sandy
+  umcm-hurricanes:
+    title: UMCM Hurricanes
+    category: Climate/Weather
+    short_description:
+      Modeled wind, wave, and current data for Hurricanes Ike and Sandy
     infoUrl: https://aka.ms/ai4edata-umcm-hurricanes
     thumbnailUrl: hurricane_small.jpg
-    alt: Hurricane in gulf of Mexico
     keywords: [UMCM, Hurricane, Wind, Wave, Current, Ocean]

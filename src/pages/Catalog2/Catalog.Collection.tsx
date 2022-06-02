@@ -9,12 +9,12 @@ import {
 import Keywords from "components/stac/Keywords";
 import { Link } from "react-router-dom";
 
-import { IStacCollection } from "types/stac";
-import { GROUP_PREFIX } from "./Catalog.CollectionList";
+import { IPcCollection } from "types/stac";
 import { CatalogCollectionThumbnail } from "./Catalog.Thumbnail";
+import { GROUP_PREFIX } from "./helpers";
 
 interface CatalogCollectionProps {
-  collection: IStacCollection;
+  collection: IPcCollection;
   onKeywordClick: (keyword: string | undefined) => void;
 }
 

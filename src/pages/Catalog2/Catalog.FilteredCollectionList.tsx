@@ -1,26 +1,37 @@
 import { IStackStyles, List, Stack } from "@fluentui/react";
 import { isEmpty } from "lodash-es";
-import { IStacCollection } from "types/stac";
+import { IPcCollection } from "types/stac";
 import { useCollections } from "utils/requests";
 import { CatalogCollection } from "./Catalog.Collection";
 import { NoResults } from "./Catalog.NoResults";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
+import { nonApiDatasetToPcCollection } from "./helpers";
+import { useMemo } from "react";
 
 interface CatalogFilteredCollectionListProps {
   filterText: string | undefined;
   setFilterText: (filterText: string | undefined) => void;
+  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
-> = ({ filterText, setFilterText }) => {
+> = ({ filterText, setFilterText, nonApiCollectionConfig }) => {
   const { isLoading, data } = useCollections();
 
-  const filteredCollections = data?.collections?.filter(
+  const datasetsToFilter = useMemo(
+    () =>
+      Object.entries(nonApiCollectionConfig)
+        .map(([id, entry]) => nonApiDatasetToPcCollection(id, entry))
+        .concat(data?.collections ?? []),
+    [data?.collections, nonApiCollectionConfig]
+  );
+
+  const filteredCollections = datasetsToFilter.filter(
     matchesTextAndKeywords(filterText)
   );
 
-  const handleCellRender = (collection: IStacCollection | undefined) => {
+  const handleCellRender = (collection: IPcCollection | undefined) => {
     if (!collection) return null;
     return (
       <CatalogCollection
@@ -50,8 +61,8 @@ export const CatalogFilteredCollectionList: React.FC<
 
 const matchesTextAndKeywords = (
   filterText: string | undefined
-): ((collection: IStacCollection) => boolean) => {
-  return (collection: IStacCollection) => {
+): ((collection: IPcCollection) => boolean) => {
+  return (collection: IPcCollection) => {
     if (!filterText) return true;
 
     const text = collection.title + collection["msft:short_description"];

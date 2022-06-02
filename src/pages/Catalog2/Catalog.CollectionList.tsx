@@ -7,17 +7,17 @@ import {
 } from "@fluentui/react";
 import { isEmpty, sortBy } from "lodash-es";
 
-import { IStacCollection } from "types/stac";
+import { IPcCollection, IStacCollection } from "types/stac";
 import { CatalogCollection } from "./Catalog.Collection";
 import { useCollections } from "utils/requests";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 import { useCallback } from "react";
-
-export const GROUP_PREFIX = "group::";
+import { GROUP_PREFIX, nonApiDatasetToPcCollection } from "./helpers";
 
 interface CatalogCollectionListProps {
   setFilterText: (filterText: string | undefined) => void;
   collectionConfig: Record<string, DatasetEntry>;
+  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
   featuredDatasetIds: string[];
   datasetGroups: Record<string, DatasetGroup>;
 }
@@ -25,35 +25,37 @@ interface CatalogCollectionListProps {
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
   collectionConfig,
+  nonApiCollectionConfig,
   featuredDatasetIds,
   datasetGroups,
 }) => {
   const { isLoading, data } = useCollections();
 
   const handleCellRender = useCallback(
-    (item: IStacCollection | undefined) => {
+    (item: IPcCollection | undefined) => {
       if (!item) return null;
       return <CatalogCollection collection={item} onKeywordClick={setFilterText} />;
     },
     [setFilterText]
   );
 
-  const groupedCollections = getGroupedCollections(
+  const categorizedCollections = getCategorizedCollections(
     data?.collections,
+    nonApiCollectionConfig,
     isLoading,
     collectionConfig
   );
-  const sortedKeys = Object.keys(groupedCollections).sort();
+  const sortedKeys = Object.keys(categorizedCollections).sort();
 
   sortedKeys.unshift("Featured");
-  groupedCollections["Featured"] = getFeaturedDatasets(
+  categorizedCollections["Featured"] = getFeaturedDatasets(
     data?.collections,
     featuredDatasetIds,
     datasetGroups
   );
 
-  const groupedList = sortedKeys.map(category => {
-    const collections = groupedCollections[category];
+  const categorizedList = sortedKeys.map(category => {
+    const collections = categorizedCollections[category];
     const sortedCollections = sortBy(collections, "title");
 
     const items =
@@ -77,7 +79,7 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     );
   });
 
-  return <Stack>{groupedList}</Stack>;
+  return <Stack>{categorizedList}</Stack>;
 };
 
 const getFeaturedDatasets = (
@@ -100,12 +102,13 @@ const getFeaturedDatasets = (
   return featured.filter(Boolean) as IStacCollection[];
 };
 
-const getGroupedCollections = (
+const getCategorizedCollections = (
   collections: IStacCollection[] | undefined,
+  nonApiCollections: Record<string, NonApiDatasetEntry>,
   isLoading: boolean,
   collectionConfig: Record<string, DatasetEntry>
-): Record<string, IStacCollection[]> => {
-  const groupedCollections: Record<string, IStacCollection[]> = {};
+): Record<string, IPcCollection[]> => {
+  const groupedCollections: Record<string, IPcCollection[]> = {};
   // If collections have loaded, group them by category
   if (collections) {
     collections?.forEach(collection => {
@@ -114,6 +117,17 @@ const getGroupedCollections = (
         groupedCollections[category] = [];
       }
       groupedCollections[category].push(collection);
+    });
+
+    // Group the non-api collections as well
+    Object.entries(nonApiCollections).forEach(([id, nonApiCollection]) => {
+      const category = nonApiCollection.category || "Other";
+      if (!groupedCollections[category]) {
+        groupedCollections[category] = [];
+      }
+      groupedCollections[category].push(
+        nonApiDatasetToPcCollection(id, nonApiCollection)
+      );
     });
   } else if (!collections && isLoading) {
     // If they're still loading, show a placeholder for each category from the main config

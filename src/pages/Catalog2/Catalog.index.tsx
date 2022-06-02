@@ -9,7 +9,10 @@ import { CatalogFilteredCollectionList } from "./Catalog.FilteredCollectionList"
 import { CatalogToc } from "./Catalog.Toc";
 import { updateQueryStringParam } from "pages/Explore/utils";
 
-import { collections as datasetConfig } from "config/datasets.yml";
+import {
+  collections as datasetConfig,
+  nonApiCollections as nonApiDatasetConfig,
+} from "config/datasets.yml";
 import featuredDatasetIds from "config/datasetFeatured.yml";
 import groups from "config/datasetGroups.yml";
 
@@ -18,12 +21,14 @@ import "./css/Catalog.css";
 
 interface CatalogProps {
   collectionConfig?: Record<string, DatasetEntry>;
+  nonApiCollectionConfig?: Record<string, NonApiDatasetEntry>;
   groupConfig?: Record<string, DatasetGroup>;
   featuredIds?: string[];
 }
 
 export const Catalog: React.FC<CatalogProps> = ({
   collectionConfig = datasetConfig,
+  nonApiCollectionConfig = nonApiDatasetConfig,
   groupConfig = groups,
   featuredIds = featuredDatasetIds,
 }) => {
@@ -46,17 +51,24 @@ export const Catalog: React.FC<CatalogProps> = ({
     <Layout bannerHeader={banner}>
       <SEO title="Data Catalog" />
       <Stack horizontal className="grid-content">
-        {!filterText && <CatalogToc collectionConfig={collectionConfig} />}
+        {!filterText && (
+          <CatalogToc
+            collectionConfig={collectionConfig}
+            nonApiCollectionConfig={nonApiCollectionConfig}
+          />
+        )}
         {!filterText && (
           <CatalogCollectionList
             setFilterText={setFilterText}
             collectionConfig={collectionConfig}
+            nonApiCollectionConfig={nonApiCollectionConfig}
             datasetGroups={groupConfig}
             featuredDatasetIds={featuredIds}
           />
         )}
         {filterText && (
           <CatalogFilteredCollectionList
+            nonApiCollectionConfig={nonApiCollectionConfig}
             setFilterText={setFilterText}
             filterText={filterText}
           />
