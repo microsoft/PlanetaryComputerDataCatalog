@@ -13,6 +13,17 @@ const defaultConfig: Record<string, DatasetEntry> = {
   "two-a": { category: "Number" },
 };
 
+const defaultNonApiConfig: Record<string, NonApiDatasetEntry> = {
+  panda: {
+    category: "Animal",
+    title: "Non-API Panda",
+    short_description: "Non-API 1 Panda description",
+    keywords: ["animal"],
+    infoUrl: "https://example.com/non-api-1",
+    thumbnailUrl: "https://example.com/non-api-1.png",
+  },
+};
+
 const defaultCollectionsResponse = {
   collections: [
     { id: "red", title: "This is Red", keywords: ["red"] },
@@ -37,6 +48,7 @@ const setup = (
   const utils = render(
     <CatalogCollectionList
       collectionConfig={defaultConfig}
+      nonApiCollectionConfig={defaultNonApiConfig}
       datasetGroups={groups}
       featuredDatasetIds={featuredIds}
       setFilterText={setFilterText}
@@ -66,6 +78,13 @@ test("Catalog renders collections by category", async () => {
   expect(numberCat).toHaveTextContent("Number");
   expect(within(numberCat).getAllByTestId("catalog-collection-item")).toHaveLength(
     3
+  );
+
+  const animalCat = getByTestId("catalog-category-section-Animal");
+  expect(animalCat).toBeInTheDocument();
+  expect(animalCat).toHaveTextContent("Animal");
+  expect(within(animalCat).getAllByTestId("catalog-collection-item")).toHaveLength(
+    1
   );
 });
 

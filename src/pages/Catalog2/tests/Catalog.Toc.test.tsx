@@ -16,14 +16,14 @@ const setup = (
   };
 };
 
-test("Catalog table of contents renders featured", () => {
+test("Catalog TOC renders featured", () => {
   const { getByText, getByLabelText } = setup();
   expect(getByLabelText("Dataset category navigation")).toBeInTheDocument();
 
   expect(getByText("Featured")).toBeInTheDocument();
 });
 
-test("Catalog table of contents renders all categories", () => {
+test("Catalog TOC renders all categories", () => {
   const collectionConfig: Record<string, DatasetEntry> = {
     red: { category: "color" },
     blue: { category: "color" },
@@ -51,4 +51,19 @@ test("Catalog table of contents renders all categories", () => {
   expect(getByText("number")).toBeInTheDocument();
   expect(getByText("Featured")).toBeInTheDocument();
   expect(getByText("animal")).toBeInTheDocument();
+});
+
+test("Catalog TOC doesn't render categories of hidden datasets", () => {
+  const collectionConfig: Record<string, DatasetEntry> = {
+    red: { category: "Category A" },
+    blue: { category: "Category B" },
+    one: { category: "Category C", isHidden: true },
+  };
+
+  const { getByLabelText, getByText, queryByText } = setup(collectionConfig);
+  const nav = getByLabelText("Dataset category navigation");
+  expect(nav).toBeInTheDocument();
+  expect(getByText("Category A")).toBeInTheDocument();
+  expect(getByText("Category B")).toBeInTheDocument();
+  expect(queryByText("Category C")).not.toBeInTheDocument();
 });

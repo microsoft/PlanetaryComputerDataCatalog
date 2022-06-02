@@ -17,7 +17,7 @@ import featuredDatasetIds from "config/datasetFeatured.yml";
 import groups from "config/datasetGroups.yml";
 
 import "styles/catalog.css";
-import "./css/Catalog.css";
+import "./css/catalog.css";
 
 interface CatalogProps {
   collectionConfig?: Record<string, DatasetEntry>;

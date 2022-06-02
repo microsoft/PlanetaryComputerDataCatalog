@@ -297,7 +297,7 @@ collections:
         launch: datasets/daymet/daymet-example.ipynb
 
   eclipse:
-    category: Sensors
+    category: Air Quality
     tabs:
       - title: Example Notebook
         src: eclipse-example.html
@@ -714,9 +714,7 @@ collections:
         src: us-census-example.html
         launch: datasets/us-census/us-census-example.ipynb
 
-# Configuration for "other dataset" section. This list is rendered
-# in the order represented here, which is mostly alphabetical, with
-# some custom prioritization.
+# Configuration for "other dataset" section, see type `NonApiDatasetEntry` for details.
 nonApiCollections:
   deltares-flood:
     title: Deltares Global Flood Maps

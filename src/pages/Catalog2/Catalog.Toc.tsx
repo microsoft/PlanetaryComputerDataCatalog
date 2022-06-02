@@ -28,7 +28,9 @@ export const CatalogToc: React.FC<CatalogTocProps> = ({
     const categories = new Set<string>();
     // Catalog entries from api and non-api datasets
     Object.entries(collectionConfig).forEach(([_, dataset]) => {
-      categories.add(dataset.category || ungroupedName);
+      if (!dataset.isHidden) {
+        categories.add(dataset.category || ungroupedName);
+      }
     });
     Object.entries(nonApiCollectionConfig).forEach(([_, dataset]) => {
       categories.add(dataset.category || ungroupedName);

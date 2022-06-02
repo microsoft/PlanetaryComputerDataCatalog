@@ -1,5 +1,5 @@
 import { IStackStyles, List, Stack } from "@fluentui/react";
-import { isEmpty } from "lodash-es";
+import { isEmpty, sortBy } from "lodash-es";
 import { IPcCollection } from "types/stac";
 import { useCollections } from "utils/requests";
 import { CatalogCollection } from "./Catalog.Collection";
@@ -27,8 +27,9 @@ export const CatalogFilteredCollectionList: React.FC<
     [data?.collections, nonApiCollectionConfig]
   );
 
-  const filteredCollections = datasetsToFilter.filter(
-    matchesTextAndKeywords(filterText)
+  const filteredCollections = sortBy(
+    datasetsToFilter.filter(matchesTextAndKeywords(filterText)),
+    "title"
   );
 
   const handleCellRender = (collection: IPcCollection | undefined) => {
@@ -45,7 +46,7 @@ export const CatalogFilteredCollectionList: React.FC<
   const hasResults = !isEmpty(filteredCollections) && !isLoading;
   return (
     <Stack styles={resultStyles} data-cy="catalog-filter-results">
-      <h2>Search results</h2>
+      <h2>Datasets matching "{filterText}"</h2>
       {hasResults && (
         <List
           data-cy="filtered-collection-results"

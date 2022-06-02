@@ -26,11 +26,6 @@ a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item
   color: #0078d4;
 }
 
-/* a11y for gray background */
-#catalog-additional-datasets a.ms-Link {
-  color: #0060bd;
-}
-
 .page-header .breadcrumbs a,
 .page-header .breadcrumbs a:hover {
   color: #fff !important;
