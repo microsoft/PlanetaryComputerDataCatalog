@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 import { IPcCollection } from "types/stac";
 import { CatalogCollectionThumbnail } from "./Catalog.Thumbnail";
-import { GROUP_PREFIX } from "./helpers";
+import { getCollectionDetailUrl } from "./helpers";
 
 interface CatalogCollectionProps {
   collection: IPcCollection;
@@ -22,10 +22,7 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
   collection,
   onKeywordClick,
 }) => {
-  const href = collection.id.startsWith(GROUP_PREFIX)
-    ? `/dataset/group/${collection.id.substring(GROUP_PREFIX.length)}`
-    : `/dataset/${collection.id}`;
-
+  const href = getCollectionDetailUrl(collection.id);
   return (
     <Stack
       horizontal

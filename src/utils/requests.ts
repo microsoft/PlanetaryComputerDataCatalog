@@ -28,6 +28,18 @@ export const useStaticMetadata = (staticFileName: string) => {
   return useQuery(["static-file", staticFileName], getStaticMetadata);
 };
 
+export const useGitHubDatasetDescription = (datasetId: string) => {
+  return useQuery(
+    ["github-dataset-description", datasetId],
+    getGithubDatasetDescription,
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      retry: false,
+    }
+  );
+};
+
 export const useTileJson = (
   query: IMosaic,
   renderOption: IMosaicRenderOption | null,
@@ -104,4 +116,21 @@ const getStaticMetadata = async (
   const [, file] = queryParam.queryKey;
   const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
+};
+
+const getGithubDatasetDescription = async (
+  queryParam: QueryFunctionContext<[string, string]>
+): Promise<string | null> => {
+  const [, datasetId] = queryParam.queryKey;
+  const resp = await axios.get(
+    `https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/${datasetId}.md`
+  );
+
+  const text = resp.data as string;
+  try {
+    const overviewStart = text.indexOf("## Overview");
+    return text.substring(overviewStart);
+  } catch {
+    return null;
+  }
 };

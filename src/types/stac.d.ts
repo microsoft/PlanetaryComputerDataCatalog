@@ -6,8 +6,9 @@ export interface IPcCollection {
   title: string;
   description: string;
   assets: Record<string, IStacAsset>;
-  "msft:short_description": string;
   keywords: string[];
+  "msft:short_description": string;
+  "msft:group_id"?: string;
 }
 export interface IStacCollection extends IPcCollection {
   summaries?: Record<string, []>;
@@ -23,7 +24,6 @@ export interface IStacCollection extends IPcCollection {
   };
   links: IStacLink[];
   summaries?: Record<string, string>;
-  "msft:group_id"?: string;
   "msft:requires_account"?: boolean;
 }
 

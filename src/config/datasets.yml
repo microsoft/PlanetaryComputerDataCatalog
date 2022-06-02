@@ -715,8 +715,9 @@ collections:
         launch: datasets/us-census/us-census-example.ipynb
 
 # Configuration for "other dataset" section, see type `NonApiDatasetEntry` for details.
+# The value for the dataset key should match the file name of the dataset in the ai4e dataset repo.
 nonApiCollections:
-  deltares-flood:
+  deltares-floods:
     title: Deltares Global Flood Maps
     category: Water
     short_description: Global coastal inundation maps at multiple resolutions
@@ -724,7 +725,7 @@ nonApiCollections:
     thumbnailUrl: deltares-flood.png
     keywords: [Global, Flood, Sea level rise, Water, Deltares]
 
-  deltares-reservoir:
+  deltares-water-availability:
     title: Deltares Global Water Availability
     category: Water
     short_description: Estimates of global water availablity
@@ -815,7 +816,7 @@ nonApiCollections:
     alt: Earth viewed from space station with a satellite
     keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-  noaa-gfs-ws:
+  gfs-warm-start:
     title: NOAA GFS Warm Start Conditions
     category: Climate/Weather
     short_description:
@@ -856,7 +857,7 @@ nonApiCollections:
     thumbnailUrl: thunder_storm.jpg
     keywords: [North America, NOAA, Weather]
 
-  noaa-climate-normals:
+  noaa-climatenormals:
     title: NOAA US Climate Normals
     category: Climate/Weather
     short_description: Typical climate conditions for the U.S. from 1981-present
@@ -864,7 +865,7 @@ nonApiCollections:
     thumbnailUrl: climate_normals.jpg
     keywords: [North America, NOAA, Weather]
 
-  camhd:
+  ooi-camhd:
     title: Ocean Observatories Initiative CAMHD
     category: Biodiversity
     short_description: High-resolution video from the floor of the Pacific Ocean
@@ -880,7 +881,7 @@ nonApiCollections:
     thumbnailUrl: sentinel-1-sat.jpg
     keywords: [Global, Sentinel, Satellite, ESA, SAR]
 
-  sentinel-3-l2:
+  sentinel-3:
     title: Sentinel-3 L2
     category: Imagery
     short_description:
@@ -905,7 +906,7 @@ nonApiCollections:
     thumbnailUrl: cssp-china.jpg
     keywords: [Met Office, China, Climate, Historical]
 
-  uk-met-covid:
+  uk-met-covid-19:
     title: UK Met Office Global Weather Data for COVID-19 Analysis
     category: Climate/Weather
     short_description:

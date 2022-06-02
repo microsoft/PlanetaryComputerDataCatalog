@@ -11,7 +11,7 @@ export const nonApiDatasetToPcCollection = (
     id: `${NON_API_PREFIX}${id}`,
     title: dataset.title,
     "msft:short_description": dataset.short_description,
-    description: dataset.short_description + " TODO",
+    description: "",
     keywords: dataset.keywords,
     assets: {
       thumbnail: {
@@ -19,4 +19,13 @@ export const nonApiDatasetToPcCollection = (
       },
     },
   };
+};
+
+export const getCollectionDetailUrl = (id: string) => {
+  if (id.startsWith(GROUP_PREFIX)) {
+    return `/dataset/group/${id.substring(GROUP_PREFIX.length)}`;
+  } else if (id.startsWith(NON_API_PREFIX)) {
+    return `/dataset/storage/${id.substring(NON_API_PREFIX.length)}`;
+  }
+  return `/dataset/${id}`;
 };

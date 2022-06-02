@@ -31,7 +31,7 @@ const RequiresAccount = () => {
 
 export default RequiresAccount;
 
-const messageBarStyles: IMessageBarStyles = {
+export const messageBarStyles: IMessageBarStyles = {
   root: {
     padding: "4px 2px",
     borderRadius: 4,
