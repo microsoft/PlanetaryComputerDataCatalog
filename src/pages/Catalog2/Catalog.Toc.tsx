@@ -1,5 +1,11 @@
 import { useMemo } from "react";
-import { Nav, INavLink, INavLinkGroup, INavStyles } from "@fluentui/react/lib/Nav";
+import {
+  FontWeights,
+  Nav,
+  INavLink,
+  INavLinkGroup,
+  INavStyles,
+} from "@fluentui/react";
 import { useNavigate } from "react-router-dom";
 
 import { scrollToHash } from "utils";
@@ -64,6 +70,11 @@ const generateNav = (categories: string[]): INavLinkGroup[] => {
 };
 
 const tocStyle: Partial<INavStyles> = {
-  link: { padding: 2 },
+  link: {
+    "&:after": { content: "" },
+    padding: 2,
+    backgroundColor: "rgba(0,0,0,0)",
+    fontWeight: FontWeights.regular,
+  },
   root: { marginRight: 35, maxHeight: "100vh" },
 };
