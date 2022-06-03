@@ -53,4 +53,9 @@ We're just getting started. Check back for updated documentation and new feature
 
 ## Beyond the Planetary Computer
 
-The Planetary Computer is just one component of Microsoft's commitment to environmental sustainability. Learn more about Microsoft's [environmental sustainability program](https://www.microsoft.com/en-us/corporate-responsibility/sustainability).
+The Planetary Computer is just one component of Microsoft's commitment to environmental sustainability.
+
+- Learn more about Microsoft's [environmental sustainability program](https://www.microsoft.com/en-us/corporate-responsibility/sustainability).
+- Learn more about the work done by AI for Earth grantees at the [AI for Earth grantee gallery](https://aka.ms/ai4egrantees).
+- Microsoft's [AI for Earth program](https://aka.ms/aiforearth) also provides open source technical resources for conservation work; check out our [machine learning APIs](https://aka.ms/ai4eapis), and read about our tools for [accelerating biodiversity surveys with AI](https://aka.ms/biodiversitysurveys) and [AI-accelerated land cover analysis](https://aka.ms/landcovermapping).
+
