@@ -9,18 +9,12 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { scrollToHash } from "utils";
+import { useDataConfig } from "components/state/DataConfigProvider";
 
 const ungroupedName = "Other";
 
-interface CatalogTocProps {
-  collectionConfig: Record<string, DatasetEntry>;
-  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
-}
-
-export const CatalogToc: React.FC<CatalogTocProps> = ({
-  collectionConfig,
-  nonApiCollectionConfig,
-}) => {
+export const CatalogToc: React.FC = () => {
+  const { collectionConfig, storageCollectionConfig } = useDataConfig();
   const navigate = useNavigate();
 
   // Generate categories from the local dataset configuration
@@ -32,7 +26,7 @@ export const CatalogToc: React.FC<CatalogTocProps> = ({
         categories.add(dataset.category || ungroupedName);
       }
     });
-    Object.entries(nonApiCollectionConfig).forEach(([_, dataset]) => {
+    Object.entries(storageCollectionConfig).forEach(([_, dataset]) => {
       categories.add(dataset.category || ungroupedName);
     });
 
@@ -43,7 +37,7 @@ export const CatalogToc: React.FC<CatalogTocProps> = ({
     cats.unshift("Featured");
 
     return cats;
-  }, [collectionConfig, nonApiCollectionConfig]);
+  }, [collectionConfig, storageCollectionConfig]);
 
   // Generate the navigation elements from the categories
   const navLinkGroups = useMemo(() => generateNav(categories), [categories]);

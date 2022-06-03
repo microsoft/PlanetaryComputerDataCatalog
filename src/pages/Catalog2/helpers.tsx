@@ -5,7 +5,7 @@ export const NON_API_PREFIX = "non-api::";
 
 export const nonApiDatasetToPcCollection = (
   id: string,
-  dataset: NonApiDatasetEntry
+  dataset: StorageDatasetEntry
 ): IPcCollection => {
   return {
     id: `${NON_API_PREFIX}${id}`,

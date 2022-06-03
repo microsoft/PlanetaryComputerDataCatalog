@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   ISeparatorStyles,
   IStackStyles,
@@ -7,28 +8,22 @@ import {
 } from "@fluentui/react";
 import { isEmpty, sortBy } from "lodash-es";
 
-import { IPcCollection, IStacCollection } from "types/stac";
 import { CatalogCollection } from "./Catalog.Collection";
-import { useCollections } from "utils/requests";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
-import { useCallback } from "react";
+import { useCollections } from "utils/requests";
 import { GROUP_PREFIX, nonApiDatasetToPcCollection } from "./helpers";
+import { IPcCollection, IStacCollection } from "types/stac";
+import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogCollectionListProps {
   setFilterText: (filterText: string | undefined) => void;
-  collectionConfig: Record<string, DatasetEntry>;
-  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
-  featuredDatasetIds: string[];
-  datasetGroups: Record<string, DatasetGroup>;
 }
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
-  collectionConfig,
-  nonApiCollectionConfig,
-  featuredDatasetIds,
-  datasetGroups,
 }) => {
+  const { collectionConfig, featuredIds, groupConfig, storageCollectionConfig } =
+    useDataConfig();
   const { isLoading, data } = useCollections();
 
   const handleCellRender = useCallback(
@@ -41,7 +36,7 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
 
   const categorizedCollections = getCategorizedCollections(
     data?.collections,
-    nonApiCollectionConfig,
+    storageCollectionConfig,
     isLoading,
     collectionConfig
   );
@@ -50,8 +45,8 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   sortedKeys.unshift("Featured");
   categorizedCollections["Featured"] = getFeaturedDatasets(
     data?.collections,
-    featuredDatasetIds,
-    datasetGroups
+    featuredIds,
+    groupConfig
   );
 
   const categorizedList = sortedKeys.map(category => {
@@ -104,7 +99,7 @@ const getFeaturedDatasets = (
 
 const getCategorizedCollections = (
   collections: IStacCollection[] | undefined,
-  nonApiCollections: Record<string, NonApiDatasetEntry>,
+  nonApiCollections: Record<string, StorageDatasetEntry>,
   isLoading: boolean,
   collectionConfig: Record<string, DatasetEntry>
 ): Record<string, IPcCollection[]> => {

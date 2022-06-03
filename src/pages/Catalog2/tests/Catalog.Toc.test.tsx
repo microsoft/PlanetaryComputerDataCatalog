@@ -3,13 +3,12 @@ import { CatalogToc } from "../Catalog.Toc";
 
 const setup = (
   collectionConfig: Record<string, DatasetEntry> | undefined = {},
-  nonApiCollectionConfig: Record<string, NonApiDatasetEntry> | undefined = {}
+  storageCollectionConfig: Record<string, StorageDatasetEntry> | undefined = {}
 ) => {
   const utils = render(
-    <CatalogToc
-      collectionConfig={collectionConfig}
-      nonApiCollectionConfig={nonApiCollectionConfig}
-    />
+    <CatalogToc />,
+    {},
+    { collectionConfig, storageCollectionConfig, groupConfig: {}, featuredIds: [] }
   );
   return {
     ...utils,
@@ -30,7 +29,7 @@ test("Catalog TOC renders all categories", () => {
     one: { category: "number" },
     two: { category: "number" },
   };
-  const nonApiCollectionConfig: Record<string, NonApiDatasetEntry> = {
+  const nonApiCollectionConfig: Record<string, StorageDatasetEntry> = {
     cat: {
       category: "animal",
       title: "Cat",

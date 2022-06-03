@@ -1,30 +1,32 @@
+import { useMemo } from "react";
 import { IStackStyles, List, Stack } from "@fluentui/react";
 import { isEmpty, sortBy } from "lodash-es";
-import { IPcCollection } from "types/stac";
-import { useCollections } from "utils/requests";
+
 import { CatalogCollection } from "./Catalog.Collection";
 import { NoResults } from "./Catalog.NoResults";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 import { nonApiDatasetToPcCollection } from "./helpers";
-import { useMemo } from "react";
+import { IPcCollection } from "types/stac";
+import { useCollections } from "utils/requests";
+import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogFilteredCollectionListProps {
   filterText: string | undefined;
   setFilterText: (filterText: string | undefined) => void;
-  nonApiCollectionConfig: Record<string, NonApiDatasetEntry>;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
-> = ({ filterText, setFilterText, nonApiCollectionConfig }) => {
+> = ({ filterText, setFilterText }) => {
+  const { storageCollectionConfig } = useDataConfig();
   const { isLoading, data } = useCollections();
 
   const datasetsToFilter = useMemo(
     () =>
-      Object.entries(nonApiCollectionConfig)
+      Object.entries(storageCollectionConfig)
         .map(([id, entry]) => nonApiDatasetToPcCollection(id, entry))
         .concat(data?.collections ?? []),
-    [data?.collections, nonApiCollectionConfig]
+    [data?.collections, storageCollectionConfig]
   );
 
   const filteredCollections = sortBy(

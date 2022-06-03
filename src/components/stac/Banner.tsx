@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
 import Keywords from "./Keywords";
-import { collections as collectionsConfig } from "config/datasets.yml";
-import groups from "config/datasetGroups.yml";
 import { IPcCollection } from "types/stac";
+import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface BannerProps {
   collection: IPcCollection;
   forceGradient?: boolean;
 }
 const Banner: React.FC<BannerProps> = ({ collection, forceGradient = false }) => {
+  const { collectionConfig, groupConfig } = useDataConfig();
   const navigate = useNavigate();
   if (!collection) return null;
 
@@ -20,16 +20,15 @@ const Banner: React.FC<BannerProps> = ({ collection, forceGradient = false }) =>
   };
 
   const imgUrl =
-    collectionsConfig[collection.id]?.headerImg ||
-    collection.assets?.thumbnail?.href;
+    collectionConfig[collection.id]?.headerImg || collection.assets?.thumbnail?.href;
 
   const groupId = collection["msft:group_id"];
-  const hasGroup = groupId && groups[groupId];
+  const hasGroup = groupId && groupConfig[groupId];
 
   const bannerBreadcrumbs = hasGroup ? (
     <>
       <Link to="/catalog">Datasets</Link> {" > "}
-      <Link to={`/dataset/group/${groupId}`}>{groups[groupId].title}</Link>
+      <Link to={`/dataset/group/${groupId}`}>{groupConfig[groupId].title}</Link>
     </>
   ) : (
     <Link to="/catalog">Datasets</Link>

@@ -1,4 +1,4 @@
-import { render, within } from "testUtils";
+import { defaultCollectionsConfig, render, within } from "testUtils";
 import nock from "nock";
 import { STAC_URL } from "utils/constants";
 import { CatalogFilteredCollectionList } from "../Catalog.FilteredCollectionList";
@@ -18,7 +18,7 @@ const setup = (
       ],
     });
 
-  const nonApiDatasets: Record<string, NonApiDatasetEntry> = {
+  const storageCollectionConfig: Record<string, StorageDatasetEntry> = {
     baz: {
       title: "This is Baz",
       category: "non-api",
@@ -33,8 +33,14 @@ const setup = (
     <CatalogFilteredCollectionList
       filterText={filterText}
       setFilterText={handleFn}
-      nonApiCollectionConfig={nonApiDatasets}
-    />
+    />,
+    {},
+    {
+      storageCollectionConfig,
+      collectionConfig: defaultCollectionsConfig,
+      groupConfig: {},
+      featuredIds: [],
+    }
   );
 
   return {

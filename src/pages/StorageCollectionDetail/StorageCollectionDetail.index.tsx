@@ -15,19 +15,17 @@ import Banner from "components/stac/Banner";
 import Layout from "components/Layout";
 import NotFound from "pages/NotFound";
 import SEO from "components/Seo";
+import { useDataConfig } from "components/state/DataConfigProvider";
 import { nonApiDatasetToPcCollection } from "pages/Catalog2/helpers";
 import { useGitHubDatasetDescription } from "utils/requests";
 import { messageBarStyles } from "components/stac/RequiresAccount";
 
-interface Props {
-  collections: Record<string, NonApiDatasetEntry>;
-}
-
-export const StorageCollectionDetail: React.FC<Props> = ({ collections }) => {
+export const StorageCollectionDetail: React.FC = () => {
+  const { storageCollectionConfig } = useDataConfig();
   const id = useParams()?.id || "";
   const { isLoading, data: description } = useGitHubDatasetDescription(id);
 
-  const dataset = collections[id];
+  const dataset = storageCollectionConfig[id];
 
   if (!dataset || !id) {
     return <NotFound />;
@@ -46,7 +44,7 @@ export const StorageCollectionDetail: React.FC<Props> = ({ collections }) => {
 };
 
 const makeDescription = (
-  dataset: NonApiDatasetEntry,
+  dataset: StorageDatasetEntry,
   description: string | null | undefined,
   isLoading: boolean
 ) => {

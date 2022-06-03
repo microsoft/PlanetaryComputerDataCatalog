@@ -16,8 +16,6 @@ import Terms from "pages/Terms";
 import Layout from "./components/Layout";
 import StorageCollectionDetail from "pages/StorageCollectionDetail";
 
-import { nonApiCollections } from "config/datasets.yml";
-
 const Explore = React.lazy(() => import("pages/Explore"));
 const Docs = React.lazy(() => import("pages/Docs"));
 
@@ -48,10 +46,7 @@ function App() {
           />
           <Route path="/applications" element={<Applications />} />
           <Route path="/dataset/group/:groupId" element={<CatalogGroup />} />
-          <Route
-            path="/dataset/storage/:id"
-            element={<StorageCollectionDetail collections={nonApiCollections} />}
-          />
+          <Route path="/dataset/storage/:id" element={<StorageCollectionDetail />} />
           <Route path="/dataset/:id" element={<Collection />} />
           <Route path="/account/request" element={<AccountSurvey />} />
           <Route

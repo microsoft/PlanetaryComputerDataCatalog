@@ -1,38 +1,14 @@
 import { waitForElementToBeRemoved, within } from "@testing-library/react";
 import nock from "nock";
 
-import { render } from "testUtils";
+import {
+  defaultCollectionsConfig,
+  defaultCollectionsResponse,
+  defaultStorageConfig,
+  render,
+} from "testUtils";
 import { STAC_URL } from "utils/constants";
 import { CatalogCollectionList } from "../Catalog.CollectionList";
-
-const defaultConfig: Record<string, DatasetEntry> = {
-  red: { category: "Color" },
-  blue: { category: "Color" },
-  one: { category: "Number" },
-  two: { category: "Number" },
-  "two-a": { category: "Number" },
-};
-
-const defaultNonApiConfig: Record<string, NonApiDatasetEntry> = {
-  panda: {
-    category: "Animal",
-    title: "Non-API Panda",
-    short_description: "Non-API 1 Panda description",
-    keywords: ["animal"],
-    infoUrl: "https://example.com/non-api-1",
-    thumbnailUrl: "https://example.com/non-api-1.png",
-  },
-};
-
-const defaultCollectionsResponse = {
-  collections: [
-    { id: "red", title: "This is Red", keywords: ["red"] },
-    { id: "blue", title: "This is Blue", keywords: ["blue"] },
-    { id: "one", title: "This is One", keywords: ["Uno"] },
-    { id: "two", title: "This is Two", keywords: ["Dos"] },
-    { id: "two-a", title: "This is Two-A", keywords: ["Dos"] },
-  ],
-};
 
 const defaultSetFilter = () => {};
 const setup = (
@@ -46,13 +22,14 @@ const setup = (
     .reply(200, defaultCollectionsResponse);
 
   const utils = render(
-    <CatalogCollectionList
-      collectionConfig={defaultConfig}
-      nonApiCollectionConfig={defaultNonApiConfig}
-      datasetGroups={groups}
-      featuredDatasetIds={featuredIds}
-      setFilterText={setFilterText}
-    />
+    <CatalogCollectionList setFilterText={setFilterText} />,
+    {},
+    {
+      collectionConfig: defaultCollectionsConfig,
+      storageCollectionConfig: defaultStorageConfig,
+      groupConfig: groups,
+      featuredIds,
+    }
   );
   return {
     httpScope,

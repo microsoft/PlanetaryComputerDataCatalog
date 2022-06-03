@@ -12,7 +12,7 @@ const defaultConfig: Record<string, DatasetEntry> = {
   "two-a": { category: "Number" },
 };
 
-const defaultNonApiConfig: Record<string, NonApiDatasetEntry> = {
+const defaultNonApiConfig: Record<string, StorageDatasetEntry> = {
   cat: {
     category: "animal",
     title: "Cat",

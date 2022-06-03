@@ -716,7 +716,7 @@ collections:
 
 # Configuration for "other dataset" section, see type `NonApiDatasetEntry` for details.
 # The value for the dataset key should match the file name of the dataset in the ai4e dataset repo.
-nonApiCollections:
+storageCollections:
   deltares-floods:
     title: Deltares Global Flood Maps
     category: Water

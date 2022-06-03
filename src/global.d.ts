@@ -21,7 +21,7 @@ interface DatasetEntry {
   isHidden?: boolean;
 }
 
-interface NonApiDatasetEntry {
+interface StorageDatasetEntry {
   title: string;
   category: string;
   short_description: string;
@@ -32,7 +32,7 @@ interface NonApiDatasetEntry {
 
 declare module "config/datasets.yml" {
   export const collections: Record<string, DatasetEntry>;
-  export const nonApiCollections: Record<string, NonApiDatasetEntry>;
+  export const storageCollections: Record<string, StorageDatasetEntry>;
 }
 
 declare module "config/datasetFeatured.yml" {
