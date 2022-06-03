@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { IStackStyles, List, Stack } from "@fluentui/react";
 import { isEmpty, sortBy } from "lodash-es";
 
@@ -20,6 +20,11 @@ export const CatalogFilteredCollectionList: React.FC<
 > = ({ filterText, setFilterText }) => {
   const { storageCollectionConfig } = useDataConfig();
   const { isLoading, data } = useCollections();
+
+  // Scroll to top when re-rendering due to filterText change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [filterText]);
 
   const datasetsToFilter = useMemo(
     () =>
