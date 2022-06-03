@@ -6,9 +6,10 @@ const iconClass = mergeStyles({
   paddingRight: 15,
 });
 
-const NoResults = ({ typeText = "" }) => {
+export const NoResults = ({ typeText = "" }) => {
   return (
     <div
+      data-cy="no-filtered-collection-results"
       style={{
         display: "flex",
         alignItems: "center",
@@ -33,5 +34,3 @@ const NoResults = ({ typeText = "" }) => {
     </div>
   );
 };
-
-export default NoResults;

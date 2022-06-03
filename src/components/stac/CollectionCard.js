@@ -23,7 +23,7 @@ const CollectionCard = ({ collection }) => {
         keywords={collection.keywords}
         color="#4C4C51"
         onClick={keyword => {
-          navigate({ pathname: "/catalog", search: `tags=${keyword}` });
+          navigate({ pathname: "/catalog", search: `filter=${keyword}` });
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />

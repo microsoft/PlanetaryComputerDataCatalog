@@ -15,6 +15,10 @@ a {
   text-decoration: none;
 }
 
+.ms-MessageBar a.ms-Link {
+  color: #0078d4;
+}
+
 .announcements a {
   color: white;
   text-decoration: underline;
@@ -24,11 +28,6 @@ a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item
     a, footer a, .announcements a):hover {
   text-decoration: underline;
   color: #0078d4;
-}
-
-/* a11y for gray background */
-#catalog-additional-datasets a.ms-Link {
-  color: #0060bd;
 }
 
 .page-header .breadcrumbs a,
@@ -150,8 +149,11 @@ main.short {
 
 .page-header {
   background-color: #f9f9f9;
-  padding: 80px 0;
   background-size: cover;
+}
+
+.page-header .grid-content {
+  padding: 80px 0;
 }
 
 /* Light hover effect for link images */

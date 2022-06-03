@@ -1,13 +1,18 @@
 import { Feature, FeatureCollection, Geometry } from "geojson";
 import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 
-export interface IStacCollection {
+export interface IPcCollection {
   id: string;
   title: string;
   description: string;
+  assets: Record<string, IStacAsset>;
+  keywords: string[];
+  "msft:short_description": string;
+  "msft:group_id"?: string;
+}
+export interface IStacCollection extends IPcCollection {
   summaries?: Record<string, []>;
   license: string;
-  assets: Record<string, IStacAsset>;
   item_assets: Record<string, IStacAsset>;
   extent: {
     spatial: {
@@ -17,11 +22,8 @@ export interface IStacCollection {
       interval: Array<Array<string | null>>;
     };
   };
-  keywords: string[];
   links: IStacLink[];
   summaries?: Record<string, string>;
-  "msft:short_description": string;
-  "msft:group_id"?: string;
   "msft:requires_account"?: boolean;
 }
 

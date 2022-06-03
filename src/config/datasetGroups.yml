@@ -8,14 +8,14 @@
     from the USGS 3D Elevation Program.
 
   description: >
-    To respond to growing needs for high-quality elevation data, the goal of 3DEP is to
-    complete acquisition of nationwide lidar (IfSAR in AK) to provide the first-ever
-    national baseline of consistent high-resolution topographic elevation data –
-    both bare earth and 3D point clouds.
+    To respond to growing needs for high-quality elevation data, the goal of 3DEP is
+    to complete acquisition of nationwide lidar (IfSAR in AK) to provide the
+    first-ever national baseline of consistent high-resolution topographic elevation
+    data – both bare earth and 3D point clouds.
 
-    This dataset provides the raw 3D point clouds in the
-    [Cloud Optimized Point Cloud](https://copc.io/) format, and various derived products
-    as [Cloud Optimized GeoTIFFs](https://www.cogeo.org/).
+    This dataset provides the raw 3D point clouds in the [Cloud Optimized Point
+    Cloud](https://copc.io/) format, and various derived products as [Cloud Optimized
+    GeoTIFFs](https://www.cogeo.org/).
   assets:
     headerImg:
       href: ./images/3dep-lidar-copc-hero.png
@@ -133,23 +133,25 @@ gnatsgo:
 modis:
   title: MODIS Version 6.1 Products
   short_description: >
-    The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on both the
-    Terra and Aqua spacecraft. The instrument has a swath width of 2,330 km and covers the entire
-    surface of the Earth within one or two days. The data products derived from MODIS observations 
-    describe atmosphere, cryosphere, land, and ocean features utilized in studies across various disciplines. 
+    The MODIS instrument operates on both the Terra and Aqua spacecraft, covering the
+    entire surface of the Earth within one or two days. The derived data products
+    describe atmosphere, cryosphere, land, and ocean features utilized in studies
+    across various disciplines.
   description: >
-    The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on both the
-    [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/) spacecraft. The instrument 
-    has a swath width of 2,330 km and covers the entire surface of the Earth within one or two days. 
-    The sensor measures 36 spectral bands between 0.405-14.385 µm and acquires data at three
-    spatial resolutions: 250, 500, and 1,000 m.
+    The Moderate Resolution Imaging Spectroradiometer (MODIS) instrument operates on
+    both the [Terra](http://terra.nasa.gov/) and [Aqua](http://aqua.nasa.gov/)
+    spacecraft. The instrument  has a swath width of 2,330 km and covers the entire
+    surface of the Earth within one or two days.  The sensor measures 36 spectral
+    bands between 0.405-14.385 µm and acquires data at three spatial resolutions:
+    250, 500, and 1,000 m.
 
 
-    MODIS Collection 6.1 (061) processing began in September 2017. The release incorporates 
-    improvements and changes to the Level-1B (L1B) products utilized as inputs for higher 
-    level products. MODIS Collection 6.1 products are available at Level 3 and 4 for land 
-    and cryosphere products. Each product type is combined into a single collection in the 
-    Planetary Computer. Additional information is provided on each collection's homepage. 
+    MODIS Collection 6.1 (061) processing began in September 2017. The release
+    incorporates  improvements and changes to the Level-1B (L1B) products utilized as
+    inputs for higher  level products. MODIS Collection 6.1 products are available at
+    Level 3 and 4 for land  and cryosphere products. Each product type is combined
+    into a single collection in the  Planetary Computer. Additional information is
+    provided on each collection's homepage.
   assets:
     headerImg:
       href: ./images/modis-11A1-hero.png
@@ -174,23 +176,24 @@ landsat:
     The Landsat program provides provides a comprehensive, continuous archive of
     multispectral imagery of the Earth's surface from 1972 to present.
   description: >
-    The [Landsat](https://landsat.gsfc.nasa.gov/) program has been imaging the
-    Earth since 1972, providing a comprehensive, continuous archive of the
-    Earth's surface. This dataset represents a global archive of
+    The [Landsat](https://landsat.gsfc.nasa.gov/) program has been imaging the Earth
+    since 1972, providing a comprehensive, continuous archive of the Earth's surface.
+    This dataset represents a global archive of
     [Level-1](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-1-data)
-    and [Level-2](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products)
-    Landsat data from [Landsat Collection 2](https://www.usgs.gov/landsat-missions/landsat-collection-2).
+    and
+    [Level-2](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products)
+    Landsat data from [Landsat Collection
+    2](https://www.usgs.gov/landsat-missions/landsat-collection-2).
 
 
-    Collection 2 Level-1 data is provided for imagery acquired by the
-    Multispectral Scanner System (MSS) onboard Landsat 1 through Landsat 5 from
-    July 1972 to January 2013. Collection 2 Level-2 data is provided for imagery
-    acquired by the Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced
-    Thematic Mapper Plus (ETM+) onboard Landsat 7, and the Operational Land
-    Imager (OLI) and Thermal Infrared Sensor (TIRS) onboard Landsat 8 and 9.
-    Collection 2 Level-2 data is available from August 1982 to present. All
-    images are stored in [cloud-optimized GeoTiff](https://www.cogeo.org/)
-    format.
+    Collection 2 Level-1 data is provided for imagery acquired by the Multispectral
+    Scanner System (MSS) onboard Landsat 1 through Landsat 5 from July 1972 to
+    January 2013. Collection 2 Level-2 data is provided for imagery acquired by the
+    Thematic Mapper (TM) onboard Landsat 4 and 5, the Enhanced Thematic Mapper Plus
+    (ETM+) onboard Landsat 7, and the Operational Land Imager (OLI) and Thermal
+    Infrared Sensor (TIRS) onboard Landsat 8 and 9. Collection 2 Level-2 data is
+    available from August 1982 to present. All images are stored in [cloud-optimized
+    GeoTiff](https://www.cogeo.org/) format.
   assets:
     headerImg:
       href: ./images/landsat-hero.jpg
@@ -213,34 +216,36 @@ planet-nicfi:
   short_description: >
     Planet's high-resolution, analysis-ready mosaics of the world's tropics
   description: >
-    Through Norway's International Climate & Forests Initiative (NICFI), users can access [Planet's](https://www.planet.com/) high-resolution, analysis-ready mosaics of the world's tropics in order to help reduce and reverse the loss of tropical forests, combat climate change, conserve biodiversity, and facilitate sustainable development.
+    Through Norway's International Climate & Forests Initiative (NICFI), users can
+    access [Planet's](https://www.planet.com/) high-resolution, analysis-ready
+    mosaics of the world's tropics in order to help reduce and reverse the loss of
+    tropical forests, combat climate change, conserve biodiversity, and facilitate
+    sustainable development.
 
   assets:
     headerImg:
       href: ./images/planet-nicfi-visual-hero.png
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/nicfi_tropics_basemap_map_d1.jpg
-  keywords:
-    [
-      "Planet",
-      "NICFI",
-      "Satellite",
-      "Tropics",
-      "Imagery"
-    ]
+  keywords: ["Planet", "NICFI", "Satellite", "Tropics", "Imagery"]
 
 sentinel-1:
   title: Sentinel-1 Synthetic Aperture Radar (SAR)
   short_description: >
-    Sentinel-1 comprises a constellation of two polar-orbiting satellites, operating day and night performing C-band synthetic aperture radar imaging.
+    Sentinel-1 comprises a constellation of two polar-orbiting satellites, operating
+    day and night performing C-band synthetic aperture radar imaging.
   description: >
-    [Sentinel 1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1) is an imaging radar mission conducted by the European Space Agency providing continuous all-weather, day-and-night imagery at C-band.
-    The Sentinel-1 constellation provides high reliability, improved revisit time, geographical coverage and rapid data dissemination to support operational
-    applications in the priority areas of marine monitoring, land monitoring and emergency services.
+    [Sentinel 1](https://sentinel.esa.int/web/sentinel/missions/sentinel-1) is an
+    imaging radar mission conducted by the European Space Agency providing continuous
+    all-weather, day-and-night imagery at C-band. The Sentinel-1 constellation
+    provides high reliability, improved revisit time, geographical coverage and rapid
+    data dissemination to support operational applications in the priority areas of
+    marine monitoring, land monitoring and emergency services.
 
 
-    See the [Sentinel-1 documentation](https://sentinel.esa.int/web/sentinel/user-guides/sentinel-1-sar/overview) on the ESA's site
-    for more information about the mission and products.
+    See the [Sentinel-1
+    documentation](https://sentinel.esa.int/web/sentinel/user-guides/sentinel-1-sar/overview)
+    on the ESA's site for more information about the mission and products.
   assets:
     headerImg:
       href: ./images/sentinel-1-hero.png
@@ -251,21 +256,26 @@ sentinel-1:
 chesapeake-lulc:
   title: Chesapeake Land Use Land Cover
   short_description: >
-    Land Use and Land Cover maps for the Chesapeake Bay Watershed from the Conservation Innovation Center at the Chesapeake Conservancy.
+    Land Use and Land Cover maps for the Chesapeake Bay Watershed from the
+    Conservation Innovation Center at the Chesapeake Conservancy.
   description: >
-    One-meter resolution land use and land cover maps for the entire Chesapeake Bay watershed, an area of over 250,000 square kilomters that spans New York, Pennsylvania, Maryland, Delaware, West Virginia, Virginia, and the District of Columbia. The data are made available by the [Conservation Innovation Center](https://www.chesapeakeconservancy.org/conservation-innovation-center/) at the [Chesapeake Conservancy](https://www.chesapeakeconservancy.org/). Based on 2013-2014 imagery from the National Agriculture Imagery Program, the high resolution classification data provides 900 times the amount of information as conventional 30-meter land cover data that has traditionally been utilized for this area.
+    One-meter resolution land use and land cover maps for the entire Chesapeake Bay
+    watershed, an area of over 250,000 square kilomters that spans New York,
+    Pennsylvania, Maryland, Delaware, West Virginia, Virginia, and the District of
+    Columbia. The data are made available by the [Conservation Innovation
+    Center](https://www.chesapeakeconservancy.org/conservation-innovation-center/) at
+    the [Chesapeake Conservancy](https://www.chesapeakeconservancy.org/). Based on
+    2013-2014 imagery from the National Agriculture Imagery Program, the high
+    resolution classification data provides 900 times the amount of information as
+    conventional 30-meter land cover data that has traditionally been utilized for
+    this area.
   assets:
     headerImg:
       href: ./images/chesapeake-lulc-hero.png
     thumbnail:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/chesapeake-lulc-thumb.png"
   keywords:
-    [
-      "Land Use",
-      "Land Cover",
-      "Chesapeake Bay Watershed",
-      "Chesapeake Conservancy"
-    ]
+    ["Land Use", "Land Cover", "Chesapeake Bay Watershed", "Chesapeake Conservancy"]
 
 cil-gdpcir:
   title: CIL Global Downscaled Projections for Climate Impacts Research
@@ -273,14 +283,28 @@ cil-gdpcir:
     Climate Impact Lab Global Downscaled Projections for Climate Impacts Research
 
   description: >
-    The World Climate Research Programme's [6th Coupled Model Intercomparison Project (CMIP6)](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6) represents an enormous advance in the quality, detail, and scope of climate modeling.
+    The World Climate Research Programme's [6th Coupled Model Intercomparison Project
+    (CMIP6)](https://www.wcrp-climate.org/wgcm-cmip/wgcm-cmip6) represents an
+    enormous advance in the quality, detail, and scope of climate modeling.
 
 
-    The [Global Downscaled Projections for Climate Impacts Research](https://github.com/ClimateImpactLab/downscaleCMIP6) dataset makes this modeling more applicable to understanding the impacts of changes in the climate on humans and society with two key developments: trend-preserving bias correction and downscaling. In this dataset, the [Climate Impact Lab](https://impactlab.org/) provides global, daily minimum and maximum air temperature at the surface (`tasmin` and `tasmax`) and daily cumulative surface precipitation (`pr`) corresponding to the CMIP6 historical, ssp1-2.6, ssp2-4.5, ssp3-7.0, and ssp5-8.5 scenarios for 25 global climate models on a 1/4-degree regular global grid.
+    The [Global Downscaled Projections for Climate Impacts
+    Research](https://github.com/ClimateImpactLab/downscaleCMIP6) dataset makes this
+    modeling more applicable to understanding the impacts of changes in the climate
+    on humans and society with two key developments: trend-preserving bias correction
+    and downscaling. In this dataset, the [Climate Impact
+    Lab](https://impactlab.org/) provides global, daily minimum and maximum air
+    temperature at the surface (`tasmin` and `tasmax`) and daily cumulative surface
+    precipitation (`pr`) corresponding to the CMIP6 historical, ssp1-2.6, ssp2-4.5,
+    ssp3-7.0, and ssp5-8.5 scenarios for 25 global climate models on a 1/4-degree
+    regular global grid.
 
 
-    GDPCIR data can be accessed on the Microsoft Planetary Computer. The dataset is made of of three collections, distinguished by data license.
-    More information about the dataset is available in these collections, including access instructions and examples, data formats, available models, methods, and citation/licensing requirements, on each dataset's homepage linked below.
+    GDPCIR data can be accessed on the Microsoft Planetary Computer. The dataset is
+    made of of three collections, distinguished by data license. More information
+    about the dataset is available in these collections, including access
+    instructions and examples, data formats, available models, methods, and
+    citation/licensing requirements, on each dataset's homepage linked below.
 
   assets:
     headerImg:

@@ -1,0 +1,6 @@
+# List of featured datasets, by id. Ids will be checked first against groupId configuration,
+# then against ids fetched from the /collections endpoint
+- landsat
+- modis
+- sentinel-1
+- sentinel-2-l2a
