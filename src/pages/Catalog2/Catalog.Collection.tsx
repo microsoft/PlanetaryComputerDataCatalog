@@ -15,7 +15,7 @@ import { getCollectionDetailUrl } from "./helpers";
 
 interface CatalogCollectionProps {
   collection: IPcCollection;
-  onKeywordClick: (keyword: string | undefined) => void;
+  onKeywordClick: (keyword: string) => void;
 }
 
 export const CatalogCollection: React.FC<CatalogCollectionProps> = ({

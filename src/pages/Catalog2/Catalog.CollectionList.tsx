@@ -16,7 +16,7 @@ import { IPcCollection, IStacCollection } from "types/stac";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogCollectionListProps {
-  setFilterText: (filterText: string | undefined) => void;
+  setFilterText: (filterText: string) => void;
 }
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({

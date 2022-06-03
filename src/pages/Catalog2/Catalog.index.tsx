@@ -13,14 +13,14 @@ import "styles/catalog.css";
 import "./css/catalog.css";
 
 export const Catalog: React.FC = () => {
-  const [filterText, setFilterText] = useState<string | undefined>(getInitialFilter);
+  const [filterText, setFilterText] = useState<string>(getInitialFilter);
 
   // Keep the URL in sync with the filter text
   useEffect(() => {
     updateQueryStringParam("filter", filterText);
   }, [filterText]);
 
-  const handleFilter = (_: any, newValue?: string | undefined) => {
+  const handleFilter = (_: any, newValue: string = "") => {
     setFilterText(newValue);
   };
 
@@ -47,5 +47,5 @@ export const Catalog: React.FC = () => {
 
 const getInitialFilter = () => {
   const filter = new URLSearchParams(window.location.search).get("filter");
-  return filter || undefined;
+  return filter || "";
 };

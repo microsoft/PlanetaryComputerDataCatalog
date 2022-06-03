@@ -11,8 +11,8 @@ import { useCollections } from "utils/requests";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogFilteredCollectionListProps {
-  filterText: string | undefined;
-  setFilterText: (filterText: string | undefined) => void;
+  filterText: string;
+  setFilterText: (filterText: string) => void;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
