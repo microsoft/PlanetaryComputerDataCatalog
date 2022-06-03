@@ -772,7 +772,7 @@ nonApiCollections:
     short_description: US-wide data on land cover and land cover change
     infoUrl: https://aka.ms/ai4edata-nlcd
     thumbnailUrl: RWz0Zh.jpg
-    keywords: [Land Cover, United States]
+    keywords: [United States, NLCD, Land Cover]
 
   nsrdb:
     title: National Solar Radiation Database
