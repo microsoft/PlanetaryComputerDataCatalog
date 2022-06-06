@@ -97,10 +97,6 @@ We'll install daskhub into a new ``dhub`` namespace, but you can use whatever na
 # file: config.yaml
 jupyterhub:
   hub:
-    # Needed for dask-gateway<=0.9.0. https://github.com/dask/helm-chart/issues/142
-    networkPolicy:
-      enabled: false
-  
     services:
       dask-gateway:
         apiToken: "<secret token from above>"
@@ -112,8 +108,8 @@ dask-gateway:
         apiToken: "<secret token from above>"
     backend:
       image:
-        name: pangeo/base-notebook
-        tag: 2021.06.05
+        name: mcr.microsoft.com/planetary-computer/python
+        tag: latest
 ```
 
 Now we can deploy JupyterHub and Dask Gateway with Helm.
