@@ -1,5 +1,7 @@
 # Metadata for a "group" page, which consolidates related collections.
-# `description` property accepts markdown
+
+# See type GroupEntry for properties.
+# Note: the `description` property accepts markdown
 
 3dep-lidar:
   title: USGS 3DEP Lidar Collection
@@ -22,6 +24,7 @@
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/3dep-lidar-copc-thumbnail.png
   keywords: [USGS, 3DEP, Elevation, Lidar, Point Cloud]
+  groupOnCatalog: false
 
 daymet:
   title: Daymet Collection
@@ -65,6 +68,7 @@ copernicus-dem:
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/cop-dem.png
   keywords: [Copernicus, DEM, DSM, elevation]
+  groupOnCatalog: false
 
 io-land-cover:
   title: 10 meter Land Cover
@@ -87,6 +91,7 @@ io-land-cover:
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/io-lulc.png
   keywords: [Global, Land Cover, Land Use, Sentinel]
+  groupOnCatalog: false
 
 gnatsgo:
   title: gNATSGO Soil Database
@@ -169,6 +174,7 @@ modis:
       Temperature,
       Land Cover,
     ]
+  groupOnCatalog: false
 
 landsat:
   title: Landsat Collection
@@ -210,6 +216,7 @@ landsat:
       "Reflectance",
       "Temperature",
     ]
+  groupOnCatalog: false
 
 planet-nicfi:
   title: Planet-NICFI Collection
