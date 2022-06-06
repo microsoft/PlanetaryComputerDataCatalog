@@ -53,12 +53,21 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     const collections = categorizedCollections[category];
     const sortedCollections = sortBy(collections, "title");
 
+    // If loading, show placeholder shimmers per category. Featured category
+    // might have a mix of loading/existing, but we can determine how many shimmers
+    // are needed in addition to what is loaded
     const items =
       isEmpty(collections) && isLoading ? (
         getCollectionShimmers(3)
       ) : (
-        <List items={sortedCollections} onRenderCell={handleCellRender} />
+        <>
+          <List items={sortedCollections} onRenderCell={handleCellRender} />
+          {isLoading &&
+            category === "Featured" &&
+            getCollectionShimmers(featuredIds.length - sortedCollections.length)}
+        </>
       );
+
     return (
       <Stack
         key={`category-${category}`}
