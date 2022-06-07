@@ -1,4 +1,8 @@
-import { waitForElementToBeRemoved, within } from "@testing-library/react";
+import {
+  getByText,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
 import nock from "nock";
 
 import {
@@ -11,15 +15,48 @@ import { STAC_URL } from "utils/constants";
 import { CatalogCollectionList } from "../Catalog.CollectionList";
 
 const defaultSetFilter = () => {};
+
+const collectionsWithGroup = {
+  collections: [
+    {
+      id: "red",
+      title: "This is Red",
+      keywords: ["red"],
+      "msft:group_id": "colors",
+    },
+    {
+      id: "blue",
+      title: "This is Blue",
+      keywords: ["blue"],
+      "msft:group_id": "colors",
+    },
+    { id: "one", title: "This is One", keywords: ["Uno"] },
+  ],
+};
+
+const groups: Record<string, DatasetGroup> = {
+  colors: {
+    title: "Color Group",
+    description: "A list of colors",
+    short_description: "A list of colors",
+    keywords: ["color"],
+    assets: {
+      thumbnail: { href: "https://example.com/color.png" },
+      headerImg: { href: "https://example.com/color.png" },
+    },
+  },
+};
+
 const setup = (
   setFilterText: (text: string | undefined) => void = defaultSetFilter,
   groups: Record<string, DatasetGroup> = {},
-  featuredIds: string[] = []
+  featuredIds: string[] = [],
+  collectionResponse: { collections: {} } = defaultCollectionsResponse
 ) => {
   const apiUrl = new URL(STAC_URL as string);
   const httpScope = nock(apiUrl.origin)
     .get(`${apiUrl.pathname}/collections`)
-    .reply(200, defaultCollectionsResponse);
+    .reply(200, collectionResponse);
 
   const utils = render(
     <CatalogCollectionList setFilterText={setFilterText} />,
@@ -113,4 +150,51 @@ test("Catalog adds featured from groups", async () => {
 
   const featured = within(featCat).getByTestId("catalog-collection-item");
   expect(featured).toHaveTextContent("Things like two");
+});
+
+test("Catalog combines grouped collections when key is present", async () => {
+  const { queryAllByTestId, getByText, queryByText } = setup(
+    defaultSetFilter,
+    groups,
+    [],
+    collectionsWithGroup
+  );
+
+  await waitForElementToBeRemoved(
+    () => queryAllByTestId("collection-loading-shimmers"),
+    { timeout: 5000 }
+  );
+
+  expect(getByText("Color Group")).toBeInTheDocument();
+  expect(getByText("This is One")).toBeInTheDocument();
+  expect(queryByText("This is Blue")).not.toBeInTheDocument();
+  expect(queryByText("This is Red")).not.toBeInTheDocument();
+});
+
+test("Catalog ignores group when configured to not group", async () => {
+  const noGroupingGroups: Record<string, DatasetGroup> = {
+    colors: {
+      ...groups.colors,
+      ...{
+        groupOnCatalog: false,
+      },
+    },
+  };
+
+  const { queryAllByTestId, getByText, queryByText } = setup(
+    defaultSetFilter,
+    noGroupingGroups,
+    [],
+    collectionsWithGroup
+  );
+
+  await waitForElementToBeRemoved(
+    () => queryAllByTestId("collection-loading-shimmers"),
+    { timeout: 5000 }
+  );
+
+  expect(queryByText("Color Group")).not.toBeInTheDocument();
+  expect(getByText("This is One")).toBeInTheDocument();
+  expect(queryByText("This is Blue")).toBeInTheDocument();
+  expect(queryByText("This is Red")).toBeInTheDocument();
 });

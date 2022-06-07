@@ -53,6 +53,10 @@ interface DatasetGroup {
     };
   };
   keywords: string[];
+
+  // Should group members be categorized on the catalog page?
+  // Defaults to true.
+  groupOnCatalog?: boolean;
 }
 
 declare module "config/datasetGroups.yml" {

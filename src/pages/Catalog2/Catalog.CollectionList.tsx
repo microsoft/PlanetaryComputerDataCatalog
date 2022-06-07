@@ -38,7 +38,8 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     data?.collections,
     storageCollectionConfig,
     isLoading,
-    collectionConfig
+    collectionConfig,
+    groupConfig
   );
   const sortedKeys = Object.keys(categorizedCollections).sort();
 
@@ -53,12 +54,21 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     const collections = categorizedCollections[category];
     const sortedCollections = sortBy(collections, "title");
 
+    // If loading, show placeholder shimmers per category. Featured category
+    // might have a mix of loading/existing, but we can determine how many shimmers
+    // are needed in addition to what is loaded
     const items =
       isEmpty(collections) && isLoading ? (
         getCollectionShimmers(3)
       ) : (
-        <List items={sortedCollections} onRenderCell={handleCellRender} />
+        <>
+          <List items={sortedCollections} onRenderCell={handleCellRender} />
+          {isLoading &&
+            category === "Featured" &&
+            getCollectionShimmers(featuredIds.length - sortedCollections.length)}
+        </>
       );
+
     return (
       <Stack
         key={`category-${category}`}
@@ -84,12 +94,7 @@ const getFeaturedDatasets = (
 ): IStacCollection[] => {
   const featured = featuredDatasetIds.map(datasetId => {
     if (datasetGroups[datasetId]) {
-      // Construct a minimal StacCollection from the dataset details
-      const { short_description, description, ...group } = datasetGroups[datasetId];
-      return Object.assign({}, group, {
-        "msft:short_description": datasetGroups[datasetId].short_description,
-        id: GROUP_PREFIX + datasetId,
-      });
+      return groupToPcCollection(datasetId, datasetGroups[datasetId]);
     }
     return collections?.find(collection => collection.id === datasetId) || null;
   });
@@ -101,7 +106,8 @@ const getCategorizedCollections = (
   collections: IStacCollection[] | undefined,
   nonApiCollections: Record<string, StorageDatasetEntry>,
   isLoading: boolean,
-  collectionConfig: Record<string, DatasetEntry>
+  collectionConfig: Record<string, DatasetEntry>,
+  groupConfig: Record<string, DatasetGroup>
 ): Record<string, IPcCollection[]> => {
   const groupedCollections: Record<string, IPcCollection[]> = {};
   // If collections have loaded, group them by category
@@ -111,10 +117,21 @@ const getCategorizedCollections = (
       if (!groupedCollections[category]) {
         groupedCollections[category] = [];
       }
-      groupedCollections[category].push(collection);
+
+      const groupId = collection["msft:group_id"];
+      const group = groupId ? groupConfig[groupId] : null;
+      if (groupId && group && group?.groupOnCatalog !== false) {
+        if (
+          !groupedCollections[category].find(c => c.id === GROUP_PREFIX + groupId)
+        ) {
+          groupedCollections[category].push(groupToPcCollection(groupId, group));
+        }
+      } else {
+        groupedCollections[category].push(collection);
+      }
     });
 
-    // Group the non-api collections as well
+    // Categorize the non-api collections as well
     Object.entries(nonApiCollections).forEach(([id, nonApiCollection]) => {
       const category = nonApiCollection.category || "Other";
       if (!groupedCollections[category]) {
@@ -134,6 +151,18 @@ const getCategorizedCollections = (
   }
 
   return groupedCollections;
+};
+
+const groupToPcCollection = (
+  groupId: string,
+  datasetGroup: DatasetGroup
+): IPcCollection => {
+  // Construct a minimal StacCollection from the dataset details
+  const { short_description, ...group } = datasetGroup;
+  return Object.assign({}, group, {
+    "msft:short_description": datasetGroup.short_description,
+    id: GROUP_PREFIX + groupId,
+  });
 };
 
 const headerStyle: React.CSSProperties = {
