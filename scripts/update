@@ -17,7 +17,7 @@ function run() {
     docker-compose \
         -f docker-compose.yml \
         run --rm --no-deps app \
-        yarn
+        npm install
 
     # Ensure container images are current
     docker-compose build

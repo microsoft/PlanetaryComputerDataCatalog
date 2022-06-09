@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   app:
-    image: node:14-slim
+    image: mcr.microsoft.com/cbl-mariner/base/nodejs:16
     working_dir: /usr/src
     ports:
       - "3000:3000"
@@ -13,7 +13,7 @@ services:
       - .:/usr/src
     networks:
       - pcdc-network
-    command: yarn start
+    command: npm start
 
   api:
     build:

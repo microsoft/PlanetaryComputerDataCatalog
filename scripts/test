@@ -12,7 +12,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
-        yarn lint
-        yarn test
+        npm lint
+        npm test
     fi
 fi
