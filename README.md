@@ -103,7 +103,13 @@ To debug or extend the small API backend, please read the [API README](api/READM
 
 The project contains cypress end-to-end tests and jest based unit tests.
 
-To run jest based unit test and perform linting, run `./scripts/test`.
+To run jest based unit test and perform linting and code format analysis, run `./scripts/test`.
+
+#### Formatting
+
+The project contains a prettier config file that is used to format code, which
+should integrate with your editor.  Alternatively you can run `./scripts/format`
+to format all files. The CI system will check for formatting errors.
 
 ##### Cypress
 
@@ -128,9 +134,10 @@ Both test suites are run from CI.
 
 ## Scripts
 
-| Name       | Description                                                                                                    |
-|------------|----------------------------------------------------------------------------------------------------------------|
-| `clean`    | Removes intermediate build files from docs and dataset codefiles                                               |
+| Name    | Description                                                      |
+|---------|------------------------------------------------------------------|
+| `clean` | Removes intermediate build files from docs and dataset codefiles |
+| `format`   | Runs black and prettier against Python and Java/TypeScript files
 | `mockstac` | Serves contents of `/mockstac/collections` at <http://localhost:8866>                                          |
 | `server`   | Runs frontend development server                                                                               |
 | `test`     | Runs unit tests and linter                                                                                     |

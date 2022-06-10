@@ -17,6 +17,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
             npm run lint
 
         docker-compose \
+            run --rm --no-deps app \
+            npm run format
+
+        docker-compose \
             run --rm --no-deps \
             -e CI="${CI}" \
             app \

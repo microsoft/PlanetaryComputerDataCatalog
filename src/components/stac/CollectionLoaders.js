@@ -1,9 +1,4 @@
-import {
-  MessageBar,
-  MessageBarType,
-  Spinner,
-  SpinnerSize,
-} from "@fluentui/react";
+import { MessageBar, MessageBarType, Spinner, SpinnerSize } from "@fluentui/react";
 
 export const errorMsg = (
   <MessageBar messageBarType={MessageBarType.error} isMultiline={false}>

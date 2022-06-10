@@ -63,6 +63,7 @@
     "test": "craco test",
     "lint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx",
     "format": "prettier --check './src/**/*.{js,jsx,ts,tsx}'",
+    "format-fix": "prettier --write './src/**/*.{js,jsx,ts,tsx}'",
     "eject": "craco eject",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"

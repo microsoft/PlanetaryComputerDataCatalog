@@ -25,11 +25,9 @@ const SpatialExtent = ({ extent }) => {
         }
 
         if (
-          [
-            "Country border",
-            "Disputed country border",
-            "State border",
-          ].includes(layer["source-layer"])
+          ["Country border", "Disputed country border", "State border"].includes(
+            layer["source-layer"]
+          )
         ) {
           mapRef.current.map.setLayoutProperty(layer.id, "visibility", "none");
         }

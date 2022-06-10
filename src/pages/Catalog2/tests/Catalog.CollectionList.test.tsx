@@ -1,7 +1,4 @@
-import {
-  waitForElementToBeRemoved,
-  within,
-} from "@testing-library/react";
+import { waitForElementToBeRemoved, within } from "@testing-library/react";
 import nock from "nock";
 
 import {

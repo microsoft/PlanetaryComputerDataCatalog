@@ -16,7 +16,8 @@ export interface DataConfigContextProps {
 const initialState: DataConfigContextProps = {
   collectionConfig: collections,
   storageCollectionConfig: storageCollections,
-  groupConfig: groups, featuredIds: featuredCollections,
+  groupConfig: groups,
+  featuredIds: featuredCollections,
 };
 
 const DataConfigContext = createContext<DataConfigContextProps>(initialState);
