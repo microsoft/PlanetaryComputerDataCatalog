@@ -1,5 +1,4 @@
 import {
-  getByText,
   waitForElementToBeRemoved,
   within,
 } from "@testing-library/react";

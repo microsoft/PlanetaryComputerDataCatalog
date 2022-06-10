@@ -16,7 +16,7 @@ import { useCollections } from "utils/requests";
 import { IStacCollection } from "types/stac";
 import { selectCurrentMosaic, setCollection } from "../../../state/mosaicSlice";
 
-import { collections as collectionConfig } from "config/datasets.yml";
+import collectionConfig from "config/datasets.yml";
 import groups from "config/datasetGroups.yml";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { useUrlStateV2 } from "./hooks/useUrlStateV2";

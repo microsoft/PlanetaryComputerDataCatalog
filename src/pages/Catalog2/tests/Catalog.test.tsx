@@ -43,13 +43,16 @@ const setup = (
     .reply(200, defaultCollectionsResponse);
 
   const utils = render(
-    <Catalog
-      collectionConfig={defaultConfig}
-      nonApiCollectionConfig={defaultNonApiConfig}
-      groupConfig={groups}
-      featuredIds={featuredIds}
-    />
+    <Catalog />,
+    {},
+    {
+      collectionConfig: defaultConfig,
+      groupConfig: groups,
+      featuredIds,
+      storageCollectionConfig: defaultNonApiConfig,
+    }
   );
+
   return {
     httpScope,
     ...utils,

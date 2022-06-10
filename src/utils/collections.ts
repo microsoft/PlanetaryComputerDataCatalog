@@ -2,7 +2,7 @@ import { BBox, Feature, GeoJsonProperties, MultiPolygon, Polygon } from "geojson
 import bboxToPolygon from "@turf/bbox-polygon";
 import union from "@turf/union";
 import { IStacCollection } from "types/stac";
-import { collections } from "config/datasets.yml";
+import collections from "config/datasets.yml";
 
 export const spatialExtentToMultipolygon = (bbox: number[][]) => {
   const polys = bbox.map(box => bboxToPolygon(box as BBox));

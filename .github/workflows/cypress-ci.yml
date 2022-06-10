@@ -19,8 +19,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           # Specify Browser since container image is compile with Firefox
-          install-command: yarn install
-          start: yarn start
+          install-command: npm install
+          start: npm start
           wait-on: http://localhost:3000
           wait-on-timeout: 95
           browser: chrome

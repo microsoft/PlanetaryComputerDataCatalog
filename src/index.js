@@ -4,7 +4,8 @@ import { ThemeProvider } from "@fluentui/react";
 import "./styles/index.css";
 import App from "./App";
 
-import { collections, storageCollections } from "config/datasets.yml";
+import collections from "config/datasets.yml";
+import storageCollections from "config/storageDatasets.yml";
 import groups from "config/datasetGroups.yml";
 import featuredCollections from "config/datasetFeatured.yml";
 

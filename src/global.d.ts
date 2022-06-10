@@ -31,8 +31,14 @@ interface StorageDatasetEntry {
 }
 
 declare module "config/datasets.yml" {
-  export const collections: Record<string, DatasetEntry>;
+  const collections: Record<string, DatasetEntry>;
+  export default collections;
   export const storageCollections: Record<string, StorageDatasetEntry>;
+}
+
+declare module "config/storageDatasets.yml" {
+  export const storageCollections: Record<string, StorageDatasetEntry>;
+  export default storageCollections;
 }
 
 declare module "config/datasetFeatured.yml" {

@@ -8,7 +8,7 @@ import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
-import { collections as datasetConfig } from "config/datasets.yml";
+import datasetConfig from "config/datasets.yml";
 
 // import { useSession } from "components/auth/hooks/SessionContext";
 

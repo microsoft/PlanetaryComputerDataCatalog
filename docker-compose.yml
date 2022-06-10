@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   app:
-    image: mcr.microsoft.com/cbl-mariner/base/nodejs:16
+    image: node:14.19.3-slim
     working_dir: /usr/src
     ports:
       - "3000:3000"
