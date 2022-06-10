@@ -9,8 +9,13 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=100
+
+      # Environments where .env is present will mount and use it. CI will need
+      # environment variables required for tests to be set.
+      - REACT_APP_API_ROOT
     volumes:
       - .:/usr/src
+      - ~/.npm:/root/.npm
     networks:
       - pcdc-network
     command: npm start
