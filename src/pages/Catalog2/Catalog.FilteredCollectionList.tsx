@@ -13,11 +13,12 @@ import { useDataConfig } from "components/state/DataConfigProvider";
 interface CatalogFilteredCollectionListProps {
   filterText: string;
   setFilterText: (filterText: string) => void;
+  itemsAsButton?: boolean;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
-> = ({ filterText, setFilterText }) => {
+> = ({ filterText, setFilterText, itemsAsButton = false }) => {
   const { storageCollectionConfig } = useDataConfig();
   const { isLoading, data } = useCollections();
 
@@ -46,6 +47,7 @@ export const CatalogFilteredCollectionList: React.FC<
         key={collection.id}
         collection={collection}
         onKeywordClick={setFilterText}
+        asButton={itemsAsButton}
       />
     );
   };

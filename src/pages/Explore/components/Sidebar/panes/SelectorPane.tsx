@@ -4,8 +4,8 @@ import { ErrorBoundary } from "react-error-boundary";
 import CustomQueryBuilder from "../selectors/CustomQueryBuilder";
 import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { MosaicPresetSelector, RenderOptionsSelector } from "../selectors";
-import CollectionSelector from "../selectors/CollectionSelector";
 import { useExploreSelector } from "pages/Explore/state/hooks";
+import { CatalogSelector } from "../selectors/CatalogSelector/CatalogSelector.index";
 
 interface SelectorPaneProps {
   isCustomQuery: boolean;
@@ -15,7 +15,7 @@ const SelectorPane = ({ isCustomQuery }: SelectorPaneProps) => {
   const { isLoadingInitialState } = useExploreSelector(state => state.mosaic);
   const contents = !isLoadingInitialState && (
     <>
-      <CollectionSelector />
+      <CatalogSelector />
       {!isCustomQuery && <MosaicPresetSelector />}
       {isCustomQuery && <CustomQueryBuilder />}
       <RenderOptionsSelector />

@@ -17,10 +17,12 @@ import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogCollectionListProps {
   setFilterText: (filterText: string) => void;
+  itemsAsButton?: boolean;
 }
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
+  itemsAsButton = false,
 }) => {
   const { collectionConfig, featuredIds, groupConfig, storageCollectionConfig } =
     useDataConfig();
@@ -29,9 +31,15 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   const handleCellRender = useCallback(
     (item: IPcCollection | undefined) => {
       if (!item) return null;
-      return <CatalogCollection collection={item} onKeywordClick={setFilterText} />;
+      return (
+        <CatalogCollection
+          collection={item}
+          onKeywordClick={setFilterText}
+          asButton={itemsAsButton}
+        />
+      );
     },
-    [setFilterText]
+    [itemsAsButton, setFilterText]
   );
 
   const categorizedCollections = getCategorizedCollections(
