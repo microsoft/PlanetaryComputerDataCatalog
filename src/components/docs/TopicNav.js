@@ -46,19 +46,13 @@ const TopicNav = ({ topic, prev, next }) => {
       }}
     >
       <div style={{ visibility: hasLink(prev?.link) ? "visible" : "hidden" }}>
-        <ButtonLink
-          to={reformatHref(prev?.link)}
-          title={`Previous: ${prev?.title}`}
-        >
+        <ButtonLink to={reformatHref(prev?.link)} title={`Previous: ${prev?.title}`}>
           <FontIcon iconName="ChevronLeft" className={iconClass} />
           {prev?.title}
         </ButtonLink>
       </div>
       <div style={{ visibility: hasLink(next?.link) ? "visible" : "hidden" }}>
-        <ButtonLink
-          to={reformatHref(next?.link)}
-          title={`Next: ${next?.title}`}
-        >
+        <ButtonLink to={reformatHref(next?.link)} title={`Next: ${next?.title}`}>
           {next?.title}
           <FontIcon iconName="ChevronRight" className={iconClass} />
         </ButtonLink>

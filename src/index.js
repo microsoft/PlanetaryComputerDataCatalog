@@ -1,15 +1,11 @@
-// Remove when we drop support for IE 11
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-
-import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@fluentui/react";
 
 import "./styles/index.css";
 import App from "./App";
 
-import { collections, storageCollections } from "config/datasets.yml";
+import collections from "config/datasets.yml";
+import storageCollections from "config/storageDatasets.yml";
 import groups from "config/datasetGroups.yml";
 import featuredCollections from "config/datasetFeatured.yml";
 

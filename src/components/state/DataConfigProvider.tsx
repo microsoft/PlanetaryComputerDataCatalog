@@ -1,6 +1,8 @@
 import React, { createContext } from "react";
 
-import { collections, storageCollections } from "config/datasets.yml";
+//eslint-disable-next-line
+import collections from "config/datasets.yml";
+import storageCollections from "config/storageDatasets.yml";
 import groups from "config/datasetGroups.yml";
 import featuredCollections from "config/datasetFeatured.yml";
 

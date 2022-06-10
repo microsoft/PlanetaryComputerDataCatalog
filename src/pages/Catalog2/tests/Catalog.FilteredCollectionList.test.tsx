@@ -5,8 +5,8 @@ import { CatalogFilteredCollectionList } from "../Catalog.FilteredCollectionList
 import { waitForElementToBeRemoved } from "@testing-library/react";
 
 const setup = (
-  filterText: string | undefined = undefined,
-  handleFn: (text: string | undefined) => void = () => {}
+  filterText: string = "",
+  handleFn: (text: string) => void = () => {}
 ) => {
   const apiUrl = new URL(STAC_URL as string);
   const httpScope = nock(apiUrl.origin)

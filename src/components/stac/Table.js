@@ -99,11 +99,23 @@ const ColumnTable = ({ stacKey, title, description }) => {
 };
 
 export const TableTables = () => {
-  return <TableTable stacKey="table:tables" title="Tables" description="The dataset includes the following tables."/>;
+  return (
+    <TableTable
+      stacKey="table:tables"
+      title="Tables"
+      description="The dataset includes the following tables."
+    />
+  );
 };
 
 export const TableColumns = () => {
-  return <ColumnTable stacKey="table:columns" title="Columns" description="Each table includes the following columns."/>;
+  return (
+    <ColumnTable
+      stacKey="table:columns"
+      title="Columns"
+      description="Each table includes the following columns."
+    />
+  );
 };
 
 export default TableTable;

@@ -13,17 +13,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
         usage
     else
         docker-compose \
+            -f docker-compose.yml \
             run --rm --no-deps app \
-            npm run lint
-
-        docker-compose \
-            run --rm --no-deps app \
-            npm run format
-
-        docker-compose \
-            run --rm --no-deps \
-            -e CI="${CI}" \
-            app \
-            npm run test
+            npm run build
     fi
 fi

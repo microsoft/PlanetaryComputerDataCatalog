@@ -26,7 +26,7 @@ import { TableTables, TableColumns } from "../components/stac/Table";
 import { CollectionProvider } from "../components/stac/CollectionContext";
 
 import { useCollections } from "../utils/requests";
-import { collections as tabConfig } from "../config/datasets.yml";
+import tabConfig from "config/datasets.yml";
 import Assets from "../components/stac/Assets";
 import CollectionUrl from "components/stac/CollectionUrl";
 import { ErrorBoundary } from "react-error-boundary";

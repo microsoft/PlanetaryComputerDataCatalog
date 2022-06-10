@@ -5,7 +5,7 @@
   "proxy": "http://api:7071/",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
-    "@craco/craco": "^6.4.3",
+    "@craco/craco": "7.0.0-alpha.3",
     "@fluentui/react": "^8.61.0",
     "@radiantearth/stac-fields": "1.0.0-beta.7",
     "@reduxjs/toolkit": "^1.8.0",
@@ -29,14 +29,17 @@
     "@uifabric/icons": "^7.6.2",
     "axios": "^0.26.0",
     "azure-maps-control": "^2.1.10",
+    "buffer": "^6.0.3",
     "dayjs": "^1.10.8",
     "dompurify": "^2.3.6",
     "formik": "^2.2.9",
     "highlight.js": "^11.4.0",
+    "https-browserify": "^1.0.0",
     "json-stringify-pretty-compact": "^3.0.0",
     "lodash-es": "^4.17.21",
     "marked": "^4.0.12",
     "number-abbreviate": "^2.0.0",
+    "process": "^0.11.10",
     "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -46,22 +49,21 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-router-hash-link": "^2.4.3",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "react-use": "^17.3.2",
     "redux": "^4.1.2",
+    "stream-http": "^3.2.0",
     "swagger-ui-react": "^4.6.0",
     "typescript": "^4.6.2",
     "yup": "^0.32.11"
-  },
-  "resolutions": {
-    "//": "See https://github.com/facebook/create-react-app/issues/11773",
-    "react-error-overlay": "6.0.9"
   },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint ./src --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "format": "prettier --check './src/**/*.{js,jsx,ts,tsx}'",
+    "format-fix": "prettier --write './src/**/*.{js,jsx,ts,tsx}'",
     "eject": "craco eject",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
@@ -81,20 +83,18 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all",
-      "ie 11"
+      "not op_mini all"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version",
-      "ie 11"
+      "last 1 safari version"
     ]
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^0.8.2",
     "copy-webpack-plugin": "^6.4.1",
-    "cypress": "^9.5.4",
+    "cypress": "^10.0.3",
     "html-loader": "^1.3.2",
     "http-proxy-cli": "2.1.0",
     "js-yaml": "^4.1.0",
