@@ -24,3 +24,7 @@
 .legend-item-separator:last-child {
   display: none;
 }
+
+.ms-Modal .catalog-category-section h2 {
+  padding-left: 8px;
+}

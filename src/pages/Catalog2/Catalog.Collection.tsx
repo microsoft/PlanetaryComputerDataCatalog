@@ -1,4 +1,6 @@
 import {
+  getTheme,
+  ILinkStyles,
   IStackStyles,
   IStackTokens,
   ITextStyles,
@@ -30,7 +32,7 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
 }) => {
   const handleButtonClick = (collectionId: string) => {
     return (
-      e: React.MouseEvent<
+      _: React.MouseEvent<
         HTMLElement | HTMLAnchorElement | HTMLButtonElement,
         MouseEvent
       >
@@ -41,6 +43,13 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
 
   const href = getCollectionDetailUrl(collection.id);
   const title = collection.title || collection.id;
+  const thumbnailBase = <CatalogCollectionThumbnail assets={collection.assets} />;
+  const thumbnail = asButton ? (
+    thumbnailBase
+  ) : (
+    <Link to={href}>{thumbnailBase}</Link>
+  );
+
   const card = (
     <Stack
       horizontal
@@ -50,9 +59,7 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
       data-cy="catalog-collection-item"
     >
       <StackItem shrink={0} className="catalog-collection-item--thumbnail">
-        <Link to={href}>
-          <CatalogCollectionThumbnail assets={collection.assets} />
-        </Link>
+        {thumbnail}
       </StackItem>
       <StackItem styles={contentStyles} className="catalog-collection-item--content">
         <h3 style={titleStyle}>
@@ -73,17 +80,25 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
       </StackItem>
     </Stack>
   );
+
   if (asButton) {
     return (
-      <FluentLink onClick={handleButtonClick(collection.id)}>{card}</FluentLink>
+      <FluentLink styles={buttonStyles} onClick={handleButtonClick(collection.id)}>
+        {card}
+      </FluentLink>
     );
   }
   return card;
 };
 
+const theme = getTheme();
 const cardStyles: IStackStyles = {
   root: {
-    paddingBottom: 10,
+    padding: 8,
+    paddingLeft: 0,
+    "button &": {
+      paddingLeft: 8,
+    },
   },
 };
 
@@ -106,4 +121,22 @@ const descStyles: ITextStyles = {};
 
 const keywordContainerStyle: React.CSSProperties = {
   marginTop: 10,
+};
+
+const buttonStyles: ILinkStyles = {
+  root: {
+    color: theme.semanticColors.bodyText,
+    "&:hover": {
+      backgroundColor: theme.palette.neutralLighterAlt,
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+    },
+    "&:focus": {
+      color: theme.semanticColors.bodyText,
+    },
+    "&:active": {
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+    },
+  },
 };

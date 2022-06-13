@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   ISeparatorStyles,
   IStackStyles,
@@ -16,17 +16,37 @@ import { IPcCollection, IStacCollection } from "types/stac";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogCollectionListProps {
+  // Text to be used to filter the list of collections by title,
+  // short_description, or keywords
   setFilterText: (filterText: string) => void;
+
+  // Include storage datasets in the output
+  includeStorageDatasets?: boolean;
+
+  // Optional filter function to display only subset of collections
+  preFilterCollectionFn?: (collection: IStacCollection) => boolean;
+
+  // Treat the entire collection entry as a button
   itemsAsButton?: boolean;
+
+  // Callback for when itemAsButton is true and clicked
+  onButtonClick?: (collectionId: string) => void;
 }
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
+  includeStorageDatasets = true,
+  preFilterCollectionFn = () => true,
   itemsAsButton = false,
+  onButtonClick = () => {},
 }) => {
   const { collectionConfig, featuredIds, groupConfig, storageCollectionConfig } =
     useDataConfig();
   const { isLoading, data } = useCollections();
+
+  const collections = useMemo(() => {
+    return data ? data.collections.filter(preFilterCollectionFn) : undefined;
+  }, [data, preFilterCollectionFn]);
 
   const handleCellRender = useCallback(
     (item: IPcCollection | undefined) => {
@@ -36,15 +56,16 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
           collection={item}
           onKeywordClick={setFilterText}
           asButton={itemsAsButton}
+          onButtonClick={onButtonClick}
         />
       );
     },
-    [itemsAsButton, setFilterText]
+    [itemsAsButton, onButtonClick, setFilterText]
   );
 
   const categorizedCollections = getCategorizedCollections(
-    data?.collections,
-    storageCollectionConfig,
+    collections,
+    includeStorageDatasets ? storageCollectionConfig : {},
     isLoading,
     collectionConfig,
     groupConfig
@@ -53,7 +74,7 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
 
   sortedKeys.unshift("Featured");
   categorizedCollections["Featured"] = getFeaturedDatasets(
-    data?.collections,
+    collections,
     featuredIds,
     groupConfig
   );
@@ -81,6 +102,7 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
       <Stack
         key={`category-${category}`}
         styles={groupStyles}
+        className="catalog-category-section"
         data-cy={`catalog-category-section-${category}`}
       >
         <h2 id={category} style={headerStyle}>

@@ -7,34 +7,54 @@ import {
   DefaultButton,
   IconButton,
   IIconProps,
-  Separator,
   Stack,
   IButtonStyles,
 } from "@fluentui/react";
-import { CatalogFilter } from "pages/Catalog2/Catalog.Filter";
 import { useState } from "react";
+
 import { CatalogToc } from "pages/Catalog2/Catalog.Toc";
 import { CatalogCollectionList } from "pages/Catalog2/Catalog.CollectionList";
+import { CatalogFilter } from "pages/Catalog2/Catalog.Filter";
 import { CatalogFilteredCollectionList } from "pages/Catalog2/Catalog.FilteredCollectionList";
-import { IStacCollection } from "types/stac";
-import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { setCollection } from "pages/Explore/state/mosaicSlice";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { selectCurrentMosaic, setCollection } from "pages/Explore/state/mosaicSlice";
+import { useCollections } from "utils/requests";
+import { isValidExplorer } from "utils/collections";
 
 export const CatalogSelector = () => {
   const dispatch = useExploreDispatch();
+  const { collection } = useExploreSelector(selectCurrentMosaic);
+  const { data: stacCollections } = useCollections();
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
     useBoolean(false);
 
-  const titleId = useId("title");
+  const titleId = useId("exp-selector-title");
 
-  const handleSelection = (collection: IStacCollection) => {
-    dispatch(setCollection(collection));
+  const handleFilterChange = (_: any, newValue?: string | undefined) => {
+    setFilterText(newValue || "");
   };
 
+  const handleSelection = (collectionId: string) => {
+    if (!stacCollections) return;
+
+    const selectedCollection = stacCollections.collections.find(
+      c => c.id === collectionId
+    );
+    selectedCollection && dispatch(setCollection(selectedCollection));
+    hideModal();
+  };
+
+  const toc = (
+    <div style={tocStyle}>
+      <CatalogToc />
+    </div>
+  );
+
+  const buttonText = collection ? collection.title : "Select a dataset to visualize";
   return (
     <>
-      <DefaultButton text="Select a dataset to visualize" onClick={showModal} />
+      <DefaultButton text={buttonText} onClick={showModal} />
       <Modal
         isBlocking
         titleAriaId={titleId}
@@ -43,8 +63,13 @@ export const CatalogSelector = () => {
         containerClassName={contentStyles.container}
       >
         <div className={contentStyles.header}>
-          <span id={titleId}>Select a dataset</span>
-          <CatalogFilter filterText={filterText} onFilterChange={setFilterText} />
+          <span className={contentStyles.title} id={titleId}>
+            Select a dataset
+          </span>
+          <CatalogFilter
+            filterText={filterText}
+            onFilterChange={handleFilterChange}
+          />
           <IconButton
             styles={iconButtonStyles}
             iconProps={cancelIcon}
@@ -52,16 +77,24 @@ export const CatalogSelector = () => {
             onClick={hideModal}
           />
         </div>
-        <Separator />
         <Stack horizontal>
-          {!filterText && <CatalogToc />}
+          {!filterText && toc}
           {!filterText && (
-            <CatalogCollectionList itemsAsButton setFilterText={setFilterText} />
+            <CatalogCollectionList
+              itemsAsButton
+              includeStorageDatasets={false}
+              preFilterCollectionFn={isValidExplorer}
+              setFilterText={handleFilterChange}
+              onButtonClick={handleSelection}
+            />
           )}
           {filterText && (
             <CatalogFilteredCollectionList
               itemsAsButton
-              setFilterText={setFilterText}
+              includeStorageDatasets={false}
+              preFilterCollectionFn={isValidExplorer}
+              setFilterText={handleFilterChange}
+              onButtonClick={handleSelection}
               filterText={filterText}
             />
           )}
@@ -93,8 +126,12 @@ const contentStyles = mergeStyleSets({
       fontWeight: FontWeights.semibold,
       padding: "12px 12px 14px 24px",
       zIndex: 1,
+      borderBottom: `1px solid ${theme.palette.neutralLight}`,
     },
   ],
+  title: {
+    width: 165,
+  },
 });
 
 const cancelIcon: IIconProps = { iconName: "Cancel" };
@@ -109,4 +146,10 @@ const iconButtonStyles: IButtonStyles = {
   rootHovered: {
     color: theme.palette.neutralDark,
   },
+};
+
+const tocStyle: React.CSSProperties = {
+  paddingLeft: 8,
+  paddingTop: 4,
+  borderRight: `1px solid ${theme.palette.neutralLighter}`,
 };
