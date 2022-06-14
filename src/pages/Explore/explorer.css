@@ -34,10 +34,9 @@
   height: 112px;
 }
 
-/* .ms-Modal .catalog-collection-item-shimmer {
-  width: 200px;
-  height: 112px;
-} */
+.ms-Modal h2 {
+  scroll-margin-top: 80px;
+}
 
 @media screen and (min-width: 480px) {
   .ms-Modal .ms-SearchBox {

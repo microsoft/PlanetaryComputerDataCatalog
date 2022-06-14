@@ -125,16 +125,23 @@ const keywordContainerStyle: React.CSSProperties = {
 
 const buttonStyles: ILinkStyles = {
   root: {
+    width: "100%",
     color: theme.semanticColors.bodyText,
+    border: "1px solid transparent",
     "&:hover": {
       backgroundColor: theme.palette.neutralLighterAlt,
       textDecoration: "none",
       color: theme.semanticColors.bodyText,
+      border: `1px solid ${theme.palette.neutralLighter}`,
     },
     "&:focus": {
       color: theme.semanticColors.bodyText,
     },
     "&:active": {
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+    },
+    "&:active:hover": {
       textDecoration: "none",
       color: theme.semanticColors.bodyText,
     },

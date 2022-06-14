@@ -417,12 +417,14 @@ ul.summary-list {
   background-color: #008000 !important;
 }
 
+.ms-Modal-scrollableContent::-webkit-scrollbar,
 .custom-overflow::-webkit-scrollbar,
 .ms-Callout-main::-webkit-scrollbar {
   width: 8px;
   background-color: #f5f5f5;
 }
 
+.ms-Modal-scrollableContent::-webkit-scrollbar-thumb,
 .custom-overflow::-webkit-scrollbar-thumb,
 .ms-Callout-main::-webkit-scrollbar-thumb {
   border-radius: 8px;
@@ -430,6 +432,7 @@ ul.summary-list {
   background-color: #ccc;
 }
 
+.ms-Modal-scrollableContent::-webkit-scrollbar-track,
 .custom-overflow::-webkit-scrollbar-track,
 .ms-Callout-main::-webkit-scrollbar-track {
   box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);

@@ -52,7 +52,13 @@ export const CatalogSelector = () => {
 
   const toc = (
     <div style={tocStyle}>
-      <CatalogToc />
+      <div style={tocStickyStyle}>
+        <CatalogToc
+          setHashOnClick={false}
+          preFilterCollectionFn={isValidExplorer}
+          includeStorageDatasets={false}
+        />
+      </div>
     </div>
   );
 
@@ -92,13 +98,15 @@ export const CatalogSelector = () => {
         <Stack horizontal>
           {!filterText && toc}
           {!filterText && (
-            <CatalogCollectionList
-              itemsAsButton
-              includeStorageDatasets={false}
-              preFilterCollectionFn={isValidExplorer}
-              setFilterText={handleFilterChange}
-              onButtonClick={handleSelection}
-            />
+            <div style={{ marginTop: 15 }}>
+              <CatalogCollectionList
+                itemsAsButton
+                includeStorageDatasets={false}
+                preFilterCollectionFn={isValidExplorer}
+                setFilterText={handleFilterChange}
+                onButtonClick={handleSelection}
+              />
+            </div>
           )}
           {filterText && (
             <CatalogFilteredCollectionList
@@ -164,6 +172,11 @@ const tocStyle: React.CSSProperties = {
   paddingLeft: 8,
   paddingTop: 4,
   borderRight: `1px solid ${theme.palette.neutralLighter}`,
+};
+
+const tocStickyStyle: React.CSSProperties = {
+  position: "sticky",
+  top: 65,
 };
 
 const buttonStyles: Partial<IButtonStyles> = {

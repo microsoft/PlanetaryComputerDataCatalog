@@ -33,6 +33,9 @@ interface CatalogCollectionListProps {
   onButtonClick?: (collectionId: string) => void;
 }
 
+const smallThumbWidth = 200;
+const smallThumbHeight = 112;
+
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
   includeStorageDatasets = true,
@@ -86,21 +89,21 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     // If loading, show placeholder shimmers per category. Featured category
     // might have a mix of loading/existing, but we can determine how many shimmers
     // are needed in addition to what is loaded
-    const shimmerWidth = itemsAsButton ? 200 : undefined;
-    const shimmerHeight = itemsAsButton ? 112 : undefined;
+    const shimmerWidth = itemsAsButton ? smallThumbWidth : undefined;
+    const shimmerHeight = itemsAsButton ? smallThumbHeight : undefined;
     const items =
       isEmpty(collections) && isLoading ? (
         getCollectionShimmers(3, shimmerHeight, shimmerWidth)
       ) : (
         <>
           <List items={sortedCollections} onRenderCell={handleCellRender} />
-          {
-            (isLoading &&
-              category === "Featured" &&
-              getCollectionShimmers(featuredIds.length - sortedCollections.length),
-            shimmerHeight,
-            shimmerWidth)
-          }
+          {isLoading &&
+            category === "Featured" &&
+            getCollectionShimmers(
+              featuredIds.length - sortedCollections.length,
+              shimmerHeight,
+              shimmerWidth
+            )}
         </>
       );
 
