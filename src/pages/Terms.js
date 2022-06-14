@@ -20,7 +20,7 @@ const Terms = () => {
             Previews are made available to you on the condition that you agree to
             these Supplemental Terms of Use (“Supplemental Terms”), which supplement
             the{" "}
-            <Link href="https://www.microsoft.com/en-us/legal/intellectualproperty/copyright">
+            <Link href="https://www.microsoft.com/en-us/servicesagreement">
               Microsoft Terms of Use
             </Link>{" "}
             (“TOU”) governing your use of Microsoft’s Planetary Computer service
