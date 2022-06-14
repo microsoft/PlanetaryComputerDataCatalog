@@ -86,15 +86,21 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     // If loading, show placeholder shimmers per category. Featured category
     // might have a mix of loading/existing, but we can determine how many shimmers
     // are needed in addition to what is loaded
+    const shimmerWidth = itemsAsButton ? 200 : undefined;
+    const shimmerHeight = itemsAsButton ? 112 : undefined;
     const items =
       isEmpty(collections) && isLoading ? (
-        getCollectionShimmers(3)
+        getCollectionShimmers(3, shimmerHeight, shimmerWidth)
       ) : (
         <>
           <List items={sortedCollections} onRenderCell={handleCellRender} />
-          {isLoading &&
-            category === "Featured" &&
-            getCollectionShimmers(featuredIds.length - sortedCollections.length)}
+          {
+            (isLoading &&
+              category === "Featured" &&
+              getCollectionShimmers(featuredIds.length - sortedCollections.length),
+            shimmerHeight,
+            shimmerWidth)
+          }
         </>
       );
 
@@ -102,7 +108,6 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
       <Stack
         key={`category-${category}`}
         styles={groupStyles}
-        className="catalog-category-section"
         data-cy={`catalog-category-section-${category}`}
       >
         <h2 id={category} style={headerStyle}>

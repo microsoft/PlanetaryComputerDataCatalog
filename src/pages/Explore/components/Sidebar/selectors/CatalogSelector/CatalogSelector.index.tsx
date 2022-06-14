@@ -9,6 +9,7 @@ import {
   IIconProps,
   Stack,
   IButtonStyles,
+  IIconStyles,
 } from "@fluentui/react";
 import { useState } from "react";
 
@@ -20,6 +21,8 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import { selectCurrentMosaic, setCollection } from "pages/Explore/state/mosaicSlice";
 import { useCollections } from "utils/requests";
 import { isValidExplorer } from "utils/collections";
+import { renderText } from "pages/Explore/utils/dropdownRenderers";
+import { useUrlStateV2 } from "../hooks/useUrlStateV2";
 
 export const CatalogSelector = () => {
   const dispatch = useExploreDispatch();
@@ -28,6 +31,8 @@ export const CatalogSelector = () => {
   const [filterText, setFilterText] = useState("");
   const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
     useBoolean(false);
+
+  useUrlStateV2();
 
   const titleId = useId("exp-selector-title");
 
@@ -54,9 +59,16 @@ export const CatalogSelector = () => {
   const buttonText = collection ? collection.title : "Select a dataset to visualize";
   return (
     <>
-      <DefaultButton text={buttonText} onClick={showModal} />
+      <DefaultButton
+        ariaLabel="Select a dataset to visualize"
+        title="Select a dataset to visualize"
+        text={buttonText}
+        onRenderText={renderText("GlobeLocation", buttonText)}
+        onClick={showModal}
+        styles={buttonStyles}
+        iconProps={{ styles: chevronStyle, iconName: "ChevronDown" }}
+      />
       <Modal
-        isBlocking
         titleAriaId={titleId}
         isOpen={isModalOpen}
         onDismiss={hideModal}
@@ -124,7 +136,7 @@ const contentStyles = mergeStyleSets({
       display: "flex",
       alignItems: "center",
       fontWeight: FontWeights.semibold,
-      padding: "12px 12px 14px 24px",
+      padding: "12px 14px",
       zIndex: 1,
       borderBottom: `1px solid ${theme.palette.neutralLight}`,
     },
@@ -152,4 +164,45 @@ const tocStyle: React.CSSProperties = {
   paddingLeft: 8,
   paddingTop: 4,
   borderRight: `1px solid ${theme.palette.neutralLighter}`,
+};
+
+const buttonStyles: Partial<IButtonStyles> = {
+  flexContainer: {
+    justifyContent: "start",
+  },
+  root: {
+    paddingLeft: 8,
+    paddingRight: 4,
+    borderColor: theme.palette.neutralTertiaryAlt,
+    backgroundColor: theme.palette.white,
+  },
+  rootHovered: {
+    backgroundColor: theme.palette.white,
+    borderColor: theme.palette.neutralTertiary,
+  },
+  rootPressed: {
+    backgroundColor: theme.palette.white,
+    borderColor: theme.palette.neutralTertiary,
+  },
+  rootExpanded: {
+    backgroundColor: theme.palette.white,
+    borderColor: theme.palette.neutralTertiary,
+  },
+};
+
+const chevronStyle: IIconStyles = {
+  root: {
+    position: "absolute",
+    top: 1,
+    right: 4,
+    height: 32,
+    lineHeight: 30,
+    fontSize: 12,
+    color: theme.palette.neutralSecondary,
+    pointerEvents: "none",
+    cursor: "pointer",
+    "button:active &": {
+      padding: 0,
+    },
+  },
 };
