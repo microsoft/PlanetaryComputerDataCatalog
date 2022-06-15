@@ -18,9 +18,9 @@ import { getCollectionDetailUrl } from "./helpers";
 
 interface CatalogCollectionProps {
   collection: IPcCollection;
-  onKeywordClick: (keyword: string) => void;
+  onKeywordClick?: (keyword: string) => void;
   // If true, the collection is displayed as a single button element
-  asButton: boolean;
+  asButton?: boolean;
   onButtonClick?: (collectionId: string) => void;
 }
 
@@ -47,7 +47,9 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
   const thumbnail = asButton ? (
     thumbnailBase
   ) : (
-    <Link to={href}>{thumbnailBase}</Link>
+    <Link to={href} data-cy="catalog-collection-thumb-link">
+      {thumbnailBase}
+    </Link>
   );
 
   const card = (
@@ -83,7 +85,11 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
 
   if (asButton) {
     return (
-      <FluentLink styles={buttonStyles} onClick={handleButtonClick(collection.id)}>
+      <FluentLink
+        styles={buttonStyles}
+        onClick={handleButtonClick(collection.id)}
+        data-cy="collection-as-button"
+      >
         {card}
       </FluentLink>
     );

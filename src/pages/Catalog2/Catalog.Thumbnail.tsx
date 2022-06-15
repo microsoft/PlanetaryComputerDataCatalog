@@ -14,6 +14,7 @@ export const CatalogCollectionThumbnail = ({ assets }: CollectionThumbnailProps)
       alt="Dataset thumbnail"
       styles={imageStyles}
       imageFit={ImageFit.cover}
+      data-cy="catalog-collection-thumb"
     />
   );
 };

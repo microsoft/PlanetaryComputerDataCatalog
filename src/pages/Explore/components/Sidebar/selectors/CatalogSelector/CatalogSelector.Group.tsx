@@ -8,7 +8,6 @@ import {
   Text,
 } from "@fluentui/react";
 import { useDataConfig } from "components/state/DataConfigProvider";
-import { noop } from "lodash-es";
 import { CatalogCollection } from "pages/Catalog2/Catalog.Collection";
 import { useCollections } from "utils/requests";
 import {
@@ -90,7 +89,6 @@ export const CatalogSelectorGroup: React.FC<CatalogSelectorGroupProps> = ({
             key={collection.id}
             onButtonClick={onButtonClick}
             collection={collection}
-            onKeywordClick={noop}
           />
         ))}
       </Stack>

@@ -7,6 +7,7 @@ import {
   defaultStorageConfig,
   render,
 } from "testUtils";
+import { IStacCollection } from "types/stac";
 import { STAC_URL } from "utils/constants";
 import { CatalogCollectionList } from "../Catalog.CollectionList";
 
@@ -47,7 +48,9 @@ const setup = (
   setFilterText: (text: string | undefined) => void = defaultSetFilter,
   groups: Record<string, DatasetGroup> = {},
   featuredIds: string[] = [],
-  collectionResponse: { collections: {} } = defaultCollectionsResponse
+  collectionResponse: { collections: {} } = defaultCollectionsResponse,
+  preFilterFn: (collection: IStacCollection) => boolean = () => true,
+  includeStorageCollections: boolean = true
 ) => {
   const apiUrl = new URL(STAC_URL as string);
   const httpScope = nock(apiUrl.origin)
@@ -55,7 +58,11 @@ const setup = (
     .reply(200, collectionResponse);
 
   const utils = render(
-    <CatalogCollectionList setFilterText={setFilterText} />,
+    <CatalogCollectionList
+      setFilterText={setFilterText}
+      preFilterCollectionFn={preFilterFn}
+      includeStorageDatasets={includeStorageCollections}
+    />,
     {},
     {
       collectionConfig: defaultCollectionsConfig,
@@ -193,4 +200,45 @@ test("Catalog ignores group when configured to not group", async () => {
   expect(getByText("This is One")).toBeInTheDocument();
   expect(queryByText("This is Blue")).toBeInTheDocument();
   expect(queryByText("This is Red")).toBeInTheDocument();
+});
+
+test("Catalog pre-filters collections", async () => {
+  const filterFn = (collection: IStacCollection) =>
+    collection.title === "This is One";
+  const { queryAllByTestId, queryByTestId, getByTestId } = setup(
+    defaultSetFilter,
+    {},
+    [],
+    defaultCollectionsResponse,
+    filterFn
+  );
+
+  await waitForElementToBeRemoved(
+    () => queryAllByTestId("collection-loading-shimmers"),
+    { timeout: 5000 }
+  );
+
+  expect(queryByTestId("catalog-category-section-Color")).not.toBeInTheDocument();
+  const numberSection = getByTestId("catalog-category-section-Number");
+  expect(numberSection).toBeInTheDocument();
+  expect(numberSection).toHaveTextContent("This is One");
+  expect(numberSection).not.toHaveTextContent("This is Two");
+});
+
+test("Catalog does not include storage accounts when set", async () => {
+  const { queryAllByTestId, queryByTestId } = setup(
+    defaultSetFilter,
+    undefined,
+    undefined,
+    defaultCollectionsResponse,
+    undefined,
+    false // <- don't include storage accounts
+  );
+
+  await waitForElementToBeRemoved(
+    () => queryAllByTestId("collection-loading-shimmers"),
+    { timeout: 5000 }
+  );
+
+  expect(queryByTestId("catalog-category-section-Animal")).not.toBeInTheDocument();
 });
