@@ -136,6 +136,7 @@ export const CatalogSelector = () => {
         onClick={showModal}
         styles={buttonStyles}
         iconProps={selectorIconProps}
+        data-cy="collection-selector"
       />
       <Modal
         titleAriaId={titleId}

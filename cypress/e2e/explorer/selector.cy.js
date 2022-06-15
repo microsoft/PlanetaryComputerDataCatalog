@@ -28,7 +28,7 @@ describe("Explorer selector tests", () => {
     cy.wait(["@getCollections"]);
     cy.getBySel("collection-selector").click();
 
-    cy.get(".ms-Callout").contains("Sentinel-2 Level-2A");
+    cy.get(".ms-Modal").contains("Sentinel-2 Level-2A");
   });
 
   it("loads mosaic spec for selected collection", () => {
@@ -103,7 +103,7 @@ describe("Explorer selector tests", () => {
 
   it("resets to default state", () => {
     cy.getBySel("collection-selector").click();
-    cy.contains("Sentinel-2 Level-2A").click();
+    cy.contains("Chloris Biomass").click();
     cy.getBySel("reset").click();
     cy.getBySel("collection-selector").should("not.have.class", disabledClass);
     cy.getBySel("mosaic-selector").should("have.class", disabledClass);
