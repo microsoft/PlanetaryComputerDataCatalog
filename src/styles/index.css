@@ -162,6 +162,14 @@ main a img {
   border-radius: 2px;
 }
 
+.ms-Modal img {
+  transition: 0.5s ease;
+}
+
+.ms-Modal .catalog-collection-item:hover img {
+  opacity: 0.85;
+}
+
 a:not(header a):hover img {
   opacity: 0.85;
 }

@@ -23,12 +23,15 @@ import { useCollections } from "utils/requests";
 import { isValidExplorer } from "utils/collections";
 import { renderText } from "pages/Explore/utils/dropdownRenderers";
 import { useUrlStateV2 } from "../hooks/useUrlStateV2";
+import { GROUP_PREFIX } from "pages/Catalog2/helpers";
+import { CatalogSelectorGroup } from "./CatalogSelector.Group";
 
 export const CatalogSelector = () => {
   const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
   const { data: stacCollections } = useCollections();
   const [filterText, setFilterText] = useState("");
+  const [selectedGroupId, setSelectedGroupId] = useState<string | null>();
   const [isModalOpen, { setTrue: showModal, setFalse: hideModal }] =
     useBoolean(false);
 
@@ -43,11 +46,20 @@ export const CatalogSelector = () => {
   const handleSelection = (collectionId: string) => {
     if (!stacCollections) return;
 
+    if (collectionId.startsWith(GROUP_PREFIX)) {
+      setSelectedGroupId(collectionId.substring(GROUP_PREFIX.length));
+      return;
+    }
+
     const selectedCollection = stacCollections.collections.find(
       c => c.id === collectionId
     );
     selectedCollection && dispatch(setCollection(selectedCollection));
     hideModal();
+  };
+
+  const handleBack = () => {
+    setSelectedGroupId(null);
   };
 
   const toc = (
@@ -62,7 +74,58 @@ export const CatalogSelector = () => {
     </div>
   );
 
+  const groupList = selectedGroupId && (
+    <CatalogSelectorGroup
+      groupId={selectedGroupId}
+      onButtonClick={handleSelection}
+      onCloseClick={hideModal}
+      onBackClick={handleBack}
+    />
+  );
+
+  const collectionList = (
+    <>
+      <div className={contentStyles.header}>
+        <span className={contentStyles.title} id={titleId}>
+          Select a dataset
+        </span>
+        <CatalogFilter filterText={filterText} onFilterChange={handleFilterChange} />
+        <IconButton
+          styles={iconButtonStyles}
+          iconProps={cancelIcon}
+          ariaLabel="Close popup modal"
+          onClick={hideModal}
+        />
+      </div>
+      <Stack horizontal styles={selectorBodyStyles}>
+        {!filterText && toc}
+        {!filterText && (
+          <div style={selectorListStyles}>
+            <CatalogCollectionList
+              itemsAsButton
+              includeStorageDatasets={false}
+              preFilterCollectionFn={isValidExplorer}
+              setFilterText={handleFilterChange}
+              onButtonClick={handleSelection}
+            />
+          </div>
+        )}
+        {filterText && (
+          <CatalogFilteredCollectionList
+            itemsAsButton
+            includeStorageDatasets={false}
+            preFilterCollectionFn={isValidExplorer}
+            setFilterText={handleFilterChange}
+            onButtonClick={handleSelection}
+            filterText={filterText}
+          />
+        )}
+      </Stack>
+    </>
+  );
+
   const buttonText = collection ? collection.title : "Select a dataset to visualize";
+
   return (
     <>
       <DefaultButton
@@ -72,7 +135,7 @@ export const CatalogSelector = () => {
         onRenderText={renderText("GlobeLocation", buttonText)}
         onClick={showModal}
         styles={buttonStyles}
-        iconProps={{ styles: chevronStyle, iconName: "ChevronDown" }}
+        iconProps={selectorIconProps}
       />
       <Modal
         titleAriaId={titleId}
@@ -80,52 +143,14 @@ export const CatalogSelector = () => {
         onDismiss={hideModal}
         containerClassName={contentStyles.container}
       >
-        <div className={contentStyles.header}>
-          <span className={contentStyles.title} id={titleId}>
-            Select a dataset
-          </span>
-          <CatalogFilter
-            filterText={filterText}
-            onFilterChange={handleFilterChange}
-          />
-          <IconButton
-            styles={iconButtonStyles}
-            iconProps={cancelIcon}
-            ariaLabel="Close popup modal"
-            onClick={hideModal}
-          />
-        </div>
-        <Stack horizontal>
-          {!filterText && toc}
-          {!filterText && (
-            <div style={{ marginTop: 15 }}>
-              <CatalogCollectionList
-                itemsAsButton
-                includeStorageDatasets={false}
-                preFilterCollectionFn={isValidExplorer}
-                setFilterText={handleFilterChange}
-                onButtonClick={handleSelection}
-              />
-            </div>
-          )}
-          {filterText && (
-            <CatalogFilteredCollectionList
-              itemsAsButton
-              includeStorageDatasets={false}
-              preFilterCollectionFn={isValidExplorer}
-              setFilterText={handleFilterChange}
-              onButtonClick={handleSelection}
-              filterText={filterText}
-            />
-          )}
-        </Stack>
+        {selectedGroupId ? groupList : collectionList}
       </Modal>
     </>
   );
 };
 
 const theme = getTheme();
-const contentStyles = mergeStyleSets({
+export const contentStyles = mergeStyleSets({
   container: {
     display: "flex",
     flexFlow: "column nowrap",
@@ -143,7 +168,6 @@ const contentStyles = mergeStyleSets({
       color: theme.palette.neutralPrimary,
       display: "flex",
       alignItems: "center",
-      fontWeight: FontWeights.semibold,
       padding: "12px 14px",
       zIndex: 1,
       borderBottom: `1px solid ${theme.palette.neutralLight}`,
@@ -151,12 +175,17 @@ const contentStyles = mergeStyleSets({
   ],
   title: {
     width: 165,
+    fontWeight: FontWeights.semibold,
+    fontSize: 20,
+  },
+  titlePadded: {
+    paddingLeft: 5,
   },
 });
 
-const cancelIcon: IIconProps = { iconName: "Cancel" };
+export const cancelIcon: IIconProps = { iconName: "Cancel" };
 
-const iconButtonStyles: IButtonStyles = {
+export const iconButtonStyles: IButtonStyles = {
   root: {
     color: theme.palette.neutralPrimary,
     marginLeft: "auto",
@@ -219,3 +248,7 @@ const chevronStyle: IIconStyles = {
     },
   },
 };
+
+const selectorBodyStyles = { root: { padding: "0 5px" } };
+const selectorListStyles = { marginTop: 15 };
+const selectorIconProps = { styles: chevronStyle, iconName: "ChevronDown" };
