@@ -100,12 +100,14 @@ test("Catalog TOC doesn't render categories of filtered-out datasets", async () 
     onlyColorsFn
   );
 
-  await waitFor(() => httpScope.done());
-
   const nav = getByLabelText("Dataset category navigation");
   expect(nav).toBeInTheDocument();
   expect(getByText("Color")).toBeInTheDocument();
-  expect(queryByText("Number")).not.toBeInTheDocument();
+
+  // After the collections load, the filtered out collection's category should not be present
+  await waitFor(() => expect(queryByText("Number")).not.toBeInTheDocument(), {
+    timeout: 5000,
+  });
 
   httpScope.done();
 });
