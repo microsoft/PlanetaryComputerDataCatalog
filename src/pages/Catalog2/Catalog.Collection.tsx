@@ -1,7 +1,10 @@
 import {
+  getTheme,
+  ILinkStyles,
   IStackStyles,
   IStackTokens,
   ITextStyles,
+  Link as FluentLink,
   Stack,
   StackItem,
   Text,
@@ -15,15 +18,41 @@ import { getCollectionDetailUrl } from "./helpers";
 
 interface CatalogCollectionProps {
   collection: IPcCollection;
-  onKeywordClick: (keyword: string) => void;
+  onKeywordClick?: (keyword: string) => void;
+  // If true, the collection is displayed as a single button element
+  asButton?: boolean;
+  onButtonClick?: (collectionId: string) => void;
 }
 
 export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
   collection,
   onKeywordClick,
+  asButton,
+  onButtonClick,
 }) => {
+  const handleButtonClick = (collectionId: string) => {
+    return (
+      _: React.MouseEvent<
+        HTMLElement | HTMLAnchorElement | HTMLButtonElement,
+        MouseEvent
+      >
+    ) => {
+      onButtonClick && onButtonClick(collectionId);
+    };
+  };
+
   const href = getCollectionDetailUrl(collection.id);
-  return (
+  const title = collection.title || collection.id;
+  const thumbnailBase = <CatalogCollectionThumbnail assets={collection.assets} />;
+  const thumbnail = asButton ? (
+    thumbnailBase
+  ) : (
+    <Link to={href} data-cy="catalog-collection-thumb-link">
+      {thumbnailBase}
+    </Link>
+  );
+
+  const card = (
     <Stack
       horizontal
       styles={cardStyles}
@@ -32,32 +61,50 @@ export const CatalogCollection: React.FC<CatalogCollectionProps> = ({
       data-cy="catalog-collection-item"
     >
       <StackItem shrink={0} className="catalog-collection-item--thumbnail">
-        <Link to={href}>
-          <CatalogCollectionThumbnail assets={collection.assets} />
-        </Link>
+        {thumbnail}
       </StackItem>
       <StackItem styles={contentStyles} className="catalog-collection-item--content">
         <h3 style={titleStyle}>
-          <Link to={href}>{collection.title || collection.id}</Link>{" "}
+          {asButton ? title : <Link to={href}>{title}</Link>}{" "}
         </h3>
         <Text block styles={descStyles}>
           {collection["msft:short_description"]}
         </Text>
-        <div style={keywordContainerStyle}>
-          <Keywords
-            keywords={collection.keywords}
-            color="#4C4C51"
-            onClick={onKeywordClick}
-          />
-        </div>
+        {!asButton && (
+          <div style={keywordContainerStyle}>
+            <Keywords
+              keywords={collection.keywords}
+              color="#4C4C51"
+              onClick={onKeywordClick}
+            />
+          </div>
+        )}
       </StackItem>
     </Stack>
   );
+
+  if (asButton) {
+    return (
+      <FluentLink
+        styles={buttonStyles}
+        onClick={handleButtonClick(collection.id)}
+        data-cy="collection-as-button"
+      >
+        {card}
+      </FluentLink>
+    );
+  }
+  return card;
 };
 
+const theme = getTheme();
 const cardStyles: IStackStyles = {
   root: {
-    paddingBottom: 10,
+    padding: 8,
+    paddingLeft: 0,
+    "button &": {
+      paddingLeft: 8,
+    },
   },
 };
 
@@ -68,6 +115,7 @@ const cardTokens: IStackTokens = {
 const contentStyles: IStackStyles = {
   root: {
     maxWidth: 600,
+    minWidth: 400,
   },
 };
 
@@ -80,4 +128,29 @@ const descStyles: ITextStyles = {};
 
 const keywordContainerStyle: React.CSSProperties = {
   marginTop: 10,
+};
+
+const buttonStyles: ILinkStyles = {
+  root: {
+    width: "100%",
+    color: theme.semanticColors.bodyText,
+    border: "1px solid transparent",
+    "&:hover": {
+      backgroundColor: theme.palette.neutralLighterAlt,
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+      border: `1px solid ${theme.palette.neutralLighter}`,
+    },
+    "&:focus": {
+      color: theme.semanticColors.bodyText,
+    },
+    "&:active": {
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+    },
+    "&:active:hover": {
+      textDecoration: "none",
+      color: theme.semanticColors.bodyText,
+    },
+  },
 };

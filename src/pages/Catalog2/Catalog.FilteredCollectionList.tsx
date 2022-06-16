@@ -6,18 +6,36 @@ import { CatalogCollection } from "./Catalog.Collection";
 import { NoResults } from "./Catalog.NoResults";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 import { nonApiDatasetToPcCollection } from "./helpers";
-import { IPcCollection } from "types/stac";
+import { IPcCollection, IStacCollection } from "types/stac";
 import { useCollections } from "utils/requests";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogFilteredCollectionListProps {
   filterText: string;
   setFilterText: (filterText: string) => void;
+  // Include storage datasets in the output
+  includeStorageDatasets?: boolean;
+
+  // Optional filter function to display only subset of collections
+  preFilterCollectionFn?: (collection: IStacCollection) => boolean;
+
+  // Treat the entire collection entry as a button
+  itemsAsButton?: boolean;
+
+  // Callback for when itemAsButton is true and clicked
+  onButtonClick?: (collectionId: string) => void;
 }
 
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
-> = ({ filterText, setFilterText }) => {
+> = ({
+  filterText,
+  setFilterText,
+  includeStorageDatasets = true,
+  preFilterCollectionFn = () => true,
+  itemsAsButton = false,
+  onButtonClick,
+}) => {
   const { storageCollectionConfig } = useDataConfig();
   const { isLoading, data } = useCollections();
 
@@ -26,14 +44,21 @@ export const CatalogFilteredCollectionList: React.FC<
     window.scrollTo(0, 0);
   }, [filterText]);
 
-  const datasetsToFilter = useMemo(
-    () =>
-      Object.entries(storageCollectionConfig)
-        .map(([id, entry]) => nonApiDatasetToPcCollection(id, entry))
-        .concat(data?.collections ?? []),
-    [data?.collections, storageCollectionConfig]
-  );
+  // Build up the list of collections that are eligible for filtering
+  const datasetsToFilter = useMemo(() => {
+    const storageCollections = includeStorageDatasets
+      ? Object.entries(storageCollectionConfig)
+      : [];
+    const collections = data?.collections
+      ? data.collections.filter(preFilterCollectionFn)
+      : [];
 
+    return storageCollections
+      .map(([id, entry]) => nonApiDatasetToPcCollection(id, entry))
+      .concat(collections);
+  }, [data, includeStorageDatasets, preFilterCollectionFn, storageCollectionConfig]);
+
+  // Sorted list of PC collections that match the filterText
   const filteredCollections = sortBy(
     datasetsToFilter.filter(matchesTextAndKeywords(filterText)),
     "title"
@@ -46,11 +71,14 @@ export const CatalogFilteredCollectionList: React.FC<
         key={collection.id}
         collection={collection}
         onKeywordClick={setFilterText}
+        asButton={itemsAsButton}
+        onButtonClick={onButtonClick}
       />
     );
   };
 
   const hasResults = !isEmpty(filteredCollections) && !isLoading;
+
   return (
     <Stack styles={resultStyles} data-cy="catalog-filter-results">
       <h2>Datasets matching "{filterText}"</h2>
@@ -68,7 +96,7 @@ export const CatalogFilteredCollectionList: React.FC<
 };
 
 const matchesTextAndKeywords = (
-  filterText: string | undefined
+  filterText: string
 ): ((collection: IPcCollection) => boolean) => {
   return (collection: IPcCollection) => {
     if (!filterText) return true;

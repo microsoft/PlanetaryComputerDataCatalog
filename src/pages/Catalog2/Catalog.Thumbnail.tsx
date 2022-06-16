@@ -5,7 +5,7 @@ interface CollectionThumbnailProps {
 }
 
 export const CatalogCollectionThumbnail = ({ assets }: CollectionThumbnailProps) => {
-  const placeholderHref = "https://via.placeholder.com/350?text=Missing+thumbnail";
+  const placeholderHref = "https://via.placeholder.com/267?text=Missing+thumbnail";
   const thumbnailHref = assets?.thumbnail?.href;
 
   return (
@@ -14,6 +14,7 @@ export const CatalogCollectionThumbnail = ({ assets }: CollectionThumbnailProps)
       alt="Dataset thumbnail"
       styles={imageStyles}
       imageFit={ImageFit.cover}
+      data-cy="catalog-collection-thumb"
     />
   );
 };

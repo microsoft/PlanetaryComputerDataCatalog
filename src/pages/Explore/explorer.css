@@ -24,3 +24,22 @@
 .legend-item-separator:last-child {
   display: none;
 }
+
+.ms-Modal h2 {
+  padding-left: 8px;
+}
+
+.ms-Modal .catalog-collection-item img {
+  width: 200px;
+  height: 112px;
+}
+
+.ms-Modal h2 {
+  scroll-margin-top: 80px;
+}
+
+@media screen and (min-width: 480px) {
+  .ms-Modal .ms-SearchBox {
+    min-width: 300px;
+  }
+}

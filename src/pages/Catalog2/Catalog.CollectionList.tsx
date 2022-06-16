@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import {
   ISeparatorStyles,
   IStackStyles,
@@ -16,27 +16,59 @@ import { IPcCollection, IStacCollection } from "types/stac";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
 interface CatalogCollectionListProps {
+  // Text to be used to filter the list of collections by title,
+  // short_description, or keywords
   setFilterText: (filterText: string) => void;
+
+  // Include storage datasets in the output
+  includeStorageDatasets?: boolean;
+
+  // Optional filter function to display only subset of collections
+  preFilterCollectionFn?: (collection: IStacCollection) => boolean;
+
+  // Treat the entire collection entry as a button
+  itemsAsButton?: boolean;
+
+  // Callback for when itemAsButton is true and clicked
+  onButtonClick?: (collectionId: string) => void;
 }
+
+const smallThumbWidth = 200;
+const smallThumbHeight = 112;
 
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
+  includeStorageDatasets = true,
+  preFilterCollectionFn = () => true,
+  itemsAsButton = false,
+  onButtonClick = () => {},
 }) => {
   const { collectionConfig, featuredIds, groupConfig, storageCollectionConfig } =
     useDataConfig();
   const { isLoading, data } = useCollections();
 
+  const collections = useMemo(() => {
+    return data ? data.collections.filter(preFilterCollectionFn) : undefined;
+  }, [data, preFilterCollectionFn]);
+
   const handleCellRender = useCallback(
     (item: IPcCollection | undefined) => {
       if (!item) return null;
-      return <CatalogCollection collection={item} onKeywordClick={setFilterText} />;
+      return (
+        <CatalogCollection
+          collection={item}
+          onKeywordClick={setFilterText}
+          asButton={itemsAsButton}
+          onButtonClick={onButtonClick}
+        />
+      );
     },
-    [setFilterText]
+    [itemsAsButton, onButtonClick, setFilterText]
   );
 
   const categorizedCollections = getCategorizedCollections(
-    data?.collections,
-    storageCollectionConfig,
+    collections,
+    includeStorageDatasets ? storageCollectionConfig : {},
     isLoading,
     collectionConfig,
     groupConfig
@@ -45,7 +77,7 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
 
   sortedKeys.unshift("Featured");
   categorizedCollections["Featured"] = getFeaturedDatasets(
-    data?.collections,
+    collections,
     featuredIds,
     groupConfig
   );
@@ -57,15 +89,21 @@ export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
     // If loading, show placeholder shimmers per category. Featured category
     // might have a mix of loading/existing, but we can determine how many shimmers
     // are needed in addition to what is loaded
+    const shimmerWidth = itemsAsButton ? smallThumbWidth : undefined;
+    const shimmerHeight = itemsAsButton ? smallThumbHeight : undefined;
     const items =
       isEmpty(collections) && isLoading ? (
-        getCollectionShimmers(3)
+        getCollectionShimmers(3, shimmerHeight, shimmerWidth)
       ) : (
         <>
           <List items={sortedCollections} onRenderCell={handleCellRender} />
           {isLoading &&
             category === "Featured" &&
-            getCollectionShimmers(featuredIds.length - sortedCollections.length)}
+            getCollectionShimmers(
+              featuredIds.length - sortedCollections.length,
+              shimmerHeight,
+              shimmerWidth
+            )}
         </>
       );
 

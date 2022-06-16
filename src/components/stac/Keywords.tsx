@@ -88,7 +88,12 @@ const Keywords = ({
   }
 
   return (
-    <Stack horizontal className="keywords-bar" styles={keywordBarStyles}>
+    <Stack
+      horizontal
+      className="keywords-bar"
+      styles={keywordBarStyles}
+      data-cy="collection-keywords-bar"
+    >
       {sections}
     </Stack>
   );

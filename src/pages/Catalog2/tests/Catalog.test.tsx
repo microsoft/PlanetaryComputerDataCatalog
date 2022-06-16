@@ -1,4 +1,4 @@
-import { render } from "testUtils";
+import { render, waitForElementToBeRemoved } from "testUtils";
 import nock from "nock";
 
 import { STAC_URL } from "utils/constants";
@@ -59,15 +59,22 @@ const setup = (
   };
 };
 
-test("Catalog renders full list when no filter is present", () => {
-  const { getByLabelText, queryAllByText, queryByTestId } = setup();
+test("Catalog renders full list when no filter is present", async () => {
+  const { getByLabelText, queryAllByText, queryByTestId, queryAllByTestId } =
+    setup();
+
+  await waitForElementToBeRemoved(
+    () => queryAllByTestId("collection-loading-shimmers"),
+    { timeout: 5000 }
+  );
+
   expect(getByLabelText("Dataset category navigation")).toBeInTheDocument();
   expect(queryAllByText("Featured")).toHaveLength(2);
 
   expect(queryByTestId("catalog-filter-results")).not.toBeInTheDocument();
 });
 
-test("Catalog renders only search results when filter is present in query string", () => {
+test("Catalog renders only search results when filter is present in query string", async () => {
   // Update the query string to include filter before rendering the component
   Object.defineProperty(window, "location", {
     writable: true,
