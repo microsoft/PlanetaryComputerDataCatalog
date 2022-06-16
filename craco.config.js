@@ -7,7 +7,7 @@ const { marked } = require("marked");
 const yamlLoader = {
   use: [
     { loader: require.resolve("json-loader") },
-    { loader: require.resolve("yaml-loader") },
+    { loader: require.resolve("yaml-loader"), options: { asJSON: true } },
   ],
   test: /\.ya?ml$/,
   exclude: /node_modules/,

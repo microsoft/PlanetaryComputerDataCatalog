@@ -6,7 +6,7 @@
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@craco/craco": "7.0.0-alpha.3",
-    "@fluentui/react": "^8.75.1",
+    "@fluentui/react": "^8.76.0",
     "@radiantearth/stac-fields": "1.0.0-beta.7",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -18,7 +18,7 @@
     "@turf/union": "^6.5.0",
     "@types/dompurify": "^2.3.3",
     "@types/geojson": "^7946.0.8",
-    "@types/jest": "^27.4.1",
+    "@types/jest": "^28.1.1",
     "@types/lodash-es": "^4.17.6",
     "@types/marked": "^4.0.3",
     "@types/node": "^17.0.44",
@@ -27,7 +27,7 @@
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
     "@uifabric/icons": "^7.7.2",
-    "axios": "^0.26.1",
+    "axios": "^0.27.2",
     "azure-maps-control": "^2.1.10",
     "buffer": "^6.0.3",
     "dayjs": "^1.11.3",
@@ -35,7 +35,7 @@
     "formik": "^2.2.9",
     "highlight.js": "^11.5.1",
     "https-browserify": "^1.0.0",
-    "json-stringify-pretty-compact": "^3.0.0",
+    "json-stringify-pretty-compact": "^4.0.0",
     "lodash-es": "^4.17.21",
     "marked": "^4.0.17",
     "number-abbreviate": "^2.0.0",
@@ -92,13 +92,12 @@
     ]
   },
   "devDependencies": {
-    "@azure/static-web-apps-cli": "^0.8.2",
-    "copy-webpack-plugin": "^6.4.1",
-    "cypress": "^10.0.3",
+    "@azure/static-web-apps-cli": "^1.0.1",
+    "copy-webpack-plugin": "^11.0.0",
     "http-proxy-cli": "2.1.0",
     "json-loader": "^0.5.7",
-    "nock": "^13.2.4",
-    "prettier": "^2.3.1",
-    "yaml-loader": "^0.6.0"
+    "nock": "^13.2.7",
+    "prettier": "^2.7.1",
+    "yaml-loader": "^0.8.0"
   }
 }
