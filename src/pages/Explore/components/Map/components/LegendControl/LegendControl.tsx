@@ -51,10 +51,10 @@ export const LegendControl = () => {
 
   const hasLegends = legends.length > 0;
   return hasLegends ? (
-    <>
+    <div className="explorer-map-component">
       {legendPanel}
       {legendButton}
-    </>
+    </div>
   ) : null;
 };
 

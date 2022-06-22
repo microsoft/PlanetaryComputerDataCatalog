@@ -56,7 +56,7 @@
   .explorer-sidebar {
     width: 100vw;
   }
-  .explorer-toggle-sidebar {
-    display: none;
+  .explorer-map-component {
+    display: none !important;
   }
 }
