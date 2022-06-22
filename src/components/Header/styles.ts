@@ -1,18 +1,24 @@
-import { mergeStyles, Theme } from "@fluentui/react";
+import { mergeStyles, getTheme } from "@fluentui/react";
 
-export const headerStyleFactory = (theme: Theme) =>
-  mergeStyles({
-    padding: "11px 0",
-    background: theme.semanticColors.bodyBackground,
-    borderBottom: "1px solid rgb(237, 235, 233)",
-  });
+const theme = getTheme();
+
+export const headerStyle = mergeStyles({
+  padding: "11px 0",
+  background: theme.semanticColors.bodyBackground,
+  borderBottom: "1px solid rgb(237, 235, 233)",
+});
 
 export const innerHeaderStyle = mergeStyles({
   margin: "0",
   padding: "0",
-  /* When header links are on a new line, add some padding to the bottom of the header */
-  "@media (max-width: 1023px)": {
-    paddingBottom: "10px",
+  "@media (max-width: 900px)": {
+    display: "none",
+  },
+});
+
+export const smallHeaderStyle = mergeStyles({
+  "@media (min-width: 900px)": {
+    display: "none",
   },
 });
 
