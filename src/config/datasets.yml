@@ -712,3 +712,43 @@ us-census:
     - title: Example Notebook
       src: us-census-example.html
       launch: datasets/us-census/us-census-example.ipynb
+
+viirs-09a1-001:
+  category: Imagery
+  headerImg: ./images/viirs-09a1-hero.png
+
+viirs-09h1-001:
+  category: Imagery
+  headerImg: ./images/viirs-09h1-hero.png
+
+viirs-10a1-001:
+  category: Water/Snow
+  headerImg: ./images/viirs-10a1-hero.png
+
+viirs-13a1-001:
+  category: Biomass/Vegetation
+  headerImg: ./images/viirs-13a1-hero.png
+
+viirs-14a1-001:
+  category: Fire
+  headerImg: ./images/viirs-14a1-hero.png
+
+viirs-15a2h-001:
+  category: Biomass/Vegetation
+  headerImg: ./images/viirs-15a2h-hero.png
+
+viirs-21a2-001:
+  category: Temperature
+  headerImg: ./images/viirs-21a2-hero.png
+
+viirs-43ia4-001:
+  category: Imagery
+  headerImg: ./images/viirs-43ia4-hero.png
+
+viirs-43ma4-001:
+  category: Imagery
+  headerImg: ./images/viirs-43ma4-hero.png
+
+viirs-46a2-001:
+  category: Imagery
+  headerImg: ./images/viirs-64a1-hero.png

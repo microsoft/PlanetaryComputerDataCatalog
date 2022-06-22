@@ -319,3 +319,52 @@ cil-gdpcir:
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/gdpcir.png
   keywords: [CMIP6, Climate Impact Lab, Rhodium Group, Precipitation, Temperature]
+
+viirs:
+  title: VIIRS Version 001 Products
+  short_description: >
+    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument collects 
+    global observations of the land, atmosphere, cryosphere, and oceans in the 
+    visible and infrared wavelengths. The VIIRS sensor was designed to extend 
+    and improve upon the series of measurements initiated by its predecessors, 
+    including the Moderate Resolution Imaging Spectroradiometer (MODIS).
+
+  description: >
+    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument is aboard 
+    the Suomi National Polar-orbiting Partnership (Suomi NPP) and National Oceanic 
+    and Atmospheric Administration-20 (NOAA-20) [satellites](https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/joint-polar-satellite-system/jpss-mission-and). 
+    The instrument has a swath width of 3,000 kilometers and observes the entire 
+    surface of the Earth twice each day. It has 22 channels ranging from 0.41 
+    micrometers to 12.01 micrometers, of which five are high-resolution image bands 
+    (I-bands, 375 meter resolution) and sixteen serve as moderate-resolution bands (M-bands, 
+    750 meter resolution). VIIRS also hosts a unique panchromatic Day/Night band 
+    (DNB), which is ultra-sensitive in low-light conditions and is used to generate 
+    the [VIIRS Black Marble](https://viirsland.gsfc.nasa.gov/Products/NASA/BlackMarble.html) 
+    product. Many of the VIIRS product algorithms are specifically designed to promote 
+    continuity with the heritage MODIS products, including spatial resampling 
+    from the sensor's native 375 and 750 meter ground sample distances to 500 
+    meter, 1 kilometer, and 0.05 degree resolutions.
+
+
+    The Planetary Computer currently hosts Version 001 Level 3 and 4 data from the
+    VIIRS instrument aboard the Suomi NPP satellite (product prefix 'VNP'). 
+    Level 3 and 4 data from the VIIRS instrument aboard the NOAA-20 satellite 
+    (product prefix 'VJ1') are not yet widely available. Additional product 
+    information is provided on each collection's homepage. 
+  assets:
+    headerImg:
+      href: ./images/viirs-21a2-hero.png
+    thumbnail:
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/viirs-21a2-001.png
+  keywords:
+    [
+      VIIRS,
+      NASA,
+      USGS,
+      Satellite,
+      Global,
+      Imagery,
+      Reflectance,
+      Temperature,
+      Land Cover,
+    ]
