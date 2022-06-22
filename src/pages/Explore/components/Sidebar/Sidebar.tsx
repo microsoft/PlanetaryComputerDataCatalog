@@ -73,7 +73,7 @@ export const Sidebar = () => {
 
   return (
     <>
-      <StackItem styles={sidebarStyles}>
+      <StackItem styles={sidebarStyles} className="explorer-sidebar">
         <Stack styles={sidebarStackStyles}>
           <Stack styles={searchPanelStyles} tokens={stackTokens}>
             <TitleHeader />

@@ -14,7 +14,8 @@
   }
 
   .catalog-collection-item--content {
-    max-width: 450px;
+    max-width: 444px;
+    width: 100%;
   }
 
   .catalog-collection-item--thumbnail {
@@ -23,7 +24,8 @@
 
   .catalog-collection-item--thumbnail img {
     height: 250px;
-    width: 444px;
+    max-width: 444px;
+    width: 100%;
   }
 }
 
@@ -38,10 +40,12 @@
 
   .catalog-collection-item--content {
     max-width: calc(100vw - 50px);
+    margin-top: 8px;
   }
 
   .catalog-collection-item--content .keywords-bar {
-    flex: row wrap;
+    flex-wrap: wrap;
+    flex-direction: row;
   }
 
   .catalog-collection-item--thumbnail img {

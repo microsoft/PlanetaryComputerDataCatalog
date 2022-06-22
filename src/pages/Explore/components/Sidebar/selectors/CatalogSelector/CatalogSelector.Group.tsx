@@ -66,8 +66,8 @@ export const CatalogSelectorGroup: React.FC<CatalogSelectorGroupProps> = ({
           <IconButton
             styles={iconButtonStyles}
             iconProps={backIcon}
-            ariaLabel="Return to collection list"
-            title="Return to collection list"
+            ariaLabel="Return to dataset list"
+            title="Return to dataset list"
             onClick={onBackClick}
           />
           <span className={`${contentStyles.title} ${contentStyles.titlePadded}`}>

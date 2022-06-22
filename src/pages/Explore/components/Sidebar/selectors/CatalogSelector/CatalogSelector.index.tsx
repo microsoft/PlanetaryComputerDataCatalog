@@ -3,13 +3,11 @@ import {
   Modal,
   getTheme,
   mergeStyleSets,
-  FontWeights,
   DefaultButton,
   IconButton,
   IIconProps,
   Stack,
   IButtonStyles,
-  IIconStyles,
 } from "@fluentui/react";
 import { useState } from "react";
 
@@ -63,7 +61,7 @@ export const CatalogSelector = () => {
   };
 
   const toc = (
-    <div style={tocStyle}>
+    <div style={tocStyle} className="catalog-selector-toc">
       <div style={tocStickyStyle}>
         <CatalogToc
           setHashOnClick={false}
@@ -135,7 +133,7 @@ export const CatalogSelector = () => {
         onRenderText={renderText("GlobeLocation", buttonText)}
         onClick={showModal}
         styles={buttonStyles}
-        iconProps={selectorIconProps}
+        // iconProps={selectorIconProps}
         data-cy="collection-selector"
       />
       <Modal
@@ -156,7 +154,9 @@ export const contentStyles = mergeStyleSets({
     display: "flex",
     flexFlow: "column nowrap",
     alignItems: "stretch",
-    maxWidth: 1600,
+    width: "90%",
+    maxWidth: 1300,
+    minHeight: "98vh",
   },
   header: [
     theme.fonts.large,
@@ -175,9 +175,9 @@ export const contentStyles = mergeStyleSets({
     },
   ],
   title: {
-    width: 165,
-    fontWeight: FontWeights.semibold,
-    fontSize: 20,
+    width: 175,
+    fontWeight: 700,
+    fontSize: 21,
   },
   titlePadded: {
     paddingLeft: 5,
@@ -233,23 +233,5 @@ const buttonStyles: Partial<IButtonStyles> = {
   },
 };
 
-const chevronStyle: IIconStyles = {
-  root: {
-    position: "absolute",
-    top: 1,
-    right: 4,
-    height: 32,
-    lineHeight: 30,
-    fontSize: 12,
-    color: theme.palette.neutralSecondary,
-    pointerEvents: "none",
-    cursor: "pointer",
-    "button:active &": {
-      padding: 0,
-    },
-  },
-};
-
 const selectorBodyStyles = { root: { padding: "0 5px" } };
 const selectorListStyles = { marginTop: 15 };
-const selectorIconProps = { styles: chevronStyle, iconName: "ChevronDown" };

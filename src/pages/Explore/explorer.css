@@ -29,17 +29,34 @@
   padding-left: 8px;
 }
 
-.ms-Modal .catalog-collection-item img {
-  width: 200px;
-  height: 112px;
-}
-
 .ms-Modal h2 {
   scroll-margin-top: 80px;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 600px) {
   .ms-Modal .ms-SearchBox {
     min-width: 300px;
+  }
+}
+
+@media (min-width: 820px) {
+  .ms-Modal .catalog-collection-item img {
+    width: 200px;
+    height: 112px;
+  }
+}
+
+@media (max-width: 450px) {
+  .catalog-selector-toc {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .explorer-sidebar {
+    width: 100vw;
+  }
+  .explorer-toggle-sidebar {
+    display: none;
   }
 }
