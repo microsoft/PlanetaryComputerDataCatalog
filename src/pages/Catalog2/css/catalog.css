@@ -50,6 +50,5 @@
 
   .catalog-collection-item--thumbnail img {
     height: auto;
-    width: calc(100vw - 50px);
   }
 }

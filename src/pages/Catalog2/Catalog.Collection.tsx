@@ -115,7 +115,6 @@ const cardTokens: IStackTokens = {
 const contentStyles: IStackStyles = {
   root: {
     maxWidth: 600,
-    // minWidth: 400,
   },
 };
 

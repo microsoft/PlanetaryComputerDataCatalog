@@ -51,12 +51,37 @@
     display: none;
   }
 }
+.explorer-mobile-view-map {
+  display: none;
+}
 
 @media screen and (max-width: 430px) {
   .explorer-sidebar {
     width: 100vw;
   }
+
+  .explorer-sidebar.explorer-sidebar-hidden {
+    width: 0;
+    min-width: 0;
+  }
+
+  .explorer-map.explorer-sidebar-hidden .explorer-map-component {
+    display: initial !important;
+  }
+
   .explorer-map-component {
     display: none !important;
+  }
+
+  .explorer-mobile-view-map {
+    display: block;
+  }
+
+  .explorer-explore-in-hub {
+    display: none;
+  }
+
+  button .catalog-collection-item {
+    padding-left: 0;
   }
 }

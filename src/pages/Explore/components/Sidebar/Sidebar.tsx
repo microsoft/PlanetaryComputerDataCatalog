@@ -17,7 +17,9 @@ export const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const showSidebar = useExploreSelector(s => s.map.showSidebar);
   const { isCustomQuery } = useExploreSelector(selectCurrentMosaic);
-  const selectedItem = useExploreSelector(s => s.detail.selectedItem);
+  const { selectedItem, showAsLayer: showingItemLayer } = useExploreSelector(
+    s => s.detail
+  );
   const isDetailView = Boolean(selectedItem);
 
   const { width, sidebarVisibility } = useMemo(() => {
@@ -71,9 +73,16 @@ export const Sidebar = () => {
     },
   };
 
+  // Classes used to sync state via responsive media queries in css
+  let visibilityClass =
+    !showSidebar || showingItemLayer ? "explorer-sidebar-hidden" : "";
+
   return (
     <>
-      <StackItem styles={sidebarStyles} className="explorer-sidebar">
+      <StackItem
+        styles={sidebarStyles}
+        className={`explorer-sidebar ${visibilityClass}`}
+      >
         <Stack styles={sidebarStackStyles}>
           <Stack styles={searchPanelStyles} tokens={stackTokens}>
             <TitleHeader />

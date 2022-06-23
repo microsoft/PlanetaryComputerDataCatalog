@@ -24,17 +24,18 @@ import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallbac
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import { MobileViewMapButton } from "../../MobileViewInMap/ViewInMap.index";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
   visible: boolean;
 }
 
+const mobileViewMapStyle = { root: { width: "100%", marginTop: "auto !important" } };
 const SearchResultsPane = ({
   request: { data, isError, isLoading, isPreviousData },
   visible,
 }: SearchResultsProps) => {
-  const theme = getTheme();
   const { collection } = useExploreSelector(selectCurrentMosaic);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
@@ -98,7 +99,13 @@ const SearchResultsPane = ({
   if (!data && isLoading) return loadingIndicator;
 
   // If there is no data, but there is no collection set, we have no query, so don't render anything
-  if (!data || !collection) return null;
+  // (except the show map button on mobile).
+  if (!data || !collection)
+    return (
+      <Stack.Item align="center" styles={mobileViewMapStyle}>
+        <MobileViewMapButton />
+      </Stack.Item>
+    );
 
   // Otherwise, when the collection has stayed the same, we do keep previous
   // results displayed, but dimmed, until the new results come in.
@@ -106,20 +113,6 @@ const SearchResultsPane = ({
   const renderCell = (item?: IStacItem | undefined): ReactNode => {
     if (!item) return null;
     return <ItemResult item={item} />;
-  };
-
-  const resultsListStyle: Partial<IStackStyles> = {
-    root: {
-      background: theme.palette.neutralLighterAlt,
-      display: visible ? "flex" : "none",
-      height: "100%",
-      paddingLeft: 10,
-      paddingRight: 10,
-      paddingBottom: 1,
-      borderTop: `1px solid ${theme.palette.neutralLight}`,
-      overflowY: "auto",
-      overflowX: "hidden",
-    },
   };
 
   return (
@@ -153,12 +146,14 @@ const SearchResultsPane = ({
         </ErrorBoundary>
       </Stack>
       {visible && <ExploreInHub />}
+      {visible && <MobileViewMapButton />}
     </>
   );
 };
 
 export default SearchResultsPane;
 
+const theme = getTheme();
 export const loadingStyle = (inLoadingState: boolean) => ({
   opacity: inLoadingState ? 0.4 : 1,
   transition: "opacity 0.1s ease-in-out",
@@ -166,4 +161,18 @@ export const loadingStyle = (inLoadingState: boolean) => ({
 
 export const errorMessageStyles: IMessageBarStyles = {
   root: { borderRadius: 4, margin: 8, width: "unset" },
+};
+
+const resultsListStyle: Partial<IStackStyles> = {
+  root: {
+    background: theme.palette.neutralLighterAlt,
+    display: "flex",
+    height: "100%",
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 1,
+    borderTop: `1px solid ${theme.palette.neutralLight}`,
+    overflowY: "auto",
+    overflowX: "hidden",
+  },
 };

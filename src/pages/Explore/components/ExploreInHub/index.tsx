@@ -7,7 +7,7 @@ const ExploreInHub = () => {
   const buttonId = useId("callout-button");
 
   return (
-    <Stack styles={styles}>
+    <Stack className="explorer-explore-in-hub" styles={sidebarBottomButtonStyles}>
       <PrimaryButton id={buttonId} onClick={toggle} data-cy="explore-in-hub">
         Explore results in the Hub
       </PrimaryButton>
@@ -24,7 +24,7 @@ const ExploreInHub = () => {
 export default ExploreInHub;
 
 const theme = getTheme();
-const styles = {
+export const sidebarBottomButtonStyles = {
   root: {
     marginTop: 0,
     padding: 8,

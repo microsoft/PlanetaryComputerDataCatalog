@@ -133,7 +133,6 @@ export const CatalogSelector = () => {
         onRenderText={renderText("GlobeLocation", buttonText)}
         onClick={showModal}
         styles={buttonStyles}
-        // iconProps={selectorIconProps}
         data-cy="collection-selector"
       />
       <Modal
@@ -168,6 +167,7 @@ export const contentStyles = mergeStyleSets({
       borderTop: `4px solid ${theme.palette.themePrimary}`,
       color: theme.palette.neutralPrimary,
       display: "flex",
+      flexFlow: "row wrap",
       alignItems: "center",
       padding: "12px 14px",
       zIndex: 1,
