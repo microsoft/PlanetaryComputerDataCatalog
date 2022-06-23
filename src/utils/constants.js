@@ -1,5 +1,7 @@
-const apiRoot = process.env.REACT_APP_API_ROOT;
-const tilerRoot = process.env.REACT_APP_TILER_ROOT || process.env.REACT_APP_API_ROOT;
+const apiRoot =
+  process.env.REACT_APP_API_ROOT ||
+  "https://planetarycomputer-staging.microsoft.com";
+const tilerRoot = process.env.REACT_APP_TILER_ROOT || apiRoot;
 
 // In some environments, there is a one-off URL for the STAC API that doesn't
 //conform to the otherwise expected path layout
@@ -16,6 +18,4 @@ export const DATA_URL = apiRoot.endsWith("stac")
   : `${tilerRoot}/api/data/v1`;
 
 export const HUB_URL = process.env.REACT_APP_HUB_URL || "";
-export const AUTH_URL =
-  process.env.REACT_APP_AUTH_URL ||
-  "https://planetarycomputer-staging.microsoft.com";
+export const AUTH_URL = process.env.REACT_APP_AUTH_URL || apiRoot;
