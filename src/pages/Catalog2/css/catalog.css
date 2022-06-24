@@ -23,7 +23,7 @@
   }
 
   .catalog-collection-item--thumbnail img {
-    height: 250px;
+    min-height: 178px;
     max-width: 444px;
     width: 100%;
   }

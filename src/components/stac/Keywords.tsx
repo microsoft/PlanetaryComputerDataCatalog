@@ -90,6 +90,7 @@ const Keywords = ({
   return (
     <Stack
       horizontal
+      wrap
       className="keywords-bar"
       styles={keywordBarStyles}
       data-cy="collection-keywords-bar"
