@@ -1,14 +1,23 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
-import { a11yPostProcessDom } from "../../utils";
+import { a11yPostProcessDom } from "../../../utils";
 
 // Given a Json object of HTML markup generated from sphinx-build, rewrite
 // internal links and capture their events to process them through the
 // React Router system.
-const DocsHtmlContent = ({ className, markupJson, children }) => {
+interface DocsHtmlContentProps {
+  className: string;
+  markupJson: any;
+}
+
+const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
+  className,
+  markupJson,
+  children,
+}) => {
   const navigate = useNavigate();
-  const contentRef = useRef();
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const { body, current_page_name } = markupJson;
 
@@ -41,7 +50,7 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   const launcherEl = docsDoc.querySelector(".docs-launcher");
 
   if (launcherEl) {
-    docsDoc.querySelector("h1").insertAdjacentElement("afterend", launcherEl);
+    docsDoc.querySelector("h1")?.insertAdjacentElement("afterend", launcherEl);
   }
 
   a11yPostProcessDom(docsDoc);
@@ -52,12 +61,14 @@ const DocsHtmlContent = ({ className, markupJson, children }) => {
   // Handle any internal links as an SPA style route, not a full reload.
   // If the href includes 1-4 characters after a `.`, treat as file extension
   // and allow a direct download.
-  const handleClick = e => {
-    const anchor = e.target.closest("a.reference.internal");
+  const handleClick = (e: React.MouseEvent<HTMLDivElement> | undefined) => {
+    if (!e) return;
+    const target = e.target as HTMLDivElement;
+    const anchor = target.closest("a.reference.internal") as HTMLAnchorElement;
     if (anchor && !anchor.href.match(/\.[a-z]{1,4}$/i)) {
       const path = anchor.getAttribute("href");
       e.preventDefault();
-      navigate(path);
+      path && navigate(path);
     }
   };
 

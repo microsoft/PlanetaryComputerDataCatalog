@@ -189,6 +189,7 @@ a:not(header a):hover img {
     display: none;
   }
 }
+
 .nav-internal {
   min-width: 175px;
   margin-left: 30px;
@@ -218,6 +219,9 @@ a:not(header a):hover img {
 .toc-item {
   margin-right: 18px;
   padding-top: 15px;
+  padding-right: 10px;
+  max-height: calc(100vh - 50px);
+  overflow: auto;
 }
 
 .toctree-wrapper ul {
@@ -278,6 +282,18 @@ a:not(header a):hover img {
   }
   footer .off-grid-content {
     padding-left: 5px;
+  }
+
+  .docs-toc-nav {
+    display: none;
+  }
+
+  .overflow-docs-nav {
+    display: block;
+  }
+
+  .generated-docs {
+    width: 100%;
   }
 }
 
@@ -376,6 +392,7 @@ ul.summary-list {
   font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
     BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   color: rgb(50, 49, 48);
+  margin-top: 15px;
 }
 
 .swagger-ui h4.opblock-tag {
