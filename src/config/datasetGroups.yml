@@ -368,3 +368,4 @@ viirs:
       Temperature,
       Land Cover,
     ]
+  groupOnCatalog: false
