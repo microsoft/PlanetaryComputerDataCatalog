@@ -1,14 +1,16 @@
 import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { Link, Panel, PanelType, Text } from "@fluentui/react";
+import { useBoolean } from "@fluentui/react-hooks";
 
-import Layout from "../components/Layout";
-import SEO from "../components/Seo";
-import DocsHtmlContent from "../components/docs/DocsHtmlContent";
-import Topic from "../components/docs/Topic";
-import { DATA_URL, SAS_URL, STAC_URL } from "../utils/constants";
-import ScrollToTop from "../components/ScrollToTop";
+import Layout from "../../components/Layout";
+import SEO from "../../components/Seo";
+import DocsHtmlContent from "./components/DocsHtmlContent";
+import Topic from "./components/Topic";
+import { DATA_URL, SAS_URL, STAC_URL } from "../../utils/constants";
+import ScrollToTop from "../../components/ScrollToTop";
 
-const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
+const OpenApiSpec = React.lazy(() => import("./components/OpenApiSpec"));
 
 // Import all the JSON files that were copied into src/docs
 // from the documentation build step.
@@ -16,15 +18,18 @@ const OpenApiSpec = React.lazy(() => import("../components/docs/OpenApiSpec"));
 // TODO: Jest tests can't parse require.context, so this module cannot be tested
 // as a result. Resolve this by transforming the sphinx output into an actual
 // named import and remove the dynamic import.
-const jsonFileContexts = require.context("../docs/", true, /\.json$/);
+// @ts-ignore-next-line
+const jsonFileContexts = require.context("../../docs/", true, /\.json$/);
 const docTopics = Object.fromEntries(
-  jsonFileContexts.keys().map(key => [key, jsonFileContexts(key)])
+  jsonFileContexts.keys().map((key: string) => [key, jsonFileContexts(key)])
 );
 
 const Docs = () => {
+  const [isOpen, { setTrue: openPanel, setFalse: dismissPanel }] = useBoolean(false);
   const toc = docTopics["./index.json"];
   const tocComponent = (
     <nav
+      className="docs-toc-nav"
       style={{
         flexBasis: "10rem",
         flexGrow: 1,
@@ -34,20 +39,32 @@ const Docs = () => {
     </nav>
   );
 
+  const breadcrumb = (
+    <>
+      <Text block className="overflow-docs-nav" styles={breadCrumbStyles}>
+        Documentation &gt; <Link onClick={() => openPanel()}>Table of Contents</Link>
+      </Text>
+      <Panel
+        isLightDismiss
+        isOpen={isOpen}
+        onDismiss={dismissPanel}
+        type={PanelType.smallFixedNear}
+        onClick={dismissPanel}
+      >
+        <h3>Table of Contents</h3>
+        <DocsHtmlContent className="toc-item-panel" markupJson={toc} />
+      </Panel>
+    </>
+  );
+
   const documentationPane = (
-    <div
-      className="grid-content"
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-      }}
-    >
+    <div className="grid-content" style={docPageStyle}>
       {tocComponent}
-      <div style={{ flexBasis: "0", flexGrow: 999, minWidth: "calc(50% - 1rem)" }}>
+      <div style={docContentStyle}>
+        {breadcrumb}
         <ScrollToTop />
         <Routes>
           <Route
-            title="STAC API Reference"
             path={"/reference/stac"}
             element={
               <Suspense fallback={<div />}>
@@ -56,7 +73,6 @@ const Docs = () => {
             }
           />
           <Route
-            title="SAS API Reference"
             path={"/reference/sas"}
             element={
               <Suspense fallback={<div />}>
@@ -65,7 +81,6 @@ const Docs = () => {
             }
           />
           <Route
-            title="Data API Reference"
             path={"/reference/data"}
             element={
               <Suspense fallback={<div />}>
@@ -95,3 +110,14 @@ const Docs = () => {
 };
 
 export default Docs;
+
+const breadCrumbStyles = { root: { paddingTop: 20, display: "none" } };
+const docPageStyle: Partial<React.CSSProperties> = {
+  display: "flex",
+  flexWrap: "wrap",
+};
+const docContentStyle = {
+  flexBasis: "0",
+  flexGrow: 999,
+  minWidth: "calc(50% - 1rem)",
+};

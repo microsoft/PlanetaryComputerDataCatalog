@@ -55,7 +55,7 @@ const PanelControl = React.forwardRef<
       ? DirectionalHint.rightTopEdge
       : DirectionalHint.leftTopEdge;
     return (
-      <Stack style={buttonStyle}>
+      <Stack style={buttonStyle} className="explorer-map-component">
         <IconButton
           id={buttonId}
           ariaLabel={label}

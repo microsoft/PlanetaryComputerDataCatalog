@@ -43,22 +43,6 @@ li p {
   margin: 6px 0;
 }
 
-/* h2 {
-  font-size: 48px;
-  line-height: 1.2;
-  margin-bottom: 16px;
-}
-
-h3 {
-  font-size: 32px;
-  line-height: 1.2;
-}
-
-h4 {
-  font-size: 24px;
-  line-height: 1.2;
-} */
-
 /* The documentation site adds a header for buttons
    on external notebooks that launch the file in the Hub.
    This is done via sphinx config and is not injecting React
@@ -205,6 +189,7 @@ a:not(header a):hover img {
     display: none;
   }
 }
+
 .nav-internal {
   min-width: 175px;
   margin-left: 30px;
@@ -234,6 +219,9 @@ a:not(header a):hover img {
 .toc-item {
   margin-right: 18px;
   padding-top: 15px;
+  padding-right: 10px;
+  max-height: calc(100vh - 50px);
+  overflow: auto;
 }
 
 .toctree-wrapper ul {
@@ -294,6 +282,18 @@ a:not(header a):hover img {
   }
   footer .off-grid-content {
     padding-left: 5px;
+  }
+
+  .docs-toc-nav {
+    display: none;
+  }
+
+  .overflow-docs-nav {
+    display: block;
+  }
+
+  .generated-docs {
+    width: 100%;
   }
 }
 
@@ -392,6 +392,7 @@ ul.summary-list {
   font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system,
     BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
   color: rgb(50, 49, 48);
+  margin-top: 15px;
 }
 
 .swagger-ui h4.opblock-tag {

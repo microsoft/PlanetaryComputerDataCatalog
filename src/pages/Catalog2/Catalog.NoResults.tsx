@@ -16,7 +16,7 @@ export const NoResults = ({ typeText = "" }) => {
         border: "1px solid #ccc",
         borderRadius: 3,
         padding: "0 15px",
-        marginLeft: 50,
+        margin: 20,
       }}
     >
       <FontIcon iconName="FabricFolderSearch" className={iconClass} />

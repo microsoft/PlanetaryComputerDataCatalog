@@ -7,9 +7,10 @@ import DocsHtmlContent from "./DocsHtmlContent";
 import { useEffect } from "react";
 import { scrollToHash } from "utils";
 
-const centerPanelWidth = "75%";
-
-const Topic = ({ topics }) => {
+interface TopicProps {
+  topics: { [key: string]: any };
+}
+const Topic: React.FC<TopicProps> = ({ topics }) => {
   const { topicId, fileId } = useParams();
   const docsKey = `./${topicId}/${fileId}.json`;
   const doc = topics[docsKey];
@@ -24,14 +25,14 @@ const Topic = ({ topics }) => {
     const generatedToc = <GeneratedInternalToc html={doc.body} />;
     return (
       <>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={bodyStyle}>
           <DocsHtmlContent
             className="generated-docs markdown-source"
             markupJson={doc}
           />
           {generatedToc}
         </div>
-        <Separator styles={{ root: { width: centerPanelWidth } }} />
+        <Separator styles={separatorStyles} />
         {bottomNav}
       </>
     );
@@ -40,3 +41,6 @@ const Topic = ({ topics }) => {
 };
 
 export default Topic;
+
+const separatorStyles = { root: { width: "75%" } };
+const bodyStyle: React.CSSProperties = { display: "flex", flexDirection: "row" };

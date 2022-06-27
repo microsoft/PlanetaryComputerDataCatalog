@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 
 // Mimic the structure of a Sphinx generated TOC item, so we can apply more
 // items to the list at runtime.
-const TocTreeItem = ({ title, links }) => {
+interface TocTreeItemProps {
+  title: string;
+  links: { href: string; label: string }[];
+}
+
+const TocTreeItem: React.FC<TocTreeItemProps> = ({ title, links }) => {
   return (
     <div className="toctree-wrapper compound">
       <p>

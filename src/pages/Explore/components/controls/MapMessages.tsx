@@ -13,6 +13,7 @@ const MapMessage: React.FC = ({ children }) => {
 
   return (
     <div
+      className="explorer-map-component"
       style={{
         position: "absolute",
         top: 10,

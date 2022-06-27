@@ -28,12 +28,13 @@ import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
 import { useSession } from "components/auth/hooks/SessionContext";
 import { DATA_URL } from "utils/constants";
+import { MobileViewSidebarButton } from "../MobileViewInMap/ViewInMap.index";
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
-  const { center, zoom } = useExploreSelector(s => s.map);
+  const { center, zoom, showSidebar } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
   const { status: sessionStatus } = useSession();
@@ -134,15 +135,19 @@ const ExploreMap = () => {
     />
   );
 
+  // Class used to sync state via responsive media queries in css
+  const visibilityClass = !showSidebar ? "explorer-sidebar-hidden" : "";
+
   return (
-    <div style={mapContainerStyle}>
+    <div className={`explorer-map ${visibilityClass}`} style={mapContainerStyle}>
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
-      <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
+      <MobileViewSidebarButton />
+      <div id={mapContainerId} style={mapElementStyle} />
     </div>
   );
 };
@@ -154,6 +159,8 @@ const mapContainerStyle: React.CSSProperties = {
   height: "100%",
   position: "relative",
 };
+
+const mapElementStyle = { width: "100%", height: "100%" };
 
 const progressIndicatorStyles: IStyleFunctionOrObject<
   IProgressIndicatorStyleProps,

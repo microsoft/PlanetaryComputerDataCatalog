@@ -31,6 +31,7 @@ interface Props {
   external?: boolean;
   asButton?: boolean;
   isNav?: boolean;
+  align?: "start" | "center" | "end";
 }
 
 const HeaderLink: React.FC<Props> = ({
@@ -38,6 +39,7 @@ const HeaderLink: React.FC<Props> = ({
   external = false,
   asButton = false,
   isNav = false,
+  align = "center",
   children,
   ...rest
 }) => {
@@ -69,7 +71,7 @@ const HeaderLink: React.FC<Props> = ({
   }
 
   return (
-    <Stack.Item align={"center"} {...rest}>
+    <Stack.Item align={align} {...rest}>
       {link}
     </Stack.Item>
   );

@@ -19,6 +19,7 @@ const MinimizeButton = () => {
 
   return (
     <div
+      className="explorer-map-component"
       style={{
         position: "absolute",
         top: 175,

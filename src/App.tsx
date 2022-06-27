@@ -17,7 +17,7 @@ import Layout from "./components/Layout";
 import StorageCollectionDetail from "pages/StorageCollectionDetail";
 
 const Explore = React.lazy(() => import("pages/Explore"));
-const Docs = React.lazy(() => import("pages/Docs"));
+const Docs = React.lazy(() => import("pages/Docs/Docs.index"));
 
 function App() {
   initializeIcons(undefined, { disableWarnings: true });
