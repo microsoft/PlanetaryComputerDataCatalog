@@ -608,6 +608,13 @@ mobi:
       src: mobi-example.html
       launch: datasets/mobi/mobi-example.ipynb
 
+msbuildings:
+  headerImg: ./images/msbuildings-hero.png
+  tabs:
+    - title: Example Notebook
+      src: msbuildings-example.html
+      launch: datasets/msbuildings/msbuildings-example.ipynb
+
 mtbs:
   category: Fire
   headerImg: ./images/mtbs-hero.png
