@@ -33,6 +33,14 @@
   scroll-margin-top: 80px;
 }
 
+.explorer-mobile-view-map {
+  display: none;
+}
+
+.explorer-mobile-view-sidebar {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   .ms-Modal .ms-SearchBox {
     min-width: 300px;
@@ -50,9 +58,6 @@
   .catalog-selector-toc {
     display: none;
   }
-}
-.explorer-mobile-view-map {
-  display: none;
 }
 
 @media screen and (max-width: 430px) {
@@ -74,6 +79,10 @@
   }
 
   .explorer-mobile-view-map {
+    display: block;
+  }
+
+  .explorer-mobile-view-sidebar {
     display: block;
   }
 
