@@ -295,6 +295,18 @@ daymet-annual-na:
       src: daymet-example.html
       launch: datasets/daymet/daymet-example.ipynb
 
+deltares-floods:
+  tabs:
+    - title: Example Notebook
+      src: deltares-floods-example.html
+      launch: datasets/deltares-floods/deltares-floods-example.ipynb
+
+deltares-water-availability:
+  tabs:
+    - title: Example Notebook
+      src: deltares-water-availability-example.html
+      launch: datasets/deltares-water-availability/deltares-water-availability-example.ipynb
+
 eclipse:
   category: Air Quality
   tabs:
@@ -608,12 +620,12 @@ mobi:
       src: mobi-example.html
       launch: datasets/mobi/mobi-example.ipynb
 
-msbuildings:
-  headerImg: ./images/msbuildings-hero.png
+ms-buildings:
+  headerImg: ./images/ms-buildings-hero.png
   tabs:
     - title: Example Notebook
-      src: msbuildings-example.html
-      launch: datasets/msbuildings/msbuildings-example.ipynb
+      src: ms-buildings-example.html
+      launch: datasets/ms-buildings/ms-buildings-example.ipynb
 
 mtbs:
   category: Fire

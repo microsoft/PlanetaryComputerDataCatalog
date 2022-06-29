@@ -48,4 +48,6 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-snow-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-temperature-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-vegetation-example.ipynb
-https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/msbuildings/msbuildings-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/ms-buildings/ms-buildings-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/deltares-floods/deltares-floods-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/deltares-water-availability/deltares-water-availability-example.ipynb
