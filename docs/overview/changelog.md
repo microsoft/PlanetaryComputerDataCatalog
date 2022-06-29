@@ -2,6 +2,21 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## June 2022
+
+This month's release includes many changes to our website tools, three new datasets, and updates to our open-source dependencies and libraries.
+
+### Highlights
+
+- The Catalog and Explorer interfaces have been redesigned to accommodate the increased number of datasets available in the Planetary Computer.
+- The entire website, including the Explorer, Catalog, and Documentation pages, have all been updated to work well on most mobile devices.
+
+### New datasets
+
+### Hub environments
+
+### Changes
+
 ## May 2022
 
 This release includes many new datasets, API enhancements, and updates to libraries.
