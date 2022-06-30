@@ -33,3 +33,9 @@
   content: >
     Sentinel-1 RTC and MODIS products are a part of [30+ new
     datasets](/docs/overview/changelog) available in the API.
+- id: june-2022-release-notes
+  startDate: 2022-06-30
+  endDate: 2022-07-15
+  content: >
+    Updates to the Catalog and Explorer interfaces and 4 new datasets. [Check it out
+    &rarr;](/docs/overview/changelog)
