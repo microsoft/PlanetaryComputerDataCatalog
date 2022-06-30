@@ -296,12 +296,14 @@ daymet-annual-na:
       launch: datasets/daymet/daymet-example.ipynb
 
 deltares-floods:
+  category: Water
   tabs:
     - title: Example Notebook
       src: deltares-floods-example.html
       launch: datasets/deltares-floods/deltares-floods-example.ipynb
 
 deltares-water-availability:
+  category: Water 
   tabs:
     - title: Example Notebook
       src: deltares-water-availability-example.html
