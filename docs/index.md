@@ -28,6 +28,7 @@ Changelog <overview/changelog>
 Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-stac-r
 quickstarts/reading-zarr-data
+quickstarts/stac-geoparquet
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
 quickstarts/using-radiant-mlhub-api
