@@ -22,10 +22,10 @@ See [Bulk STAC item queries with GeoParquet](../quickstarts/stac-geoparquet) for
 
 This release includes several new datasets in our STAC API. Each of these links to the dataset details page, which includes an example notebook.
 
-- [Deltares Floods](https://planetarycomputer-staging.microsoft.com/dataset/deltares-floods)
-- [Deltares Water Availability](https://planetarycomputer-staging.microsoft.com/dataset/deltares-water-availability)
-- [Microsoft Buildings Footprint](https://planetarycomputer-staging.microsoft.com/dataset/ms-buildings)
-- [Kwando & Upper Zambezi Rivers HydroForecast](https://planetarycomputer-staging.microsoft.com/dataset/kaza-hydroforecast)
+- [Deltares Floods](https://planetarycomputer.microsoft.com/dataset/deltares-floods)
+- [Deltares Water Availability](https://planetarycomputer.microsoft.com/dataset/deltares-water-availability)
+- [Microsoft Buildings Footprint](https://planetarycomputer.microsoft.com/dataset/ms-buildings)
+- [Kwando & Upper Zambezi Rivers HydroForecast](https://planetarycomputer.microsoft.com/dataset/kaza-hydroforecast)
 
 ## May 2022
 
