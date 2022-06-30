@@ -2,6 +2,31 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+## June 2022
+
+This month's release includes many changes to our website tools, support for bulk STAC queries, several new datasets, and updates to our open-source dependencies and libraries.
+
+### Highlights
+
+- The Catalog and Explorer interfaces have been redesigned to accommodate the increased number of datasets available in the Planetary Computer.
+- The entire website, including the Explorer, Catalog, and Documentation pages, have all been updated to work well on most mobile devices.
+- We now provide snapshots of our STAC items for most of our collections as [GeoParquet](https://github.com/opengeospatial/geoparquet) datasets to support bulk STAC queries.
+
+### Bulk STAC queries with GeoParquet
+
+Many of our collections now include a `geoparquet-items` collection-level asset that links to a [GeoParquet](https://github.com/opengeospatial/geoparquet) dataset in Azure Blob Storage. Each row in these Parquet datasets is a STAC item. While most users should continue to use the normal STAC API, these Parquet datasets are a nice complement for workloads that need to return very many STAC items.
+
+See [Bulk STAC item queries with GeoParquet](../quickstarts/stac-geoparquet) for more.
+
+### New datasets
+
+This release includes several new datasets in our STAC API. Each of these links to the dataset details page, which includes an example notebook.
+
+- [Deltares Floods](https://planetarycomputer.microsoft.com/dataset/deltares-floods)
+- [Deltares Water Availability](https://planetarycomputer.microsoft.com/dataset/deltares-water-availability)
+- [Microsoft Buildings Footprint](https://planetarycomputer.microsoft.com/dataset/ms-buildings)
+- [Kwando & Upper Zambezi Rivers HydroForecast](https://planetarycomputer.microsoft.com/dataset/kaza-hydroforecast)
+
 ## May 2022
 
 This release includes many new datasets, API enhancements, and updates to libraries.
