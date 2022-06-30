@@ -592,9 +592,10 @@ export const renderItemColumn = (item, _, column) => {
   // Add tooltips to potentially long cells
   switch (column.key) {
     case "asset":
-      // Assets are generally rendered as a link to download a file. However, Zarr types
-      // are really a root directory, and the href is more important than a link
-      return fieldContent.contentType === "application/vnd+zarr" ? (
+      // Assets are generally rendered as a link to download a file. However, some types
+      // are really a root directory, and the href text is more important than a link
+      const nonLinkHrefTypes = ["application/vnd+zarr", "application/x-parquet"];
+      return nonLinkHrefTypes.includes(fieldContent.contentType) ? (
         <code title={fieldContent.name}>{fieldContent.href}</code>
       ) : (
         <NewTabLink href={fieldContent.href}>{fieldContent.name}</NewTabLink>
