@@ -443,6 +443,14 @@ jrc-gsw:
       src: jrc-gsw-example.html
       launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
 
+kaza-hydroforecast:
+  category: Water
+  headerImg: ./images/kaza-hydroforecast-hero.png
+  tabs:
+    - title: Example Notebook
+      src: kaza-hydroforecast-example.html
+      launch: datasets/kaza-hydroforecast/kaza-hydroforecast-example.ipynb
+
 landsat-c2-l1:
   category: Imagery
   headerImg: ./images/landsat-c2-l1-hero.png
@@ -623,6 +631,7 @@ mobi:
       launch: datasets/mobi/mobi-example.ipynb
 
 ms-buildings:
+  category: Infrastructure
   headerImg: ./images/ms-buildings-hero.png
   tabs:
     - title: Example Notebook
