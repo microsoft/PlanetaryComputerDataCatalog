@@ -631,6 +631,7 @@ mobi:
       launch: datasets/mobi/mobi-example.ipynb
 
 ms-buildings:
+  category: Infrastructure
   headerImg: ./images/ms-buildings-hero.png
   tabs:
     - title: Example Notebook
