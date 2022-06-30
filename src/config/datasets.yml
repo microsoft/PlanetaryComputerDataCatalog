@@ -36,872 +36,749 @@
 #       filePath: tutorials/notebook.ipynb
 
 ---
-collections:
-  3dep-lidar-copc:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-copc-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-copc-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-copc-example.ipynb
-
-  3dep-lidar-dsm:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-dsm-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-pointsourceid:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-pointsourceid-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-intensity:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-intensity-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-hag:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-hag-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-dtm:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-dtm-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-returns:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-returns-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-classification:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-classification-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-lidar-dtm-native:
-    category: DEMs
-    headerImg: ./images/3dep-lidar-dtm-native-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-lidar-cog-example.html
-        launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
-
-  3dep-seamless:
-    category: DEMs
-    headerImg: ./images/threedep-seamless-hero.png
-    tabs:
-      - title: Example Notebook
-        src: 3dep-seamless-example.html
-        launch: datasets/dep/3dep-seamless-example.ipynb
-
-  alos-dem:
-    category: DEMs
-    headerImg: ./images/alos-hero.png
-    tabs:
-      - title: Example Notebook
-        src: alos-dem-example.html
-        launch: datasets/alos-dem/alos-dem-example.ipynb
-
-  alos-fnf-mosaic:
-    category: Land use/Land cover
-    headerImg: ./images/alos-fnf-hero.png
-    tabs:
-      - title: Example Notebook
-        src: alos-palsar-example.html
-        launch: datasets/alos-palsar/alos-palsar-example.ipynb
-
-  alos-palsar-mosaic:
-    category: SAR
-    headerImg: ./images/alos-palsar-hero.png
-    tabs:
-      - title: Example Notebook
-        src: alos-palsar-example.html
-        launch: datasets/alos-palsar/alos-palsar-example.ipynb
-
-  aster-l1t:
-    category: Imagery
-    headerImg: ./images/aster-hero.jpg
-    tabs:
-      - title: Example Notebook
-        src: aster-l1t-example.html
-        launch: datasets/aster-l1t/aster-l1t-example.ipynb
-
-  chesapeake-lc-7:
-    category: Land use/Land cover
-    headerImg: ./images/chesapeake-lc-7-hero.png
-
-  chesapeake-lc-13:
-    category: Land use/Land cover
-    headerImg: ./images/chesapeake-lc-13-hero.png
-
-  chesapeake-lu:
-    category: Land use/Land cover
-    headerImg: ./images/chesapeake-lu-hero.png
-
-  chloris-biomass:
-    category: Biomass/Vegetation
-    headerImg: ./images/chloris-biomass-hero.jpg
-    tabs:
-      - title: Example Notebook
-        src: chloris-biomass-example.html
-        launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
-
-  cil-gdpcir-cc0:
-    category: Climate/Weather
-    headerImg: ./images/cil-gdpcir.png
-    tabs:
-      - title: Example Notebook
-        src: cil-gdpcir-example.html
-        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
-      - title: Ensemble example
-        src: ensemble.html
-        launch: datasets/cil-gdpcir/ensemble.ipynb
-      - title: Climate indicators
-        src: indicators.html
-        launch: datasets/cil-gdpcir/indicators.ipynb
-
-  cil-gdpcir-cc-by:
-    category: Climate/Weather
-    headerImg: ./images/cil-gdpcir.png
-    tabs:
-      - title: Example Notebook
-        src: cil-gdpcir-example.html
-        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
-      - title: Ensemble example
-        src: ensemble.html
-        launch: datasets/cil-gdpcir/ensemble.ipynb
-      - title: Climate indicators
-        src: indicators.html
-        launch: datasets/cil-gdpcir/indicators.ipynb
-
-  cil-gdpcir-cc-by-sa:
-    category: Climate/Weather
-    headerImg: ./images/cil-gdpcir.png
-    tabs:
-      - title: Example Notebook
-        src: cil-gdpcir-example.html
-        launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
-      - title: Ensemble example
-        src: ensemble.html
-        launch: datasets/cil-gdpcir/ensemble.ipynb
-      - title: Climate indicators
-        src: indicators.html
-        launch: datasets/cil-gdpcir/indicators.ipynb
-
-  cop-dem-glo-30:
-    category: DEMs
-    headerImg: ./images/cop-dem-glo-30-hero.png
-    tabs:
-      - title: Example Notebook
-        src: copernicus-dem-example.html
-        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-
-  cop-dem-glo-90:
-    category: DEMs
-    headerImg: ./images/cop-dem-glo-90-hero.png
-    tabs:
-      - title: Example Notebook
-        src: copernicus-dem-example.html
-        launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
-
-  daymet-daily-pr:
-    headerImg: ./images/daymet-daily-pr-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-monthly-pr:
-    headerImg: ./images/daymet-monthly-pr-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-annual-pr:
-    headerImg: ./images/daymet-annual-pr-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-daily-hi:
-    headerImg: ./images/daymet-daily-hi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-monthly-hi:
-    headerImg: ./images/daymet-monthly-hi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-annual-hi:
-    headerImg: ./images/daymet-annual-hi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-daily-na:
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-monthly-na:
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  daymet-annual-na:
-    tabs:
-      - title: Example Notebook
-        src: daymet-example.html
-        launch: datasets/daymet/daymet-example.ipynb
-
-  eclipse:
-    tabs:
-      - title: Example Notebook
-        src: eclipse-example.html
-        launch: datasets/eclipse/eclipse-example.ipynb
-
-  ecmwf-forecast:
-    headerImg: ./images/ecmwf-forecast-hero.png
-    tabs:
-      - title: Example Notebook
-        src: ecmwf-forecast-example.html
-        launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
-
-  era5-pds:
-    category: Climate/Weather
-    headerImg: ./images/era5-hero.png
-    tabs:
-      - title: Example Notebook
-        src: era5-example.html
-        launch: datasets/era5/era5-example.ipynb
-
-  esa-worldcover:
-    category: Land use/Land cover
-    headerImg: ./images/esa-worldcover-hero.png
-    tabs:
-      - title: Example Notebook
-        src: esa-worldcover-example.html
-        launch: datasets/esa-worldcover/esa-worldcover-example.ipynb
-
-  fia:
-    headerImg: ./images/fia-hero.png
-    tabs:
-      - title: Example Notebook
-        src: fia-example.html
-        launch: datasets/fia/fia-example.ipynb
-
-  gap:
-    category: Land use/Land cover
-    headerImg: ./images/gap-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gap-example.html
-        launch: datasets/gap/gap-example.ipynb
-
-  gnatsgo-rasters:
-    category: Soils
-    headerImg: ./images/gnatsgo-rasters-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gnatsgo-example.html
-        launch: datasets/gnatsgo/gnatsgo-example.ipynb
-
-  gnatsgo-tables:
-    category: Soils
-    headerImg: ./images/gnatsgo-tables-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gnatsgo-example.html
-        launch: datasets/gnatsgo/gnatsgo-example.ipynb
-
-  gbif:
-    headerImg: ./images/gbif-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gbif-example.html
-        launch: datasets/gbif/gbif-example.ipynb
-
-  goes-cmi:
-    category: Imagery
-    headerImg: ./images/goes-cmi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: goes-cmi-example.html
-        launch: datasets/goes/goes-cmi-example.ipynb
-
-  gpm-imerg-hhr:
-    headerImg: ./images/gpm-imerg-hhr-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gpm-imerg-hhr-example.html
-        launch: datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
-
-  gridmet:
-    headerImg: ./images/gridmet-hero.png
-    tabs:
-      - title: Example Notebook
-        src: gridmet-example.html
-        launch: datasets/gridmet/gridmet-example.ipynb
-
-  hgb:
-    category: Biomass/Vegetation
-    headerImg: ./images/hgb-hero.png
-    tabs:
-      - title: Example Notebook
-        src: hgb-example.html
-        launch: datasets/hgb/hgb-example.ipynb
-
-  hrea:
-    category: Infrastructure
-    headerImg: ./images/hrea-hero.png
-    tabs:
-      - title: Example Notebook
-        src: hrea-example.html
-        launch: datasets/hrea/hrea-example.ipynb
-
-  io-lulc:
-    category: Land use/Land cover
-    tabs:
-      - title: Example Notebook
-        src: io-lulc-example.html
-        launch: datasets/io-lulc/io-lulc-example.ipynb
-
-  io-lulc-9-class:
-    category: Land use/Land cover
-    headerImg: ./images/io-lulc-9-class-hero.png
-    tabs:
-      - title: Example Notebook
-        src: io-lulc-9-class-example.html
-        launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
-
-  jrc-gsw:
-    category: Water/Snow
-    headerImg: ./images/jrc-gsw-hero.png
-    tabs:
-      - title: Example Notebook
-        src: jrc-gsw-example.html
-        launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
-
-  landsat-c2-l1:
-    category: Imagery
-    headerImg: ./images/landsat-c2-l1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: landsat-c2-example.html
-        launch: datasets/landsat-c2/landsat-c2-example.ipynb
-
-  landsat-c2-l2:
-    category: Imagery
-    headerImg: ./images/landsat-c2-l2-hero.png
-    tabs:
-      - title: Example Notebook
-        src: landsat-c2-example.html
-        launch: datasets/landsat-c2/landsat-c2-example.ipynb
-
-  landsat-8-c2-l2:
-    isHidden: true
-
-  modis-09A1-061:
-    category: Imagery
-    headerImg: ./images/modis-09a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-imagery-example.html
-        launch: datasets/modis/modis-imagery-example.ipynb
-
-  modis-09Q1-061:
-    category: Imagery
-    headerImg: ./images/modis-09q1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-imagery-example.html
-        launch: datasets/modis/modis-imagery-example.ipynb
-
-  modis-10A1-061:
-    category: Water/Snow
-    headerImg: ./images/modis-10a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-snow-example.html
-        launch: datasets/modis/modis-snow-example.ipynb
-
-  modis-10A2-061:
-    category: Water/Snow
-    headerImg: ./images/modis-10a2-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-snow-example.html
-        launch: datasets/modis/modis-snow-example.ipynb
-
-  modis-11A1-061:
-    category: Temperature
-    headerImg: ./images/modis-11a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-temperature-example.html
-        launch: datasets/modis/modis-temperature-example.ipynb
-
-  modis-11A2-061:
-    category: Temperature
-    headerImg: ./images/modis-11a2-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-temperature-example.html
-        launch: datasets/modis/modis-temperature-example.ipynb
-
-  modis-13A1-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-13a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-13Q1-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-13q1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-14A1-061:
-    category: Fire
-    headerImg: ./images/modis-14a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-fire-example.html
-        launch: datasets/modis/modis-fire-example.ipynb
-
-  modis-14A2-061:
-    category: Fire
-    headerImg: ./images/modis-14a2-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-fire-example.html
-        launch: datasets/modis/modis-fire-example.ipynb
-
-  modis-15A2H-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-15a2h-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-15A3H-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-15a3h-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-16A3GF-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-16a3gf-hero.jpeg
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-17A2H-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-17a2h-hero.jpeg
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-17A2HGF-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-17a2hgf-hero.jpeg
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-17A3HGF-061:
-    category: Biomass/Vegetation
-    headerImg: ./images/modis-17a3hgf-hero.jpeg
-    tabs:
-      - title: Example Notebook
-        src: modis-vegetation-example.html
-        launch: datasets/modis/modis-vegetation-example.ipynb
-
-  modis-21A2-061:
-    category: Temperature
-    headerImg: ./images/modis-21a2-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-temperature-example.html
-        launch: datasets/modis/modis-temperature-example.ipynb
-
-  modis-43A4-061:
-    category: Imagery
-    headerImg: ./images/modis-43a4-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-imagery-example.html
-        launch: datasets/modis/modis-imagery-example.ipynb
-
-  modis-64A1-061:
-    category: Fire
-    headerImg: ./images/modis-64a1-hero.png
-    tabs:
-      - title: Example Notebook
-        src: modis-fire-example.html
-        launch: datasets/modis/modis-fire-example.ipynb
-
-  mobi:
-    category: Biodiversity
-    headerImg: ./images/mobi-hero.png
-    tabs:
-      - title: Example Notebook
-        src: mobi-example.html
-        launch: datasets/mobi/mobi-example.ipynb
-
-  mtbs:
-    category: Fire
-    headerImg: ./images/mtbs-hero.png
-    tabs:
-      - title: Example Notebook
-        src: mtbs-example.html
-        launch: datasets/mtbs/mtbs-example.ipynb
-
-  naip:
-    category: Imagery
-    headerImg: ./images/naip-hero.jpg
-    tabs:
-      - title: Example Notebook
-        src: naip-example.html
-        launch: datasets/naip/naip-example.ipynb
-
-  nasa-nex-gddp-cmip6:
-    category: Climate/Weather
-    tabs:
-      - title: Example Notebook
-        src: nasa-nex-gddp-cmip6-example.html
-        launch: datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
-
-  nasadem:
-    category: DEMs
-    headerImg: ./images/nasadem-hero.png
-    tabs:
-      - title: Example Notebook
-        src: nasadem-example.html
-        launch: datasets/nasadem/nasadem-example.ipynb
-
-  noaa-c-cap:
-    category: Land use/Land cover
-    headerImg: ./images/noaa-c-cap-hero.png
-    tabs:
-      - title: Example Notebook
-        src: noaa-c-cap-example.html
-        launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
-
-  nrcan-landcover:
-    category: Land use/Land cover
-    headerImg: ./images/nrcan-landcover-hero.png
-    tabs:
-      - title: Example Notebook
-        src: nrcan-landcover-example.html
-        launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
-
-  planet-nicfi-visual:
-    hideInExplorer: true
-    category: Imagery
-    headerImg: ./images/planet-nicfi-visual-hero.png
-    tabs:
-      - title: Example Notebook
-        src: planet-nicfi-example.html
-        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
-
-  planet-nicfi-analytic:
-    hideInExplorer: true
-    category: Imagery
-    headerImg: ./images/planet-nicfi-analytic-hero.png
-    tabs:
-      - title: Example Notebook
-        src: planet-nicfi-example.html
-        launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
-
-  sentinel-1-grd:
-    category: SAR
-    headerImg: ./images/sentinel-1-grd-hero.png
-    tabs:
-      - title: Example Notebook
-        src: sentinel-1-grd-example.html
-        launch: datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
-
-  sentinel-1-rtc:
-    category: SAR
-    headerImg: ./images/sentinel-1-rtc-hero.png
-    tabs:
-      - title: Example Notebook
-        src: sentinel-1-rtc-example.html
-        launch: datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
-
-  sentinel-2-l2a:
-    category: Imagery
-    headerImg: ./images/sentinel-hero.jpg
-    tabs:
-      - title: Example Notebook
-        src: sentinel-2-l2a-example.html
-        launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
-
-  terraclimate:
-    category: Climate/Weather
-    headerImg: ./images/terraclimate-hero.png
-    tabs:
-      - title: Example Notebook
-        src: terraclimate-example.html
-        launch: datasets/terraclimate/terraclimate-example.ipynb
-
-  us-census:
-    headerImg: ./images/us-census-hero.png
-    tabs:
-      - title: Example Notebook
-        src: us-census-example.html
-        launch: datasets/us-census/us-census-example.ipynb
-
-# Configuration for "other dataset" section. This list is rendered
-# in the order represented here, which is mostly alphabetical, with
-# some custom prioritization.
-ai4e:
-  - title: Deltares Global Flood Maps
-    shortTerm: Deltares flood
-    description: Global coastal inundation maps at multiple resolutions
-    infoUrl: https://aka.ms/ai4edata-deltares-gfm
-    thumbnailUrl: deltares-flood.png
-    alt: Flood map of coastal Myanmar
-    keywords: [Global, Flood, Sea level rise, Water, Deltares]
-
-  - title: Deltares Global Water Availability
-    shortTerm: Deltares water availability
-    description: Global coastal inundation maps at multiple resolutions
-    infoUrl: https://aka.ms/ai4edata-deltares-reservoirs
-    thumbnailUrl: deltares-reservoir.jpg
-    alt: Reservoir with access tower
-    keywords: [Global, Water, Reservoir, Deltares]
-
-  - title: Global Hydro Estimator
-    shortTerm: global precipitation
-    description: Global precipitation estimates
-    infoUrl: http://aka.ms/ai4edata-ghe
-    thumbnailUrl: RE4ucH7.jpg
-    alt: Clouds at sunset
-    keywords: [NOAA, Global, Precipitation]
-
-  - title: High Resolution Ocean Surface Wave Hindcast
-    shortTerm: wave hindcast
-    description:
-      Long-term wave hindcast data for the U.S. Exclusive Economic Zone (EEZ)
-    infoUrl: https://aka.ms/ai4edata-doe-wave
-    thumbnailUrl: wave-hindcast_small.jpg
-    alt: Ocean waves
-    keywords: [Wave, hindcast, United States]
-
-  - title: Harmonized Landsat Sentinel-2
-    shortTerm: HLS
-    description: 30m-resolution satellite imagery for North America
-    infoUrl: http://aka.ms/ai4edata-hls
-    thumbnailUrl: RE3OM3E.jpg
-    alt: Map of Chesapeake Bay
-    keywords: [Landsat, Sentinel, Satellite, Imagery, North America]
-
-  - title: LILA BC
-    shortTerm: LILA BC
-    description: Labeled images related to wildlife conservation
-    infoUrl: http://lila.science/
-    thumbnailUrl: RE3BWhq.jpg
-    alt: Fox pup stands on a rock.
-    keywords: [LILA, Labels, Wildlife, Biodiversity]
-
-  - title: National Land Cover Database
-    shortTerm: land cover
-    description: US-wide data on land cover and land cover change
-    infoUrl: https://aka.ms/ai4edata-nlcd
-    thumbnailUrl: RWz0Zh.jpg
-    alt: Landcover map of the United States
-    keywords: [Land Cover, United States]
-
-  - title: National Solar Radiation Database
-    shortTerm: solar radiation
-    description:
-      Half-hourly measurements of incident solar radiation from 1998-present
-    infoUrl: https://aka.ms/ai4edata-nsrdb
-    thumbnailUrl: solar_radiation_small.jpg
-    alt: Bright sun over the ocean
-    keywords: [United States, Solar, Radiation]
-
-  - title: NOAA Climate Data Records
-    shortTerm: NOAA climate
-    description: Historical global climate information
-    infoUrl: https://aka.ms/ai4edata-cdr
-    thumbnailUrl: global_weather_1.jpg
-    alt: Weather pattern from space
-    keywords: [Global, NOAA, Climate]
-
-  - title: NOAA Climate Forecast System
-    shortTerm: NOAA climate forecast
-    description: Global weather forecasts at approximately 56km resolution
-    infoUrl: https://aka.ms/ai4edata-cfs
-    thumbnailUrl: global_weather_2.jpg
-    alt: Weather pattern from space
-    keywords: [Global, NOAA, Climate, Forecast]
-
-  - title: NOAA Global Ensemble Forecast System (GEFS)
-    shortTerm: NOAA ensemble forecast
-    description: Ensembled global weather forecasts
-    infoUrl: https://aka.ms/ai4edata-gefs
-    thumbnailUrl: global_weather_3.jpg
-    alt: Weather pattern from space
-    keywords: [Global, NOAA, Weather, Forecast]
-
-  - title: NOAA Global Forecast System
-    shortTerm: NOAA global forecast
-    description: 15-day US hourly weather forecast data
-    infoUrl: https://aka.ms/ai4edata-gfs
-    thumbnailUrl: RE4rvnx.jpg
-    alt: Earth viewed from space station with a satellite
-    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
-
-  - title: NOAA GFS Warm Start Conditions
-    shortTerm: NOAA warm start
-    description: Six-hourly initial conditions for the NOAA Global Forecast System
-    infoUrl: https://aka.ms/ai4edata-gfs-warm-start
-    thumbnailUrl: RE4MHyn.jpg
-    alt: High altitude view of cloud cover with moon
-    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
-
-  - title: NOAA High-Resolution Rapid Refresh (HRRR)
-    shortTerm: NOAA HRRR
-    description: Weather forecasts for North America at 3km resolution
-    infoUrl: https://aka.ms/ai4edata-hrrr
-    thumbnailUrl: hrrr_small.jpg
-    alt: Temperature rendering of North America
-    keywords: [North America, NOAA, Weather, Forecast]
-
-  - title: NOAA Integrated Surface Data
-    shortTerm: NOAA surface
-    description: Worldwide hourly weather history data
-    infoUrl: https://aka.ms/ai4edata-isd
-    thumbnailUrl: RE4rsOQ.jpg
-    alt: High altitude view of clouds
-    keywords: [Global, NOAA, Weather, Temperature, Precipitation]
-
-  - title: NOAA US Climate Gridded Dataset (NClimGrid)
-    shortTerm: NOAA US climate
-    description: Gridded climate data for the U.S. from 1895 to the present
-    infoUrl: https://aka.ms/ai4edata-nclimgrid
-    thumbnailUrl: nclimgrid.png
-    alt: Rendering of precipitation in NW USA
-    keywords: [United States, NOAA, Climate, Historical]
-
-  - title: NOAA Rapid Refresh (RAP)
-    shortTerm: NOAA RAP
-    description: Weather forecasts for North America at 13km resolution
-    infoUrl: https://aka.ms/ai4edata-rap
-    thumbnailUrl: thunder_storm.jpg
-    alt: Lightning and thunder storm
-    keywords: [North America, NOAA, Weather]
-
-  - title: NOAA US Climate Normals
-    shortTerm: NOAA climate normals
-    description: Typical climate conditions for the U.S. from 1981-present
-    infoUrl: https://aka.ms/ai4edata-climatenormals
-    thumbnailUrl: climate_normals.jpg
-    alt: Pink cloudy sky
-    keywords: [North America, NOAA, Weather]
-
-  - title: Ocean Observatories Initiative CAMHD
-    shortTerm: OOI
-    description: High-resolution video from the floor of the Pacific Ocean
-    infoUrl: https://aka.ms/ai4edata-ooi-camhd
-    thumbnailUrl: RE4KiKZ.jpg
-    alt: Image from ocean floor video
-    keywords: [OOI, Video, Ocean, Pacific]
-
-  - title: Sentinel-1 SLC
-    shortTerm: Sentinel-1 SLC
-    description: Global synthetic aperture radar data for the last 90 days
-    infoUrl: https://aka.ms/ai4edata-sentinel-1-slc
-    thumbnailUrl: sentinel-1-sat.jpg
-    alt: Earth from space showing panel of satellite
-    keywords: [Global, Sentinel, Satellite, ESA, SAR]
-
-  - title: Sentinel-3 L2
-    shortTerm: Sentinel-3 L2
-    description:
-      Global multispectral imagery at a resolution of 300m-500m from 2016-present
-    infoUrl: https://aka.ms/ai4edata-sentinel-3
-    thumbnailUrl: sentinel-3-l2.png
-    alt: Satellite image of Grand Canyon from Sentinel-3 L2
-    keywords: [Global, Sentinel, Satellite, ESA, Temperature, SAR, Ocean, Imagery]
-
-  - title: Sentinel-5P
-    shortTerm: Sentinel-5P
-    description: Global atmospheric data from 2018-present
-    infoUrl: https://aka.ms/ai4edata-sentinel-5p
-    thumbnailUrl: sentinel-5.png
-    alt: Rendering of sentinel 5 swath
-    keywords: [Global, Sentinel, Satellite, ESA, Atmosphere]
-
-  - title: UK Met Office CSSP China 20CRDS
-    shortTerm: CSSP China 20CRDS
-    description: Historical climate data for China, from 1851-2010
-    infoUrl: https://aka.ms/ai4edata-uk-met-20crds
-    thumbnailUrl: cssp-china.jpg
-    alt: Sky and clouds over mountain range
-    keywords: [Met Office, China, Climate, Historical]
-
-  - title: UK Met Office Global Weather Data for COVID-19 Analysis
-    shortTerm: UK Met COVID-19
-    description:
-      Data to explore relationships between COVID-19 and environmental factors
-    infoUrl: https://aka.ms/ai4edata-metofficecovid19
-    thumbnailUrl: covid-dot-map.jpg
-    alt: Global map rendered as dots showing hotspot areas
-    keywords: [Met Office, Global, COVID-19, Weather]
-
-  - title: UMCM Hurricanes
-    shortTerm: UMCM Hurricane
-    description: Modeled wind, wave, and current data for Hurricanes Ike and Sandy
-    infoUrl: https://aka.ms/ai4edata-umcm-hurricanes
-    thumbnailUrl: hurricane_small.jpg
-    alt: Hurricane in gulf of Mexico
-    keywords: [UMCM, Hurricane, Wind, Wave, Current, Ocean]
+3dep-lidar-copc:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-copc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-copc-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-copc-example.ipynb
+
+3dep-lidar-dsm:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-dsm-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-pointsourceid:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-pointsourceid-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-intensity:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-intensity-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-hag:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-hag-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-dtm:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-dtm-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-returns:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-returns-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-classification:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-classification-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-lidar-dtm-native:
+  category: DEMs
+  headerImg: ./images/3dep-lidar-dtm-native-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-lidar-cog-example.html
+      launch: datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
+
+3dep-seamless:
+  category: DEMs
+  headerImg: ./images/threedep-seamless-hero.png
+  tabs:
+    - title: Example Notebook
+      src: 3dep-seamless-example.html
+      launch: datasets/dep/3dep-seamless-example.ipynb
+
+alos-dem:
+  category: DEMs
+  headerImg: ./images/alos-hero.png
+  tabs:
+    - title: Example Notebook
+      src: alos-dem-example.html
+      launch: datasets/alos-dem/alos-dem-example.ipynb
+
+alos-fnf-mosaic:
+  category: Land use/Land cover
+  headerImg: ./images/alos-fnf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: alos-palsar-example.html
+      launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
+alos-palsar-mosaic:
+  category: SAR
+  headerImg: ./images/alos-palsar-hero.png
+  tabs:
+    - title: Example Notebook
+      src: alos-palsar-example.html
+      launch: datasets/alos-palsar/alos-palsar-example.ipynb
+
+aster-l1t:
+  category: Imagery
+  headerImg: ./images/aster-hero.jpg
+  tabs:
+    - title: Example Notebook
+      src: aster-l1t-example.html
+      launch: datasets/aster-l1t/aster-l1t-example.ipynb
+
+chesapeake-lc-7:
+  category: Land use/Land cover
+  headerImg: ./images/chesapeake-lc-7-hero.png
+
+chesapeake-lc-13:
+  category: Land use/Land cover
+  headerImg: ./images/chesapeake-lc-13-hero.png
+
+chesapeake-lu:
+  category: Land use/Land cover
+  headerImg: ./images/chesapeake-lu-hero.png
+
+chloris-biomass:
+  category: Biomass/Vegetation
+  headerImg: ./images/chloris-biomass-hero.jpg
+  tabs:
+    - title: Example Notebook
+      src: chloris-biomass-example.html
+      launch: datasets/chloris-biomass/chloris-biomass-example.ipynb
+
+cil-gdpcir-cc0:
+  category: Climate/Weather
+  headerImg: ./images/cil-gdpcir.png
+  tabs:
+    - title: Example Notebook
+      src: cil-gdpcir-example.html
+      launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+    - title: Ensemble example
+      src: ensemble.html
+      launch: datasets/cil-gdpcir/ensemble.ipynb
+    - title: Climate indicators
+      src: indicators.html
+      launch: datasets/cil-gdpcir/indicators.ipynb
+
+cil-gdpcir-cc-by:
+  category: Climate/Weather
+  headerImg: ./images/cil-gdpcir.png
+  tabs:
+    - title: Example Notebook
+      src: cil-gdpcir-example.html
+      launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+    - title: Ensemble example
+      src: ensemble.html
+      launch: datasets/cil-gdpcir/ensemble.ipynb
+    - title: Climate indicators
+      src: indicators.html
+      launch: datasets/cil-gdpcir/indicators.ipynb
+
+cil-gdpcir-cc-by-sa:
+  category: Climate/Weather
+  headerImg: ./images/cil-gdpcir.png
+  tabs:
+    - title: Example Notebook
+      src: cil-gdpcir-example.html
+      launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
+    - title: Ensemble example
+      src: ensemble.html
+      launch: datasets/cil-gdpcir/ensemble.ipynb
+    - title: Climate indicators
+      src: indicators.html
+      launch: datasets/cil-gdpcir/indicators.ipynb
+
+cop-dem-glo-30:
+  category: DEMs
+  headerImg: ./images/cop-dem-glo-30-hero.png
+  tabs:
+    - title: Example Notebook
+      src: copernicus-dem-example.html
+      launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+
+cop-dem-glo-90:
+  category: DEMs
+  headerImg: ./images/cop-dem-glo-90-hero.png
+  tabs:
+    - title: Example Notebook
+      src: copernicus-dem-example.html
+      launch: datasets/copernicus-dem/copernicus-dem-example.ipynb
+
+daymet-daily-pr:
+  category: Climate/Weather
+  headerImg: ./images/daymet-daily-pr-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-monthly-pr:
+  category: Climate/Weather
+  headerImg: ./images/daymet-monthly-pr-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-annual-pr:
+  category: Climate/Weather
+  headerImg: ./images/daymet-annual-pr-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-daily-hi:
+  category: Climate/Weather
+  headerImg: ./images/daymet-daily-hi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-monthly-hi:
+  category: Climate/Weather
+  headerImg: ./images/daymet-monthly-hi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-annual-hi:
+  category: Climate/Weather
+  headerImg: ./images/daymet-annual-hi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-daily-na:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-monthly-na:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+daymet-annual-na:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: daymet-example.html
+      launch: datasets/daymet/daymet-example.ipynb
+
+deltares-floods:
+  category: Water
+  tabs:
+    - title: Example Notebook
+      src: deltares-floods-example.html
+      launch: datasets/deltares-floods/deltares-floods-example.ipynb
+
+deltares-water-availability:
+  category: Water 
+  tabs:
+    - title: Example Notebook
+      src: deltares-water-availability-example.html
+      launch: datasets/deltares-water-availability/deltares-water-availability-example.ipynb
+
+eclipse:
+  category: Air Quality
+  tabs:
+    - title: Example Notebook
+      src: eclipse-example.html
+      launch: datasets/eclipse/eclipse-example.ipynb
+
+ecmwf-forecast:
+  category: Climate/Weather
+  headerImg: ./images/ecmwf-forecast-hero.png
+  tabs:
+    - title: Example Notebook
+      src: ecmwf-forecast-example.html
+      launch: datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
+
+era5-pds:
+  category: Climate/Weather
+  headerImg: ./images/era5-hero.png
+  tabs:
+    - title: Example Notebook
+      src: era5-example.html
+      launch: datasets/era5/era5-example.ipynb
+
+esa-worldcover:
+  category: Land use/Land cover
+  headerImg: ./images/esa-worldcover-hero.png
+  tabs:
+    - title: Example Notebook
+      src: esa-worldcover-example.html
+      launch: datasets/esa-worldcover/esa-worldcover-example.ipynb
+
+fia:
+  category: Biomass/Vegetation
+  headerImg: ./images/fia-hero.png
+  tabs:
+    - title: Example Notebook
+      src: fia-example.html
+      launch: datasets/fia/fia-example.ipynb
+
+gap:
+  category: Land use/Land cover
+  headerImg: ./images/gap-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gap-example.html
+      launch: datasets/gap/gap-example.ipynb
+
+gnatsgo-rasters:
+  category: Soils
+  headerImg: ./images/gnatsgo-rasters-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gnatsgo-example.html
+      launch: datasets/gnatsgo/gnatsgo-example.ipynb
+
+gnatsgo-tables:
+  category: Soils
+  headerImg: ./images/gnatsgo-tables-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gnatsgo-example.html
+      launch: datasets/gnatsgo/gnatsgo-example.ipynb
+
+gbif:
+  category: Biodiversity
+  headerImg: ./images/gbif-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gbif-example.html
+      launch: datasets/gbif/gbif-example.ipynb
+
+goes-cmi:
+  category: Imagery
+  headerImg: ./images/goes-cmi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: goes-cmi-example.html
+      launch: datasets/goes/goes-cmi-example.ipynb
+
+gpm-imerg-hhr:
+  category: Climate/Weather
+  headerImg: ./images/gpm-imerg-hhr-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gpm-imerg-hhr-example.html
+      launch: datasets/gpm-imerg-hhr/gpm-imerg-hhr-example.ipynb
+
+gridmet:
+  category: Climate/Weather
+  headerImg: ./images/gridmet-hero.png
+  tabs:
+    - title: Example Notebook
+      src: gridmet-example.html
+      launch: datasets/gridmet/gridmet-example.ipynb
+
+hgb:
+  category: Biomass/Vegetation
+  headerImg: ./images/hgb-hero.png
+  tabs:
+    - title: Example Notebook
+      src: hgb-example.html
+      launch: datasets/hgb/hgb-example.ipynb
+
+hrea:
+  category: Infrastructure
+  headerImg: ./images/hrea-hero.png
+  tabs:
+    - title: Example Notebook
+      src: hrea-example.html
+      launch: datasets/hrea/hrea-example.ipynb
+
+io-lulc:
+  category: Land use/Land cover
+  tabs:
+    - title: Example Notebook
+      src: io-lulc-example.html
+      launch: datasets/io-lulc/io-lulc-example.ipynb
+
+io-lulc-9-class:
+  category: Land use/Land cover
+  headerImg: ./images/io-lulc-9-class-hero.png
+  tabs:
+    - title: Example Notebook
+      src: io-lulc-9-class-example.html
+      launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
+
+jrc-gsw:
+  category: Water
+  headerImg: ./images/jrc-gsw-hero.png
+  tabs:
+    - title: Example Notebook
+      src: jrc-gsw-example.html
+      launch: datasets/jrc-gsw/jrc-gsw-example.ipynb
+
+kaza-hydroforecast:
+  category: Water
+  headerImg: ./images/kaza-hydroforecast-hero.png
+  tabs:
+    - title: Example Notebook
+      src: kaza-hydroforecast-example.html
+      launch: datasets/kaza-hydroforecast/kaza-hydroforecast-example.ipynb
+
+landsat-c2-l1:
+  category: Imagery
+  headerImg: ./images/landsat-c2-l1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: landsat-c2-example.html
+      launch: datasets/landsat-c2/landsat-c2-example.ipynb
+
+landsat-c2-l2:
+  category: Imagery
+  headerImg: ./images/landsat-c2-l2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: landsat-c2-example.html
+      launch: datasets/landsat-c2/landsat-c2-example.ipynb
+
+landsat-8-c2-l2:
+  isHidden: true
+
+modis-09A1-061:
+  category: Imagery
+  headerImg: ./images/modis-09a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-imagery-example.html
+      launch: datasets/modis/modis-imagery-example.ipynb
+
+modis-09Q1-061:
+  category: Imagery
+  headerImg: ./images/modis-09q1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-imagery-example.html
+      launch: datasets/modis/modis-imagery-example.ipynb
+
+modis-10A1-061:
+  category: Snow
+  headerImg: ./images/modis-10a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-snow-example.html
+      launch: datasets/modis/modis-snow-example.ipynb
+
+modis-10A2-061:
+  category: Snow
+  headerImg: ./images/modis-10a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-snow-example.html
+      launch: datasets/modis/modis-snow-example.ipynb
+
+modis-11A1-061:
+  category: Temperature
+  headerImg: ./images/modis-11a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-temperature-example.html
+      launch: datasets/modis/modis-temperature-example.ipynb
+
+modis-11A2-061:
+  category: Temperature
+  headerImg: ./images/modis-11a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-temperature-example.html
+      launch: datasets/modis/modis-temperature-example.ipynb
+
+modis-13A1-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-13a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-13Q1-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-13q1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-14A1-061:
+  category: Fire
+  headerImg: ./images/modis-14a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-fire-example.html
+      launch: datasets/modis/modis-fire-example.ipynb
+
+modis-14A2-061:
+  category: Fire
+  headerImg: ./images/modis-14a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-fire-example.html
+      launch: datasets/modis/modis-fire-example.ipynb
+
+modis-15A2H-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-15a2h-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-15A3H-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-15a3h-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-16A3GF-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-16a3gf-hero.jpeg
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-17A2H-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-17a2h-hero.jpeg
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-17A2HGF-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-17a2hgf-hero.jpeg
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-17A3HGF-061:
+  category: Biomass/Vegetation
+  headerImg: ./images/modis-17a3hgf-hero.jpeg
+  tabs:
+    - title: Example Notebook
+      src: modis-vegetation-example.html
+      launch: datasets/modis/modis-vegetation-example.ipynb
+
+modis-21A2-061:
+  category: Temperature
+  headerImg: ./images/modis-21a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-temperature-example.html
+      launch: datasets/modis/modis-temperature-example.ipynb
+
+modis-43A4-061:
+  category: Imagery
+  headerImg: ./images/modis-43a4-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-imagery-example.html
+      launch: datasets/modis/modis-imagery-example.ipynb
+
+modis-64A1-061:
+  category: Fire
+  headerImg: ./images/modis-64a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: modis-fire-example.html
+      launch: datasets/modis/modis-fire-example.ipynb
+
+mobi:
+  category: Biodiversity
+  headerImg: ./images/mobi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: mobi-example.html
+      launch: datasets/mobi/mobi-example.ipynb
+
+ms-buildings:
+  category: Infrastructure
+  headerImg: ./images/ms-buildings-hero.png
+  tabs:
+    - title: Example Notebook
+      src: ms-buildings-example.html
+      launch: datasets/ms-buildings/ms-buildings-example.ipynb
+
+mtbs:
+  category: Fire
+  headerImg: ./images/mtbs-hero.png
+  tabs:
+    - title: Example Notebook
+      src: mtbs-example.html
+      launch: datasets/mtbs/mtbs-example.ipynb
+
+naip:
+  category: Imagery
+  headerImg: ./images/naip-hero.jpg
+  tabs:
+    - title: Example Notebook
+      src: naip-example.html
+      launch: datasets/naip/naip-example.ipynb
+
+nasa-nex-gddp-cmip6:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: nasa-nex-gddp-cmip6-example.html
+      launch: datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
+
+nasadem:
+  category: DEMs
+  headerImg: ./images/nasadem-hero.png
+  tabs:
+    - title: Example Notebook
+      src: nasadem-example.html
+      launch: datasets/nasadem/nasadem-example.ipynb
+
+noaa-c-cap:
+  category: Land use/Land cover
+  headerImg: ./images/noaa-c-cap-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-c-cap-example.html
+      launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
+
+nrcan-landcover:
+  category: Land use/Land cover
+  headerImg: ./images/nrcan-landcover-hero.png
+  tabs:
+    - title: Example Notebook
+      src: nrcan-landcover-example.html
+      launch: datasets/nrcan-landcover/nrcan-landcover-example.ipynb
+
+planet-nicfi-visual:
+  hideInExplorer: true
+  category: Imagery
+  headerImg: ./images/planet-nicfi-visual-hero.png
+  tabs:
+    - title: Example Notebook
+      src: planet-nicfi-example.html
+      launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
+
+planet-nicfi-analytic:
+  hideInExplorer: true
+  category: Imagery
+  headerImg: ./images/planet-nicfi-analytic-hero.png
+  tabs:
+    - title: Example Notebook
+      src: planet-nicfi-example.html
+      launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
+
+sentinel-1-grd:
+  category: SAR
+  headerImg: ./images/sentinel-1-grd-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-1-grd-example.html
+      launch: datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
+
+sentinel-1-rtc:
+  category: SAR
+  headerImg: ./images/sentinel-1-rtc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-1-rtc-example.html
+      launch: datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
+
+sentinel-2-l2a:
+  category: Imagery
+  headerImg: ./images/sentinel-hero.jpg
+  tabs:
+    - title: Example Notebook
+      src: sentinel-2-l2a-example.html
+      launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+
+terraclimate:
+  category: Climate/Weather
+  headerImg: ./images/terraclimate-hero.png
+  tabs:
+    - title: Example Notebook
+      src: terraclimate-example.html
+      launch: datasets/terraclimate/terraclimate-example.ipynb
+
+us-census:
+  category: Demographics
+  headerImg: ./images/us-census-hero.png
+  tabs:
+    - title: Example Notebook
+      src: us-census-example.html
+      launch: datasets/us-census/us-census-example.ipynb
+
+viirs-09a1-001:
+  category: Imagery
+  headerImg: ./images/viirs-09a1-hero.png
+
+viirs-09h1-001:
+  category: Imagery
+  headerImg: ./images/viirs-09h1-hero.png
+
+viirs-10a1-001:
+  category: Water/Snow
+  headerImg: ./images/viirs-10a1-hero.png
+
+viirs-13a1-001:
+  category: Biomass/Vegetation
+  headerImg: ./images/viirs-13a1-hero.png
+
+viirs-14a1-001:
+  category: Fire
+  headerImg: ./images/viirs-14a1-hero.png
+
+viirs-15a2h-001:
+  category: Biomass/Vegetation
+  headerImg: ./images/viirs-15a2h-hero.png
+
+viirs-21a2-001:
+  category: Temperature
+  headerImg: ./images/viirs-21a2-hero.png
+
+viirs-43ia4-001:
+  category: Imagery
+  headerImg: ./images/viirs-43ia4-hero.png
+
+viirs-43ma4-001:
+  category: Imagery
+  headerImg: ./images/viirs-43ma4-hero.png
+
+viirs-46a2-001:
+  category: Imagery
+  headerImg: ./images/viirs-46a2-hero.png

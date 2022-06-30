@@ -1,5 +1,5 @@
-import CollectionSelector from "./CollectionSelector";
+import { CatalogSelector } from "./CatalogSelector/CatalogSelector.index";
 import MosaicPresetSelector from "./MosaicPresetSelector";
 import RenderOptionsSelector from "./RenderOptionsSelector";
 
-export { CollectionSelector, MosaicPresetSelector, RenderOptionsSelector };
+export { CatalogSelector, MosaicPresetSelector, RenderOptionsSelector };

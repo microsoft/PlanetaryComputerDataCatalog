@@ -19,7 +19,7 @@
 
 project = "pc-data-catalog"
 copyright = "2021, Microsoft"
-author = "AI For Earth Team"
+author = "Planetary Computer Team"
 
 # The full version, including alpha/beta/rc tags
 release = "0.0.1"

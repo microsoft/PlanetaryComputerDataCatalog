@@ -61,7 +61,7 @@ You can supply your subscription key in an HTTP request in two ways:
 * Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
 
 ```bash
-curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
+curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip
 ```
 
 * Supply it in a `subscription-key` query parameter, for example:

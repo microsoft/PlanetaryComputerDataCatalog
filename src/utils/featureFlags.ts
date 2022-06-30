@@ -8,7 +8,6 @@ export const initializeFeatures = () => {
   const flags = getFlags();
   const initialFlags: FeatureFlag[] = [
     { name: "login", description: "Test login", active: false },
-    { name: "pin", description: "Pin layer to map", active: false },
   ];
 
   // Merge old flags with new flags, keeping the existing `active` setting

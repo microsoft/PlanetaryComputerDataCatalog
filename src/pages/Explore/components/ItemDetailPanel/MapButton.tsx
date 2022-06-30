@@ -30,7 +30,7 @@ const MapButton = () => {
         id={buttonId}
         onClick={handleClick}
         checked={showAsLayer}
-        iconProps={{ iconName: "Nav2DMapView" }}
+        iconProps={iconProps}
         ariaLabel={label}
         aria-describedby={tooltipId}
         styles={checkedHeaderButtonStyle}
@@ -41,3 +41,5 @@ const MapButton = () => {
 };
 
 export default MapButton;
+
+const iconProps = { iconName: "Nav2DMapView" };

@@ -44,8 +44,8 @@ Now you can start the development server, and the site should be accessible at <
 If you want to run just the frontend development server on your host, ensure you have Node 14 installed and run:
 
 ```sh
-yarn install
-yarn start
+npm install
+npm start
 ```
 
 To build the latest docs or external notebook, or if any new dependencies have been added, re-run `./scripts/update` (you may need to refresh the app in your browser if the site was running).
@@ -103,16 +103,24 @@ To debug or extend the small API backend, please read the [API README](api/READM
 
 The project contains cypress end-to-end tests and jest based unit tests.
 
-To run jest based unit test and perform linting, run `./scripts/test`.
+To run jest based unit test and perform linting and code format analysis, run `./scripts/test`.
+
+#### Formatting
+
+The project contains a prettier config file that is used to format code, which
+should integrate with your editor.  Alternatively you can run `./scripts/format`
+to format all files. The CI system will check for formatting errors.
 
 ##### Cypress
 
 If you're on WSL2, be sure to set up your system to run the Cypress GUI:
 <https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/>
 
+You may also need to install cypress locally on your computer, with `npm install cypress`.
+
 - Install Google Chrome in your WSL2 environment (Cypress ships with a chromium-based electron browser)
-- Run `yarn cypress:open` to run the GUI and debug tests, or
-- Run `yarn cypress:run` to run the headless version in the terminal
+- Run `npm cypress:open` to run the GUI and debug tests, or
+- Run `npm cypress:run` to run the headless version in the terminal
 
 Both test suites are run from CI.
 
@@ -126,14 +134,15 @@ Both test suites are run from CI.
 
 ## Scripts
 
-| Name       | Description                                                                                                    |
-|------------|----------------------------------------------------------------------------------------------------------------|
-| `clean`    | Removes intermediate build files from docs and dataset codefiles                                               |
+| Name    | Description                                                      |
+|---------|------------------------------------------------------------------|
+| `clean` | Removes intermediate build files from docs and dataset codefiles |
+| `format`   | Runs black and prettier against Python and Java/TypeScript files
 | `mockstac` | Serves contents of `/mockstac/collections` at <http://localhost:8866>                                          |
 | `server`   | Runs frontend development server                                                                               |
 | `test`     | Runs unit tests and linter                                                                                     |
 | `update`   | Install dependencies and build etl and docs content. Use `--devdocs` to develop against a local notebook repo. |
-| `yarn *`   | Run configured `yarn` commands like `yarn add`, `yarn lint`, `yarn test`, etc                                  |
+| `npm *`    | Run configured `npm` commands like `npm add`, `npm lint`, `npm test`, etc                                      |
 
 ## Deploying
 

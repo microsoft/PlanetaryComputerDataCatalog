@@ -22,6 +22,7 @@ import {
   fetchCollectionMosaicInfo,
 } from "../utils/hooks/useCollectionMosaicInfo";
 import { fetchSearchIdMetadata } from "../utils/hooks/useSearchIdMetadata";
+import { toggleShowSidebar } from "./mapSlice";
 import {
   initialMosaicState,
   setBulkLayers,
@@ -109,6 +110,12 @@ const loadMosaicStateV2 = async (
   editingIndex: number | undefined = undefined,
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
 ) => {
+  // For very small screens, if there are collections pre-loaded, close the
+  // sidebar to show the map initially.
+  if (collectionIds.length && window.innerWidth < 500) {
+    dispatch(toggleShowSidebar());
+  }
+
   const collections = await Promise.all(
     collectionIds.map(async id => {
       return await fetchCollection(id);

@@ -8,7 +8,7 @@ import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
-import { collections as datasetConfig } from "config/datasets.yml";
+import datasetConfig from "config/datasets.yml";
 
 // import { useSession } from "components/auth/hooks/SessionContext";
 
@@ -26,6 +26,18 @@ export const useCollections = () => {
 
 export const useStaticMetadata = (staticFileName: string) => {
   return useQuery(["static-file", staticFileName], getStaticMetadata);
+};
+
+export const useGitHubDatasetDescription = (datasetId: string) => {
+  return useQuery(
+    ["github-dataset-description", datasetId],
+    getGithubDatasetDescription,
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      retry: false,
+    }
+  );
 };
 
 export const useTileJson = (
@@ -88,7 +100,7 @@ const getCollections = async (): Promise<{ collections: IStacCollection[] }> => 
   const resp = await axios.get(`${STAC_URL}/collections`);
 
   // Collections in the API can be configured to be hidden in all frontend contexts.
-  const hiddenCollections = Object.entries(datasetConfig)
+  const hiddenCollections = Object.entries(datasetConfig || {})
     .filter(([, config]) => config.isHidden)
     .map(([id]) => id);
   const filteredCollections = resp.data.collections.filter(
@@ -104,4 +116,21 @@ const getStaticMetadata = async (
   const [, file] = queryParam.queryKey;
   const resp = await axios.get(`static/metadata/${file}`);
   return resp.data;
+};
+
+const getGithubDatasetDescription = async (
+  queryParam: QueryFunctionContext<[string, string]>
+): Promise<string | null> => {
+  const [, datasetId] = queryParam.queryKey;
+  const resp = await axios.get(
+    `https://raw.githubusercontent.com/microsoft/AIforEarthDataSets/main/data/${datasetId}.md`
+  );
+
+  const text = resp.data as string;
+  try {
+    const overviewStart = text.indexOf("## Overview");
+    return text.substring(overviewStart);
+  } catch {
+    return null;
+  }
 };

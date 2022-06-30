@@ -9,8 +9,8 @@ import Layout from "../components/Layout";
 import NotFound from "./NotFound";
 import SEO from "../components/Seo";
 import { useCollections } from "../utils/requests";
+import { useDataConfig } from "components/state/DataConfigProvider";
 
-import groups from "../config/datasetGroups.yml";
 import CollectionCard from "../components/stac/CollectionCard";
 import { errorMsg, loadingMsg } from "../components/stac/CollectionLoaders";
 import { capitalize, titleCase } from "../utils";
@@ -29,6 +29,7 @@ const valFormatter = key => {
 
 const CatalogGroup = () => {
   const { groupId } = useParams();
+  const { groupConfig } = useDataConfig();
   const navigate = useNavigate();
   const location = useLocation();
   const [collections, setCollections] = useState([]);
@@ -39,7 +40,7 @@ const CatalogGroup = () => {
     location.hash.replace("#", "") || ALL
   );
 
-  const group = groups[groupId];
+  const group = groupConfig[groupId];
 
   const { isError, isLoading, isSuccess, data: stacResponse } = useCollections();
 

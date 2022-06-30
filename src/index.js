@@ -1,16 +1,17 @@
-// Remove when we drop support for IE 11
-import "react-app-polyfill/ie11";
-import "react-app-polyfill/stable";
-
-import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@fluentui/react";
 
 import "./styles/index.css";
 import App from "./App";
 
+import collections from "config/datasets.yml";
+import storageCollections from "config/storageDatasets.yml";
+import groups from "config/datasetGroups.yml";
+import featuredCollections from "config/datasetFeatured.yml";
+
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SessionProvider } from "components/auth/hooks/SessionContext";
+import { DataConfigProvider } from "components/state/DataConfigProvider";
 
 const queryClient = new QueryClient();
 
@@ -18,7 +19,14 @@ ReactDOM.render(
   <ThemeProvider>
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
-        <App />
+        <DataConfigProvider
+          collectionConfig={collections}
+          storageCollectionConfig={storageCollections}
+          groupConfig={groups}
+          featuredIds={featuredCollections}
+        >
+          <App />
+        </DataConfigProvider>
       </SessionProvider>
     </QueryClientProvider>
   </ThemeProvider>,

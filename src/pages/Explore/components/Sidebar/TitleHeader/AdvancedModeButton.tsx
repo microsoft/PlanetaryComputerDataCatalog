@@ -15,13 +15,16 @@ import {
 } from "pages/Explore/state/mosaicSlice";
 import { useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 
+// Turning off coachmark
+const showCoachByDefault = false;
+
 const AdvancedModeButton = () => {
   const dispatch = useExploreDispatch();
   const { isCustomQuery, collection } = useExploreSelector(selectCurrentMosaic);
   const { data: mosaicInfo, isSuccess } = useCollectionMosaicInfo(collection?.id);
   const [showAdvancedCoach, setShowAdvanceCoach] = useLocalStorage(
     "coach-show-advanced-mode",
-    true
+    showCoachByDefault
   );
   const linkRef = useRef<HTMLElement>(null);
 

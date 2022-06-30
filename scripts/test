@@ -12,7 +12,18 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
-        yarn lint
-        yarn test
+        docker-compose \
+            run --rm --no-deps app \
+            npm run lint
+
+        docker-compose \
+            run --rm --no-deps app \
+            npm run format
+
+        docker-compose \
+            run --rm --no-deps \
+            -e CI="${CI}" \
+            app \
+            npm run test
     fi
 fi
