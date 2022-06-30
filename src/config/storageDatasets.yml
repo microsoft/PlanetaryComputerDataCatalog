@@ -1,21 +1,5 @@
 # Configuration for "other dataset" section, see type `NonApiDatasetEntry` for details.
 # The value for the dataset key should match the file name of the dataset in the ai4e dataset repo.
-deltares-floods:
-  title: Deltares Global Flood Maps
-  category: Water
-  short_description: Global coastal inundation maps at multiple resolutions
-  infoUrl: https://aka.ms/ai4edata-deltares-gfm
-  thumbnailUrl: deltares-flood.png
-  keywords: [Global, Flood, Sea level rise, Water, Deltares]
-
-deltares-water-availability:
-  title: Deltares Global Water Availability
-  category: Water
-  short_description: Estimates of global water availablity
-  infoUrl: https://aka.ms/ai4edata-deltares-reservoirs
-  thumbnailUrl: deltares-reservoir.jpg
-  keywords: [Global, Water, Reservoir, Deltares]
-
 ghe:
   title: Global Hydro Estimator
   category: Climate/Weather

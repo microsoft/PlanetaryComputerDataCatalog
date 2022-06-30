@@ -399,6 +399,10 @@ StacFields.Registry.addMetadataField("cmip6:variant_label", {
   label: "'Variant' label",
 });
 
+StacFields.Registry.addMetadataField("deltares:sea_level_year", {
+  formatter: String,
+});
+
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
 });
