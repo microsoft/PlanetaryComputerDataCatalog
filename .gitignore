@@ -382,6 +382,7 @@ yarn-error.log*
 
 # jupyter cache
 .ipynb_checkpoints
+.venv
 
 # yarn intermediate files
 .package-lock.json
