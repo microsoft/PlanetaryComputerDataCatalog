@@ -1,7 +1,7 @@
 import { IImageStyles, Image, ImageFit } from "@fluentui/react";
 
 interface CollectionThumbnailProps {
-  assets: Record<string, any>;
+  assets?: Record<string, any>;
 }
 
 export const CatalogCollectionThumbnail = ({ assets }: CollectionThumbnailProps) => {
@@ -15,6 +15,8 @@ export const CatalogCollectionThumbnail = ({ assets }: CollectionThumbnailProps)
       styles={imageStyles}
       imageFit={ImageFit.cover}
       data-cy="catalog-collection-thumb"
+      shouldFadeIn={false}
+      loading="lazy"
     />
   );
 };
