@@ -25,7 +25,7 @@
   display: none;
 }
 
-.ms-Modal h2 {
+.ms-Modal .catalog-filter-results-header {
   padding-left: 8px;
 }
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { IStackStyles, List, Stack } from "@fluentui/react";
+import { IStackStyles, Link, List, Stack, Text } from "@fluentui/react";
 import { isEmpty } from "lodash-es";
 import MiniSearch from "minisearch";
 
@@ -10,7 +10,7 @@ import { nonApiDatasetToPcCollection } from "./helpers";
 import { IPcCollection, IStacCollection } from "types/stac";
 import { useCollections } from "utils/requests";
 import { useDataConfig } from "components/state/DataConfigProvider";
-import { mediaTypeOverride, stacFormatter } from "utils/stac";
+import { mediaTypeOverride } from "utils/stac";
 
 interface CatalogFilteredCollectionListProps {
   filterText: string;
@@ -100,7 +100,6 @@ export const CatalogFilteredCollectionList: React.FC<
             const collectionAssets = Object.values(collection.assets || {})
               .map(asset => mediaTypeOverride(asset.type))
               .join(" ");
-            console.log(itemAssets);
             return `${itemAssets} ${collectionAssets}`;
         }
 
@@ -115,11 +114,12 @@ export const CatalogFilteredCollectionList: React.FC<
     return searchIndex;
   }, [datasetsToFilter]);
 
-  const searchResults = searchIndex.search(filterText, {
+  const searchOpts = {
     prefix: true,
     combineWith: "AND",
-    weights: { prefix: 0.8, fuzzy: 0 },
-  });
+    weights: { prefix: 0.8, fuzzy: 0.8 },
+  };
+  const searchResults = searchIndex.search(filterText, searchOpts);
 
   const matchedIds = searchResults.map(r => r.id);
 
@@ -143,10 +143,23 @@ export const CatalogFilteredCollectionList: React.FC<
   };
 
   const hasResults = !isEmpty(filteredCollections) && !isLoading;
+  const suggestions = !hasResults
+    ? searchIndex.autoSuggest(filterText, { ...searchOpts, fuzzy: true })
+    : null;
+  const suggestion = suggestions?.[0]?.suggestion;
+  const searchInstead = suggestion ? (
+    <Text styles={suggestionStyles}>
+      Did you mean: "
+      <Link onClick={() => setFilterText(suggestion)}>{suggestion}</Link>"?
+    </Text>
+  ) : null;
 
   return (
     <Stack styles={resultStyles} data-cy="catalog-filter-results">
-      <h2>Datasets matching "{filterText}"</h2>
+      <div className="catalog-filter-results-header">
+        <h2 style={{ marginBottom: 8 }}>Datasets matching "{filterText}"</h2>
+        {!hasResults && searchInstead}
+      </div>
       {hasResults && (
         <List
           data-cy="filtered-collection-results"
@@ -165,5 +178,12 @@ const includeAllFn = () => true;
 const resultStyles: IStackStyles = {
   root: {
     minHeight: "calc(100vh - 250px)",
+  },
+};
+
+const suggestionStyles = {
+  root: {
+    fontStyle: "italic",
+    fontSize: 15,
   },
 };
