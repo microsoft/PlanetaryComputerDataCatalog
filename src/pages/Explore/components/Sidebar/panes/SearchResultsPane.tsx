@@ -117,7 +117,7 @@ const SearchResultsPane = ({
 
   return (
     <>
-      <Stack styles={resultsListStyle}>
+      <Stack id="explorer-search-results" styles={resultsListStyle}>
         <ErrorBoundary
           FallbackComponent={ErrorFallback}
           onError={handleErrorBoundaryError}

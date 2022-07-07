@@ -16,6 +16,7 @@ export interface MapState {
   useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
+  showAnimationPanel: boolean;
 }
 
 const initialState: MapState = {
@@ -28,6 +29,7 @@ const initialState: MapState = {
   useHighDef: true,
   previousCenter: null,
   previousZoom: null,
+  showAnimationPanel: false,
 };
 
 export const mapSlice = createSlice({
@@ -69,6 +71,9 @@ export const mapSlice = createSlice({
     setUseHighDef: (state, action: PayloadAction<boolean>) => {
       state.useHighDef = action.payload;
     },
+    setShowAnimationPanel: (state, action: PayloadAction<boolean>) => {
+      state.showAnimationPanel = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
@@ -95,6 +100,7 @@ export const {
   setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
+  setShowAnimationPanel,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

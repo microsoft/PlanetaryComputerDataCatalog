@@ -11,7 +11,7 @@ import { useBoolean, useId } from "@fluentui/react-hooks";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-import { useExploreSelector } from "pages/Explore/state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import QuerySection from "./QuerySection";
 import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
@@ -22,6 +22,7 @@ import {
   selectCurrentMosaic,
 } from "pages/Explore/state/mosaicSlice";
 import { searchHeaderButtonStyle } from "../../PinLayer/PinLayer";
+import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
 
 const QueryInfo = () => {
   const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
@@ -63,13 +64,18 @@ const QueryInfo = () => {
 
   const title = "Current filter details";
 
+  // Temp
+  const dispatch = useExploreDispatch();
   return (
     <>
       <IconButton
         id={buttonId}
         iconProps={{ iconName: "Info" }}
         ariaLabel={title}
-        onClick={toggle}
+        onClick={() => {
+          toggle();
+          dispatch(setShowAnimationPanel(true));
+        }}
         data-cy="query-detail-button"
         styles={searchHeaderButtonStyle}
       />

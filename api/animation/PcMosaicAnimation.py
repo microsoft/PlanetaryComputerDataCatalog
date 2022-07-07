@@ -1,3 +1,4 @@
+from copy import deepcopy
 import aiohttp
 import asyncio
 import io
@@ -5,7 +6,7 @@ import logging
 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
-from typing import List
+from typing import Dict, List
 from mercantile import tiles
 from PIL import Image
 
@@ -16,31 +17,36 @@ class PcMosaicAnimation:
     registerUrl = "https://planetarycomputer.microsoft.com/api/data/v1/mosaic/register"
     async_limit = asyncio.Semaphore(34)
 
-    def __init__(self, bbox: List[float], zoom: int, render_params: str):
+    def __init__(
+        self, bbox: List[float], zoom: int, cql: Dict[str, any], render_params: str
+    ):
         self.bbox = bbox
         self.zoom = zoom
+        self.cql = cql
         self.render_params = render_params
         self.tiles = list(tiles(*bbox, zoom))
         self.tile_size = 256
 
-    async def _get_tilejson(self, daterange: List[str]) -> str:
-        cql = {
-            "filter-lang": "cql2-json",
-            "filter": {
-                "op": "and",
-                "args": [
-                    {
-                        "op": "anyinteracts",
-                        "args": [{"property": "datetime"}, {"interval": daterange}],
-                    },
-                    {"op": "=", "args": [{"property": "collection"}, "modis-09A1-061"]},
-                ],
-            },
-        }
+    async def _get_tilejson(self, the_date: str) -> str:
+        logging.info("cql", self.cql["filter"])
+        non_temporal_args = [
+            arg
+            for arg in self.cql["filter"]["args"]
+            if arg["args"][0]["property"] != "datetime"
+        ] + [
+            {
+                "op": "<=",
+                "args": [{"property": "datetime"}, {"timestamp": the_date}],
+            }
+        ]
+
+        frame_cql = deepcopy(self.cql)
+        frame_cql["filter"]["args"] = non_temporal_args
+        logging.info(f"Registering {the_date}")
 
         async with aiohttp.ClientSession() as session:
             # Register the search and get the tilejson_url back
-            async with session.post(self.registerUrl, json=cql) as resp:
+            async with session.post(self.registerUrl, json=frame_cql) as resp:
                 mosaic_info = await resp.json()
                 tilejson_href = [
                     link["href"]
@@ -68,20 +74,22 @@ class PcMosaicAnimation:
                         return io.BytesIO(img_bytes)
                     else:
                         img_bytes = Image.new(
-                            "RGB", (self.tile_size, self.tile_size), "white"
+                            "RGB", (self.tile_size, self.tile_size), "gray"
                         )
                         empty = io.BytesIO()
                         img_bytes.save(empty, format="png")
                         return empty
 
-    async def get(self, increments: int, unit: str, start: datetime, total_frames: int):
+    async def get(self, step: int, unit: str, start: datetime, total_frames: int):
         frames = []
 
         delta = {
-            "days": relativedelta(days=increments),
-            "weeks": relativedelta(weeks=increments),
-            "months": relativedelta(months=increments),
-            "years": relativedelta(years=increments),
+            "mins": timedelta(minutes=step),
+            "hours": relativedelta(hours=step),
+            "days": relativedelta(days=step),
+            "weeks": relativedelta(weeks=step),
+            "months": relativedelta(months=step),
+            "years": relativedelta(years=step),
         }[unit]
 
         next_date = start
@@ -97,20 +105,16 @@ class PcMosaicAnimation:
             output,
             format="GIF",
             append_images=image_frames[1:],
-            optimize=False,
+            optimize=True,
             save_all=True,
-            duration=500,
+            duration=250,
             loop=0,
         )
 
         return output
 
     async def _get_frame(self, date: datetime) -> io.BytesIO:
-        date_buffer_pre = date - timedelta(days=3)
-        date_buffer_post = date + relativedelta(days=3)
-        tile_path = await self._get_tilejson(
-            [date_buffer_pre.isoformat(), date_buffer_post.isoformat()]
-        )
+        tile_path = await self._get_tilejson(date.isoformat())
 
         tasks = []
         for tile in self.tiles:
