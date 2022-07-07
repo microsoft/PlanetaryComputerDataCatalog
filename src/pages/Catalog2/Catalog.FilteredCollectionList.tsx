@@ -28,6 +28,34 @@ interface CatalogFilteredCollectionListProps {
   onButtonClick?: (collectionId: string) => void;
 }
 
+const searchIndexerFields = (collection: IPcCollection, fieldName: string) => {
+  switch (fieldName) {
+    case "keywords":
+      return collection.keywords?.join(" ") || "";
+    case "eo:bands":
+      return (
+        collection.summaries?.["eo:bands"]?.map(
+          (eoband: any) => eoband?.common_name
+        ) || ""
+      );
+    case "variables":
+      return Object.values(collection?.["cube:variables"] || {})
+        .map(v => v?.attrs?.standard_name)
+        .join(" ");
+    case "mediaType":
+      const itemAssets = Object.values(collection.item_assets || {})
+        .map(asset => mediaTypeOverride(asset.type))
+        .join(" ");
+      const collectionAssets = Object.values(collection.assets || {})
+        .map(asset => mediaTypeOverride(asset.type))
+        .join(" ");
+      return `${itemAssets} ${collectionAssets}`;
+    case "providers":
+      return collection.providers?.map(p => p.name).join(" ");
+  }
+
+  return fieldName.split(".").reduce((doc: any, key) => doc && doc[key], collection);
+};
 export const CatalogFilteredCollectionList: React.FC<
   CatalogFilteredCollectionListProps
 > = ({
@@ -70,6 +98,7 @@ export const CatalogFilteredCollectionList: React.FC<
         "eo:bands",
         "variables",
         "mediaType",
+        "providers",
       ],
       searchOptions: {
         boost: {
@@ -79,34 +108,7 @@ export const CatalogFilteredCollectionList: React.FC<
           keywords: 2,
         },
       },
-      extractField: (collection: IPcCollection, fieldName: string) => {
-        switch (fieldName) {
-          case "keywords":
-            return collection.keywords?.join(" ") || "";
-          case "eo:bands":
-            return (
-              collection.summaries?.["eo:bands"]?.map(
-                (eoband: any) => eoband?.common_name
-              ) || ""
-            );
-          case "variables":
-            return Object.values(collection?.["cube:variables"] || {})
-              .map(v => v?.attrs?.standard_name)
-              .join(" ");
-          case "mediaType":
-            const itemAssets = Object.values(collection.item_assets || {})
-              .map(asset => mediaTypeOverride(asset.type))
-              .join(" ");
-            const collectionAssets = Object.values(collection.assets || {})
-              .map(asset => mediaTypeOverride(asset.type))
-              .join(" ");
-            return `${itemAssets} ${collectionAssets}`;
-        }
-
-        return fieldName
-          .split(".")
-          .reduce((doc: any, key) => doc && doc[key], collection);
-      },
+      extractField: searchIndexerFields,
     });
 
     searchIndex.addAll(datasetsToFilter);

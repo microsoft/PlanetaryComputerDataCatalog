@@ -6,18 +6,17 @@ export interface IPcCollection {
   title: string;
   description: string;
   summaries?: Record<string, Optional<[]>>;
-  assets: Record<string, IStacAsset>;
+  assets?: Record<string, IStacAsset>;
   item_assets?: Record<string, IStacAsset>;
   keywords: string[];
+  providers?: IStacProvider[];
   "msft:short_description": string;
   "msft:group_id"?: string;
   "cube:variables"?: Record<string, Record<string, any>>;
 }
 
 export interface IStacCollection extends IPcCollection {
-  summaries?: Record<string, []>;
   license: string;
-  item_assets: Record<string, IStacAsset>;
   extent: {
     spatial: {
       bbox: Array<Array<number>>;
@@ -26,12 +25,17 @@ export interface IStacCollection extends IPcCollection {
       interval: Array<Array<string | null>>;
     };
   };
+  item_assets: Record<string, IStacAsset>;
+  assets: Record<string, IStacAsset>;
   links: IStacLink[];
-  summaries?: Record<string, []>;
   "msft:requires_account"?: boolean;
-  "cube:variables"?: Record<string, Record<string, any>>;
 }
 
+export interface IStacProvider {
+  name: string;
+  url: string;
+  roles: string[];
+}
 export interface IStacLink {
   href: string;
   rel: string;
