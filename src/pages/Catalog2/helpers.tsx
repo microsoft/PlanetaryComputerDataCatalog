@@ -21,6 +21,18 @@ export const nonApiDatasetToPcCollection = (
   };
 };
 
+export const groupToPcCollection = (
+  groupId: string,
+  datasetGroup: DatasetGroup
+): IPcCollection => {
+  // Construct a minimal StacCollection from the dataset details
+  const { short_description, ...group } = datasetGroup;
+  return Object.assign({}, group, {
+    "msft:short_description": datasetGroup.short_description,
+    id: GROUP_PREFIX + groupId,
+  });
+};
+
 export const getCollectionDetailUrl = (id: string) => {
   if (id.startsWith(GROUP_PREFIX)) {
     return `/dataset/group/${id.substring(GROUP_PREFIX.length)}`;

@@ -530,6 +530,12 @@ export const mediaTypeOverride = value => {
       return "GeoTIFF (COG)";
     case "application/x-parquet":
       return "Parquet";
+    case "application/x-hdf":
+      return "HDF";
+    case "application/vnd.laszip+copc":
+      return "COPC";
+    case "application/vnd+zarr":
+      return "Zarr";
     default:
       return StacFields.Formatters.formatMediaType(value);
   }
