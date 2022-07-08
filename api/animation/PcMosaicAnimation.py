@@ -15,7 +15,7 @@ from .AnimationFrame import AnimationFrame
 
 class PcMosaicAnimation:
     registerUrl = "https://planetarycomputer.microsoft.com/api/data/v1/mosaic/register"
-    async_limit = asyncio.Semaphore(34)
+    async_limit = asyncio.Semaphore(45)
 
     def __init__(
         self, bbox: List[float], zoom: int, cql: Dict[str, any], render_params: str
@@ -28,7 +28,6 @@ class PcMosaicAnimation:
         self.tile_size = 256
 
     async def _get_tilejson(self, the_date: str) -> str:
-        logging.info("cql", self.cql["filter"])
         non_temporal_args = [
             arg
             for arg in self.cql["filter"]["args"]
@@ -73,6 +72,7 @@ class PcMosaicAnimation:
                         img_bytes = await resp.read()
                         return io.BytesIO(img_bytes)
                     else:
+                        logging.warning(f"Tile request: {resp.status} {url}")
                         img_bytes = Image.new(
                             "RGB", (self.tile_size, self.tile_size), "gray"
                         )
@@ -94,7 +94,6 @@ class PcMosaicAnimation:
 
         next_date = start
         for frame_num in range(total_frames - 1):
-            logging.debug(f"Generating frame {frame_num}")
             frames.append(asyncio.ensure_future(self._get_frame(next_date)))
             next_date += delta
 
