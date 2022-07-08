@@ -103,7 +103,7 @@ export const CatalogSelector = () => {
               itemsAsButton
               includeStorageDatasets={false}
               preFilterCollectionFn={isValidExplorer}
-              setFilterText={handleFilterChange}
+              setFilterText={setFilterText}
               onButtonClick={handleSelection}
             />
           </div>
@@ -113,7 +113,7 @@ export const CatalogSelector = () => {
             itemsAsButton
             includeStorageDatasets={false}
             preFilterCollectionFn={isValidExplorer}
-            setFilterText={handleFilterChange}
+            setFilterText={setFilterText}
             onButtonClick={handleSelection}
             filterText={filterText}
           />

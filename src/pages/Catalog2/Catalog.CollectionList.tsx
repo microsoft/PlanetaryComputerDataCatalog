@@ -11,7 +11,11 @@ import { isEmpty, sortBy } from "lodash-es";
 import { CatalogCollection } from "./Catalog.Collection";
 import { getCollectionShimmers } from "./Catalog.CollectionShimmer";
 import { useCollections } from "utils/requests";
-import { GROUP_PREFIX, nonApiDatasetToPcCollection } from "./helpers";
+import {
+  GROUP_PREFIX,
+  nonApiDatasetToPcCollection,
+  groupToPcCollection,
+} from "./helpers";
 import { IPcCollection, IStacCollection } from "types/stac";
 import { useDataConfig } from "components/state/DataConfigProvider";
 
@@ -39,9 +43,9 @@ const smallThumbHeight = 112;
 export const CatalogCollectionList: React.FC<CatalogCollectionListProps> = ({
   setFilterText,
   includeStorageDatasets = true,
-  preFilterCollectionFn = () => true,
+  preFilterCollectionFn = defaultTrueFn,
   itemsAsButton = false,
-  onButtonClick = () => {},
+  onButtonClick = defaultVoidFn,
 }) => {
   const { collectionConfig, featuredIds, groupConfig, storageCollectionConfig } =
     useDataConfig();
@@ -191,18 +195,6 @@ const getCategorizedCollections = (
   return groupedCollections;
 };
 
-const groupToPcCollection = (
-  groupId: string,
-  datasetGroup: DatasetGroup
-): IPcCollection => {
-  // Construct a minimal StacCollection from the dataset details
-  const { short_description, ...group } = datasetGroup;
-  return Object.assign({}, group, {
-    "msft:short_description": datasetGroup.short_description,
-    id: GROUP_PREFIX + groupId,
-  });
-};
-
 const headerStyle: React.CSSProperties = {
   margin: 0,
 };
@@ -219,3 +211,5 @@ const separatorStyles: Partial<ISeparatorStyles> = {
     paddingTop: 0,
   },
 };
+const defaultTrueFn = () => true;
+const defaultVoidFn = () => {};
