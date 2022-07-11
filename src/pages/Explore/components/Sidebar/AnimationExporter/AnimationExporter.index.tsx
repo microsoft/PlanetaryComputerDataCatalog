@@ -116,16 +116,16 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
             setAnimConfig({ ...animConfig, unit: option?.key as string })
           }
         />
+        <TextField
+          label="Number of frames"
+          name="frames"
+          min={1}
+          max={48}
+          step={1}
+          defaultValue={animConfig.frames}
+          onChange={handleChange}
+        />
       </Stack>
-      <TextField
-        label="Number of frames"
-        name="frames"
-        min={1}
-        max={48}
-        step={1}
-        defaultValue={animConfig.frames}
-        onChange={handleChange}
-      />
       {urlParams && (
         <Image
           alt="layer animation"
