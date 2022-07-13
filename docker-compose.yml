@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   app:
-    image: node:14-slim
+    image: node:14.19.3-slim
     working_dir: /usr/src
     ports:
       - "3000:3000"
@@ -9,11 +9,16 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=100
+
+      # Environments where .env is present will mount and use it. CI will need
+      # environment variables required for tests to be set.
+      - REACT_APP_API_ROOT
     volumes:
       - .:/usr/src
+      - ~/.npm:/root/.npm
     networks:
       - pcdc-network
-    command: yarn start
+    command: npm start
 
   api:
     build:

@@ -28,12 +28,13 @@ import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
 import { useSession } from "components/auth/hooks/SessionContext";
 import { DATA_URL } from "utils/constants";
+import { MobileViewSidebarButton } from "../MobileViewInMap/ViewInMap.index";
 
 const mapContainerId: string = "viewer-map";
 
 const ExploreMap = () => {
   const mapRef = useRef<atlas.Map | null>(null);
-  const { center, zoom } = useExploreSelector(s => s.map);
+  const { center, zoom, showSidebar } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
   const { status: sessionStatus } = useSession();
@@ -84,13 +85,24 @@ const ExploreMap = () => {
     mapHandlers.onDataEvent,
   ]);
 
+  useEffect(() => {
+    // Azure maps is putting 2 shortcut elements with the same id on the page,
+    // and it's causing an accessibility error.
+    const elNames = ["#atlas-map-shortcuts", "#atlas-map-style", "#atlas-map-state"];
+    elNames.forEach(elName => {
+      const els = document.querySelectorAll(elName);
+      if (els.length === 2) {
+        els[1].remove();
+      }
+    });
+  }, [mapReady]);
+
   // When logged in, transform requests to include auth header
   useEffect(() => {
     if (sessionStatus.isLoggedIn) {
       console.log("Activating auth headers for tile requests");
       mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
     } else {
-      console.log("Deactivating auth headers for tile requests");
       mapRef.current?.setServiceOptions({
         transformRequest: () => {
           return {};
@@ -123,15 +135,19 @@ const ExploreMap = () => {
     />
   );
 
+  // Class used to sync state via responsive media queries in css
+  const visibilityClass = !showSidebar ? "explorer-sidebar-hidden" : "";
+
   return (
-    <div style={mapContainerStyle}>
+    <div className={`explorer-map ${visibilityClass}`} style={mapContainerStyle}>
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
-      <div id={mapContainerId} style={{ width: "100%", height: "100%" }} />
+      <MobileViewSidebarButton />
+      <div id={mapContainerId} style={mapElementStyle} />
     </div>
   );
 };
@@ -143,6 +159,8 @@ const mapContainerStyle: React.CSSProperties = {
   height: "100%",
   position: "relative",
 };
+
+const mapElementStyle = { width: "100%", height: "100%" };
 
 const progressIndicatorStyles: IStyleFunctionOrObject<
   IProgressIndicatorStyleProps,

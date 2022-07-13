@@ -45,10 +45,10 @@ We're just getting started. Check back for updated documentation and new feature
 - [Browse the data available in the Planetary Computer through the Data Catalog](https://planetarycomputer.microsoft.com/catalog)
 - [Learn how to search for Planetary Computer data using the STAC API](../quickstarts/reading-stac.ipynb)
 - Check out the example notebooks for our datasets, for example:
-  - [Landsat 8 Collection 2](http://planetarycomputer.microsoft.com/dataset/landsat-8-c2-l2#Example-Notebook)
-  - [Sentinel-2  L2A](http://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Example-Notebook)
-  - [NAIP](http://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook)
-  - [ASTER L1T](http://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook)
+  - [Landsat Collection 2 Level-2](https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2#Example-Notebook)
+  - [Sentinel-2  L2A](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Example-Notebook)
+  - [NAIP](https://planetarycomputer.microsoft.com/dataset/naip#Example-Notebook)
+  - [ASTER L1T](https://planetarycomputer.microsoft.com/dataset/aster-l1t#Example-Notebook)
 - [Request a Planetary Computer account](https://planetarycomputer.microsoft.com/account/request)
 
 ## Beyond the Planetary Computer
@@ -56,6 +56,6 @@ We're just getting started. Check back for updated documentation and new feature
 The Planetary Computer is just one component of Microsoft's commitment to environmental sustainability.
 
 - Learn more about Microsoft's [environmental sustainability program](https://www.microsoft.com/en-us/corporate-responsibility/sustainability).
-- If you're doing cloud-based environmental science and conservation work, consider applying for an [AI for Earth grant](http://aka.ms/ai4egrants).
-- Speaking of which, our grantees are the heart of the AI for Earth program; learn more about the work they do at the [AI for Earth grantee gallery](https://aka.ms/ai4egrantees).
+- Learn more about the work done by AI for Earth grantees at the [AI for Earth grantee gallery](https://aka.ms/ai4egrantees).
 - Microsoft's [AI for Earth program](https://aka.ms/aiforearth) also provides open source technical resources for conservation work; check out our [machine learning APIs](https://aka.ms/ai4eapis), and read about our tools for [accelerating biodiversity surveys with AI](https://aka.ms/biodiversitysurveys) and [AI-accelerated land cover analysis](https://aka.ms/landcovermapping).
+

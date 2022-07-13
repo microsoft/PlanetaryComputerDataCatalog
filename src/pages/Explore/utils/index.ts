@@ -1,5 +1,6 @@
 import { centerKey, zoomKey } from "../components/Map/hooks/useUrlState";
 import {
+  QS_ACTIVE_EDIT_KEY,
   QS_COLLECTION_KEY,
   QS_MOSAIC_KEY,
   QS_RENDER_KEY,
@@ -12,8 +13,9 @@ export const resetMosaicQueryStringState = () => {
     QS_COLLECTION_KEY,
     QS_MOSAIC_KEY,
     QS_RENDER_KEY,
-    QS_V1_CUSTOM_KEY,
+    QS_ACTIVE_EDIT_KEY,
     QS_VERSION_KEY,
+    QS_V1_CUSTOM_KEY,
   ].map(key => updateQueryStringParam(key, ""));
 };
 

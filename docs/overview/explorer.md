@@ -21,12 +21,19 @@ features are visible at different pixel resolutions.
 
 ## Selecting datasets
 
-Datasets that are available in the Explorer can be selected in the top dropdown,
-which is grouped by category.
+Datasets that are available in the Explorer can be browsed and selected by clicking the Dataset Selector at the top of the page
 
-```{image} images/explorer-ds.jpg
-:height: 200
+```{image} images/explorer-ds-selector.png
+:height: 150
 :name: Planetary Computer Explorer dataset selection
+:class: no-scaled-link
+```
+
+In the catalog popup, you can view datasets by category and filter results against dataset metadata. The interface is similar to the main Data Catalog page. Select a dataset by click on the dataset card.
+
+```{image} images/explorer-ds-catalog.png
+:height: 550
+:name: Planetary Computer Explorer dataset selection catalog
 :class: no-scaled-link
 ```
 

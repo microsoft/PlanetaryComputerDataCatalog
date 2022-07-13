@@ -1,32 +1,16 @@
-const { addBeforeLoader, loaderByName } = require("@craco/craco");
+const webpack = require("webpack");
+
 const CopyPlugin = require("copy-webpack-plugin");
 const { marked } = require("marked");
-const renderer = new marked.Renderer();
 
 // Allows import of yaml files as json
 const yamlLoader = {
-  test: /\.ya?ml$/,
-  exclude: /node_modules/,
   use: [
     { loader: require.resolve("json-loader") },
-    { loader: require.resolve("yaml-loader") },
+    { loader: require.resolve("yaml-loader"), options: { asJSON: true } },
   ],
-};
-
-// Allows import of md files as html
-const mdLoader = {
-  test: /\.md$/,
-  use: [
-    {
-      loader: require.resolve("html-loader"),
-    },
-    {
-      loader: require.resolve("markdown-loader"),
-      options: {
-        renderer,
-      },
-    },
-  ],
+  test: /\.ya?ml$/,
+  exclude: /node_modules/,
 };
 
 module.exports = {
@@ -53,12 +37,33 @@ module.exports = {
             },
           ],
         }),
+        new webpack.ProvidePlugin({
+          Buffer: ["buffer", "Buffer"],
+          process: "process/browser",
+          http: "stream-http",
+        }),
       ],
     },
     configure: webpackConfig => {
-      addBeforeLoader(webpackConfig, loaderByName("file-loader"), mdLoader);
-      addBeforeLoader(webpackConfig, loaderByName("file-loader"), yamlLoader);
+      // Load the yaml-loader first in list of loaders, allows use of yaml files imported as json
+      webpackConfig.module.rules[1].oneOf.unshift(yamlLoader);
 
+      // See: https://github.com/JS-DevTools/ono/issues/18
+      webpackConfig.ignoreWarnings = [/Failed to parse source map/];
+
+      // Fallback entries are required pollyfill fallbacks for webpack v5 to use the
+      // "@apidevtools/json-schema-ref-parser" module, which isn't configurable for
+      // browser-only builds. An upgrade in the future may make these, and their
+      // package.json entries, unnecessary.
+      const fallbacks = {
+        http: require.resolve("stream-http"),
+        https: require.resolve("https-browserify"),
+        process: require.resolve("process/browser"),
+      };
+      webpackConfig.resolve.fallback = {
+        ...webpackConfig.resolve.fallback,
+        ...fallbacks,
+      };
       return webpackConfig;
     },
   },

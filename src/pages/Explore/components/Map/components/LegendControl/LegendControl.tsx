@@ -5,6 +5,7 @@ import {
   IStackTokens,
   IconButton,
   IButtonStyles,
+  IIconProps,
 } from "@fluentui/react";
 import { useLocalStorage } from "react-use";
 
@@ -42,7 +43,7 @@ export const LegendControl = () => {
           ariaLabel="Open legend"
           className="azure-maps-control-button"
           styles={legendButtonStyles}
-          iconProps={{ iconName: "MapLegend" }}
+          iconProps={iconProps}
           onClick={() => setIsOpen(!isOpen)}
         />
       </div>
@@ -51,10 +52,10 @@ export const LegendControl = () => {
 
   const hasLegends = legends.length > 0;
   return hasLegends ? (
-    <>
+    <div className="explorer-map-component">
       {legendPanel}
       {legendButton}
-    </>
+    </div>
   ) : null;
 };
 
@@ -86,3 +87,12 @@ const legendButtonStyles: IButtonStyles = {
 };
 
 const buttonStyle = { right: 2, bottom: 32, ...controlStyle };
+const iconProps: IIconProps = {
+  iconName: "Layer",
+  styles: {
+    root: {
+      fill: "rgb(131, 136, 141)",
+      width: 20,
+    },
+  },
+};

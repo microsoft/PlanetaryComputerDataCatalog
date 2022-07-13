@@ -1,6 +1,10 @@
 name: Cypress Tests
 
-on: [push]
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - develop
 
 jobs:
   cypress-run:
@@ -8,7 +12,7 @@ jobs:
     env:
       REACT_APP_API_ROOT: https://planetarycomputer-staging.microsoft.com
       CHOKIDAR_USEPOLLING: 1
-    container: cypress/browsers:node14.17.0-chrome91-ff89
+    container: cypress/browsers:node14.19.0-chrome100-ff99-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -16,11 +20,10 @@ jobs:
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v4
         with:
-          # Specify Browser since container image is compile with Firefox
-          install-command: yarn install
-          start: yarn start
+          install-command: npm install
+          start: npm start
           wait-on: http://localhost:3000
           wait-on-timeout: 95
           browser: chrome

@@ -17,9 +17,13 @@ export const makeFilterBody = (
   limit: number | undefined = undefined
 ): IStacFilter => {
   const optimizedCql = optimizeCqlExpressions(cql);
+
+  // Combine base filters with any selected filters, removing any nulls
+  const filterBody = [...baseFilter, ...optimizedCql].filter(Boolean);
+
   return {
     "filter-lang": "cql2-json",
-    filter: { op: "and", args: [...baseFilter, ...optimizedCql] },
+    filter: { op: "and", args: filterBody },
     sortby: query.sortby || undefined,
     limit: limit,
   } as IStacFilter;

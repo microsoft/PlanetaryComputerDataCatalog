@@ -28,6 +28,7 @@ Changelog <overview/changelog>
 Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-stac-r
 quickstarts/reading-zarr-data
+quickstarts/stac-geoparquet
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
 quickstarts/using-radiant-mlhub-api
@@ -39,6 +40,7 @@ quickstarts/storage
 :caption: Tutorials
 
 tutorials/cloudless-mosaic-sentinel2
+Sentinel-1 Customizable Radiometric Terrain Correction <tutorials/customizable-rtc-sentinel1>
 tutorials/landcover
 tutorials/hurricane-florence-animation
 See all tutorials <https://github.com/microsoft/PlanetaryComputerExamples/tree/main/tutorials>

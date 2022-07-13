@@ -13,7 +13,7 @@ import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
 import { a11yPostProcessDom, buildGitHubUrl, buildHubLaunchUrl } from "../utils";
 import NewTabLink from "./controls/NewTabLink";
-import GeneratedInternalToc from "./docs/GeneratedInternalToc";
+import GeneratedInternalToc from "../pages/Docs/components/GeneratedInternalToc";
 
 // HTML rendered Notebooks and Markdown files are fetched async from the static dir
 const MetadataHtmlContent = ({ src, launch }) => {

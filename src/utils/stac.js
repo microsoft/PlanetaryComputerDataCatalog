@@ -3,6 +3,7 @@ import {
   DetailsListLayoutMode,
   SelectionMode,
   Stack,
+  StackItem,
   Text,
 } from "@fluentui/react";
 import StacFields from "@radiantearth/stac-fields";
@@ -72,23 +73,26 @@ StacFields.Registry.addMetadataField("raster:bands", {
   label: "Raster Info",
   formatter: value => {
     const values = Array.isArray(value) ? value : [value];
-    return values.map((band, idx) => (
-      <Stack>
-        <Text
-          as="h4"
-          styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
-        >
-          Raster Band {idx + 1}
-        </Text>
-        <div style={{ paddingLeft: 4 }}>
-          <SimpleKeyValueList
-            key={`rasterband-${idx}`}
-            object={band}
-            indent={true}
-          />
-        </div>
-      </Stack>
-    ));
+    return values.map((band, idx) => {
+      const key = Object.entries(band)[0][1];
+      return (
+        <Stack key={`bandwrapper-${key}-${idx}`}>
+          <Text
+            as="h4"
+            styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
+          >
+            Raster Band {idx + 1}
+          </Text>
+          <div style={{ paddingLeft: 4 }}>
+            <SimpleKeyValueList
+              key={`rasterband-${key}-${idx}`}
+              object={band}
+              indent={true}
+            />
+          </div>
+        </Stack>
+      );
+    });
   },
 });
 
@@ -153,6 +157,60 @@ StacFields.Registry.addMetadataField("classification:classes", {
         items={items}
       />
     );
+  },
+});
+
+StacFields.Registry.addMetadataField("classification:bitfields", {
+  label: "Classfication Bitfields",
+  formatter: fileValues => {
+    return fileValues.map(v => {
+      return (
+        <Stack key={`bitfield-${v.name}`} tokens={gap4}>
+          <Stack horizontal tokens={gap4}>
+            <Text styles={boldStyle}>{capitalize(v.name)}</Text>
+            <Text>{v.description}</Text>
+          </Stack>
+          <Stack horizontal tokens={gap4}>
+            <StackItem>Offset: {v.offset}, </StackItem>
+            <StackItem>Length: {v.length}</StackItem>
+          </Stack>
+          <DetailsList
+            styles={{ root: { paddingBottom: 10 } }}
+            selectionMode={SelectionMode.none}
+            layoutMode={DetailsListLayoutMode.justified}
+            isHeaderVisible={true}
+            compact={true}
+            columns={[
+              {
+                key: "name",
+                name: "Name",
+                fieldName: "name",
+                isMultiline: false,
+                isPadded: false,
+                maxWidth: 55,
+                minWidth: 10,
+              },
+              {
+                key: "value",
+                name: "Value",
+                fieldName: "value",
+                isMultiline: false,
+                isPadded: false,
+                maxWidth: 35,
+                minWidth: 10,
+              },
+              {
+                key: "description",
+                name: "Description",
+                fieldName: "description",
+                isMultiline: false,
+              },
+            ]}
+            items={v.classes}
+          />
+        </Stack>
+      );
+    });
   },
 });
 
@@ -232,6 +290,9 @@ StacFields.Registry.addMetadataField("sat:orbit_state", {
 });
 StacFields.Registry.addMetadataField("sat:relative_orbit", {
   label: "Relative Orbit No.",
+});
+StacFields.Registry.addMetadataField("sat:absolute_orbit", {
+  label: "Absolute Orbit No.",
 });
 StacFields.Registry.addMetadataField("sat:platform_international_designator", {
   label: "Platform Designator",
@@ -338,6 +399,10 @@ StacFields.Registry.addMetadataField("cmip6:variant_label", {
   label: "'Variant' label",
 });
 
+StacFields.Registry.addMetadataField("deltares:sea_level_year", {
+  formatter: String,
+});
+
 StacFields.Registry.addMetadataField("goes:image-type", {
   label: "Image Type",
 });
@@ -346,6 +411,10 @@ StacFields.Registry.addMetadataField("goes:mode", {
 });
 StacFields.Registry.addMetadataField("goes:processing-level", {
   label: "Processing Level",
+});
+
+StacFields.Registry.addMetadataField("s1:shape", {
+  formatter: codeNumberList,
 });
 
 StacFields.Registry.addMetadataField("s2:mgrs_tile", {
@@ -461,6 +530,12 @@ export const mediaTypeOverride = value => {
       return "GeoTIFF (COG)";
     case "application/x-parquet":
       return "Parquet";
+    case "application/x-hdf":
+      return "HDF";
+    case "application/vnd.laszip+copc":
+      return "COPC";
+    case "application/vnd+zarr":
+      return "Zarr";
     default:
       return StacFields.Formatters.formatMediaType(value);
   }
@@ -470,7 +545,7 @@ export const bandOverrideList = bands => {
   return bands
     .map(({ name, common_name }) => {
       const common = common_name ? `(${common_name})` : "";
-      return `${name} ${common}`.trim();
+      return name ? `${name} ${common}`.trim() : common_name;
     })
     .join(", ");
 };
@@ -523,9 +598,10 @@ export const renderItemColumn = (item, _, column) => {
   // Add tooltips to potentially long cells
   switch (column.key) {
     case "asset":
-      // Assets are generally rendered as a link to download a file. However, Zarr types
-      // are really a root directory, and the href is more important than a link
-      return fieldContent.contentType === "application/vnd+zarr" ? (
+      // Assets are generally rendered as a link to download a file. However, some types
+      // are really a root directory, and the href text is more important than a link
+      const nonLinkHrefTypes = ["application/vnd+zarr", "application/x-parquet"];
+      return nonLinkHrefTypes.includes(fieldContent.contentType) ? (
         <code title={fieldContent.name}>{fieldContent.href}</code>
       ) : (
         <NewTabLink href={fieldContent.href}>{fieldContent.name}</NewTabLink>
@@ -545,7 +621,9 @@ export const renderItemColumn = (item, _, column) => {
         </Revealer>
       );
     case "dimensions":
-      fieldContent = fieldContent.join(", ");
+      if (Array.isArray(fieldContent)) {
+        fieldContent = fieldContent.join(", ");
+      }
       return <span>({fieldContent})</span>;
     case "shape":
     case "chunks":
@@ -584,3 +662,6 @@ export const renderItemColumn = (item, _, column) => {
       return stacFormatter.format(fieldContent, column.fieldName);
   }
 };
+
+const boldStyle = { root: { fontWeight: "bold" } };
+const gap4 = { childrenGap: 4 };

@@ -1,10 +1,14 @@
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/aster-l1t/aster-l1t-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/eclipse/eclipse-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/cil-gdpcir-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/ensemble.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/cil-gdpcir/indicators.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/naip/naip-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-grd/sentinel-1-grd-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/sentinel-1-rtc/sentinel-1-rtc-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/stac-geoparquet.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-radiant-mlhub-api.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/goes/goes-cmi-example.ipynb
@@ -14,6 +18,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/mtbs/mtbs-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasadem/nasadem-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/terraclimate/terraclimate-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/daymet/daymet-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/io-lulc/io-lulc-example.ipynb
@@ -23,6 +28,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/3dep-lidar/3dep-lidar-cog-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/gap/gap-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/jrc-gsw/jrc-gsw-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/kaza-hydroforecast/kaza-hydroforecast-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/us-census/us-census-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/ecmwf-forecast/ecmwf-forecast-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/era5/era5-example.ipynb
@@ -39,3 +45,11 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/planet-nicfi/planet-nicfi-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/landsat-c2/landsat-c2-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/esa-worldcover/esa-worldcover-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-fire-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-imagery-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-snow-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-temperature-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/modis/modis-vegetation-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/ms-buildings/ms-buildings-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/deltares-floods/deltares-floods-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/deltares-water-availability/deltares-water-availability-example.ipynb
