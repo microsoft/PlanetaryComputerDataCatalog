@@ -151,14 +151,26 @@ aster-l1t:
 chesapeake-lc-7:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lc-7-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chesapeake-lc-13:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lc-13-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chesapeake-lu:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lu-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb 
 
 chloris-biomass:
   category: Biomass/Vegetation
