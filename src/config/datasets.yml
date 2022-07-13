@@ -309,6 +309,14 @@ deltares-water-availability:
       src: deltares-water-availability-example.html
       launch: datasets/deltares-water-availability/deltares-water-availability-example.ipynb
 
+drcog-lulc:
+  category: Land use/Land cover
+  headerImg: ./images/drcog-hrlulc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: drcog-lulc-example.html
+      launch: datasets/drcog-lulc/drcog-lulc-example.ipynb
+
 eclipse:
   category: Air Quality
   tabs:
@@ -752,7 +760,7 @@ viirs-09h1-001:
   headerImg: ./images/viirs-09h1-hero.png
 
 viirs-10a1-001:
-  category: Water/Snow
+  category: Snow
   headerImg: ./images/viirs-10a1-hero.png
 
 viirs-13a1-001:
