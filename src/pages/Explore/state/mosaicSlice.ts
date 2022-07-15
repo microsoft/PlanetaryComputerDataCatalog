@@ -329,11 +329,6 @@ export const selectCurrentMosaic = (state: ExploreState): ILayerState => {
   return state.mosaic.layers[state.mosaic.currentEditingLayerId];
 };
 
-// Custom selector to get all pinned mosaic layers
-export const selectPinnedMosaics = (state: ExploreState) => {
-  return Object.values(state.mosaic.layers).filter(layer => layer.isPinned);
-};
-
 // Register the new CQL query and set the resulting searchId
 async function registerUpdatedSearch(getState: () => unknown) {
   const state = getState() as ExploreState;

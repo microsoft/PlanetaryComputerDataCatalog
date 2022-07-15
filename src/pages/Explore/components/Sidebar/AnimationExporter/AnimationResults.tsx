@@ -12,10 +12,15 @@ import {
 import { AnimationResponse, AnimationResult } from "./AnimationResult";
 
 interface Props {
+  collectionId: string;
   animations: AnimationResponse[];
   isLoading: boolean;
 }
-export const AnimationResults: React.FC<Props> = ({ animations, isLoading }) => {
+export const AnimationResults: React.FC<Props> = ({
+  collectionId,
+  animations,
+  isLoading,
+}) => {
   const imageShimmer = (
     <Shimmer
       styles={shimmerStyles}
@@ -39,12 +44,11 @@ export const AnimationResults: React.FC<Props> = ({ animations, isLoading }) => 
         {animations
           .slice()
           .reverse()
-          .map((animation, idx) => {
-            const reverseIndex = animations.length - idx - 1;
+          .map(animation => {
             return (
               <AnimationResult
                 key={animation.url}
-                idx={reverseIndex}
+                collectionId={collectionId}
                 animationResponse={animation}
               />
             );

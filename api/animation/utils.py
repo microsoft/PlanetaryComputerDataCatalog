@@ -1,7 +1,8 @@
 import io
 import os
-from uuid import uuid4
 from dataclasses import dataclass
+from uuid import uuid4
+from urllib.parse import quote
 
 from azure.storage.blob import BlobClient
 from pyproj import Transformer
@@ -30,12 +31,23 @@ def geop_to_imgp(
 to_3857 = Transformer.from_crs("EPSG:4326", "EPSG:3857", always_xy=True)
 
 
-def upload_gif(gif: io.BytesIO):
+def upload_gif(gif: io.BytesIO, collection_name: str) -> str:
     gif.seek(0)
-    filename = f"mspc-animation-{uuid4().hex}.gif"
+    filename = f"mspc-{collection_name}-{uuid4().hex}.gif"
     blob_uri = f"{ANIMATION_CONTAINER_URL}/{filename}"
     sas = os.environ.get("CONTAINER_ANIMATION_SAS")
 
     BlobClient.from_blob_url(blob_uri, credential=sas).upload_blob(gif)
 
     return blob_uri
+
+
+def parse_render_params(body):
+    render_options = [p.split("=") for p in body["render_params"].split("&")]
+    collection_id = [value for key, value in render_options if key == "collection"][0]
+
+    encoded_options = [f"{key}={quote(value)}" for key, value in render_options]
+    encoded_options.append("tile_scale=2")
+    render_params = "&".join(encoded_options)
+
+    return (render_params, collection_id)

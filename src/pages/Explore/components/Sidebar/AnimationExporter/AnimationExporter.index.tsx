@@ -1,18 +1,17 @@
 import {
   Dropdown,
-  getTheme,
-  IconButton,
   IDropdownOption,
-  Image,
-  ImageFit,
   IStackStyles,
   PrimaryButton,
   Stack,
   StackItem,
-  Text,
   TextField,
 } from "@fluentui/react";
 import dayjs from "dayjs";
+import {
+  addAnimation,
+  selectAnimationsByCollection,
+} from "pages/Explore/state/animationSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
@@ -22,7 +21,6 @@ import { useEffect, useState } from "react";
 import { IStacFilter } from "types/stac";
 import { useAnimationExport } from "utils/requests";
 import { AnimationIntro } from "./AnimationIntro";
-import { AnimationResponse } from "./AnimationResult";
 import { AnimationResults } from "./AnimationResults";
 
 interface AnimationExporterProps {}
@@ -53,8 +51,10 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
   const { collection, renderOption, query } =
     useExploreSelector(selectCurrentMosaic);
   const { bounds, zoom, showAnimationPanel } = useExploreSelector(s => s.map);
+  const animations = useExploreSelector(s =>
+    selectAnimationsByCollection(s, collection?.id)
+  );
   const [configPayload, setConfigPayload] = useState<IAnimationExportConfig>();
-  const [animations, setAnimations] = useState<AnimationResponse[]>([]);
   const [animConfig, setAnimConfig] = useState<IAnimationSettings>(defaultConfig);
   const {
     data: animationResp,
@@ -62,29 +62,41 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
     isError,
   } = useAnimationExport(configPayload);
 
+  // When an animation response is received, add it to the list of animations
+  // for this collection and reset the payload state used to request it.
   useEffect(() => {
-    if (animationResp) {
-      setAnimations(animations.concat([animationResp]));
+    if (animationResp && collection?.id) {
+      dispatch(
+        addAnimation({
+          animation: animationResp,
+          collectionId: collection.id,
+        })
+      );
       setConfigPayload(undefined);
     }
-  }, [animationResp, animations]);
+  }, [animationResp, animations, collection?.id, dispatch]);
 
   if (!bounds) return null;
   if (!renderOption) return null;
+  if (!collection) return null;
 
-  const collectionFragment = collectionFilter(collection?.id);
+  // Build up the config payload to be used to request an animation
+  // based on the current map/filter state.
+  const collectionFragment = collectionFilter(collection.id);
   const cql = makeFilterBody([collectionFragment], query, query.cql);
   const mosaicConfig = {
     bbox: bounds,
     zoom: Math.round(zoom),
-    render_params: renderOption.options + `&collection=${collection?.id}`,
+    render_params: renderOption.options + `&collection=${collection.id}`,
     cql,
   };
 
+  // Todo: useeffect?
   if (isError) {
     setConfigPayload(undefined);
   }
 
+  // Build the full payload to be used to request an animation
   const handleExport = () => {
     const payload = { ...mosaicConfig, ...animConfig };
     setConfigPayload(payload);
@@ -163,15 +175,17 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
       </StackItem>
 
       {(animations.length || isLoading) && (
-        <AnimationResults animations={animations} isLoading={isLoading} />
+        <AnimationResults
+          collectionId={collection.id}
+          animations={animations}
+          isLoading={isLoading}
+        />
       )}
     </Stack>
   );
 
   return showAnimationPanel ? panel : null;
 };
-
-const theme = getTheme();
 
 const units: IDropdownOption[] = [
   { key: "mins", text: "Minutes" },

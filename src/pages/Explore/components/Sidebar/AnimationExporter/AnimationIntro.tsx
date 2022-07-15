@@ -27,9 +27,8 @@ export const AnimationIntro: React.FC<Props> = ({ collection, handleClose }) => 
         frame.
       </Text>
       <Text>
-        Keep in mind that many datasets have irregular temporal availability,
-        varied cloud cover, or other changes which might affect the quality of your
-        results.
+        Keep in mind that many datasets have irregular temporal availability, varied
+        cloud cover, or other changes which might affect the quality of your results.
       </Text>
     </>
   );
@@ -37,6 +36,11 @@ export const AnimationIntro: React.FC<Props> = ({ collection, handleClose }) => 
 
 const theme = getTheme();
 
-const buttonStyles = { root: { color: theme.semanticColors.bodyText } };
+const buttonStyles = {
+  root: { color: theme.semanticColors.bodyText },
+  rootHovered: {
+    color: theme.palette.neutralDark,
+  },
+};
 const iconProps = { iconName: "Cancel" };
 const headerStyles = { marginBottom: 4 };

@@ -1,0 +1,111 @@
+import {
+  getTheme,
+  IButtonStyles,
+  IconButton,
+  IIconProps,
+  IImageStyles,
+  Image,
+  ImageFit,
+  Label,
+  Modal,
+  Separator,
+  Stack,
+} from "@fluentui/react";
+import { useCallback } from "react";
+import { AnimationResponse } from "./AnimationResult";
+
+interface AnimationViewerProps {
+  animationResponse: AnimationResponse;
+  onClose: () => void;
+}
+
+export const AnimationViewer: React.FC<AnimationViewerProps> = ({
+  animationResponse,
+  onClose,
+}) => {
+  const handleDownload = useCallback(() => {
+    window.open(animationResponse.url);
+  }, [animationResponse.url]);
+
+  return (
+    <Modal isOpen={true} onDismiss={onClose}>
+      <Stack horizontal horizontalAlign="space-between">
+        <h3 style={headerStyle}>Timelapse viewer</h3>
+        <IconButton
+          styles={iconButtonStyles}
+          iconProps={cancelIcon}
+          ariaLabel="Close popup modal"
+          onClick={onClose}
+        />
+      </Stack>
+      <Separator />
+      <div
+        style={{
+          margin: "0 10px",
+        }}
+      >
+        <Label>Share link:</Label>
+        <Stack
+          horizontal
+          horizontalAlign="start"
+          tokens={{ childrenGap: 5 }}
+          verticalAlign="center"
+        >
+          <div
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: 4,
+              padding: 4,
+            }}
+          >
+            <code>{animationResponse.url}</code>
+          </div>
+          <IconButton
+            title="Download image"
+            iconProps={{ iconName: "Download" }}
+            onClick={handleDownload}
+          />
+        </Stack>
+      </div>
+      <Image
+        src={animationResponse.url}
+        styles={imageStyles}
+        alt={"Timelapse animation"}
+        imageFit={ImageFit.contain}
+      />
+    </Modal>
+  );
+};
+
+const theme = getTheme();
+
+const cancelIcon: IIconProps = { iconName: "Cancel" };
+
+const iconButtonStyles: Partial<IButtonStyles> = {
+  root: {
+    color: theme.palette.neutralPrimary,
+    marginTop: 12,
+    marginRight: 4,
+  },
+  rootHovered: {
+    color: theme.palette.neutralDark,
+  },
+};
+
+const imageStyles: Partial<IImageStyles> = {
+  root: {
+    margin: 10,
+    backgroundColor: theme.palette.neutralLighter,
+  },
+  image: {
+    maxWidth: "80vw",
+    maxHeight: "80vh",
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+};
+
+const headerStyle: React.CSSProperties = {
+  marginLeft: 10,
+  marginBottom: 5,
+};
