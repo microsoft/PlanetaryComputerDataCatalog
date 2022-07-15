@@ -31,7 +31,6 @@ export const AnimationResults: React.FC<Props> = ({ animations, isLoading }) => 
       <Stack
         horizontal
         wrap
-        horizontalAlign="space-evenly"
         className="custom-overflow"
         styles={resultStyles}
         tokens={resultTokens}
@@ -40,9 +39,16 @@ export const AnimationResults: React.FC<Props> = ({ animations, isLoading }) => 
         {animations
           .slice()
           .reverse()
-          .map(animation => (
-            <AnimationResult key={animation.url} animationResponse={animation} />
-          ))}
+          .map((animation, idx) => {
+            const reverseIndex = animations.length - idx - 1;
+            return (
+              <AnimationResult
+                key={animation.url}
+                idx={reverseIndex}
+                animationResponse={animation}
+              />
+            );
+          })}
       </Stack>
     </>
   );

@@ -37,13 +37,15 @@ interface IAnimationSettings {
   step: number;
   unit: string;
   frames: number;
+  duration: number;
 }
 
 const defaultConfig = {
-  start: dayjs().utc().toISOString(),
-  step: 5,
+  start: dayjs().subtract(6, "months").utc().toISOString(),
+  step: 1,
   unit: "months",
   frames: 6,
+  duration: 250,
 };
 
 export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
@@ -107,14 +109,14 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
   const panel = (
     <Stack styles={containerStyles} tokens={{ childrenGap: 10 }}>
       <AnimationIntro collection={collection} handleClose={handleClose} />
-      <TextField
-        label="Start date/time"
-        name="start"
-        placeholder="YYYY-MM-DDTHH:mm:ssZ"
-        defaultValue={animConfig.start}
-        onChange={handleChange}
-      />
       <Stack horizontal horizontalAlign="start" tokens={{ childrenGap: 6 }}>
+        <TextField
+          label="Start date/time"
+          name="start"
+          placeholder="YYYY-MM-DDTHH:mm:ssZ"
+          defaultValue={animConfig.start}
+          onChange={handleChange}
+        />
         <TextField
           type="number"
           name="step"
@@ -132,6 +134,8 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
             setAnimConfig({ ...animConfig, unit: option?.key as string })
           }
         />
+      </Stack>
+      <Stack horizontal horizontalAlign="start" tokens={{ childrenGap: 6 }}>
         <TextField
           type="number"
           label="Number of frames"
@@ -142,6 +146,15 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
           defaultValue={animConfig.frames.toString()}
           onChange={handleChange}
         />
+        <TextField
+          type="number"
+          label="Frame duration (ms)"
+          name="duration"
+          min={1}
+          step={1}
+          defaultValue={animConfig.duration.toString()}
+          onChange={handleChange}
+        />
       </Stack>
       <StackItem shrink={false}>
         <PrimaryButton disabled={!exportEnabled} onClick={handleExport}>
@@ -149,7 +162,7 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
         </PrimaryButton>
       </StackItem>
 
-      {animations.length && (
+      {(animations.length || isLoading) && (
         <AnimationResults animations={animations} isLoading={isLoading} />
       )}
     </Stack>

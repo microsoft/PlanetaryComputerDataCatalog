@@ -17,16 +17,20 @@ async def main(req: func.HttpRequest) -> func.HttpResponse:
     params.append("tile_scale=2")
     params = "&".join(params)
 
-    animator = PcMosaicAnimation(
-        bbox=body["bbox"], zoom=body["zoom"], cql=body["cql"], render_params=params
-    )
-
+    duration = int(body["duration"])
     step = int(body["step"])
     frames = int(body["frames"])
     start = parse(body["start"])
 
-    gif = await animator.get(step, body["unit"], start, frames)
+    animator = PcMosaicAnimation(
+        bbox=body["bbox"],
+        zoom=body["zoom"],
+        cql=body["cql"],
+        render_params=params,
+        frame_duration=duration,
+    )
 
+    gif = await animator.get(step, body["unit"], start, frames)
     gif_url = upload_gif(gif)
 
     return func.HttpResponse(
