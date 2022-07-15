@@ -1,12 +1,14 @@
 import {
-  DefaultButton,
   Dropdown,
+  getTheme,
+  IconButton,
   IDropdownOption,
   Image,
   ImageFit,
   IStackStyles,
   PrimaryButton,
   Stack,
+  StackItem,
   Text,
   TextField,
 } from "@fluentui/react";
@@ -16,32 +18,54 @@ import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
-import { useState } from "react";
-
-import { BoundsSelector } from "./BoundsSelector";
+import { useEffect, useState } from "react";
+import { IStacFilter } from "types/stac";
+import { useAnimationExport } from "utils/requests";
+import { AnimationIntro } from "./AnimationIntro";
+import { AnimationResponse } from "./AnimationResult";
+import { AnimationResults } from "./AnimationResults";
 
 interface AnimationExporterProps {}
-interface IAnimConfig {
-  start: string;
-  step: string;
-  unit: string;
-  frames: string;
+export interface IAnimationExportConfig extends IAnimationSettings {
+  bbox: number[];
+  zoom: number;
+  cql: IStacFilter;
 }
 
-export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
-  const [urlParams, setUrlParams] = useState<string>("");
-  const [animConfig, setAnimConfig] = useState<IAnimConfig>({
-    start: dayjs().utc().toISOString(),
-    step: "5",
-    unit: "months",
-    frames: "12",
-  });
+interface IAnimationSettings {
+  start: string;
+  step: number;
+  unit: string;
+  frames: number;
+}
 
+const defaultConfig = {
+  start: dayjs().utc().toISOString(),
+  step: 5,
+  unit: "months",
+  frames: 6,
+};
+
+export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
+  const dispatch = useExploreDispatch();
   const { collection, renderOption, query } =
     useExploreSelector(selectCurrentMosaic);
   const { bounds, zoom, showAnimationPanel } = useExploreSelector(s => s.map);
-  const dispatch = useExploreDispatch();
-  const title = collection?.title;
+  const [configPayload, setConfigPayload] = useState<IAnimationExportConfig>();
+  const [animations, setAnimations] = useState<AnimationResponse[]>([]);
+  const [animConfig, setAnimConfig] = useState<IAnimationSettings>(defaultConfig);
+  const {
+    data: animationResp,
+    isLoading,
+    isError,
+  } = useAnimationExport(configPayload);
+
+  useEffect(() => {
+    if (animationResp) {
+      setAnimations(animations.concat([animationResp]));
+      setConfigPayload(undefined);
+    }
+  }, [animationResp, animations]);
 
   if (!bounds) return null;
   if (!renderOption) return null;
@@ -49,17 +73,19 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
   const collectionFragment = collectionFilter(collection?.id);
   const cql = makeFilterBody([collectionFragment], query, query.cql);
   const mosaicConfig = {
-    bbox: bounds.join(","),
-    zoom: Math.round(zoom).toString(),
+    bbox: bounds,
+    zoom: Math.round(zoom),
     render_params: renderOption.options + `&collection=${collection?.id}`,
-    cql: JSON.stringify(cql),
+    cql,
   };
 
-  const payload = { ...mosaicConfig, ...animConfig };
+  if (isError) {
+    setConfigPayload(undefined);
+  }
 
   const handleExport = () => {
-    const params = new URLSearchParams(payload);
-    setUrlParams(params.toString());
+    const payload = { ...mosaicConfig, ...animConfig };
+    setConfigPayload(payload);
   };
 
   const handleChange = (
@@ -76,22 +102,11 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
     dispatch(setShowAnimationPanel(false));
   };
 
+  const exportEnabled = !Boolean(animationResp) && !isLoading;
+
   const panel = (
     <Stack styles={containerStyles} tokens={{ childrenGap: 10 }}>
-      <Stack horizontal horizontalAlign="space-between">
-        <h3>Animation</h3>
-        <DefaultButton iconProps={{ iconName: "Cancel" }} onClick={handleClose} />
-      </Stack>
-      <h4>{title}</h4>
-      <Text>
-        Generate an animated image of your current search over time. Start by drawing
-        the area you want to capture on the map, and select the increment for each
-        frame.
-      </Text>
-      <Text>
-        Keep in mind that many datasets have an irregular temporal availability which
-        might affect your results.
-      </Text>
+      <AnimationIntro collection={collection} handleClose={handleClose} />
       <TextField
         label="Start date/time"
         name="start"
@@ -101,11 +116,12 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
       />
       <Stack horizontal horizontalAlign="start" tokens={{ childrenGap: 6 }}>
         <TextField
+          type="number"
           name="step"
           label={"Increment amount"}
           min={2}
           step={1}
-          defaultValue={animConfig.step}
+          defaultValue={animConfig.step.toString()}
           onChange={handleChange}
         />
         <Dropdown
@@ -117,29 +133,32 @@ export const AnimationExporter: React.FC<AnimationExporterProps> = () => {
           }
         />
         <TextField
+          type="number"
           label="Number of frames"
           name="frames"
           min={1}
           max={48}
           step={1}
-          defaultValue={animConfig.frames}
+          defaultValue={animConfig.frames.toString()}
           onChange={handleChange}
         />
       </Stack>
-      {urlParams && (
-        <Image
-          alt="layer animation"
-          src={`/api/animation?${urlParams}`}
-          imageFit={ImageFit.contain}
-        />
+      <StackItem shrink={false}>
+        <PrimaryButton disabled={!exportEnabled} onClick={handleExport}>
+          Generate animation
+        </PrimaryButton>
+      </StackItem>
+
+      {animations.length && (
+        <AnimationResults animations={animations} isLoading={isLoading} />
       )}
-      <PrimaryButton onClick={handleExport}>Export</PrimaryButton>
     </Stack>
   );
 
   return showAnimationPanel ? panel : null;
-  // return showAnimationPanel ? <BoundsSelector /> : null;
 };
+
+const theme = getTheme();
 
 const units: IDropdownOption[] = [
   { key: "mins", text: "Minutes" },

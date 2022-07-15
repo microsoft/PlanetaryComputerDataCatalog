@@ -6,6 +6,8 @@
     "SignupUrl": "",
     "SignupToken": "",
 
+    "CONTAINER_ANIMATION_SAS": "",
+
     "FUNCTIONS_WORKER_RUNTIME": "python"
   }
 }

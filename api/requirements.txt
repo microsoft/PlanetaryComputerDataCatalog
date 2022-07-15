@@ -10,3 +10,4 @@ dateutils==0.6.12
 mercantile==1.2.1
 pillow==9.2.0
 pyproj==3.3.1
+azure-storage-blob==12.13.0

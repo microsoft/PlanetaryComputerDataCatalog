@@ -1,4 +1,5 @@
 import io
+import logging
 
 from typing import List
 from PIL import Image
@@ -8,26 +9,22 @@ from .utils import Point, geop_to_imgp, to_3857
 
 
 class AnimationFrame:
-    tiles = []
-    tile_images = []
-    bbox = []
-    num_cols = 0
-    num_rows = 0
-    tile_size = 256
-
     def __init__(
         self,
         tiles: List[Tile],
         tile_images: List[io.BytesIO],
         bbox: Bbox,
+        tile_size: int,
     ):
         self.tiles = tiles
         self.tile_images = tile_images
+        self.tile_size = tile_size
+        self.bbox = bbox
         self.num_cols = self._get_num_cols()
         self.num_rows = self._get_num_rows()
         self.px_width = self.num_cols * self.tile_size
         self.px_height = self.num_rows * self.tile_size
-        self.bbox = bbox
+        logging.info(f"size: {self.px_width}x{self.px_height}")
 
     def _get_num_cols(self) -> int:
         return len(set([tile.x for tile in self.tiles]))

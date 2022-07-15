@@ -18,14 +18,20 @@ class PcMosaicAnimation:
     async_limit = asyncio.Semaphore(45)
 
     def __init__(
-        self, bbox: List[float], zoom: int, cql: Dict[str, any], render_params: str
+        self,
+        bbox: List[float],
+        zoom: int,
+        cql: Dict[str, any],
+        render_params: str,
+        frame_duration: int = 250,
     ):
         self.bbox = bbox
         self.zoom = zoom
         self.cql = cql
         self.render_params = render_params
         self.tiles = list(tiles(*bbox, zoom))
-        self.tile_size = 256
+        self.frame_duration = frame_duration
+        self.tile_size = 512
 
     async def _get_tilejson(self, the_date: str) -> str:
         non_temporal_args = [
@@ -106,7 +112,7 @@ class PcMosaicAnimation:
             append_images=image_frames[1:],
             optimize=True,
             save_all=True,
-            duration=250,
+            duration=self.frame_duration,
             loop=0,
         )
 
@@ -125,5 +131,5 @@ class PcMosaicAnimation:
             tasks.append(asyncio.ensure_future(self._get_tile(url)))
 
         tile_images = await asyncio.gather(*tasks)
-        frame = AnimationFrame(self.tiles, tile_images, self.bbox)
+        frame = AnimationFrame(self.tiles, tile_images, self.bbox, self.tile_size)
         return frame.get_mosaic()
