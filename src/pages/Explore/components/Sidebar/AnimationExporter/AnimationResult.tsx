@@ -139,7 +139,7 @@ const iconButtonStyles: IButtonStyles = {
   root: {
     border: `1px solid ${theme.palette.neutralQuaternary}`,
     position: "absolute",
-    right: 8,
+    right: 4,
     top: 4,
     zIndex: 1,
     borderRadius: 20,

@@ -1,0 +1,135 @@
+import dayjs, { ManipulateType } from "dayjs";
+import { IStacCollection } from "types/stac";
+import { AnimationFrameSettings, AnimationValidation } from "./types";
+
+const MAX_FRAMES = 24;
+
+export const validate = (
+  animationSettings: AnimationFrameSettings,
+  collection: IStacCollection | null
+) => {
+  const { start, step, unit, frames, duration } = animationSettings;
+  const validations: AnimationValidation = {
+    start: [],
+    frames: [],
+    duration: [],
+    step: [],
+    count: 0,
+  };
+
+  const startDate = dayjs(start);
+
+  const collectionStart = getCollectionStart(collection);
+  const collectionEnd = getCollectionEnd(collection);
+
+  if (!start) {
+    validations.start.push("Required.");
+  }
+
+  if (!startDate.isValid()) {
+    validations.start.push("Invalid datetime.");
+  }
+
+  if (!step) {
+    validations.step.push("Required.");
+  }
+
+  if (!frames) {
+    validations.frames.push("Required.");
+  }
+
+  if (frames > MAX_FRAMES) {
+    validations.frames.push(`Max ${MAX_FRAMES} frames.`);
+  }
+
+  if (!duration) {
+    validations.duration.push("Required.");
+  }
+
+  if (frames < 2) {
+    validations.frames.push("Must be > 2.");
+  }
+
+  if (duration < 10) {
+    validations.duration.push("Must be > 10ms.");
+  }
+
+  if (step < 1) {
+    validations.step.push("Must be > 1.");
+  }
+
+  if (startDate.isBefore(collectionStart)) {
+    validations.start.push(`Must be after ${collectionStart.format("YYYY-MM-DD")}`);
+  }
+
+  if (startDate.add(step * frames, unit as ManipulateType).isAfter(collectionEnd)) {
+    validations.frames.push(
+      `Frames go past dataset end date of ${collectionEnd.format("YYYY-MM-DD")}`
+    );
+  }
+
+  validations.count = Object.values(validations).reduce(
+    (acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0),
+    0
+  );
+
+  return validations;
+};
+
+const getCollectionStart = (collection: IStacCollection | null) => {
+  if (!collection) {
+    return dayjs();
+  }
+  const temporal = collection.extent.temporal.interval;
+  const collectionStart = temporal.reduce((acc, curr) => {
+    if (dayjs(acc).isBefore(dayjs(curr[0]))) {
+      return acc;
+    }
+    return curr[0];
+  }, temporal[0][0]);
+  return dayjs(collectionStart);
+};
+
+const getCollectionEnd = (collection: IStacCollection | null) => {
+  if (!collection) {
+    return dayjs();
+  }
+  const temporal = collection.extent.temporal.interval;
+  const collectionEnd = temporal.reduce((acc, curr) => {
+    if (dayjs(acc).isAfter(dayjs(curr[1]))) {
+      return acc;
+    }
+    return curr[1];
+  }, temporal[0][1]);
+
+  return collectionEnd ? dayjs(collectionEnd) : dayjs();
+};
+
+export const getDefaultSettings = (collection: IStacCollection | null) => {
+  const collectionStart = getCollectionStart(collection);
+  const collectionEnd = getCollectionEnd(collection);
+
+  const diff = collectionEnd.diff(collectionStart, "d") / 2;
+  const defaultStart = collectionStart.add(diff, "d").startOf("d").toISOString();
+  const defaultSettings: AnimationFrameSettings = {
+    start: defaultStart,
+    step: 1,
+    unit: "months",
+    frames: 6,
+    duration: 250,
+  };
+
+  return defaultSettings;
+};
+
+export const isValidCollection = (collection: IStacCollection | null) => {
+  if (!collection) {
+    return false;
+  }
+
+  // If the start/end dates of the temporal extent are the same, then the collection is invalid.
+  const temporal = collection.extent.temporal.interval;
+  return temporal
+    .map(([start, end]) => dayjs(start).isSame(dayjs(end)))
+    .every(Boolean);
+};

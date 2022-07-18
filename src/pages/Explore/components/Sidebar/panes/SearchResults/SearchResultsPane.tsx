@@ -16,15 +16,15 @@ import {
 import { UseQueryResult } from "react-query";
 
 import { IStacCollection, IStacItem, IStacSearchResult } from "types/stac";
-import ItemResult from "../../ItemResult";
-import ExploreInHub from "../../ExploreInHub";
+import ItemResult from "../../../ItemResult";
+import ExploreInHub from "../../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import { MobileViewMapButton } from "../../MobileViewInMap/ViewInMap.index";
+import { MobileViewMapButton } from "../../../MobileViewInMap/ViewInMap.index";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;

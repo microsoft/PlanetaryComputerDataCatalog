@@ -7,6 +7,8 @@ from dateutil.parser import parse
 from .PcMosaicAnimation import PcMosaicAnimation
 from .utils import parse_render_params, upload_gif
 
+MAX_FRAMES = 24
+
 
 async def main(req: func.HttpRequest) -> func.HttpResponse:
     body = req.get_json()
@@ -14,7 +16,7 @@ async def main(req: func.HttpRequest) -> func.HttpResponse:
     render_params, collection_id = parse_render_params(body)
     duration = int(body["duration"])
     step = int(body["step"])
-    frames = min(int(body["frames"]), 24)
+    frames = min(int(body["frames"]), MAX_FRAMES)
     start = parse(body["start"])
 
     animator = PcMosaicAnimation(

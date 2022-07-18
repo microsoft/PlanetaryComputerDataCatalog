@@ -1,5 +1,5 @@
 import ItemDetailPanel from "../../ItemDetailPanel";
-import SearchResultsPane from "../panes/SearchResultsPane";
+import SearchResultsPane from "../panes/SearchResults/SearchResultsPane";
 import SelectorPane from "../panes/SelectorPane";
 import TitleHeader from "../TitleHeader";
 import InitialStateLoader from "../selectors/InitialStateLoader";

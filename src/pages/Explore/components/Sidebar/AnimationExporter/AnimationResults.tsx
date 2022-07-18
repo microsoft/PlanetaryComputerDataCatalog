@@ -32,7 +32,7 @@ export const AnimationResults: React.FC<Props> = ({
   return (
     <>
       <Separator />
-      <Label>Your animations:</Label>
+      <Label>Animations:</Label>
       <Stack
         horizontal
         wrap

@@ -1,17 +1,15 @@
 import {
   Callout,
-  IconButton,
   Text,
   mergeStyleSets,
   Separator,
   DirectionalHint,
   Icon,
 } from "@fluentui/react";
-import { useBoolean, useId } from "@fluentui/react-hooks";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { useExploreSelector } from "pages/Explore/state/hooks";
 import QuerySection from "./QuerySection";
 import Section from "./Section";
 import NewTabLink from "components/controls/NewTabLink";
@@ -21,15 +19,15 @@ import {
   selectCurrentCql,
   selectCurrentMosaic,
 } from "pages/Explore/state/mosaicSlice";
-import { searchHeaderButtonStyle } from "../../PinLayer/PinLayer";
-import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
 
-const QueryInfo = () => {
+interface QueryInfoProps {
+  onDismiss: () => void;
+  targetElementId: string;
+}
+
+const QueryInfo: React.FC<QueryInfoProps> = ({ onDismiss, targetElementId }) => {
   const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const cql = useExploreSelector(selectCurrentCql);
-  const [isCalloutVisible, { toggle }] = useBoolean(false);
-  const buttonId = useId("queryinfo-button");
-  const labelId = useId("queryinfo-label");
 
   const collectionSection = collection ? (
     <Section title={collection?.title} icon={"World"}>
@@ -62,46 +60,28 @@ const QueryInfo = () => {
     </Section>
   );
 
-  const title = "Current filter details";
-
-  // Temp
-  const dispatch = useExploreDispatch();
   return (
     <>
-      <IconButton
-        id={buttonId}
-        iconProps={{ iconName: "Info" }}
-        ariaLabel={title}
-        onClick={() => {
-          toggle();
-          dispatch(setShowAnimationPanel(true));
-        }}
-        data-cy="query-detail-button"
-        styles={searchHeaderButtonStyle}
-      />
-      {isCalloutVisible && (
-        <Callout
-          className={styles.callout}
-          ariaLabelledBy={labelId}
-          role="alertdialog"
-          gapSpace={0}
-          target={`#${buttonId}`}
-          onDismiss={toggle}
-          directionalHint={DirectionalHint.rightCenter}
-          setInitialFocus
+      <Callout
+        className={styles.callout}
+        role="alertdialog"
+        gapSpace={0}
+        target={`#${targetElementId}`}
+        onDismiss={onDismiss}
+        directionalHint={DirectionalHint.rightCenter}
+        setInitialFocus
+      >
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onError={handleErrorBoundaryError}
         >
-          <ErrorBoundary
-            FallbackComponent={ErrorFallback}
-            onError={handleErrorBoundaryError}
-          >
-            {collectionSection}
-            <Separator />
-            {querySection}
-            <Separator />
-            {renderSection}
-          </ErrorBoundary>
-        </Callout>
-      )}
+          {collectionSection}
+          <Separator />
+          {querySection}
+          <Separator />
+          {renderSection}
+        </ErrorBoundary>
+      </Callout>
     </>
   );
 };

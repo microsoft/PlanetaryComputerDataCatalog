@@ -9,7 +9,7 @@ import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, STAC_URL } from "./constants";
 import datasetConfig from "config/datasets.yml";
-import { IAnimationExportConfig } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationExporter.index";
+import { AnimationConfig } from "pages/Explore/components/Sidebar/AnimationExporter/types";
 import { AnimationResponse } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationResult";
 
 // import { useSession } from "components/auth/hooks/SessionContext";
@@ -55,17 +55,17 @@ export const useTileJson = (
   });
 };
 
-export const useAnimationExport = (config: IAnimationExportConfig | undefined) => {
+export const useAnimationExport = (config: AnimationConfig | undefined) => {
   return useQuery(["animation-export", config], getAnimationExport, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     retry: false,
-    enabled: Boolean(config),
+    enabled: false,
   });
 };
 
 const getAnimationExport = async (
-  queryParam: QueryFunctionContext<[string, IAnimationExportConfig | undefined]>
+  queryParam: QueryFunctionContext<[string, AnimationConfig | undefined]>
 ): Promise<AnimationResponse> => {
   const config = queryParam.queryKey[1];
   const resp = await axios.post("/api/animation", config);
