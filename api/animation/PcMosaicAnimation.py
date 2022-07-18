@@ -1,4 +1,5 @@
 from copy import deepcopy
+import os
 import aiohttp
 import asyncio
 import io
@@ -14,8 +15,11 @@ from .AnimationFrame import AnimationFrame
 
 
 class PcMosaicAnimation:
-    registerUrl = "https://planetarycomputer.microsoft.com/api/data/v1/mosaic/register"
-    async_limit = asyncio.Semaphore(45)
+    root_url = os.environ.get(
+        "ANIMATION_API_ROOT_URL", "https://planetarycomputer.microsoft.com/api/data/v1"
+    )
+    registerUrl = f"{root_url}/mosaic/register/"
+    async_limit = asyncio.Semaphore(os.environ.get("ANIMATION_CONCURRENCY", 10))
 
     def __init__(
         self,

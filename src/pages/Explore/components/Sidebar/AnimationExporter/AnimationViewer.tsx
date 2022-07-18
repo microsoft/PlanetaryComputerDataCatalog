@@ -39,30 +39,20 @@ export const AnimationViewer: React.FC<AnimationViewerProps> = ({
         />
       </Stack>
       <Separator />
-      <div
-        style={{
-          margin: "0 10px",
-        }}
-      >
+      <div style={viewerBodyStyle}>
         <Label>Share link:</Label>
         <Stack
           horizontal
           horizontalAlign="start"
-          tokens={{ childrenGap: 5 }}
+          tokens={stackTokens}
           verticalAlign="center"
         >
-          <div
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: 4,
-              padding: 4,
-            }}
-          >
+          <div style={urlCopyStyle}>
             <code>{animationResponse.url}</code>
           </div>
           <IconButton
             title="Download image"
-            iconProps={{ iconName: "Download" }}
+            iconProps={downloadIconProps}
             onClick={handleDownload}
           />
         </Stack>
@@ -80,7 +70,9 @@ export const AnimationViewer: React.FC<AnimationViewerProps> = ({
 const theme = getTheme();
 
 const cancelIcon: IIconProps = { iconName: "Cancel" };
+const downloadIconProps = { iconName: "Download" };
 
+const stackTokens = { childrenGap: 5 };
 const iconButtonStyles: Partial<IButtonStyles> = {
   root: {
     color: theme.palette.neutralPrimary,
@@ -108,4 +100,13 @@ const imageStyles: Partial<IImageStyles> = {
 const headerStyle: React.CSSProperties = {
   marginLeft: 10,
   marginBottom: 5,
+};
+
+const urlCopyStyle = {
+  border: `1px solid ${theme.palette.neutralLight}`,
+  borderRadius: 4,
+  padding: 4,
+};
+const viewerBodyStyle = {
+  margin: "0 10px",
 };
