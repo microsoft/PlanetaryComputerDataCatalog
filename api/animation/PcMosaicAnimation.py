@@ -99,7 +99,7 @@ class PcMosaicAnimation:
         }[unit]
 
         next_date = start
-        for frame_num in range(total_frames - 1):
+        for frame_num in range(total_frames):
             frames.append(asyncio.ensure_future(self._get_frame(next_date)))
             next_date += delta
 

@@ -133,7 +133,7 @@ export const AnimationExporter: React.FC = () => {
           type="number"
           name="step"
           label={"Increment"}
-          min={2}
+          min={1}
           step={1}
           defaultValue={animationSettings.step.toString()}
           onChange={handleChange}
@@ -153,7 +153,7 @@ export const AnimationExporter: React.FC = () => {
           type="number"
           label="No. of frames"
           name="frames"
-          min={1}
+          min={2}
           max={48}
           step={1}
           defaultValue={animationSettings.frames.toString()}

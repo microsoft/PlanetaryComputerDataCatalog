@@ -1,4 +1,4 @@
-import { getTheme, IconButton, Stack, Text } from "@fluentui/react";
+import { getTheme, IconButton, Separator, Stack, Text } from "@fluentui/react";
 import TemporalExtent from "components/stac/TemporalExtent";
 import { IMosaicRenderOption } from "pages/Explore/types";
 import { IStacCollection } from "types/stac";
@@ -37,6 +37,7 @@ export const AnimationIntro: React.FC<Props> = ({
         cloud cover, or other changes which might affect the quality of your results.
         You may need to experiment to get a good result!
       </Text>
+      <Separator />
       <h4 style={headerStyles}>
         {collection.title || collection.id}, {renderOption?.name}
       </h4>
