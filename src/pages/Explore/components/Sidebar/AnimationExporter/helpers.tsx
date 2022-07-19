@@ -1,20 +1,28 @@
 import dayjs, { ManipulateType } from "dayjs";
+import { ILayerState } from "pages/Explore/types";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { IStacCollection } from "types/stac";
-import { AnimationFrameSettings, AnimationValidation } from "./types";
+import {
+  AnimationConfig,
+  AnimationFrameSettings,
+  AnimationValidation,
+} from "./types";
 
 const MAX_FRAMES = 24;
 
 export const validate = (
-  animationSettings: AnimationFrameSettings,
-  collection: IStacCollection | null
+  animationConfig: AnimationConfig,
+  collection: IStacCollection | null,
+  layer: ILayerState["layer"] | null
 ) => {
-  const { start, step, unit, frames, duration } = animationSettings;
+  const { start, step, unit, frames, duration, zoom } = animationConfig;
   const validations: AnimationValidation = {
     start: [],
     frames: [],
     duration: [],
     step: [],
-    count: 0,
+    map: [],
+    isValid: false,
   };
 
   const startDate = dayjs(start);
@@ -68,10 +76,15 @@ export const validate = (
     );
   }
 
-  validations.count = Object.values(validations).reduce(
-    (acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0),
-    0
-  );
+  if (zoom < (layer?.minZoom || DEFAULT_MIN_ZOOM)) {
+    validations.map.push("Zoom in to see layer");
+  }
+
+  validations.isValid =
+    Object.values(validations).reduce(
+      (acc, curr) => acc + (Array.isArray(curr) ? curr.length : 0),
+      0
+    ) === 0;
 
   return validations;
 };

@@ -1,15 +1,19 @@
 import {
   Dropdown,
+  FontSizes,
+  getTheme,
   IButtonStyles,
   IDropdownOption,
   IDropdownStyles,
   IStackStyles,
   ITextFieldStyles,
+  ITextStyles,
   MessageBar,
   MessageBarType,
   PrimaryButton,
   Stack,
   StackItem,
+  Text,
   TextField,
 } from "@fluentui/react";
 import {
@@ -26,11 +30,15 @@ import { useAnimationExport } from "utils/requests";
 import { AnimationIntro } from "./AnimationIntro";
 import { AnimationResults } from "./AnimationResults";
 import { getDefaultSettings, validate } from "./helpers";
-import { AnimationFrameSettings, AnimationMosaicSettings } from "./types";
+import {
+  AnimationConfig,
+  AnimationFrameSettings,
+  AnimationMosaicSettings,
+} from "./types";
 
 export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
-  const { collection, renderOption, query } =
+  const { collection, renderOption, query, layer } =
     useExploreSelector(selectCurrentMosaic);
   const { bounds, zoom, showAnimationPanel } = useExploreSelector(s => s.map);
   const animations = useExploreSelector(s =>
@@ -51,7 +59,7 @@ export const AnimationExporter: React.FC = () => {
     cql,
   };
 
-  const requestBody = { ...mosaicConfig, ...animationSettings };
+  const requestBody: AnimationConfig = { ...mosaicConfig, ...animationSettings };
 
   const {
     data: animationResp,
@@ -103,8 +111,8 @@ export const AnimationExporter: React.FC = () => {
     dispatch(setShowAnimationPanel(false));
   };
 
-  const validation = validate(animationSettings, collection);
-  const exportEnabled = !isLoading && validation.count === 0;
+  const validation = validate(requestBody, collection, layer);
+  const exportEnabled = !isLoading && validation.isValid;
 
   const panel = (
     <Stack styles={containerStyles} tokens={panelTokens}>
@@ -181,9 +189,15 @@ export const AnimationExporter: React.FC = () => {
         >
           Generate animation
         </PrimaryButton>
+
+        {Boolean(validation.map.length) && (
+          <Text block styles={errorTextStyles}>
+            * {validation.map[0]}
+          </Text>
+        )}
         {isError && (
           <MessageBar messageBarType={MessageBarType.error}>
-            Sorry, something went wrong...
+            Sorry, something went wrong with that request.
           </MessageBar>
         )}
       </StackItem>
@@ -201,6 +215,7 @@ export const AnimationExporter: React.FC = () => {
   return showAnimationPanel ? panel : null;
 };
 
+const theme = getTheme();
 const stackTokens = { childrenGap: 6 };
 const panelTokens = { childrenGap: 10 };
 
@@ -243,5 +258,12 @@ const unitStyles: Partial<IDropdownStyles> = {
 const buttonStyles: Partial<IButtonStyles> = {
   root: {
     marginTop: 10,
+  },
+};
+
+const errorTextStyles: Partial<ITextStyles> = {
+  root: {
+    color: theme.semanticColors.errorText,
+    fontSize: FontSizes.small,
   },
 };

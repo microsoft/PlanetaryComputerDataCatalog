@@ -21,5 +21,6 @@ export interface AnimationValidation {
   step: string[];
   frames: string[];
   duration: string[];
-  count: number;
+  map: string[];
+  isValid: boolean;
 }
