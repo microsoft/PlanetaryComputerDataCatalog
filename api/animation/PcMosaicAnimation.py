@@ -5,13 +5,15 @@ import asyncio
 import io
 import logging
 
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
+from datetime import datetime
 from typing import Dict, List
 from mercantile import tiles
 from PIL import Image
 
+
 from .AnimationFrame import AnimationFrame
+from .constants import MAX_TILE_COUNT
+from .utils import get_relative_delta
 
 
 class PcMosaicAnimation:
@@ -36,6 +38,11 @@ class PcMosaicAnimation:
         self.tiles = list(tiles(*bbox, zoom))
         self.frame_duration = frame_duration
         self.tile_size = 512
+
+        if len(self.tiles) > MAX_TILE_COUNT:
+            raise ValueError(
+                f"Bbox too large, max {MAX_TILE_COUNT} tiles. {len(self.tiles)} requested"
+            )
 
     async def _get_tilejson(self, the_date: str) -> str:
         non_temporal_args = [
@@ -93,15 +100,7 @@ class PcMosaicAnimation:
     async def get(self, step: int, unit: str, start: datetime, total_frames: int):
         frames = []
 
-        delta = {
-            "mins": timedelta(minutes=step),
-            "hours": relativedelta(hours=step),
-            "days": relativedelta(days=step),
-            "weeks": relativedelta(weeks=step),
-            "months": relativedelta(months=step),
-            "years": relativedelta(years=step),
-        }[unit]
-
+        delta = get_relative_delta(unit, step)
         next_date = start
         for frame_num in range(total_frames):
             frames.append(asyncio.ensure_future(self._get_frame(next_date)))

@@ -5,6 +5,7 @@ from uuid import uuid4
 from urllib.parse import quote
 
 from azure.storage.blob import BlobClient
+from dateutil.relativedelta import relativedelta
 from pyproj import Transformer
 import mercantile
 
@@ -51,3 +52,14 @@ def parse_render_params(body):
     render_params = "&".join(encoded_options)
 
     return (render_params, collection_id)
+
+
+def get_relative_delta(unit: str, step: int) -> int:
+    return {
+        "mins": relativedelta(minutes=step),
+        "hours": relativedelta(hours=step),
+        "days": relativedelta(days=step),
+        "weeks": relativedelta(weeks=step),
+        "months": relativedelta(months=step),
+        "years": relativedelta(years=step),
+    }[unit]
