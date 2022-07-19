@@ -35,7 +35,7 @@ def upload_gif(gif: io.BytesIO, collection_name: str) -> str:
     gif.seek(0)
     filename = f"mspc-{collection_name}-{uuid4().hex}.gif"
     blob_uri = f"{ANIMATION_CONTAINER_URL}/{filename}"
-    sas = os.environ.get("CONTAINER_ANIMATION_SAS")
+    sas = os.environ.get("ANIMATION_CONTAINER_SAS")
 
     BlobClient.from_blob_url(blob_uri, credential=sas).upload_blob(gif)
 
