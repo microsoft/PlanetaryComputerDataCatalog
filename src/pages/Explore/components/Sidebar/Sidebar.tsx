@@ -1,40 +1,26 @@
 import { useEffect, useMemo } from "react";
-import { IStackStyles, IStackTokens, Stack, StackItem } from "@fluentui/react";
+import { IStackStyles, Stack, StackItem } from "@fluentui/react";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { resetMosaic, selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
+import { resetMosaic } from "pages/Explore/state/mosaicSlice";
 import { resetDetail } from "pages/Explore/state/detailSlice";
 import MinimizeButton from "../controls/ToggleSidebarButton";
-import ItemDetailPanel from "../ItemDetailPanel";
-import SearchResultsPane from "./panes/SearchResultsPane";
-import { useStacFilter } from "../../utils/hooks";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
-import SelectorPane from "./panes/SelectorPane";
-import TitleHeader from "./TitleHeader";
-import InitialStateLoader from "./selectors/InitialStateLoader";
+import AnimationExporter from "./AnimationExporter";
+import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilter";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
-  const showSidebar = useExploreSelector(s => s.map.showSidebar);
-  const { isCustomQuery } = useExploreSelector(selectCurrentMosaic);
-  const { selectedItem, showAsLayer: showingItemLayer } = useExploreSelector(
-    s => s.detail
-  );
-  const isDetailView = Boolean(selectedItem);
+  const isSidebarVisible = useExploreSelector(s => s.map.showSidebar);
+  const { showAsLayer: isItemLayerVisible } = useExploreSelector(s => s.detail);
+  const { showAnimationPanel } = useExploreSelector(s => s.map);
 
   const { width, sidebarVisibility } = useMemo(() => {
     return {
-      width: showSidebar ? SIDEBAR_WIDTH : 0,
-      sidebarVisibility: showSidebar ? "visible" : "hidden",
+      width: isSidebarVisible ? SIDEBAR_WIDTH : 0,
+      sidebarVisibility: isSidebarVisible ? "visible" : "hidden",
     };
-  }, [showSidebar]);
-
-  const { searchPanelDisplay, detailViewDisplay } = useMemo(() => {
-    return {
-      searchPanelDisplay: isDetailView ? "none" : "flex",
-      detailViewDisplay: isDetailView ? "flex" : "none",
-    };
-  }, [isDetailView]);
+  }, [isSidebarVisible]);
 
   useEffect(() => {
     return () => {
@@ -45,8 +31,6 @@ export const Sidebar = () => {
     };
   }, [dispatch]);
 
-  const stacFilter = useStacFilter();
-
   const sidebarStyles: Partial<IStackStyles> = {
     root: {
       width: width,
@@ -56,43 +40,23 @@ export const Sidebar = () => {
     },
   };
 
-  const searchPanelStyles: Partial<IStackStyles> = {
-    root: {
-      visibility: sidebarVisibility,
-      display: searchPanelDisplay,
-      transition: "visibility 0.1s",
-      padding: 10,
-      paddingBottom: 20,
-    },
-  };
-
-  const itemDetailPanelStyles: Partial<IStackStyles> = {
-    root: {
-      height: "100%",
-      display: detailViewDisplay,
-    },
-  };
-
   // Classes used to sync state via responsive media queries in css
   let visibilityClass =
-    !showSidebar || showingItemLayer ? "explorer-sidebar-hidden" : "";
+    !isSidebarVisible || isItemLayerVisible ? "explorer-sidebar-hidden" : "";
 
+  const registeredPanels = {
+    itemSearch: <CollectionItemFilter sidebarVisibility={sidebarVisibility} />,
+    animationExport: <AnimationExporter />,
+  };
+  const selectedPanel = showAnimationPanel ? "animationExport" : "itemSearch";
   return (
     <>
       <StackItem
         styles={sidebarStyles}
         className={`explorer-sidebar ${visibilityClass}`}
       >
-        <Stack styles={sidebarStackStyles}>
-          <Stack styles={searchPanelStyles} tokens={stackTokens}>
-            <TitleHeader />
-            <InitialStateLoader />
-            <SelectorPane isCustomQuery={isCustomQuery} />
-          </Stack>
-          <SearchResultsPane request={stacFilter} visible={!isDetailView} />
-          <Stack styles={itemDetailPanelStyles} tokens={stackTokens}>
-            <ItemDetailPanel />
-          </Stack>
+        <Stack id="explorer-sidebar-content" styles={sidebarStackStyles}>
+          {registeredPanels[selectedPanel]}
         </Stack>
       </StackItem>
       <MinimizeButton />
@@ -104,7 +68,4 @@ const sidebarStackStyles: Partial<IStackStyles> = {
   root: {
     height: "100%",
   },
-};
-const stackTokens: IStackTokens = {
-  childrenGap: 5,
 };

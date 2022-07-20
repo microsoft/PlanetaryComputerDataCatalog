@@ -89,10 +89,11 @@ describe("Explorer selector tests", () => {
   });
 
   it("has query action buttons", () => {
+    cy.getBySel("explore-results-menu-button").click();
     cy.getBySel("query-detail-button").click();
     cy.contains("Filters Applied");
     cy.contains("Rendering");
-    cy.getBySel("query-detail-button").click();
+    cy.get("body").click(0, 0);
     cy.contains("Filters Applied").should("not.exist");
 
     cy.getBySel("search-results-list").scrollTo("center");

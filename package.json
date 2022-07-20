@@ -31,6 +31,7 @@
     "@uifabric/icons": "^7.7.2",
     "axios": "^0.27.2",
     "azure-maps-control": "^2.1.10",
+    "azure-maps-drawing-tools": "^1.0.0",
     "buffer": "^6.0.3",
     "dayjs": "^1.11.3",
     "dompurify": "^2.3.8",

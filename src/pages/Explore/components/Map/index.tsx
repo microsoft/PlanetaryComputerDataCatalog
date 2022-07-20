@@ -7,6 +7,7 @@ import {
   useMosaicLayer,
   useItemBoundsLayer,
   useMapEvents,
+  useMapDrawTools,
   useZoomEvents,
   useMapControls,
   useMapZoomToLayer,
@@ -117,6 +118,7 @@ const ExploreMap = () => {
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
   useUrlState();
+  useMapDrawTools(mapRef, mapReady);
 
   const { zoomToLayer, showZoomMsg, nonVisibleLayers } = useMapZoomToLayer();
   const zoomMsg = (
