@@ -1,3 +1,4 @@
+import * as atlas from "azure-maps-control";
 import dayjs, { ManipulateType } from "dayjs";
 import { ILayerState } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
@@ -13,7 +14,8 @@ const MAX_FRAMES = 24;
 export const validate = (
   animationConfig: AnimationConfig,
   collection: IStacCollection | null,
-  layer: ILayerState["layer"] | null
+  layer: ILayerState["layer"] | null,
+  drawnBbox: atlas.data.BoundingBox | null
 ) => {
   const { start, step, unit, frames, duration, zoom } = animationConfig;
   const validations: AnimationValidation = {
@@ -77,7 +79,11 @@ export const validate = (
   }
 
   if (zoom < (layer?.minZoom || DEFAULT_MIN_ZOOM)) {
-    validations.map.push("Zoom in to see layer");
+    validations.map.push("Zoom in to see layer.");
+  }
+
+  if (!drawnBbox) {
+    validations.map.push("Please draw an export area on the map.");
   }
 
   validations.isValid =

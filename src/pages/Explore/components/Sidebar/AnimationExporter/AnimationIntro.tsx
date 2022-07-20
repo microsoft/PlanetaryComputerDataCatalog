@@ -1,5 +1,4 @@
 import { getTheme, IconButton, Separator, Stack, Text } from "@fluentui/react";
-import TemporalExtent from "components/stac/TemporalExtent";
 import { IMosaicRenderOption } from "pages/Explore/types";
 import { IStacCollection } from "types/stac";
 
@@ -27,21 +26,16 @@ export const AnimationIntro: React.FC<Props> = ({
           onClick={handleClose}
         />
       </Stack>
-      <Text>
-        Generate an animated image of your current search over time. Start by
-        selecting the area you want to capture on the map, then select the increment
-        for each frame.
-      </Text>
+      <Text>Generate an animated image of your current search over time. </Text>
       <Text>
         Keep in mind that many datasets have irregular temporal availability, varied
         cloud cover, or other changes which might affect the quality of your results.
         You may need to experiment to get a good result!
       </Text>
-      <Separator />
+      <Separator styles={{ root: { padding: "0 4px" } }} />
       <h4 style={headerStyles}>
         {collection.title || collection.id}, {renderOption?.name}
       </h4>
-      <TemporalExtent extent={collection.extent.temporal} label="Valid date range" />
     </>
   );
 };

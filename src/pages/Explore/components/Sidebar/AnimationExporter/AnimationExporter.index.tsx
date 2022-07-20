@@ -1,10 +1,12 @@
 import {
+  DefaultButton,
   Dropdown,
   FontSizes,
   getTheme,
   IButtonStyles,
   IDropdownOption,
   IDropdownStyles,
+  IMessageBarStyles,
   IStackStyles,
   ITextFieldStyles,
   ITextStyles,
@@ -16,12 +18,17 @@ import {
   Text,
   TextField,
 } from "@fluentui/react";
+
 import {
   addAnimation,
   selectAnimationsByCollection,
 } from "pages/Explore/state/animationSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
+import {
+  setBboxDrawMode,
+  setDrawnBbox,
+  setShowAnimationPanel,
+} from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
@@ -29,6 +36,7 @@ import { useState } from "react";
 import { useAnimationExport } from "utils/requests";
 import { AnimationIntro } from "./AnimationIntro";
 import { AnimationResults } from "./AnimationResults";
+import { AnimationStartField } from "./AnimationStartField";
 import { getDefaultSettings, validate } from "./helpers";
 import {
   AnimationConfig,
@@ -40,7 +48,7 @@ export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
   const { collection, renderOption, query, layer } =
     useExploreSelector(selectCurrentMosaic);
-  const { bounds, zoom, showAnimationPanel } = useExploreSelector(s => s.map);
+  const { zoom, showAnimationPanel, drawnBbox } = useExploreSelector(s => s.map);
   const animations = useExploreSelector(s =>
     selectAnimationsByCollection(s, collection?.id)
   );
@@ -53,7 +61,7 @@ export const AnimationExporter: React.FC = () => {
   const collectionFragment = collectionFilter(collection?.id);
   const cql = makeFilterBody([collectionFragment], query, query.cql);
   const mosaicConfig: AnimationMosaicSettings = {
-    bbox: bounds,
+    bbox: drawnBbox,
     zoom: Math.round(zoom),
     render_params: renderOption?.options + `&collection=${collection?.id}`,
     cql,
@@ -109,10 +117,28 @@ export const AnimationExporter: React.FC = () => {
 
   const handleClose = () => {
     dispatch(setShowAnimationPanel(false));
+    dispatch(setDrawnBbox(null));
+    removeAnimationRespose();
   };
 
-  const validation = validate(requestBody, collection, layer);
+  const validation = validate(requestBody, collection, layer, drawnBbox);
   const exportEnabled = !isLoading && validation.isValid;
+
+  const drawButtonText = drawnBbox ? "Re-draw export area" : "Draw export area";
+  const drawButton = (
+    <StackItem>
+      <Text block>Start by selecting the area you want to capture on the map.</Text>
+      <DefaultButton
+        styles={buttonStyles}
+        text={drawButtonText}
+        iconProps={{ iconName: "SingleColumnEdit" }}
+        onClick={() => {
+          dispatch(setBboxDrawMode(true));
+          removeAnimationRespose();
+        }}
+      />
+    </StackItem>
+  );
 
   const panel = (
     <Stack styles={containerStyles} tokens={panelTokens}>
@@ -121,21 +147,18 @@ export const AnimationExporter: React.FC = () => {
         renderOption={renderOption}
         handleClose={handleClose}
       />
+      {drawButton}
       <Stack
         horizontal
         horizontalAlign="start"
         tokens={stackTokens}
         verticalAlign={"start"}
       >
-        <TextField
-          title="Datetime to start the timelapse from (YYYY-MM-DDTHH:mm:ssZ)"
-          label="Start datetime"
-          name="start"
-          placeholder="YYYY-MM-DD"
+        <AnimationStartField
+          collection={collection}
           defaultValue={animationSettings.start}
+          validations={validation.start}
           onChange={handleChange}
-          errorMessage={validation.start[0]}
-          styles={firstInputStyle}
         />
         <TextField
           type="number"
@@ -196,7 +219,7 @@ export const AnimationExporter: React.FC = () => {
           </Text>
         )}
         {isError && (
-          <MessageBar messageBarType={MessageBarType.error}>
+          <MessageBar styles={errorBarStyles} messageBarType={MessageBarType.error}>
             Sorry, something went wrong with that request.
           </MessageBar>
         )}
@@ -216,7 +239,7 @@ export const AnimationExporter: React.FC = () => {
 };
 
 const theme = getTheme();
-const stackTokens = { childrenGap: 6 };
+export const stackTokens = { childrenGap: 6 };
 const panelTokens = { childrenGap: 10 };
 
 const units: IDropdownOption[] = [
@@ -237,7 +260,7 @@ const containerStyles: Partial<IStackStyles> = {
   },
 };
 
-const firstInputStyle: Partial<ITextFieldStyles> = {
+export const firstInputStyle: Partial<ITextFieldStyles> = {
   root: {
     width: 172,
   },
@@ -265,5 +288,11 @@ const errorTextStyles: Partial<ITextStyles> = {
   root: {
     color: theme.semanticColors.errorText,
     fontSize: FontSizes.small,
+  },
+};
+
+const errorBarStyles: IMessageBarStyles = {
+  root: {
+    marginTop: 10,
   },
 };

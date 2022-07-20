@@ -17,6 +17,8 @@ export interface MapState {
   previousCenter: [number, number] | null;
   previousZoom: number | null;
   showAnimationPanel: boolean;
+  isDrawBboxMode: boolean;
+  drawnBbox: atlas.data.BoundingBox | null;
 }
 
 const initialState: MapState = {
@@ -30,6 +32,8 @@ const initialState: MapState = {
   previousCenter: null,
   previousZoom: null,
   showAnimationPanel: false,
+  isDrawBboxMode: false,
+  drawnBbox: null,
 };
 
 export const mapSlice = createSlice({
@@ -74,6 +78,17 @@ export const mapSlice = createSlice({
     setShowAnimationPanel: (state, action: PayloadAction<boolean>) => {
       state.showAnimationPanel = action.payload;
     },
+    setBboxDrawMode: (state, action: PayloadAction<boolean>) => {
+      state.isDrawBboxMode = action.payload;
+
+      // Remove existing bbox if drawing mode is turning on
+      if (action.payload) {
+        state.drawnBbox = null;
+      }
+    },
+    setDrawnBbox: (state, action: PayloadAction<atlas.data.BoundingBox | null>) => {
+      state.drawnBbox = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
@@ -101,6 +116,8 @@ export const {
   clearBoundaryShape,
   toggleShowSidebar,
   setShowAnimationPanel,
+  setBboxDrawMode,
+  setDrawnBbox,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
