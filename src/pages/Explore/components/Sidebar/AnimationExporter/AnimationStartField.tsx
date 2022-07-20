@@ -21,7 +21,7 @@ export const AnimationStartField: React.FC<AnimationStartFieldProps> = ({
 }) => {
   const tooltip = collection && (
     <Stack horizontal verticalAlign="center" tokens={stackTokens}>
-      <Label>Start datetime</Label>
+      <Label>Start datetime (UTC)</Label>
       <TooltipHost
         content={
           <TemporalExtent
@@ -37,7 +37,7 @@ export const AnimationStartField: React.FC<AnimationStartFieldProps> = ({
 
   const field = (
     <TextField
-      title="Datetime to start the timelapse from (YYYY-MM-DDTHH:mm:ssZ)"
+      title="Datetime to start the timelapse from, UTC (YYYY-MM-DDTHH:mm:ssZ)"
       name="start"
       placeholder="YYYY-MM-DD"
       defaultValue={defaultValue}

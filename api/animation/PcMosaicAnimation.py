@@ -13,15 +13,18 @@ from PIL import Image
 
 from .AnimationFrame import AnimationFrame
 from .constants import MAX_TILE_COUNT
-from .utils import get_relative_delta
+from .utils import BBoxTooLargeError, get_relative_delta
+
+
+concurrency_limit = int(os.environ.get("ANIMATION_CONCURRENCY", 10))
+api_url = os.environ.get(
+    "ANIMATION_API_ROOT_URL", "https://planetarycomputer.microsoft.com/api/data/v1"
+)
 
 
 class PcMosaicAnimation:
-    root_url = os.environ.get(
-        "ANIMATION_API_ROOT_URL", "https://planetarycomputer.microsoft.com/api/data/v1"
-    )
-    registerUrl = f"{root_url}/mosaic/register/"
-    async_limit = asyncio.Semaphore(os.environ.get("ANIMATION_CONCURRENCY", 10))
+    registerUrl = f"{api_url}/mosaic/register/"
+    async_limit = asyncio.Semaphore(concurrency_limit)
 
     def __init__(
         self,
@@ -39,9 +42,13 @@ class PcMosaicAnimation:
         self.frame_duration = frame_duration
         self.tile_size = 512
 
+        logging.info(f"Concurrency limit: {concurrency_limit}")
+        logging.info(f"API URL: {api_url}")
+
         if len(self.tiles) > MAX_TILE_COUNT:
-            raise ValueError(
-                f"Bbox too large, max {MAX_TILE_COUNT} tiles. {len(self.tiles)} requested"
+            raise BBoxTooLargeError(
+                f"Export area is too large, please draw a smaller area or zoom out."
+                f" ({len(self.tiles)} of {MAX_TILE_COUNT} max tiles requested)"
             )
 
     async def _get_tilejson(self, the_date: str) -> str:

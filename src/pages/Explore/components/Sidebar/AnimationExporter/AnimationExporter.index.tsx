@@ -6,18 +6,16 @@ import {
   IButtonStyles,
   IDropdownOption,
   IDropdownStyles,
-  IMessageBarStyles,
   IStackStyles,
   ITextFieldStyles,
   ITextStyles,
-  MessageBar,
-  MessageBarType,
   PrimaryButton,
   Stack,
   StackItem,
   Text,
   TextField,
 } from "@fluentui/react";
+import { AxiosError } from "axios";
 
 import {
   addAnimation,
@@ -34,6 +32,7 @@ import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useState } from "react";
 import { useAnimationExport } from "utils/requests";
+import { AnimationError } from "./AnimationError";
 import { AnimationIntro } from "./AnimationIntro";
 import { AnimationResults } from "./AnimationResults";
 import { AnimationStartField } from "./AnimationStartField";
@@ -48,7 +47,9 @@ export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
   const { collection, renderOption, query, layer } =
     useExploreSelector(selectCurrentMosaic);
-  const { zoom, showAnimationPanel, drawnBbox } = useExploreSelector(s => s.map);
+  const { zoom, showAnimationPanel, drawnBbox, isDrawBboxMode } = useExploreSelector(
+    s => s.map
+  );
   const animations = useExploreSelector(s =>
     selectAnimationsByCollection(s, collection?.id)
   );
@@ -72,9 +73,9 @@ export const AnimationExporter: React.FC = () => {
   const {
     data: animationResp,
     isLoading,
-    isError,
+    error,
     refetch: fetchAnimation,
-    remove: removeAnimationRespose,
+    remove: removeAnimationResponse,
   } = useAnimationExport(requestBody);
 
   // When an animation response is received, add it to the list of animations
@@ -90,7 +91,7 @@ export const AnimationExporter: React.FC = () => {
         collectionId: collection.id,
       })
     );
-    removeAnimationRespose();
+    removeAnimationResponse();
   }
 
   const handleExportClick = () => {
@@ -118,11 +119,12 @@ export const AnimationExporter: React.FC = () => {
   const handleClose = () => {
     dispatch(setShowAnimationPanel(false));
     dispatch(setDrawnBbox(null));
-    removeAnimationRespose();
+    removeAnimationResponse();
   };
 
   const validation = validate(requestBody, collection, layer, drawnBbox);
   const exportEnabled = !isLoading && validation.isValid;
+  const drawExportEnabled = !isDrawBboxMode;
 
   const drawButtonText = drawnBbox ? "Re-draw export area" : "Draw export area";
   const drawButton = (
@@ -134,8 +136,9 @@ export const AnimationExporter: React.FC = () => {
         iconProps={{ iconName: "SingleColumnEdit" }}
         onClick={() => {
           dispatch(setBboxDrawMode(true));
-          removeAnimationRespose();
+          removeAnimationResponse();
         }}
+        disabled={!drawExportEnabled}
       />
     </StackItem>
   );
@@ -218,11 +221,7 @@ export const AnimationExporter: React.FC = () => {
             * {validation.map[0]}
           </Text>
         )}
-        {isError && (
-          <MessageBar styles={errorBarStyles} messageBarType={MessageBarType.error}>
-            Sorry, something went wrong with that request.
-          </MessageBar>
-        )}
+        <AnimationError error={error as AxiosError<any, any>} />
       </StackItem>
 
       {(animations.length || isLoading) && collection && (
@@ -288,11 +287,5 @@ const errorTextStyles: Partial<ITextStyles> = {
   root: {
     color: theme.semanticColors.errorText,
     fontSize: FontSizes.small,
-  },
-};
-
-const errorBarStyles: IMessageBarStyles = {
-  root: {
-    marginTop: 10,
   },
 };

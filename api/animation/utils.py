@@ -12,6 +12,10 @@ import mercantile
 from .constants import ANIMATION_CONTAINER_URL
 
 
+class BBoxTooLargeError(Exception):
+    pass
+
+
 @dataclass
 class Point:
     x: float
