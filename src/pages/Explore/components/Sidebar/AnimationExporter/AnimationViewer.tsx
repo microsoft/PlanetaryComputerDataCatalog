@@ -86,7 +86,9 @@ const iconButtonStyles: Partial<IButtonStyles> = {
 
 const imageStyles: Partial<IImageStyles> = {
   root: {
+    display: "flex",
     margin: 10,
+    minHeight: "50vh",
     backgroundColor: theme.palette.neutralLighter,
   },
   image: {
@@ -94,6 +96,8 @@ const imageStyles: Partial<IImageStyles> = {
     maxHeight: "80vh",
     marginLeft: "auto",
     marginRight: "auto",
+    height: "auto",
+    width: "auto",
   },
 };
 

@@ -30,7 +30,7 @@ export const AnimationStartField: React.FC<AnimationStartFieldProps> = ({
           />
         }
       >
-        <Icon iconName="Info" />
+        <Icon iconName="Info" styles={{ root: { cursor: "pointer" } }} />
       </TooltipHost>
     </Stack>
   );
