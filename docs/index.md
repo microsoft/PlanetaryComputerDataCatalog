@@ -31,6 +31,7 @@ quickstarts/reading-zarr-data
 quickstarts/stac-geoparquet
 quickstarts/reading-tabular-data
 quickstarts/scale-with-dask
+quickstarts/using-the-data-api
 quickstarts/using-radiant-mlhub-api
 quickstarts/storage
 ```

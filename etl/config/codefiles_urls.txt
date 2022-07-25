@@ -10,6 +10,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-stac-r.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/stac-geoparquet.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-radiant-mlhub-api.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-the-data-api.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/goes/goes-cmi-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/hgb/hgb-example.ipynb
