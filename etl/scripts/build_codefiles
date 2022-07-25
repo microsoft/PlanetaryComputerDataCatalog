@@ -6,6 +6,8 @@ rm _codefile_output/*.md || true
 # Download all the notebooks and markdown files specified
 wget -nv -i config/codefiles_urls.txt -P ./_codefile_output
 
+jupyter trust ./_codefile_output/*.ipynb
+
 # Convert the notebooks to a basic html output, without body or style tags
 jupyter nbconvert --to html --template basic ./_codefile_output/*.ipynb
 
