@@ -117,7 +117,7 @@ const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
         onClick={handleClick}
         dangerouslySetInnerHTML={{
           // __html: DOMPurify.sanitize(bodyWithRoutedLinks),
-          __html: bodyWithRoutedLinks
+          __html: bodyWithRoutedLinks,
         }}
       />
     </div>
