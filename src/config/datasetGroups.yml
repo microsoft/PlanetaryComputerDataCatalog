@@ -369,3 +369,25 @@ viirs:
       Land Cover,
     ]
   groupOnCatalog: false
+
+noaa-nclimgrid:
+  title: NOAA NClimGrid
+  short_description: >
+    Monthly and Daily NOAA U.S. Climate Gridded Dataset (NClimGrid)
+  description: >
+    The NOAA U.S. Climate Gridded Dataset (NClimGrid) consists of four 
+    climate variables derived from the Global Historical Climatology Network 
+    Daily dataset (GHCN-D): maximum temperature, minimum temperature, average 
+    temperature, and precipitation. Values in a 1/24 degree lat/lon 
+    (nominal 5x5 kilometer) grid are provided for the Continental United States. 
+
+    Daily data are available from 1951 to the present; monthly data span from 
+    1895 to present. Images are stored in [cloud-optimized GeoTIFF](https://www.cogeo.org/) 
+    format.
+  assets:
+    headerImg:
+      href: ./images/noaa-nclimgrid-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-nclimgrid-group-thumb.png"
+  keywords:
+    ["NOAA", "NClimGrid", "Air Temperature", "Precipitation", "Surface Observation", "Climatology", "CONUS"]

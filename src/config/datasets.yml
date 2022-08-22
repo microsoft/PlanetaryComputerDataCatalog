@@ -697,6 +697,22 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
+noaa-nclimgrid-daily:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-daily-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
+noaa-nclimgrid-monthly:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-monthly-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
 nrcan-landcover:
   category: Land use/Land cover
   headerImg: ./images/nrcan-landcover-hero.png
