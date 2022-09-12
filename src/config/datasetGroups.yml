@@ -437,3 +437,38 @@ noaa-mrms-qpe:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-mrms-qpe-group-thumb.png"
   keywords:
     ["United States", "Caribbean", "Guam", "NOAA", "MRMS", "QPE", "Precipitation", "Weather"]
+
+goes:
+  title: GOES-R Series
+  short_description: >
+    Geostationary Operational Environmental Satellite - R Series (GOES-R) Products 
+  description: >
+    The Geostationary Operational Environmental Satellite - R Series (GOES-R) is 
+    the current generation of United States geostationary weather satellites providing
+    continuous views of the contiguous United States, neighboring environs of 
+    the Pacific and Atlantic Oceans, and Central and South America. GOES weather 
+    imagery and weather products provide a continuous stream of environmental 
+    information used to support weather forecasting, severe storm tracking, and 
+    meteorological research. 
+
+
+    The Advanced Baseline Imager (ABI) is the primary instrument on the GOES-R 
+    series spacecraft for imaging Earth's weather, oceans, and environment. ABI 
+    views the Earth with 16 different spectral bands, including two visible 
+    channels, four near-infrared channels, and ten infrared channels. ABI's data 
+    enables meteorologists to pinpoint and track developing storms.
+
+
+    The GOES-R Geostationary Lightning Mapper (GLM) instrument detects and maps total 
+    lightning (in-cloud and cloud-to-ground) activity continuously over the 
+    Americas and adjacent ocean regions. Used in combination with radar, data 
+    from the ABI instrument, and surface observations, GLM data has the 
+    potential to increase lead time for severe thunderstorm and tornado warnings.
+
+  assets:
+    headerImg:
+      href: ./images/goes-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/goes-group-thumb.png"
+  keywords:
+    ["GOES", "NOAA", "NASA", "Satellite", "Weather", "Cloud", "Moisture", "Lightning"]
