@@ -11,9 +11,9 @@ import {
 import { IStacSearchResult } from "types/stac";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { loadingStyle } from "./SearchResultsPane";
-import QueryInfo from "./QueryInfo";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import PinLayer from "../PinLayer";
+import PinLayer from "../../PinLayer";
+import { SearchResultHeaderMenu } from "./SearchResultHeaderMenu";
 
 interface SearchResultsHeaderProps {
   results: IStacSearchResult | undefined;
@@ -51,22 +51,27 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
   const resultsText = returned !== 0 ? withResults : withoutResults;
 
   return (
-    <Stack tokens={tokens} styles={styles}>
-      <Stack horizontal tokens={tokens}>
+    <Stack
+      horizontal
+      horizontalAlign="space-between"
+      tokens={tokens}
+      styles={styles}
+    >
+      <Stack tokens={tokens}>
         <Text styles={headerStyles}>{collection?.title}</Text>
-        {isLoading && <Spinner size={SpinnerSize.xSmall} />}
-      </Stack>
-      <Stack
-        horizontal
-        tokens={tokens}
-        horizontalAlign="space-between"
-        verticalAlign="center"
-      >
-        {resultsText}
-        <Stack horizontal verticalAlign="center">
-          <PinLayer />
-          <QueryInfo />
+        <Stack
+          horizontal
+          tokens={tokens}
+          horizontalAlign="space-between"
+          verticalAlign="center"
+        >
+          {resultsText}
+          {isLoading && <Spinner size={SpinnerSize.xSmall} />}
         </Stack>
+      </Stack>
+      <Stack horizontal verticalAlign="start">
+        <PinLayer />
+        <SearchResultHeaderMenu />
       </Stack>
     </Stack>
   );
@@ -75,7 +80,7 @@ const SearchResultsHeader = ({ results, isLoading }: SearchResultsHeaderProps) =
 export default SearchResultsHeader;
 
 const tokens: IStackTokens = {
-  childrenGap: 6,
+  childrenGap: 5,
 };
 
 const styles = {
