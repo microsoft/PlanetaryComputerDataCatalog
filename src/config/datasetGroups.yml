@@ -373,7 +373,7 @@ viirs:
 noaa-nclimgrid:
   title: NOAA NClimGrid
   short_description: >
-    NOAA Daily and Monthly U.S. Climate Gridded Dataset (NClimGrid)
+    Daily and Monthly NOAA U.S. Climate Gridded Dataset (NClimGrid)
   description: >
     The [NOAA U.S. Climate Gridded Dataset](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
     (NClimGrid) consists of four climate variables derived from the [Global 
@@ -384,9 +384,18 @@ noaa-nclimgrid:
     and monthly time intervals.
 
 
-    Daily data are available from 1951 to the present; monthly data are available from 
-    1895 to present. Images are stored in [cloud-optimized GeoTIFF](https://www.cogeo.org/) 
-    format.
+    NClimGrid data is available in monthly and daily temporal intervals, with 
+    the daily data further differentiated as "prelim" (preliminary) or 
+    "scaled". Preliminary daily data is available within approximately three 
+    days of collection. Once a calendar month of preliminary daily data has 
+    been collected, it is scaled to match the corresponding monthly value. 
+    Monthly data is available from 1895 to the present. Daily preliminary and 
+    daily scaled data is available from 1951 to the present.
+
+
+    Users of all NClimGrid data product should be aware that [NOAA advertises](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
+    that:
+    >On an annual basis, approximately one year of "final" NClimGrid data is submitted to replace the initially supplied "preliminary" data for the same time period. Users should be sure to ascertain which level of data is required for their research.
   assets:
     headerImg:
       href: ./images/noaa-nclimgrid-group-hero.png
