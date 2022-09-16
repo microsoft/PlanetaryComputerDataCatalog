@@ -697,9 +697,17 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
-noaa-nclimgrid-daily:
+noaa-nclimgrid-daily-prelim:
   category: Climate/Weather
-  headerImg: ./images/noaa-nclimgrid-daily-hero.png
+  headerImg: ./images/noaa-nclimgrid-daily-prelim-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
+noaa-nclimgrid-daily-scaled:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-daily-scaled-hero.png
   tabs:
     - title: Example Notebook
       src: noaa-nclimgrid-example.html
