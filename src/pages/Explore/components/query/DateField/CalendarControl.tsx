@@ -190,7 +190,7 @@ const errorMsgStyles: Partial<IMessageBarStyles> = {
   },
 };
 
-const calendarStyles: Partial<ICalendarDayStyles> = {
+const calendarDayStyles: Partial<ICalendarDayStyles> = {
   dayCell: {
     fontSize: FontSizes.size14,
     width: 29,
@@ -266,7 +266,7 @@ const monthStyles: Partial<ICalendarMonthStyles> = {
 };
 
 const calendarDayProps: Partial<ICalendarDayProps> = {
-  styles: calendarStyles,
+  styles: calendarDayStyles,
   navigationIcons: {
     leftNavigation: "ChevronLeft",
     rightNavigation: "ChevronRight",

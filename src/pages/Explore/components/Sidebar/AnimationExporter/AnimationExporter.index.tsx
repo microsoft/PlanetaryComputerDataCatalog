@@ -3,8 +3,6 @@ import {
   Dropdown,
   FontSizes,
   getTheme,
-  IButtonStyles,
-  IconButton,
   IDropdownOption,
   IDropdownStyles,
   IStackStyles,
@@ -17,10 +15,13 @@ import {
   TextField,
 } from "@fluentui/react";
 import { AxiosError } from "axios";
+import { isEmpty } from "lodash-es";
 
 import {
   addAnimation,
+  selectAnimationFrameSettings,
   selectAnimationsByCollection,
+  updateAnimationSettings,
 } from "pages/Explore/state/animationSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
@@ -29,9 +30,8 @@ import {
   setShowAnimationPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
+import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
-import { useState } from "react";
 import { useAnimationExport } from "utils/requests";
 import { AnimationError } from "./AnimationError";
 import { AnimationIntro } from "./AnimationIntro";
@@ -39,11 +39,7 @@ import { AnimationResults } from "./AnimationResults";
 import { AnimationSettings } from "./AnimationSettings";
 import { AnimationStartField } from "./AnimationStartField";
 import { getDefaultSettings, validate } from "./helpers";
-import {
-  AnimationConfig,
-  AnimationFrameSettings,
-  AnimationMosaicSettings,
-} from "./types";
+import { AnimationConfig, AnimationMosaicSettings } from "./types";
 
 export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
@@ -55,9 +51,10 @@ export const AnimationExporter: React.FC = () => {
   const animations = useExploreSelector(s =>
     selectAnimationsByCollection(s, collection?.id)
   );
-  const [animationSettings, setAnimationSettings] = useState<AnimationFrameSettings>(
-    getDefaultSettings(collection)
+  const animationSettings = useExploreSelector(s =>
+    selectAnimationFrameSettings(s, collection?.id)
   );
+  const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
   // Build up the config payload to be used to request an animation
   // based on the current map/filter state.
@@ -70,7 +67,10 @@ export const AnimationExporter: React.FC = () => {
     cql,
   };
 
-  const requestBody: AnimationConfig = { ...mosaicConfig, ...animationSettings };
+  const frameSettings = isEmpty(animationSettings)
+    ? getDefaultSettings(collection, mosaicInfo?.animationHint)
+    : animationSettings;
+  const requestBody: AnimationConfig = { ...mosaicConfig, ...frameSettings };
 
   const {
     data: animationResp,
@@ -89,8 +89,8 @@ export const AnimationExporter: React.FC = () => {
   ) {
     dispatch(
       addAnimation({
-        animation: animationResp,
         collectionId: collection.id,
+        animation: animationResp,
       })
     );
     removeAnimationResponse();
@@ -105,24 +105,27 @@ export const AnimationExporter: React.FC = () => {
     newValue: string | undefined
   ) => {
     const fieldName = e.currentTarget.name;
-    const value = fieldName === "start" ? newValue : parseInt(newValue || "0", 10);
-    setAnimationSettings({
-      ...animationSettings,
-      [fieldName]: value,
-    });
+    const value = parseInt(newValue || "0", 10);
+    handleSettingsChange(fieldName, value);
   };
 
   const handleUnitChange = (_: any, option: IDropdownOption | undefined) =>
-    setAnimationSettings({
-      ...animationSettings,
-      unit: option?.key as string,
-    });
+    handleSettingsChange("unit", option?.key as string);
 
-  const handleSettingsChange = (key: string, value: boolean) => {
-    setAnimationSettings({
-      ...animationSettings,
-      [key]: value,
-    });
+  const handleSettingsChange = (
+    key: string,
+    value: string | number | boolean | undefined
+  ) => {
+    collection?.id &&
+      dispatch(
+        updateAnimationSettings({
+          collectionId: collection?.id,
+          animationSettings: {
+            ...frameSettings,
+            [key]: value,
+          },
+        })
+      );
   };
 
   const handleClose = () => {
@@ -168,9 +171,9 @@ export const AnimationExporter: React.FC = () => {
       >
         <AnimationStartField
           collection={collection}
-          defaultValue={animationSettings.start}
+          value={frameSettings.start}
           validations={validation.start}
-          onChange={handleChange}
+          onChange={handleSettingsChange}
         />
         <TextField
           type="number"
@@ -178,7 +181,7 @@ export const AnimationExporter: React.FC = () => {
           label={"Increment"}
           min={1}
           step={1}
-          defaultValue={animationSettings.step.toString()}
+          defaultValue={frameSettings.step.toString()}
           onChange={handleChange}
           styles={inputStyles}
           errorMessage={validation.step[0]}
@@ -186,7 +189,7 @@ export const AnimationExporter: React.FC = () => {
         <Dropdown
           label="Unit"
           options={units}
-          defaultSelectedKey={animationSettings.unit}
+          defaultSelectedKey={frameSettings.unit}
           onChange={handleUnitChange}
           styles={unitStyles}
         />
@@ -199,7 +202,7 @@ export const AnimationExporter: React.FC = () => {
           min={2}
           max={48}
           step={1}
-          defaultValue={animationSettings.frames.toString()}
+          defaultValue={frameSettings.frames.toString()}
           onChange={handleChange}
           styles={firstInputStyle}
           errorMessage={validation.frames[0]}
@@ -210,7 +213,7 @@ export const AnimationExporter: React.FC = () => {
           name="duration"
           min={1}
           step={1}
-          defaultValue={animationSettings.duration.toString()}
+          defaultValue={frameSettings.duration.toString()}
           styles={inputStyles}
           onChange={handleChange}
           errorMessage={validation.duration[0]}
@@ -228,8 +231,8 @@ export const AnimationExporter: React.FC = () => {
             Generate animation
           </PrimaryButton>
           <AnimationSettings
-            showProgressBar={animationSettings.showProgressBar}
-            showBranding={animationSettings.showBranding}
+            showProgressBar={frameSettings.showProgressBar}
+            showBranding={frameSettings.showBranding}
             onSettingsChange={handleSettingsChange}
           />
         </Stack>

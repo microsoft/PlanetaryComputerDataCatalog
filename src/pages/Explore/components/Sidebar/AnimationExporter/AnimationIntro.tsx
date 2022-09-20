@@ -26,7 +26,7 @@ export const AnimationIntro: React.FC<Props> = ({
           onClick={handleClose}
         />
       </Stack>
-      <Text>Generate an animated image of your current search over time. </Text>
+      <Text>Generate an animated image of this dataset over time. </Text>
       <Text>
         Keep in mind that many datasets have irregular temporal availability, varied
         cloud cover, or other changes which might affect the quality of your results.
