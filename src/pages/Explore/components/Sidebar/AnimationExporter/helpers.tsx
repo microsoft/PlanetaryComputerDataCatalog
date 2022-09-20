@@ -136,6 +136,8 @@ export const getDefaultSettings = (collection: IStacCollection | null) => {
     unit: "months",
     frames: 6,
     duration: 250,
+    showBranding: true,
+    showProgressBar: true,
   };
 
   return defaultSettings;

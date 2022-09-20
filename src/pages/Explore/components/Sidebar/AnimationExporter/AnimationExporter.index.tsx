@@ -4,6 +4,7 @@ import {
   FontSizes,
   getTheme,
   IButtonStyles,
+  IconButton,
   IDropdownOption,
   IDropdownStyles,
   IStackStyles,
@@ -35,6 +36,7 @@ import { useAnimationExport } from "utils/requests";
 import { AnimationError } from "./AnimationError";
 import { AnimationIntro } from "./AnimationIntro";
 import { AnimationResults } from "./AnimationResults";
+import { AnimationSettings } from "./AnimationSettings";
 import { AnimationStartField } from "./AnimationStartField";
 import { getDefaultSettings, validate } from "./helpers";
 import {
@@ -115,6 +117,13 @@ export const AnimationExporter: React.FC = () => {
       ...animationSettings,
       unit: option?.key as string,
     });
+
+  const handleSettingsChange = (key: string, value: boolean) => {
+    setAnimationSettings({
+      ...animationSettings,
+      [key]: value,
+    });
+  };
 
   const handleClose = () => {
     dispatch(setShowAnimationPanel(false));
@@ -208,13 +217,22 @@ export const AnimationExporter: React.FC = () => {
         />
       </Stack>
       <StackItem shrink={false}>
-        <PrimaryButton
-          disabled={!exportEnabled}
-          onClick={handleExportClick}
+        <Stack
+          horizontal
+          horizontalAlign="start"
+          verticalAlign="center"
+          tokens={stackTokens}
           styles={buttonStyles}
         >
-          Generate animation
-        </PrimaryButton>
+          <PrimaryButton disabled={!exportEnabled} onClick={handleExportClick}>
+            Generate animation
+          </PrimaryButton>
+          <AnimationSettings
+            showProgressBar={animationSettings.showProgressBar}
+            showBranding={animationSettings.showBranding}
+            onSettingsChange={handleSettingsChange}
+          />
+        </Stack>
 
         {Boolean(validation.map.length) && (
           <Text block styles={errorTextStyles}>
@@ -277,7 +295,7 @@ const unitStyles: Partial<IDropdownStyles> = {
   },
 };
 
-const buttonStyles: Partial<IButtonStyles> = {
+const buttonStyles: Partial<IStackStyles> = {
   root: {
     marginTop: 10,
   },

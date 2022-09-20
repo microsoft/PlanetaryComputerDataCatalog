@@ -5,6 +5,8 @@ export interface AnimationFrameSettings {
   unit: string;
   frames: number;
   duration: number;
+  showProgressBar: boolean;
+  showBranding: boolean;
 }
 
 export interface AnimationMosaicSettings {
