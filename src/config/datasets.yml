@@ -697,6 +697,30 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
+noaa-mrms-qpe-1h-pass1:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-1h-pass1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
+noaa-mrms-qpe-1h-pass2:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-1h-pass2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
+noaa-mrms-qpe-24h-pass2:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-24h-pass2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
 noaa-nclimgrid-daily-prelim:
   category: Climate/Weather
   headerImg: ./images/noaa-nclimgrid-daily-prelim-hero.png

@@ -404,3 +404,36 @@ noaa-nclimgrid:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-nclimgrid-group-thumb.png"
   keywords:
     ["United States", "NOAA", "NClimGrid", "Climate", "Precipitation", "Temperature"]
+
+noaa-mrms-qpe:
+  title: NOAA Multi-Radar Multi-Sensor Quantitative Precipitation Estimation
+  short_description: >
+    Integrated multi-sensor cumulative precipation estimates for CONUS, Alaska, 
+    Hawaii, the Caribbean, and Guam.
+  description: >
+    The [Multi-Radar Multi-Sensor (MRMS)](https://mrms.nssl.noaa.gov/) 
+    [Quantitative Precipitation Estimation (QPE)](https://inside.nssl.noaa.gov/mrms/) 
+    products are seamless 1 km mosaics of precipitation accumulation covering the 
+    continental United States, Alaska, Hawaii, the Caribbean, and Guam. The products 
+    are automatically generated through integration of data from multiple radars 
+    and radar networks, surface and satellite observations, numerical weather 
+    prediction (NWP) models, and climatology. The products are updated hourly at 
+    the top of the hour.
+
+
+    MRMS QPE is available as a "Pass 1" or "Pass 2" product. The Pass 1 product 
+    is available with a 60 minute latency and includes 60-65% of gauges. The Pass 
+    2 product has a higher latency of 120 minutes, but includes 99% of gauges. 
+    The Pass 1 and Pass 2 products are broken into 1-, 3-, 6-, 12-, 24-, 48-, and 
+    72-hour accumulation sub-products.
+
+
+    Further information about NOAA's MRMS QPE products can be found in the 
+    [technical product guide](https://vlab.noaa.gov/web/wdtd/-/multi-sensor-qpe-1?selectedFolder=9234881).
+  assets:
+    headerImg:
+      href: ./images/noaa-mrms-qpe-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-mrms-qpe-group-thumb.png"
+  keywords:
+    ["United States", "Caribbean", "Guam", "NOAA", "MRMS", "QPE", "Precipitation", "Weather"]
