@@ -7,7 +7,7 @@ import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
-import { DATA_URL, STAC_URL } from "./constants";
+import { DATA_URL, IMAGE_URL, STAC_URL } from "./constants";
 import datasetConfig from "config/datasets.yml";
 import { AnimationConfig } from "pages/Explore/components/Sidebar/AnimationExporter/types";
 import { AnimationResponse } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationResult";
@@ -68,8 +68,15 @@ const getAnimationExport = async (
   queryParam: QueryFunctionContext<[string, AnimationConfig | undefined]>
 ): Promise<AnimationResponse> => {
   const config = queryParam.queryKey[1];
-  const resp = await axios.post("/api/animation", config);
-  return resp.data;
+  const resp = await axios.post(`${IMAGE_URL}/animation`, config);
+
+  // For local development, swapt out azurite host with localhost
+  const { url } = resp.data;
+  const animationUrl = url.startsWith("http://azurite")
+    ? url.replace("http://azurite", "http://localhost")
+    : url;
+
+  return { url: animationUrl };
 };
 
 export const getTileJson = async (
