@@ -1,6 +1,6 @@
 import * as atlas from "azure-maps-control";
 import dayjs, { ManipulateType } from "dayjs";
-import { ILayerState } from "pages/Explore/types";
+import { IAnimationHint, ILayerState } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { IStacCollection } from "types/stac";
 import {
@@ -124,18 +124,27 @@ const getCollectionEnd = (collection: IStacCollection | null) => {
   return collectionEnd ? dayjs(collectionEnd) : dayjs();
 };
 
-export const getDefaultSettings = (collection: IStacCollection | null) => {
+export const getDefaultSettings = (
+  collection: IStacCollection | null,
+  hint: IAnimationHint | undefined
+) => {
   const collectionStart = getCollectionStart(collection);
   const collectionEnd = getCollectionEnd(collection);
 
   const diff = collectionEnd.diff(collectionStart, "d") / 2;
-  const defaultStart = collectionStart.add(diff, "d").startOf("d").toISOString();
+  const defaultStart = collectionStart
+    .add(diff, "d")
+    .utc()
+    .startOf("d")
+    .toISOString();
   const defaultSettings: AnimationFrameSettings = {
     start: defaultStart,
-    step: 1,
-    unit: "months",
-    frames: 6,
-    duration: 250,
+    step: hint?.step || 1,
+    unit: hint?.unit || "months",
+    frames: hint?.frameCount || 6,
+    duration: hint?.duration || 250,
+    showBranding: true,
+    showProgressBar: true,
   };
 
   return defaultSettings;

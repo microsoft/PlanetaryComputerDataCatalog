@@ -6,10 +6,6 @@
     "SignupUrl": "",
     "SignupToken": "",
 
-    "ANIMATION_CONTAINER_SAS": "",
-    "ANIMATION_API_ROOT_URL": "",
-    "ANIMATION_CONCURRENCY": 10,
-
     "FUNCTIONS_WORKER_RUNTIME": "python"
   }
 }

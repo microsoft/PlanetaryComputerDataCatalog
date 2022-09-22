@@ -7,11 +7,18 @@ export interface IDefaultLocationInfo {
   coordinates: [number, number];
 }
 
+export interface IAnimationHint {
+  unit: string;
+  step: number;
+  duration: number;
+  frameCount: number;
+}
 export interface IMosaicInfo {
   mosaics: IMosaic[];
   renderOptions: IMosaicRenderOption[] | null;
   defaultLocation: IDefaultLocationInfo;
   defaultCustomQuery: ICqlExpressionList;
+  animationHint: IAnimationHint | undefined;
 }
 
 export interface IMosaic {
