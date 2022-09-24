@@ -30,10 +30,10 @@ export const ImageIntro: React.FC<Props> = ({
       <Text>
         The image will be generated using the current search. Draw a bounding box for
         the image and select the image size. The image returned will be at the size
-        provided and contain the area drawn in the bounding box. Note that the image
-        bounds may be slightly larger than the bounding box if the aspect ratios do
-        not match.
+        provided and will contain the area drawn in the bounding box. Note that the
+        image bounds may be larger than the drawn area.
       </Text>
+      <Text>Click on the generated image to download or share.</Text>
       <Separator styles={{ root: { padding: "0 4px" } }} />
       <h4 style={headerStyles}>
         {collection.title || collection.id}, {renderOption?.name}
