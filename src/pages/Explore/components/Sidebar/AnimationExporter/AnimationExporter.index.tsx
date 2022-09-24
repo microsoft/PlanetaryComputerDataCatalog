@@ -258,7 +258,7 @@ export const AnimationExporter: React.FC = () => {
     </Stack>
   );
 
-  return sidebarPanel == SidebarPanels.animation ? panel : null;
+  return sidebarPanel === SidebarPanels.animation ? panel : null;
 };
 
 const theme = getTheme();

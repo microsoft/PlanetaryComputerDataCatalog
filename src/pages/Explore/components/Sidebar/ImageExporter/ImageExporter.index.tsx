@@ -30,7 +30,7 @@ import {
   setSidebarPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
+import { makeFilterBody } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useImageExport } from "utils/requests";
 import { ImageError } from "./ImageError";
@@ -123,9 +123,9 @@ export const ImageExporter: React.FC = () => {
           collectionId: collection?.id,
           imageSettings: {
             ...imageSettings,
-            ["imageSize"]: v,
-            ["cols"]: cols,
-            ["rows"]: rows,
+            imageSize: v,
+            cols: cols,
+            rows: rows,
           },
         })
       );
@@ -153,7 +153,7 @@ export const ImageExporter: React.FC = () => {
     removeImageResponse();
   };
 
-  const validation = validate(requestBody, collection, layer, drawnShape);
+  const validation = validate(requestBody, layer, drawnShape);
   const exportEnabled = !isLoading && validation.isValid;
   const drawExportEnabled = !isDrawBboxMode;
   const customImageSize = imageSettings?.imageSize === "custom";
@@ -261,7 +261,7 @@ export const ImageExporter: React.FC = () => {
     </Stack>
   );
 
-  return sidebarPanel == SidebarPanels.image ? panel : null;
+  return sidebarPanel === SidebarPanels.image ? panel : null;
 };
 
 const theme = getTheme();

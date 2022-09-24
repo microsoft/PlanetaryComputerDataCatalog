@@ -1,19 +1,13 @@
-import * as atlas from "azure-maps-control";
-import dayjs, { ManipulateType } from "dayjs";
-import { IAnimationHint, IDrawnShape, ILayerState } from "pages/Explore/types";
+import { IDrawnShape, ILayerState } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
-import { IStacCollection } from "types/stac";
 import { ImageConfig, ImageSettings, ImageValidation } from "./types";
-
-const MAX_FRAMES = 24;
 
 export const validate = (
   imageConfig: ImageConfig,
-  collection: IStacCollection | null,
   layer: ILayerState["layer"] | null,
   drawnShape: IDrawnShape | null
 ) => {
-  const { cols, rows, imageSize, zoom } = imageConfig;
+  const { cols, rows, zoom } = imageConfig;
   const validations: ImageValidation = {
     start: [],
     frames: [],
