@@ -10,7 +10,12 @@ import { makeTileJsonUrl } from "utils";
 import { DATA_URL, IMAGE_URL, STAC_URL } from "./constants";
 import datasetConfig from "config/datasets.yml";
 import { AnimationConfig } from "pages/Explore/components/Sidebar/AnimationExporter/types";
+import {
+  ImageConfig,
+  ImageExportRequest,
+} from "pages/Explore/components/Sidebar/ImageExporter/types";
 import { AnimationResponse } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationResult";
+import { ImageResponse } from "pages/Explore/components/Sidebar/ImageExporter/ImageResult";
 
 // import { useSession } from "components/auth/hooks/SessionContext";
 
@@ -64,19 +69,51 @@ export const useAnimationExport = (config: AnimationConfig | undefined) => {
   });
 };
 
+export const useImageExport = (config: ImageConfig) => {
+  return useQuery(["image-export", config], getImageExport, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    retry: false,
+    enabled: false,
+  });
+};
+
 const getAnimationExport = async (
   queryParam: QueryFunctionContext<[string, AnimationConfig | undefined]>
 ): Promise<AnimationResponse> => {
   const config = queryParam.queryKey[1];
   const resp = await axios.post(`${IMAGE_URL}/animation`, config);
 
-  // For local development, swapt out azurite host with localhost
+  // For local development, swap out azurite host with localhost
   const { url } = resp.data;
   const animationUrl = url.startsWith("http://azurite")
     ? url.replace("http://azurite", "http://localhost")
     : url;
 
   return { url: animationUrl };
+};
+
+const getImageExport = async (
+  queryParam: QueryFunctionContext<[string, ImageConfig]>
+): Promise<ImageResponse> => {
+  const config = queryParam.queryKey[1];
+  const req: ImageExportRequest = {
+    geometry: config.geometry,
+    cql: config?.cql,
+    render_params: config?.render_params,
+    cols: config?.cols,
+    rows: config?.rows,
+    showBranding: config?.showBranding,
+  };
+  const resp = await axios.post(`${IMAGE_URL}/image`, req);
+
+  // For local development, swap out azurite host with localhost
+  const { url } = resp.data;
+  const imageUrl = url.startsWith("http://azurite")
+    ? url.replace("http://azurite", "http://localhost")
+    : url;
+
+  return { url: imageUrl };
 };
 
 export const getTileJson = async (
