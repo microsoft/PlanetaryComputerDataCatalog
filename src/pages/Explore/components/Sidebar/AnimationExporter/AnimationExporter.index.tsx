@@ -26,8 +26,8 @@ import {
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
   setBboxDrawMode,
-  setDrawnBbox,
   setShowAnimationPanel,
+  setDrawnShape,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
@@ -45,7 +45,7 @@ export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
   const { collection, renderOption, query, layer } =
     useExploreSelector(selectCurrentMosaic);
-  const { zoom, showAnimationPanel, drawnBbox, isDrawBboxMode } = useExploreSelector(
+  const { zoom, sidebarPanel, drawnShape, isDrawBboxMode } = useExploreSelector(
     s => s.map
   );
   const animations = useExploreSelector(s =>
@@ -55,6 +55,8 @@ export const AnimationExporter: React.FC = () => {
     selectAnimationFrameSettings(s, collection?.id)
   );
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
+
+  const drawnBbox = drawnShape?.bbox || null;
 
   // Build up the config payload to be used to request an animation
   // based on the current map/filter state.

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
+import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
 import { setShowAsLayer } from "./detailSlice";
 
@@ -18,7 +19,7 @@ export interface MapState {
   previousZoom: number | null;
   showAnimationPanel: boolean;
   isDrawBboxMode: boolean;
-  drawnBbox: atlas.data.BoundingBox | null;
+  drawnShape: IDrawnShape | null;
 }
 
 const initialState: MapState = {
@@ -33,7 +34,7 @@ const initialState: MapState = {
   previousZoom: null,
   showAnimationPanel: false,
   isDrawBboxMode: false,
-  drawnBbox: null,
+  drawnShape: null,
 };
 
 export const mapSlice = createSlice({
@@ -86,8 +87,8 @@ export const mapSlice = createSlice({
         state.drawnBbox = null;
       }
     },
-    setDrawnBbox: (state, action: PayloadAction<atlas.data.BoundingBox | null>) => {
-      state.drawnBbox = action.payload;
+    setDrawnShape: (state, action: PayloadAction<IDrawnShape | null>) => {
+      state.drawnShape = action.payload;
     },
   },
   extraReducers: builder => {
@@ -117,7 +118,7 @@ export const {
   toggleShowSidebar,
   setShowAnimationPanel,
   setBboxDrawMode,
-  setDrawnBbox,
+  setDrawnShape,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
