@@ -269,10 +269,10 @@ export const stackTokens = { childrenGap: 6 };
 const panelTokens = { childrenGap: 10 };
 
 const imageSizes: IDropdownOption[] = [
-  { key: "1920x1080", text: "Large (1920 x 1080)" },
-  { key: "1280x720", text: "Medium (1280 x 720)" },
-  { key: "1080x1080", text: "Square (1080 x 1080)" },
-  { key: "custom", text: "Custom" },
+  { key: "1920x1080", text: "Large (1920 x 1080)", "title": "Use to generate a Teams background" },
+  { key: "1280x720", text: "Medium (1280 x 720)", "title": "Medium sized image with 16:9 aspect ratio" },
+  { key: "1080x1080", text: "Square (1080 x 1080)", "title": "Use for social media posts" },
+  { key: "custom", text: "Custom", "title": "Enter image size manually" },
 ];
 
 const containerStyles: Partial<IStackStyles> = {
