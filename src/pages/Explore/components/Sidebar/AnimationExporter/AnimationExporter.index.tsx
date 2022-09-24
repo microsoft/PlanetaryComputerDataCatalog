@@ -16,6 +16,7 @@ import {
 } from "@fluentui/react";
 import { AxiosError } from "axios";
 import { isEmpty } from "lodash-es";
+import { SidebarPanels } from "pages/Explore/enums";
 
 import {
   addAnimation,
@@ -26,8 +27,8 @@ import {
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
   setBboxDrawMode,
-  setShowAnimationPanel,
   setDrawnShape,
+  setSidebarPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
@@ -131,8 +132,8 @@ export const AnimationExporter: React.FC = () => {
   };
 
   const handleClose = () => {
-    dispatch(setShowAnimationPanel(false));
-    dispatch(setDrawnBbox(null));
+    dispatch(setSidebarPanel(SidebarPanels.itemSearch));
+    dispatch(setDrawnShape(null));
     removeAnimationResponse();
   };
 
@@ -257,7 +258,7 @@ export const AnimationExporter: React.FC = () => {
     </Stack>
   );
 
-  return showAnimationPanel ? panel : null;
+  return sidebarPanel == SidebarPanels.animation ? panel : null;
 };
 
 const theme = getTheme();

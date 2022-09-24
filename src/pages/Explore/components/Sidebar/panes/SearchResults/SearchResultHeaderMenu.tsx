@@ -1,8 +1,9 @@
 import { IButtonStyles, IconButton } from "@fluentui/react";
 import { useConst, useId, useBoolean } from "@fluentui/react-hooks";
+import { SidebarPanels } from "pages/Explore/enums";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
+import { setSidebarPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { isValidCollection } from "../../AnimationExporter/helpers";
 import QueryInfo from "../QueryInfo";
@@ -32,7 +33,17 @@ export const SearchResultHeaderMenu: React.FC = () => {
         ariaLabel: "Generate timelapse animation base on current filter settings",
         iconProps: { iconName: "PlaybackRate1x" },
         onClick: () => {
-          dispatch(setShowAnimationPanel(true));
+          dispatch(setSidebarPanel(SidebarPanels.animation));
+        },
+        disabled: isValidCollection(collection),
+      },
+      {
+        key: "image",
+        text: "Generate snapshot image",
+        ariaLabel: "Generate timelapse animation base on current filter settings",
+        iconProps: { iconName: "Photo2" },
+        onClick: () => {
+          dispatch(setSidebarPanel(SidebarPanels.image));
         },
         disabled: isValidCollection(collection),
       },

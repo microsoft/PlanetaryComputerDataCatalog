@@ -8,12 +8,14 @@ import MinimizeButton from "../controls/ToggleSidebarButton";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
 import AnimationExporter from "./AnimationExporter";
 import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilter";
+import ImageExporter from "./ImageExporter";
+import { SidebarPanels } from "pages/Explore/enums";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const isSidebarVisible = useExploreSelector(s => s.map.showSidebar);
   const { showAsLayer: isItemLayerVisible } = useExploreSelector(s => s.detail);
-  const { showAnimationPanel } = useExploreSelector(s => s.map);
+  const { sidebarPanel } = useExploreSelector(s => s.map);
 
   const { width, sidebarVisibility } = useMemo(() => {
     return {
@@ -45,10 +47,13 @@ export const Sidebar = () => {
     !isSidebarVisible || isItemLayerVisible ? "explorer-sidebar-hidden" : "";
 
   const registeredPanels = {
-    itemSearch: <CollectionItemFilter sidebarVisibility={sidebarVisibility} />,
-    animationExport: <AnimationExporter />,
+    [SidebarPanels.itemSearch]: (
+      <CollectionItemFilter sidebarVisibility={sidebarVisibility} />
+    ),
+    [SidebarPanels.animation]: <AnimationExporter />,
+    [SidebarPanels.image]: <ImageExporter />,
   };
-  const selectedPanel = showAnimationPanel ? "animationExport" : "itemSearch";
+
   return (
     <>
       <StackItem
@@ -56,7 +61,7 @@ export const Sidebar = () => {
         className={`explorer-sidebar ${visibilityClass}`}
       >
         <Stack id="explorer-sidebar-content" styles={sidebarStackStyles}>
-          {registeredPanels[selectedPanel]}
+          {registeredPanels[sidebarPanel]}
         </Stack>
       </StackItem>
       <MinimizeButton />

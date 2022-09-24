@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
+import { SidebarPanels } from "../enums";
 import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
 import { setShowAsLayer } from "./detailSlice";
@@ -17,7 +18,7 @@ export interface MapState {
   useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
-  showAnimationPanel: boolean;
+  sidebarPanel: SidebarPanels;
   isDrawBboxMode: boolean;
   drawnShape: IDrawnShape | null;
 }
@@ -32,7 +33,7 @@ const initialState: MapState = {
   useHighDef: true,
   previousCenter: null,
   previousZoom: null,
-  showAnimationPanel: false,
+  sidebarPanel: SidebarPanels.itemSearch,
   isDrawBboxMode: false,
   drawnShape: null,
 };
@@ -76,15 +77,15 @@ export const mapSlice = createSlice({
     setUseHighDef: (state, action: PayloadAction<boolean>) => {
       state.useHighDef = action.payload;
     },
-    setShowAnimationPanel: (state, action: PayloadAction<boolean>) => {
-      state.showAnimationPanel = action.payload;
+    setSidebarPanel: (state, action: PayloadAction<SidebarPanels>) => {
+      state.sidebarPanel = action.payload; // Move to panel name
     },
     setBboxDrawMode: (state, action: PayloadAction<boolean>) => {
       state.isDrawBboxMode = action.payload;
 
       // Remove existing bbox if drawing mode is turning on
       if (action.payload) {
-        state.drawnBbox = null;
+        state.drawnShape = null;
       }
     },
     setDrawnShape: (state, action: PayloadAction<IDrawnShape | null>) => {
@@ -116,7 +117,7 @@ export const {
   setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
-  setShowAnimationPanel,
+  setSidebarPanel,
   setBboxDrawMode,
   setDrawnShape,
 } = mapSlice.actions;
