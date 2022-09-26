@@ -1,7 +1,7 @@
 import { Stack, StackItem, useTheme } from "@fluentui/react";
 import { isNumber } from "lodash-es";
 
-import { toUtcDateString } from "utils";
+import { toDateWithTime24, toUtcDateString } from "utils";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 
@@ -15,7 +15,7 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
   const cloud = item.properties?.["eo:cloud_cover"];
 
   // Items typically have a datetime, if not, they'll have start_/end_datetime
-  const date = item.properties?.datetime;
+  const date = item.properties?.datetime as string;
   const dateRange = [
     item.properties?.start_datetime,
     item.properties?.end_datetime,
@@ -29,7 +29,7 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
   );
 
   const dtTitle = !hasRange && date && (
-    <span title="Acquisition date">{toUtcDateString(date)}</span>
+    <span title="Acquisition date (UTC)">{toDateWithTime24(date)}</span>
   );
 
   return (

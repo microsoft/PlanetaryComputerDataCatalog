@@ -33,6 +33,9 @@ export const toUtcDateString = (dt: string | Date | Dayjs) => {
 export const toUtcDateWithTime = (dt: string) =>
   dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
 
+export const toDateWithTime24 = (dt: string) =>
+  dayjs.utc(dt).format("MM/DD/YYYY, HH:mm:ss");
+
 export const toIsoDateString = (
   dt: string | Date | Dayjs,
   includeTime: boolean = true
