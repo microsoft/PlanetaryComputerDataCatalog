@@ -29,6 +29,7 @@ export const ASSET_DETAIL_KEYS = [
   "raster:bands",
   "classification:classes",
   "classification:bitfields",
+  "table:columns",
 ];
 
 const ItemAssets = () => {
