@@ -32,6 +32,8 @@ export const ASSET_DETAIL_KEYS = [
   "table:columns",
 ];
 
+export const SUPRESSED_KEYS = ["xarray:open_kwargs"];
+
 const ItemAssets = () => {
   const collection = useStac();
   if (!collection) return null;
@@ -51,7 +53,9 @@ const ItemAssets = () => {
         })
         .flat()
     )
-  ).concat(["stac_key"]);
+  )
+    .filter(key => !SUPRESSED_KEYS.includes(key))
+    .concat(["stac_key"]);
 
   // Special keys which can be long or many-to-one with an asset get plucked out
   // and ultimately rendered in a detail pane. Remove these keys, and if they existed

@@ -70,6 +70,10 @@ StacFields.Registry.addMetadataField("attrs", {
   formatter: value => value,
 });
 
+StacFields.Registry.addMetadataField("xarray:open_kwargs", {
+  formatter: () => null,
+});
+
 StacFields.Registry.addMetadataField("raster:bands", {
   label: "Raster Info",
   formatter: value => {
