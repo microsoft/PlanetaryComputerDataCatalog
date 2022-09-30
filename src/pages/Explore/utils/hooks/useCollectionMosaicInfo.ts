@@ -1,4 +1,3 @@
-import axios from "axios";
 import { IMosaicInfo } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { IStacCollection } from "types/stac";

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ISearchIdMetadata } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { DATA_URL } from "utils/constants";

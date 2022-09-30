@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ILegendConfig } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { QsParamType } from "types";
