@@ -2,6 +2,7 @@ import axios from "axios";
 import { ISearchIdMetadata } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { DATA_URL } from "utils/constants";
+import { pcApiClient } from "utils/requests";
 
 export const useSearchIdMetadata = (searchId: string | null) => {
   return useQuery(["searchId", searchId], getSearchIdMetadata, {
@@ -22,6 +23,6 @@ export const fetchSearchIdMetadata = async (
   searchId: string | null
 ): Promise<ISearchIdMetadata> => {
   return await (
-    await axios.get(`${DATA_URL}/mosaic/${searchId}/info`)
+    await pcApiClient.get(`${DATA_URL}/mosaic/${searchId}/info`)
   ).data;
 };

@@ -3,6 +3,7 @@ import { IMosaicInfo } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { IStacCollection } from "types/stac";
 import { DATA_URL, STAC_URL } from "utils/constants";
+import { pcApiClient } from "utils/requests";
 
 export const useCollectionMosaicInfo = (collectionId: string | undefined) => {
   return useQuery(["mosaicinfo", collectionId], getCollectionMosaicParams, {
@@ -23,7 +24,7 @@ export const fetchCollectionMosaicInfo = async (
   collectionId: string | undefined
 ): Promise<IMosaicInfo> => {
   return await (
-    await axios.get(`${DATA_URL}/mosaic/info?collection=${collectionId}`)
+    await pcApiClient.get(`${DATA_URL}/mosaic/info?collection=${collectionId}`)
   ).data;
 };
 
@@ -31,6 +32,6 @@ export const fetchCollection = async (
   collectionId: string
 ): Promise<IStacCollection> => {
   return await (
-    await axios.get(`${STAC_URL}/collections/${collectionId}`)
+    await pcApiClient.get(`${STAC_URL}/collections/${collectionId}`)
   ).data;
 };

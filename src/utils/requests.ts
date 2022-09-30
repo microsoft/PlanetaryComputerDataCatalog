@@ -7,12 +7,22 @@ import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
-import { DATA_URL, IMAGE_URL, STAC_URL } from "./constants";
+import {
+  DATA_URL,
+  IMAGE_URL,
+  REQUEST_ENTITY,
+  STAC_URL,
+  X_REQUEST_ENTITY,
+} from "./constants";
 import datasetConfig from "config/datasets.yml";
 import { AnimationConfig } from "pages/Explore/components/Sidebar/AnimationExporter/types";
 import { AnimationResponse } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationResult";
 
-// import { useSession } from "components/auth/hooks/SessionContext";
+export const pcApiClient = axios.create({
+  headers: {
+    [X_REQUEST_ENTITY]: REQUEST_ENTITY,
+  },
+});
 
 // Query content can be prefetched if it's likely to be used
 export const usePrefetchContent = () => {
@@ -68,7 +78,7 @@ const getAnimationExport = async (
   queryParam: QueryFunctionContext<[string, AnimationConfig | undefined]>
 ): Promise<AnimationResponse> => {
   const config = queryParam.queryKey[1];
-  const resp = await axios.post(`${IMAGE_URL}/animation`, config);
+  const resp = await pcApiClient.post(`${IMAGE_URL}/animation`, config);
 
   // For local development, swapt out azurite host with localhost
   const { url } = resp.data;
@@ -95,7 +105,7 @@ export const fetchTileJson = async (
 ) => {
   const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
 
-  const resp = await axios.get(tileJsonUrl);
+  const resp = await pcApiClient.get(tileJsonUrl);
   return resp.data;
 };
 
@@ -116,14 +126,14 @@ export const registerStacFilter = async (
   // Make a new request
   const dataUrl = DATA_URL;
   const body = makeFilterBody([collectionFilter(collectionId)], queryInfo, cql);
-  const r = await axios.post(`${dataUrl}/mosaic/register`, body, {
+  const r = await pcApiClient.post(`${dataUrl}/mosaic/register`, body, {
     cancelToken: new axios.CancelToken(c => (registerCancelToken = c)),
   });
   return r.data.searchid;
 };
 
 const getCollections = async (): Promise<{ collections: IStacCollection[] }> => {
-  const resp = await axios.get(`${STAC_URL}/collections`);
+  const resp = await pcApiClient.get(`${STAC_URL}/collections`);
 
   // Collections in the API can be configured to be hidden in all frontend contexts.
   const hiddenCollections = Object.entries(datasetConfig || {})
