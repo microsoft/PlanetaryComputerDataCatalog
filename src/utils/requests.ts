@@ -9,13 +9,9 @@ import { IStacCollection, IStacItem } from "types/stac";
 import { makeTileJsonUrl } from "utils";
 import { DATA_URL, IMAGE_URL, STAC_URL } from "./constants";
 import datasetConfig from "config/datasets.yml";
-import { AnimationConfig } from "pages/Explore/components/Sidebar/AnimationExporter/types";
-import {
-  ImageConfig,
-  ImageExportRequest,
-} from "pages/Explore/components/Sidebar/ImageExporter/types";
-import { AnimationResponse } from "pages/Explore/components/Sidebar/AnimationExporter/AnimationResult";
-import { ImageResponse } from "pages/Explore/components/Sidebar/ImageExporter/ImageResult";
+import { AnimationConfig } from "pages/Explore/components/Sidebar/exporters/AnimationExporter/types";
+import { ImageConfig } from "pages/Explore/components/Sidebar/exporters/ImageExporter/types";
+import { ImageExportResponse } from "pages/Explore/components/Sidebar/exporters/BaseExporter/types";
 
 // import { useSession } from "components/auth/hooks/SessionContext";
 
@@ -80,7 +76,7 @@ export const useImageExport = (config: ImageConfig) => {
 
 const getAnimationExport = async (
   queryParam: QueryFunctionContext<[string, AnimationConfig | undefined]>
-): Promise<AnimationResponse> => {
+): Promise<ImageExportResponse> => {
   const config = queryParam.queryKey[1];
   const resp = await axios.post(`${IMAGE_URL}/animation`, config);
 
@@ -95,17 +91,17 @@ const getAnimationExport = async (
 
 const getImageExport = async (
   queryParam: QueryFunctionContext<[string, ImageConfig]>
-): Promise<ImageResponse> => {
+): Promise<ImageExportResponse> => {
   const config = queryParam.queryKey[1];
-  const req: ImageExportRequest = {
-    geometry: config.geometry,
-    cql: config?.cql,
-    render_params: config?.render_params,
-    cols: config?.cols,
-    rows: config?.rows,
-    showBranding: config?.showBranding,
-  };
-  const resp = await axios.post(`${IMAGE_URL}/image`, req);
+  // const req: ImageExportRequest = {
+  //   geometry: config.geometry,
+  //   cql: config?.cql,
+  //   render_params: config?.render_params,
+  //   cols: config?.cols,
+  //   rows: config?.rows,
+  //   showBranding: config?.showBranding,
+  // };
+  const resp = await axios.post(`${IMAGE_URL}/image`, config);
 
   // For local development, swap out azurite host with localhost
   const { url } = resp.data;

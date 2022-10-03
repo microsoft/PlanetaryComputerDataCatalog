@@ -20,6 +20,7 @@ import { SidebarPanels } from "pages/Explore/enums";
 
 import {
   addAnimation,
+  removeAnimation,
   selectAnimationFrameSettings,
   selectAnimationsByCollection,
   updateAnimationSettings,
@@ -34,9 +35,9 @@ import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useAnimationExport } from "utils/requests";
-import { AnimationError } from "./AnimationError";
+import { ImageResults } from "../BaseExporter";
+import { ImageExportError } from "../BaseExporter/ImageError";
 import { AnimationIntro } from "./AnimationIntro";
-import { AnimationResults } from "./AnimationResults";
 import { AnimationSettings } from "./AnimationSettings";
 import { AnimationStartField } from "./AnimationStartField";
 import { getDefaultSettings, validate } from "./helpers";
@@ -93,7 +94,7 @@ export const AnimationExporter: React.FC = () => {
     dispatch(
       addAnimation({
         collectionId: collection.id,
-        animation: animationResp,
+        image: animationResp,
       })
     );
     removeAnimationResponse();
@@ -245,14 +246,15 @@ export const AnimationExporter: React.FC = () => {
             * {validation.map[0]}
           </Text>
         )}
-        <AnimationError error={error as AxiosError<any, any>} />
+        <ImageExportError error={error as AxiosError<any, any>} />
       </StackItem>
 
       {(animations.length || isLoading) && collection && (
-        <AnimationResults
+        <ImageResults
           collectionId={collection.id}
-          animations={animations}
+          images={animations}
           isLoading={isLoading}
+          onRemove={removeAnimation}
         />
       )}
     </Stack>

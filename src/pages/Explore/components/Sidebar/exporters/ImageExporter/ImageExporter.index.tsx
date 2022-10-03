@@ -22,6 +22,7 @@ import {
   selectImageSettings,
   selectImagesByCollection,
   updateImageSettings,
+  removeImage,
 } from "pages/Explore/state/imageSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
@@ -33,9 +34,9 @@ import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useImageExport } from "utils/requests";
-import { ImageError } from "./ImageError";
+import { ImageExportError } from "../BaseExporter/ImageError";
 import { ImageIntro } from "./ImageIntro";
-import { ImageResults } from "./ImageResults";
+import { ImageResults } from "../BaseExporter/ImageResults";
 import { ImageSettings } from "./ImageSettings";
 import { validate, getDefaultImageSettings } from "./helpers";
 import { ImageConfig, ImageMosaicSettings } from "./types";
@@ -248,14 +249,15 @@ export const ImageExporter: React.FC = () => {
             * {validation.map[0]}
           </Text>
         )}
-        <ImageError error={error as AxiosError<any, any>} />
+        <ImageExportError error={error as AxiosError<any, any>} />
       </StackItem>
 
       {(images.length || isLoading) && collection && (
         <ImageResults
           collectionId={collection.id}
-          Images={images}
+          images={images}
           isLoading={isLoading}
+          onRemove={removeImage}
         />
       )}
     </Stack>

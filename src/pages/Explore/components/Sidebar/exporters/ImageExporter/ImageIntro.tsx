@@ -1,6 +1,7 @@
-import { getTheme, IconButton, Separator, Stack, Text } from "@fluentui/react";
+import { Text } from "@fluentui/react";
 import { IMosaicRenderOption } from "pages/Explore/types";
 import { IStacCollection } from "types/stac";
+import { ExporterHeader } from "../BaseExporter/ImageIntro";
 
 interface Props {
   collection: IStacCollection | null;
@@ -15,17 +16,11 @@ export const ImageIntro: React.FC<Props> = ({
   if (!collection) return null;
 
   return (
-    <>
-      <Stack horizontal horizontalAlign="space-between">
-        <h3 style={headerStyles}>Export Image</h3>
-        <IconButton
-          title="Close"
-          aria-label="Close Image export panel"
-          styles={buttonStyles}
-          iconProps={iconProps}
-          onClick={handleClose}
-        />
-      </Stack>
+    <ExporterHeader
+      title="Image Export"
+      subTitle={`${collection.title || collection.id}, ${renderOption?.name}`}
+      onClose={handleClose}
+    >
       <Text>Generate an image of this dataset. </Text>
       <Text>
         The image will be generated using the current search. Draw a bounding box for
@@ -34,21 +29,6 @@ export const ImageIntro: React.FC<Props> = ({
         image bounds may be larger than the drawn area.
       </Text>
       <Text>Click on the generated image to download or share.</Text>
-      <Separator styles={{ root: { padding: "0 4px" } }} />
-      <h4 style={headerStyles}>
-        {collection.title || collection.id}, {renderOption?.name}
-      </h4>
-    </>
+    </ExporterHeader>
   );
 };
-
-const theme = getTheme();
-
-const buttonStyles = {
-  root: { color: theme.semanticColors.bodyText },
-  rootHovered: {
-    color: theme.palette.neutralDark,
-  },
-};
-const iconProps = { iconName: "Cancel" };
-const headerStyles = { marginBottom: 4 };

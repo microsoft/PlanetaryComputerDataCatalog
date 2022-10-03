@@ -12,42 +12,45 @@ import {
   StackItem,
 } from "@fluentui/react";
 import { useConst } from "@fluentui/react-hooks";
-import { removeImage } from "pages/Explore/state/imageSlice";
+import { CollectionImageExport } from "pages/Explore/state/imageSlice";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { useCallback, useState } from "react";
 import { ImageViewer } from "./ImageViewer";
-
-export interface ImageResponse {
-  url: string;
-}
+import { ImageExportResponse } from "./types";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 interface Props {
-  ImageResponse: ImageResponse;
+  imageResponse: ImageExportResponse;
   collectionId: string;
+  onRemove: ActionCreatorWithPayload<CollectionImageExport, string>;
 }
 
-export const ImageResult: React.FC<Props> = ({ ImageResponse, collectionId }) => {
+export const ImageResult: React.FC<Props> = ({
+  imageResponse,
+  collectionId,
+  onRemove,
+}) => {
   const dispatch = useExploreDispatch();
-  const [displayedImage, setDisplayedImage] = useState<ImageResponse | null>();
+  const [displayedImage, setDisplayedImage] = useState<ImageExportResponse | null>();
 
   const handleViewerClose = useCallback(() => {
     setDisplayedImage(null);
   }, []);
 
   const handleViewClick = useCallback(() => {
-    setDisplayedImage(ImageResponse);
-  }, [ImageResponse]);
+    setDisplayedImage(imageResponse);
+  }, [imageResponse]);
 
   const menuProps: IContextualMenuProps = useConst({
     onItemClick(_, item?) {
       switch (item?.key) {
         case "download":
-          window.open(ImageResponse.url, "_blank");
+          window.open(imageResponse.url, "_blank");
           break;
         case "delete":
           dispatch(
-            removeImage({
-              image: ImageResponse,
+            onRemove({
+              image: imageResponse,
               collectionId: collectionId,
             })
           );
@@ -73,7 +76,7 @@ export const ImageResult: React.FC<Props> = ({ ImageResponse, collectionId }) =>
         <Image
           styles={imageStyles}
           alt="layer Image"
-          src={ImageResponse.url}
+          src={imageResponse.url}
           imageFit={ImageFit.contain}
         />
       </Link>

@@ -1,16 +1,16 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ImageResponse } from "../components/Sidebar/ImageExporter/ImageResult";
-import { ImageSettings } from "../components/Sidebar/ImageExporter/types";
+import { ImageExportResponse } from "../components/Sidebar/exporters/BaseExporter/types";
+import { ImageSettings } from "../components/Sidebar/exporters/ImageExporter/types";
 import { ExploreState } from "./store";
 
 export interface ImageState {
-  images: Record<string, ImageResponse[]>;
+  images: Record<string, ImageExportResponse[]>;
   settings: Record<string, ImageSettings>;
 }
 
-export interface CollectionImage {
+export interface CollectionImageExport {
   collectionId: string;
-  image: ImageResponse;
+  image: ImageExportResponse;
 }
 
 export interface CollectionImageConfig {
@@ -27,13 +27,13 @@ export const ImageSlice = createSlice({
   name: "Images",
   initialState,
   reducers: {
-    addImage: (state, action: PayloadAction<CollectionImage>) => {
+    addImage: (state, action: PayloadAction<CollectionImageExport>) => {
       const collectionImages = state.images[action.payload.collectionId] || [];
       collectionImages.push(action.payload.image);
       state.images[action.payload.collectionId] = collectionImages;
     },
 
-    removeImage: (state, action: PayloadAction<CollectionImage>) => {
+    removeImage: (state, action: PayloadAction<CollectionImageExport>) => {
       const collectionImages = state.images[action.payload.collectionId] || [];
 
       const index = collectionImages.findIndex(

@@ -5,7 +5,7 @@ import { SidebarPanels } from "pages/Explore/enums";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setSidebarPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import { isValidCollection } from "../../AnimationExporter/helpers";
+import { isValidCollection } from "../../exporters/AnimationExporter/helpers";
 import QueryInfo from "../QueryInfo";
 
 export const SearchResultHeaderMenu: React.FC = () => {

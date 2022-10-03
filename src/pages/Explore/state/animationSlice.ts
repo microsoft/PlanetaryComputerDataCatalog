@@ -1,16 +1,12 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AnimationResponse } from "../components/Sidebar/AnimationExporter/AnimationResult";
-import { AnimationFrameSettings } from "../components/Sidebar/AnimationExporter/types";
+import { AnimationFrameSettings } from "../components/Sidebar/exporters/AnimationExporter/types";
+import { ImageExportResponse } from "../components/Sidebar/exporters/BaseExporter/types";
+import { CollectionImageExport } from "./imageSlice";
 import { ExploreState } from "./store";
 
 export interface AnimationState {
-  animations: Record<string, AnimationResponse[]>;
+  animations: Record<string, ImageExportResponse[]>;
   settings: Record<string, AnimationFrameSettings>;
-}
-
-export interface CollectionAnimation {
-  collectionId: string;
-  animation: AnimationResponse;
 }
 
 export interface CollectionAnimationConfig {
@@ -27,19 +23,19 @@ export const animationSlice = createSlice({
   name: "animations",
   initialState,
   reducers: {
-    addAnimation: (state, action: PayloadAction<CollectionAnimation>) => {
+    addAnimation: (state, action: PayloadAction<CollectionImageExport>) => {
       const collectionAnimations =
         state.animations[action.payload.collectionId] || [];
-      collectionAnimations.push(action.payload.animation);
+      collectionAnimations.push(action.payload.image);
       state.animations[action.payload.collectionId] = collectionAnimations;
     },
 
-    removeAnimation: (state, action: PayloadAction<CollectionAnimation>) => {
+    removeAnimation: (state, action: PayloadAction<CollectionImageExport>) => {
       const collectionAnimations =
         state.animations[action.payload.collectionId] || [];
 
       const index = collectionAnimations.findIndex(
-        a => a.url === action.payload.animation.url
+        a => a.url === action.payload.image.url
       );
       if (index > -1) {
         collectionAnimations.splice(index, 1);

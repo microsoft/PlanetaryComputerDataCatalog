@@ -6,9 +6,9 @@ import { resetMosaic } from "pages/Explore/state/mosaicSlice";
 import { resetDetail } from "pages/Explore/state/detailSlice";
 import MinimizeButton from "../controls/ToggleSidebarButton";
 import { SIDEBAR_WIDTH } from "../../utils/constants";
-import AnimationExporter from "./AnimationExporter";
+import AnimationExporter from "./exporters/AnimationExporter";
 import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilter";
-import ImageExporter from "./ImageExporter";
+import ImageExporter from "./exporters/ImageExporter";
 import { SidebarPanels } from "pages/Explore/enums";
 
 export const Sidebar = () => {

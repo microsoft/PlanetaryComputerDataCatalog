@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   getTheme,
   IButtonStyles,
@@ -11,8 +12,6 @@ import {
   Separator,
   Stack,
 } from "@fluentui/react";
-import { useCallback } from "react";
-import { ImageResponse } from "./ImageResult";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -22,8 +21,10 @@ import {
   TwitterIcon,
 } from "next-share";
 
+import { ImageExportResponse } from "./types";
+
 interface ImageViewerProps {
-  ImageResponse: ImageResponse;
+  ImageResponse: ImageExportResponse;
   collectionId: string;
   onClose: () => void;
 }
