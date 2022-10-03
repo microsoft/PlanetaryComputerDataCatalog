@@ -1,6 +1,7 @@
 import { ICqlExpressionList } from "./utils/cql/types";
 import { IStacCollection, IStacLink } from "types/stac";
 import { LegendTypes } from "./enums";
+import atlas from "azure-maps-control";
 
 export interface IDefaultLocationInfo {
   zoom: number;
@@ -101,4 +102,9 @@ export interface IOrderedLayers {
 export interface ILayerZoomVisibility {
   current: ILayerState | null;
   others: ILayerState[];
+}
+
+export interface IDrawnShape {
+  geometry: atlas.data.Geometry | null;
+  bbox: atlas.data.BoundingBox | null;
 }

@@ -42,6 +42,7 @@
     "lodash-es": "^4.17.21",
     "marked": "^4.0.17",
     "minisearch": "^5.0.0",
+    "next-share": "^0.18.1",
     "number-abbreviate": "^2.0.0",
     "process": "^0.11.10",
     "query-string": "^7.1.1",

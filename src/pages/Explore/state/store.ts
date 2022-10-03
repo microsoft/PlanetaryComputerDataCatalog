@@ -3,6 +3,7 @@ import mosaicReducer from "./mosaicSlice";
 import mapReducer from "./mapSlice";
 import detailReducer from "./detailSlice";
 import animationSlice from "./animationSlice";
+import imageSlice from "./imageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     map: mapReducer,
     detail: detailReducer,
     animation: animationSlice,
+    image: imageSlice,
   },
 });
 

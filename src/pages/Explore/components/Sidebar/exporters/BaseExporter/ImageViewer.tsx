@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   getTheme,
   IButtonStyles,
@@ -11,26 +12,38 @@ import {
   Separator,
   Stack,
 } from "@fluentui/react";
-import { useCallback } from "react";
-import { AnimationResponse } from "./AnimationResult";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton,
+  TwitterIcon,
+} from "next-share";
 
-interface AnimationViewerProps {
-  animationResponse: AnimationResponse;
+import { ImageExportResponse } from "./types";
+
+interface ImageViewerProps {
+  ImageResponse: ImageExportResponse;
+  collectionId: string;
   onClose: () => void;
 }
 
-export const AnimationViewer: React.FC<AnimationViewerProps> = ({
-  animationResponse,
+export const ImageViewer: React.FC<ImageViewerProps> = ({
+  ImageResponse,
+  collectionId,
   onClose,
 }) => {
   const handleDownload = useCallback(() => {
-    window.open(animationResponse.url);
-  }, [animationResponse.url]);
+    window.open(ImageResponse.url);
+  }, [ImageResponse.url]);
+
+  const shareUrl = ImageResponse.url;
 
   return (
     <Modal isOpen={true} onDismiss={onClose}>
       <Stack horizontal horizontalAlign="space-between">
-        <h3 style={headerStyle}>Timelapse viewer</h3>
+        <h3 style={headerStyle}>Image viewer</h3>
         <IconButton
           styles={iconButtonStyles}
           iconProps={cancelIcon}
@@ -40,7 +53,15 @@ export const AnimationViewer: React.FC<AnimationViewerProps> = ({
       </Stack>
       <Separator />
       <div style={viewerBodyStyle}>
-        <Label>Share link:</Label>
+        <Stack
+          horizontal
+          horizontalAlign="start"
+          tokens={stackTokens}
+          verticalAlign="center"
+        >
+          <Label>Share:</Label>
+        </Stack>
+
         <Stack
           horizontal
           horizontalAlign="start"
@@ -48,19 +69,36 @@ export const AnimationViewer: React.FC<AnimationViewerProps> = ({
           verticalAlign="center"
         >
           <div style={urlCopyStyle}>
-            <code>{animationResponse.url}</code>
+            <code>{shareUrl}</code>
           </div>
           <IconButton
             title="Download image"
             iconProps={downloadIconProps}
             onClick={handleDownload}
           />
+          <LinkedinShareButton url={shareUrl}>
+            <LinkedinIcon size={20} round />
+          </LinkedinShareButton>
+          <TwitterShareButton
+            url={shareUrl}
+            title={`Rendering of ${collectionId} from the Planetary Computer`}
+            hashtags={[collectionId, "planetarycomputer"]}
+          >
+            <TwitterIcon size={20} round />
+          </TwitterShareButton>
+          <FacebookShareButton
+            url={shareUrl}
+            quote={`Rendering of ${collectionId} from the Planetary Computer`}
+            hashtag={`#${collectionId} #planetarycomputer`}
+          >
+            <FacebookIcon size={20} round />
+          </FacebookShareButton>
         </Stack>
       </div>
       <Image
-        src={animationResponse.url}
+        src={ImageResponse.url}
         styles={imageStyles}
-        alt={"Timelapse animation"}
+        alt={"Timelapse Image"}
         imageFit={ImageFit.contain}
       />
     </Modal>
@@ -114,3 +152,5 @@ const urlCopyStyle = {
 const viewerBodyStyle = {
   margin: "0 10px",
 };
+
+export default ImageViewer;

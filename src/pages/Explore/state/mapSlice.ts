@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
+import { SidebarPanels } from "../enums";
+import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
 import { setShowAsLayer } from "./detailSlice";
 
@@ -16,9 +18,9 @@ export interface MapState {
   useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
-  showAnimationPanel: boolean;
+  sidebarPanel: SidebarPanels;
   isDrawBboxMode: boolean;
-  drawnBbox: atlas.data.BoundingBox | null;
+  drawnShape: IDrawnShape | null;
 }
 
 const initialState: MapState = {
@@ -31,9 +33,9 @@ const initialState: MapState = {
   useHighDef: true,
   previousCenter: null,
   previousZoom: null,
-  showAnimationPanel: false,
+  sidebarPanel: SidebarPanels.itemSearch,
   isDrawBboxMode: false,
-  drawnBbox: null,
+  drawnShape: null,
 };
 
 export const mapSlice = createSlice({
@@ -75,19 +77,19 @@ export const mapSlice = createSlice({
     setUseHighDef: (state, action: PayloadAction<boolean>) => {
       state.useHighDef = action.payload;
     },
-    setShowAnimationPanel: (state, action: PayloadAction<boolean>) => {
-      state.showAnimationPanel = action.payload;
+    setSidebarPanel: (state, action: PayloadAction<SidebarPanels>) => {
+      state.sidebarPanel = action.payload; // Move to panel name
     },
     setBboxDrawMode: (state, action: PayloadAction<boolean>) => {
       state.isDrawBboxMode = action.payload;
 
       // Remove existing bbox if drawing mode is turning on
       if (action.payload) {
-        state.drawnBbox = null;
+        state.drawnShape = null;
       }
     },
-    setDrawnBbox: (state, action: PayloadAction<atlas.data.BoundingBox | null>) => {
-      state.drawnBbox = action.payload;
+    setDrawnShape: (state, action: PayloadAction<IDrawnShape | null>) => {
+      state.drawnShape = action.payload;
     },
   },
   extraReducers: builder => {
@@ -115,9 +117,9 @@ export const {
   setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
-  setShowAnimationPanel,
+  setSidebarPanel,
   setBboxDrawMode,
-  setDrawnBbox,
+  setDrawnShape,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

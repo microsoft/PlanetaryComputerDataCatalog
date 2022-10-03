@@ -9,17 +9,23 @@ import {
   ShimmerElementType,
   Stack,
 } from "@fluentui/react";
-import { AnimationResponse, AnimationResult } from "./AnimationResult";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { CollectionImageExport } from "pages/Explore/state/imageSlice";
+import { ImageResult } from "./ImageResult";
+import { ImageExportResponse } from "./types";
 
 interface Props {
   collectionId: string;
-  animations: AnimationResponse[];
+  images: ImageExportResponse[];
   isLoading: boolean;
+  onRemove: ActionCreatorWithPayload<CollectionImageExport, string>;
 }
-export const AnimationResults: React.FC<Props> = ({
+
+export const ImageResults: React.FC<Props> = ({
   collectionId,
-  animations,
+  images,
   isLoading,
+  onRemove,
 }) => {
   const imageShimmer = (
     <Shimmer
@@ -32,7 +38,7 @@ export const AnimationResults: React.FC<Props> = ({
   return (
     <>
       <Separator />
-      <Label>Animations:</Label>
+      <Label>Images:</Label>
       <Stack
         horizontal
         wrap
@@ -41,15 +47,16 @@ export const AnimationResults: React.FC<Props> = ({
         tokens={resultTokens}
       >
         {isLoading && imageShimmer}
-        {animations
+        {images
           .slice()
           .reverse()
-          .map(animation => {
+          .map(image => {
             return (
-              <AnimationResult
-                key={animation.url}
+              <ImageResult
+                key={image.url}
                 collectionId={collectionId}
-                animationResponse={animation}
+                imageResponse={image}
+                onRemove={onRemove}
               />
             );
           })}

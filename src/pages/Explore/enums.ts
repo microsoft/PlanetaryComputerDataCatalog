@@ -6,3 +6,9 @@ export enum LegendTypes {
   interval = "interval",
   none = "none",
 }
+
+export enum SidebarPanels {
+  itemSearch = "itemSearch",
+  animation = "animation",
+  image = "image",
+}

@@ -3,7 +3,8 @@ import * as atlas from "azure-maps-control";
 import { drawing } from "azure-maps-drawing-tools";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setBboxDrawMode, setDrawnBbox } from "pages/Explore/state/mapSlice";
+import { setBboxDrawMode, setDrawnShape } from "pages/Explore/state/mapSlice";
+import { IDrawnShape } from "pages/Explore/types";
 import { getTheme } from "@fluentui/react";
 
 const theme = getTheme();
@@ -14,7 +15,7 @@ export const useMapDrawTools = (
 ) => {
   const dispatch = useExploreDispatch();
   const drawMgrRef = useRef<drawing.DrawingManager | null>(null);
-  const { isDrawBboxMode, drawnBbox } = useExploreSelector(s => s.map);
+  const { isDrawBboxMode, drawnShape } = useExploreSelector(s => s.map);
 
   // Initialize the drawing manager when the map is ready
   if (!drawMgrRef.current && mapRef.current && mapReady) {
@@ -38,13 +39,16 @@ export const useMapDrawTools = (
 
   const { mode } = drawMgrRef.current.getOptions();
 
-  if (!drawnBbox && drawMgrRef.current.getSource().getShapes().length > 0) {
+  if (!drawnShape && drawMgrRef.current.getSource().getShapes().length > 0) {
     drawMgrRef.current.getSource().clear();
   }
 
   const handleShapeAdded = (shape: atlas.Shape): void => {
-    const bounds = shape.getBounds();
-    dispatch(setDrawnBbox(bounds));
+    const drawnShape: IDrawnShape = {
+      geometry: shape.toJson().geometry,
+      bbox: shape.getBounds(),
+    };
+    dispatch(setDrawnShape(drawnShape));
     dispatch(setBboxDrawMode(false));
 
     if (drawMgrRef.current) {

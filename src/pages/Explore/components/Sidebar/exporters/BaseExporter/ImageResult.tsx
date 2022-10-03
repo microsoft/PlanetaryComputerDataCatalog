@@ -1,3 +1,4 @@
+import React, { useCallback, useState } from "react";
 import {
   getTheme,
   IButtonStyles,
@@ -11,47 +12,47 @@ import {
   Link,
   StackItem,
 } from "@fluentui/react";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useConst } from "@fluentui/react-hooks";
-import { removeAnimation } from "pages/Explore/state/animationSlice";
-import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { useCallback, useState } from "react";
-import { AnimationViewer } from "./AnimationViewer";
 
-export interface AnimationResponse {
-  url: string;
-}
+import { CollectionImageExport } from "pages/Explore/state/imageSlice";
+import { useExploreDispatch } from "pages/Explore/state/hooks";
+import { ImageExportResponse } from "./types";
+
+const ImageViewer = React.lazy(() => import("./ImageViewer"));
 
 interface Props {
-  animationResponse: AnimationResponse;
+  imageResponse: ImageExportResponse;
   collectionId: string;
+  onRemove: ActionCreatorWithPayload<CollectionImageExport, string>;
 }
 
-export const AnimationResult: React.FC<Props> = ({
-  animationResponse,
+export const ImageResult: React.FC<Props> = ({
+  imageResponse,
   collectionId,
+  onRemove,
 }) => {
   const dispatch = useExploreDispatch();
-  const [displayedAnimation, setDisplayedAnimation] =
-    useState<AnimationResponse | null>();
+  const [displayedImage, setDisplayedImage] = useState<ImageExportResponse | null>();
 
   const handleViewerClose = useCallback(() => {
-    setDisplayedAnimation(null);
+    setDisplayedImage(null);
   }, []);
 
   const handleViewClick = useCallback(() => {
-    setDisplayedAnimation(animationResponse);
-  }, [animationResponse]);
+    setDisplayedImage(imageResponse);
+  }, [imageResponse]);
 
   const menuProps: IContextualMenuProps = useConst({
     onItemClick(_, item?) {
       switch (item?.key) {
         case "download":
-          window.open(animationResponse.url, "_blank");
+          window.open(imageResponse.url, "_blank");
           break;
         case "delete":
           dispatch(
-            removeAnimation({
-              animation: animationResponse,
+            onRemove({
+              image: imageResponse,
               collectionId: collectionId,
             })
           );
@@ -73,20 +74,18 @@ export const AnimationResult: React.FC<Props> = ({
         styles={iconButtonStyles}
         iconProps={iconButtonProps}
       />
-      <Link
-        aria-label="Click to display full size timelapse animation"
-        onClick={handleViewClick}
-      >
+      <Link aria-label="Click to display full size image" onClick={handleViewClick}>
         <Image
           styles={imageStyles}
-          alt="layer animation"
-          src={animationResponse.url}
+          alt="layer Image"
+          src={imageResponse.url}
           imageFit={ImageFit.contain}
         />
       </Link>
-      {displayedAnimation && (
-        <AnimationViewer
-          animationResponse={displayedAnimation}
+      {displayedImage && (
+        <ImageViewer
+          ImageResponse={displayedImage}
+          collectionId={collectionId}
           onClose={handleViewerClose}
         />
       )}
@@ -99,19 +98,19 @@ const menuItems: IContextualMenuItem[] = [
     key: "view",
     iconProps: { iconName: "FullScreen" },
     text: "View larger version",
-    ariaLabel: "View large timelapse animation",
+    ariaLabel: "View large image",
   },
   {
     key: "download",
     iconProps: { iconName: "Download" },
     text: "Download full size",
-    ariaLabel: "Download full size timelapse animation",
+    ariaLabel: "Download full size image",
   },
   {
     key: "delete",
     text: "Remove",
     iconProps: { iconName: "Delete" },
-    ariaLabel: "Remove timelapse animation",
+    ariaLabel: "Remove image",
   },
 ];
 

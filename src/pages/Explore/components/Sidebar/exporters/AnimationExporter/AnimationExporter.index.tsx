@@ -16,9 +16,11 @@ import {
 } from "@fluentui/react";
 import { AxiosError } from "axios";
 import { isEmpty } from "lodash-es";
+import { SidebarPanels } from "pages/Explore/enums";
 
 import {
   addAnimation,
+  removeAnimation,
   selectAnimationFrameSettings,
   selectAnimationsByCollection,
   updateAnimationSettings,
@@ -26,16 +28,17 @@ import {
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
   setBboxDrawMode,
-  setDrawnBbox,
-  setShowAnimationPanel,
+  setDrawnShape,
+  setSidebarPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
+import { useEffect } from "react";
 import { useAnimationExport } from "utils/requests";
-import { AnimationError } from "./AnimationError";
+import { ImageResults } from "../BaseExporter";
+import { ImageExportError } from "../BaseExporter/ImageExportError";
 import { AnimationIntro } from "./AnimationIntro";
-import { AnimationResults } from "./AnimationResults";
 import { AnimationSettings } from "./AnimationSettings";
 import { AnimationStartField } from "./AnimationStartField";
 import { getDefaultSettings, validate } from "./helpers";
@@ -45,7 +48,7 @@ export const AnimationExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
   const { collection, renderOption, query, layer } =
     useExploreSelector(selectCurrentMosaic);
-  const { zoom, showAnimationPanel, drawnBbox, isDrawBboxMode } = useExploreSelector(
+  const { zoom, sidebarPanel, drawnShape, isDrawBboxMode } = useExploreSelector(
     s => s.map
   );
   const animations = useExploreSelector(s =>
@@ -55,6 +58,8 @@ export const AnimationExporter: React.FC = () => {
     selectAnimationFrameSettings(s, collection?.id)
   );
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
+
+  const drawnBbox = drawnShape?.bbox || null;
 
   // Build up the config payload to be used to request an animation
   // based on the current map/filter state.
@@ -82,19 +87,21 @@ export const AnimationExporter: React.FC = () => {
 
   // When an animation response is received, add it to the list of animations
   // for this collection and reset the payload state used to request it.
-  if (
-    animationResp &&
-    collection &&
-    !animations.find(a => a.url === animationResp.url)
-  ) {
-    dispatch(
-      addAnimation({
-        collectionId: collection.id,
-        animation: animationResp,
-      })
-    );
-    removeAnimationResponse();
-  }
+  useEffect(() => {
+    if (
+      animationResp &&
+      collection &&
+      !animations.find(a => a.url === animationResp.url)
+    ) {
+      dispatch(
+        addAnimation({
+          collectionId: collection.id,
+          image: animationResp,
+        })
+      );
+      removeAnimationResponse();
+    }
+  }, [animationResp, animations, collection, dispatch, removeAnimationResponse]);
 
   const handleExportClick = () => {
     fetchAnimation({ stale: true });
@@ -129,8 +136,9 @@ export const AnimationExporter: React.FC = () => {
   };
 
   const handleClose = () => {
-    dispatch(setShowAnimationPanel(false));
-    dispatch(setDrawnBbox(null));
+    dispatch(setSidebarPanel(SidebarPanels.itemSearch));
+    dispatch(setDrawnShape(null));
+    dispatch(setBboxDrawMode(false));
     removeAnimationResponse();
   };
 
@@ -242,20 +250,21 @@ export const AnimationExporter: React.FC = () => {
             * {validation.map[0]}
           </Text>
         )}
-        <AnimationError error={error as AxiosError<any, any>} />
+        <ImageExportError error={error as AxiosError<any, any>} />
       </StackItem>
 
       {(animations.length || isLoading) && collection && (
-        <AnimationResults
+        <ImageResults
           collectionId={collection.id}
-          animations={animations}
+          images={animations}
           isLoading={isLoading}
+          onRemove={removeAnimation}
         />
       )}
     </Stack>
   );
 
-  return showAnimationPanel ? panel : null;
+  return sidebarPanel === SidebarPanels.animation ? panel : null;
 };
 
 const theme = getTheme();

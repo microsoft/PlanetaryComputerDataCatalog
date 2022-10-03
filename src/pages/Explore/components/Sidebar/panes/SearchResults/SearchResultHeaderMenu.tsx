@@ -1,10 +1,11 @@
 import { IButtonStyles, IconButton } from "@fluentui/react";
 import { useConst, useId, useBoolean } from "@fluentui/react-hooks";
+import { SidebarPanels } from "pages/Explore/enums";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { setShowAnimationPanel } from "pages/Explore/state/mapSlice";
+import { setSidebarPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
-import { isValidCollection } from "../../AnimationExporter/helpers";
+import { isValidCollection } from "../../exporters/AnimationExporter/helpers";
 import QueryInfo from "../QueryInfo";
 
 export const SearchResultHeaderMenu: React.FC = () => {
@@ -16,8 +17,16 @@ export const SearchResultHeaderMenu: React.FC = () => {
   const menuProps = useConst({
     items: [
       {
+        key: "details",
+        text: "Filter details",
+        ariaLabel: "Details of current filter settings",
+        iconProps: { iconName: "Info" },
+        onClick: toggle,
+        "data-cy": "query-detail-button",
+      },
+      {
         key: "collection",
-        text: "Data Catalog page",
+        text: `Data Catalog page (${collection?.id})`,
         iconProps: { iconName: "ProductCatalog" },
         onClick: () => {
           window.open(
@@ -32,17 +41,19 @@ export const SearchResultHeaderMenu: React.FC = () => {
         ariaLabel: "Generate timelapse animation base on current filter settings",
         iconProps: { iconName: "PlaybackRate1x" },
         onClick: () => {
-          dispatch(setShowAnimationPanel(true));
+          dispatch(setSidebarPanel(SidebarPanels.animation));
         },
         disabled: isValidCollection(collection),
       },
       {
-        key: "details",
-        text: "Filter details",
-        ariaLabel: "Details of current filter settings",
-        iconProps: { iconName: "Info" },
-        onClick: toggle,
-        "data-cy": "query-detail-button",
+        key: "image",
+        text: "Generate snapshot image",
+        ariaLabel: "Generate timelapse animation base on current filter settings",
+        iconProps: { iconName: "Photo2" },
+        onClick: () => {
+          dispatch(setSidebarPanel(SidebarPanels.image));
+        },
+        disabled: isValidCollection(collection),
       },
     ],
   });
