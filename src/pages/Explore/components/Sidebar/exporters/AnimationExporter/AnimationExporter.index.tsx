@@ -36,7 +36,7 @@ import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hoo
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useAnimationExport } from "utils/requests";
 import { ImageResults } from "../BaseExporter";
-import { ImageExportError } from "../BaseExporter/ImageError";
+import { ImageExportError } from "../BaseExporter/ImageExportError";
 import { AnimationIntro } from "./AnimationIntro";
 import { AnimationSettings } from "./AnimationSettings";
 import { AnimationStartField } from "./AnimationStartField";

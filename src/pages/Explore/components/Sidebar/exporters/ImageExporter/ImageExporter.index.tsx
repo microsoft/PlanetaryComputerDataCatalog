@@ -34,7 +34,7 @@ import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useImageExport } from "utils/requests";
-import { ImageExportError } from "../BaseExporter/ImageError";
+import { ImageExportError } from "../BaseExporter/ImageExportError";
 import { ImageIntro } from "./ImageIntro";
 import { ImageResults } from "../BaseExporter/ImageResults";
 import { ImageSettings } from "./ImageSettings";
