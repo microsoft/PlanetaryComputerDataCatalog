@@ -41,6 +41,7 @@ import { ImageSettings } from "./ImageSettings";
 import { validate, getDefaultImageSettings } from "./helpers";
 import { ImageConfig, ImageMosaicSettings } from "./types";
 import { SidebarPanels } from "pages/Explore/enums";
+import { useEffect } from "react";
 
 export const ImageExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
@@ -56,7 +57,6 @@ export const ImageExporter: React.FC = () => {
     selectImageSettings(s, collection?.id)
   );
 
-  console.log(imageSettings);
   if (isEmpty(imageSettings)) {
     imageSettings = getDefaultImageSettings();
   }
@@ -82,17 +82,19 @@ export const ImageExporter: React.FC = () => {
     remove: removeImageResponse,
   } = useImageExport(requestBody);
 
-  // When an Image response is received, add it to the list of Images
-  // for this collection and reset the payload state used to request it.
-  if (ImageResp && collection && !images.find(a => a.url === ImageResp.url)) {
-    dispatch(
-      addImage({
-        collectionId: collection.id,
-        image: ImageResp,
-      })
-    );
-    removeImageResponse();
-  }
+  useEffect(() => {
+    // When an Image response is received, add it to the list of Images
+    // for this collection and reset the payload state used to request it.
+    if (ImageResp && collection && !images.find(a => a.url === ImageResp.url)) {
+      dispatch(
+        addImage({
+          collectionId: collection.id,
+          image: ImageResp,
+        })
+      );
+      removeImageResponse();
+    }
+  }, [ImageResp, collection, dispatch, images, removeImageResponse]);
 
   const handleExportClick = () => {
     fetchImage({ stale: true });
@@ -109,14 +111,12 @@ export const ImageExporter: React.FC = () => {
 
   const handleImageSizeChange = (_: any, option: IDropdownOption | undefined) => {
     const v = option?.key as string;
-    console.log("handleImageSizeChange", v);
     let cols = imageSettings.cols;
     let rows = imageSettings.rows;
     if (v && v !== "custom") {
       const dims = v.split("x").map((v, i) => parseInt(v));
       cols = dims[0];
       rows = dims[1];
-      console.log("dims", dims);
     }
     collection?.id &&
       dispatch(
@@ -151,6 +151,7 @@ export const ImageExporter: React.FC = () => {
   const handleClose = () => {
     dispatch(setSidebarPanel(SidebarPanels.itemSearch));
     dispatch(setDrawnShape(null));
+    dispatch(setBboxDrawMode(false));
     removeImageResponse();
   };
 
@@ -158,8 +159,6 @@ export const ImageExporter: React.FC = () => {
   const exportEnabled = !isLoading && validation.isValid;
   const drawExportEnabled = !isDrawBboxMode;
   const customImageSize = imageSettings?.imageSize === "custom";
-  console.log("imageSize", imageSettings?.imageSize);
-  console.log("customImageSize", customImageSize);
 
   const drawButtonText = drawnShape ? "Re-draw export area" : "Draw export area";
   const drawButton = (

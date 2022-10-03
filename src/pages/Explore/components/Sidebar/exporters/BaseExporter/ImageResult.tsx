@@ -1,3 +1,4 @@
+import React, { useCallback, useState } from "react";
 import {
   getTheme,
   IButtonStyles,
@@ -11,13 +12,14 @@ import {
   Link,
   StackItem,
 } from "@fluentui/react";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useConst } from "@fluentui/react-hooks";
+
 import { CollectionImageExport } from "pages/Explore/state/imageSlice";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
-import { useCallback, useState } from "react";
-import { ImageViewer } from "./ImageViewer";
 import { ImageExportResponse } from "./types";
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+
+const ImageViewer = React.lazy(() => import("./ImageViewer"));
 
 interface Props {
   imageResponse: ImageExportResponse;

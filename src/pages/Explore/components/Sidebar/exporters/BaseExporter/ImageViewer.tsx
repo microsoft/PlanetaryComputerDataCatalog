@@ -81,15 +81,15 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
           </LinkedinShareButton>
           <TwitterShareButton
             url={shareUrl}
-            title={`From ${collectionId}`}
+            title={`Rendering of ${collectionId} from the Planetary Computer`}
             hashtags={[collectionId, "planetarycomputer"]}
           >
             <TwitterIcon size={20} round />
           </TwitterShareButton>
           <FacebookShareButton
             url={shareUrl}
-            quote={"next-share is a social share buttons for your next React apps."}
-            hashtag={"#nextshare"}
+            quote={`Rendering of ${collectionId} from the Planetary Computer`}
+            hashtag={`#${collectionId} #planetarycomputer`}
           >
             <FacebookIcon size={20} round />
           </FacebookShareButton>
@@ -152,3 +152,5 @@ const urlCopyStyle = {
 const viewerBodyStyle = {
   margin: "0 10px",
 };
+
+export default ImageViewer;

@@ -34,6 +34,7 @@ import {
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
+import { useEffect } from "react";
 import { useAnimationExport } from "utils/requests";
 import { ImageResults } from "../BaseExporter";
 import { ImageExportError } from "../BaseExporter/ImageExportError";
@@ -86,19 +87,21 @@ export const AnimationExporter: React.FC = () => {
 
   // When an animation response is received, add it to the list of animations
   // for this collection and reset the payload state used to request it.
-  if (
-    animationResp &&
-    collection &&
-    !animations.find(a => a.url === animationResp.url)
-  ) {
-    dispatch(
-      addAnimation({
-        collectionId: collection.id,
-        image: animationResp,
-      })
-    );
-    removeAnimationResponse();
-  }
+  useEffect(() => {
+    if (
+      animationResp &&
+      collection &&
+      !animations.find(a => a.url === animationResp.url)
+    ) {
+      dispatch(
+        addAnimation({
+          collectionId: collection.id,
+          image: animationResp,
+        })
+      );
+      removeAnimationResponse();
+    }
+  }, [animationResp, animations, collection, dispatch, removeAnimationResponse]);
 
   const handleExportClick = () => {
     fetchAnimation({ stale: true });
@@ -135,6 +138,7 @@ export const AnimationExporter: React.FC = () => {
   const handleClose = () => {
     dispatch(setSidebarPanel(SidebarPanels.itemSearch));
     dispatch(setDrawnShape(null));
+    dispatch(setBboxDrawMode(false));
     removeAnimationResponse();
   };
 

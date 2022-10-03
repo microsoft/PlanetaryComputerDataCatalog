@@ -17,8 +17,16 @@ export const SearchResultHeaderMenu: React.FC = () => {
   const menuProps = useConst({
     items: [
       {
+        key: "details",
+        text: "Filter details",
+        ariaLabel: "Details of current filter settings",
+        iconProps: { iconName: "Info" },
+        onClick: toggle,
+        "data-cy": "query-detail-button",
+      },
+      {
         key: "collection",
-        text: "Data Catalog page",
+        text: `Data Catalog page (${collection?.id})`,
         iconProps: { iconName: "ProductCatalog" },
         onClick: () => {
           window.open(
@@ -46,14 +54,6 @@ export const SearchResultHeaderMenu: React.FC = () => {
           dispatch(setSidebarPanel(SidebarPanels.image));
         },
         disabled: isValidCollection(collection),
-      },
-      {
-        key: "details",
-        text: "Filter details",
-        ariaLabel: "Details of current filter settings",
-        iconProps: { iconName: "Info" },
-        onClick: toggle,
-        "data-cy": "query-detail-button",
       },
     ],
   });
