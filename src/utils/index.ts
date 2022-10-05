@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL, HUB_URL } from "./constants";
+import { DATA_URL, HUB_URL, QS_REQUEST_ENTITY, REQUEST_ENTITY } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
@@ -32,6 +32,9 @@ export const toUtcDateString = (dt: string | Date | Dayjs) => {
 
 export const toUtcDateWithTime = (dt: string) =>
   dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
+
+export const toDateWithTime24 = (dt: string) =>
+  dayjs.utc(dt).format("MM/DD/YYYY, HH:mm:ss");
 
 export const toIsoDateString = (
   dt: string | Date | Dayjs,
@@ -239,12 +242,11 @@ export const useItemPreviewUrl = (
   renderOption: IMosaicRenderOption | null,
   size?: number
 ) => {
-  // TODO: add auth to request: const { status } = useSession();
   const maxSize = size ? `&max_size=${size}` : "";
   const url = encodeURI(`${DATA_URL}/item/preview.png`);
   const renderParams = encodeRenderOpts(removeMercatorAssets(renderOption?.options));
 
-  const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}`;
+  const params = `?collection=${item.collection}&item=${item.id}&${renderParams}${maxSize}&${QS_REQUEST_ENTITY}=${REQUEST_ENTITY}`;
 
   return url + params;
 };

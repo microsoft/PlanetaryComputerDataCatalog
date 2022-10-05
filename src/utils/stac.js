@@ -16,6 +16,7 @@ import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 import AssetDetails from "components/stac/AssetDetails";
+import NamedEntry from "components/controls/NamedEntry";
 
 const stringList = value => {
   return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
@@ -67,6 +68,10 @@ StacFields.Registry.addMetadataField("stac_key", {
 StacFields.Registry.addMetadataField("attrs", {
   label: "Attributes",
   formatter: value => value,
+});
+
+StacFields.Registry.addMetadataField("xarray:open_kwargs", {
+  formatter: () => null,
 });
 
 StacFields.Registry.addMetadataField("raster:bands", {
@@ -476,6 +481,17 @@ StacFields.Registry.addMetadataField("view:sun_elevation", {
   formatter: fixedDeg,
 });
 
+StacFields.Registry.addMetadataField("table:columns", {
+  formatter: value => {
+    return (
+      <Stack>
+        {value.map(column => (
+          <NamedEntry entry={column} />
+        ))}
+      </Stack>
+    );
+  },
+});
 StacFields.Registry.addMetadataField("table:storage_options", {
   formatter: value => <SimpleKeyValueList object={value} />,
 });

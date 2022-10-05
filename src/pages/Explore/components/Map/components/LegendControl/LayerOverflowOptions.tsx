@@ -1,4 +1,8 @@
-import { IconButton, IContextualMenuProps } from "@fluentui/react";
+import {
+  IconButton,
+  IContextualMenuItem,
+  IContextualMenuProps,
+} from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
   moveLayerDown,
@@ -21,12 +25,16 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
   const { currentEditingLayerId, layerOrder } = useExploreSelector(s => s.mosaic);
   const isEditing = layerId === currentEditingLayerId;
 
+  const handlePin = useCallback(() => {
+    currentEditingLayerId && dispatch(pinCurrentMosaic());
+  }, [currentEditingLayerId, dispatch]);
+
   const handleEdit = useCallback(() => {
     // If there is a layer being edited, pin it so the current map isn't disrupted
     // when reloading this layer to the sidebar.
-    currentEditingLayerId && dispatch(pinCurrentMosaic());
+    handlePin();
     dispatch(setCurrentEditingLayerId(layerId));
-  }, [dispatch, currentEditingLayerId, layerId]);
+  }, [dispatch, handlePin, layerId]);
 
   const handleMoveUp = useCallback(() => {
     dispatch(moveLayerUp(layerId));
@@ -39,16 +47,28 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
   const canMoveUp = layerOrder[0] !== layerId;
   const canMoveDown = layerOrder[layerOrder.length - 1] !== layerId;
 
+  const pinOrEditItem: IContextualMenuItem = useMemo(() => {
+    if (isPinned && !isEditing) {
+      return {
+        key: "re-edit",
+        text: "Edit layer and filter options",
+        iconProps: { iconName: "Edit" },
+        onClick: handleEdit,
+      };
+    }
+
+    return {
+      key: "re-pin",
+      text: "Stop editing",
+      iconProps: { iconName: "PencilReply" },
+      onClick: handlePin,
+    };
+  }, [handleEdit, handlePin, isEditing, isPinned]);
+
   const menuProps: IContextualMenuProps = useMemo(() => {
     return {
       items: [
-        {
-          key: "re-edit",
-          text: "Edit layer/filter options",
-          iconProps: { iconName: "Edit" },
-          disabled: !isPinned || isEditing,
-          onClick: handleEdit,
-        },
+        pinOrEditItem,
         {
           key: "moveup",
           text: "Move layer up",
@@ -73,15 +93,7 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
         },
       },
     };
-  }, [
-    isPinned,
-    isEditing,
-    handleEdit,
-    canMoveUp,
-    handleMoveUp,
-    canMoveDown,
-    handleMoveDown,
-  ]);
+  }, [pinOrEditItem, canMoveUp, handleMoveUp, canMoveDown, handleMoveDown]);
 
   return (
     <IconButton
