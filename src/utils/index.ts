@@ -21,7 +21,7 @@ export const toDateString = (
   includeTime: boolean = false
 ) => {
   const dateFormat = "MM/DD/YYYY";
-  const timeFormat = includeTime ? "THH:mm:ss" : "";
+  const timeFormat = includeTime ? "THH:mm:ss[Z]" : "";
 
   return dayjs(dt).format(dateFormat + timeFormat);
 };
@@ -34,7 +34,7 @@ export const toUtcDateWithTime = (dt: string) =>
   dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
 
 export const toDateWithTime24 = (dt: string) =>
-  dayjs.utc(dt).format("MM/DD/YYYY, HH:mm:ss");
+  dayjs.utc(dt).format("MM/DD/YYYY, HH:mm:ss[Z]");
 
 export const toIsoDateString = (
   dt: string | Date | Dayjs,

@@ -1,6 +1,6 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
-import { toUtcDateString } from "utils";
+import { toDateWithTime24, toUtcDateString } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
 import { CqlExpressionParser } from "./CqlExpressionParser";
 import { rangeIsOnSameDay } from "./helpers";
@@ -30,7 +30,7 @@ export class CqlParser {
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
-    return [toUtcDateString(range[0]), toUtcDateString(range[1])];
+    return [toDateWithTime24(range[0]), toDateWithTime24(range[1])];
   }
 
   getExpressions({

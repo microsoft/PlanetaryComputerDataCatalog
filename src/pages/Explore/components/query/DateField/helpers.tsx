@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import {
   CqlPropertyObject,
   CqlDate,
@@ -6,24 +7,18 @@ import {
   CqlLteExpression,
   CqlTimestampValue,
 } from "pages/Explore/utils/cql/types";
-import {
-  dayjs,
-  getDayEnd,
-  getDayStart,
-  toIsoDateString,
-  toUtcDateString,
-} from "utils";
+import { dayjs, getDayEnd, toIsoDateString, toUtcDateString } from "utils";
 import { Message, DateMessage } from "./DateMessage";
 import { DateRangeState, ValidationState } from "./types";
 
-export const getStartRangeValue = (date: CqlDate) => {
+export const getStartRangeValue = (date: CqlDate): Dayjs => {
   const d = date.isRange ? date.value[0] : date.value;
-  return getDayStart(d, true);
+  return dayjs(d).utc();
 };
 
-export const getEndRangeValue = (date: CqlDate) => {
+export const getEndRangeValue = (date: CqlDate): Dayjs => {
   const d = date.isRange ? date.value[1] : undefined;
-  return getDayEnd(d, true);
+  return dayjs(d).utc();
 };
 
 export const getDateDisplayText = (dateExpression: CqlDate) => {
@@ -61,7 +56,7 @@ export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
     start: getStartRangeValue(dateExpression),
     end: dateExpression.isRange
       ? getEndRangeValue(dateExpression)
-      : getDayEnd(dateExpression.max, true),
+      : dayjs(dateExpression.max),
   };
 };
 
@@ -101,13 +96,10 @@ export const toCqlExpression = (
   | CqlLteExpression<string | CqlTimestampValue> => {
   const property: CqlPropertyObject = { property: "datetime" };
 
-  // For precision, the date-only string needs to be manipulated to include UTC beginning/end of day
-  const start = toIsoDateString(getDayStart(dateRange.start), true);
-  const startEndOfDay = toIsoDateString(getDayEnd(dateRange.start), true);
+  const start = toIsoDateString(dateRange.start.utc(), true);
+  const startEndOfDay = toIsoDateString(getDayEnd(dateRange.start.utc()), true);
 
-  const end = dateRange.end
-    ? toIsoDateString(getDayEnd(dateRange.end), true)
-    : undefined;
+  const end = dateRange.end ? toIsoDateString(dateRange.end.utc(), true) : undefined;
 
   switch (operator) {
     case "between":
@@ -130,7 +122,7 @@ export const toCqlExpression = (
     case "before":
       return {
         op: "<=",
-        args: [property, { timestamp: startEndOfDay }],
+        args: [property, { timestamp: start }],
       };
     default:
       throw new Error(`Invalid operator: ${operator} for date range field`);

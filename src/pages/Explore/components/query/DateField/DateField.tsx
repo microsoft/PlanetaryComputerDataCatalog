@@ -1,11 +1,4 @@
-import {
-  useCallback,
-  useState,
-  useEffect,
-  useMemo,
-  useReducer,
-  useRef,
-} from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef } from "react";
 import {
   Stack,
   IStackTokens,
@@ -16,10 +9,8 @@ import {
   DirectionalHint,
   ISeparatorStyles,
   IStackStyles,
-  Link,
   TooltipHost,
   Text,
-  IButtonStyles,
 } from "@fluentui/react";
 
 import CalendarControl from "./CalendarControl";
@@ -54,14 +45,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const dispatch = useExploreDispatch();
   const panelRef = useRef<PanelControlHandlers>(null);
 
-  const [initialExpression, setInitialExpression] = useState<CqlDate>();
-
-  // Track initial state so we can determine if things have changed
-  useEffect(() => {
-    setInitialExpression(dateExpression);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const initialDateRange = useMemo(() => {
     return toDateRange(dateExpression);
   }, [dateExpression]);
@@ -79,8 +62,10 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const minDay = getDayStart(dateExpression.min, true);
   const maxDay = getDayEnd(dateExpression.max, true);
 
-  const { OperatorSelector, operatorSelection, resetOperatorSelection } =
-    useOperatorSelector(dateExpression, initialDateRange);
+  const { OperatorSelector, operatorSelection } = useOperatorSelector(
+    dateExpression,
+    initialDateRange
+  );
 
   const isValid = isValidToApply(
     controlValidState,
@@ -107,14 +92,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     workingDates: workingDateRange,
     setValidation: validationDispatch,
     validationState: controlValidState,
-  };
-
-  const handleReset = () => {
-    if (!initialExpression) return;
-
-    resetOperatorSelection();
-    const drs = toDateRange(initialExpression);
-    workingDateRangeDispatch({ start: drs.start, end: drs.end });
   };
 
   const handleRenderText = () => {
@@ -160,9 +137,6 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
               horizontalAlign={"space-between"}
             >
               {OperatorSelector}
-              <Link styles={resetStyles} onClick={handleReset}>
-                Reset
-              </Link>
             </Stack>
             <Separator styles={separatorStyles} />
             <Stack horizontal tokens={calendarTokens}>
@@ -219,11 +193,5 @@ const dividerStyles: IVerticalDividerStyles = {
   divider: {
     height: "100%",
     backgroundColor: theme.palette.neutralLight,
-  },
-};
-
-const resetStyles: Partial<IButtonStyles> = {
-  root: {
-    display: "none",
   },
 };

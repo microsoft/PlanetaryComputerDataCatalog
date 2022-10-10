@@ -1,4 +1,4 @@
-import { useRef, useEffect, useContext, useState } from "react";
+import { useRef, useEffect, useContext, useState, useCallback } from "react";
 import {
   Calendar,
   Stack,
@@ -15,11 +15,15 @@ import {
   MessageBarType,
   IMessageBarStyles,
   AnimationDirection,
+  ICalendarStyles,
+  Separator,
+  ISeparatorStyles,
 } from "@fluentui/react";
 import { dayjs, toAbsoluteDate, toDateString } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 import { CalendarNavControl } from "./CalendarNavControl";
+import { Time } from "./Time";
 
 interface CalendarControlProps {
   label: string;
@@ -47,66 +51,114 @@ const CalendarControl = ({
 
   const date = workingDates[rangeType];
 
-  const handleSelectDate = (newDate: Date) => {
-    setDateValidation(newDate);
-    onSelectDate({ [rangeType]: dayjs(newDate) });
-  };
+  const getErrorMessage = useCallback(
+    (value: Date | string) => {
+      const day = dayjs(value);
+      if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
 
-  const getErrorMessage = (value: Date | string) => {
-    const day = dayjs(value);
-    if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
+      if (day.isBefore(validMinDate))
+        return `Date must be after ${toDateString(validMinDate.subtract(1, "day"))}`;
 
-    if (day.isBefore(validMinDate))
-      return `Date must be after ${toDateString(validMinDate.subtract(1, "day"))}`;
+      if (day.isAfter(validMaxDate))
+        return `Date must be before ${toDateString(validMaxDate.add(1, "day"))}`;
 
-    if (day.isAfter(validMaxDate))
-      return `Date must be before ${toDateString(validMaxDate.add(1, "day"))}`;
-
-    // Validate date ranges to be start <= end
-    if (operator === "between") {
-      if (
-        rangeType === "start" &&
-        workingDates?.end &&
-        day.isAfter(workingDates.end)
-      ) {
-        return `Date must be before End Date`;
-      } else if (
-        rangeType === "end" &&
-        workingDates?.start &&
-        day.isBefore(workingDates.start)
-      ) {
-        return `Date must be after Start Date`;
+      // Validate date ranges to be start <= end
+      if (operator === "between") {
+        if (
+          rangeType === "start" &&
+          workingDates?.end &&
+          day.isAfter(workingDates.end)
+        ) {
+          return "Date must be before End Date";
+        } else if (
+          rangeType === "end" &&
+          workingDates?.start &&
+          day.isBefore(workingDates.start)
+        ) {
+          return "Date must be after Start Date";
+        }
       }
-    }
-    return "";
-  };
+      return "";
+    },
+    [
+      operator,
+      rangeType,
+      validMaxDate,
+      validMinDate,
+      workingDates.end,
+      workingDates.start,
+    ]
+  );
 
-  const setDateValidation = (value: Date | undefined) => {
-    if (!value) return false;
+  const setDateValidation = useCallback(
+    (value: Date | undefined) => {
+      if (!value) return false;
 
-    // The calendar control determines validation state by the presence or absence of a
-    // string which is also used as a validation message.
-    const err = getErrorMessage(value);
-    setErrorMessage(err);
+      // The calendar control determines validation state by the presence or absence of a
+      // string which is also used as a validation message.
+      const err = getErrorMessage(value);
+      setErrorMessage(err);
 
-    // Dispatch to the parent context using the rangeType key provided
-    const validation = { [rangeType]: !Boolean(err) };
-    if (validation[rangeType] !== validationState[rangeType]) {
-      setValidation(validation);
-    }
+      // Dispatch to the parent context using the rangeType key provided
+      const validation = { [rangeType]: !Boolean(err) };
+      if (validation[rangeType] !== validationState[rangeType]) {
+        setValidation(validation);
+      }
 
-    // Track the invalid date. It may not be *currently* valid compared to the other date in the range.
-    // When the other date changes, we'll check this invalid date and it could become valid will need to
-    // be applied to the working dates.
-    if (err) {
-      setInvalidDate(value);
-    } else {
-      setInvalidDate(undefined);
-    }
+      // Track the invalid date. It may not be *currently* valid compared to the other date in the range.
+      // When the other date changes, we'll check this invalid date and it could become valid will need to
+      // be applied to the working dates.
+      if (err) {
+        setInvalidDate(value);
+      } else {
+        setInvalidDate(undefined);
+      }
 
-    const hasError = Boolean(err);
-    return !hasError;
-  };
+      const hasError = Boolean(err);
+      return !hasError;
+    },
+    [getErrorMessage, rangeType, setValidation, validationState]
+  );
+
+  const setSelectedDatetime = useCallback(
+    (newDate: Date) => {
+      setDateValidation(newDate);
+      onSelectDate({ [rangeType]: dayjs(newDate) });
+    },
+    [onSelectDate, rangeType, setDateValidation]
+  );
+
+  const handleDateChange = useCallback(
+    (newDate: Date) => {
+      // When the date has changed from the calendar, we need to apply the
+      // existing time to the new date.
+      const newDatetime = dayjs(newDate)
+        .hour(date?.hour() || 0)
+        .minute(date?.minute() || 0)
+        .second(date?.second() || 0)
+        .millisecond(date?.millisecond() || 0);
+
+      setSelectedDatetime(newDatetime.toDate());
+    },
+    [date, setSelectedDatetime]
+  );
+
+  const handleTimeChange = useCallback(
+    (time: string) => {
+      // When the time changes, apply it to the existing selected date.
+      const timeParts = time.split(":").map(p => parseInt(p, 10));
+      if (!date) return;
+
+      const newDate = date
+        .utc()
+        .set("hour", timeParts[0])
+        .set("minute", timeParts[1])
+        .set("second", timeParts[2]);
+
+      setSelectedDatetime(newDate.toDate());
+    },
+    [date, setSelectedDatetime]
+  );
 
   // Cross validate date ranges - when rendering, the current invalid date may
   // have become valid due to changes in the other date range value.
@@ -117,7 +169,7 @@ const CalendarControl = ({
 
       // If it's now valid, use it as the selected date
       if (valid) {
-        handleSelectDate(invalidDate);
+        handleDateChange(invalidDate);
       }
     }
   });
@@ -125,6 +177,7 @@ const CalendarControl = ({
   const [navigatedDate, setNavigatedDate] = useState<Date>(
     toAbsoluteDate(dayjs(date))
   );
+
   if (!date) return null;
 
   const calDayNav: Partial<ICalendarDayProps> = {
@@ -144,6 +197,7 @@ const CalendarControl = ({
       {navigation}
       <Calendar
         ref={ref}
+        styles={calendarStyles}
         showMonthPickerAsOverlay={true}
         highlightSelectedMonth
         isMonthPickerVisible={false}
@@ -151,9 +205,15 @@ const CalendarControl = ({
         value={toAbsoluteDate(date)}
         minDate={toAbsoluteDate(validMinDate)}
         maxDate={toAbsoluteDate(validMaxDate)}
-        onSelectDate={handleSelectDate}
+        onSelectDate={handleDateChange}
         calendarDayProps={{ ...calendarDayProps, ...calDayNav }}
         calendarMonthProps={calendarMonthProps}
+      />
+      <Separator styles={separatorStyles} />
+      <Time
+        time={date.utc().format("HH:mm:ss")}
+        rangeType={rangeType}
+        onChange={handleTimeChange}
       />
       {errorMessage && (
         <MessageBar styles={errorMsgStyles} messageBarType={MessageBarType.error}>
@@ -171,6 +231,15 @@ const controlStyles: Partial<IStackStyles> = {
   root: {
     maxWidth: 220,
     marginRight: 3,
+  },
+};
+
+const calendarStyles: Partial<ICalendarStyles> = {
+  root: {
+    minHeight: 231,
+    "& .ms-FocusZone": {
+      paddingBottom: 0,
+    },
   },
 };
 
@@ -280,4 +349,11 @@ const calendarMonthProps: Partial<ICalendarDayProps> = {
     rightNavigation: "ChevronRight",
   },
   animationDirection: AnimationDirection.Horizontal,
+};
+
+const separatorStyles: Partial<ISeparatorStyles> = {
+  root: {
+    marginBottom: 4,
+    height: 0,
+  },
 };

@@ -24,7 +24,16 @@ export const rangeIsOnSameDay = (
 
   const [date1, date2] = dateExpressionValue.map(d => dayjs.utc(d));
 
-  return date1.isSame(date2, "day");
+  // Date range is same calendar day?
+  const isSameDay = date1.isSame(date2, "day");
+
+  // Within calendar day, do the times represent a full day?
+  const isFullDayRange =
+    date1.format("HH:mm:ss") === "00:00:00" &&
+    date2.format("HH:mm:ss") === "23:59:59";
+
+  return isSameDay;
+  return isSameDay && isFullDayRange;
 };
 
 // CQL expression lists that come from a restored searchId (i.e., from the query string)
