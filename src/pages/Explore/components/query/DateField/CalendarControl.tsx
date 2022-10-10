@@ -19,11 +19,16 @@ import {
   Separator,
   ISeparatorStyles,
 } from "@fluentui/react";
-import { dayjs, toAbsoluteDate, toDateString } from "utils";
+import { dayjs, toAbsoluteDate } from "utils";
 import { DateFieldContext } from "./context";
 import { DateRangeAction, RangeType } from "./types";
 import { CalendarNavControl } from "./CalendarNavControl";
 import { Time } from "./Time";
+import {
+  adjustTime,
+  formatDateShort,
+  parseDatetime,
+} from "pages/Explore/utils/time";
 
 interface CalendarControlProps {
   label: string;
@@ -53,14 +58,16 @@ const CalendarControl = ({
 
   const getErrorMessage = useCallback(
     (value: Date | string) => {
-      const day = dayjs(value);
+      const day = parseDatetime(value);
       if (!day.isValid()) return "Invalid date, use MM/DD/YYYY";
 
       if (day.isBefore(validMinDate))
-        return `Date must be after ${toDateString(validMinDate.subtract(1, "day"))}`;
+        return `Date must be after ${formatDateShort(
+          validMinDate.subtract(1, "day")
+        )}`;
 
       if (day.isAfter(validMaxDate))
-        return `Date must be before ${toDateString(validMaxDate.add(1, "day"))}`;
+        return `Date must be before ${formatDateShort(validMaxDate.add(1, "day"))}`;
 
       // Validate date ranges to be start <= end
       if (operator === "between") {
@@ -123,7 +130,7 @@ const CalendarControl = ({
   const setSelectedDatetime = useCallback(
     (newDate: Date) => {
       setDateValidation(newDate);
-      onSelectDate({ [rangeType]: dayjs(newDate) });
+      onSelectDate({ [rangeType]: parseDatetime(newDate) });
     },
     [onSelectDate, rangeType, setDateValidation]
   );
@@ -132,7 +139,8 @@ const CalendarControl = ({
     (newDate: Date) => {
       // When the date has changed from the calendar, we need to apply the
       // existing time to the new date.
-      const newDatetime = dayjs(newDate)
+      const newDatetime = parseDatetime(newDate)
+        .utc()
         .hour(date?.hour() || 0)
         .minute(date?.minute() || 0)
         .second(date?.second() || 0)
@@ -145,16 +153,10 @@ const CalendarControl = ({
 
   const handleTimeChange = useCallback(
     (time: string) => {
-      // When the time changes, apply it to the existing selected date.
-      const timeParts = time.split(":").map(p => parseInt(p, 10));
       if (!date) return;
 
-      const newDate = date
-        .utc()
-        .set("hour", timeParts[0])
-        .set("minute", timeParts[1])
-        .set("second", timeParts[2]);
-
+      // When the time changes, apply it to the existing selected date.
+      const newDate = adjustTime(date, time);
       setSelectedDatetime(newDate.toDate());
     },
     [date, setSelectedDatetime]

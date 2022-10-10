@@ -32,7 +32,6 @@ export const rangeIsOnSameDay = (
     date1.format("HH:mm:ss") === "00:00:00" &&
     date2.format("HH:mm:ss") === "23:59:59";
 
-  return isSameDay;
   return isSameDay && isFullDayRange;
 };
 

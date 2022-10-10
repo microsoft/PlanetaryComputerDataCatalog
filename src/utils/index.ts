@@ -6,7 +6,6 @@ import { DATA_URL, HUB_URL, QS_REQUEST_ENTITY, REQUEST_ENTITY } from "./constant
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
-// import { useSession } from "components/auth/hooks/SessionContext";
 
 dayjs.extend(utc);
 export { dayjs };
@@ -14,52 +13,6 @@ export { dayjs };
 // The represented date without consideration for the timezone
 export const toAbsoluteDate = (date: Dayjs) => {
   return new Date(date.year(), date.month(), date.date());
-};
-
-export const toDateString = (
-  dt: string | Date | Dayjs,
-  includeTime: boolean = false
-) => {
-  const dateFormat = "MM/DD/YYYY";
-  const timeFormat = includeTime ? "THH:mm:ss[Z]" : "";
-
-  return dayjs(dt).format(dateFormat + timeFormat);
-};
-
-export const toUtcDateString = (dt: string | Date | Dayjs) => {
-  return toDateString(dayjs.utc(dt));
-};
-
-export const toUtcDateWithTime = (dt: string) =>
-  dayjs.utc(dt).format("MM/DD/YYYY, h:mm:ss A UTC");
-
-export const toDateWithTime24 = (dt: string) =>
-  dayjs.utc(dt).format("MM/DD/YYYY, HH:mm:ss[Z]");
-
-export const toIsoDateString = (
-  dt: string | Date | Dayjs,
-  includeTime: boolean = true
-) => {
-  const dateFormat = "YYYY-MM-DD";
-  const timeFormat = includeTime ? "[T]HH:mm:ss[Z]" : "";
-
-  return dayjs(dt).format(dateFormat + timeFormat);
-};
-
-export const getDayStart = (
-  date: string | Date | Dayjs | undefined,
-  fromUtc: boolean = false
-) => {
-  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
-  return d.startOf("day");
-};
-
-export const getDayEnd = (
-  date: string | Date | Dayjs | undefined,
-  fromUtc: boolean = false
-) => {
-  const d = fromUtc ? dayjs.utc(date) : dayjs(date);
-  return d.endOf("day");
 };
 
 export const capitalize = (value: string) => {

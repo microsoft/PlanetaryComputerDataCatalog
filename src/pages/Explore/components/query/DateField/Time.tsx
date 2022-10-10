@@ -4,12 +4,11 @@ import {
   ITextField,
   ITextFieldStyles,
   ITextStyles,
-  MaskedTextField,
   Stack,
   Text,
   TextField,
 } from "@fluentui/react";
-import { createRef, useRef } from "react";
+import { createRef } from "react";
 import { RangeType } from "./types";
 
 interface TimeProps {

@@ -17,7 +17,7 @@ import CalendarControl from "./CalendarControl";
 import { CqlDate } from "pages/Explore/utils/cql/types";
 import { opEnglish } from "../constants";
 import { DateFieldProvider, IDateFieldContext } from "./context";
-import { capitalize, getDayEnd, getDayStart, toDateString } from "utils";
+import { capitalize } from "utils";
 import {
   getDateDisplayText,
   isSingleDayRange,
@@ -36,6 +36,7 @@ import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import { DropdownButton } from "../DropdownButton";
 import { PanelControlHandlers } from "pages/Explore/components/Map/components/PanelControl";
 import DropdownLabel from "../components/DropdownLabel";
+import { formatDateShort, getDayEnd, getDayStart } from "pages/Explore/utils/time";
 
 interface DateFieldProps {
   dateExpression: CqlDate;
@@ -59,8 +60,8 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     initialValidationState
   );
 
-  const minDay = getDayStart(dateExpression.min, true);
-  const maxDay = getDayEnd(dateExpression.max, true);
+  const minDay = getDayStart(dateExpression.min);
+  const maxDay = getDayEnd(dateExpression.max);
 
   const { OperatorSelector, operatorSelection } = useOperatorSelector(
     dateExpression,
@@ -78,6 +79,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
   const handleSave = useCallback(() => {
     if (isValid) {
       const exp = toCqlExpression(workingDateRange, operatorSelection.key);
+      console.table(exp.args[1].interval);
       dispatch(setCustomCqlExpressions(exp));
     }
   }, [isValid, workingDateRange, operatorSelection.key, dispatch]);
@@ -110,10 +112,12 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     handleSave();
   }, [handleSave, workingDateRange, operatorSelection.key]);
 
-  const disabled = isSingleDayRange(initialDateRange);
+  const disabled = isSingleDayRange(dateExpression);
   const disabledMsg = disabled ? (
     <Text>
-      <Text style={{ fontWeight: 500 }}>{toDateString(initialDateRange.start)}</Text>{" "}
+      <Text style={{ fontWeight: 500 }}>
+        {formatDateShort(initialDateRange.start)}
+      </Text>{" "}
       is the only date available for this dataset
     </Text>
   ) : (

@@ -1,7 +1,7 @@
 import { Stack, StackItem, useTheme } from "@fluentui/react";
 import { isNumber } from "lodash-es";
+import { formatDatetimeHuman } from "pages/Explore/utils/time";
 
-import { toDateWithTime24, toUtcDateString } from "utils";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 
@@ -24,12 +24,12 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
 
   const dtRangeTitle = hasRange && (
     <span title="Acquired between">
-      {toUtcDateString(dateRange[0])} — {toUtcDateString(dateRange[1])}
+      {formatDatetimeHuman(dateRange[0])} — {formatDatetimeHuman(dateRange[1])}
     </span>
   );
 
   const dtTitle = !hasRange && date && (
-    <span title="Acquisition date (UTC)">{toDateWithTime24(date)}</span>
+    <span title="Acquisition date (UTC)">{formatDatetimeHuman(date)}</span>
   );
 
   return (
