@@ -17,7 +17,7 @@ import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 import AssetDetails from "components/stac/AssetDetails";
 import NamedEntry from "components/controls/NamedEntry";
-import { formatDatetime } from "pages/Explore/utils/time";
+import { formatDatetimeHuman } from "pages/Explore/utils/time";
 
 const stringList = value => {
   return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
@@ -43,7 +43,7 @@ StacFields.Registry.addAssetField("roles", {
 });
 
 StacFields.Registry.addMetadataField("datetime", {
-  formatter: value => (value ? formatDatetime(value) : "n/a"),
+  formatter: value => (value ? formatDatetimeHuman(value) : "n/a"),
 });
 
 StacFields.Registry.addMetadataField("gsd", {

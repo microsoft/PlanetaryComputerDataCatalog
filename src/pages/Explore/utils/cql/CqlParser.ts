@@ -1,7 +1,7 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
 import { rangeFromTemporalExtent } from "../stac";
-import { formatDatetime } from "../time";
+import { formatDatetime, getDayEnd, getDayStart, parseDatetime } from "../time";
 import { CqlExpressionParser } from "./CqlExpressionParser";
 import { rangeIsOnSameDay } from "./helpers";
 
@@ -30,7 +30,16 @@ export class CqlParser {
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
-    return [formatDatetime(range[0]), formatDatetime(range[1])];
+    const start = parseDatetime(range[0]);
+    const end = parseDatetime(range[1]);
+
+    // If the range is the same exact datetime, and at the begining of the day,
+    // expand it to a full day. This is the case of some single-day collections.
+    if (start.isSame(end) && start.isSame(getDayStart(start))) {
+      return [formatDatetime(start), formatDatetime(getDayEnd(end))];
+    }
+
+    return [formatDatetime(start), formatDatetime(end)];
   }
 
   getExpressions({

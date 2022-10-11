@@ -1,4 +1,4 @@
-import { Stack, StackItem, useTheme } from "@fluentui/react";
+import { getTheme, Stack, StackItem } from "@fluentui/react";
 import { isNumber } from "lodash-es";
 import { formatDatetimeHuman } from "pages/Explore/utils/time";
 
@@ -11,7 +11,6 @@ interface PriorityAttributesProps {
 
 // Show high-priority attributes if they exist
 const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
-  const theme = useTheme();
   const cloud = item.properties?.["eo:cloud_cover"];
 
   // Items typically have a datetime, if not, they'll have start_/end_datetime
@@ -24,7 +23,8 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
 
   const dtRangeTitle = hasRange && (
     <span title="Acquired between">
-      {formatDatetimeHuman(dateRange[0])} — {formatDatetimeHuman(dateRange[1])}
+      {formatDatetimeHuman(dateRange[0], false, true)} —{" "}
+      {formatDatetimeHuman(dateRange[1], false, true)}
     </span>
   );
 
@@ -37,15 +37,11 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
       horizontal
       horizontalAlign={"space-between"}
       tokens={{ childrenGap: 5 }}
-      styles={{
-        root: {
-          color: theme.palette.neutralSecondary,
-        },
-      }}
+      styles={containerStyles}
     >
       {dtTitle}
       {dtRangeTitle}
-      <StackItem styles={{ root: { paddingRight: 8 } }}>
+      <StackItem styles={cloudContainerStyles}>
         {isNumber(cloud) && (
           <IconValue
             iconName="Cloud"
@@ -59,3 +55,17 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
 };
 
 export default PriorityAttributes;
+
+const theme = getTheme();
+const containerStyles = {
+  root: {
+    color: theme.palette.neutralSecondary,
+  },
+};
+
+const cloudContainerStyles = {
+  root: {
+    paddingRight: 8,
+    fontSize: "inherit",
+  },
+};

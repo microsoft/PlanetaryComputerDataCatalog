@@ -14,16 +14,27 @@ export const formatDatetime = (date: Date | string | Dayjs) => {
 
 export const formatDateShort = (date: Date | string | Dayjs) => {
   const d = parseDatetime(date);
-  return d.format("YYYY-MM-DD");
+  return d.format("MM/DD/YYYY");
 };
 
 export const formatDatetimeHuman = (
   date: Date | string | Dayjs,
-  short: boolean | undefined = false
+  forceShort: boolean | undefined = false,
+  shortenIfBoundaryTime: boolean | undefined = false
 ) => {
   const d = parseDatetime(date);
-  const timeFormat = short ? "HH:mm" : ", HH:mm:ss";
-  return d.format(`L ${timeFormat}`);
+  const dayBoundary =
+    d.format("HH:mm:ss") === "00:00:00" || d.format("HH:mm:ss") === "23:59:59";
+
+  if (dayBoundary && shortenIfBoundaryTime) {
+    return formatDateShort(d);
+  }
+
+  if (forceShort) {
+    return d.format(`MM/DD/YYYY HH:mm`);
+  }
+
+  return d.format(`MM/DD/YYYY HH:mm:ss UTC`);
 };
 
 export const adjustTime = (date: Date | string | Dayjs, time: string) => {
