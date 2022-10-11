@@ -137,15 +137,11 @@ const CalendarControl = ({
 
   const handleDateChange = useCallback(
     (newDate: Date) => {
+      if (!date) return;
+
       // When the date has changed from the calendar, we need to apply the
       // existing time to the new date.
-      const newDatetime = parseDatetime(newDate)
-        .utc()
-        .hour(date?.hour() || 0)
-        .minute(date?.minute() || 0)
-        .second(date?.second() || 0)
-        .millisecond(date?.millisecond() || 0);
-
+      const newDatetime = adjustTime(newDate, date?.format("HH:mm:ss"));
       setSelectedDatetime(newDatetime.toDate());
     },
     [date, setSelectedDatetime]
