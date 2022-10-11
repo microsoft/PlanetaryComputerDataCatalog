@@ -193,6 +193,8 @@ const CalendarControl = ({
     />
   );
 
+  const validTimeOperator = ["between", "before", "after"].includes(operator);
+
   return (
     <Stack styles={controlStyles}>
       <Label styles={labelStyles}>{label}</Label>
@@ -211,12 +213,16 @@ const CalendarControl = ({
         calendarDayProps={{ ...calendarDayProps, ...calDayNav }}
         calendarMonthProps={calendarMonthProps}
       />
-      <Separator styles={separatorStyles} />
-      <Time
-        time={date.utc().format("HH:mm:ss")}
-        rangeType={rangeType}
-        onChange={handleTimeChange}
-      />
+      {validTimeOperator && (
+        <>
+          <Separator styles={separatorStyles} />
+          <Time
+            time={date.utc().format("HH:mm:ss")}
+            rangeType={rangeType}
+            onChange={handleTimeChange}
+          />
+        </>
+      )}
       {errorMessage && (
         <MessageBar styles={errorMsgStyles} messageBarType={MessageBarType.error}>
           {errorMessage}

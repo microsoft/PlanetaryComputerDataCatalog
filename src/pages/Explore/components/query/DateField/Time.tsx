@@ -1,14 +1,14 @@
 import {
   IStackStyles,
   IStackTokens,
-  ITextField,
   ITextFieldStyles,
   ITextStyles,
+  MaskedTextField,
   Stack,
   Text,
-  TextField,
 } from "@fluentui/react";
-import { createRef } from "react";
+import { useState } from "react";
+
 import { RangeType } from "./types";
 
 interface TimeProps {
@@ -21,14 +21,26 @@ const defaultStart = "00:00:00Z";
 const defaultEnd = "23:59:59Z";
 
 export const Time: React.FC<TimeProps> = ({ time, rangeType, onChange }) => {
+  const [errorMsg, setErrorMessage] = useState<string>("");
   const defaultTime = rangeType === "start" ? defaultStart : defaultEnd;
-  const ref = createRef<ITextField>();
 
   const handleChange = (
     _: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
     newValue?: string | undefined
   ): void => {
-    onChange(ref.current?.value || defaultTime);
+    // An underscore indicates the mask hasn't been filled out yet
+    if (!newValue || newValue.includes("_")) return;
+    if (!validateTime(newValue)) {
+      setErrorMessage("* 00:00:00 – 23:59:59");
+      return;
+    }
+
+    setErrorMessage("");
+    onChange(newValue || defaultTime);
+  };
+
+  const maskFormat: { [key: string]: RegExp } = {
+    "*": /[0-9]/,
   };
 
   return (
@@ -39,11 +51,14 @@ export const Time: React.FC<TimeProps> = ({ time, rangeType, onChange }) => {
       verticalAlign="center"
     >
       <Text styles={textStyles}>Time (UTC)</Text>
-      <TextField
-        componentRef={ref}
+      <MaskedTextField
+        maskFormat={maskFormat}
+        maskChar="_"
+        mask="**:**:**"
         styles={inputStyles}
-        defaultValue={time}
-        onBlur={handleChange}
+        value={time}
+        onChange={handleChange}
+        errorMessage={errorMsg}
       />
     </Stack>
   );
@@ -71,4 +86,20 @@ const inputStyles: Partial<ITextFieldStyles> = {
   root: {
     width: 125,
   },
+};
+
+const validateTime = (newValue: string): boolean => {
+  try {
+    const [hours, minutes, seconds] = newValue.split(":");
+    const hour = parseInt(hours);
+    const minute = parseInt(minutes);
+    const second = parseInt(seconds);
+
+    if (hour > 23 || minute > 59 || second > 59) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
 };

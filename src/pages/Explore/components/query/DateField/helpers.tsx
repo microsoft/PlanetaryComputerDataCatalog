@@ -11,6 +11,7 @@ import {
   formatDatetime,
   formatDatetimeHuman,
   getDayEnd,
+  getDayStart,
   parseDatetime,
 } from "pages/Explore/utils/time";
 import { dayjs } from "utils";
@@ -29,8 +30,8 @@ export const getEndRangeValue = (date: CqlDate): Dayjs => {
 
 export const getDateDisplayText = (dateExpression: CqlDate) => {
   return dateExpression.isRange
-    ? dateExpression.value.map(v => formatDatetimeHuman(v, true)).join(" – ")
-    : formatDatetimeHuman(dateExpression.value, true);
+    ? dateExpression.value.map(v => formatDatetimeHuman(v, true, true)).join(" – ")
+    : formatDatetimeHuman(dateExpression.value, true, true);
 };
 
 export const isSingleDayRange = (dateExpression: CqlDate): boolean => {
@@ -105,6 +106,7 @@ export const toCqlExpression = (
   const property: CqlPropertyObject = { property: "datetime" };
 
   const start = formatDatetime(dateRange.start);
+  const startOfStartingDay = formatDatetime(getDayStart(dateRange.start));
   const endOfStartingDay = formatDatetime(getDayEnd(dateRange.start));
   const end = dateRange.end ? formatDatetime(dateRange.end) : undefined;
 
@@ -119,7 +121,7 @@ export const toCqlExpression = (
     case "on":
       return {
         op: "anyinteracts",
-        args: [property, { interval: [start, endOfStartingDay] }],
+        args: [property, { interval: [startOfStartingDay, endOfStartingDay] }],
       };
     case "after":
       return {
