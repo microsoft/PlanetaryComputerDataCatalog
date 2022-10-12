@@ -26,7 +26,7 @@ export interface IMosaic {
   name: string | null;
   description: string | null;
   cql: ICqlExpressionList;
-  sortby: [] | null;
+  sortby: ISortDir | undefined;
   searchId?: string | null;
 }
 
@@ -60,14 +60,22 @@ export interface IQueryable {
   properties: { [key: string]: any };
 }
 
+export type ISortDir = "asc" | "desc";
+export interface ISortBy {
+  field: string;
+  direction: ISortDir;
+}
+
 export interface ISearchIdMetadata {
   links: IStacLink[];
   metadata: { type: string };
   orderby: string;
   search: {
     hash: string;
-    search: { filter: { args: ICqlExpressionList } };
-    orderby: string;
+    search: {
+      filter: { args: ICqlExpressionList };
+      sortby: ISortBy[] | undefined;
+    };
   };
 }
 

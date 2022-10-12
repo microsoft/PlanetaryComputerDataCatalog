@@ -4,6 +4,7 @@ import {
   QS_COLLECTION_KEY,
   QS_MOSAIC_KEY,
   QS_RENDER_KEY,
+  QS_SORT_KEY,
   QS_V1_CUSTOM_KEY,
   QS_VERSION_KEY,
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
@@ -13,6 +14,7 @@ export const resetMosaicQueryStringState = () => {
     QS_COLLECTION_KEY,
     QS_MOSAIC_KEY,
     QS_RENDER_KEY,
+    QS_SORT_KEY,
     QS_ACTIVE_EDIT_KEY,
     QS_VERSION_KEY,
     QS_V1_CUSTOM_KEY,

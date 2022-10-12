@@ -9,6 +9,7 @@ export const QS_CUSTOM_PREFIX = "cql:";
 export const QS_COLLECTION_KEY = "d";
 export const QS_MOSAIC_KEY = "m";
 export const QS_RENDER_KEY = "r";
+export const QS_SORT_KEY = "sr";
 export const QS_SETTINGS_KEY = "s";
 export const QS_ACTIVE_EDIT_KEY = "ae";
 export const QS_VERSION_KEY = "v";
@@ -76,12 +77,19 @@ export const useUrlStateV2 = () => {
     [currentEditingLayerId]
   );
 
+  const setSortQs = useCallback((ol: ILayerState[]) => {
+    const sorts = ol.map(l => l.query.sortby || "desc").join(QS_SEPARATOR);
+
+    updateQueryStringParam(QS_SORT_KEY, sorts);
+  }, []);
+
   useEffect(() => {
     setCollectionQs(orderedLayers);
     setMosiacQs(orderedLayers);
     setRenderQs(orderedLayers);
     setLayerSettingsQs(orderedLayers);
     setLayerEditingQs(orderedLayers);
+    setSortQs(orderedLayers);
   }, [
     layers,
     orderedLayers,
@@ -90,6 +98,7 @@ export const useUrlStateV2 = () => {
     setLayerSettingsQs,
     setMosiacQs,
     setRenderQs,
+    setSortQs,
   ]);
 };
 

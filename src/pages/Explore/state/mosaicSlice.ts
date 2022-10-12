@@ -22,7 +22,7 @@ export const initialMosaicState: IMosaic = {
   name: null,
   description: null,
   cql: [],
-  sortby: null,
+  sortby: "desc",
   searchId: null,
 };
 
