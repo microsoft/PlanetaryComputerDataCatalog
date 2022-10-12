@@ -1,6 +1,6 @@
 import { isNumber } from "lodash-es";
 import { useExploreSelector } from "pages/Explore/state/hooks";
-import { CurrentLayers, ILayerState } from "pages/Explore/types";
+import { ILayerState } from "pages/Explore/types";
 import { updateQueryStringParam } from "pages/Explore/utils";
 import { useCallback, useEffect } from "react";
 
@@ -77,17 +77,11 @@ export const useUrlStateV2 = () => {
     [currentEditingLayerId]
   );
 
-  const setSortQs = useCallback(
-    (layers: CurrentLayers) => {
-      if (currentEditingLayerId) {
-        updateQueryStringParam(
-          QS_SORT_KEY,
-          layers[currentEditingLayerId]?.query.sortby
-        );
-      }
-    },
-    [currentEditingLayerId]
-  );
+  const setSortQs = useCallback((ol: ILayerState[]) => {
+    const sorts = ol.map(l => l.query.sortby || "desc").join(QS_SEPARATOR);
+
+    updateQueryStringParam(QS_SORT_KEY, sorts);
+  }, []);
 
   useEffect(() => {
     setCollectionQs(orderedLayers);
@@ -95,7 +89,7 @@ export const useUrlStateV2 = () => {
     setRenderQs(orderedLayers);
     setLayerSettingsQs(orderedLayers);
     setLayerEditingQs(orderedLayers);
-    setSortQs(layers);
+    setSortQs(orderedLayers);
   }, [
     layers,
     orderedLayers,

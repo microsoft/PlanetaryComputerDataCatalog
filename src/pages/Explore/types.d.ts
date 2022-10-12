@@ -74,7 +74,7 @@ export interface ISearchIdMetadata {
     hash: string;
     search: {
       filter: { args: ICqlExpressionList };
-      sortby: ISortBy[];
+      sortby: ISortBy[] | undefined;
     };
   };
 }

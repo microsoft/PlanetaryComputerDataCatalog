@@ -62,7 +62,7 @@ const loadQsV1 = (
       [collectionId],
       [mosaicName],
       [renderOptionName],
-      "desc",
+      ["desc"],
       [],
       undefined,
       dispatch
@@ -78,7 +78,7 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
   const collectionIds = qs.get(QS_COLLECTION_KEY)?.split(QS_SEPARATOR) ?? [];
   const mosaicNames = qs.get(QS_MOSAIC_KEY)?.split(QS_SEPARATOR) ?? [];
   const renderOptionNames = qs.get(QS_RENDER_KEY)?.split(QS_SEPARATOR) ?? [];
-  const sortbyQs = qs.get(QS_SORT_KEY) ?? "desc";
+  const sortbyQs = qs.get(QS_SORT_KEY)?.split(QS_SEPARATOR) ?? [];
   const settings = qs.get(QS_SETTINGS_KEY)?.split(QS_SEPARATOR) ?? [];
   const editingIdx = qs.get(QS_ACTIVE_EDIT_KEY)
     ? parseInt(qs.get(QS_ACTIVE_EDIT_KEY) as string)
@@ -88,7 +88,7 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
     collectionIds,
     mosaicNames,
     renderOptionNames,
-    sortbyQs as ISortDir,
+    sortbyQs as ISortDir[],
     settings,
     editingIdx,
     dispatch
@@ -110,7 +110,7 @@ const loadMosaicStateV2 = async (
   collectionIds: string[],
   mosaicNames: string[],
   renderOptionNames: string[],
-  defaultSort: ISortDir,
+  sortDirs: ISortDir[],
   settings: string[],
   editingIndex: number | undefined = undefined,
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
@@ -180,7 +180,7 @@ const loadMosaicStateV2 = async (
 
       const sortby = customQueryMetadata
         ? parseSortBy(customQueryMetadata.search.search.sortby)
-        : defaultSort;
+        : sortDirs[index] || "desc";
 
       // The registered cql will have had the collection id property added
       // which we don't need. It's stored directly on the state.
@@ -252,8 +252,8 @@ const getDefaultRenderName = (
   return renderName ? renderName : defaultName;
 };
 
-const parseSortBy = (sortby: ISortBy[]): ISortDir => {
+const parseSortBy = (sortby: ISortBy[] | undefined): ISortDir => {
   // Explorer only supports datetime sorts. If none is specified, use desc
-  const sort = sortby.find(s => s.field === "datetime");
+  const sort = sortby?.find(s => s.field === "datetime");
   return sort?.direction === "asc" ? "asc" : "desc";
 };
