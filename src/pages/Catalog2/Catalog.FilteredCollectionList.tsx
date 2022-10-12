@@ -89,7 +89,6 @@ export const CatalogFilteredCollectionList: React.FC<
   }, [data, includeStorageDatasets, preFilterCollectionFn, storageCollectionConfig]);
 
   const searchIndex = useMemo(() => {
-    console.time("building search index");
     const searchIndex = new MiniSearch({
       fields: [
         "title",
@@ -112,7 +111,7 @@ export const CatalogFilteredCollectionList: React.FC<
     });
 
     searchIndex.addAll(datasetsToFilter);
-    console.timeEnd("building search index");
+
     return searchIndex;
   }, [datasetsToFilter]);
 

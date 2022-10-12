@@ -7,7 +7,7 @@ import {
   CqlExpression,
   ICqlExpressionList,
 } from "pages/Explore/utils/cql/types";
-import { toUtcDateString } from "utils";
+import { formatDatetimeHuman } from "pages/Explore/utils/time";
 import { stacFormatter } from "utils/stac";
 import { opEnglish, operators } from "../../../query/constants";
 import Section from "./Section";
@@ -68,14 +68,18 @@ const getDateLabel = (
     const isSingleDate = rangeIsOnSameDay(value);
 
     const labelText = isSingleDate
-      ? `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value[0])} `
-      : `${propertyLabel} between ${toUtcDateString(value[0])} and ${toUtcDateString(
-          value[1]
-        )}`;
+      ? `${propertyLabel} ${opEnglish[op]} ${formatDatetimeHuman(value[0])} `
+      : `${propertyLabel} between ${formatDatetimeHuman(
+          value[0]
+        )} and ${formatDatetimeHuman(value[1])}`;
 
     return <Text>{labelText}</Text>;
-  } else if (property === "datetime" && !Array.isArray(value)) {
-    const labelText = `${propertyLabel} ${opEnglish[op]} ${toUtcDateString(value)}`;
+  }
+
+  if (property === "datetime") {
+    const labelText = `${propertyLabel} ${opEnglish[op]} ${formatDatetimeHuman(
+      value
+    )}`;
     return <Text>{labelText}</Text>;
   }
 };

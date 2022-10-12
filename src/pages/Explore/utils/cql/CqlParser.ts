@@ -1,7 +1,7 @@
 import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
 import { IStacCollection } from "types/stac";
-import { toUtcDateString } from "utils";
 import { rangeFromTemporalExtent } from "../stac";
+import { formatDatetime, getDayEnd, getDayStart, parseDatetime } from "../time";
 import { CqlExpressionParser } from "./CqlExpressionParser";
 import { rangeIsOnSameDay } from "./helpers";
 
@@ -30,7 +30,16 @@ export class CqlParser {
   }
 
   private formatRange(range: CqlDateRange): CqlDateRange {
-    return [toUtcDateString(range[0]), toUtcDateString(range[1])];
+    const start = parseDatetime(range[0]);
+    const end = parseDatetime(range[1]);
+
+    // If the range is the same exact datetime, and at the begining of the day,
+    // expand it to a full day. This is the case of some single-day collections.
+    if (start.isSame(end) && start.isSame(getDayStart(start))) {
+      return [formatDatetime(start), formatDatetime(getDayEnd(end))];
+    }
+
+    return [formatDatetime(start), formatDatetime(end)];
   }
 
   getExpressions({
@@ -77,7 +86,7 @@ export class CqlParser {
         const implicitDate = date.value[0];
         return {
           operator: date.operator,
-          value: toUtcDateString(implicitDate),
+          value: formatDatetime(implicitDate),
           isRange: false,
           ...collectionRange,
         };
@@ -86,7 +95,7 @@ export class CqlParser {
 
     return {
       operator: date.operator,
-      value: toUtcDateString(date.value),
+      value: formatDatetime(date.value),
       isRange: false,
       ...collectionRange,
     };

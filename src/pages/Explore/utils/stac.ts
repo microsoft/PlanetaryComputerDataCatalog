@@ -4,6 +4,7 @@ import { BBox } from "geojson";
 
 import { IStacCollection, IStacFilterCollection, IStacFilterGeom } from "types/stac";
 import { CqlDateRange } from "./cql/types";
+import { formatDatetime, getDayEnd } from "./time";
 
 export const collectionFilter = (
   collectionId: string | undefined
@@ -35,7 +36,10 @@ export const geomFilter = (
 export const rangeFromTemporalExtent = (
   interval: IStacCollection["extent"]["temporal"]["interval"]
 ): CqlDateRange => {
-  const start = interval[0][0] || new Date().toUTCString();
-  const end = interval[0][1] || new Date().toUTCString();
+  const today = formatDatetime(new Date());
+
+  const start = interval[0][0] || today;
+  const end = interval[0][1] || formatDatetime(getDayEnd(new Date()));
+
   return [start, end];
 };

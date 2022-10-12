@@ -47,9 +47,11 @@ const ItemResult = ({ item }: ItemResultProps) => {
         <div style={wrapperStyle}>
           <ItemPreview item={item} key={item.id} />
         </div>
-        <Stack verticalAlign={"space-evenly"} style={{ paddingRight: "10px" }}>
+        <Stack verticalAlign={"space-evenly"} style={{ paddingRight: 10 }}>
           <Text styles={idStyles}>{item.id}</Text>
-          <PriorityAttributes item={item} />
+          <div style={attributeStyle}>
+            <PriorityAttributes item={item} />
+          </div>
         </Stack>
       </Stack>
     </Link>
@@ -107,4 +109,8 @@ const idStyles = {
     fontWeight: "600",
     overflowWrap: "anywhere",
   },
+};
+
+const attributeStyle: CSSProperties = {
+  fontSize: 13,
 };

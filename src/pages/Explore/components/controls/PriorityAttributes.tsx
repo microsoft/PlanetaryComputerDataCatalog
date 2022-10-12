@@ -1,7 +1,7 @@
-import { Stack, StackItem, useTheme } from "@fluentui/react";
+import { getTheme, Stack, StackItem } from "@fluentui/react";
 import { isNumber } from "lodash-es";
+import { formatDatetimeHuman } from "pages/Explore/utils/time";
 
-import { toDateWithTime24, toUtcDateString } from "utils";
 import { IStacItem } from "types/stac";
 import IconValue from "./IconValue";
 
@@ -11,7 +11,6 @@ interface PriorityAttributesProps {
 
 // Show high-priority attributes if they exist
 const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
-  const theme = useTheme();
   const cloud = item.properties?.["eo:cloud_cover"];
 
   // Items typically have a datetime, if not, they'll have start_/end_datetime
@@ -24,12 +23,13 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
 
   const dtRangeTitle = hasRange && (
     <span title="Acquired between">
-      {toUtcDateString(dateRange[0])} — {toUtcDateString(dateRange[1])}
+      {formatDatetimeHuman(dateRange[0], false, true)} —{" "}
+      {formatDatetimeHuman(dateRange[1], false, true)}
     </span>
   );
 
   const dtTitle = !hasRange && date && (
-    <span title="Acquisition date (UTC)">{toDateWithTime24(date)}</span>
+    <span title="Acquisition date (UTC)">{formatDatetimeHuman(date)}</span>
   );
 
   return (
@@ -37,15 +37,11 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
       horizontal
       horizontalAlign={"space-between"}
       tokens={{ childrenGap: 5 }}
-      styles={{
-        root: {
-          color: theme.palette.neutralSecondary,
-        },
-      }}
+      styles={containerStyles}
     >
       {dtTitle}
       {dtRangeTitle}
-      <StackItem styles={{ root: { paddingRight: 8 } }}>
+      <StackItem styles={cloudContainerStyles}>
         {isNumber(cloud) && (
           <IconValue
             iconName="Cloud"
@@ -59,3 +55,17 @@ const PriorityAttributes = ({ item }: PriorityAttributesProps) => {
 };
 
 export default PriorityAttributes;
+
+const theme = getTheme();
+const containerStyles = {
+  root: {
+    color: theme.palette.neutralSecondary,
+  },
+};
+
+const cloudContainerStyles = {
+  root: {
+    paddingRight: 8,
+    fontSize: "inherit",
+  },
+};

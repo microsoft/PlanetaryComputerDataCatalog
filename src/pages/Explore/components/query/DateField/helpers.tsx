@@ -1,3 +1,4 @@
+import { Dayjs } from "dayjs";
 import {
   CqlPropertyObject,
   CqlDate,
@@ -7,33 +8,36 @@ import {
   CqlTimestampValue,
 } from "pages/Explore/utils/cql/types";
 import {
-  dayjs,
+  formatDatetime,
+  formatDatetimeHuman,
   getDayEnd,
   getDayStart,
-  toIsoDateString,
-  toUtcDateString,
-} from "utils";
+  parseDatetime,
+} from "pages/Explore/utils/time";
+import { dayjs } from "utils";
 import { Message, DateMessage } from "./DateMessage";
 import { DateRangeState, ValidationState } from "./types";
 
-export const getStartRangeValue = (date: CqlDate) => {
+export const getStartRangeValue = (date: CqlDate): Dayjs => {
   const d = date.isRange ? date.value[0] : date.value;
-  return getDayStart(d, true);
+  return parseDatetime(d);
 };
 
-export const getEndRangeValue = (date: CqlDate) => {
-  const d = date.isRange ? date.value[1] : undefined;
-  return getDayEnd(d, true);
+export const getEndRangeValue = (date: CqlDate): Dayjs => {
+  const d = date.isRange ? date.value[1] : new Date();
+  return parseDatetime(d);
 };
 
 export const getDateDisplayText = (dateExpression: CqlDate) => {
   return dateExpression.isRange
-    ? dateExpression.value.join(" – ")
-    : dateExpression.value;
+    ? dateExpression.value.map(v => formatDatetimeHuman(v, true, true)).join(" – ")
+    : formatDatetimeHuman(dateExpression.value, true, true);
 };
 
-export const isSingleDayRange = (initialDates: DateRangeState) => {
-  return initialDates.start.isSame(initialDates.end, "day");
+export const isSingleDayRange = (dateExpression: CqlDate): boolean => {
+  const min = parseDatetime(dateExpression.min);
+  const max = parseDatetime(dateExpression.max);
+  return min.isSame(max, "day");
 };
 
 export const isValidToApply = (
@@ -61,16 +65,16 @@ export const toDateRange = (dateExpression: CqlDate): DateRangeState => {
     start: getStartRangeValue(dateExpression),
     end: dateExpression.isRange
       ? getEndRangeValue(dateExpression)
-      : getDayEnd(dateExpression.max, true),
+      : parseDatetime(dateExpression.max),
   };
 };
 
 export const getValidDateText = (dateExpression: CqlDate, isRange: boolean) => {
   const displayMin = (
-    <DateMessage>{toUtcDateString(dateExpression.min)}</DateMessage>
+    <DateMessage>{formatDatetimeHuman(dateExpression.min)}</DateMessage>
   );
   const displayMax = (
-    <DateMessage>{toUtcDateString(dateExpression.max)}</DateMessage>
+    <DateMessage>{formatDatetimeHuman(dateExpression.max)}</DateMessage>
   );
 
   const min = dayjs.utc(dateExpression.min);
@@ -101,13 +105,10 @@ export const toCqlExpression = (
   | CqlLteExpression<string | CqlTimestampValue> => {
   const property: CqlPropertyObject = { property: "datetime" };
 
-  // For precision, the date-only string needs to be manipulated to include UTC beginning/end of day
-  const start = toIsoDateString(getDayStart(dateRange.start), true);
-  const startEndOfDay = toIsoDateString(getDayEnd(dateRange.start), true);
-
-  const end = dateRange.end
-    ? toIsoDateString(getDayEnd(dateRange.end), true)
-    : undefined;
+  const start = formatDatetime(dateRange.start);
+  const startOfStartingDay = formatDatetime(getDayStart(dateRange.start));
+  const endOfStartingDay = formatDatetime(getDayEnd(dateRange.start));
+  const end = dateRange.end ? formatDatetime(dateRange.end) : undefined;
 
   switch (operator) {
     case "between":
@@ -120,7 +121,7 @@ export const toCqlExpression = (
     case "on":
       return {
         op: "anyinteracts",
-        args: [property, { interval: [start, startEndOfDay] }],
+        args: [property, { interval: [startOfStartingDay, endOfStartingDay] }],
       };
     case "after":
       return {
@@ -130,7 +131,7 @@ export const toCqlExpression = (
     case "before":
       return {
         op: "<=",
-        args: [property, { timestamp: startEndOfDay }],
+        args: [property, { timestamp: start }],
       };
     default:
       throw new Error(`Invalid operator: ${operator} for date range field`);
