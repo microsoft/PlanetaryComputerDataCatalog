@@ -163,11 +163,16 @@ const loadMosaicStateV2 = async (
         throw new Error("Invalid mosaic or render option");
       }
 
+      // Check the sort for this layer as specified in the query string. If this ends up
+      // being a custom query, we'll use the sort that was included in the stac search
+      const qsSort = sortDirs[index] || "desc";
+
       // Register the cql to get the search Id, custom queries don't have
-      // cql but already have a searchId
+      // cql but already have a searchId.
+      const sortedMosaic = { ...mosaic, sortby: qsSort };
       const searchId = isCustomQuery
         ? customSearchId
-        : await registerStacFilter(collection.id, mosaic, mosaic.cql, false);
+        : await registerStacFilter(collection.id, sortedMosaic, mosaic.cql, false);
 
       // Get the named mosaic's cql, or fetch the cql for a custom query's searchId
       const customQueryMetadata = isCustomQuery
@@ -180,7 +185,7 @@ const loadMosaicStateV2 = async (
 
       const sortby = customQueryMetadata
         ? parseSortBy(customQueryMetadata.search.search.sortby)
-        : sortDirs[index] || "desc";
+        : qsSort;
 
       // The registered cql will have had the collection id property added
       // which we don't need. It's stored directly on the state.
