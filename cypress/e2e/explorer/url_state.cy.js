@@ -60,6 +60,34 @@ describe("URL state is loaded to Explorer", () => {
     cy.contains("matched your filter");
   });
 
+  it("can specify a sort direction", () => {
+    cy.intercept("/api/stac/v1/collections/sentinel-2-l2a").as("getS2");
+    cy.intercept("/api/data/v1/mosaic/info?collection=sentinel-2-l2a").as(
+      "getS2mosaic"
+    );
+    cy.intercept("/api/stac/v1/search").as("getS2search");
+
+    cy.visit({
+      url: "/explore",
+      qs: {
+        d: "sentinel-2-l2a",
+        m: "Dec – Feb, 2022 (low cloud)",
+        r: "Color infrared",
+        ae: "0",
+        sr: "asc",
+      },
+    });
+
+    cy.wait(["@getS2", "@getS2mosaic"]);
+
+    cy.wait(["@getS2search"]);
+    cy.contains("matched your filter");
+
+    cy.getBySel("explore-results-menu-button").click();
+    cy.contains("Sort order").click();
+    cy.get("[title='Show oldest results first']").should("have.class", "is-checked");
+  });
+
   it("can specify a custom searchid", () => {
     cy.intercept("/api/stac/v1/collections/sentinel-2-l2a").as("getS2");
     cy.intercept("/api/data/v1/mosaic/info?collection=sentinel-2-l2a").as(
@@ -90,7 +118,7 @@ describe("URL state is loaded to Explorer", () => {
     cy.contains("matched your filter");
   });
 
-  it("can specify a multiple layers", () => {
+  it("can specify multiple layers", () => {
     cy.intercept("/api/stac/v1/collections/nasadem").as("getnasadem");
     cy.intercept("/api/stac/v1/collections/chloris-biomass").as("getchloris");
 

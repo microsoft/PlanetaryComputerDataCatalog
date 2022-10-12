@@ -31,12 +31,14 @@ export const useSortMenuItem = (): IContextualMenuItem => {
     key: "sortby",
     text: "Sort order",
     iconProps: { iconName: "Sort" },
+    "data-cy": "sortby",
     subMenuProps: {
       items: [
         {
-          key: "sortby-date",
+          key: "sortby-date-desc",
           text: "Date descending",
           title: "Show newest results first",
+          "data-cy": "sortby-desc",
           iconProps: { iconName: "SortDown" },
           canCheck: true,
           checked: !query.sortby || query.sortby === "desc",
