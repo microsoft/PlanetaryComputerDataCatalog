@@ -1,5 +1,10 @@
-import { IButtonStyles, IconButton } from "@fluentui/react";
-import { useConst, useId, useBoolean } from "@fluentui/react-hooks";
+import {
+  ContextualMenuItemType,
+  IButtonStyles,
+  IconButton,
+  IContextualMenuProps,
+} from "@fluentui/react";
+import { useId, useBoolean } from "@fluentui/react-hooks";
 import { SidebarPanels } from "pages/Explore/enums";
 
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
@@ -7,15 +12,22 @@ import { setSidebarPanel } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { isValidCollection } from "../../exporters/AnimationExporter/helpers";
 import QueryInfo from "../QueryInfo";
+import { useSortMenuItem } from "./useSortMenuItem";
 
 export const SearchResultHeaderMenu: React.FC = () => {
   const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
   const [isQueryInfoVisible, { toggle }] = useBoolean(false);
+  const sortItem = useSortMenuItem();
   const buttonId = useId("explore-results-menu-button");
 
-  const menuProps = useConst({
+  const menuProps: IContextualMenuProps = {
     items: [
+      sortItem,
+      {
+        key: "separator1",
+        itemType: ContextualMenuItemType.Divider,
+      },
       {
         key: "details",
         text: "Filter details",
@@ -34,6 +46,11 @@ export const SearchResultHeaderMenu: React.FC = () => {
             "_blank"
           );
         },
+      },
+      {
+        key: "exports",
+        text: "Export",
+        itemType: ContextualMenuItemType.Divider,
       },
       {
         key: "animate",
@@ -56,7 +73,7 @@ export const SearchResultHeaderMenu: React.FC = () => {
         disabled: isValidCollection(collection),
       },
     ],
-  });
+  };
 
   return (
     <>
