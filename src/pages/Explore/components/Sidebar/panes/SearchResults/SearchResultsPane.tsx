@@ -33,7 +33,7 @@ interface SearchResultsProps {
 
 const mobileViewMapStyle = { root: { width: "100%", marginTop: "auto !important" } };
 const SearchResultsPane = ({
-  request: { data, isError, isLoading, isPreviousData },
+  request: { data, isError, isFetching, isPreviousData },
   visible,
 }: SearchResultsProps) => {
   const { collection } = useExploreSelector(selectCurrentMosaic);
@@ -96,7 +96,7 @@ const SearchResultsPane = ({
   if (collection && isCollectionChanged && isPreviousData) return loadingIndicator;
 
   // If there is no data, but it is currently being fetched, we show a loading indicator
-  if (!data && isLoading) return loadingIndicator;
+  if (!data && isFetching) return loadingIndicator;
 
   // If there is no data, but there is no collection set, we have no query, so don't render anything
   // (except the show map button on mobile).
@@ -122,7 +122,7 @@ const SearchResultsPane = ({
           FallbackComponent={ErrorFallback}
           onError={handleErrorBoundaryError}
         >
-          <SearchResultsHeader results={data} isLoading={isPreviousData} />
+          <SearchResultsHeader results={data} isLoading={isFetching} />
           <div className={scrollPos ? "hood on" : "hood"} />
           <div
             className="custom-overflow"
@@ -130,7 +130,7 @@ const SearchResultsPane = ({
               height: "100%",
               overflowY: "auto",
               overflowX: "hidden",
-              ...loadingStyle(isPreviousData),
+              ...loadingStyle(isFetching),
             }}
             onScroll={handleScroll}
             data-cy="search-results-list"

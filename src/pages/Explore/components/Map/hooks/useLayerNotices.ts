@@ -17,7 +17,7 @@ const useMapZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
     map: { zoom },
-    detail: { showAsLayer },
+    detail: { showItemAsLayer: showAsLayer },
   } = useExploreSelector(s => s);
   const currentMosaic = useExploreSelector(selectCurrentMosaic);
   const { currentEditingLayerId, layers: allMosaics } = useExploreSelector(

@@ -4,7 +4,7 @@ import { GeoJsonObject } from "geojson";
 import { SidebarPanels } from "../enums";
 import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
-import { setShowAsLayer } from "./detailSlice";
+import { setShowItemAsLayer } from "./detailSlice";
 
 const { center, zoom } = getCenterAndZoomQueryString();
 
@@ -78,7 +78,7 @@ export const mapSlice = createSlice({
       state.useHighDef = action.payload;
     },
     setSidebarPanel: (state, action: PayloadAction<SidebarPanels>) => {
-      state.sidebarPanel = action.payload; // Move to panel name
+      state.sidebarPanel = action.payload;
     },
     setBboxDrawMode: (state, action: PayloadAction<boolean>) => {
       state.isDrawBboxMode = action.payload;
@@ -93,7 +93,7 @@ export const mapSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setShowAsLayer, (state, action: PayloadAction<boolean>) => {
+    builder.addCase(setShowItemAsLayer, (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
         state.previousCenter = state.center;
         state.previousZoom = state.zoom;
