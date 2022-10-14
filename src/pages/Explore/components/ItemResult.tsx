@@ -11,8 +11,8 @@ import {
 } from "@fluentui/react";
 import { CSSProperties, useCallback } from "react";
 import { IStacItem } from "types/stac";
-import { setSelectedItem } from "../state/detailSlice";
-import { useExploreDispatch } from "../state/hooks";
+import { setItemDetail } from "../state/detailSlice";
+import { useExploreDispatch, useExploreSelector } from "../state/hooks";
 import { clearBoundaryShape, setBoundaryShape } from "../state/mapSlice";
 import PriorityAttributes from "./controls/PriorityAttributes";
 import ItemPreviewButton from "./ItemPreviewButton";
@@ -23,6 +23,7 @@ type ItemResultProps = {
 
 const ItemResult = ({ item }: ItemResultProps) => {
   const dispatch = useExploreDispatch();
+  const { selectedItem, isQuickPreviewMode } = useExploreSelector(s => s.detail);
 
   const showBounds = useCallback(() => {
     dispatch(setBoundaryShape(item.geometry));
@@ -33,13 +34,15 @@ const ItemResult = ({ item }: ItemResultProps) => {
   }, [dispatch]);
 
   const handleSelectItem = useCallback(() => {
-    dispatch(setSelectedItem(item));
+    dispatch(setItemDetail(item));
   }, [dispatch, item]);
 
+  const selected = selectedItem?.id === item.id && isQuickPreviewMode;
+  const x = selected ? selectedContainerStyles : containerStyles;
   return (
     <Stack
       horizontal
-      styles={containerStyles}
+      styles={x}
       onMouseEnter={showBounds}
       onMouseLeave={removeBounds}
     >
@@ -62,9 +65,9 @@ const theme = getTheme();
 
 const hoverStyle: IStyle = {
   background: theme.palette.themeLighterAlt,
+  transition: "background 0.25s linear",
   boxShadow: theme.effects.elevation8,
   color: theme.palette.black,
-  cursor: "pointer",
   textDecoration: "none",
 };
 
@@ -78,7 +81,7 @@ const linkStyle: IStyleFunctionOrObject<ILinkStyleProps, ILinkStyles> = {
     paddingLeft: 10,
     ":focus": activeStyle,
     ":active": activeStyle,
-    ":hover": hoverStyle,
+    ":hover": activeStyle,
     ":active:hover": activeStyle,
   },
 };
@@ -94,27 +97,41 @@ const attributeStyle: CSSProperties = {
   fontSize: 13,
 };
 
+const rootContainerStyle: IStyle = {
+  borderStyle: "solid",
+  borderRadius: 2,
+  overflow: "hidden",
+  color: theme.palette.black,
+  backgroundColor: theme.semanticColors.bodyBackground,
+  marginBottom: 6,
+  padding: 0,
+  width: "99%",
+  ":hover": hoverStyle,
+  ":active:hover": activeStyle,
+  "&:hover .explore-item-preview-button": {
+    opacity: 0.8,
+  },
+};
+
 const containerStyles: IStackStyles = {
   root: {
     borderWidth: 1,
     borderColor: theme.palette.neutralQuaternary,
-    borderStyle: "solid",
-    borderRadius: 2,
-    overflow: "hidden",
-    color: theme.palette.black,
-    backgroundColor: theme.semanticColors.bodyBackground,
-    marginBottom: 6,
-    padding: 0,
-    width: "99%",
-    ":hover": hoverStyle,
-    ":active:hover": activeStyle,
-    "&:hover .explore-item-preview-button": {
-      opacity: 0.6,
-    },
+    ...rootContainerStyle,
+  },
+};
+
+const selectedContainerStyles: IStackStyles = {
+  root: {
+    borderWidth: 2,
+    borderColor: theme.palette.themePrimary,
+    background: `${theme.palette.neutralLighter} !important`,
+    ...rootContainerStyle,
   },
 };
 
 const detailsContainerStyle = {
   height: "100%",
+  width: "100%",
   paddingRight: 10,
 };

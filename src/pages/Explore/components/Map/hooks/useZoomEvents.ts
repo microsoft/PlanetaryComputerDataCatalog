@@ -22,7 +22,7 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item
-  const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+  const stacItemForMosaic = detail.showItemAsLayer ? detail.selectedItem : null;
 
   const { data: mosaicLayerTileJson } = useTileJson(
     mosaic.query,

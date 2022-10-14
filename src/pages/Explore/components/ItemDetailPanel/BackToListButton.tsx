@@ -1,5 +1,8 @@
 import { ActionButton, FontSizes, useTheme } from "@fluentui/react";
-import { clearSelectedItem, setShowAsLayer } from "pages/Explore/state/detailSlice";
+import {
+  clearSelectedItem,
+  setShowItemAsLayer,
+} from "pages/Explore/state/detailSlice";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { useCallback } from "react";
 
@@ -11,7 +14,7 @@ const BackToListButton = () => {
 
   const handleClick = useCallback(() => {
     dispatch(clearSelectedItem());
-    dispatch(setShowAsLayer(false));
+    dispatch(setShowItemAsLayer(false));
   }, [dispatch]);
 
   return (

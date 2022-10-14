@@ -15,7 +15,7 @@ const useMosaicLayer = (
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
-  const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+  const stacItemForMosaic = detail.showItemAsLayer ? detail.selectedItem : null;
   const isItemLayerValid = Boolean(stacItemForMosaic);
 
   // Shuffle the map layer order when the layerOrder changes

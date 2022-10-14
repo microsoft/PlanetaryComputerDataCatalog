@@ -32,6 +32,7 @@ const useItemBoundsLayer = (
     }
   }, [mapRef, mapReady]);
 
+  // Zoom to the bounds of the selected item when it is added to the map
   useEffect(() => {
     if (!boundaryPoly) {
       stacItemDatasource.clear();
@@ -40,7 +41,7 @@ const useItemBoundsLayer = (
       stacItemDatasource.clear();
       stacItemDatasource.add(geom);
 
-      if (detail.showAsLayer) {
+      if (detail.showItemAsLayer && detail.display.zoomToItem) {
         mapRef.current?.setCamera({
           bounds: atlas.data.BoundingBox.fromData(geom),
           padding: 100,
@@ -49,7 +50,7 @@ const useItemBoundsLayer = (
         });
       }
     }
-  }, [mapRef, boundaryPoly, detail.showAsLayer]);
+  }, [mapRef, boundaryPoly, detail.showItemAsLayer, detail.display.zoomToItem]);
 };
 
 export default useItemBoundsLayer;

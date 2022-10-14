@@ -29,6 +29,7 @@ import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
 import { MobileViewSidebarButton } from "../MobileViewInMap/ViewInMap.index";
 import { addEntityHeader } from "./helpers";
+import { QuickItemPreviewManage } from "./components/QuickItemPreviewManager";
 
 const mapContainerId: string = "viewer-map";
 
@@ -118,6 +119,7 @@ const ExploreMap = () => {
   const extentMsg = (
     <ExtentMessage onClick={zoomToExtent} layerVisibility={nonVisibleLayers} />
   );
+
   const loadingIndicator = (
     <ProgressIndicator
       aria-label="Map tile loading indicator"
@@ -134,6 +136,7 @@ const ExploreMap = () => {
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
+      <QuickItemPreviewManage />
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />
