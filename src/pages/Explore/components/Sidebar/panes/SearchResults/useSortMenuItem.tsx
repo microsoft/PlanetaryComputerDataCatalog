@@ -10,6 +10,7 @@ import { IMosaic, ISortDir } from "pages/Explore/types";
 export const useSortMenuItem = (): IContextualMenuItem => {
   const dispatch = useExploreDispatch();
   const { query } = useExploreSelector(selectCurrentMosaic);
+  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
 
   const clickHandler = (dir: ISortDir) => {
     return (
@@ -31,6 +32,7 @@ export const useSortMenuItem = (): IContextualMenuItem => {
     key: "sortby",
     text: "Sort order",
     iconProps: { iconName: "Sort" },
+    disabled: isQuickPreviewMode,
     "data-cy": "sortby",
     subMenuProps: {
       items: [

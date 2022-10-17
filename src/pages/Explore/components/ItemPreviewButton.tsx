@@ -1,26 +1,30 @@
 import { getTheme, Icon, IIconStyles, ILinkStyles, Link } from "@fluentui/react";
 import React, { CSSProperties } from "react";
 import { IStacItem } from "types/stac";
-import { clearSelectedItem, setItemQuickPreview } from "../state/detailSlice";
+import { resetDetail } from "../state/detailSlice";
 import { useExploreDispatch, useExploreSelector } from "../state/hooks";
 import ItemPreview from "./ItemPreview";
 
 interface ItemPreviewButtonProps {
   item: IStacItem;
+  onItemPreview: () => void;
 }
 
 export const ITEM_PREVIEW_BUTTON_CLASSNAME = "explore-item-preview-button";
 
-const ItemPreviewButton: React.FC<ItemPreviewButtonProps> = ({ item }) => {
+const ItemPreviewButton: React.FC<ItemPreviewButtonProps> = ({
+  item,
+  onItemPreview,
+}) => {
   const dispatch = useExploreDispatch();
   const { selectedItem } = useExploreSelector(s => s.detail);
   const isSelected = selectedItem?.id === item.id;
 
   const handlePreviewClick = () => {
     if (isSelected) {
-      dispatch(clearSelectedItem());
+      dispatch(resetDetail());
     } else {
-      dispatch(setItemQuickPreview(item));
+      onItemPreview();
     }
   };
 

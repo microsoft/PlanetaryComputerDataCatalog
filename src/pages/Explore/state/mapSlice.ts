@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal";
 import * as atlas from "azure-maps-control";
 import { GeoJsonObject } from "geojson";
+
 import { SidebarPanels } from "../enums";
 import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
-import { setShowItemAsLayer } from "./detailSlice";
+import { setItemQuickPreview, setShowItemAsDetailLayer } from "./detailSlice";
+import { isNull } from "lodash-es";
 
 const { center, zoom } = getCenterAndZoomQueryString();
 
@@ -62,6 +65,9 @@ export const mapSlice = createSlice({
         state.bounds = action.payload.bounds;
       }
     },
+    restorePreviousCenterAndZoom: state => {
+      restorePreviousMapBounds(state);
+    },
     setBoundaryShape: (state, action: PayloadAction<GeoJsonObject>) => {
       state.boundaryShape = action.payload;
     },
@@ -93,18 +99,27 @@ export const mapSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(setShowItemAsLayer, (state, action: PayloadAction<boolean>) => {
-      if (action.payload) {
-        state.previousCenter = state.center;
-        state.previousZoom = state.zoom;
-      } else {
-        state.center = state.previousCenter || state.center;
-        state.zoom = state.previousZoom || state.zoom;
-
-        //Reset
-        state.previousCenter = state.previousZoom = null;
+    builder.addCase(
+      setShowItemAsDetailLayer,
+      (state, action: PayloadAction<boolean>) => {
+        if (action.payload) {
+          preservePreviousMapBounds(state);
+        } else {
+          restorePreviousMapBounds(state);
+        }
       }
-    });
+    );
+
+    builder.addCase(
+      setItemQuickPreview,
+      (state: WritableDraft<MapState>, action) => {
+        if (isNull(action.payload.currentIndex)) {
+          restorePreviousMapBounds(state);
+        } else {
+          preservePreviousMapBounds(state);
+        }
+      }
+    );
   },
 });
 
@@ -112,6 +127,7 @@ export const {
   setCamera,
   setCenter,
   setZoom,
+  restorePreviousCenterAndZoom,
   setBoundaryShape,
   setShowCollectionOutline,
   setUseHighDef,
@@ -123,3 +139,19 @@ export const {
 } = mapSlice.actions;
 
 export default mapSlice.reducer;
+
+const preservePreviousMapBounds = (state: WritableDraft<MapState>) => {
+  state.previousCenter = state.center;
+  state.previousZoom = state.zoom;
+};
+
+const restorePreviousMapBounds = (state: WritableDraft<MapState>) => {
+  state.center = state.previousCenter || state.center;
+  state.zoom = state.previousZoom || state.zoom;
+
+  clearPreviousMapBounds(state);
+};
+
+const clearPreviousMapBounds = (state: WritableDraft<MapState>) => {
+  state.previousCenter = state.previousZoom = null;
+};
