@@ -1,21 +1,23 @@
 import { ActionButton, FontSizes, useTheme } from "@fluentui/react";
-import {
-  clearSelectedItem,
-  setShowItemAsLayer,
-} from "pages/Explore/state/detailSlice";
-import { useExploreDispatch } from "pages/Explore/state/hooks";
+import { clearDetailView } from "pages/Explore/state/detailSlice";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
+import { restorePreviousCenterAndZoom } from "pages/Explore/state/mapSlice";
 import { useCallback } from "react";
 
 const BackToListButton = () => {
   const theme = useTheme();
   const dispatch = useExploreDispatch();
+  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
 
   const label = "Return to results list";
 
   const handleClick = useCallback(() => {
-    dispatch(clearSelectedItem());
-    dispatch(setShowItemAsLayer(false));
-  }, [dispatch]);
+    dispatch(clearDetailView());
+
+    if (!isQuickPreviewMode) {
+      dispatch(restorePreviousCenterAndZoom());
+    }
+  }, [dispatch, isQuickPreviewMode]);
 
   return (
     <ActionButton

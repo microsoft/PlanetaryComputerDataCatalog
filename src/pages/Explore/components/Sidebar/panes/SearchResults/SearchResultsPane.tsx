@@ -19,12 +19,17 @@ import { IStacCollection, IStacItem, IStacSearchResult } from "types/stac";
 import ItemResult from "../../../ItemResult";
 import ExploreInHub from "../../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
-import { useExploreSelector } from "pages/Explore/state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { MobileViewMapButton } from "../../../MobileViewInMap/ViewInMap.index";
+import {
+  setItemQuickPreview,
+  setSelectedItem,
+} from "pages/Explore/state/detailSlice";
+import { isUndefined } from "lodash-es";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
@@ -36,7 +41,9 @@ const SearchResultsPane = ({
   request: { data, isError, isFetching, isPreviousData },
   visible,
 }: SearchResultsProps) => {
+  const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
+  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();
@@ -61,6 +68,24 @@ const SearchResultsPane = ({
     const target = e.target as HTMLTextAreaElement;
     setScrollPos(target.scrollTop);
   }, []);
+
+  const handleItemPreview = useCallback(
+    (index: number) => {
+      if (data) {
+        const item = data.features[index];
+        if (item) {
+          if (isQuickPreviewMode) {
+            dispatch(setSelectedItem(item));
+          } else {
+            dispatch(
+              setItemQuickPreview({ items: data.features, currentIndex: index })
+            );
+          }
+        }
+      }
+    },
+    [data, dispatch, isQuickPreviewMode]
+  );
 
   if (isError) {
     return (
@@ -110,9 +135,11 @@ const SearchResultsPane = ({
   // Otherwise, when the collection has stayed the same, we do keep previous
   // results displayed, but dimmed, until the new results come in.
 
-  const renderCell = (item?: IStacItem | undefined): ReactNode => {
-    if (!item) return null;
-    return <ItemResult item={item} />;
+  const renderCell = (item?: IStacItem | undefined, index?: number): ReactNode => {
+    if (!item || isUndefined(index)) return null;
+    return (
+      <ItemResult item={item} index={index} onItemPreview={handleItemPreview} />
+    );
   };
 
   return (

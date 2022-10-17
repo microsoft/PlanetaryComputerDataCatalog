@@ -17,7 +17,7 @@ const useMapZoomToLayer = () => {
   const dispatch = useExploreDispatch();
   const {
     map: { zoom },
-    detail: { showItemAsLayer: showAsLayer },
+    detail: { showItemAsLayer },
   } = useExploreSelector(s => s);
   const currentMosaic = useExploreSelector(selectCurrentMosaic);
   const { currentEditingLayerId, layers: allMosaics } = useExploreSelector(
@@ -34,7 +34,7 @@ const useMapZoomToLayer = () => {
 
   // Check zoom visibility for the currently edited layer
   const currentLayerNotVisible =
-    !visibleInZoom(currentMosaic) && searchIdLoaded && !showAsLayer;
+    !visibleInZoom(currentMosaic) && searchIdLoaded && !showItemAsLayer;
 
   const zoomToLayer = useCallback(() => {
     dispatch(setZoom(currentMosaic.layer.minZoom));

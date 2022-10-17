@@ -19,9 +19,11 @@ import ItemPreviewButton from "./ItemPreviewButton";
 
 type ItemResultProps = {
   item: IStacItem;
+  index: number;
+  onItemPreview: (index: number) => void;
 };
 
-const ItemResult = ({ item }: ItemResultProps) => {
+const ItemResult = ({ item, index, onItemPreview }: ItemResultProps) => {
   const dispatch = useExploreDispatch();
   const { selectedItem, isQuickPreviewMode } = useExploreSelector(s => s.detail);
 
@@ -37,16 +39,21 @@ const ItemResult = ({ item }: ItemResultProps) => {
     dispatch(setItemDetail(item));
   }, [dispatch, item]);
 
+  const handleItemPreviewClick = useCallback(() => {
+    onItemPreview(index);
+  }, [index, onItemPreview]);
+
   const selected = selectedItem?.id === item.id && isQuickPreviewMode;
-  const x = selected ? selectedContainerStyles : containerStyles;
+  const activeContainerStyle = selected ? selectedContainerStyles : containerStyles;
+
   return (
     <Stack
       horizontal
-      styles={x}
+      styles={activeContainerStyle}
       onMouseEnter={showBounds}
       onMouseLeave={removeBounds}
     >
-      <ItemPreviewButton item={item} />
+      <ItemPreviewButton item={item} onItemPreview={handleItemPreviewClick} />
       <Link onClick={handleSelectItem} styles={linkStyle} data-cy="item-result">
         <Stack verticalAlign={"space-evenly"} style={detailsContainerStyle}>
           <Text styles={idStyles}>{item.id}</Text>

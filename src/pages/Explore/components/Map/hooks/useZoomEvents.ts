@@ -9,7 +9,7 @@ import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { useEffect } from "react";
 import { useTileJson } from "utils/requests";
 
-const ZOOM_DURATION = 750;
+export const ZOOM_DURATION = 750;
 const SIDEBAR_DURATION = 350;
 
 const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {

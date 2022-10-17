@@ -6,9 +6,10 @@ import { selectCurrentMosaic, setMosaicQuery } from "../../../state/mosaicSlice"
 import StateSelector from "./StateSelector";
 
 const MosaicPresetSelector = () => {
+  const dispatch = useExploreDispatch();
   const { collection, query, isCustomQuery } =
     useExploreSelector(selectCurrentMosaic);
-  const dispatch = useExploreDispatch();
+  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
 
   const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
@@ -37,7 +38,7 @@ const MosaicPresetSelector = () => {
       options={mosaicOptions}
       selectedKey={query.name}
       getStateValFn={getQueryPresetByName}
-      disabled={!collection?.id || isCustomQuery}
+      disabled={!collection?.id || isCustomQuery || isQuickPreviewMode}
       cyId="mosaic-selector"
     />
   );
