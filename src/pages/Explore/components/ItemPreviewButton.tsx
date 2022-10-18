@@ -87,6 +87,9 @@ const buttonStyles: ILinkStyles = {
     borderRadius: "50%",
     height: 30,
     width: 30,
+    "&:focus": {
+      opacity: "1 !important",
+    },
     "&:hover": {
       opacity: "1 !important",
     },

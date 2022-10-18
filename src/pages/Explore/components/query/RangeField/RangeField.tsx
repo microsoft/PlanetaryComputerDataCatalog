@@ -23,9 +23,10 @@ import DropdownLabel from "../components/DropdownLabel";
 
 type RangeFieldProps = {
   field: CqlExpressionParser<number>;
+  disabled?: boolean;
 };
 
-export const RangeField = ({ field }: RangeFieldProps) => {
+export const RangeField = ({ field, disabled = false }: RangeFieldProps) => {
   const dispatch = useExploreDispatch();
 
   const { currentLower, currentUpper } = parseCqlValueToRange(field);
@@ -77,6 +78,7 @@ export const RangeField = ({ field }: RangeFieldProps) => {
       label={`${labelPrefix}: ${valueLabel}`}
       onRenderText={renderLabel}
       data-cy={keyPrefix}
+      disabled={disabled}
     >
       <Stack horizontal styles={stackStyles} tokens={stackTokens}>
         {/* <TextField

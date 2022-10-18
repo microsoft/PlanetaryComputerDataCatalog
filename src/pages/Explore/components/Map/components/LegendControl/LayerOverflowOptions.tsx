@@ -23,6 +23,7 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
 }) => {
   const dispatch = useExploreDispatch();
   const { currentEditingLayerId, layerOrder } = useExploreSelector(s => s.mosaic);
+  const { previewMode } = useExploreSelector(s => s.detail);
   const isEditing = layerId === currentEditingLayerId;
 
   const handlePin = useCallback(() => {
@@ -54,6 +55,7 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
         text: "Edit layer and filter options",
         iconProps: { iconName: "Edit" },
         onClick: handleEdit,
+        disabled: previewMode.enabled,
       };
     }
 
@@ -62,8 +64,9 @@ const LayerOverflowOptions: React.FC<LayerOverflowOptionsProps> = ({
       text: "Stop editing",
       iconProps: { iconName: "PencilReply" },
       onClick: handlePin,
+      disabled: previewMode.enabled,
     };
-  }, [handleEdit, handlePin, isEditing, isPinned]);
+  }, [handleEdit, handlePin, isEditing, isPinned, previewMode.enabled]);
 
   const menuProps: IContextualMenuProps = useMemo(() => {
     return {

@@ -9,9 +9,13 @@ import { CqlExpressionParser } from "pages/Explore/utils/cql";
 
 type TextNumberFieldProps = {
   field: CqlExpressionParser<number>;
+  disabled?: boolean;
 };
 
-export const TextNumberField = ({ field }: TextNumberFieldProps) => {
+export const TextNumberField = ({
+  field,
+  disabled = false,
+}: TextNumberFieldProps) => {
   return (
     <TextFieldBase
       field={field}
@@ -20,6 +24,7 @@ export const TextNumberField = ({ field }: TextNumberFieldProps) => {
       onParseOperatorKey={parseOperatorToKey}
       onGenerateCqlExpression={toCqlExpression}
       onRenderDisplay={formatValue}
+      disabled={disabled}
     />
   );
 };
