@@ -109,6 +109,7 @@ const containerStyles: IStackStyles = {
 const tooltipIconStyles: IIconStyles = {
   root: {
     cursor: "default",
+    visibility: "hidden",
   },
 };
 
