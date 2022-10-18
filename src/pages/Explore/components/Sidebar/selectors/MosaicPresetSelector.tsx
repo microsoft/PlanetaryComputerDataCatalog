@@ -9,7 +9,7 @@ const MosaicPresetSelector = () => {
   const dispatch = useExploreDispatch();
   const { collection, query, isCustomQuery } =
     useExploreSelector(selectCurrentMosaic);
-  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { previewMode } = useExploreSelector(s => s.detail);
 
   const { isSuccess, data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
 
@@ -38,7 +38,7 @@ const MosaicPresetSelector = () => {
       options={mosaicOptions}
       selectedKey={query.name}
       getStateValFn={getQueryPresetByName}
-      disabled={!collection?.id || isCustomQuery || isQuickPreviewMode}
+      disabled={!collection?.id || isCustomQuery || previewMode.enabled}
       cyId="mosaic-selector"
     />
   );

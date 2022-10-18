@@ -5,13 +5,13 @@ import { removeLayerById } from "./mosaicSlice";
 
 export interface DetailState {
   selectedItem: IStacItem | null;
-  showItemAsLayer: boolean;
-  isQuickPreviewMode: boolean;
   display: {
-    showItemDetail: boolean;
+    showSelectedItemAsLayer: boolean;
+    showItemDetailsPanel: boolean;
     zoomToItem: boolean;
   };
-  previewModeNav: {
+  previewMode: {
+    enabled: boolean;
     currentIndex: number | null;
     items: IStacItem[];
   };
@@ -19,13 +19,13 @@ export interface DetailState {
 
 const initialState: DetailState = {
   selectedItem: null,
-  showItemAsLayer: false,
-  isQuickPreviewMode: false,
   display: {
-    showItemDetail: false,
+    showSelectedItemAsLayer: false,
+    showItemDetailsPanel: false,
     zoomToItem: false,
   },
-  previewModeNav: {
+  previewMode: {
+    enabled: false,
     currentIndex: null,
     items: [],
   },
@@ -43,60 +43,62 @@ export const detailSlice = createSlice({
     setSelectedItem: (state, action: PayloadAction<IStacItem | null>) => {
       state.selectedItem = action.payload;
 
-      state.previewModeNav.currentIndex = state.previewModeNav.items.findIndex(
-        i => i.id === action.payload?.id
-      );
+      if (state.previewMode.enabled) {
+        state.previewMode.currentIndex = state.previewMode.items.findIndex(
+          i => i.id === action.payload?.id
+        );
+      }
     },
     setItemDetail: (state, action: PayloadAction<IStacItem | null>) => {
       state.selectedItem = action.payload;
-      state.display.showItemDetail = true;
+      state.display.showItemDetailsPanel = true;
     },
     setShowItemAsDetailLayer: (state, action: PayloadAction<boolean>) => {
-      state.showItemAsLayer = action.payload;
       state.display.zoomToItem = true;
+      state.display.showSelectedItemAsLayer = action.payload;
     },
     setItemQuickPreview: (state, action: PayloadAction<previewModePayload>) => {
       const { currentIndex, items } = action.payload;
       // Quick preview uses all the detail view logic, but doesn't show the
       // detail view panel or zoom to bounds.
-      state.isQuickPreviewMode = true;
+      state.previewMode.enabled = true;
       state.selectedItem = isNull(currentIndex)
         ? null
         : action.payload.items[currentIndex];
-      state.previewModeNav.items = items;
-      state.previewModeNav.currentIndex = currentIndex;
+      state.previewMode.items = items;
+      state.previewMode.currentIndex = currentIndex;
 
-      state.showItemAsLayer = true;
+      state.display.showSelectedItemAsLayer = true;
 
       // Don't zoom to the item or show the detail panel
-      state.display.showItemDetail = false;
+      state.display.showItemDetailsPanel = false;
       state.display.zoomToItem = false;
     },
     setNextItemPreview: state => {
-      if (isNull(state.previewModeNav.currentIndex)) return;
+      if (isNull(state.previewMode.currentIndex)) return;
 
-      const nextIndex = state.previewModeNav.currentIndex + 1;
-      if (state.previewModeNav.items.length > nextIndex) {
-        state.selectedItem = state.previewModeNav.items[nextIndex];
-        state.previewModeNav.currentIndex = nextIndex;
+      const nextIndex = state.previewMode.currentIndex + 1;
+      if (state.previewMode.items.length > nextIndex) {
+        state.selectedItem = state.previewMode.items[nextIndex];
+        state.previewMode.currentIndex = nextIndex;
       }
     },
     setPrevItemPreview: state => {
-      if (isNull(state.previewModeNav.currentIndex)) return;
+      if (isNull(state.previewMode.currentIndex)) return;
 
-      const prevIndex = state.previewModeNav.currentIndex - 1;
+      const prevIndex = state.previewMode.currentIndex - 1;
       if (prevIndex >= 0) {
-        state.selectedItem = state.previewModeNav.items[prevIndex];
-        state.previewModeNav.currentIndex = prevIndex;
+        state.selectedItem = state.previewMode.items[prevIndex];
+        state.previewMode.currentIndex = prevIndex;
       }
     },
     clearDetailView: state => {
       // The item will remain selected if preview mode is enabled
-      if (!state.isQuickPreviewMode) {
-        state.showItemAsLayer = false;
+      if (!state.previewMode.enabled) {
         state.selectedItem = null;
+        state.display.showSelectedItemAsLayer = false;
       }
-      state.display.showItemDetail = false;
+      state.display.showItemDetailsPanel = false;
     },
     resetDetail: () => {
       return initialState;

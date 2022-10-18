@@ -7,7 +7,10 @@ import { checkedHeaderButtonStyle } from "./styles";
 
 const MapButton = () => {
   const dispatch = useExploreDispatch();
-  const { isQuickPreviewMode, showItemAsLayer } = useExploreSelector(s => s.detail);
+  const {
+    previewMode,
+    display: { showSelectedItemAsLayer: showItemAsLayer },
+  } = useExploreSelector(s => s.detail);
 
   const tooltipId = useId("tooltip");
   const buttonId = useId("targetButton");
@@ -30,7 +33,7 @@ const MapButton = () => {
         id={buttonId}
         onClick={handleClick}
         checked={showItemAsLayer}
-        disabled={isQuickPreviewMode}
+        disabled={previewMode.enabled}
         iconProps={iconProps}
         ariaLabel={label}
         aria-describedby={tooltipId}

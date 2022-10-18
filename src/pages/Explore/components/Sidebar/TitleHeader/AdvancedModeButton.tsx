@@ -12,7 +12,7 @@ import { useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 const AdvancedModeButton = () => {
   const dispatch = useExploreDispatch();
   const { isCustomQuery, collection } = useExploreSelector(selectCurrentMosaic);
-  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { previewMode } = useExploreSelector(s => s.detail);
   const { data: mosaicInfo, isSuccess } = useCollectionMosaicInfo(collection?.id);
   const linkRef = useRef<HTMLElement>(null);
 
@@ -24,7 +24,7 @@ const AdvancedModeButton = () => {
     }
   }, [dispatch, isSuccess, mosaicInfo]);
 
-  const disabled = !collection || isCustomQuery || isQuickPreviewMode;
+  const disabled = !collection || isCustomQuery || previewMode.enabled;
   return (
     <>
       <Link
