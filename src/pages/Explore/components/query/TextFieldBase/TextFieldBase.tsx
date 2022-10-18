@@ -33,6 +33,7 @@ interface TextFieldProps<T extends string | number> {
   ) => any;
   onRenderDisplay: (value: T) => string;
   instructions?: Record<string, JSX.Element>;
+  disabled?: boolean;
 }
 
 export const TextFieldBase = ({
@@ -42,6 +43,7 @@ export const TextFieldBase = ({
   onParseOperatorKey,
   onGenerateCqlExpression,
   instructions,
+  disabled = false,
 }: TextFieldProps<string> | TextFieldProps<number>) => {
   const dispatch = useExploreDispatch();
 
@@ -115,6 +117,7 @@ export const TextFieldBase = ({
       label={`${labelPrefix}: ${formattedValue}`}
       onRenderText={renderLabel}
       data-cy={keyPrefix}
+      disabled={disabled}
     >
       <Stack styles={stackStyles} tokens={stackTokens}>
         <Stack horizontal tokens={stackTokens}>

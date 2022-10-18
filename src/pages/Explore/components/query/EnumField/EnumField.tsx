@@ -18,9 +18,10 @@ import { stacFormatter } from "utils/stac";
 
 type EnumFieldProps = {
   field: CqlExpressionParser<string>;
+  disabled?: boolean;
 };
 
-export const EnumField = ({ field }: EnumFieldProps) => {
+export const EnumField = ({ field, disabled = false }: EnumFieldProps) => {
   const dispatch = useExploreDispatch();
   const [selectedKeys, setSelectedKeys] = useState<string[]>(
     parseCqlToEnumKeys(field)
@@ -61,6 +62,7 @@ export const EnumField = ({ field }: EnumFieldProps) => {
       onRenderPlaceholder={renderSegmentedPlaceholder(title, "Include all")}
       onChange={handleChange}
       styles={dropdownStyles}
+      disabled={disabled}
     />
   );
 };

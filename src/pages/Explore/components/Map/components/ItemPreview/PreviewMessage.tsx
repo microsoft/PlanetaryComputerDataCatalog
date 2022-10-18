@@ -82,7 +82,11 @@ export const PreviewMessage: React.FC<PreviewMessageProps> = ({ mapRef }) => {
       {header}
       <Separator styles={separatorStyles} />
       {content}
-      <PreviewActionBar item={selectedItem} mapRef={mapRef} />
+      <PreviewActionBar
+        item={selectedItem}
+        mapRef={mapRef}
+        previewModeState={previewMode}
+      />
     </MapMessage>
   );
 };

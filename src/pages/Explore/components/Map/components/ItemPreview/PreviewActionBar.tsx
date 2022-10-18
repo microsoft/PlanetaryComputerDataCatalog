@@ -1,8 +1,10 @@
-import { IButtonStyles, IconButton, Stack } from "@fluentui/react";
+import { getTheme, IButtonStyles, IconButton, Stack } from "@fluentui/react";
 import atlas from "azure-maps-control";
+import { isNull } from "lodash-es";
 import {
   setNextItemPreview,
   setPrevItemPreview,
+  DetailState,
 } from "pages/Explore/state/detailSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import React from "react";
@@ -12,11 +14,13 @@ import { ZOOM_DURATION } from "../../hooks/useZoomEvents";
 interface PreviewActionBarProps {
   item: IStacItem;
   mapRef: React.MutableRefObject<atlas.Map | null>;
+  previewModeState: DetailState["previewMode"];
 }
 
 export const PreviewActionBar: React.FC<PreviewActionBarProps> = ({
   item,
   mapRef,
+  previewModeState: { currentIndex, items },
 }) => {
   const dispatch = useExploreDispatch();
   const { previousZoom, previousCenter } = useExploreSelector(s => s.map);
@@ -46,6 +50,9 @@ export const PreviewActionBar: React.FC<PreviewActionBarProps> = ({
     dispatch(setPrevItemPreview());
   };
 
+  const hasNext = !isNull(currentIndex) ? currentIndex < items.length - 1 : false;
+  const hasPrev = !isNull(currentIndex) ? currentIndex > 0 : false;
+
   return (
     <Stack horizontal tokens={{ childrenGap: 2 }} horizontalAlign="center">
       <IconButton
@@ -53,6 +60,7 @@ export const PreviewActionBar: React.FC<PreviewActionBarProps> = ({
         ariaLabel="View previous search result item"
         iconProps={{ iconName: "ChevronLeftMed" }}
         styles={smallIconStyles}
+        disabled={!hasPrev}
         onClick={handlePrev}
       />
       <IconButton
@@ -74,15 +82,20 @@ export const PreviewActionBar: React.FC<PreviewActionBarProps> = ({
         ariaLabel="View next search result item"
         iconProps={{ iconName: "ChevronRightMed" }}
         styles={smallIconStyles}
+        disabled={!hasNext}
         onClick={handleNext}
       />
     </Stack>
   );
 };
 
+const theme = getTheme();
 const smallIconStyles: IButtonStyles = {
   icon: {
     fontSize: 13,
+  },
+  rootDisabled: {
+    backgroundColor: theme.palette.neutralLighterAlt,
   },
 };
 
