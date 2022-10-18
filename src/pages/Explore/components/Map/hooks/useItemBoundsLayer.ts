@@ -19,6 +19,7 @@ const useItemBoundsLayer = (
   } = useExploreSelector(s => s);
 
   const boundaryPoly = boundaryShape ?? detail.selectedItem?.geometry;
+  const { display } = detail;
 
   useEffect(() => {
     const map = mapRef.current;
@@ -41,7 +42,7 @@ const useItemBoundsLayer = (
       stacItemDatasource.clear();
       stacItemDatasource.add(geom);
 
-      if (detail.showItemAsLayer && detail.display.zoomToItem) {
+      if (display.showSelectedItemAsLayer && display.zoomToItem) {
         mapRef.current?.setCamera({
           bounds: atlas.data.BoundingBox.fromData(geom),
           padding: 100,
@@ -50,7 +51,7 @@ const useItemBoundsLayer = (
         });
       }
     }
-  }, [mapRef, boundaryPoly, detail.showItemAsLayer, detail.display.zoomToItem]);
+  }, [mapRef, boundaryPoly, display.showSelectedItemAsLayer, display.zoomToItem]);
 };
 
 export default useItemBoundsLayer;

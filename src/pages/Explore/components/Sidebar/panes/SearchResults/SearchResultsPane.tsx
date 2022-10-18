@@ -43,7 +43,7 @@ const SearchResultsPane = ({
 }: SearchResultsProps) => {
   const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
-  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { previewMode } = useExploreSelector(s => s.detail);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();
@@ -74,7 +74,7 @@ const SearchResultsPane = ({
       if (data) {
         const item = data.features[index];
         if (item) {
-          if (isQuickPreviewMode) {
+          if (previewMode.enabled) {
             dispatch(setSelectedItem(item));
           } else {
             dispatch(
@@ -84,7 +84,7 @@ const SearchResultsPane = ({
         }
       }
     },
-    [data, dispatch, isQuickPreviewMode]
+    [data, dispatch, previewMode.enabled]
   );
 
   if (isError) {

@@ -25,7 +25,7 @@ type ItemResultProps = {
 
 const ItemResult = ({ item, index, onItemPreview }: ItemResultProps) => {
   const dispatch = useExploreDispatch();
-  const { selectedItem, isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { selectedItem, previewMode } = useExploreSelector(s => s.detail);
 
   const showBounds = useCallback(() => {
     dispatch(setBoundaryShape(item.geometry));
@@ -43,7 +43,7 @@ const ItemResult = ({ item, index, onItemPreview }: ItemResultProps) => {
     onItemPreview(index);
   }, [index, onItemPreview]);
 
-  const selected = selectedItem?.id === item.id && isQuickPreviewMode;
+  const selected = selectedItem?.id === item.id && previewMode.enabled;
   const activeContainerStyle = selected ? selectedContainerStyles : containerStyles;
 
   return (

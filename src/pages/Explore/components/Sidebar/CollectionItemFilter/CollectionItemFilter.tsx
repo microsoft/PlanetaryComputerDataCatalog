@@ -19,7 +19,7 @@ export const CollectionItemFilter: React.FC<CollectionItemFilterProps> = ({
   const { isCustomQuery } = useExploreSelector(selectCurrentMosaic);
   const {
     selectedItem,
-    display: { showItemDetail },
+    display: { showItemDetailsPanel: showItemDetail },
   } = useExploreSelector(s => s.detail);
   const isDetailView = Boolean(selectedItem) && showItemDetail;
   const { searchPanelDisplay, detailViewDisplay } = useMemo(() => {

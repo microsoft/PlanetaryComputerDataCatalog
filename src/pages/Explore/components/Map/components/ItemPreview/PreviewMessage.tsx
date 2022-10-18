@@ -27,9 +27,9 @@ interface PreviewMessageProps {
 
 export const PreviewMessage: React.FC<PreviewMessageProps> = ({ mapRef }) => {
   const dispatch = useExploreDispatch();
-  const { selectedItem, isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { selectedItem, previewMode } = useExploreSelector(s => s.detail);
 
-  if (!selectedItem || !isQuickPreviewMode) {
+  if (!selectedItem || !previewMode.enabled) {
     return null;
   }
 

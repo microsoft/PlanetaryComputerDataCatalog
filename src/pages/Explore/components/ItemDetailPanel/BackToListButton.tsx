@@ -7,17 +7,17 @@ import { useCallback } from "react";
 const BackToListButton = () => {
   const theme = useTheme();
   const dispatch = useExploreDispatch();
-  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { previewMode } = useExploreSelector(s => s.detail);
 
   const label = "Return to results list";
 
   const handleClick = useCallback(() => {
     dispatch(clearDetailView());
 
-    if (!isQuickPreviewMode) {
+    if (!previewMode.enabled) {
       dispatch(restorePreviousCenterAndZoom());
     }
-  }, [dispatch, isQuickPreviewMode]);
+  }, [dispatch, previewMode.enabled]);
 
   return (
     <ActionButton

@@ -8,7 +8,7 @@ import {
 export const PinLayer = () => {
   const dispatch = useExploreDispatch();
   const { isPinned } = useExploreSelector(selectCurrentMosaic);
-  const { isQuickPreviewMode } = useExploreSelector(s => s.detail);
+  const { previewMode } = useExploreSelector(s => s.detail);
 
   const handleClick = () => {
     dispatch(pinCurrentMosaic());
@@ -18,7 +18,7 @@ export const PinLayer = () => {
     ? "Stop editing and return to pinned layers"
     : "Pin this layer to the map and perform a new search";
 
-  const disabled = isQuickPreviewMode;
+  const disabled = previewMode.enabled;
   return (
     <IconButton
       title={title}

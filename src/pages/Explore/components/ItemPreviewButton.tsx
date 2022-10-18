@@ -40,7 +40,9 @@ const ItemPreviewButton: React.FC<ItemPreviewButtonProps> = ({
       </div>
       <Link
         title={tooltip}
-        className={ITEM_PREVIEW_BUTTON_CLASSNAME}
+        className={
+          ITEM_PREVIEW_BUTTON_CLASSNAME + " " + (isSelected ? "selected" : "")
+        }
         onClick={handlePreviewClick}
         styles={buttonStyles}
       >
@@ -87,6 +89,9 @@ const buttonStyles: ILinkStyles = {
     width: 30,
     "&:hover": {
       opacity: "1 !important",
+    },
+    "&.selected": {
+      opacity: "0.8 ",
     },
   },
 };
