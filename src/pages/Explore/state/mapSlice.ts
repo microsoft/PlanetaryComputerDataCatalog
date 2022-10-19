@@ -74,6 +74,9 @@ export const mapSlice = createSlice({
     clearBoundaryShape: state => {
       state.boundaryShape = null;
     },
+    setShowSidebar: (state, action: PayloadAction<boolean>) => {
+      state.showSidebar = action.payload;
+    },
     toggleShowSidebar: state => {
       state.showSidebar = !state.showSidebar;
     },
@@ -133,6 +136,7 @@ export const {
   setUseHighDef,
   clearBoundaryShape,
   toggleShowSidebar,
+  setShowSidebar,
   setSidebarPanel,
   setBboxDrawMode,
   setDrawnShape,

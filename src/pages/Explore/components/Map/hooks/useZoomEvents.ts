@@ -61,12 +61,16 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   // Fit the map to the provided bounds
   useEffect(() => {
     if (!map) return;
-    if (bounds && bounds[0] !== map.getCamera().bounds?.[0]) {
-      map.setCamera({
-        bounds,
-        padding: 20,
-        type: "jump",
-      });
+    try {
+      if (bounds && bounds[0] !== map.getCamera().bounds?.[0]) {
+        map.setCamera({
+          bounds,
+          padding: 20,
+          type: "jump",
+        });
+      }
+    } catch (e) {
+      console.error(e);
     }
   }, [bounds, map]);
 

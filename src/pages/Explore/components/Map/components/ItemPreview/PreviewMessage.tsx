@@ -16,6 +16,7 @@ import { resetDetail } from "pages/Explore/state/detailSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { restorePreviousCenterAndZoom } from "pages/Explore/state/mapSlice";
 import React from "react";
+import { MOBILE_WIDTH } from "utils/constants";
 import { MapMessage } from "../../../controls/MapMessages";
 import { truncateMiddle } from "./helpers";
 import { PreviewActionBar } from "./PreviewActionBar";
@@ -103,6 +104,9 @@ const headerTitleStyles: ITextStyles = {
 const containerStyles: IStackStyles = {
   root: {
     minWidth: 320,
+    [`@media(max-width: ${MOBILE_WIDTH}px)`]: {
+      maxWidth: 250,
+    },
   },
 };
 

@@ -30,13 +30,15 @@ import {
   setSelectedItem,
 } from "pages/Explore/state/detailSlice";
 import { isUndefined } from "lodash-es";
+import { setShowSidebar } from "pages/Explore/state/mapSlice";
+import { useMedia } from "react-use";
+import { MOBILE_WIDTH } from "utils/constants";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
   visible: boolean;
 }
 
-const mobileViewMapStyle = { root: { width: "100%", marginTop: "auto !important" } };
 const SearchResultsPane = ({
   request: { data, isError, isFetching, isPreviousData },
   visible,
@@ -47,7 +49,7 @@ const SearchResultsPane = ({
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();
-
+  const isMobileView = useMedia(`(max-width: ${MOBILE_WIDTH}px)`);
   const isCollectionChanged = lastColRef.current !== collection;
 
   // When the data changes, scroll to the top
@@ -74,6 +76,8 @@ const SearchResultsPane = ({
       if (data) {
         const item = data.features[index];
         if (item) {
+          // On mobile, hide the sidebar when for item preview
+          isMobileView && dispatch(setShowSidebar(false));
           if (previewMode.enabled) {
             dispatch(setSelectedItem(item));
           } else {
@@ -84,7 +88,7 @@ const SearchResultsPane = ({
         }
       }
     },
-    [data, dispatch, previewMode.enabled]
+    [data, dispatch, isMobileView, previewMode.enabled]
   );
 
   if (isError) {
@@ -201,5 +205,12 @@ const resultsListStyle: Partial<IStackStyles> = {
     borderTop: `1px solid ${theme.palette.neutralLight}`,
     overflowY: "auto",
     overflowX: "hidden",
+  },
+};
+
+const mobileViewMapStyle = {
+  root: {
+    width: "100%",
+    marginTop: "auto !important",
   },
 };
