@@ -38,6 +38,7 @@ export const PreviewActionBar: React.FC<PreviewActionBarProps> = ({
     mapRef.current?.setCamera({
       bounds: item.bbox,
       type: "ease",
+      padding: 50,
       duration: ZOOM_DURATION,
     });
   };
