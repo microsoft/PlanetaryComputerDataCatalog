@@ -17,8 +17,11 @@ export const CollectionItemFilter: React.FC<CollectionItemFilterProps> = ({
   sidebarVisibility,
 }) => {
   const { isCustomQuery } = useExploreSelector(selectCurrentMosaic);
-  const { selectedItem } = useExploreSelector(s => s.detail);
-  const isDetailView = Boolean(selectedItem);
+  const {
+    selectedItem,
+    display: { showItemDetailsPanel: showItemDetail },
+  } = useExploreSelector(s => s.detail);
+  const isDetailView = Boolean(selectedItem) && showItemDetail;
   const { searchPanelDisplay, detailViewDisplay } = useMemo(() => {
     return {
       searchPanelDisplay: isDetailView ? "none" : "flex",

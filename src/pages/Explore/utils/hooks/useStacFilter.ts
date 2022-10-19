@@ -73,8 +73,9 @@ export const useCqlFormat = () => {
 };
 
 const useStacFilter = () => {
+  const { previewMode } = useExploreSelector(s => s.detail);
   const search = useCqlFormat();
-  return useStacSearch(search);
+  return useStacSearch(search, !previewMode.enabled);
 };
 
 export default useStacFilter;

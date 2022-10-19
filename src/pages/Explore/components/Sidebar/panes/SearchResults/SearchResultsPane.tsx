@@ -19,28 +19,37 @@ import { IStacCollection, IStacItem, IStacSearchResult } from "types/stac";
 import ItemResult from "../../../ItemResult";
 import ExploreInHub from "../../../ExploreInHub";
 import SearchResultsHeader from "./SearchResultsHeader";
-import { useExploreSelector } from "pages/Explore/state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import NewTabLink from "components/controls/NewTabLink";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { MobileViewMapButton } from "../../../MobileViewInMap/ViewInMap.index";
+import {
+  setItemQuickPreview,
+  setSelectedItem,
+} from "pages/Explore/state/detailSlice";
+import { isUndefined } from "lodash-es";
+import { setShowSidebar } from "pages/Explore/state/mapSlice";
+import { useMedia } from "react-use";
+import { MOBILE_WIDTH } from "utils/constants";
 
 interface SearchResultsProps {
   request: UseQueryResult<IStacSearchResult, Error>;
   visible: boolean;
 }
 
-const mobileViewMapStyle = { root: { width: "100%", marginTop: "auto !important" } };
 const SearchResultsPane = ({
-  request: { data, isError, isLoading, isPreviousData },
+  request: { data, isError, isFetching, isPreviousData },
   visible,
 }: SearchResultsProps) => {
+  const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
+  const { previewMode } = useExploreSelector(s => s.detail);
   const [scrollPos, setScrollPos] = useState(0);
   const listRef: React.RefObject<IList> = useRef(null);
   const lastColRef = useRef<IStacCollection | null>();
-
+  const isMobileView = useMedia(`(max-width: ${MOBILE_WIDTH}px)`);
   const isCollectionChanged = lastColRef.current !== collection;
 
   // When the data changes, scroll to the top
@@ -61,6 +70,26 @@ const SearchResultsPane = ({
     const target = e.target as HTMLTextAreaElement;
     setScrollPos(target.scrollTop);
   }, []);
+
+  const handleItemPreview = useCallback(
+    (index: number) => {
+      if (data) {
+        const item = data.features[index];
+        if (item) {
+          // On mobile, hide the sidebar when for item preview
+          isMobileView && dispatch(setShowSidebar(false));
+          if (previewMode.enabled) {
+            dispatch(setSelectedItem(item));
+          } else {
+            dispatch(
+              setItemQuickPreview({ items: data.features, currentIndex: index })
+            );
+          }
+        }
+      }
+    },
+    [data, dispatch, isMobileView, previewMode.enabled]
+  );
 
   if (isError) {
     return (
@@ -96,7 +125,7 @@ const SearchResultsPane = ({
   if (collection && isCollectionChanged && isPreviousData) return loadingIndicator;
 
   // If there is no data, but it is currently being fetched, we show a loading indicator
-  if (!data && isLoading) return loadingIndicator;
+  if (!data && isFetching) return loadingIndicator;
 
   // If there is no data, but there is no collection set, we have no query, so don't render anything
   // (except the show map button on mobile).
@@ -110,9 +139,11 @@ const SearchResultsPane = ({
   // Otherwise, when the collection has stayed the same, we do keep previous
   // results displayed, but dimmed, until the new results come in.
 
-  const renderCell = (item?: IStacItem | undefined): ReactNode => {
-    if (!item) return null;
-    return <ItemResult item={item} />;
+  const renderCell = (item?: IStacItem | undefined, index?: number): ReactNode => {
+    if (!item || isUndefined(index)) return null;
+    return (
+      <ItemResult item={item} index={index} onItemPreview={handleItemPreview} />
+    );
   };
 
   return (
@@ -122,7 +153,7 @@ const SearchResultsPane = ({
           FallbackComponent={ErrorFallback}
           onError={handleErrorBoundaryError}
         >
-          <SearchResultsHeader results={data} isLoading={isPreviousData} />
+          <SearchResultsHeader results={data} isLoading={isFetching} />
           <div className={scrollPos ? "hood on" : "hood"} />
           <div
             className="custom-overflow"
@@ -130,7 +161,7 @@ const SearchResultsPane = ({
               height: "100%",
               overflowY: "auto",
               overflowX: "hidden",
-              ...loadingStyle(isPreviousData),
+              ...loadingStyle(isFetching),
             }}
             onScroll={handleScroll}
             data-cy="search-results-list"
@@ -174,5 +205,12 @@ const resultsListStyle: Partial<IStackStyles> = {
     borderTop: `1px solid ${theme.palette.neutralLight}`,
     overflowY: "auto",
     overflowX: "hidden",
+  },
+};
+
+const mobileViewMapStyle = {
+  root: {
+    width: "100%",
+    marginTop: "auto !important",
   },
 };

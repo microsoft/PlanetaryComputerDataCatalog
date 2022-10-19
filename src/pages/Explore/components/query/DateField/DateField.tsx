@@ -40,9 +40,10 @@ import { formatDateShort, getDayEnd, getDayStart } from "pages/Explore/utils/tim
 
 interface DateFieldProps {
   dateExpression: CqlDate;
+  disabled?: boolean;
 }
 
-export const DateField = ({ dateExpression }: DateFieldProps) => {
+export const DateField = ({ dateExpression, disabled = false }: DateFieldProps) => {
   const dispatch = useExploreDispatch();
   const panelRef = useRef<PanelControlHandlers>(null);
 
@@ -111,8 +112,9 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
     handleSave();
   }, [handleSave, workingDateRange, operatorSelection.key]);
 
-  const disabled = isSingleDayRange(dateExpression);
-  const disabledMsg = disabled ? (
+  const isSingleDay = isSingleDayRange(dateExpression);
+  const isDisabled = isSingleDay || disabled;
+  const disabledMsg = isSingleDay ? (
     <Text>
       <Text style={{ fontWeight: 500 }}>
         {formatDateShort(initialDateRange.start)}
@@ -131,7 +133,7 @@ export const DateField = ({ dateExpression }: DateFieldProps) => {
           label="Date acquired"
           directionalHint={DirectionalHint.rightTopEdge}
           onRenderText={handleRenderText}
-          disabled={disabled}
+          disabled={isDisabled}
         >
           <DateFieldProvider state={providerState}>
             <Stack

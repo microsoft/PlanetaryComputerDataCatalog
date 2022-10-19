@@ -1,4 +1,5 @@
-import { Link, Stack, Text, useTheme } from "@fluentui/react";
+import { CSSProperties } from "react";
+import { getTheme, Link, Stack, Text } from "@fluentui/react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { ILayerZoomVisibility } from "pages/Explore/types";
@@ -8,29 +9,28 @@ interface MessageProps {
   layerVisibility: ILayerZoomVisibility;
 }
 
-const MapMessage: React.FC = ({ children }) => {
-  const theme = useTheme();
-
+export const MapMessage: React.FC = ({ children }) => {
   return (
-    <div
-      className="explorer-map-component"
-      style={{
-        position: "absolute",
-        top: 10,
-        left: "50%",
-        transform: "translate(-50%, 0)",
-        zIndex: 1,
-        padding: "7px 10px",
-        borderRadius: 5,
-        border: "1px solid",
-        borderColor: theme.semanticColors.primaryButtonBorder,
-        backgroundColor: theme.semanticColors.bodyBackground,
-        boxShadow: theme.effects.elevation16,
-      }}
-    >
+    <div className="explorer-map-component" style={mapMessageStyle}>
       {children}
     </div>
   );
+};
+
+const theme = getTheme();
+
+const mapMessageStyle: CSSProperties = {
+  position: "absolute",
+  top: 10,
+  left: "50%",
+  transform: "translate(-50%, 0)",
+  zIndex: 1,
+  padding: "7px 10px",
+  borderRadius: 5,
+  border: "1px solid",
+  borderColor: theme.semanticColors.primaryButtonBorder,
+  backgroundColor: theme.semanticColors.bodyBackground,
+  boxShadow: theme.effects.elevation16,
 };
 
 export const ZoomMessage: React.FC<MessageProps> = ({

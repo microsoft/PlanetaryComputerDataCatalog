@@ -26,7 +26,8 @@ const CustomQueryBuilder = () => {
     collection,
     query: { cql },
   } = useExploreSelector(selectCurrentMosaic);
-
+  const { previewMode } = useExploreSelector(s => s.detail);
+  const isFieldDisabled = previewMode.enabled;
   const {
     data: apiQueryable,
     isError,
@@ -42,12 +43,12 @@ const CustomQueryBuilder = () => {
   }, [collection, queryable, cql]);
 
   const dateControl = parsedCql?.dateValue ? (
-    <DateField dateExpression={parsedCql.dateValue} />
+    <DateField dateExpression={parsedCql.dateValue} disabled={isFieldDisabled} />
   ) : null;
 
   // Get the rest of the controls needed to represent the CQL
   const expressions = parsedCql?.getExpressions({ omit: ["datetime"] });
-  const controls = expressions?.map(e => e.control);
+  const controls = expressions?.map(e => e.getControl(isFieldDisabled));
 
   return (
     <Stack tokens={controlStackTokens}>

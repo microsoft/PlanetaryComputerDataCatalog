@@ -115,7 +115,7 @@ export class CqlExpressionParser<T extends string | number | string[]> {
     console.warn("Unexpected property schema: ", property);
   }
 
-  get control(): React.ReactNode {
-    return getControlForField(this);
+  getControl(disabled: boolean): React.ReactNode {
+    return getControlForField(this, disabled);
   }
 }

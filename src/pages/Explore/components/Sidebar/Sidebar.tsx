@@ -14,7 +14,9 @@ import { SidebarPanels } from "pages/Explore/enums";
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
   const isSidebarVisible = useExploreSelector(s => s.map.showSidebar);
-  const { showAsLayer: isItemLayerVisible } = useExploreSelector(s => s.detail);
+  const { showSelectedItemAsLayer: isItemLayerVisible } = useExploreSelector(
+    s => s.detail.display
+  );
   const { sidebarPanel } = useExploreSelector(s => s.map);
 
   const { width, sidebarVisibility } = useMemo(() => {
