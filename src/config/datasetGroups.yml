@@ -413,7 +413,7 @@ noaa-mrms-qpe:
   description: >
     The [Multi-Radar Multi-Sensor (MRMS)](https://mrms.nssl.noaa.gov/) 
     [Quantitative Precipitation Estimation (QPE)](https://inside.nssl.noaa.gov/mrms/) 
-    products are seamless 1 km mosaics of precipitation accumulation covering the 
+    products are seamless 1-km mosaics of precipitation accumulation covering the 
     continental United States, Alaska, Hawaii, the Caribbean, and Guam. The products 
     are automatically generated through integration of data from multiple radars 
     and radar networks, surface and satellite observations, numerical weather 
