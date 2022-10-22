@@ -439,9 +439,9 @@ noaa-mrms-qpe:
     ["United States", "Caribbean", "Guam", "NOAA", "MRMS", "QPE", "Precipitation", "Weather"]
 
 goes:
-  title: GOES-R Series
+  title: GOES-R Series Products
   short_description: >
-    Geostationary Operational Environmental Satellite - R Series (GOES-R) Products 
+    Geostationary Operational Environmental Satellite - R Series (GOES-R) Products.
   description: >
     The Geostationary Operational Environmental Satellite - R Series (GOES-R) is 
     the current generation of United States geostationary weather satellites providing
