@@ -443,27 +443,29 @@ goes:
   short_description: >
     Geostationary Operational Environmental Satellite - R Series (GOES-R) Products.
   description: >
-    The Geostationary Operational Environmental Satellite - R Series (GOES-R) is 
-    the current generation of United States geostationary weather satellites providing
-    continuous views of the contiguous United States, neighboring environs of 
+    The [Geostationary Operational Environmental Satellite - R Series](https://www.goes-r.gov/) 
+    (GOES-R) is the current generation of United States geostationary weather satellites 
+    providing continuous views of the contiguous United States, neighboring environs of 
     the Pacific and Atlantic Oceans, and Central and South America. GOES weather 
     imagery and weather products provide a continuous stream of environmental 
     information used to support weather forecasting, severe storm tracking, and 
     meteorological research. 
 
 
-    The Advanced Baseline Imager (ABI) is the primary instrument on the GOES-R 
-    series spacecraft for imaging Earth's weather, oceans, and environment. ABI 
-    views the Earth with 16 different spectral bands, including two visible 
-    channels, four near-infrared channels, and ten infrared channels. ABI's data 
-    enables meteorologists to pinpoint and track developing storms.
+    The [Advanced Baseline Imager](https://www.goes-r.gov/spacesegment/abi.html) 
+    (ABI) is the primary instrument on the GOES-R series spacecraft for imaging 
+    Earth's weather, oceans, and environment. ABI views the Earth with 16 different 
+    spectral bands, including two visible channels, four near-infrared channels, 
+    and ten infrared channels. ABI's data enables meteorologists to pinpoint and 
+    track developing storms.
 
 
-    The GOES-R Geostationary Lightning Mapper (GLM) instrument detects and maps total 
-    lightning (in-cloud and cloud-to-ground) activity continuously over the 
-    Americas and adjacent ocean regions. Used in combination with radar, data 
-    from the ABI instrument, and surface observations, GLM data has the 
-    potential to increase lead time for severe thunderstorm and tornado warnings.
+    The GOES-R [Geostationary Lightning Mapper](https://www.goes-r.gov/spacesegment/glm.html) 
+    (GLM) instrument detects and maps total lightning (in-cloud and cloud-to-ground) 
+    activity continuously over the Americas and adjacent ocean regions. Used in 
+    combination with radar, data from the ABI instrument, and surface observations, 
+    GLM data has the potential to increase lead time for severe thunderstorm and 
+    tornado warnings.
 
   assets:
     headerImg:
