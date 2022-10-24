@@ -408,6 +408,14 @@ goes-cmi:
       src: goes-cmi-example.html
       launch: datasets/goes/goes-cmi-example.ipynb
 
+goes-glm:
+  category: Climate/Weather
+  headerImg: ./images/goes-glm-hero.png
+  tabs:
+    - title: Example Notebook
+      src: goes-glm-example.html
+      launch: datasets/goes/goes-glm-example.ipynb
+
 gpm-imerg-hhr:
   category: Climate/Weather
   headerImg: ./images/gpm-imerg-hhr-hero.png
