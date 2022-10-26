@@ -705,6 +705,30 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
+noaa-climate-normals-tabular:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-tabular-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
+noaa-climate-normals-gridded:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-gridded-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
+noaa-climate-normals-netcdf:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
 noaa-mrms-qpe-1h-pass1:
   category: Climate/Weather
   headerImg: ./images/noaa-mrms-qpe-1h-pass1-hero.png
