@@ -142,7 +142,7 @@ export const getDefaultSettings = (
     step: hint?.step || 1,
     unit: hint?.unit || "months",
     frames: hint?.frameCount || 6,
-    duration: hint?.duration || 250,
+    duration: hint?.duration || 400,
     showBranding: true,
     showProgressBar: true,
   };
