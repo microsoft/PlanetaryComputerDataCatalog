@@ -26,9 +26,9 @@ const GeneratedInternalToc: React.FC<GeneratedInternalTocProps> = ({
   const toc = headings.map(heading => {
     const hash = getHeadingId(heading);
     const text = heading.innerText.replace(/¶/g, "").trim();
-
+    const wrapperClass = heading.nodeName.toLowerCase() === "h3" ? "indent" : "";
     return (
-      <li key={hash} className="toctree-l1">
+      <li key={hash} className={`toctree-l1 ${wrapperClass}`}>
         {nohash ? (
           <Link onClick={() => scrollToHash(hash)}>{text}</Link>
         ) : (
