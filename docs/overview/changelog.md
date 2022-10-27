@@ -100,8 +100,14 @@ Last but now least, we've also added a sort direction selector for search result
 
 ## New datasets
 
+This release includes several new datasets:
+
 - [GOES-R Lightning Detection](https://planetarycomputer.microsoft.com/dataset/goes-glm): Continuous lightning detection over the Western Hemisphere from the Geostationary Lightning Mapper (GLM) instrument.
 - [NOAA MRMS QPE 1-Hour Pass 1](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-1h-pass1): Integrated multi-sensor cumulative precipitation estimate for the past hour with a 1-hour latency.
 - [NOAA MRMS QPE 1-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-1h-pass2):Integrated multi-sensor cumulative precipitation estimate for the past hour with a 2-hour latency.
 - [NOAA MRMS QPE 24-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-24h-pass2): Integrated multi-sensor cumulative precipitation estimate for the past 24 hours with a 2-hour latency.
 - [NOAA Monthly NClimGrid](https://planetarycomputer.microsoft.com/dataset/noaa-nclimgrid-monthly): Monthly Climate Gridded dataset with data on temperature and precipitation.
+- [Denver Regional Council of Gevernments Land Use Land Cover](https://planetarycomputer.microsoft.com/dataset/drcog-lulc): 1-ft resolution land use / land cover dataset around Denver, Colorado.
+- [Chesapeake Land Cover (7-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-7): 1-meter land cover data product for the entire Chesapeake Bay watershed with a uniform set of 7 land cover classes.
+- [Chesapeake Land Cover (13-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-13): 1-meter land cover data product for the entire Chesapeake Bay watershed with 13 varying land cover classes.
+- [Chesapeake Land Use](https://planetarycomputer.microsoft.com/dataset/chesapeake-lu): 1-meter land use data product for the entire Chesapeake Bay watershed.
