@@ -39,3 +39,9 @@
   content: >
     Updates to the Catalog and Explorer interfaces and 4 new datasets. [Check it out
     &rarr;](/docs/overview/changelog)
+- id: october-2022-release-notes
+  startDate: 2022-10-27
+  endDate: 2022-11-11
+  content: >
+    Timelapse exports, search result previews, and 10 new datasets. [Check out the
+    latest features &rarr;](/docs/overview/changelog)
