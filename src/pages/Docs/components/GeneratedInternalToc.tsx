@@ -23,22 +23,24 @@ const GeneratedInternalToc: React.FC<GeneratedInternalTocProps> = ({
     setHeadings(Array.from(headings) as HTMLHeadingElement[]);
   }, [html]);
 
-  const toc = headings.map(heading => {
-    const hash = getHeadingId(heading);
-    const text = heading.innerText.replace(/¶/g, "").trim();
-    const wrapperClass = heading.nodeName.toLowerCase() === "h3" ? "indent" : "";
-    return (
-      <li key={hash} className={`toctree-l1 ${wrapperClass}`}>
-        {nohash ? (
-          <Link onClick={() => scrollToHash(hash)}>{text}</Link>
-        ) : (
-          <HashLink smooth to={hash}>
-            {text}
-          </HashLink>
-        )}
-      </li>
-    );
-  });
+  const toc = headings
+    .filter(heading => heading.parentNode?.nodeName !== "SUMMARY")
+    .map(heading => {
+      const hash = getHeadingId(heading);
+      const text = heading.innerText.replace(/¶/g, "").trim();
+      const wrapperClass = heading.nodeName.toLowerCase() === "h3" ? "indent" : "";
+      return (
+        <li key={hash} className={`toctree-l1 ${wrapperClass}`}>
+          {nohash ? (
+            <Link onClick={() => scrollToHash(hash)}>{text}</Link>
+          ) : (
+            <HashLink smooth to={hash}>
+              {text}
+            </HashLink>
+          )}
+        </li>
+      );
+    });
 
   return headings.length ? (
     <div className="nav-internal toctree-wrapper sticky">
