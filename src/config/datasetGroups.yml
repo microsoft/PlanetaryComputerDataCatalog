@@ -474,3 +474,31 @@ goes:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/goes-group-thumb.png"
   keywords:
     ["GOES", "NOAA", "NASA", "Satellite", "Weather", "Cloud", "Moisture", "Lightning"]
+
+noaa-climate-normals:
+  title: NOAA US Climate Normals
+  short_description: >
+    Tabular and gridded Climate Normals for the United States
+  description: >
+    The [NOAA US Climate Normals](https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals) 
+    provide information about typical climate conditions for thousands of weather 
+    station locations across the United States. Normals act both as a ruler to 
+    compare current weather and as a predictor of conditions in the near future. 
+    The official normals are calculated for a uniform 30 year period for almost 
+    15,000 weather stations, and consist of annual/seasonal, monthly, daily, and 
+    hourly averages and statistics of temperature, precipitation, and other 
+    climatological variables for each weather station. 
+
+
+    In addition to tabular Climate Normal data for each weather station location, 
+    gridded Climate Normals for temperature and precipitation variables are also 
+    available. Daily, monthly, seasonal, and annual gridded Climate Normals are 
+    provided in 1/24 degree lat/lon (nominal 5x5 kilometer) grids for the 
+    contiguous United States.
+  assets:
+    headerImg:
+      href: ./images/noaa-climate-normals-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-climate-normals-group-thumb.png"
+  keywords:
+    ["NOAA", "Climate Normals", "Weather", "Surface Observations", "Climatology", "CONUS"]
