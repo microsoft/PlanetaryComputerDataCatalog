@@ -28,6 +28,7 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import {
   setBboxDrawMode,
   setDrawnShape,
+  setShowSidebar,
   setSidebarPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
@@ -42,6 +43,8 @@ import { validate, getDefaultImageSettings } from "./helpers";
 import { ImageConfig, ImageMosaicSettings } from "./types";
 import { SidebarPanels } from "pages/Explore/enums";
 import { useEffect } from "react";
+import { useMedia } from "react-use";
+import { MOBILE_WIDTH } from "utils/constants";
 
 export const ImageExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
@@ -56,6 +59,7 @@ export const ImageExporter: React.FC = () => {
   let imageSettings = useExploreSelector(s =>
     selectImageSettings(s, collection?.id)
   );
+  const isMobileView = useMedia(`(max-width: ${MOBILE_WIDTH}px)`);
 
   if (isEmpty(imageSettings)) {
     imageSettings = getDefaultImageSettings();
@@ -170,6 +174,7 @@ export const ImageExporter: React.FC = () => {
         iconProps={{ iconName: "SingleColumnEdit" }}
         onClick={() => {
           dispatch(setBboxDrawMode(true));
+          isMobileView && dispatch(setShowSidebar(false));
           removeImageResponse();
         }}
         disabled={!drawExportEnabled}

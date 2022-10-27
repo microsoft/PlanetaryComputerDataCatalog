@@ -29,12 +29,15 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import {
   setBboxDrawMode,
   setDrawnShape,
+  setShowSidebar,
   setSidebarPanel,
 } from "pages/Explore/state/mapSlice";
 import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 import { makeFilterBody, useCollectionMosaicInfo } from "pages/Explore/utils/hooks";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { useEffect } from "react";
+import { useMedia } from "react-use";
+import { MOBILE_WIDTH } from "utils/constants";
 import { useAnimationExport } from "utils/requests";
 import { ImageResults } from "../BaseExporter";
 import { ImageExportError } from "../BaseExporter/ImageExportError";
@@ -58,6 +61,7 @@ export const AnimationExporter: React.FC = () => {
     selectAnimationFrameSettings(s, collection?.id)
   );
   const { data: mosaicInfo } = useCollectionMosaicInfo(collection?.id);
+  const isMobileView = useMedia(`(max-width: ${MOBILE_WIDTH}px)`);
 
   const drawnBbox = drawnShape?.bbox || null;
 
@@ -156,6 +160,7 @@ export const AnimationExporter: React.FC = () => {
         iconProps={{ iconName: "SingleColumnEdit" }}
         onClick={() => {
           dispatch(setBboxDrawMode(true));
+          isMobileView && dispatch(setShowSidebar(false));
           removeAnimationResponse();
         }}
         disabled={!drawExportEnabled}
