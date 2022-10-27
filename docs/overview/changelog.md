@@ -23,7 +23,7 @@ To help with this, we've added a new "Item Preview" mode to the map view. When a
 To activate, click the map icon button on the thumbnail image of any search result:
 
 ```{image} images/docs-explorer-activate-item-preview_c.jpg
-:height:125
+:height: 125
 :name: Activate item preview mode
 :class: no-scaled-link
 ```
@@ -87,7 +87,7 @@ You can now specify time (in UTC) for date ranges in the Advanced date field fil
 
 ```{image} images/docs-explorer-time-filter_c.jpg
 :height: 500
-:name: Static snapshot image settings
+:name: Datetime filter
 :class: no-scaled-link
 ```
 
@@ -102,7 +102,7 @@ Last but now least, we've also added a sort direction selector for search result
 
 ```{image} images/docs-explorer-sort-order_c.jpg
 :height: 300
-:name: Static snapshot image settings
+:name: Sort order selector
 :class: no-scaled-link
 ```
 
@@ -123,7 +123,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 ```{image} images/docs-data-noaa-mrms-qpe_c.jpg
 :width: 558
-:name: Static snapshot image settings
+:name: NOAA MRMS QPE
 :class: no-scaled-link
 ```
 
@@ -139,7 +139,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 ```{image} images/docs-data-denver-regional_c.jpg
 :width: 558
-:name: Static snapshot image settings
+:name: Denver Regional Council of Governments Land Use Land Cover
 :class: no-scaled-link
 ```
 
