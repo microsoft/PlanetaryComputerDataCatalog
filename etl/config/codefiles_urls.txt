@@ -12,6 +12,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quick
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/using-radiant-mlhub-api.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/quickstarts/reading-zarr-data.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/goes/goes-cmi-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/goes/goes-glm-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/hgb/hgb-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/mobi/mobi-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/hrea/hrea-example.ipynb
@@ -19,6 +20,7 @@ https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datas
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasadem/nasadem-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/nasa-nex-gddp-cmip6/nasa-nex-gddp-cmip6-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/noaa-c-cap/noaa-c-cap-example.ipynb
+https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/terraclimate/terraclimate-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/daymet/daymet-example.ipynb
 https://raw.githubusercontent.com/microsoft/PlanetaryComputerExamples/main/datasets/io-lulc/io-lulc-example.ipynb
