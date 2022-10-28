@@ -70,13 +70,25 @@ Our Landsat C2 L2 dataset goes back to 1982 in many places, and is a good exampl
 (generate-a-static-image-of-a-dataset-mosaic)=
 ### Generate a static image of a dataset mosaic
 
-Similar to the timelapse export, you can also generate a static image of a dataset mosaic. This is useful for creating an image of a dataset for a report, presentation, or Teams background. To use the feature, open the overflow menu on the search results header and select "Generate snapshot image". Adjust the settings to control the area of interest and image size, then click "Generate image" to download the image.
+Similar to the timelapse export, you can also generate a static image of a dataset mosaic. This is useful for creating an image of a dataset for a report, presentation, to use as a background, or to share on social media. To use the feature, open the overflow menu on the search results header and select "Generate snapshot image".
+
+<video loop controls style="height: 400px;">
+  <source src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/docs-explorer-image-export.mp4" type="video/mp4" />
+  <p>
+    Your browser doesn't support HTML video. Here is a
+    <a href="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/docs-explorer-image-export.mp4">link to the video</a> instead.
+  </p>
+</video>
+
+ Adjust the settings to control the area of interest and image size, then click "Generate image" to download the image.
 
 ```{image} images/docs-explorer-image-screen_c.jpg
 :height: 500
 :name: Static snapshot image settings
 :class: no-scaled-link
 ```
+
+You can also use this to create great Microsoft Teams backgrounds! Use the "Large (1920 x 1080)" image size to clip out your favorite view and set it as your background in Teams. If you want to automate the generation of Teams backgrounds - and don't mind a bit of codebase setup - check out the <https://github.com/microsoft/planetary-computer-teams-background> repository, which uses the Planetary Computer APIs to auto-rotate with the latest imagery of Sentinel 2 from the Planetary Computer.
 
 <hr/>
 
