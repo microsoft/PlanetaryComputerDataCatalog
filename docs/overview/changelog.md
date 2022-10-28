@@ -127,6 +127,12 @@ This release includes several new datasets:
 [GOES-R Lightning Detection](https://planetarycomputer.microsoft.com/dataset/goes-glm):
 Continuous lightning detection over the Western Hemisphere from the Geostationary Lightning Mapper (GLM) instrument.
 
+```{image} images/docs-data-glm_c.jpg
+:width: 558
+:name: GLM screenshot
+:class: no-scaled-link
+```
+
 ### NOAA MRMS QPE
 
 - [NOAA MRMS QPE 1-Hour Pass 1](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-1h-pass1): Integrated multi-sensor cumulative precipitation estimate for the past hour with a 1-hour latency.
