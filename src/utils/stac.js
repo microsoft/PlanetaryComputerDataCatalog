@@ -11,11 +11,13 @@ import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { isEmpty, isNil, isObject } from "lodash-es";
 
-import { capitalize, toUtcDateWithTime } from ".";
+import { capitalize } from "utils";
 import NewTabLink from "../components/controls/NewTabLink";
 import SimpleKeyValueList from "../components/controls/SimpleKeyValueList";
 import Revealer from "../components/Revealer";
 import AssetDetails from "components/stac/AssetDetails";
+import NamedEntry from "components/controls/NamedEntry";
+import { formatDatetimeHuman } from "pages/Explore/utils/time";
 
 const stringList = value => {
   return Array.isArray(value) ? value.map(capitalize).join(", ") : capitalize(value);
@@ -41,7 +43,7 @@ StacFields.Registry.addAssetField("roles", {
 });
 
 StacFields.Registry.addMetadataField("datetime", {
-  formatter: value => (value ? toUtcDateWithTime(value) : "n/a"),
+  formatter: value => (value ? formatDatetimeHuman(value) : "n/a"),
 });
 
 StacFields.Registry.addMetadataField("gsd", {
@@ -67,6 +69,10 @@ StacFields.Registry.addMetadataField("stac_key", {
 StacFields.Registry.addMetadataField("attrs", {
   label: "Attributes",
   formatter: value => value,
+});
+
+StacFields.Registry.addMetadataField("xarray:open_kwargs", {
+  formatter: () => null,
 });
 
 StacFields.Registry.addMetadataField("raster:bands", {
@@ -476,6 +482,17 @@ StacFields.Registry.addMetadataField("view:sun_elevation", {
   formatter: fixedDeg,
 });
 
+StacFields.Registry.addMetadataField("table:columns", {
+  formatter: value => {
+    return (
+      <Stack>
+        {value.map(column => (
+          <NamedEntry entry={column} />
+        ))}
+      </Stack>
+    );
+  },
+});
 StacFields.Registry.addMetadataField("table:storage_options", {
   formatter: value => <SimpleKeyValueList object={value} />,
 });
@@ -530,6 +547,12 @@ export const mediaTypeOverride = value => {
       return "GeoTIFF (COG)";
     case "application/x-parquet":
       return "Parquet";
+    case "application/x-hdf":
+      return "HDF";
+    case "application/vnd.laszip+copc":
+      return "COPC";
+    case "application/vnd+zarr":
+      return "Zarr";
     default:
       return StacFields.Formatters.formatMediaType(value);
   }

@@ -108,14 +108,6 @@ noaa-isd:
   thumbnailUrl: RE4rsOQ.jpg
   keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-noaa-nclimgrid:
-  title: NOAA US Climate Gridded Dataset (NClimGrid)
-  category: Climate/Weather
-  short_description: Gridded climate data for the U.S. from 1895 to the present
-  infoUrl: https://aka.ms/ai4edata-nclimgrid
-  thumbnailUrl: nclimgrid.png
-  keywords: [United States, NOAA, Climate, Historical]
-
 noaa-rap:
   title: NOAA Rapid Refresh (RAP)
   category: Climate/Weather

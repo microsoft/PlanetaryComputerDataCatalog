@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ILegendConfig } from "pages/Explore/types";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { QsParamType } from "types";
@@ -9,6 +8,7 @@ import {
   IStacCollection,
 } from "types/stac";
 import { DATA_URL } from "utils/constants";
+import { pcApiClient } from "utils/requests";
 
 export const rootColormapUrl = `${DATA_URL}/legend/colormap`;
 export const rootClassmapUrl = `${DATA_URL}/legend/classmap`;
@@ -88,6 +88,6 @@ const getLegendMappingByName = async (
   const rootUrl = legendType === "classmap" ? rootClassmapUrl : rootIntervalUrl;
 
   return await (
-    await axios.get(`${rootUrl}/${classmapName}${qsConfig}`)
+    await pcApiClient.get(`${rootUrl}/${classmapName}${qsConfig}`)
   ).data;
 };

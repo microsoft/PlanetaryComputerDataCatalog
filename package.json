@@ -1,6 +1,6 @@
 {
   "name": "pc-datacatalog",
-  "version": "2022.3.3",
+  "version": "2022.4.0",
   "private": true,
   "proxy": "http://api:7071/",
   "dependencies": {
@@ -31,6 +31,7 @@
     "@uifabric/icons": "^7.7.2",
     "axios": "^0.27.2",
     "azure-maps-control": "^2.1.10",
+    "azure-maps-drawing-tools": "^1.0.0",
     "buffer": "^6.0.3",
     "dayjs": "^1.11.3",
     "dompurify": "^2.3.8",
@@ -40,6 +41,8 @@
     "json-stringify-pretty-compact": "^4.0.0",
     "lodash-es": "^4.17.21",
     "marked": "^4.0.17",
+    "minisearch": "^5.0.0",
+    "next-share": "^0.18.1",
     "number-abbreviate": "^2.0.0",
     "process": "^0.11.10",
     "query-string": "^7.1.1",

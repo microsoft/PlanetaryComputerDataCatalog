@@ -4,6 +4,7 @@ interface CatalogFilterProps {
   filterText: string | undefined;
   onFilterChange: (_: any, newValue?: string | undefined) => void;
 }
+
 export const CatalogFilter: React.FC<CatalogFilterProps> = ({
   filterText,
   onFilterChange,

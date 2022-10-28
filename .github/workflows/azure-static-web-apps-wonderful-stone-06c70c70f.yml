@@ -19,6 +19,7 @@ jobs:
     name: Build and Deploy Job
     env:
       REACT_APP_API_ROOT: ${{ secrets.API_ROOT }}
+      REACT_APP_IMAGE_API_ROOT: ${{ secrets.IMAGE_API_ROOT }}
       REACT_APP_ONEDS_TENANT_KEY: ${{ secrets.ONEDS_TENANT_KEY }}
       REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
@@ -38,6 +39,9 @@ jobs:
         run: ./scripts/update
       - name: Test and lint
         run: ./scripts/test
+      - name: Inject disallow crawling for robots.txt
+        run: |
+          echo -e "User-agent: *\nDisallow: /\n" > public/robots.txt
       - name: Build And Deploy (Test)
         id: builddeploy-test
         uses: Azure/static-web-apps-deploy@v1

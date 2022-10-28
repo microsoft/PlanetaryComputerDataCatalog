@@ -1,5 +1,5 @@
 import { getTheme, IButtonStyles, IconButton, Stack } from "@fluentui/react";
-import { useExploreDispatch } from "pages/Explore/state/hooks";
+import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { pinCurrentMosaic, removeLayerById } from "pages/Explore/state/mosaicSlice";
 import { ILayerState } from "pages/Explore/types";
 
@@ -9,6 +9,7 @@ interface LegendCmdBarProps {
 
 const LegendBumperBar = ({ layer }: LegendCmdBarProps) => {
   const dispatch = useExploreDispatch();
+  const { previewMode } = useExploreSelector(s => s.detail);
 
   const handlePin = () => {
     const layerId = layer.layerId;
@@ -27,6 +28,7 @@ const LegendBumperBar = ({ layer }: LegendCmdBarProps) => {
       iconProps={{ iconName: info.icon }}
       onClick={handlePin}
       styles={bumperButtonStyles}
+      disabled={previewMode.enabled}
     />
   );
 
@@ -46,7 +48,16 @@ const bumperButtonStyles: IButtonStyles = {
     height: 18,
     padding: "0px 12px 0px 16px",
   },
+  rootDisabled: {
+    background: theme.semanticColors.bodyBackground,
+  },
   rootHovered: {
     background: theme.semanticColors.bodyBackground,
+  },
+  iconDisabled: {
+    backgroundColor: theme.semanticColors.bodyBackground,
+    "& svg path": {
+      fill: theme.semanticColors.buttonBackgroundDisabled,
+    },
   },
 };

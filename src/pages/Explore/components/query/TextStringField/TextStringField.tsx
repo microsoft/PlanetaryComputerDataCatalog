@@ -10,9 +10,13 @@ import { CqlExpressionParser } from "pages/Explore/utils/cql";
 
 type TextStringFieldProps = {
   field: CqlExpressionParser<string>;
+  disabled: boolean;
 };
 
-export const TextStringField = ({ field }: TextStringFieldProps) => {
+export const TextStringField = ({
+  field,
+  disabled = false,
+}: TextStringFieldProps) => {
   return (
     <TextFieldBase
       field={field}
@@ -22,6 +26,7 @@ export const TextStringField = ({ field }: TextStringFieldProps) => {
       onGenerateCqlExpression={toCqlExpression}
       onRenderDisplay={formatValue}
       instructions={instructionMap}
+      disabled={disabled}
     />
   );
 };

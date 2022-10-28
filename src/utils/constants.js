@@ -17,5 +17,12 @@ export const DATA_URL = apiRoot.endsWith("stac")
   ? tilerRoot.replace("stac", "data")
   : `${tilerRoot}/api/data/v1`;
 
+export const IMAGE_URL = process.env.REACT_APP_IMAGE_API_ROOT || "";
 export const HUB_URL = process.env.REACT_APP_HUB_URL || "";
 export const AUTH_URL = process.env.REACT_APP_AUTH_URL || apiRoot;
+
+export const X_REQUEST_ENTITY = "X-PC-Request-Entity";
+export const QS_REQUEST_ENTITY = "request_entity";
+export const REQUEST_ENTITY = "explorer";
+
+export const MOBILE_WIDTH = 430;

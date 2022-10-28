@@ -11,11 +11,15 @@ const useMosaicLayer = (
   mapReady: boolean
 ) => {
   const { detail } = useExploreSelector(s => s);
-  const { layers, layerOrder } = useExploreSelector(s => s.mosaic);
+  const { layers, layerOrder, currentEditingLayerId } = useExploreSelector(
+    s => s.mosaic
+  );
 
   // If we are showing the detail as a tile layer, craft the tileJSON request
   // with the selected item (TODO: make custom redux selector, it's used elsewhere)
-  const stacItemForMosaic = detail.showAsLayer ? detail.selectedItem : null;
+  const stacItemForMosaic = detail.display.showSelectedItemAsLayer
+    ? detail.selectedItem
+    : null;
   const isItemLayerValid = Boolean(stacItemForMosaic);
 
   // Shuffle the map layer order when the layerOrder changes
@@ -58,6 +62,11 @@ const useMosaicLayer = (
         ) as atlas.layer.TileLayer;
         const isMosaicLayerValid = Boolean(query.searchId);
 
+        // The detail item selected is only valid for the currently editing layer
+        const isItemForCurrentLayer = isItemLayerValid
+          ? id === currentEditingLayerId
+          : false;
+
         // Check if the configuration valid to add a mosaic layer
         if ((isMosaicLayerValid || isItemLayerValid) && renderOption) {
           const tileLayerOpts: atlas.TileLayerOptions = {
@@ -65,7 +74,7 @@ const useMosaicLayer = (
               query,
               renderOption,
               collection,
-              stacItemForMosaic
+              isItemForCurrentLayer ? stacItemForMosaic : null
             ),
             visible: mosaic.layer.visible,
             opacity: mosaic.layer.opacity / 100,
@@ -98,7 +107,15 @@ const useMosaicLayer = (
           map.layers.remove(layer);
         }
       });
-  }, [mapRef, mapReady, stacItemForMosaic, isItemLayerValid, layerOrder, layers]);
+  }, [
+    mapRef,
+    mapReady,
+    stacItemForMosaic,
+    isItemLayerValid,
+    layerOrder,
+    layers,
+    currentEditingLayerId,
+  ]);
 };
 
 export default useMosaicLayer;

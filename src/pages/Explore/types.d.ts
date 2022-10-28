@@ -1,24 +1,32 @@
 import { ICqlExpressionList } from "./utils/cql/types";
 import { IStacCollection, IStacLink } from "types/stac";
 import { LegendTypes } from "./enums";
+import atlas from "azure-maps-control";
 
 export interface IDefaultLocationInfo {
   zoom: number;
   coordinates: [number, number];
 }
 
+export interface IAnimationHint {
+  unit: string;
+  step: number;
+  duration: number;
+  frameCount: number;
+}
 export interface IMosaicInfo {
   mosaics: IMosaic[];
   renderOptions: IMosaicRenderOption[] | null;
   defaultLocation: IDefaultLocationInfo;
   defaultCustomQuery: ICqlExpressionList;
+  animationHint: IAnimationHint | undefined;
 }
 
 export interface IMosaic {
   name: string | null;
   description: string | null;
   cql: ICqlExpressionList;
-  sortby: [] | null;
+  sortby: ISortDir | undefined;
   searchId?: string | null;
 }
 
@@ -52,14 +60,22 @@ export interface IQueryable {
   properties: { [key: string]: any };
 }
 
+export type ISortDir = "asc" | "desc";
+export interface ISortBy {
+  field: string;
+  direction: ISortDir;
+}
+
 export interface ISearchIdMetadata {
   links: IStacLink[];
   metadata: { type: string };
   orderby: string;
   search: {
     hash: string;
-    search: { filter: { args: ICqlExpressionList } };
-    orderby: string;
+    search: {
+      filter: { args: ICqlExpressionList };
+      sortby: ISortBy[] | undefined;
+    };
   };
 }
 
@@ -94,4 +110,9 @@ export interface IOrderedLayers {
 export interface ILayerZoomVisibility {
   current: ILayerState | null;
   others: ILayerState[];
+}
+
+export interface IDrawnShape {
+  geometry: atlas.data.Geometry | null;
+  bbox: atlas.data.BoundingBox | null;
 }

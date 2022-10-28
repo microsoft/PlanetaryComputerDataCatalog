@@ -151,14 +151,26 @@ aster-l1t:
 chesapeake-lc-7:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lc-7-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chesapeake-lc-13:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lc-13-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chesapeake-lu:
   category: Land use/Land cover
   headerImg: ./images/chesapeake-lu-hero.png
+  tabs:
+    - title: Example Notebook
+      src: chesapeake-example.html
+      launch: datasets/chesapeake/chesapeake-example.ipynb 
 
 chloris-biomass:
   category: Biomass/Vegetation
@@ -309,6 +321,14 @@ deltares-water-availability:
       src: deltares-water-availability-example.html
       launch: datasets/deltares-water-availability/deltares-water-availability-example.ipynb
 
+drcog-lulc:
+  category: Land use/Land cover
+  headerImg: ./images/drcog-hrlulc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: drcog-lulc-example.html
+      launch: datasets/drcog-lulc/drcog-lulc-example.ipynb
+
 eclipse:
   category: Air Quality
   tabs:
@@ -387,6 +407,14 @@ goes-cmi:
     - title: Example Notebook
       src: goes-cmi-example.html
       launch: datasets/goes/goes-cmi-example.ipynb
+
+goes-glm:
+  category: Climate/Weather
+  headerImg: ./images/goes-glm-hero.png
+  tabs:
+    - title: Example Notebook
+      src: goes-glm-example.html
+      launch: datasets/goes/goes-glm-example.ipynb
 
 gpm-imerg-hhr:
   category: Climate/Weather
@@ -677,6 +705,78 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
+noaa-climate-normals-tabular:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-tabular-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
+noaa-climate-normals-gridded:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-gridded-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
+noaa-climate-normals-netcdf:
+  category: Climate/Weather
+  headerImg: ./images/noaa-climate-normals-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-climate-normals-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+
+noaa-mrms-qpe-1h-pass1:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-1h-pass1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
+noaa-mrms-qpe-1h-pass2:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-1h-pass2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
+noaa-mrms-qpe-24h-pass2:
+  category: Climate/Weather
+  headerImg: ./images/noaa-mrms-qpe-24h-pass2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-mrms-qpe-example.html
+      launch: datasets/noaa-mrms-qpe/noaa-mrms-qpe-example.ipynb
+
+noaa-nclimgrid-daily-prelim:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-daily-prelim-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
+noaa-nclimgrid-daily-scaled:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-daily-scaled-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
+noaa-nclimgrid-monthly:
+  category: Climate/Weather
+  headerImg: ./images/noaa-nclimgrid-monthly-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-nclimgrid-example.html
+      launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
+
 nrcan-landcover:
   category: Land use/Land cover
   headerImg: ./images/nrcan-landcover-hero.png
@@ -746,39 +846,79 @@ us-census:
 viirs-09a1-001:
   category: Imagery
   headerImg: ./images/viirs-09a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-imagery-example.html
+      launch: datasets/viirs/viirs-imagery-example.ipynb
 
 viirs-09h1-001:
   category: Imagery
   headerImg: ./images/viirs-09h1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-imagery-example.html
+      launch: datasets/viirs/viirs-imagery-example.ipynb
 
 viirs-10a1-001:
-  category: Water/Snow
+  category: Snow
   headerImg: ./images/viirs-10a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-snow-example.html
+      launch: datasets/viirs/viirs-snow-example.ipynb
 
 viirs-13a1-001:
   category: Biomass/Vegetation
   headerImg: ./images/viirs-13a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-vegetation-example.html
+      launch: datasets/viirs/viirs-vegetation-example.ipynb
 
 viirs-14a1-001:
   category: Fire
   headerImg: ./images/viirs-14a1-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-fire-example.html
+      launch: datasets/viirs/viirs-fire-example.ipynb
 
 viirs-15a2h-001:
   category: Biomass/Vegetation
   headerImg: ./images/viirs-15a2h-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-vegetation-example.html
+      launch: datasets/viirs/viirs-vegetation-example.ipynb
 
 viirs-21a2-001:
   category: Temperature
   headerImg: ./images/viirs-21a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-temperature-example.html
+      launch: datasets/viirs/viirs-temperature-example.ipynb
 
 viirs-43ia4-001:
   category: Imagery
   headerImg: ./images/viirs-43ia4-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-imagery-example.html
+      launch: datasets/viirs/viirs-imagery-example.ipynb
 
 viirs-43ma4-001:
   category: Imagery
   headerImg: ./images/viirs-43ma4-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-imagery-example.html
+      launch: datasets/viirs/viirs-imagery-example.ipynb
 
 viirs-46a2-001:
   category: Imagery
   headerImg: ./images/viirs-46a2-hero.png
+  tabs:
+    - title: Example Notebook
+      src: viirs-imagery-example.html
+      launch: datasets/viirs/viirs-imagery-example.ipynb

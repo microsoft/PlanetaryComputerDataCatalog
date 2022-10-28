@@ -5,10 +5,16 @@ import { collectionFilter, geomFilter } from "../stac";
 import { IMosaic } from "pages/Explore/types";
 import { CQL_VALS_IDX, DEFAULT_QUERY_LIMIT } from "../constants";
 import {
+  initialMosaicState,
   selectCurrentCql,
   selectCurrentMosaic,
 } from "pages/Explore/state/mosaicSlice";
 import { CqlExpression, CqlInExpression, ICqlExpressionList } from "../cql/types";
+
+export const makeSortBy = (mosaic: IMosaic) => {
+  const sortby = mosaic.sortby;
+  return [{ field: "datetime", direction: sortby }];
+};
 
 export const makeFilterBody = (
   baseFilter: (IStacFilterCollection | IStacFilterGeom | null)[],
@@ -18,13 +24,15 @@ export const makeFilterBody = (
 ): IStacFilter => {
   const optimizedCql = optimizeCqlExpressions(cql);
 
+  const fullQuery = { ...initialMosaicState, ...query };
+
   // Combine base filters with any selected filters, removing any nulls
   const filterBody = [...baseFilter, ...optimizedCql].filter(Boolean);
 
   return {
     "filter-lang": "cql2-json",
     filter: { op: "and", args: filterBody },
-    sortby: query.sortby || undefined,
+    sortby: makeSortBy(fullQuery),
     limit: limit,
   } as IStacFilter;
 };
@@ -65,8 +73,9 @@ export const useCqlFormat = () => {
 };
 
 const useStacFilter = () => {
+  const { previewMode } = useExploreSelector(s => s.detail);
   const search = useCqlFormat();
-  return useStacSearch(search);
+  return useStacSearch(search, !previewMode.enabled);
 };
 
 export default useStacFilter;

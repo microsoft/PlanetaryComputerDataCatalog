@@ -109,6 +109,10 @@ const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
     }
   });
 
+  const html = allowList.includes(current_page_name)
+    ? bodyWithRoutedLinks
+    : DOMPurify.sanitize(bodyWithRoutedLinks);
+
   const content = processedMarkup ? (
     <div className={className}>
       {children}
@@ -116,7 +120,7 @@ const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
         ref={contentRef}
         onClick={handleClick}
         dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(bodyWithRoutedLinks),
+          __html: html,
         }}
       />
     </div>
@@ -126,3 +130,6 @@ const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
 };
 
 export default DocsHtmlContent;
+
+// Skip dom sanitizations for pages that embed scripts
+const allowList = ["quickstarts/using-the-data-api"];

@@ -27,6 +27,7 @@ import { CatalogSelectorGroup } from "./CatalogSelector.Group";
 export const CatalogSelector = () => {
   const dispatch = useExploreDispatch();
   const { collection } = useExploreSelector(selectCurrentMosaic);
+  const { previewMode } = useExploreSelector(s => s.detail);
   const { data: stacCollections } = useCollections();
   const [filterText, setFilterText] = useState("");
   const [selectedGroupId, setSelectedGroupId] = useState<string | null>();
@@ -103,7 +104,7 @@ export const CatalogSelector = () => {
               itemsAsButton
               includeStorageDatasets={false}
               preFilterCollectionFn={isValidExplorer}
-              setFilterText={handleFilterChange}
+              setFilterText={setFilterText}
               onButtonClick={handleSelection}
             />
           </div>
@@ -113,7 +114,7 @@ export const CatalogSelector = () => {
             itemsAsButton
             includeStorageDatasets={false}
             preFilterCollectionFn={isValidExplorer}
-            setFilterText={handleFilterChange}
+            setFilterText={setFilterText}
             onButtonClick={handleSelection}
             filterText={filterText}
           />
@@ -133,6 +134,7 @@ export const CatalogSelector = () => {
         onRenderText={renderText("GlobeLocation", buttonText)}
         onClick={showModal}
         styles={buttonStyles}
+        disabled={previewMode.enabled}
         data-cy="collection-selector"
       />
       <Modal

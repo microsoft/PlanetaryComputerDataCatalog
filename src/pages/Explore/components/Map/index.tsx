@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 
@@ -7,6 +7,7 @@ import {
   useMosaicLayer,
   useItemBoundsLayer,
   useMapEvents,
+  useMapDrawTools,
   useZoomEvents,
   useMapControls,
   useMapZoomToLayer,
@@ -26,9 +27,9 @@ import {
 import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
-import { useSession } from "components/auth/hooks/SessionContext";
-import { DATA_URL } from "utils/constants";
 import { MobileViewSidebarButton } from "../MobileViewInMap/ViewInMap.index";
+import { addEntityHeader } from "./helpers";
+import { PreviewMessage } from "./components/ItemPreview/PreviewMessage";
 
 const mapContainerId: string = "viewer-map";
 
@@ -37,18 +38,7 @@ const ExploreMap = () => {
   const { center, zoom, showSidebar } = useExploreSelector(s => s.map);
   const [mapReady, setMapReady] = useState<boolean>(false);
   const mapHandlers = useMapEvents(mapRef);
-  const { status: sessionStatus } = useSession();
-
-  const addAuthHeaders = useCallback(
-    (url: string, resourceType: atlas.ResourceType): atlas.RequestParameters => {
-      resourceType === "Tile" && console.log(url, resourceType, DATA_URL);
-      if (resourceType === "Tile" && url?.startsWith(DATA_URL)) {
-        return { headers: { Authorization: `Bearer ${sessionStatus.token}` } };
-      }
-      return {};
-    },
-    [sessionStatus]
-  );
+  // const { status: sessionStatus } = useSession();
 
   // Initialize the map
   useEffect(() => {
@@ -68,6 +58,7 @@ const ExploreMap = () => {
           authType: atlas.AuthenticationType.subscriptionKey,
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
         },
+        transformRequest: addEntityHeader,
       });
 
       map.events.add("ready", onReady);
@@ -98,18 +89,18 @@ const ExploreMap = () => {
   }, [mapReady]);
 
   // When logged in, transform requests to include auth header
-  useEffect(() => {
-    if (sessionStatus.isLoggedIn) {
-      console.log("Activating auth headers for tile requests");
-      mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
-    } else {
-      mapRef.current?.setServiceOptions({
-        transformRequest: () => {
-          return {};
-        },
-      });
-    }
-  }, [addAuthHeaders, sessionStatus]);
+  // useEffect(() => {
+  //   if (sessionStatus.isLoggedIn) {
+  //     console.log("Activating auth headers for tile requests");
+  //     mapRef.current?.setServiceOptions({ transformRequest: addAuthHeaders });
+  //   } else {
+  //     mapRef.current?.setServiceOptions({
+  //       transformRequest: () => {
+  //         return {};
+  //       },
+  //     });
+  //   }
+  // }, [addAuthHeaders, sessionStatus]);
 
   useItemBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
@@ -117,6 +108,7 @@ const ExploreMap = () => {
   useZoomEvents(mapRef);
   useMapControls(mapRef, mapReady);
   useUrlState();
+  useMapDrawTools(mapRef, mapReady);
 
   const { zoomToLayer, showZoomMsg, nonVisibleLayers } = useMapZoomToLayer();
   const zoomMsg = (
@@ -127,6 +119,7 @@ const ExploreMap = () => {
   const extentMsg = (
     <ExtentMessage onClick={zoomToExtent} layerVisibility={nonVisibleLayers} />
   );
+
   const loadingIndicator = (
     <ProgressIndicator
       aria-label="Map tile loading indicator"
@@ -143,6 +136,7 @@ const ExploreMap = () => {
       {mapHandlers.areTilesLoading && loadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
+      <PreviewMessage mapRef={mapRef} />
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
       <LegendControl />

@@ -369,3 +369,136 @@ viirs:
       Land Cover,
     ]
   groupOnCatalog: false
+
+noaa-nclimgrid:
+  title: NOAA NClimGrid
+  short_description: >
+    Daily and Monthly NOAA U.S. Climate Gridded Dataset (NClimGrid)
+  description: >
+    The [NOAA U.S. Climate Gridded Dataset](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
+    (NClimGrid) consists of four climate variables derived from the [Global 
+    Historical Climatology Network Daily](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily) 
+    (GHCN-D) dataset: maximum temperature, minimum temperature, average 
+    temperature, and precipitation. The data is provided in 1/24 degree lat/lon 
+    (nominal 5x5 kilometer) grids for the Continental United States (CONUS).
+
+
+    NClimGrid data is available in monthly and daily temporal intervals, with 
+    the daily data further differentiated as "prelim" (preliminary) or 
+    "scaled". Preliminary daily data is available within approximately three 
+    days of collection. Once a calendar month of preliminary daily data has 
+    been collected, it is scaled to match the corresponding monthly value. 
+    Monthly data is available from 1895 to the present. Daily preliminary and 
+    daily scaled data is available from 1951 to the present.
+
+
+    Users of all NClimGrid data product should be aware that [NOAA advertises](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
+    that, "On an annual basis, approximately one year of 'final' NClimGrid data 
+    is submitted to replace the initially supplied 'preliminary' data for the same 
+    time period. Users should be sure to ascertain which level of data is required 
+    for their research."
+  assets:
+    headerImg:
+      href: ./images/noaa-nclimgrid-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-nclimgrid-group-thumb.png"
+  keywords:
+    ["United States", "NOAA", "NClimGrid", "Climate", "Precipitation", "Temperature"]
+
+noaa-mrms-qpe:
+  title: NOAA Multi-Radar Multi-Sensor Quantitative Precipitation Estimation
+  short_description: >
+    Integrated multi-sensor cumulative precipation estimates for CONUS, Alaska, 
+    Hawaii, the Caribbean, and Guam.
+  description: >
+    The [Multi-Radar Multi-Sensor (MRMS)](https://mrms.nssl.noaa.gov/) 
+    [Quantitative Precipitation Estimation (QPE)](https://inside.nssl.noaa.gov/mrms/) 
+    products are seamless 1 km mosaics of precipitation accumulation covering the 
+    continental United States, Alaska, Hawaii, the Caribbean, and Guam. The products 
+    are automatically generated through integration of data from multiple radars 
+    and radar networks, surface and satellite observations, numerical weather 
+    prediction (NWP) models, and climatology. The products are updated hourly at 
+    the top of the hour.
+
+
+    MRMS QPE is available as a "Pass 1" or "Pass 2" product. The Pass 1 product 
+    is available with a 60-minute latency and includes 60-65% of gauges. The Pass 
+    2 product has a higher latency of 120 minutes, but includes 99% of gauges. 
+    The Pass 1 and Pass 2 products are broken into 1-, 3-, 6-, 12-, 24-, 48-, and 
+    72-hour accumulation sub-products.
+
+
+    Further information about NOAA's MRMS QPE products can be found in the 
+    [technical product guide](https://vlab.noaa.gov/web/wdtd/-/multi-sensor-qpe-1?selectedFolder=9234881).
+  assets:
+    headerImg:
+      href: ./images/noaa-mrms-qpe-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-mrms-qpe-group-thumb.png"
+  keywords:
+    ["United States", "Caribbean", "Guam", "NOAA", "MRMS", "QPE", "Precipitation", "Weather"]
+
+goes:
+  title: GOES-R Series Products
+  short_description: >
+    Geostationary Operational Environmental Satellite - R Series (GOES-R) Products.
+  description: >
+    The [Geostationary Operational Environmental Satellite - R Series](https://www.goes-r.gov/) 
+    (GOES-R) is the current generation of United States geostationary weather satellites 
+    providing continuous views of the contiguous United States, neighboring environs of 
+    the Pacific and Atlantic Oceans, and Central and South America. GOES weather 
+    imagery and weather products provide a continuous stream of environmental 
+    information used to support weather forecasting, severe storm tracking, and 
+    meteorological research. 
+
+
+    The [Advanced Baseline Imager](https://www.goes-r.gov/spacesegment/abi.html) 
+    (ABI) is the primary instrument on the GOES-R series spacecraft for imaging 
+    Earth's weather, oceans, and environment. ABI views the Earth with 16 different 
+    spectral bands, including two visible channels, four near-infrared channels, 
+    and ten infrared channels. ABI's data enables meteorologists to pinpoint and 
+    track developing storms.
+
+
+    The GOES-R [Geostationary Lightning Mapper](https://www.goes-r.gov/spacesegment/glm.html) 
+    (GLM) instrument detects and maps total lightning (in-cloud and cloud-to-ground) 
+    activity continuously over the Americas and adjacent ocean regions. Used in 
+    combination with radar, data from the ABI instrument, and surface observations, 
+    GLM data has the potential to increase lead time for severe thunderstorm and 
+    tornado warnings.
+
+  assets:
+    headerImg:
+      href: ./images/goes-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/goes-group-thumb.png"
+  keywords:
+    ["GOES", "NOAA", "NASA", "Satellite", "Weather", "Cloud", "Moisture", "Lightning"]
+
+noaa-climate-normals:
+  title: NOAA US Climate Normals
+  short_description: >
+    Tabular and gridded Climate Normals for the United States
+  description: >
+    The [NOAA US Climate Normals](https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals) 
+    provide information about typical climate conditions for thousands of weather 
+    station locations across the United States. Normals act both as a ruler to 
+    compare current weather and as a predictor of conditions in the near future. 
+    The official normals are calculated for a uniform 30 year period for almost 
+    15,000 weather stations, and consist of annual/seasonal, monthly, daily, and 
+    hourly averages and statistics of temperature, precipitation, and other 
+    climatological variables for each weather station. 
+
+
+    In addition to tabular Climate Normal data for each weather station location, 
+    gridded Climate Normals for temperature and precipitation variables are also 
+    available. Daily, monthly, seasonal, and annual gridded Climate Normals are 
+    provided in 1/24 degree lat/lon (nominal 5x5 kilometer) grids for the 
+    contiguous United States.
+  assets:
+    headerImg:
+      href: ./images/noaa-climate-normals-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-climate-normals-group-thumb.png"
+  keywords:
+    ["NOAA", "Climate Normals", "Weather", "Surface Observations", "Climatology", "CONUS"]

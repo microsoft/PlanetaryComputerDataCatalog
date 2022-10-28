@@ -24,13 +24,18 @@ export const MobileViewMapButton = () => {
 
 export const MobileViewSidebarButton = () => {
   const dispatch = useExploreDispatch();
-  const { showSidebar } = useExploreSelector(s => s.map);
+  const { showSidebar, sidebarPanel } = useExploreSelector(s => s.map);
+  const { previewMode } = useExploreSelector(s => s.detail);
+
   const handleClick = () => {
     dispatch(toggleShowSidebar());
   };
 
-  if (showSidebar) return null;
+  if (showSidebar || previewMode.enabled) return null;
 
+  const panelText = ["animation", "image"].includes(sidebarPanel)
+    ? "Config"
+    : "Search";
   return (
     <PrimaryButton
       className="explorer-mobile-view-sidebar"
@@ -38,7 +43,7 @@ export const MobileViewSidebarButton = () => {
       onClick={handleClick}
       iconProps={sidebarIconProps}
     >
-      View Search
+      View {panelText}
     </PrimaryButton>
   );
 };

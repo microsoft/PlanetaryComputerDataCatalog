@@ -1,4 +1,4 @@
-import { dayjs } from "utils";
+import { parseDatetime } from "pages/Explore/utils/time";
 import {
   DateRangeAction,
   DateRangeState,
@@ -20,9 +20,10 @@ export const validationReducer = (
   return { ...state, ...action };
 };
 
+const now = parseDatetime(new Date());
 export const initialWorkingDateState: DateRangeState = {
-  start: dayjs(),
-  end: dayjs(),
+  start: now,
+  end: now,
 };
 
 export const dateRangeReducer = (

@@ -13,8 +13,23 @@ const setup = (
     .get(`${apiUrl.pathname}/collections`)
     .reply(200, {
       collections: [
-        { id: "foo", title: "This is Foo", keywords: ["red", "blue"] },
+        { id: "foo", title: "This is Foo", keywords: ["red", "blue", "plant"] },
         { id: "bar", title: "This is Bar", keywords: ["purple", "blue"] },
+        {
+          id: "baz",
+          title: "Primarily plant",
+          "msft:short_description": "Earth-based vegetation",
+          keywords: [],
+        },
+        {
+          id: "maz",
+          title: "Seaweed",
+          "msft:short_description": "Sea-based vegetation",
+          keywords: [],
+          "cube:variables": {
+            x: { attrs: { standard_name: "water_temperature" } },
+          },
+        },
       ],
     });
 
@@ -147,6 +162,64 @@ test("Filter component show messages with no results", async () => {
 
   const noResults = queryByTestId("no-filtered-collection-results");
   expect(noResults).toBeInTheDocument();
+
+  // Make sure the mock was called
+  httpScope.done();
+});
+
+test("Filter matches non-adjacent terms", async () => {
+  const { httpScope, getByTestId } = setup("earth plant");
+
+  // Shimmer should be removed after collections load
+  await waitForElementToBeRemoved(() => getByTestId("collection-loading-shimmers"), {
+    timeout: 5000,
+  });
+
+  const results = getByTestId("filtered-collection-results");
+  expect(results).toBeInTheDocument();
+  expect(results?.childElementCount).toBe(1);
+  const items = within(results).getAllByTestId("catalog-collection-item");
+  expect(items).toHaveLength(1);
+  expect(items[0]).toHaveTextContent("Primarily plant");
+
+  // Make sure the mock was called
+  httpScope.done();
+});
+
+test("Filter matches cube:variables", async () => {
+  const { httpScope, getByTestId } = setup("water temp");
+
+  // Shimmer should be removed after collections load
+  await waitForElementToBeRemoved(() => getByTestId("collection-loading-shimmers"), {
+    timeout: 5000,
+  });
+
+  const results = getByTestId("filtered-collection-results");
+  expect(results).toBeInTheDocument();
+  expect(results?.childElementCount).toBe(1);
+  const items = within(results).getAllByTestId("catalog-collection-item");
+  expect(items).toHaveLength(1);
+  expect(items[0]).toHaveTextContent("Seaweed");
+
+  // Make sure the mock was called
+  httpScope.done();
+});
+
+test("Filter sorts title-matches higher than keyword-matches", async () => {
+  const { httpScope, getByTestId } = setup("plant");
+
+  // Shimmer should be removed after collections load
+  await waitForElementToBeRemoved(() => getByTestId("collection-loading-shimmers"), {
+    timeout: 5000,
+  });
+
+  const results = getByTestId("filtered-collection-results");
+  expect(results).toBeInTheDocument();
+  expect(results?.childElementCount).toBe(1);
+  const items = within(results).getAllByTestId("catalog-collection-item");
+  expect(items).toHaveLength(2);
+  expect(items[0]).toHaveTextContent("Primarily plant");
+  expect(items[1]).toHaveTextContent("This is Foo");
 
   // Make sure the mock was called
   httpScope.done();

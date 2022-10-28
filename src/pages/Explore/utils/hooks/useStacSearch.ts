@@ -1,8 +1,7 @@
-import axios from "axios";
-// import { useSession } from "components/auth/hooks/SessionContext";
 import { QueryFunctionContext, useQuery, UseQueryResult } from "react-query";
 import { IStacFilter, IStacSearchResult } from "types/stac";
 import { STAC_URL } from "utils/constants";
+import { pcApiClient } from "utils/requests";
 
 const getStacItems = async (
   queryParam: QueryFunctionContext<[string, IStacFilter | undefined]>
@@ -13,20 +12,20 @@ const getStacItems = async (
     return Promise.reject();
   }
 
-  const resp = await axios.post(`${STAC_URL}/search`, search);
+  const resp = await pcApiClient.post(`${STAC_URL}/search`, search);
 
   return resp.data;
 };
 
 export const useStacSearch = (
-  search: IStacFilter | undefined
+  search: IStacFilter | undefined,
+  enabled?: boolean
 ): UseQueryResult<IStacSearchResult, Error> => {
-  // const { status } = useSession();
   return useQuery(["items", search], getStacItems, {
     keepPreviousData: true, // intended to not clear out search results when panning the map
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     retry: false,
-    enabled: !!search,
+    enabled: !!search && Boolean(enabled),
   });
 };

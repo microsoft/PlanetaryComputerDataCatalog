@@ -1,7 +1,8 @@
 import React from "react";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { DateRangeState, ValidationAction, ValidationState } from "./types";
 import { initialValidationState } from "./state";
+import { parseDatetime } from "pages/Explore/utils/time";
 
 export interface IDateFieldContext {
   validMinDate: Dayjs;
@@ -13,10 +14,11 @@ export interface IDateFieldContext {
     | ((arg: ValidationAction) => void);
 }
 
+const now = parseDatetime(new Date());
 export const DateFieldContext = React.createContext<IDateFieldContext>({
-  validMinDate: dayjs(),
-  validMaxDate: dayjs(),
-  workingDates: { start: dayjs(), end: null },
+  validMinDate: now,
+  validMaxDate: now,
+  workingDates: { start: now, end: null },
   setValidation: () => {},
   validationState: initialValidationState,
 });

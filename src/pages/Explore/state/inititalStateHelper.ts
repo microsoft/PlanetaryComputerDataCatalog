@@ -11,10 +11,11 @@ import {
   QS_RENDER_KEY,
   QS_SEPARATOR,
   QS_SETTINGS_KEY,
+  QS_SORT_KEY,
   QS_V1_CUSTOM_KEY,
   QS_VERSION_KEY,
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
-import { ILayerState, IMosaic, IMosaicInfo } from "../types";
+import { ILayerState, IMosaic, IMosaicInfo, ISortBy, ISortDir } from "../types";
 import { updateQueryStringParam } from "../utils";
 import { CqlExpressionParser } from "../utils/cql";
 import {
@@ -61,6 +62,7 @@ const loadQsV1 = (
       [collectionId],
       [mosaicName],
       [renderOptionName],
+      ["desc"],
       [],
       undefined,
       dispatch
@@ -76,6 +78,7 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
   const collectionIds = qs.get(QS_COLLECTION_KEY)?.split(QS_SEPARATOR) ?? [];
   const mosaicNames = qs.get(QS_MOSAIC_KEY)?.split(QS_SEPARATOR) ?? [];
   const renderOptionNames = qs.get(QS_RENDER_KEY)?.split(QS_SEPARATOR) ?? [];
+  const sortbyQs = qs.get(QS_SORT_KEY)?.split(QS_SEPARATOR) ?? [];
   const settings = qs.get(QS_SETTINGS_KEY)?.split(QS_SEPARATOR) ?? [];
   const editingIdx = qs.get(QS_ACTIVE_EDIT_KEY)
     ? parseInt(qs.get(QS_ACTIVE_EDIT_KEY) as string)
@@ -85,6 +88,7 @@ const loadQsV2 = (dispatch: ThunkDispatch<unknown, unknown, AnyAction>) => {
     collectionIds,
     mosaicNames,
     renderOptionNames,
+    sortbyQs as ISortDir[],
     settings,
     editingIdx,
     dispatch
@@ -106,6 +110,7 @@ const loadMosaicStateV2 = async (
   collectionIds: string[],
   mosaicNames: string[],
   renderOptionNames: string[],
+  sortDirs: ISortDir[],
   settings: string[],
   editingIndex: number | undefined = undefined,
   dispatch: ThunkDispatch<unknown, unknown, AnyAction>
@@ -158,16 +163,29 @@ const loadMosaicStateV2 = async (
         throw new Error("Invalid mosaic or render option");
       }
 
+      // Check the sort for this layer as specified in the query string. If this ends up
+      // being a custom query, we'll use the sort that was included in the stac search
+      const qsSort = sortDirs[index] || "desc";
+
       // Register the cql to get the search Id, custom queries don't have
-      // cql but already have a searchId
+      // cql but already have a searchId.
+      const sortedMosaic = { ...mosaic, sortby: qsSort };
       const searchId = isCustomQuery
         ? customSearchId
-        : await registerStacFilter(collection.id, mosaic, mosaic.cql, false);
+        : await registerStacFilter(collection.id, sortedMosaic, mosaic.cql, false);
 
       // Get the named mosaic's cql, or fetch the cql for a custom query's searchId
-      const cql = isCustomQuery
-        ? (await fetchSearchIdMetadata(searchId)).search.search.filter.args
+      const customQueryMetadata = isCustomQuery
+        ? await fetchSearchIdMetadata(searchId)
+        : null;
+
+      const cql = customQueryMetadata
+        ? customQueryMetadata.search.search.filter.args
         : mosaic.cql;
+
+      const sortby = customQueryMetadata
+        ? parseSortBy(customQueryMetadata.search.search.sortby)
+        : qsSort;
 
       // The registered cql will have had the collection id property added
       // which we don't need. It's stored directly on the state.
@@ -175,7 +193,12 @@ const loadMosaicStateV2 = async (
         exp => new CqlExpressionParser(exp).property !== "collection"
       );
 
-      const query = { ...mosaic, searchId, cql: cqlClean };
+      const query: IMosaic = {
+        ...mosaic,
+        searchId,
+        cql: cqlClean,
+        sortby: sortby,
+      };
 
       // Fetch the minzoom from the tilejson endpoint for this collection/renderOption
       const minZoom = (await fetchTileJson(query, renderOption, collection)).minzoom;
@@ -232,4 +255,10 @@ const getDefaultRenderName = (
 ): string => {
   const defaultName = mosaicInfo.renderOptions?.[0].name || "";
   return renderName ? renderName : defaultName;
+};
+
+const parseSortBy = (sortby: ISortBy[] | undefined): ISortDir => {
+  // Explorer only supports datetime sorts. If none is specified, use desc
+  const sort = sortby?.find(s => s.field === "datetime");
+  return sort?.direction === "asc" ? "asc" : "desc";
 };

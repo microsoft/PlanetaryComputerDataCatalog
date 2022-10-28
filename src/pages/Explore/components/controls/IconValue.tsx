@@ -16,7 +16,7 @@ const IconValue = ({ iconName, title, value, iconSize = 20 }: IconValueProps) =>
   });
 
   return (
-    <Stack horizontal tokens={{ childrenGap: 8 }}>
+    <Stack horizontal tokens={{ childrenGap: 8 }} styles={containerStyles}>
       <span>{value} </span>
       <FontIcon
         title={title}
@@ -29,3 +29,9 @@ const IconValue = ({ iconName, title, value, iconSize = 20 }: IconValueProps) =>
 };
 
 export default IconValue;
+
+const containerStyles = {
+  root: {
+    fontSize: "inherit",
+  },
+};
