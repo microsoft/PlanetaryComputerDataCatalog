@@ -12,14 +12,14 @@ import {
   Separator,
   Stack,
 } from "@fluentui/react";
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from "next-share";
+// import {
+//   FacebookShareButton,
+//   FacebookIcon,
+//   LinkedinShareButton,
+//   LinkedinIcon,
+//   TwitterShareButton,
+//   TwitterIcon,
+// } from "next-share";
 
 import { ImageExportResponse } from "./types";
 
@@ -76,7 +76,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             iconProps={downloadIconProps}
             onClick={handleDownload}
           />
-          <LinkedinShareButton url={shareUrl}>
+          {/* <LinkedinShareButton url={shareUrl}>
             <LinkedinIcon size={20} round />
           </LinkedinShareButton>
           <TwitterShareButton
@@ -92,7 +92,7 @@ export const ImageViewer: React.FC<ImageViewerProps> = ({
             hashtag={`#${collectionId} #planetarycomputer`}
           >
             <FacebookIcon size={20} round />
-          </FacebookShareButton>
+          </FacebookShareButton> */}
         </Stack>
       </div>
       <Image

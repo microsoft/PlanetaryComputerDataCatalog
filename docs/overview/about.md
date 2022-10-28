@@ -9,10 +9,6 @@ The Planetary Computer consists of four major components:
 - The [Hub](./environment.md), a fully managed computing environment that allows scientists to process massive geospatial datasets.
 - [Applications](https://planetarycomputer.microsoft.com/applications), built by our network of partners, that put the Planetary Computer platform to work for environmental sustainability.
 
-```{note}
-Check current Planetary Computer health status and view past incidents on the [Service Status](https://planetarycomputer-status.microsoft.com) page.
-```
-
 ## Built on Open
 
 The Planetary Computer uses open source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open source community. For example, our Hub builds on the work done by the [Pangeo](http://pangeo.io/) community to put the tools of data science to work for the Earth science community, and our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.

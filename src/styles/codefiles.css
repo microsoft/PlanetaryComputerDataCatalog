@@ -54,6 +54,11 @@
   margin: 1em;
 }
 
+.output_area.rendered_html.docutils.container {
+  width: 100%;
+  overflow: auto;
+}
+
 .highlight pre {
   margin-top: 0em;
 }

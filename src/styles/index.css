@@ -235,6 +235,10 @@ a:not(header a):hover img {
   margin: 4px 0;
 }
 
+.toctree-wrapper li.indent {
+  padding-left: 8px;
+}
+
 .toctree-wrapper p {
   margin: 10px 0 2px 0;
 }
