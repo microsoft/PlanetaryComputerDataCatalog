@@ -42,6 +42,9 @@ jobs:
       - name: Inject disallow crawling for robots.txt
         run: |
           echo -e "User-agent: *\nDisallow: /\n" > public/robots.txt
+      - name: Build optimized bundle
+        id: build-bundle
+        run: ./scripts/cibuild
       - name: Build And Deploy (Test)
         id: builddeploy-test
         uses: Azure/static-web-apps-deploy@v1
@@ -51,7 +54,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           skip_deploy_on_missing_secrets: true
           action: "upload"
-          app_location: "/"
+          skip_app_build: true
+          app_location: "build"
           api_location: "api"
           output_location: "build"
 

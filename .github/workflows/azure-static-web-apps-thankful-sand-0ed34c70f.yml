@@ -32,6 +32,9 @@ jobs:
         run: ./scripts/update
       - name: Test and lint
         run: ./scripts/test
+      - name: Build optimized bundle
+        id: build-bundle
+        run: ./scripts/cibuild
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -41,8 +44,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           skip_deploy_on_missing_secrets: true
           action: "upload"
-          app_build_command: "./scripts/cibuild"
-          app_location: "/"
+          skip_app_build: true
+          app_location: "build"
           api_location: "api"
           output_location: "build"
 
