@@ -25,10 +25,10 @@ jobs:
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
       REACT_APP_AUTH_URL: ${{ secrets.AUTH_URL }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: npm-cache
         with:
           path: ~/.npm
@@ -42,7 +42,10 @@ jobs:
       - name: Inject disallow crawling for robots.txt
         run: |
           echo -e "User-agent: *\nDisallow: /\n" > public/robots.txt
-      - name: Build And Deploy (Staging)
+      - name: Build optimized bundle
+        id: build-bundle
+        run: ./scripts/cibuild
+      - name: Deploy (Staging)
         id: builddeploy-staging
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -51,9 +54,10 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           skip_deploy_on_missing_secrets: true
           action: "upload"
-          app_location: "/"
+          skip_app_build: true
+          app_location: "build"
           api_location: "api"
-          output_location: "build"
+          output_location: ""
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

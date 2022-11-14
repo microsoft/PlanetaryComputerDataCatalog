@@ -16,5 +16,10 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
             -f docker-compose.yml \
             run --rm --no-deps app \
             npm run build
+
+        docker-compose \
+            -f docker-compose.yml \
+            run --rm --no-deps app \
+            cp staticwebapp.config.json build/
     fi
 fi
