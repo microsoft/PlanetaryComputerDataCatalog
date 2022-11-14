@@ -25,10 +25,10 @@ jobs:
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
       REACT_APP_AUTH_URL: ${{ secrets.AUTH_URL }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: npm-cache
         with:
           path: ~/.npm
