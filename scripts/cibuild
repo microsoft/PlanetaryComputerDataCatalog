@@ -17,6 +17,9 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
             run --rm --no-deps app \
             npm run build
 
-        cp staticwebapp.config.json build/
+        docker-compose \
+            -f docker-compose.yml \
+            run --rm --no-deps app \
+            cp staticwebapp.config.json build/
     fi
 fi
