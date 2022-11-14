@@ -44,7 +44,7 @@ jobs:
           echo -e "User-agent: *\nDisallow: /\n" > public/robots.txt
       - name: Build optimized bundle
         id: build-bundle
-        run ./scripts/cibuild
+        run: ./scripts/cibuild
       - name: Deploy (Staging)
         id: builddeploy-staging
         uses: Azure/static-web-apps-deploy@v1
