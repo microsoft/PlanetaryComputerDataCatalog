@@ -41,6 +41,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           skip_deploy_on_missing_secrets: true
           action: "upload"
+          app_build_command: "./scripts/cibuild"
           app_location: "/"
           api_location: "api"
           output_location: "build"
