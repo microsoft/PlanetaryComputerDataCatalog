@@ -181,7 +181,7 @@ export const makeTileJsonUrl = (
 
   // Rendering a single Item
   if (item && collection) {
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}${format}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}&${renderParams}${format}`;
   }
 
   // Rendering a STAC search mosaic
