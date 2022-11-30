@@ -181,8 +181,7 @@ export const makeTileJsonUrl = (
 
   // Rendering a single Item
   if (item && collection) {
-    const forcePngRenderParams = renderParams.replace("jpg", "png");
-    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}&${forcePngRenderParams}`;
+    return `${DATA_URL}/item/tilejson.json?collection=${collection.id}&${scaleParam}&item=${item.id}&${renderParams}${format}`;
   }
 
   // Rendering a STAC search mosaic
