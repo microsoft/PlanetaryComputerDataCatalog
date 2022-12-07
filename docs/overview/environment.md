@@ -18,6 +18,8 @@ Select an environment and click *Start* to start your server. You'll see a progr
 
 When you're done with your session on the hub, make sure to stop your server to release the resources your consuming. From the Jupyterlab UI, select *File > Hub Control Panel*. This will open a new tab at [https://pccompute.westeurope.cloudapp.azure.com/compute/hub/home](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/home), which lets you manage your servers.
 
+Note that the QGIS environment doesn't run the Jupyterlab UI, so you'll need to navigate directly to the [JupyterHub Control Panel](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/home) to stop your server.
+
 ![Jupyterlab menu showing how to open the hub control panel.](images/jupyterlab-menu.png)
 
 Select *Stop My Server* to stop your server and release all of the resources you're consuming.
