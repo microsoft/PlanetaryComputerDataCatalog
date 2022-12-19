@@ -53,7 +53,7 @@ diamond 1). With the Planetary Computer's [STAC API](../quickstarts/reading-stac
 high-level concepts like date ranges, bounding boxes, and more (green diamond
 2). In addition to the STAC API, the Planetary Computer provides a tile server
 for quickly visualizing the data on a map, which is used by our
-[Explorer](../overview/explorer.md)
+[Explorer](../overview/explorer.md).
 
 Finally, note that the STAC API *also* catalogs the raw data from the upstream
 data providers. So it's not an "either-or": users of the Planetary Computer can
