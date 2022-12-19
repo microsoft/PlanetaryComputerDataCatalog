@@ -21,14 +21,14 @@ that the data is available on Azure.
 This diagram shows the relationship between upstream data providers and the Planetary Computer,
 using the
 [NOAA Open Data Dissemination](https://www.noaa.gov/information-technology/open-data-dissemination)
-(NODD) as a concrete example.
+(NODD) program as a concrete example.
 
 ![NODD Diagram](./images/nodd-diagram.png)
 
 This diagram starts with NODD pushing data assets to Azure, represented by the
 green circle 1. At this point, the raw data are immediately available to anyone
 through the highly scalable [Azure Blob
-Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview).
+Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview) service.
 Users can access the data using whatever tool they want that can make HTTP
 requests to the Blob Storage endpoint. In the diagram, this is represented by
 the green diamond 1, showing a "plain" Azure user accessing an individual file
