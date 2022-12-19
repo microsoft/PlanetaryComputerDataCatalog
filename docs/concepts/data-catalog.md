@@ -36,7 +36,7 @@ using `curl`.
 
 For some use cases, just having access to the raw data is sufficient. But to
 satisfy even more use cases, the Planetary Computer provides some additional
-services and assets on top of the raw data. This is shown on the right-hand side
+assets and services on top of the raw data. This is shown on the right-hand side
 of the diagram.
 
 First, the Planetary Computer might produce cloud-optimized versions of the same data;
@@ -44,12 +44,12 @@ for example converting HDF5 files to [Cloud Optimized GeoTIFF](https://www.cogeo
 In the diagram this is represented by the green circle 2a, which shows the Planetary Computer
 generating COGs and storing them in the `goeseuwest-cogs` storage container.
 
-Second, the Planetary Computer provides additional services to make working
-with geospatial data much easier (depicted by the green circle 2b in the diagram).
+Second, the Planetary Computer provides services to make working with geospatial
+data much easier (depicted by the green circle 2b in the diagram).
 
-To work with the raw data pushed to Azure, users need to somehow know the naming
+To use the raw data pushed to Azure, users need to somehow know the naming
 convention of each data product, and parse it to find the data they want (green
-diamond 1). With the Planetary Computer's [STAC API](../quickstarts/reading-stac.ipynb), users can search for the data using
+diamond 1). With the Planetary Computer's [STAC API](../quickstarts/reading-stac.ipynb), users can search the data using
 high-level concepts like date ranges, bounding boxes, and more (green diamond
 2). In addition to the STAC API, the Planetary Computer provides a tile server
 for quickly visualizing the data on a map, which is used by our
