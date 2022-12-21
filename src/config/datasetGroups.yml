@@ -502,3 +502,26 @@ noaa-climate-normals:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-climate-normals-group-thumb.png"
   keywords:
     ["NOAA", "Climate Normals", "Weather", "Surface Observations", "Climatology", "CONUS"]
+
+usgs-lcmap:
+  title: USGS LCMAP
+  short_discription: >
+    USGS Land Change Monitoring, Assessment, and Projection (LCMAP)
+  description: >
+    The U.S. Geological Survey (USGS) [Land Change Monitoring, Assessment, and Projection](https://www.usgs.gov/special-topics/lcmap) (LCMAP) product provides land cover mapping and change monitoring from the USGS's [Earth Resources Observation and Science](https://www.usgs.gov/centers/eros) (EROS) Center. LCMAP's Science Products are developed by applying time-series modeling on a per-pixel basis to [Landsat Analysis Ready Data](https://www.usgs.gov/landsat-missions/landsat-us-analysis-ready-data) (ARD) using an implementation of the [Continuous Change Detection and Classification](https://doi.org/10.1016/j.rse.2014.01.011) (CCDC) algorithm. All available clear (non-cloudy) U.S. Landsat ARD observations are fit to a harmonic model to predict future Landsat-like surface reflectance. Where Landsat surface reflectance observations differ significantly from those predictions, a change is identified. Attributes of the resulting model sequences (e.g., start/end dates, residuals, model coefficients) are then used to produce a set of land surface change products and as inputs to the subsequent classification to thematic land cover. 
+
+
+    Two LCMAP Collections are provided:
+
+    1. [LCMAP CONUS Collection 1.3](https://www.usgs.gov/special-topics/lcmap/collection-13-conus-science-products), which was released in August 2022 for years 1985-2021.
+    2. [LCMAP Hawaii Collection 1.0](https://www.usgs.gov/special-topics/lcmap/collection-1-hawaii-science-products), which was released in January 2022 for years 2000-2020.
+
+
+    The data are tiled according to the Landsat ARD tile grid and consist of [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COG) and corresponding metadata files. Note that the provided COGs differ slightly from those in the USGS source data. They have been reprocessed to add overviews, "nodata" values where appropriate, and an updated projection definition. The source USGS data bundle is also provided in TAR format.
+  assets:
+    headerImg:
+      href: ./images/usgs-lcmap-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/usgs-lcmap-group-thumb.png"
+  keywords:
+    ["USGS", "LCMAP", "Land Cover", "Land Cover Change", "CONUS", "Hawaii"]
