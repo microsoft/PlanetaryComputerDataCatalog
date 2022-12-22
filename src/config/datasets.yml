@@ -843,6 +843,22 @@ us-census:
       src: us-census-example.html
       launch: datasets/us-census/us-census-example.ipynb
 
+usgs-lcmap-conus-v13:
+  category: Land use/Land cover
+  headerImg: ./images/usgs-lcmap-conus-v13-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usgs-lcmap-example.html
+      launch: datasets/usgs-lcmap/usgs-lcmap-example.ipynb
+
+usgs-lcmap-hawaii-v10:
+  category: Land use/Land cover
+  headerImg: ./images/usgs-lcmap-hawaii-v10-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usgs-lcmap-example.html
+      launch: datasets/usgs-lcmap/usgs-lcmap-example.ipynb
+
 viirs-09a1-001:
   category: Imagery
   headerImg: ./images/viirs-09a1-hero.png
