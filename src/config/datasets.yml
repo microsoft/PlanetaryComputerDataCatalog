@@ -352,6 +352,22 @@ era5-pds:
       src: era5-example.html
       launch: datasets/era5/era5-example.ipynb
 
+esa-cci-lc:
+  category: Land use/Land cover
+  headerImg: ./images/esa-cci-lc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: esa-cci-lc-example.html
+      launch: datasets/esa-cci-lc/esa-cci-lc-example.ipynb
+
+esa-cci-lc-netcdf:
+  category: Land use/Land cover
+  headerImg: ./images/esa-cci-lc-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: esa-cci-lc-example.html
+      launch: datasets/esa-cci-lc/esa-cci-lc-example.ipynb
+
 esa-worldcover:
   category: Land use/Land cover
   headerImg: ./images/esa-worldcover-hero.png
