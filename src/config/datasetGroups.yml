@@ -518,7 +518,7 @@ usgs-lcmap:
     2. [LCMAP Hawaii Collection 1.0](https://www.usgs.gov/special-topics/lcmap/collection-1-hawaii-science-products), which was released in January 2022 for years 2000-2020.
 
 
-    The data are tiled according to the Landsat ARD tile grid and consist of [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COG) and corresponding metadata files. Note that the provided COGs differ slightly from those in the USGS source data. They have been reprocessed to add overviews, "nodata" values where appropriate, and an updated projection definition. The source USGS data bundle is also provided in TAR format.
+    The data are tiled according to the Landsat ARD tile grid and consist of [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COGs) and corresponding metadata files. Note that the provided COGs differ slightly from those in the USGS source data. They have been reprocessed to add overviews, "nodata" values where appropriate, and an updated projection definition. The source USGS data bundle is also provided in TAR format.
   assets:
     headerImg:
       href: ./images/usgs-lcmap-group-hero.png
