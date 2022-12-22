@@ -549,7 +549,7 @@ usgs-lcmap:
 esa-cci-lc:
   title: ESA Climate Change Initiative (CCI) Land Cover Maps
   short_description: >
-    Global annual land cover maps at 300m spatial resolution
+    Global annual land cover maps from 1992 to 2020 at 300m resolution
   description: >
     The ESA Climate Change Initiative (CCI) [Land Cover dataset](https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview) 
     provides consistent global annual land cover maps at 300m spatial resolution 
@@ -559,11 +559,11 @@ esa-cci-lc:
     to document the reliability of the classification and change detection. 
 
 
-    Two STAC Collections are provided for the ESA CCI land cover product:
+    The ESA CCI land cover data is provided in two forms:
 
     1. The source NetCDF data.
 
-    2. Tiled COGs derived from the source NetCDF files.
+    2. Tiled [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COGs) created from the source NetCDF data.
   assets:
     headerImg:
       href: ./images/esa-cci-lc-group-hero.png
