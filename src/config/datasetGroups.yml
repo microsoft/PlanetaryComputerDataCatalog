@@ -508,7 +508,19 @@ usgs-lcmap:
   short_description: >
     Annual land cover and cover change maps for the conterminous United States and Hawaii
   description: >
-    The U.S. Geological Survey (USGS) [Land Change Monitoring, Assessment, and Projection](https://www.usgs.gov/special-topics/lcmap) (LCMAP) product provides land cover mapping and change monitoring from the USGS's [Earth Resources Observation and Science](https://www.usgs.gov/centers/eros) (EROS) Center. LCMAP's Science Products are developed by applying time-series modeling on a per-pixel basis to [Landsat Analysis Ready Data](https://www.usgs.gov/landsat-missions/landsat-us-analysis-ready-data) (ARD) using an implementation of the [Continuous Change Detection and Classification](https://doi.org/10.1016/j.rse.2014.01.011) (CCDC) algorithm. All available clear (non-cloudy) U.S. Landsat ARD observations are fit to a harmonic model to predict future Landsat-like surface reflectance. Where Landsat surface reflectance observations differ significantly from those predictions, a change is identified. Attributes of the resulting model sequences (e.g., start/end dates, residuals, model coefficients) are then used to produce a set of land surface change products and as inputs to the subsequent classification to thematic land cover. 
+    The U.S. Geological Survey (USGS) [Land Change Monitoring, Assessment, and Projection](https://www.usgs.gov/special-topics/lcmap) 
+    (LCMAP) product provides land cover mapping and change monitoring from the 
+    USGS's [Earth Resources Observation and Science](https://www.usgs.gov/centers/eros) 
+    (EROS) Center. LCMAP's Science Products are developed by applying time-series 
+    modeling on a per-pixel basis to [Landsat Analysis Ready Data](https://www.usgs.gov/landsat-missions/landsat-us-analysis-ready-data) 
+    (ARD) using an implementation of the [Continuous Change Detection and Classification](https://doi.org/10.1016/j.rse.2014.01.011) 
+    (CCDC) algorithm. All available clear (non-cloudy) U.S. Landsat ARD 
+    observations are fit to a harmonic model to predict future Landsat-like 
+    surface reflectance. Where Landsat surface reflectance observations differ 
+    significantly from those predictions, a change is identified. Attributes of 
+    the resulting model sequences (e.g., start/end dates, residuals, model 
+    coefficients) are then used to produce a set of land surface change products 
+    and as inputs to the subsequent classification to thematic land cover. 
 
 
     Two LCMAP Collections are provided:
@@ -533,3 +545,29 @@ usgs-lcmap:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/usgs-lcmap-group-thumb.png"
   keywords:
     ["USGS", "LCMAP", "Land Cover", "Land Cover Change", "CONUS", "Hawaii"]
+
+esa-cci-lc:
+  title: ESA Climate Change Initiative (CCI) Land Cover Maps
+  short_description: >
+    Global annual land cover maps at 300m spatial resolution
+  description: >
+    The ESA Climate Change Initiative (CCI) [Land Cover dataset](https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview) 
+    provides consistent global annual land cover maps at 300m spatial resolution 
+    from 1992 to 2020. The land cover classes are defined using the United Nations 
+    Food and Agriculture Organization's (UN FAO) [Land Cover Classification System](https://www.fao.org/land-water/land/land-governance/land-resources-planning-toolbox/category/details/en/c/1036361/) 
+    (LCCS). In addition to the land cover maps, four quality flags are produced 
+    to document the reliability of the classification and change detection. 
+
+
+    Two STAC Collections are provided for the ESA CCI land cover product:
+
+    1. The source NetCDF data.
+
+    2. Tiled COGs derived from the source NetCDF files.
+  assets:
+    headerImg:
+      href: ./images/esa-cci-lc-group-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/esa-cci-lc-group-thumb.png"
+  keywords:
+    ["ESA", "CCI", "Land Cover", "Global"]
