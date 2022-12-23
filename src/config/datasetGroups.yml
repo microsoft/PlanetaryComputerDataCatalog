@@ -504,7 +504,7 @@ noaa-climate-normals:
     ["NOAA", "Climate Normals", "Weather", "Surface Observations", "Climatology", "CONUS"]
 
 usgs-lcmap:
-  title: USGS Land Change Monitoring, Assessment, and Projection (LCMAP)
+  title: USGS Land Change Monitoring, Assessment, and Projection
   short_description: >
     Annual land cover and cover change maps for the conterminous United States and Hawaii
   description: >
@@ -536,8 +536,7 @@ usgs-lcmap:
     [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COGs) and corresponding 
     metadata files. Note that the provided COGs differ slightly from those in 
     the USGS source data. They have been reprocessed to add overviews, "nodata" 
-    values where appropriate, and an updated projection definition. The source 
-    USGS data bundle is also provided in TAR format.
+    values where appropriate, and an updated projection definition.
   assets:
     headerImg:
       href: ./images/usgs-lcmap-group-hero.png
@@ -547,7 +546,7 @@ usgs-lcmap:
     ["USGS", "LCMAP", "Land Cover", "Land Cover Change", "CONUS", "Hawaii"]
 
 esa-cci-lc:
-  title: ESA Climate Change Initiative (CCI) Land Cover Maps
+  title: ESA Climate Change Initiative Land Cover Maps
   short_description: >
     Global annual land cover maps from 1992 to 2020 at 300m resolution
   description: >
