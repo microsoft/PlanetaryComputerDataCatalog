@@ -47,11 +47,14 @@ relative image URLs.
 
 ### Developing doc notebooks locally
 
-The PlanetaryComputerExamples project includes a dev environment that facilitates developing notebooks. To render and visualize in-progress local notebooks, that project ships with a local webserver that will serve out file contents compatible with the docs site builder. While that project has a `./scripts/server` running, add the `--devdocs` option to the `update` script and it will assume all external notebook docs are served via that local server (http://localhost:8889).
+The PlanetaryComputerExamples project includes a dev environment that facilitates developing notebooks. To render and visualize in-progress local notebooks, that project ships with a local webserver that will serve out file contents compatible with the docs site builder. 
 
-```sh
-./scripts/update --devdocs
-```
+1. Stop the PlanetaryComputerDataCatalog if it is running.
+2. In the PlanetaryComputerExamples main folder, run the `./scripts/server` command. Don't stop until you've completed all of the steps.
+3. Run the command `./scripts/update --devdocs` in the PlanetaryComputerDataCatalog main folder.
+4. Finally, use the `./scripts/server` command to start the local Data Catalog.
+
+Following these steps, the local Data Catalog will assume all external notebook docs are served through the local server (http://localhost:8889) that we hosted in the second step.
 
 ## Adding/Removing codefiles
 
