@@ -170,7 +170,7 @@ chesapeake-lu:
   tabs:
     - title: Example Notebook
       src: chesapeake-example.html
-      launch: datasets/chesapeake/chesapeake-example.ipynb 
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chloris-biomass:
   category: Biomass/Vegetation
@@ -315,7 +315,7 @@ deltares-floods:
       launch: datasets/deltares-floods/deltares-floods-example.ipynb
 
 deltares-water-availability:
-  category: Water 
+  category: Water
   tabs:
     - title: Example Notebook
       src: deltares-water-availability-example.html
@@ -383,6 +383,14 @@ fia:
     - title: Example Notebook
       src: fia-example.html
       launch: datasets/fia/fia-example.ipynb
+
+fws-nwi:
+  category: Land use/Land cover
+  headerImg: ./images/fws-nwi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: fws-nwi-example.html
+      launch: datasets/fws-nwi/fws-nwi-example.ipynb
 
 gap:
   category: Land use/Land cover
