@@ -735,7 +735,7 @@ noaa-climate-normals-tabular:
   tabs:
     - title: Example Notebook
       src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-tabular-example.ipynb
 
 noaa-climate-normals-gridded:
   category: Climate/Weather
@@ -743,7 +743,7 @@ noaa-climate-normals-gridded:
   tabs:
     - title: Example Notebook
       src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-climate-normals-netcdf:
   category: Climate/Weather
@@ -751,7 +751,7 @@ noaa-climate-normals-netcdf:
   tabs:
     - title: Example Notebook
       src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-mrms-qpe-1h-pass1:
   category: Climate/Weather
