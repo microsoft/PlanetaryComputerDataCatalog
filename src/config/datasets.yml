@@ -357,16 +357,16 @@ esa-cci-lc:
   headerImg: ./images/esa-cci-lc-hero.png
   tabs:
     - title: Example Notebook
-      src: esa-cci-lc-example.html
-      launch: datasets/esa-cci-lc/esa-cci-lc-example.ipynb
+      src: esa-cci-example.html
+      launch: datasets/esa-cci/esa-cci-example.ipynb
 
 esa-cci-lc-netcdf:
   category: Land use/Land cover
   headerImg: ./images/esa-cci-lc-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: esa-cci-lc-example.html
-      launch: datasets/esa-cci-lc/esa-cci-lc-example.ipynb
+      src: esa-cci-example.html
+      launch: datasets/esa-cci/esa-cci-example.ipynb
 
 esa-worldcover:
   category: Land use/Land cover
@@ -734,7 +734,7 @@ noaa-climate-normals-tabular:
   headerImg: ./images/noaa-climate-normals-tabular-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
+      src: noaa-climate-normals-tabular-example.html
       launch: datasets/noaa-climate-normals/noaa-climate-normals-tabular-example.ipynb
 
 noaa-climate-normals-gridded:
@@ -742,7 +742,7 @@ noaa-climate-normals-gridded:
   headerImg: ./images/noaa-climate-normals-gridded-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
+      src: noaa-climate-normals-gridded-example.html
       launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-climate-normals-netcdf:
