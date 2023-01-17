@@ -750,7 +750,7 @@ noaa-climate-normals-netcdf:
   headerImg: ./images/noaa-climate-normals-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
+      src: noaa-climate-normals-gridded-example.html
       launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-mrms-qpe-1h-pass1:
