@@ -867,6 +867,14 @@ us-census:
       src: us-census-example.html
       launch: datasets/us-census/us-census-example.ipynb
 
+usda-cdl:
+  category: Land use/Land cover
+  headerImg: ./images/usda-cdl-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usda-cdl-example.html
+      launch: datasets/usda-cdl/usda-cdl-example.ipynb
+
 usgs-lcmap-conus-v13:
   category: Land use/Land cover
   headerImg: ./images/usgs-lcmap-conus-v13-hero.png
