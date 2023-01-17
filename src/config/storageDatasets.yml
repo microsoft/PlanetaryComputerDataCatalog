@@ -116,14 +116,6 @@ noaa-rap:
   thumbnailUrl: thunder_storm.jpg
   keywords: [North America, NOAA, Weather]
 
-noaa-climatenormals:
-  title: NOAA US Climate Normals
-  category: Climate/Weather
-  short_description: Typical climate conditions for the U.S. from 1981-present
-  infoUrl: https://aka.ms/ai4edata-climatenormals
-  thumbnailUrl: climate_normals.jpg
-  keywords: [North America, NOAA, Weather]
-
 ooi-camhd:
   title: Ocean Observatories Initiative CAMHD
   category: Biodiversity
