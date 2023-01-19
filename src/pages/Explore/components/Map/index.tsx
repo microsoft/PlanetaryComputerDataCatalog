@@ -42,7 +42,9 @@ const ExploreMap = () => {
 
   // Initialize the map
   useEffect(() => {
-    const onReady = () => setMapReady(true);
+    const onReady = () => {
+      setMapReady(true);
+    };
 
     if (!mapRef.current) {
       const map = new atlas.Map(mapContainerId, {

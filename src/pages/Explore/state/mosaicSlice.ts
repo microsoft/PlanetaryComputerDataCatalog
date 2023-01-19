@@ -3,6 +3,7 @@ import { uniqueId } from "lodash-es";
 
 import { IStacCollection } from "types/stac";
 import { registerStacFilter } from "utils/requests";
+import { LayerType } from "../enums";
 import {
   ILayerState,
   IMosaic,
@@ -152,6 +153,16 @@ export const mosaicSlice = createSlice({
         { minZoom: DEFAULT_MIN_ZOOM },
         action.payload
       );
+
+      if (action.payload.minZoom !== undefined) {
+        mosaic.layer.minZoom = action.payload.minZoom;
+      }
+
+      // Backwards compatibility for old render options
+      if (!renderOption.type) {
+        renderOption.type = LayerType.tile;
+      }
+
       mosaic.renderOption = renderOption;
     },
 

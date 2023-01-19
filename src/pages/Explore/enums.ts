@@ -12,3 +12,8 @@ export enum SidebarPanels {
   animation = "animation",
   image = "image",
 }
+
+export enum LayerType {
+  tile = "tile",
+  polygon = "vt-polygon",
+}

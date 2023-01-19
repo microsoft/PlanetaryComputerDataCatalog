@@ -33,6 +33,12 @@ const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) =>
 
   const previewUrl = useItemPreviewUrl(item, renderOption, size);
 
+  // Check that the item assets have an asset with a rel of preview
+  const hasPreview = Object.values(item.assets).some(asset =>
+    asset.roles?.includes("overview")
+  );
+
+  if (!hasPreview) return null;
   if (!renderOption) return null;
 
   return (
