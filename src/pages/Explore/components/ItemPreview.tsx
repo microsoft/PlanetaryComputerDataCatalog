@@ -12,6 +12,7 @@ import { IStacItem } from "types/stac";
 import { useItemPreviewUrl } from "utils";
 import { useExploreSelector } from "../state/hooks";
 import { selectCurrentMosaic } from "../state/mosaicSlice";
+import collections from "config/datasets.yml";
 
 interface ItemPreviewProps {
   item: IStacItem;
@@ -31,14 +32,18 @@ const ItemPreview = ({ item, size = 100, border = "side" }: ItemPreviewProps) =>
     [setLoading]
   );
 
-  const previewUrl = useItemPreviewUrl(item, renderOption, size);
+  const previewAssetUrl = useItemPreviewUrl(item, renderOption, size);
 
   // Check that the item assets have an asset with a rel of preview
-  const hasPreview = Object.values(item.assets).some(asset =>
+  const hasPreviewAsset = Object.values(item.assets).some(asset =>
     asset.roles?.includes("overview")
   );
 
-  if (!hasPreview) return null;
+  const previewUrl = hasPreviewAsset
+    ? previewAssetUrl
+    : collections[item.collection]?.defaultPreviewImage;
+
+  if (!previewUrl) return null;
   if (!renderOption) return null;
 
   return (

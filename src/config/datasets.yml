@@ -17,6 +17,9 @@
 # `hideInExplorer` attribute determines if the dataset is hidden in the Explorer, even
 # if would otherwise be available. It is still visible in the catalog.
 
+# `defaultPreviewImage` attribute determines if the dataset should use the default preview image
+# in the Explorer if no preview image is available on the STAC Item directly.
+
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
 
@@ -685,6 +688,7 @@ mobi:
 ms-buildings:
   category: Infrastructure
   headerImg: ./images/ms-buildings-hero.png
+  defaultPreviewImage: ./images/ms-buildings-preview.jpg
   tabs:
     - title: Example Notebook
       src: ms-buildings-example.html
