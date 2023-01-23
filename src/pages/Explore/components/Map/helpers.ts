@@ -70,7 +70,7 @@ export const setupPolygonLayers = (
   if (isValid) {
     const polygonLayerOpts: atlas.PolygonLayerOptions = {
       sourceLayer: renderOption.vectorOptions?.sourceLayer,
-      fillColor: renderOption.vectorOptions?.fillColor || "pink",
+      fillColor: renderOption.vectorOptions?.fillColor || "#000",
       visible: mosaic.layer.visible,
       fillOpacity: mosaic.layer.opacity / 100,
     };
@@ -89,33 +89,33 @@ export const setupPolygonLayers = (
       strokeOpacity: mosaic.layer.opacity / 100,
     };
 
-    const heatmapLayerOpts: atlas.HeatMapLayerOptions = {
-      sourceLayer: renderOption.vectorOptions?.sourceLayer,
-      weight: ["get", "point_count"],
-      intensity: ["interpolate", ["linear"], ["zoom"], 0, 0.8, 21.2, -2],
-      // radius: ["interpolate", ["linear"], ["zoom"], 0, 15, 7, 8],
-      radius: 12,
-      maxZoom: 8,
-      color: [
-        "interpolate",
-        ["linear"],
-        ["heatmap-density"],
-        0,
-        "rgba(0,0, 255,0)",
-        0.1,
-        "royalblue",
-        0.4,
-        "cyan",
-        0.7,
-        "yellow",
-        0.89,
-        "orange",
-        1,
-        "#8040bf",
-      ],
-      opacity: mosaic.layer.opacity / 100,
-      visible: mosaic.layer.visible,
-    };
+    // const heatmapLayerOpts: atlas.HeatMapLayerOptions = {
+    //   sourceLayer: renderOption.vectorOptions?.sourceLayer,
+    //   weight: ["get", "point_count"],
+    //   intensity: ["interpolate", ["linear"], ["zoom"], 0, 2, 9, 1],
+    //   radius: ["interpolate", ["linear"], ["zoom"], 1, 8, 9, 2],
+    //   maxZoom: 9,
+    //   color: [
+    //     "interpolate",
+    //     ["linear"],
+    //     ["heatmap-density"],
+    //     0,
+    //     "rgba(0,0, 255,0)",
+    //     0.1,
+    //     "royalblue",
+    //     0.6,
+    //     "cyan",
+    //     0.8,
+    //     "yellow",
+    //     0.9,
+    //     "orange",
+    //     1,
+    //     "#8040bf",
+    //   ],
+    //   // opacity: mosaic.layer.opacity / 100,
+    //   opacity: ["interpolate", ["exponential", 1], ["zoom"], 0, 1, 7, 2, 9, 0],
+    //   visible: mosaic.layer.visible,
+    // };
 
     if (polygonLayer) {
       polygonLayer.setOptions(polygonLayerOpts);
@@ -127,12 +127,12 @@ export const setupPolygonLayers = (
         outline.setOptions(polygonOutlineLayerOpts);
       }
 
-      const heatmap = map.layers.getLayerById(
-        mapLayerId + "-heatmap"
-      ) as atlas.layer.HeatMapLayer;
-      if (heatmap) {
-        heatmap.setOptions(heatmapLayerOpts);
-      }
+      // const heatmap = map.layers.getLayerById(
+      //   mapLayerId + "-heatmap"
+      // ) as atlas.layer.HeatMapLayer;
+      // if (heatmap) {
+      //   heatmap.setOptions(heatmapLayerOpts);
+      // }
     } else {
       const dsId = makeDatasourceId(mapLayerId);
       const datasource = new atlas.source.VectorTileSource(dsId, {
@@ -151,16 +151,16 @@ export const setupPolygonLayers = (
         polygonOutlineLayerOpts
       );
 
-      const heatmap = new atlas.layer.HeatMapLayer(
-        datasource,
-        makeLayerHeatmapId(mapLayerId),
-        heatmapLayerOpts
-      );
+      // const heatmap = new atlas.layer.HeatMapLayer(
+      //   datasource,
+      //   makeLayerHeatmapId(mapLayerId),
+      //   heatmapLayerOpts
+      // );
 
       map.sources.add(datasource);
       map.layers.add(outline, itemOutlineLayerName);
       map.layers.add(layer, outline);
-      map.layers.add(heatmap, "labels");
+      // map.layers.add(heatmap, "labels");
     }
   }
 };
