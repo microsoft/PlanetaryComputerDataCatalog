@@ -19,6 +19,7 @@ interface DatasetEntry {
   tabs?: TabEntry[];
   hideInExplorer?: boolean;
   isHidden?: boolean;
+  defaultPreviewImage?: string;
 }
 
 interface StorageDatasetEntry {

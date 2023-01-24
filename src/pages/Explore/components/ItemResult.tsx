@@ -85,6 +85,7 @@ const activeStyle: IStyle = {
 
 const linkStyle: IStyleFunctionOrObject<ILinkStyleProps, ILinkStyles> = {
   root: {
+    width: "100%",
     paddingLeft: 10,
     ":focus": activeStyle,
     ":active": activeStyle,

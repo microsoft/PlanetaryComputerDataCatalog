@@ -10,6 +10,7 @@ import { initializeIcons } from "@uifabric/icons";
 // Mock window.scrollTo for tests
 const noop = () => {};
 Object.defineProperty(window, "scrollTo", { value: noop, writable: true });
+window.URL.createObjectURL = noop;
 
 // Register icons for any components that may try to import them
 initializeIcons();

@@ -1,6 +1,11 @@
 import * as atlas from "azure-maps-control";
 import dayjs, { ManipulateType } from "dayjs";
-import { IAnimationHint, ILayerState } from "pages/Explore/types";
+import { LayerType } from "pages/Explore/enums";
+import {
+  IAnimationHint,
+  ILayerState,
+  IMosaicRenderOption,
+} from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 import { IStacCollection } from "types/stac";
 import {
@@ -150,14 +155,21 @@ export const getDefaultSettings = (
   return defaultSettings;
 };
 
-export const isValidCollection = (collection: IStacCollection | null) => {
-  if (!collection) {
+export const isValidCollection = (
+  collection: IStacCollection | null,
+  renderOption: IMosaicRenderOption | null
+) => {
+  if (!collection || !renderOption) {
     return false;
   }
 
   // If the start/end dates of the temporal extent are the same, then the collection is invalid.
   const temporal = collection.extent.temporal.interval;
-  return temporal
+  const isTemporalValid = !temporal
     .map(([start, end]) => dayjs(start).isSame(dayjs(end)))
     .every(Boolean);
+
+  const isRenderTypeValid = renderOption.type === LayerType.tile;
+
+  return isTemporalValid && isRenderTypeValid;
 };

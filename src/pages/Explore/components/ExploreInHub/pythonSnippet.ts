@@ -60,7 +60,9 @@ export const createItemPythonSnippet = (item: IStacItem | null) => {
   let dataAssetEntries = Object.entries(item.assets).filter(
     ([, asset]) => asset.roles?.includes("data") && asset.type?.includes("geotiff")
   );
-  if (!dataAssetEntries?.length) {
+
+  const hasDataAssets = Boolean(dataAssetEntries?.length);
+  if (hasDataAssets) {
     dataAssetEntries = Object.entries(item.assets).filter(([, asset]) =>
       asset.type?.includes("geotiff")
     );
@@ -75,6 +77,18 @@ export const createItemPythonSnippet = (item: IStacItem | null) => {
         .join(", ")})`
     : "";
 
+  const assetTemplate = hasDataAssets
+    ? `signed_item = planetary_computer.sign(item)
+
+# Open one of the data assets ${formattedOtherAssets}
+asset_href = signed_item.assets["${firstDataAsset[0]}"].href
+ds = rioxarray.open_rasterio(asset_href)
+ds
+`
+    : `# No data assets in this item, show the STAC data
+item
+`;
+
   const template = `import pystac
 import planetary_computer
 import rioxarray
@@ -83,12 +97,8 @@ item_url = "${itemLink.href}"
 
 # Load the individual item metadata and sign the assets
 item = pystac.Item.from_file(item_url)
-signed_item = planetary_computer.sign(item)
 
-# Open one of the data assets ${formattedOtherAssets}
-asset_href = signed_item.assets["${firstDataAsset[0]}"].href
-ds = rioxarray.open_rasterio(asset_href)
-ds
+${assetTemplate}
 `;
 
   return hljs.highlight(template, { language: "python" });

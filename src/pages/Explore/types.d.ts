@@ -1,6 +1,6 @@
 import { ICqlExpressionList } from "./utils/cql/types";
 import { IStacCollection, IStacLink } from "types/stac";
-import { LegendTypes } from "./enums";
+import { LegendTypes, LayerType } from "./enums";
 import atlas from "azure-maps-control";
 
 export interface IDefaultLocationInfo {
@@ -34,10 +34,22 @@ export interface IMosaicRenderOptionCondition {
   property: string;
   value: any;
 }
+
+export interface IVectorTileOption {
+  tilejsonKey: string;
+  sourceLayer: string;
+  fillColor: string | null;
+  strokeColor: string | null;
+  strokeWidth: int | null;
+  filter: [] | null;
+}
+
 export interface IMosaicRenderOption {
   name: string;
   description: string;
-  options: string;
+  type: LayerType;
+  options: string | undefined;
+  vectorOptions: IVectorTileOption | null;
   minZoom: number | undefined;
   legend: ILegendConfig | undefined;
   conditions?: IMosaicRenderOptionCondition[];

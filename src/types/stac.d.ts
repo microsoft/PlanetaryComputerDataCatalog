@@ -12,6 +12,7 @@ export interface IPcCollection {
   providers?: IStacProvider[];
   "msft:short_description": string;
   "msft:group_id"?: string;
+  "msft:region"?: string;
   "cube:variables"?: Record<string, Record<string, any>>;
 }
 
