@@ -6,7 +6,7 @@ import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
-import { makeRasterTileJsonUrl } from "utils";
+import { getTileJsonAsset, makeRasterTileJsonUrl } from "utils";
 import {
   DATA_URL,
   IMAGE_URL,
@@ -19,7 +19,6 @@ import { AnimationConfig } from "pages/Explore/components/Sidebar/exporters/Anim
 import { ImageConfig } from "pages/Explore/components/Sidebar/exporters/ImageExporter/types";
 import { ImageExportResponse } from "pages/Explore/components/Sidebar/exporters/BaseExporter/types";
 import { LayerType } from "pages/Explore/enums";
-import { getTileJsonAsset } from "pages/Explore/components/Map/helpers";
 
 export const pcApiClient = axios.create({
   headers: {

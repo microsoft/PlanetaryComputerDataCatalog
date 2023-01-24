@@ -189,6 +189,22 @@ export const makeRasterTileJsonUrl = (
   return `${DATA_URL}/mosaic/${query.searchId}/tilejson.json?&${scaleParam}&${renderParams}${minZoom}${collectionParam}${format}`;
 };
 
+export const getTileJsonAsset = (
+  collection: IStacCollection,
+  renderOption: IMosaicRenderOption
+): string => {
+  const tilejsonKey = renderOption?.vectorOptions?.tilejsonKey;
+  if (!tilejsonKey) {
+    throw new Error("No tilejsonKey found in renderOption");
+  }
+
+  const asset = collection.assets?.[tilejsonKey];
+  if (!asset) {
+    throw new Error(`No asset found for key: ${tilejsonKey}`);
+  }
+  return asset.href;
+};
+
 export const useItemPreviewUrl = (
   item: IStacItem,
   renderOption: IMosaicRenderOption | null,

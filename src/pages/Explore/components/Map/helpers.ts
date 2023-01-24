@@ -1,9 +1,9 @@
 import * as atlas from "azure-maps-control";
 import { DATA_URL, REQUEST_ENTITY, X_REQUEST_ENTITY } from "utils/constants";
-import { IStacCollection, IStacItem } from "types/stac";
-import { IMosaicRenderOption, ILayerState } from "pages/Explore/types";
+import { IStacItem } from "types/stac";
+import { ILayerState } from "pages/Explore/types";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
-import { makeRasterTileJsonUrl } from "utils";
+import { getTileJsonAsset, makeRasterTileJsonUrl } from "utils";
 
 export const mosaicLayerPrefix = "pc-mosaic-";
 
@@ -31,22 +31,6 @@ export const addEntityHeader = (
     };
   }
   return {};
-};
-
-export const getTileJsonAsset = (
-  collection: IStacCollection,
-  renderOption: IMosaicRenderOption
-): string => {
-  const tilejsonKey = renderOption?.vectorOptions?.tilejsonKey;
-  if (!tilejsonKey) {
-    throw new Error("No tilejsonKey found in renderOption");
-  }
-
-  const asset = collection.assets?.[tilejsonKey];
-  if (!asset) {
-    throw new Error(`No asset found for key: ${tilejsonKey}`);
-  }
-  return asset.href;
 };
 
 export const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;
