@@ -1,7 +1,7 @@
 import { Text } from "@fluentui/react";
 import { IMosaicRenderOption } from "pages/Explore/types";
 import { IStacCollection } from "types/stac";
-import { ExporterHeader } from "../BaseExporter/ImageIntro";
+import { ExporterHeader } from "../BaseExporter/ExporterHeader";
 
 interface Props {
   collection: IStacCollection | null;

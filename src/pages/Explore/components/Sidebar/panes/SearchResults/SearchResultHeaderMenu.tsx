@@ -16,10 +16,13 @@ import { useSortMenuItem } from "./useSortMenuItem";
 
 export const SearchResultHeaderMenu: React.FC = () => {
   const dispatch = useExploreDispatch();
-  const { collection } = useExploreSelector(selectCurrentMosaic);
+  const { collection, renderOption } = useExploreSelector(selectCurrentMosaic);
   const [isQueryInfoVisible, { toggle }] = useBoolean(false);
   const sortItem = useSortMenuItem();
   const buttonId = useId("explore-results-menu-button");
+
+  const isValidExport = isValidCollection(collection, renderOption);
+  const invalidExportMsg = "This layer isn't available for image export.";
 
   const menuProps: IContextualMenuProps = {
     items: [
@@ -56,21 +59,23 @@ export const SearchResultHeaderMenu: React.FC = () => {
         key: "animate",
         text: "Generate timelapse animation",
         ariaLabel: "Generate timelapse animation base on current filter settings",
+        title: !isValidExport ? invalidExportMsg : undefined,
         iconProps: { iconName: "PlaybackRate1x" },
         onClick: () => {
           dispatch(setSidebarPanel(SidebarPanels.animation));
         },
-        disabled: isValidCollection(collection),
+        disabled: !isValidExport,
       },
       {
         key: "image",
         text: "Generate snapshot image",
         ariaLabel: "Generate timelapse animation base on current filter settings",
+        title: !isValidExport ? invalidExportMsg : undefined,
         iconProps: { iconName: "Photo2" },
         onClick: () => {
           dispatch(setSidebarPanel(SidebarPanels.image));
         },
-        disabled: isValidCollection(collection),
+        disabled: !isValidExport,
       },
     ],
   };
