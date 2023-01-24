@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { LayerType } from "pages/Explore/enums";
 import {
+  getRelatedLayers,
   makeDatasourceId,
   makeLayerHeatmapId,
   makeLayerId,
@@ -46,7 +47,10 @@ const useMosaicLayer = (
           map.layers.getLayerById(higherLayerId) &&
           map.layers.getLayerById(lowerLayerId)
         ) {
-          map.layers.move(lowerLayerId, higherLayerId);
+          const layersToMove = getRelatedLayers(lowerLayerId, map);
+          layersToMove.forEach(relatedLayerId => {
+            map.layers.move(relatedLayerId, higherLayerId);
+          });
         }
       });
   }, [layerOrder, mapReady, mapRef]);

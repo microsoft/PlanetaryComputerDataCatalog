@@ -213,3 +213,14 @@ export const setupRasterTileLayer = (
     }
   }
 };
+
+export const getRelatedLayers = (layerId: string, map: atlas.Map) => {
+  // Order here is important, higher array indexes have a higher z index on the map.
+  const relatedLayers = [
+    layerId,
+    makeLayerOutlineId(layerId),
+    makeLayerHeatmapId(layerId),
+  ];
+
+  return relatedLayers.map(layer => map.layers.getLayerById(layer)).filter(Boolean);
+};
