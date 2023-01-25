@@ -3,15 +3,40 @@ import React from "react";
 import SEO from "../components/Seo";
 import Layout from "../components/Layout";
 import { Link } from "@fluentui/react";
+import { DetailsList, DetailsListLayoutMode, SelectionMode } from "@fluentui/react";
 
 const Terms = () => {
+  const token_tier_rows = [
+    { key: "1", name: "Tier 1", value: "Up to 1 week" },
+    { key: "2", name: "Tier 2", value: "Up to 6 months" },
+  ];
+
+  const token_tier_columns = [
+    {
+      key: "column1",
+      name: "Participation Tier",
+      fieldName: "name",
+      minWidth: 100,
+      maxWidth: 200,
+      isResizable: false,
+    },
+    {
+      key: "column2",
+      name: "Authorized Time for Token Use",
+      fieldName: "value",
+      minWidth: 100,
+      maxWidth: 200,
+      isResizable: false,
+    },
+  ];
+
   return (
     <Layout isShort>
       <SEO title="Terms of Use" />
 
       <article className="grid-content" style={{ margin: "40px 0" }}>
         <h1>Supplemental Terms of Use for Microsoft Planetary Computer Previews</h1>
-        <p>Last updated: April 2021</p>
+        <p>Last updated: January 2023</p>
         <div style={{ maxWidth: 700 }}>
           <p>
             Microsoft may provide preview, beta, or other pre-release features or
@@ -77,6 +102,45 @@ const Terms = () => {
             us, without charge, the right to use, share, and commercialize the
             Feedback in any way and for any purpose, without regard to intellectual
             property or otherwise.
+          </p>
+          <p>
+            In certain circumstances, access to data hosted by the Services will
+            require the use of a valid token issued by Microsoft. Details concerning
+            when a token is needed and the process by which a token may be requested
+            may be found in the documentation made available by Microsoft at{" "}
+            <Link href="https://planetarycomputer.microsoft.com/docs/concepts/sas/">
+              this Documentation page
+            </Link>{" "}
+            or a successor site (“Documentation”). Your use of any such tokens is
+            subject to the terms of these Supplemental Terms and the Documentation.
+            Each token is unique to the individual to whom it has been issued; tokens
+            may not be assigned or transferred to any other party. Tokens are active
+            for a limited time period, and in certain cases, rate limiting may be put
+            into place to limit the amount of egress against the Service’s datasets.
+            With respect to token expiration, the duration of authorized use of a
+            token depends in part on your particular participation tier:
+          </p>
+          <DetailsList
+            items={token_tier_rows}
+            columns={token_tier_columns}
+            setKey="set"
+            selectionMode={SelectionMode.none}
+            layoutMode={DetailsListLayoutMode.justified}
+          />
+          <p>
+            Tokens are authorized for use during the calendar period above and
+            automatically expire after the authorized time for token use for your
+            particular participation tier has elapsed. Additional criteria informing
+            Microsoft’s determinations with respect to token expiration and rate
+            limiting may be found in the Documentation. You are responsible for
+            maintaining the confidentiality and security of all tokens issued to you
+            and your personnel. Tokens may not be sublicensed to, distributed to, or
+            shared with third parties (except to your employees, affiliates,
+            contractors and vendors to perform work solely on your behalf, provided
+            they are bound by the terms of these Supplemental Terms and you remain
+            responsible for their compliance). Tokens may not be monetized or used
+            for any other purpose that is not expressly permitted under these
+            Supplemental Terms or the Documentation.
           </p>
         </div>
       </article>
