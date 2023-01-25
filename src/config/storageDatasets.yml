@@ -140,6 +140,15 @@ noaa-isd:
   thumbnailUrl: RE4rsOQ.jpg
   keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
+noaa-nwm:
+  title: NOAA National Water Model
+  category: Water
+  short_description: Streamflow forecasts for the contiguous US, Hawaii and Puerto Rico
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/noaa-nwm.html
+  thumbnailUrl: noaa-nwm-thumbnail.png
+
+  keywords: [Global, NOAA, Streamflow, Hydrology, Water]
+
 noaa-rap:
   title: NOAA Rapid Refresh (RAP)
   category: Climate/Weather
