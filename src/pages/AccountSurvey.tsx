@@ -82,31 +82,30 @@ const AccountSurvey = () => {
     <Formik {...formikProps}>
       <Form style={{ maxWidth: "500px", marginBottom: 80 }}>
         <p>
-          The Planetary Computer Explorer, APIs and many datasets are available to anyone
-          who would like to use it. Check out the {" "}
-          <Link href="catalog">
-            Data Catalog
-          </Link>{" "} to get started.
+          The Planetary Computer Explorer, APIs and many datasets are available to
+          anyone who would like to use it. Check out the{" "}
+          <Link href="catalog">Data Catalog</Link> to get started.
         </p>
         <p>
-          For specific datasets such {" "}
-          <NewTabLink href="dataset/sentinel-1-rtc">
-            Sentinel 1 RTC
-          </NewTabLink>{" "} or to access the {" "}
+          For specific datasets such{" "}
+          <NewTabLink href="dataset/sentinel-1-rtc">Sentinel 1 RTC</NewTabLink> or to
+          access the{" "}
           <NewTabLink href="docs/overview/environment/">
             Planetary Computer Hub
-          </NewTabLink>{" "},
-          you will need to create an account.
+          </NewTabLink>{" "}
+          , you will need to create an account.
         </p>
         <p>
-          To request an account please tell us about the project or solution you are working on and
-          how you are using geospatial data. We strive to review new requests frequently and will let
-          you know once your request has been approved.
+          To request an account please tell us about the project or solution you are
+          working on and how you are using geospatial data. We strive to review new
+          requests frequently and will let you know once your request has been
+          approved.
         </p>
         <p>
-          Note: if you are trying to login with an enterprise email address, your company may have
-          locked down your usage of that email preventing you from using it to log in. If that happens
-          when trying to log in, please use a non-enterprise or personal email address.
+          Note: if you are trying to login with an enterprise email address, your
+          company may have locked down your usage of that email preventing you from
+          using it to log in. If that happens when trying to log in, please use a
+          non-enterprise or personal email address.
         </p>
         <Separator />
         <p>
@@ -188,15 +187,13 @@ const AccountSurvey = () => {
     <>
       <h2>Thank you for your interest!</h2>
       <p style={{ maxWidth: "50%" }}>
-        We are reviewing your request and will let you know once your account has been approved.
-        In the meantime, you can explore our data catalog by going to {" "}
-        <Link href="catalog">
-          Data Catalog
-        </Link>{" "} page.
-        Please contact {" "}
+        We are reviewing your request and will let you know once your account has
+        been approved. In the meantime, you can explore our data catalog by going to{" "}
+        <Link href="catalog">Data Catalog</Link> page. Please contact{" "}
         <Link href="mailto:planetarycomputer@microsoft.com">
           planetarycomputer@microsoft.com
-        </Link>{" "} if you have questions or if you would like to unsubscribe.
+        </Link>{" "}
+        if you have questions or if you would like to unsubscribe.
       </p>
       <ScrollToTopOnMount />
     </>
