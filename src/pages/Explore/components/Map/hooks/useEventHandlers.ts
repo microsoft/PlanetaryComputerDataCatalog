@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useWindowSize } from "react-use";
 import atlas from "azure-maps-control";
 
@@ -18,9 +18,7 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const { height, width } = useWindowSize();
   const [areTilesLoading, setTilesLoading] = useState<boolean>(false);
   const layerOrder = useExploreSelector(s => s.mosaic.layerOrder);
-
-  const stateRef = useRef<string[]>();
-  stateRef.current = layerOrder;
+  const bottomLayer = makeLayerId(layerOrder[layerOrder.length - 1]);
 
   useEffect(() => {
     // Some actions that resize the map that occur from browser chrome (show
@@ -43,44 +41,40 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
 
   // When the basemap style is changed, it changes the order of all loaded layers
   // which need to be manually reset.
-  const onStyleDataLoaded = (e: atlas.MapDataEvent) => {
-    if (e.dataType === "style") {
-      const layerMgr = e.map.layers;
-      if (layerMgr.getLayers()[0].getId() !== "base") {
-        const hasOutlineLayer = layerMgr.getLayerById(itemLineLayerName);
-        if (hasOutlineLayer) {
-          layerMgr.move(itemLineLayerName, "labels");
-          layerMgr.move(itemOutlineLayerName, itemLineLayerName);
-        }
-        const hasCollectionLayer = layerMgr.getLayerById(collectionLineLayerName);
-        if (hasCollectionLayer) {
-          layerMgr.move(collectionLineLayer, "labels");
-          layerMgr.move(collectionOutlineLayer, collectionLineLayer);
-        }
+  const onStyleDataLoaded = useCallback(
+    (e: atlas.MapDataEvent) => {
+      if (e.dataType === "style") {
+        const layerMgr = e.map.layers;
 
-        if (stateRef.current) {
-          const mosaicLayerId = makeLayerId(
-            stateRef.current[stateRef.current.length - 1]
-          );
-          const mosaicLayer = layerMgr.getLayerById(mosaicLayerId);
-          console.log("mosaicLayer", mosaicLayer);
+        if (layerMgr.getLayers()[0].getId() !== "base") {
+          const hasOutlineLayer = layerMgr.getLayerById(itemLineLayerName);
+          if (hasOutlineLayer) {
+            layerMgr.move(itemLineLayerName, "labels");
+            layerMgr.move(itemOutlineLayerName, itemLineLayerName);
+          }
+          const hasCollectionLayer = layerMgr.getLayerById(collectionLineLayerName);
+          if (hasCollectionLayer) {
+            layerMgr.move(collectionLineLayer, "labels");
+            layerMgr.move(collectionOutlineLayer, collectionLineLayer);
+          }
 
+          const mosaicLayer = layerMgr.getLayerById(bottomLayer);
           if (hasOutlineLayer && mosaicLayer) {
-            console.log("moving mosaic layer");
-            layerMgr.move(mosaicLayer, "labels");
+            layerMgr.move(mosaicLayer, itemLineLayerName);
+          }
+
+          // To prevent runaway re-renders, move the base layer under the first
+          // layer if it isn't already. This likely means a custom layer hasn't been
+          // handled above.
+          const firstLayerId = layerMgr.getLayers()[0].getId();
+          if (firstLayerId !== "base") {
+            layerMgr.move("base", firstLayerId);
           }
         }
-
-        // To prevent runaway re-renders, move the base layer under the first
-        // layer if it isn't already. This likely means a custom layer hasn't been
-        // handled above.
-        const firstLayerId = layerMgr.getLayers()[0].getId();
-        if (firstLayerId !== "base") {
-          layerMgr.move("base", firstLayerId);
-        }
       }
-    }
-  };
+    },
+    [bottomLayer]
+  );
 
   // Loading indicator for mosaic tiles
   const onDataEvent = useCallback((e: atlas.MapDataEvent) => {

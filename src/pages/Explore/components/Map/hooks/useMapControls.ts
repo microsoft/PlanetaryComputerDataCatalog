@@ -1,5 +1,6 @@
 import * as atlas from "azure-maps-control";
 import { useEffect } from "react";
+import { layerControl } from "../../../utils/layers";
 
 // Setup tile layers and map controls
 const useMapControls = (
@@ -14,8 +15,7 @@ const useMapControls = (
     const controls: atlas.Control[] = [
       new atlas.control.CompassControl(),
       new atlas.control.ZoomControl(),
-      // layer control removed until layer order bug is resolved
-      // layerControl,
+      layerControl,
     ];
 
     if (map.controls.getControls().length < controls.length) {
