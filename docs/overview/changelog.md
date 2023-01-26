@@ -57,7 +57,7 @@ Here's an example of building vectors rendered with a Sentinel-2 imagery product
 
 This release includes several new datasets:
 
-### ESA Climate Change Initiative Land Cover (CCI LC)
+### ESA Climate Change Initiative Land Cover
 
 The <a href="dataset/group/esa-cci-lc">ESA Climate Change Initiative Land Cover</a> datasets consistent global annual land cover maps at 300m spatial resolution from 1992 to 2020. There are collections containing <a href="dataset/esa-cci-lc">Cloud Optimized GeoTIFFs</a> and <a href="dataset/esa-cci-lc-netcdf">NetCDF</a> files.
 
@@ -81,7 +81,7 @@ Note that this dataset resides in the East US Azure region.
 :class: no-scaled-link
 ```
 
-### Cropland Data Layer (CDL)
+### Cropland Data Layer
 
 The [USDA Cropland Data Layer](https://planetarycomputer.microsoft.com/dataset/usda-cdl) is a crop-specific land cover classification product of more than 100 crop categories grown in the United States.
 
@@ -91,7 +91,7 @@ The [USDA Cropland Data Layer](https://planetarycomputer.microsoft.com/dataset/u
 :class: no-scaled-link
 ```
 
-### USGS LCMAP
+### USGS Land Change Monitoring, Assessment, and Projection
 
 The <a href="dataset/group/usgs-lcmap">USGS Land Change Monitoring, Assessment, and Projection (LCMAP)</a> datasets provide land cover mapping and change monitoring from the U.S.
 
@@ -105,7 +105,7 @@ This is a timelapse from 1985-2021 over <a href="/explore?c=-121.2561%2C39.7589&
 
 ### National Wetlands Inventory
 
-The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> contains more than 35 million wetland and deepwater features. This dataset covers the conterminous United States, Hawaii, Puerto Rico, the Virgin Islands, Guam, the major Northern Mariana Islands and Alaska.
+The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> collection contains more than 35 million wetland and deepwater features. This dataset covers the conterminous United States, Hawaii, Puerto Rico, the Virgin Islands, Guam, the major Northern Mariana Islands and Alaska.
 
 ```{image} images/changelog-fws-nwi.png
 :height: 400
