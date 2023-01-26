@@ -14,6 +14,6 @@ export enum SidebarPanels {
 }
 
 export enum LayerType {
-  tile = "tile",
+  tile = "raster-tile",
   polygon = "vt-polygon",
 }
