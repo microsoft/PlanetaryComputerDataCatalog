@@ -30,7 +30,7 @@ export const addEntityHeader = (
       },
     };
   }
-  return {};
+  return { headers: {}, url: url };
 };
 
 export const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;
