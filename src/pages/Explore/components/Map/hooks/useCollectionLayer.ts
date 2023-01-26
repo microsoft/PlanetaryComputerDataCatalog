@@ -6,7 +6,6 @@ import {
   collectionLineLayer,
   collectionOutlineLayer,
   itemLineLayer,
-  itemOutlineLayer,
   stacCollectionDatasource,
 } from "../../../utils/layers";
 import { MAX_ZOOM_FOR_COLLECTION_OUTLINE } from "pages/Explore/utils/constants";
