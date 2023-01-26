@@ -13,17 +13,37 @@ See [previous changelogs](docs/changelogs/history.md) for notes about previous r
 
 
 (vector-tile-rendering)=
-### Vector Tile Rendering
+### Vector Rendering
 
-...
+The Planetary Computer Data Catalog contains assets in a variety of common
+geospatial formats, but until now the Explorer has only supported visualizing
+raster data. With this release, we're introducing support for vector rendering
+for collections with GeoParquet data assets. We're showcasing this feature with
+the [MS Buildings](https://planetarycomputer.microsoft.com/dataset/ms-buildings)
+dataset, which contains over 1 billion building footprints across the world.
 
-```{image} images/docs-explorer-activate-item-preview_c.jpg
-:height: 125
-:name: Activate item preview mode
+For this, and future, GeoParquet vector datasets you'll find a new
+[collection-level asset](https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md#asset-object)
+with a role of `tilejson` that contains a [TileJSON](https://github.com/mapbox/tilejson-spec) endpoint that can be used to render the data as [Mapbox Vector Tiles](https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/).
+
+[Use the Explorer](https://planetarycomputer.microsoft.com/explore?c=-77.7333%2C39.4660&z=5.05&v=2&d=ms-buildings&m=Global&r=Default&s=true%3A%3A100%3A%3Atrue&sr=desc&ae=0)
+to quickly visualize the geographic coverage of the dataset:
+
+```{image} images/docs-explorer-vector-buildings-us-extent.png
+:height: 500
+:name: MS Buildings dataset extent in the Eastern US
 :class: no-scaled-link
 ```
 
-Here's an example of using Item Preview mode to view sequential search result items showing the progression of the devastating floods in Pakistan from late 2022 using [Sentinel-1 RTC](https://planetarycomputer.microsoft.com/dataset/sentinel-1-rtc).
+Or overlay it with other layers to see how it fits into the broader context of the world. For example, to see villages in southern Nigeria that have very low nighttime light intensity:
+
+```{image} images/docs-explorer-vector-buildings-at-light.png
+:height: 500
+:name: MS Buildings dataset nighttime lights in Nigeria
+:class: no-scaled-link
+```
+
+Here's an example of building vectors rendered with a Sentinel-2 imagery product:
 
 <video controls style="height: 400px;">
   <source src="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4" type="video/mp4" />
