@@ -132,8 +132,17 @@ East US
 - NOAA NWM
 - ASTER footprints
 - Collections now have an `msft:region` property
-- MS Buidings now have a collection levle asset of vector tiles, which can be vized through the feature mentioned abvoe
+- MS Buidings now have a collection level asset of vector tiles, which can be vized through the feature mentioned abvoe
 
-## Notices for future release
+## Notices for upcoming release
 
-- Breaking titiler change
+Please be advised that in the next release, approximately in the April/May 2023 time frame, we will be upgrading the version of our raster tiling engine, TiTiler. This will result in some changes to the way rendering parameters are specified when generating image tiles. These changes will affect both the [Item Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/Item%20tile%20endpoints) and the [Mosaic Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/PgSTAC%20Mosaic%20endpoints).
+
+These changes will **not** affect how you use the Explorer or any links you've saved or shared via the Explorer. It will only affect certain query string parameters you may have generated that hit `/api/data/` endpoints directly.
+
+Please see the upstream changes for more information:
+
+- [pgstac-titiler changelog](https://github.com/stac-utils/titiler-pgstac/blob/master/CHANGES.md?plain=1#L55-L63)
+- [rio-tiler changelog](https://github.com/cogeotiff/rio-tiler/blob/main/docs/src/v4_migration.md#band-names)
+
+If you have any questions, please reach out to us on our [GitHub Discussions page](https://github.com/microsoft/planetarycomputer/discussions).
