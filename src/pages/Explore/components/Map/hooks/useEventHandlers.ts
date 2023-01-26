@@ -11,7 +11,7 @@ import {
   itemLineLayerName,
   itemOutlineLayerName,
 } from "pages/Explore/utils/layers";
-import { makeLayerId } from "./useMosaicLayer";
+import { makeLayerId } from "../helpers";
 
 const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
   const dispatch = useExploreDispatch();

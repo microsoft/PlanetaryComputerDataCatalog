@@ -127,8 +127,8 @@ const Collection = () => {
             <div>
               <div className="collection-content">
                 <h2 style={{ marginTop: 0 }}>Overview</h2>
-                <Description />
                 <RequiresAccount />
+                <Description />
                 <Separator />
                 <CollectionUrl />
                 <Providers />

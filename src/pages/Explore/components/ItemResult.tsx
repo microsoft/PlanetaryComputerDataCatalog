@@ -46,6 +46,8 @@ const ItemResult = ({ item, index, onItemPreview }: ItemResultProps) => {
   const selected = selectedItem?.id === item.id && previewMode.enabled;
   const activeContainerStyle = selected ? selectedContainerStyles : containerStyles;
 
+  const label = item.properties?.title || item.id;
+
   return (
     <Stack
       horizontal
@@ -56,7 +58,7 @@ const ItemResult = ({ item, index, onItemPreview }: ItemResultProps) => {
       <ItemPreviewButton item={item} onItemPreview={handleItemPreviewClick} />
       <Link onClick={handleSelectItem} styles={linkStyle} data-cy="item-result">
         <Stack verticalAlign={"space-evenly"} style={detailsContainerStyle}>
-          <Text styles={idStyles}>{item.id}</Text>
+          <Text styles={idStyles}>{label}</Text>
           <div style={attributeStyle}>
             <PriorityAttributes item={item} />
           </div>
@@ -85,6 +87,7 @@ const activeStyle: IStyle = {
 
 const linkStyle: IStyleFunctionOrObject<ILinkStyleProps, ILinkStyles> = {
   root: {
+    width: "100%",
     paddingLeft: 10,
     ":focus": activeStyle,
     ":active": activeStyle,

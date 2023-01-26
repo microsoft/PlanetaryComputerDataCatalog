@@ -42,6 +42,7 @@ export const CollectionItemFilter: React.FC<CollectionItemFilterProps> = ({
   const itemDetailPanelStyles: Partial<IStackStyles> = {
     root: {
       height: "100%",
+      minHeight: "-webkit-fill-available",
       display: detailViewDisplay,
     },
   };

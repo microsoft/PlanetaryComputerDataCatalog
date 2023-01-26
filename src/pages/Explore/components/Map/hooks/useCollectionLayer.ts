@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import {
   collectionLineLayer,
   collectionOutlineLayer,
+  itemLineLayer,
   stacCollectionDatasource,
 } from "../../../utils/layers";
 import { MAX_ZOOM_FOR_COLLECTION_OUTLINE } from "pages/Explore/utils/constants";
@@ -27,7 +28,7 @@ const useCollectionBoundsLayer = (
 
     if (!map.sources.getSources().includes(stacCollectionDatasource)) {
       map.sources.add(stacCollectionDatasource);
-      map.layers.add(collectionLineLayer, "labels");
+      map.layers.add(collectionLineLayer, itemLineLayer);
       map.layers.add(collectionOutlineLayer, collectionLineLayer);
     }
   }, [mapRef, mapReady]);

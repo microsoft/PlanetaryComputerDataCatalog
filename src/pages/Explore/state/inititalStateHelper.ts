@@ -15,6 +15,7 @@ import {
   QS_V1_CUSTOM_KEY,
   QS_VERSION_KEY,
 } from "../components/Sidebar/selectors/hooks/useUrlStateV2";
+import { LayerType } from "../enums";
 import { ILayerState, IMosaic, IMosaicInfo, ISortBy, ISortDir } from "../types";
 import { updateQueryStringParam } from "../utils";
 import { CqlExpressionParser } from "../utils/cql";
@@ -162,6 +163,9 @@ const loadMosaicStateV2 = async (
       if (!mosaic || !renderOption) {
         throw new Error("Invalid mosaic or render option");
       }
+
+      // Backwards compatibility for old render configs without type
+      renderOption.type = renderOption.type || LayerType.tile;
 
       // Check the sort for this layer as specified in the query string. If this ends up
       // being a custom query, we'll use the sort that was included in the stac search
