@@ -854,6 +854,10 @@ sentinel-2-l2a:
     - title: Example Notebook
       src: sentinel-2-l2a-example.html
       launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+    - title: Baseline Change
+      src: baseline-change.html
+      launch: datasets/sentinel-2-l2a/baseline-change.ipynb
+
 
 terraclimate:
   category: Climate/Weather
