@@ -9,6 +9,7 @@ import {
 } from "@fluentui/react";
 import { useDataConfig } from "components/state/DataConfigProvider";
 import { CatalogCollection } from "pages/Catalog2/Catalog.Collection";
+import { isValidExplorer } from "utils/collections";
 import { useCollections } from "utils/requests";
 import {
   cancelIcon,
@@ -50,8 +51,9 @@ export const CatalogSelectorGroup: React.FC<CatalogSelectorGroupProps> = ({
       const isCategory = category
         ? collectionConfig[c.id].category === category
         : true;
+      const isValid = isValidExplorer(c);
 
-      return isGroup && isCategory;
+      return isGroup && isCategory && isValid;
     }) || [];
 
   return (
