@@ -115,7 +115,7 @@ The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> collection co
 (dataset-updates-jan-23)=
 ## Dataset updates
 
-#Notebook## NOAA GOES updates
+### NOAA GOES updates
 - GOES-18 data is now available in the <a href="dataset/goes-cmi">Cloud Moisture Index (goes-cmi)</a> collection.
 - Additional data products for GOES that are not yet in the API are documented in the catalog: <a href="dataset/storage/goes-fdc">Fire Detection and Characterization (FDC)</a>, <a href="dataset/storage/goes-lst">Land Surface Temperature (LST)</a>, <a href="dataset/storage/goes-rrqpe">Rainfall Rate and Quantitative Precipitation Estimation (RRQPE)</a>, and <a href="dataset/storage/goes-sst">Sea Surface Temperature (SST)</a>
 - The goes-cmi collection now has a render configuration that utilizes infrared data to better visualize night-time scenes. See <a href="/explore?c=-92.2446%2C37.2474&z=3.64&v=2&d=goes-cmi&s=false%3A%3A100%3A%3Atrue&ae=0&sr=desc&m=cql%3A6ded4476e6da6a428e449b19bd25ab17&r=Infrared">this example</a> in the Explorer.
