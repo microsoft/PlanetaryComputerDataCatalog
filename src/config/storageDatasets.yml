@@ -33,7 +33,7 @@ goes-rrqpe:
   keywords: [GOES, NOAA, Rainfall, Precipitation]
 
 goes-sst:
-  title: GOES Sea Surface
+  title: GOES Sea Surface Temperature (SST)
   category: Temperature
   short_description: Sea Surface Temperature (SST) estimate.
   infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/goes-sst.html
@@ -147,7 +147,7 @@ noaa-nwm:
   infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/noaa-nwm.html
   thumbnailUrl: noaa-nwm-thumbnail.png
 
-  keywords: [Global, NOAA, Streamflow, Hydrology, Water]
+  keywords: [Global, NOAA, Streamflow, Hydrology, Water, NWM]
 
 noaa-rap:
   title: NOAA Rapid Refresh (RAP)
