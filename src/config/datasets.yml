@@ -17,6 +17,9 @@
 # `hideInExplorer` attribute determines if the dataset is hidden in the Explorer, even
 # if would otherwise be available. It is still visible in the catalog.
 
+# `defaultPreviewImage` attribute determines if the dataset should use the default preview image
+# in the Explorer if no preview image is available on the STAC Item directly.
+
 # To include a button on a tab to launch the notebook in Hub, add the following
 # config to the tab item. Assumes PlanetaryComputerExamples/main.
 
@@ -170,7 +173,7 @@ chesapeake-lu:
   tabs:
     - title: Example Notebook
       src: chesapeake-example.html
-      launch: datasets/chesapeake/chesapeake-example.ipynb 
+      launch: datasets/chesapeake/chesapeake-example.ipynb
 
 chloris-biomass:
   category: Biomass/Vegetation
@@ -315,7 +318,7 @@ deltares-floods:
       launch: datasets/deltares-floods/deltares-floods-example.ipynb
 
 deltares-water-availability:
-  category: Water 
+  category: Water
   tabs:
     - title: Example Notebook
       src: deltares-water-availability-example.html
@@ -352,6 +355,22 @@ era5-pds:
       src: era5-example.html
       launch: datasets/era5/era5-example.ipynb
 
+esa-cci-lc:
+  category: Land use/Land cover
+  headerImg: ./images/esa-cci-lc-hero.png
+  tabs:
+    - title: Example Notebook
+      src: esa-cci-example.html
+      launch: datasets/esa-cci/esa-cci-example.ipynb
+
+esa-cci-lc-netcdf:
+  category: Land use/Land cover
+  headerImg: ./images/esa-cci-lc-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: esa-cci-example.html
+      launch: datasets/esa-cci/esa-cci-example.ipynb
+
 esa-worldcover:
   category: Land use/Land cover
   headerImg: ./images/esa-worldcover-hero.png
@@ -367,6 +386,14 @@ fia:
     - title: Example Notebook
       src: fia-example.html
       launch: datasets/fia/fia-example.ipynb
+
+fws-nwi:
+  category: Land use/Land cover
+  headerImg: ./images/fws-nwi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: fws-nwi-example.html
+      launch: datasets/fws-nwi/fws-nwi-example.ipynb
 
 gap:
   category: Land use/Land cover
@@ -661,6 +688,7 @@ mobi:
 ms-buildings:
   category: Infrastructure
   headerImg: ./images/ms-buildings-hero.png
+  defaultPreviewImage: ./images/ms-buildings-preview.jpg
   tabs:
     - title: Example Notebook
       src: ms-buildings-example.html
@@ -710,24 +738,24 @@ noaa-climate-normals-tabular:
   headerImg: ./images/noaa-climate-normals-tabular-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      src: noaa-climate-normals-tabular-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-tabular-example.ipynb
 
 noaa-climate-normals-gridded:
   category: Climate/Weather
   headerImg: ./images/noaa-climate-normals-gridded-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      src: noaa-climate-normals-gridded-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-climate-normals-netcdf:
   category: Climate/Weather
   headerImg: ./images/noaa-climate-normals-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-climate-normals-example.html
-      launch: datasets/noaa-climate-normals/noaa-climate-normals-example.ipynb
+      src: noaa-climate-normals-gridded-example.html
+      launch: datasets/noaa-climate-normals/noaa-climate-normals-gridded-example.ipynb
 
 noaa-mrms-qpe-1h-pass1:
   category: Climate/Weather
@@ -826,6 +854,10 @@ sentinel-2-l2a:
     - title: Example Notebook
       src: sentinel-2-l2a-example.html
       launch: datasets/sentinel-2-l2a/sentinel-2-l2a-example.ipynb
+    - title: Baseline Change
+      src: baseline-change.html
+      launch: datasets/sentinel-2-l2a/baseline-change.ipynb
+
 
 terraclimate:
   category: Climate/Weather
@@ -842,6 +874,30 @@ us-census:
     - title: Example Notebook
       src: us-census-example.html
       launch: datasets/us-census/us-census-example.ipynb
+
+usda-cdl:
+  category: Land use/Land cover
+  headerImg: ./images/usda-cdl-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usda-cdl-example.html
+      launch: datasets/usda-cdl/usda-cdl-example.ipynb
+
+usgs-lcmap-conus-v13:
+  category: Land use/Land cover
+  headerImg: ./images/usgs-lcmap-conus-v13-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usgs-lcmap-example.html
+      launch: datasets/usgs-lcmap/usgs-lcmap-example.ipynb
+
+usgs-lcmap-hawaii-v10:
+  category: Land use/Land cover
+  headerImg: ./images/usgs-lcmap-hawaii-v10-hero.png
+  tabs:
+    - title: Example Notebook
+      src: usgs-lcmap-example.html
+      launch: datasets/usgs-lcmap/usgs-lcmap-example.ipynb
 
 viirs-09a1-001:
   category: Imagery

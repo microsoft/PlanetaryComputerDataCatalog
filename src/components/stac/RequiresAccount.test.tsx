@@ -18,6 +18,7 @@ const getAcctReqCollection = (required: boolean): IStacCollection => {
     links: [],
     "msft:short_description": "",
     "msft:requires_account": required,
+    "msft:region": "westeurope",
   };
 };
 

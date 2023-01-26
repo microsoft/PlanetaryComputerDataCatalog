@@ -166,7 +166,16 @@ const getCategorizedCollections = (
         if (
           !groupedCollections[category].find(c => c.id === GROUP_PREFIX + groupId)
         ) {
-          groupedCollections[category].push(groupToPcCollection(groupId, group));
+          // Either enter the group as a collection or add the collection directly if
+          // it is the only one in the group that passed a pre-filter.
+          const others = collections.filter(
+            c => c["msft:group_id"] === groupId && c.id !== collection.id
+          );
+          if (others.length === 0) {
+            groupedCollections[category].push(collection);
+          } else {
+            groupedCollections[category].push(groupToPcCollection(groupId, group));
+          }
         }
       } else {
         groupedCollections[category].push(collection);

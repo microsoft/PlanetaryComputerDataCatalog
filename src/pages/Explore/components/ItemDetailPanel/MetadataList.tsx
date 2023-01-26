@@ -20,7 +20,7 @@ const MetadataList = ({ item }: MetadataListProps) => {
             />
           );
         })}
-      <LinkListItems item={item} />
+      <LinkListItems item={item} key="detail-link-list" />
     </>
   );
 };

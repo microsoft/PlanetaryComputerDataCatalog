@@ -1,4 +1,4 @@
-# Configuration for "other dataset" section, see type `NonApiDatasetEntry` for details.
+# Configuration for "other dataset" section, see type `StorageDatasetEntry` for details.
 # The value for the dataset key should match the file name of the dataset in the ai4e dataset repo.
 ghe:
   title: Global Hydro Estimator
@@ -7,6 +7,38 @@ ghe:
   infoUrl: http://aka.ms/ai4edata-ghe
   thumbnailUrl: RE4ucH7.jpg
   keywords: [NOAA, Global, Precipitation]
+
+goes-fdc:
+  title: GOES Fire Detection and Characterization (FDC)
+  category: Climate/Weather
+  short_description: Maps of fires, including radiative power, temperature, size, and classification
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/goes-fdc.html
+  thumbnailUrl: goes-fdc-thumbnail.png
+  keywords: [GOES, NOAA, Fire]
+
+goes-lst:
+  title: GOES Land Surface Temperature (LST)
+  category: Temperature
+  short_description: Land Surface Temperature (LST) estimation
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/goes-lst.html
+  thumbnailUrl: goes-lst-thumbnail.png
+  keywords: [GOES, NOAA, Temperature]
+
+goes-rrqpe:
+  title: GOES Rainfall Rate and Quantitative Precipitation Estimation (RRQPE)
+  category: Weather
+  short_description: Maps of expected rainfall rate and precipitation
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/goes-rrqpe.html
+  thumbnailUrl: goes-rrqpe-thumbnail.png
+  keywords: [GOES, NOAA, Rainfall, Precipitation]
+
+goes-sst:
+  title: GOES Sea Surface Temperature (SST)
+  category: Temperature
+  short_description: Sea Surface Temperature (SST) estimate.
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/goes-sst.html
+  thumbnailUrl: goes-sst-thumbnail.png
+  keywords: [GOES, NOAA, Ocean, Temperature]
 
 doe-wave:
   title: High Resolution Ocean Surface Wave Hindcast
@@ -108,20 +140,21 @@ noaa-isd:
   thumbnailUrl: RE4rsOQ.jpg
   keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
+noaa-nwm:
+  title: NOAA National Water Model
+  category: Water
+  short_description: Streamflow forecasts for the contiguous US, Hawaii and Puerto Rico
+  infoUrl: https://microsoft.github.io/AIforEarthDataSets/data/noaa-nwm.html
+  thumbnailUrl: noaa-nwm-thumbnail.png
+
+  keywords: [Global, NOAA, Streamflow, Hydrology, Water, NWM]
+
 noaa-rap:
   title: NOAA Rapid Refresh (RAP)
   category: Climate/Weather
   short_description: Weather forecasts for North America at 13km resolution
   infoUrl: https://aka.ms/ai4edata-rap
   thumbnailUrl: thunder_storm.jpg
-  keywords: [North America, NOAA, Weather]
-
-noaa-climatenormals:
-  title: NOAA US Climate Normals
-  category: Climate/Weather
-  short_description: Typical climate conditions for the U.S. from 1981-present
-  infoUrl: https://aka.ms/ai4edata-climatenormals
-  thumbnailUrl: climate_normals.jpg
   keywords: [North America, NOAA, Weather]
 
 ooi-camhd:

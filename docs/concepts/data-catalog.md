@@ -1,4 +1,3 @@
-
 ## Data Catalog
 
 The Planetary Computer provides key geospatial and conservation datasets,
@@ -12,6 +11,53 @@ other Planetary Computer components.
 Read more about how the Planetary Computer uses open-source tools to make
 [finding](../quickstarts/reading-stac.ipynb) and [using](./computing.md) our
 data easy and approachable.
+
+### Data Providers
+
+The Planetary Computer could not exist without the upstream data providers who
+actually generate the data. In some cases, these upstream providers also ensure
+that the data is available on Azure.
+
+This diagram shows the relationship between upstream data providers and the Planetary Computer,
+using the
+[NOAA Open Data Dissemination](https://www.noaa.gov/information-technology/open-data-dissemination)
+(NODD) program as a concrete example.
+
+![NODD Diagram](./images/nodd-diagram.png)
+
+This diagram starts with NODD pushing data assets to Azure, represented by the
+green circle 1. At this point, the raw data are immediately available to anyone
+through the highly scalable [Azure Blob
+Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-overview) service.
+Users can access the data using whatever tool they want that can make HTTP
+requests to the Blob Storage endpoint. In the diagram, this is represented by
+the green diamond 1, showing a "plain" Azure user accessing an individual file
+using `curl`.
+
+For some use cases, just having access to the raw data is sufficient. But to
+satisfy even more use cases, the Planetary Computer provides some additional
+assets and services on top of the raw data. This is shown on the right-hand side
+of the diagram.
+
+First, the Planetary Computer might produce cloud-optimized versions of the same data;
+for example converting HDF5 files to [Cloud Optimized GeoTIFF](https://www.cogeo.org/).
+In the diagram this is represented by the green circle 2a, which shows the Planetary Computer
+generating COGs and storing them in the `goeseuwest-cogs` storage container.
+
+Second, the Planetary Computer provides services to make working with geospatial
+data much easier (depicted by the green circle 2b in the diagram).
+
+To use the raw data pushed to Azure, users need to somehow know the naming
+convention of each data product, and parse it to find the data they want (green
+diamond 1). With the Planetary Computer's [STAC API](../quickstarts/reading-stac.ipynb), users can search the data using
+high-level concepts like date ranges, bounding boxes, and more (green diamond
+2). In addition to the STAC API, the Planetary Computer provides a tile server
+for quickly visualizing the data on a map, which is used by our
+[Explorer](../overview/explorer.md).
+
+Finally, note that the STAC API *also* catalogs the raw data from the upstream
+data providers. So it's not an "either-or": users of the Planetary Computer can
+also use the raw data from the upstream data provider.
 
 ### Access patterns
 

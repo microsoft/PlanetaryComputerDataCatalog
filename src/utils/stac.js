@@ -487,7 +487,7 @@ StacFields.Registry.addMetadataField("table:columns", {
     return (
       <Stack>
         {value.map(column => (
-          <NamedEntry entry={column} />
+          <NamedEntry key={column.key + column.name} entry={column} />
         ))}
       </Stack>
     );

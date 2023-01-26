@@ -6,7 +6,7 @@ import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 import { makeFilterBody } from "pages/Explore/utils/hooks/useStacFilter";
 import { collectionFilter } from "pages/Explore/utils/stac";
 import { IStacCollection, IStacItem } from "types/stac";
-import { makeTileJsonUrl } from "utils";
+import { getTileJsonAsset, makeRasterTileJsonUrl } from "utils";
 import {
   DATA_URL,
   IMAGE_URL,
@@ -18,6 +18,7 @@ import datasetConfig from "config/datasets.yml";
 import { AnimationConfig } from "pages/Explore/components/Sidebar/exporters/AnimationExporter/types";
 import { ImageConfig } from "pages/Explore/components/Sidebar/exporters/ImageExporter/types";
 import { ImageExportResponse } from "pages/Explore/components/Sidebar/exporters/BaseExporter/types";
+import { LayerType } from "pages/Explore/enums";
 
 export const pcApiClient = axios.create({
   headers: {
@@ -136,9 +137,16 @@ export const fetchTileJson = async (
   collection: IStacCollection | null,
   item: IStacItem | null = null
 ) => {
-  const tileJsonUrl = makeTileJsonUrl(query, renderOption, collection, item);
+  let url;
+  if (renderOption?.type === LayerType.tile) {
+    url = makeRasterTileJsonUrl(query, renderOption, collection, item);
+  } else if (collection && renderOption) {
+    url = getTileJsonAsset(collection, renderOption);
+  } else {
+    throw new Error("Vector layer requires a collection and render option");
+  }
 
-  const resp = await pcApiClient.get(tileJsonUrl);
+  const resp = await pcApiClient.get(url);
   return resp.data;
 };
 
