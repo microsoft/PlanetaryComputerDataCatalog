@@ -7,6 +7,7 @@ This release brings a new datasets and features, including:
 - [Vector rendering](vector-tile-rendering)
 - [New datasets](new-datasets-jan-23)
 - [Dataset updates](dataset-updates-jan-23)
+- [Updates to our Terms of Use](terms-of-use-update-jan-23)
 - [Notices for upcoming release](future-release-notice-jan-23)
 
 (vector-tile-rendering)=
@@ -134,6 +135,11 @@ The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> collection co
 
 - Added a new [Sentinel-2 notebook](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Baseline-Change) demonstrating the Sentinel-2 L2A Baseline Change, and how to harmonize data across it.
 - Expanded the Data Catalog documentation to include a <a href="docs/concepts/data-catalog/#data-providers">new section</a> on how the Planetary Computer relates to data providers like the [NOAA Open Data Dissemination](https://www.noaa.gov/information-technology/open-data-dissemination) program.
+
+(terms-of-use-update-jan-23)=
+## Updates to our Terms of Use
+
+Our <a href="/terms">Terms of Use</a> has been updated to clarify terms about the data access tokens issued by the Planetary Computer for data access. No change in behavior or permissions has occurred. Please read the Terms of Use to get more information about the permitted utilization of data tokens for the Planetary Computer.
 
 ## Notices for upcoming release
 
