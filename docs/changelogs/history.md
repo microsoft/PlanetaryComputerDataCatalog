@@ -31,7 +31,7 @@ To help with this, we've added a new "Item Preview" mode to the map view. When a
 
 To activate, click the map icon button on the thumbnail image of any search result:
 
-```{image} docs/overview/images/docs-explorer-activate-item-preview_c.jpg
+```{image} ../overview/images/docs-explorer-activate-item-preview_c.jpg
 :height: 125
 :name: Activate item preview mode
 :class: no-scaled-link
@@ -54,7 +54,7 @@ Here's an example of using Item Preview mode to view sequential search result it
 
 Many of our datasets have a temporal component, and it can be interesting to see how the data changes over time. We've added a new feature to the Explorer app that allows you to generate a timelapse GIF for any dataset mosaic that has a temporal dimension. You can control the time increment, area of interest, and frame speed of the GIF. The timelapse export will use the current search parameters and render options to generate the GIF, so experiment with the settings to get a good result. To use the feature, open the overflow menu on the search results header and select "Generate timelapse animation"
 
-```{image} images/docs-explorer-animation-screen_c.jpg
+```{image} ../overview/images/docs-explorer-animation-screen_c.jpg
 :height: 500
 :name: Timelapse GIF settings
 :class: no-scaled-link
@@ -91,7 +91,7 @@ Similar to the timelapse export, you can also generate a static image of a datas
 
  Adjust the settings to control the area of interest and image size, then click "Generate image" to download the image.
 
-```{image} images/docs-explorer-image-screen_c.jpg
+```{image} ../overview/images/docs-explorer-image-screen_c.jpg
 :height: 500
 :name: Static snapshot image settings
 :class: no-scaled-link
@@ -106,7 +106,7 @@ You can also use this to create great Microsoft Teams backgrounds! Use the "Larg
 
 You can now specify time (in UTC) for date ranges in the Advanced date field filter. This is especially useful for frequently updating datasets like GOES-CMI, where you may want to filter for a specific time range. To use the feature, enable the Advanced filter and open the date field dropdown.
 
-```{image} images/docs-explorer-time-filter_c.jpg
+```{image} ../overview/images/docs-explorer-time-filter_c.jpg
 :height: 500
 :name: Datetime filter
 :class: no-scaled-link
@@ -121,7 +121,7 @@ Along with filtering on time, all search results now include the time in their d
 
 Last but now least, we've also added a sort direction selector for search results. You can now sort the results by date ascending or descending. This not only sorts the results list, but also the order of items applied to the mosaic on the map.
 
-```{image} images/docs-explorer-sort-order_c.jpg
+```{image} ../overview/images/docs-explorer-sort-order_c.jpg
 :height: 300
 :name: Sort order selector
 :class: no-scaled-link
@@ -136,7 +136,7 @@ This release includes several new datasets:
 [GOES-R Lightning Detection](https://planetarycomputer.microsoft.com/dataset/goes-glm):
 Continuous lightning detection over the Western Hemisphere from the Geostationary Lightning Mapper (GLM) instrument.
 
-```{image} images/docs-data-glm_c.jpg
+```{image} ../overview/images/docs-data-glm_c.jpg
 :width: 558
 :name: GLM screenshot
 :class: no-scaled-link
@@ -148,7 +148,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 - [NOAA MRMS QPE 1-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-1h-pass2): Integrated multi-sensor cumulative precipitation estimate for the past hour with a 2-hour latency.
 - [NOAA MRMS QPE 24-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-24h-pass2): Integrated multi-sensor cumulative precipitation estimate for the past 24 hours with a 2-hour latency.
 
-```{image} docs/overview/images/docs-data-noaa-mrms-qpe_c.jpg
+```{image} ../overview/images/docs-data-noaa-mrms-qpe_c.jpg
 :width: 558
 :name: NOAA MRMS QPE
 :class: no-scaled-link
@@ -164,7 +164,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Denver Regional Council of Governments Land Use Land Cover](https://planetarycomputer.microsoft.com/dataset/drcog-lulc): 1-ft resolution land use / land cover dataset around Denver, Colorado.
 
-```{image} images/docs-data-denver-regional_c.jpg
+```{image} ../overview/images/docs-data-denver-regional_c.jpg
 :width: 558
 :name: Denver Regional Council of Governments Land Use Land Cover
 :class: no-scaled-link
@@ -174,7 +174,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Cover (7-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-7): 1-meter land cover data product for the entire Chesapeake Bay watershed with a uniform set of 7 land cover classes.
 
-```{image} images/docs-data-chesapeake-7_c.jpg
+```{image} ../overview/images/docs-data-chesapeake-7_c.jpg
 :width: 558
 :name: Chesapeake Land Cover (7-class) thumbnail
 :class: no-scaled-link
@@ -182,7 +182,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Cover (13-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-13): 1-meter land cover data product for the entire Chesapeake Bay watershed with 13 varying land cover classes.
 
-```{image} images/docs-data-chesapeake-13_c.jpg
+```{image} ../overview/images/docs-data-chesapeake-13_c.jpg
 :width: 558
 :name: Chesapeake Land Cover (13-class) thumbnail
 :class: no-scaled-link
@@ -190,7 +190,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Use](https://planetarycomputer.microsoft.com/dataset/chesapeake-lu): 1-meter land use data product for the entire Chesapeake Bay watershed.
 
-```{image} images/docs-data-chesapeake-lu_c.jpg
+```{image} ../overview/images/docs-data-chesapeake-lu_c.jpg
 :width: 558
 :name: Chesapeake Land Use thumbnail
 :class: no-scaled-link
