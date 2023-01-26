@@ -45,3 +45,9 @@
   content: >
     Timelapse exports, search result previews, and 10 new datasets. [Check out the
     latest features &rarr;](/docs/overview/changelog)
+- id: january-2023-release-notes
+  startDate: 2023-01-25
+  endDate: 2023-02-09
+  content: >
+    Vector rendering and new datasets! [Check out the latest features
+    &rarr;](/docs/overview/changelog)
