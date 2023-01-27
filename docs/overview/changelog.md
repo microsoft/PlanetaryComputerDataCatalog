@@ -44,10 +44,10 @@ Or overlay it with other layers to see how it fits into the broader context of t
 Here's an example of building vectors rendered with a Sentinel-2 imagery product:
 
 <video controls style="height: 400px;">
-  <source src="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4" type="video/mp4" />
+  <source src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4" type="video/mp4" />
   <p>
     Your browser doesn't support HTML video. Here is a
-    <a href="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4">link to the video</a> instead.
+    <a href="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4">link to the video</a> instead.
   </p>
 </video>
 
@@ -76,7 +76,7 @@ Additionally, there is gridded data provided in the collections <a href="dataset
 
 Note that this dataset resides in the East US Azure region.
 
-```{image} https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-climate-normals-gridded-thumb.png
+```{image} https://ai4edatasetspublicassets.azureedge.net/assets/pc_thumbnails/noaa-climate-normals-gridded-thumb.png
 :width: 700
 :name: NOAA Climate Normals
 :class: no-scaled-link
