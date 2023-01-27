@@ -55,3 +55,23 @@ The Planetary Computer is just one component of Microsoft's commitment to enviro
 - Learn more about the work done by AI for Earth grantees at the [AI for Earth grantee gallery](https://aka.ms/ai4egrantees).
 - Microsoft's [AI for Earth program](https://aka.ms/aiforearth) also provides open source technical resources for conservation work; check out our [machine learning APIs](https://aka.ms/ai4eapis), and read about our tools for [accelerating biodiversity surveys with AI](https://aka.ms/biodiversitysurveys) and [AI-accelerated land cover analysis](https://aka.ms/landcovermapping).
 
+## Cite the Planetary Computer
+
+If the Planetary Computer is useful for your work, please cite it using [this record](https://zenodo.org/record/7261897) on Zendo. Here's a BibTeX entry for your reference:
+
+```bibtex
+@software{microsoft_open_source_2022_7261897,
+  author       = {Microsoft Open Source and
+                  Matt McFarland and
+                  Rob Emanuele and
+                  Dan Morris and
+                  Tom Augspurger},
+  title        = {microsoft/PlanetaryComputer: October 2022},
+  month        = oct,
+  year         = 2022,
+  publisher    = {Zenodo},
+  version      = {2022.10.28},
+  doi          = {10.5281/zenodo.7261897},
+  url          = {https://doi.org/10.5281/zenodo.7261897}
+}
+```
