@@ -1,5 +1,5 @@
 # Notebook ETL
-ipython==7.31.1
+ipython==8.10.0
 nbconvert==6.0.*
 
 # Sphinx docs rendering
