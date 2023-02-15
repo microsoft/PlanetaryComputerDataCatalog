@@ -30,7 +30,7 @@ export const isValidExplorer = (collection: IStacCollection) => {
       a.type?.toLowerCase().includes("geotiff")
     );
     const isHidden = Boolean(collections[collection.id]?.hideInExplorer);
-    const hasCollectionTileJson = !!Object.values(collection.assets).find(a =>
+    const hasCollectionTileJson = !!Object.values(collection.assets || {}).find(a =>
       a.roles?.includes("tiles")
     );
 
