@@ -12,6 +12,9 @@ code {
 
 a {
   color: #0078d4;
+}
+
+.ms-Button a {
   text-decoration: none;
 }
 
@@ -25,14 +28,18 @@ a {
 }
 
 a:not(header a):not(a.ms-Button):not(.home-resource-item a, .home-footer-item
-    a, footer a, .announcements a):hover {
-  text-decoration: underline;
+    a, footer a, .announcements a):not(.api-datasource-item a):hover {
+  text-decoration: underline !important;
   color: #0078d4;
 }
 
 .page-header .breadcrumbs a,
 .page-header .breadcrumbs a:hover {
   color: #fff !important;
+}
+
+form a {
+  text-decoration: underline !important;
 }
 
 p {
@@ -248,6 +255,10 @@ a:not(header a):hover img {
   margin-bottom: 2px;
 }
 
+.toctree-wrapper a {
+  text-decoration: none;
+}
+
 .generated-docs {
   width: 75%;
   margin-bottom: 40px;
@@ -388,6 +399,10 @@ ul.summary-list {
 
 .collection-content-item li:last-child:after {
   content: "";
+}
+
+.collection-content-item a {
+  text-decoration: underline;
 }
 
 /* Swagger UI overrides */

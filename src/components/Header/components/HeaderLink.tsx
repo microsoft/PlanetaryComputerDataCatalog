@@ -8,6 +8,7 @@ const linkStyle = mergeStyles({
   lineHeight: "16px",
   color: "#000",
   marginTop: "3px",
+  textDecoration: "none",
   selectors: {
     "&.active": {
       textDecoration: "underline",
