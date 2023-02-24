@@ -1,3 +1,19 @@
+- title: Unlocking Insights from Global Land Use/Land Cover
+  description:
+    Esri is leveraging the annual Sentinel-2 Land Use/Land Cover (LULC) data hosted
+    on the Planetary Computer and ArcGIS Living Atlas of the World in an intuitive
+    and interactive web-mapping application. Deriving and disseminating insights from
+    LULC data is invaluable in making informed and sustainable land management
+    decisions. The Sentinel-2 Land Cover Explorer leverages a variety of
+    capabilities, including dynamic visual and statistical change analysis, to begin
+    unlocking such insights.
+  thumbnailUrl: ./images/apps/esri-lulc.jpg
+  links:
+    - title: Explore land cover change
+      url: https://livingatlas.arcgis.com/landcoverexplorer/
+    - title: Learn more about Esri
+      url: https://www.esri.com/en-us/about/about-esri/overview
+
 - title: Global Land Use and Land Cover Classification
   description:
     Impact Observatory used the Planetary Computer to build a global land use and

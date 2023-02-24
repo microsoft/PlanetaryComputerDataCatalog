@@ -27,8 +27,13 @@ const Banner: React.FC<BannerProps> = ({ collection, forceGradient = false }) =>
 
   const bannerBreadcrumbs = hasGroup ? (
     <>
-      <Link to="/catalog">Datasets</Link> {" > "}
-      <Link to={`/dataset/group/${groupId}`}>{groupConfig[groupId].title}</Link>
+      <Link style={linkStyles} to="/catalog">
+        Datasets
+      </Link>{" "}
+      {" > "}
+      <Link style={linkStyles} to={`/dataset/group/${groupId}`}>
+        {groupConfig[groupId].title}
+      </Link>
     </>
   ) : (
     <Link to="/catalog">Datasets</Link>
@@ -69,4 +74,8 @@ export default Banner;
 
 const linearGradient: React.CSSProperties = {
   background: "linear-gradient(90deg, rgb(76 68 68 / 68%), 33%, transparent)",
+};
+
+const linkStyles: React.CSSProperties = {
+  textDecoration: "none",
 };
