@@ -87,6 +87,7 @@ export const SearchResultHeaderMenu: React.FC = () => {
       )}
       <IconButton
         id={buttonId}
+        title="More options"
         styles={iconButtonStyles}
         iconProps={iconProps}
         menuProps={menuProps}

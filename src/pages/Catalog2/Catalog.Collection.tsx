@@ -105,6 +105,9 @@ const cardStyles: IStackStyles = {
     "button &": {
       paddingLeft: 8,
     },
+    "& a": {
+      textDecoration: "none",
+    },
   },
 };
 

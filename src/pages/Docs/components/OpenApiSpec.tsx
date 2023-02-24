@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SwaggerUI from "swagger-ui-react";
 import "swagger-ui-react/swagger-ui.css";
 
@@ -7,6 +7,14 @@ interface OpenApiSpecProps {
 }
 
 const OpenApiSpec: React.FC<OpenApiSpecProps> = ({ specUrl }) => {
+  useEffect(() => {
+    // Need to fix a select element without a label
+    const el = document.getElementsByTagName("select")[0];
+    if (el) {
+      el.ariaLabel = "Select a server";
+    }
+  }, []);
+
   return (
     <>
       <SwaggerUI url={specUrl} docExpansion="list" />

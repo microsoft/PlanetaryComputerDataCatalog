@@ -17,7 +17,9 @@ const GroupBanner = ({ group }) => {
           className="breadcrumbs"
           styles={{ root: { color: "#fff", fontWeight: 500, marginTop: 5 } }}
         >
-          <Link to="/catalog">Datasets</Link>
+          <Link style={linkStyles} to="/catalog">
+            Datasets
+          </Link>
         </Text>
         <h1 style={{ color: "#fff" }}>{group.title}</h1>
       </div>
@@ -27,3 +29,7 @@ const GroupBanner = ({ group }) => {
 };
 
 export default GroupBanner;
+
+const linkStyles = {
+  textDecoration: "none",
+};
