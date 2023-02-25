@@ -1,6 +1,6 @@
 {
   "name": "pc-datacatalog",
-  "version": "2023.1.3",
+  "version": "2023.1.4",
   "private": true,
   "proxy": "http://api:7071/",
   "dependencies": {
@@ -58,7 +58,7 @@
     "react-use": "^17.4.0",
     "redux": "^4.2.0",
     "stream-http": "^3.2.0",
-    "swagger-ui-react": "^4.15.5",
+    "swagger-ui-react": "^4.16.1",
     "typescript": "^4.6.2",
     "yup": "^0.32.11"
   },

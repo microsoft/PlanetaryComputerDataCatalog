@@ -65,8 +65,10 @@ const makeDescription = (
           {!description && (
             <Text block>
               See the dataset's
-              <Link href={dataset.infoUrl}>full documentation</Link> for more
-              information.
+              <Link style={highContrastLinkColor} href={dataset.infoUrl}>
+                full documentation
+              </Link>{" "}
+              for more information.
             </Text>
           )}
         </Stack>
@@ -87,3 +89,5 @@ const makeDescription = (
 const tokens: IStackTokens = {
   childrenGap: 5,
 };
+
+export const highContrastLinkColor = { color: "#006cbe" };
