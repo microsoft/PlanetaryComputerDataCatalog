@@ -150,12 +150,20 @@ export const a11yPostProcessDom = (dom: Document) => {
     el.parentElement?.setAttribute("title", "Link to image content");
   });
 
-  // Look for .dataframe with an empty header and add the text id
+  // Look for .dataframe with an empty header and add the text id. It may
+  // also have a value on the next header row, so remove that as well.
   dom
     .querySelectorAll(".dataframe > thead > tr > th:nth-child(1)")
     .forEach(header => {
-      if (header && header.textContent === "") {
-        header.textContent = "row_id";
+      if (header.textContent === "") {
+        const nextHeader =
+          header.parentElement?.nextElementSibling?.firstElementChild;
+        if (nextHeader && nextHeader.textContent) {
+          header.textContent = nextHeader.textContent;
+          nextHeader.parentElement?.remove();
+        } else {
+          header.textContent = "row_id";
+        }
       }
     });
 

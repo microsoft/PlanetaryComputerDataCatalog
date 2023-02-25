@@ -6,6 +6,7 @@ import {
   Text,
 } from "@fluentui/react";
 import { Link } from "react-router-dom";
+import { highContrastLinkColor } from "pages/StorageCollectionDetail/StorageCollectionDetail.index";
 
 const RequiresAccount = () => {
   const collection = useStac();
@@ -21,7 +22,10 @@ const RequiresAccount = () => {
       <Text>
         A Planetary Computer account is required to access the assets in this
         dataset.{" "}
-        <Link to="/docs/concepts/sas/#when-an-account-is-needed">
+        <Link
+          style={highContrastLinkColor}
+          to="/docs/concepts/sas/#when-an-account-is-needed"
+        >
           See documentation.
         </Link>
       </Text>

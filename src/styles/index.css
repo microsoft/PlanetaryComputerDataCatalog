@@ -10,8 +10,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-a {
+a,
+a.ms-Link {
   color: #0078d4;
+  text-decoration: underline;
 }
 
 .ms-Button a {
