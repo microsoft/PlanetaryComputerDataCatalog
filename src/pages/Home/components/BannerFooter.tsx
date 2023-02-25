@@ -52,7 +52,6 @@ const BannerFooter = () => {
                 style={{
                   color: "#fff",
                   fontWeight: 600,
-                  textDecoration: "underline",
                 }}
               >
                 request access now
