@@ -1,3 +1,18 @@
+- title: Hundreds of Ready-to-Use Analysis Tools
+  description:
+    As part of ArcGIS for Planetary Computer, Esri is bringing virtual ArcGIS Pro
+    machines to the cloud, providing access to hundreds of ready-to-use analysis
+    tools with an intuitive user experience. From interactive suitability modeling to
+    AI for predictive analytics, these preconfigured virtual machines exploit the
+    expansive collection of analysis-ready data in Planetary Computer and capture
+    actionable insights.
+  thumbnailUrl: ./images/apps/esri-pro.jpg
+  links:
+    - title: Explore ArcGIS for Microsoft Planetary Computer
+      url: https://www.esri.com/en-us/c/product/arcgis-for-microsoft-planetary-computer
+    - title: Learn more about Esri
+      url: https://www.esri.com/en-us/about/about-esri/overview
+
 - title: Unlocking Insights from Global Land Use/Land Cover
   description:
     Esri is leveraging the annual Sentinel-2 Land Use/Land Cover (LULC) data hosted
