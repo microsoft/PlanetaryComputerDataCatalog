@@ -13,6 +13,9 @@ RUN mv prod.list /etc/apt/sources.list.d/microsoft-prod.list
 RUN chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
 RUN chown root:root /etc/apt/sources.list.d/microsoft-prod.list
 
+# Fix for https://github.com/Azure/azure-functions-docker/issues/874
+RUN sed -i '/jessie/d' /etc/apt/sources.list
+
 RUN apt-get update
 
 # Must use functions v3 to keep support for function proxies
