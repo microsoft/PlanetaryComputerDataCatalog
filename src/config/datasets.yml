@@ -733,6 +733,54 @@ noaa-c-cap:
       src: noaa-c-cap-example.html
       launch: datasets/noaa-c-cap/noaa-c-cap-example.ipynb
 
+noaa-cdr-ocean-heat-content:
+  category: Water
+  headerImg: ./images/noaa-cdr-ocean-heat-content-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-ocean-heat-content-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-example.ipynb
+
+noaa-cdr-ocean-heat-content-netcdf:
+  category: Water
+  headerImg: ./images/noaa-cdr-ocean-heat-content-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-ocean-heat-content-netcdf-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-netcdf-example.ipynb
+
+noaa-cdr-sea-ice-concentration:
+  category: Water
+  headerImg: ./images/noaa-cdr-sea-ice-concentration-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-sea-ice-concentration-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-ice-concentration-example.ipynb
+
+noaa-cdr-sea-surface-temperature-optimum-interpolation:
+  category: Water
+  headerImg: ./images/noaa-cdr-sea-surface-temperature-optimum-interpolation-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-sea-surface-temperature-optimum-interpolation-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-optimum-interpolation-example.ipynb
+
+noaa-cdr-sea-surface-temperature-whoi:
+  category: Water
+  headerImg: ./images/noaa-cdr-sea-surface-temperature-whoi-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-sea-surface-temperature-whoi-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-example.ipynb
+
+noaa-cdr-sea-surface-temperature-whoi-netcdf:
+  category: Water
+  headerImg: ./images/noaa-cdr-sea-surface-temperature-whoi-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: noaa-cdr-sea-surface-temperature-whoi-netcdf-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-netcdf-example.ipynb
+
 noaa-climate-normals-tabular:
   category: Climate/Weather
   headerImg: ./images/noaa-climate-normals-tabular-hero.png
@@ -857,7 +905,6 @@ sentinel-2-l2a:
     - title: Baseline Change
       src: baseline-change.html
       launch: datasets/sentinel-2-l2a/baseline-change.ipynb
-
 
 terraclimate:
   category: Climate/Weather
