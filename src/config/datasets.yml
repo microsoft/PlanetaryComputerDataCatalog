@@ -490,6 +490,14 @@ io-lulc-9-class:
       src: io-lulc-9-class-example.html
       launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
+io-biodiversity:
+  category: Biodiversity
+  headerImg: ./images/io-biodiversity-hero.png
+  tabs:
+    - title: Example Notebook
+      src: io-biodiversity-example.html
+      launch: datasets/io-biodiversity/io-biodiversity-example.ipynb
+
 jrc-gsw:
   category: Water
   headerImg: ./images/jrc-gsw-hero.png
