@@ -370,6 +370,41 @@ viirs:
     ]
   groupOnCatalog: false
 
+noaa-cdr:
+  title: NOAA Climate Data Records
+  short_description: >
+    NOAA's Climate Data Records (CDRs) are robust, sustainable, and
+    scientifically sound climate records that provide trustworthy information on
+    how, where, and to what extent the land, oceans, atmosphere and ice sheets
+    are changing.
+  description: >
+    NOAA's Climate Data Records (CDRs) are robust, sustainable, and
+    scientifically sound climate records that provide trustworthy information on
+    how, where, and to what extent the land, oceans, atmosphere and ice sheets
+    are changing. These datasets are thoroughly vetted time series measurements
+    with the longevity, consistency, and continuity to assess and measure
+    climate variability and change. NOAA CDRs are vetted using [standards
+    established by the National Research Council
+    (NRC)](http://www.nap.edu/catalog.php?record_id=10944)
+
+    NOAA developed CDRs by applying modern data analysis methods to historical
+    global satellite data. This process can clarify the underlying climate
+    trends within the data and allows researchers and other users to identify
+    economic and scientific value in these records. NCEI maintains and extends
+    CDRs by applying the same methods to present-day and future satellite
+    measurements.
+
+    CDRs can be used to manage natural resources and agriculture, measure
+    environmental impacts on human health and community preparedness, and inform
+    policy development and decision making for other sectors and interest
+    groups.
+  assets:
+    headerImg:
+      href: ./images/noaa-cdr-sea-surface-temperature-optimum-interpolation-hero.png
+    thumbnail:
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-cdr-sea-surface-temperature-optimium-interpolation-thumb.png
+  keywords: ["United States", "NOAA", "Climate", "Global"]
+
 noaa-nclimgrid:
   title: NOAA NClimGrid
   short_description: >
