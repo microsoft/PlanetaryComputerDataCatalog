@@ -91,6 +91,7 @@ export const CatalogFilteredCollectionList: React.FC<
   const searchIndex = useMemo(() => {
     const searchIndex = new MiniSearch({
       fields: [
+        "id",
         "title",
         "msft:short_description",
         "keywords",
