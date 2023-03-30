@@ -45,6 +45,7 @@ import { SidebarPanels } from "pages/Explore/enums";
 import { useEffect } from "react";
 import { useMedia } from "react-use";
 import { MOBILE_WIDTH } from "utils/constants";
+import { sidebarPanelStyles } from "../AnimationExporter/AnimationExporter.index";
 
 export const ImageExporter: React.FC = () => {
   const dispatch = useExploreDispatch();
@@ -183,7 +184,7 @@ export const ImageExporter: React.FC = () => {
   );
 
   const panel = (
-    <Stack styles={containerStyles} tokens={panelTokens}>
+    <Stack styles={sidebarPanelStyles} tokens={panelTokens}>
       <ImageIntro
         collection={collection}
         renderOption={renderOption}
@@ -292,15 +293,6 @@ const imageSizes: IDropdownOption[] = [
   },
   { key: "custom", text: "Custom", title: "Enter image size manually" },
 ];
-
-const containerStyles: Partial<IStackStyles> = {
-  root: {
-    height: "100%",
-    overflowY: "auto",
-    overflowX: "clip",
-    padding: 10,
-  },
-};
 
 const inputStyles: Partial<ITextFieldStyles> = {
   root: {

@@ -11,6 +11,7 @@ export enum SidebarPanels {
   itemSearch = "itemSearch",
   animation = "animation",
   image = "image",
+  chat = "chat",
 }
 
 export enum LayerType {

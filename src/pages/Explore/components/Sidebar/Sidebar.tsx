@@ -10,6 +10,7 @@ import AnimationExporter from "./exporters/AnimationExporter";
 import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilter";
 import ImageExporter from "./exporters/ImageExporter";
 import { SidebarPanels } from "pages/Explore/enums";
+import Chat from "./Chat";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
@@ -54,6 +55,7 @@ export const Sidebar = () => {
     ),
     [SidebarPanels.animation]: <AnimationExporter />,
     [SidebarPanels.image]: <ImageExporter />,
+    [SidebarPanels.chat]: <Chat />,
   };
 
   return (

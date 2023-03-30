@@ -4,6 +4,7 @@ import mapReducer from "./mapSlice";
 import detailReducer from "./detailSlice";
 import animationSlice from "./animationSlice";
 import imageSlice from "./imageSlice";
+import chatSlice from "./chatSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     detail: detailReducer,
     animation: animationSlice,
     image: imageSlice,
+    chat: chatSlice,
   },
 });
 

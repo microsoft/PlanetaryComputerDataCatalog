@@ -169,7 +169,7 @@ export const AnimationExporter: React.FC = () => {
   );
 
   const panel = (
-    <Stack styles={containerStyles} tokens={panelTokens}>
+    <Stack styles={sidebarPanelStyles} tokens={panelTokens}>
       <AnimationIntro
         collection={collection}
         renderOption={renderOption}
@@ -285,7 +285,7 @@ const units: IDropdownOption[] = [
   { key: "years", text: "Years" },
 ];
 
-const containerStyles: Partial<IStackStyles> = {
+export const sidebarPanelStyles: Partial<IStackStyles> = {
   root: {
     height: "100%",
     overflowY: "auto",

@@ -14,6 +14,7 @@ import { selectCurrentMosaic } from "pages/Explore/state/mosaicSlice";
 
 import AdvancedModeButton from "./AdvancedModeButton";
 import ResetSelectors from "./ResetSelectors";
+import StartChatButton from "./StartChatButton";
 
 export const TitleHeader = () => {
   const { collection } = useExploreSelector(selectCurrentMosaic);
@@ -35,6 +36,7 @@ export const TitleHeader = () => {
         Explore datasets
       </Text>
       {collection && commandBar}
+      {!collection && <StartChatButton />}
     </Stack>
   );
 };

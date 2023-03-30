@@ -1,0 +1,32 @@
+.typing-indicator {
+  display: inline-block;
+}
+
+.typing-indicator-dot {
+  margin: 0 1px;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #000;
+  animation: typingIndicator 1s infinite;
+}
+
+.typing-indicator-dot:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.typing-indicator-dot:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes typingIndicator {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-2px);
+  }
+}
