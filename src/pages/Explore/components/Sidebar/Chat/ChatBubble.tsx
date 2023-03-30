@@ -1,4 +1,4 @@
-import { getTheme, ITextStyles, Text } from "@fluentui/react";
+import { getTheme, Stack } from "@fluentui/react";
 import { ReactNode } from "react";
 
 interface ChatBubbleProps {
@@ -7,27 +7,36 @@ interface ChatBubbleProps {
 }
 
 const ChatBubble: React.FC<ChatBubbleProps> = ({ isUser = false, children }) => {
-  const style = isUser ? userBubbleStyle : botBubbleStyle;
-  return <Text styles={style}>{children}</Text>;
+  const styles = getStyles(isUser);
+
+  return (
+    <Stack
+      horizontalAlign={isUser ? "end" : "start"}
+      styles={{ root: styles.container }}
+    >
+      <div style={styles.bubble}>{children}</div>
+    </Stack>
+  );
 };
 
 export default ChatBubble;
 
 const theme = getTheme();
-const userBubbleStyle: ITextStyles = {
-  root: {
-    backgroundColor: theme.palette.neutralLighter,
-    borderRadius: 5,
-    padding: 10,
-    margin: 5,
-  },
-};
 
-const botBubbleStyle: ITextStyles = {
-  root: {
-    backgroundColor: theme.palette.themeLighterAlt,
-    borderRadius: 5,
-    padding: 10,
-    margin: 5,
-  },
+const getStyles = (isUser: boolean) => {
+  return {
+    container: {
+      marginLeft: isUser ? 20 : 0,
+      marginRight: isUser ? 0 : 20,
+    },
+    bubble: {
+      backgroundColor: isUser
+        ? theme.palette.themeLighterAlt
+        : theme.palette.themePrimary,
+      borderRadius: 5,
+      padding: 8,
+      color: isUser ? "black" : "white",
+      alignSelf: isUser ? "flex-end" : "flex-start",
+    },
+  };
 };

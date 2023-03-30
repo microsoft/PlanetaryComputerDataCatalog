@@ -67,7 +67,5 @@ export const ChatInput = ({ onSend, onReset }: ChatInputProps) => {
 
 const tokens: IStackTokens = { childrenGap: 10 };
 const containerStyles: IStackStyles = {
-  root: {
-    paddingTop: 20,
-  },
+  root: {},
 };

@@ -1,8 +1,7 @@
-import { ITextStyles, Stack, Text } from "@fluentui/react";
+import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
 import { addMessage, clearMessages } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { useEffect } from "react";
-import { sidebarPanelStyles } from "../exporters/AnimationExporter/AnimationExporter.index";
 import { useChatApi } from "./api";
 import ChatBubble from "./ChatBubble";
 import { ChatInput } from "./Input";
@@ -61,19 +60,28 @@ const Chat = () => {
   );
 
   return (
-    <Stack styles={sidebarPanelStyles}>
-      <Stack>
+    <Stack styles={{ root: styles.container }}>
+      <Stack.Item styles={{ root: styles.header }}>
         <h3>Planetary Computer Chat</h3>
         <Text styles={introStyle}>
           An experimental generative AI search and explore experience for the
           Planetary Computer
         </Text>
-      </Stack>
-      <Stack verticalAlign="end" styles={{ root: { height: "100%" } }}>
-        {chats}
-        {isLoading && loadingChat}
+        <Separator />
+      </Stack.Item>
+      <Stack.Item grow styles={{ root: styles.body }}>
+        <Stack
+          styles={{ root: styles.bodyContentContainer }}
+          tokens={{ childrenGap: 10 }}
+        >
+          {chats}
+          {isLoading && loadingChat}
+        </Stack>
+      </Stack.Item>
+      <Stack.Item styles={{ root: styles.footer }}>
+        <Separator />
         <ChatInput onSend={handleSend} onReset={handleReset} />
-      </Stack>
+      </Stack.Item>
     </Stack>
   );
 };
@@ -84,4 +92,25 @@ const introStyle: ITextStyles = {
   root: {
     fontStyle: "italic",
   },
+};
+
+const styles = {
+  container: {
+    height: "100%",
+    padding: 10,
+  },
+  header: {},
+  body: {
+    flexGrow: 1,
+    overflowY: "auto",
+    display: "flex",
+    flexDirection: "column",
+  },
+  bodyContentContainer: {
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+  },
+  footer: {},
 };

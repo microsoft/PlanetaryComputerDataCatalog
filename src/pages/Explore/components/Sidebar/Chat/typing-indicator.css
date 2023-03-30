@@ -8,7 +8,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #000;
+  background-color: #fff;
   animation: typingIndicator 1s infinite;
 }
 
