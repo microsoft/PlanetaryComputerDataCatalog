@@ -1,16 +1,14 @@
 import axios from "axios";
 import { IMosaic } from "pages/Explore/types";
+import { CqlExpressionParser } from "pages/Explore/utils/cql";
 import { fetchCollectionMosaicInfo } from "pages/Explore/utils/hooks/useCollectionMosaicInfo";
 import { QueryFunctionContext, useQuery } from "react-query";
 import { registerStacFilter } from "utils/requests";
-import {
-  ChatLayer,
-  ChatLayerState,
-  ChatResponse,
-  ChatResponseWithLayerState,
-} from "./types";
+import { ChatLayerState, ServerChatResponse, StateChatResponse } from "./types";
 
-const CHAT_API_URL = "https://httpbin.org/delay/4";
+const CHAT_API_URL = true
+  ? "https://httpbin.org/delay/2"
+  : "https://func-pct-gpt-westeurope-staging.azurewebsites.net/api/ai/v1/chat";
 
 export const useChatApi = (message: string | undefined) => {
   return useQuery(["chat-message", message], getChat, {
@@ -23,11 +21,18 @@ export const useChatApi = (message: string | undefined) => {
 
 const getChat = async (
   queryParam: QueryFunctionContext<[string, string | undefined]>
-): Promise<ChatResponseWithLayerState> => {
+): Promise<StateChatResponse> => {
   const [, message] = queryParam.queryKey;
-  const { data } = await axios.post<ChatResponse>(CHAT_API_URL, message);
+  const { data } = await axios.post<ServerChatResponse>(CHAT_API_URL, message);
 
-  const response = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+  let response: ServerChatResponse;
+  if (message?.toLowerCase().includes("bio")) {
+    response = fakeMessages[1];
+  } else if (message?.toLowerCase().includes("climate")) {
+    response = fakeMessages[0];
+  } else {
+    response = fakeMessages[Math.floor(Math.random() * fakeMessages.length)];
+  }
 
   const collectionIds = response.layers.map(l => l.collectionId);
 
@@ -38,9 +43,12 @@ const getChat = async (
   );
 
   const mosaics: IMosaic[] = response.layers.map(l => {
+    const cqlClean = l.cql.filter(
+      exp => new CqlExpressionParser(exp).property !== "collection"
+    );
     return {
       name: "Suggested",
-      cql: l.cql,
+      cql: cqlClean,
       description: "Suggested by the Planetary Computer Chatbot",
       sortby: "desc",
     };
@@ -61,9 +69,6 @@ const getChat = async (
     })
   );
 
-  console.log(mosaicInfos);
-  console.log(data);
-
   const layerStates: ChatLayerState[] = response.layers.map((l, i) => {
     const renderOption = mosaicInfos[i].renderOptions?.find(
       r => r.name === l.renderOptionName
@@ -81,30 +86,52 @@ const getChat = async (
   });
 
   return {
-    text: response.text,
+    ...response,
     layers: layerStates,
-    map: response.map,
   };
 };
 
-const fakeMessages: ChatResponse[] = [
+const fakeMessages: ServerChatResponse[] = [
   {
-    text: "Chloris biomass is a vegetation index that measures the aboveground biomass of a plant. It is calculated by dividing the red band by the near-infrared band. The index is sensitive to the amount of chlorophyll in the plant. The index is useful for monitoring the growth of plants and for estimating the amount of biomass in a given area.",
+    id: "123-34-3432",
+    success: true,
+    response:
+      "Sentinel-2 L2A is a satellite product that provides global, high-resolution, and atmospherically corrected images of the Earth’s surface. It can be used to monitor various environmental features and changes related to climate change.\n\nIt has a high temporal and spectral coverage and resolution compared to other satellite products.",
     layers: [
-      { collectionId: "sentinel-2-l2a", cql: [], renderOptionName: "Natural Color" },
+      {
+        collectionId: "sentinel-2-l2a",
+        cql: [{ op: "<=", args: [{ property: "eo:cloud_cover" }, 10] }],
+        renderOptionName: "Natural color",
+      },
     ],
-    map: {
-      center: [-45, 70],
-      zoom: 5,
+    boundary: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [
+          [
+            [3.3874172564356115, 6.67813593752345],
+            [3.310465585040191, 6.727587854895134],
+            [3.292359309418032, 6.759054637989294],
+            [3.2154076380226115, 6.7455691240407845],
+            [3.265199895983443, 6.475780984361137],
+            [3.3919438253411442, 6.5027663880180455],
+            [3.3874172564356115, 6.67813593752345],
+          ],
+        ],
+        type: "Polygon",
+      },
     },
   },
   {
-    text: "Hello. This is a fake response",
+    id: "9328-423-234",
+    success: true,
+    response:
+      "Chloris Biomass is a planetary computer product that provides global, annual, and CO2-equivalent estimates of aboveground biomass for woody vegetation ecosystems. It covers the period from 2003 to 2019 with a spatial resolution of about 4.6 km. It is available under a Creative Common license for non-commercial use.",
     layers: [
       {
         collectionId: "chloris-biomass",
         cql: [
-          { op: "=", args: [{ property: "collection" }, "chloris-biomass"] },
           {
             op: "anyinteracts",
             args: [
@@ -117,9 +144,21 @@ const fakeMessages: ChatResponse[] = [
         renderOptionName: "Aboveground Biomass (tonnes)",
       },
     ],
-    map: {
-      center: [-45, 70],
-      zoom: 5,
+    boundary: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        coordinates: [
+          [
+            [-70.76350637661093, -1.8609123212856815],
+            [-70.76350637661093, -11.973776197745195],
+            [-59.60373614807622, -11.973776197745195],
+            [-59.60373614807622, -1.8609123212856815],
+            [-70.76350637661093, -1.8609123212856815],
+          ],
+        ],
+        type: "Polygon",
+      },
     },
   },
 ];

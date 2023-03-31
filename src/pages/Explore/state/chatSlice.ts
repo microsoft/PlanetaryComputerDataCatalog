@@ -8,6 +8,7 @@ export interface ChatState {
 const initialState: ChatState = {
   messages: [
     {
+      id: "initial",
       timestamp: new Date().toISOString(),
       text: "Hi! I can help you find and visualize geospatial data within the Planetary Computer. What are you looking for?",
       isUser: false,

@@ -66,7 +66,8 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
         map.setCamera({
           bounds,
           padding: 20,
-          type: "jump",
+          type: "fly",
+          duration: ZOOM_DURATION * 4,
         });
       }
     } catch (e) {

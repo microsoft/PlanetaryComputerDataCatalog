@@ -49,7 +49,7 @@ const initialState: IMosaicState = {
   isLoadingInitialState: true,
 };
 
-export const loadDataFromQuery = createAsyncThunk<boolean, boolean>(
+export const loadDataFromQueryString = createAsyncThunk<boolean, boolean>(
   "initial-load",
   async (_, { dispatch }) => {
     try {
@@ -300,7 +300,7 @@ export const mosaicSlice = createSlice({
     );
 
     builder.addCase(
-      loadDataFromQuery.fulfilled,
+      loadDataFromQueryString.fulfilled,
       (state, action: PayloadAction<boolean>) => {
         state.isLoadingInitialState = action.payload;
       }

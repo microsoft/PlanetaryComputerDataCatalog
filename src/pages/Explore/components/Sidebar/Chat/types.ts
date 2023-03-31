@@ -1,7 +1,9 @@
+import { Feature, GeoJsonProperties, Polygon } from "geojson";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
 
 export type ChatMessage = {
+  id: string;
   timestamp: string;
   text: string;
   isUser: boolean;
@@ -15,26 +17,23 @@ export type ChatLayer = {
   renderOption?: IMosaicRenderOption;
 };
 
-export type ChatResponse = {
-  text: string;
-  layers: ChatLayer[];
-  map: {
-    center: [number, number];
-    zoom: number;
-  };
-};
-
 export type ChatLayerState = {
   collectionId: string;
   mosaic: IMosaic;
   renderOption: IMosaicRenderOption;
 };
 
-export type ChatResponseWithLayerState = {
-  text: string;
+export type BaseChatResponse = {
+  id: string;
+  success: boolean;
+  response: string;
+  boundary: Feature<Polygon, GeoJsonProperties>;
+};
+
+export type ServerChatResponse = BaseChatResponse & {
+  layers: ChatLayer[];
+};
+
+export type StateChatResponse = BaseChatResponse & {
   layers: ChatLayerState[];
-  map: {
-    center: [number, number];
-    zoom: number;
-  };
 };

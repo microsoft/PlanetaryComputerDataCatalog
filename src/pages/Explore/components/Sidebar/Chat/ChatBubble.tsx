@@ -28,6 +28,7 @@ const getStyles = (isUser: boolean) => {
     container: {
       marginLeft: isUser ? 20 : 0,
       marginRight: isUser ? 0 : 20,
+      whiteSpace: "pre-wrap",
     },
     bubble: {
       backgroundColor: isUser

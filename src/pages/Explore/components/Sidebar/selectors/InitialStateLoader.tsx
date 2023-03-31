@@ -1,6 +1,6 @@
 import { Spinner, SpinnerSize } from "@fluentui/react";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { loadDataFromQuery } from "pages/Explore/state/mosaicSlice";
+import { loadDataFromQueryString } from "pages/Explore/state/mosaicSlice";
 import { useEffect } from "react";
 
 const InitialStateLoader = () => {
@@ -8,7 +8,7 @@ const InitialStateLoader = () => {
   const { isLoadingInitialState } = useExploreSelector(state => state.mosaic);
 
   useEffect(() => {
-    dispatch(loadDataFromQuery(true));
+    dispatch(loadDataFromQueryString(true));
   }, [dispatch]);
 
   if (isLoadingInitialState) {

@@ -2,7 +2,7 @@ import { getTheme, IconButton, Separator, Stack } from "@fluentui/react";
 
 interface ExporterHeaderProps {
   title: string;
-  subTitle: string;
+  subTitle?: string;
   onClose: () => void;
 }
 
@@ -26,7 +26,7 @@ export const ExporterHeader: React.FC<ExporterHeaderProps> = ({
       </Stack>
       {children}
       <Separator styles={{ root: { padding: "0 4px" } }} />
-      <h4 style={headerStyles}>{subTitle}</h4>
+      {subTitle && <h4 style={headerStyles}>{subTitle}</h4>}
     </>
   );
 };

@@ -1,17 +1,25 @@
 import { useEffect } from "react";
+import * as atlas from "azure-maps-control";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
-import { uniqueId } from "lodash-es";
 
 import { addMessage, clearMessages } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { addLayer } from "pages/Explore/state/mosaicSlice";
-import { ILayerState } from "pages/Explore/types";
+import {
+  setCollection,
+  setCustomQueryBody,
+  setIsCustomQuery,
+  setRenderOption,
+} from "pages/Explore/state/mosaicSlice";
 import { useCollections } from "utils/requests";
 import { useChatApi } from "./api";
 import ChatBubble from "./ChatBubble";
 import { ChatInput } from "./Input";
 import { TypingIndicator } from "./TypingIndicator";
-import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
+import { setCamera, setSidebarPanel } from "pages/Explore/state/mapSlice";
+import { ExporterHeader } from "../exporters/BaseExporter/ExporterHeader";
+import { SidebarPanels } from "pages/Explore/enums";
+import { uniqueId } from "lodash-es";
+import { useUrlStateV2 } from "../selectors/hooks/useUrlStateV2";
 
 const Chat = () => {
   const dispatch = useExploreDispatch();
@@ -27,9 +35,12 @@ const Chat = () => {
     console.error(error);
   }
 
+  useUrlStateV2();
+
   const handleSend = (message: string) => {
     dispatch(
       addMessage({
+        id: uniqueId(),
         timestamp: new Date().toISOString(),
         text: message,
         isUser: true,
@@ -41,6 +52,43 @@ const Chat = () => {
     dispatch(clearMessages());
   };
 
+  const handleClose = () => {
+    dispatch(setSidebarPanel(SidebarPanels.itemSearch));
+  };
+
+  useEffect(() => {
+    const hasMessage = data && messages.map(m => m.id).includes(data.id);
+    if (data && !hasMessage) {
+      dispatch(
+        addMessage({
+          id: data.id,
+          timestamp: new Date().toISOString(),
+          text: data.response,
+          isUser: false,
+        })
+      );
+
+      data.layers.forEach(layer => {
+        const collection = collections?.collections.find(
+          c => c.id === layer.collectionId
+        );
+        if (!layer.renderOption || !collection) {
+          return;
+        }
+
+        dispatch(setCollection(collection));
+        dispatch(setIsCustomQuery(true));
+        dispatch(setCustomQueryBody(layer.mosaic));
+        dispatch(setRenderOption(layer.renderOption));
+      });
+
+      if (data.boundary) {
+        const bbox = atlas.data.BoundingBox.fromData(data.boundary.geometry);
+        dispatch(setCamera({ bounds: bbox }));
+      }
+    }
+  }, [collections?.collections, data, dispatch, messages]);
+
   const chats = messages.map((message, index) => {
     return (
       <ChatBubble key={index} isUser={message.isUser}>
@@ -48,41 +96,6 @@ const Chat = () => {
       </ChatBubble>
     );
   });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(
-        addMessage({
-          timestamp: new Date().toISOString(),
-          text: data.text,
-          isUser: false,
-        })
-      );
-
-      data.layers.forEach(layer => {
-        if (!layer.renderOption) {
-          return;
-        }
-
-        const layerState: ILayerState = {
-          layerId: uniqueId(layer.collectionId),
-          isPinned: false,
-          collection:
-            collections?.collections.find(c => c.id === layer.collectionId) || null,
-          isCustomQuery: true,
-          query: layer.mosaic,
-          layer: {
-            maxExtent: [],
-            minZoom: layer.renderOption.minZoom || DEFAULT_MIN_ZOOM,
-            opacity: 100,
-            visible: true,
-          },
-          renderOption: layer.renderOption,
-        };
-        dispatch(addLayer(layerState));
-      });
-    }
-  }, [collections?.collections, data, dispatch]);
 
   const loadingChat = (
     <ChatBubble>
@@ -93,12 +106,12 @@ const Chat = () => {
   return (
     <Stack styles={{ root: styles.container }}>
       <Stack.Item styles={{ root: styles.header }}>
-        <h3>Planetary Computer Chat</h3>
-        <Text styles={introStyle}>
-          An experimental generative AI search and explore experience for the
-          Planetary Computer
-        </Text>
-        <Separator />
+        <ExporterHeader title="Planetary Computer Chat" onClose={handleClose}>
+          <Text styles={introStyle}>
+            An experimental generative AI search and explore experience for the
+            Planetary Computer
+          </Text>
+        </ExporterHeader>
       </Stack.Item>
       <Stack.Item grow styles={{ root: styles.body }}>
         <Stack
