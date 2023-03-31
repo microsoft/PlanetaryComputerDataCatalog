@@ -171,6 +171,12 @@ export const mosaicSlice = createSlice({
       state.layerOrder = action.payload.layerOrder;
     },
 
+    addLayer: (state, action: PayloadAction<ILayerState>) => {
+      const layer = action.payload;
+      state.layers[layer.layerId] = layer;
+      state.layerOrder = [layer.layerId].concat(state.layerOrder);
+    },
+
     setLayerMinZoom: (state, action: PayloadAction<number>) => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.layer.minZoom = action.payload;
@@ -316,6 +322,7 @@ export const {
   setLayerVisible,
   setIsCustomQuery,
   setCustomQueryBody,
+  addLayer,
   addOrUpdateCustomCqlExpression,
   removeCustomCqlProperty,
   moveLayerDown,

@@ -1,11 +1,17 @@
+import { useEffect } from "react";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
+import { uniqueId } from "lodash-es";
+
 import { addMessage, clearMessages } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
-import { useEffect } from "react";
+import { addLayer } from "pages/Explore/state/mosaicSlice";
+import { ILayerState } from "pages/Explore/types";
+import { useCollections } from "utils/requests";
 import { useChatApi } from "./api";
 import ChatBubble from "./ChatBubble";
 import { ChatInput } from "./Input";
 import { TypingIndicator } from "./TypingIndicator";
+import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
 
 const Chat = () => {
   const dispatch = useExploreDispatch();
@@ -14,6 +20,8 @@ const Chat = () => {
   const userMessages = messages.filter(m => m.isUser);
   const lastMessage = userMessages[userMessages.length - 1]?.text;
   const { isLoading, error, data } = useChatApi(lastMessage);
+
+  const { data: collections } = useCollections();
 
   if (error) {
     console.error(error);
@@ -46,12 +54,35 @@ const Chat = () => {
       dispatch(
         addMessage({
           timestamp: new Date().toISOString(),
-          text: data,
+          text: data.text,
           isUser: false,
         })
       );
+
+      data.layers.forEach(layer => {
+        if (!layer.renderOption) {
+          return;
+        }
+
+        const layerState: ILayerState = {
+          layerId: uniqueId(layer.collectionId),
+          isPinned: false,
+          collection:
+            collections?.collections.find(c => c.id === layer.collectionId) || null,
+          isCustomQuery: true,
+          query: layer.mosaic,
+          layer: {
+            maxExtent: [],
+            minZoom: layer.renderOption.minZoom || DEFAULT_MIN_ZOOM,
+            opacity: 100,
+            visible: true,
+          },
+          renderOption: layer.renderOption,
+        };
+        dispatch(addLayer(layerState));
+      });
     }
-  }, [data, dispatch]);
+  }, [collections?.collections, data, dispatch]);
 
   const loadingChat = (
     <ChatBubble>
