@@ -3,6 +3,7 @@ import { ChatMessage } from "../components/Sidebar/Chat/types";
 
 export interface ChatState {
   messages: ChatMessage[];
+  responses: Record<string, any>;
 }
 
 const initialState: ChatState = {
@@ -16,6 +17,7 @@ const initialState: ChatState = {
       hasLayers: false,
     },
   ],
+  responses: {},
 };
 
 export const chatSlice = createSlice({
@@ -25,12 +27,16 @@ export const chatSlice = createSlice({
     addMessage: (state, action: PayloadAction<ChatMessage>) => {
       state.messages.push(action.payload);
     },
-    clearMessages: state => {
+    clearChats: state => {
       return initialState;
+    },
+    addResponse: (state, action: PayloadAction<{ id: string; response: any }>) => {
+      const { id, response } = action.payload;
+      state.responses[id] = response;
     },
   },
 });
 
-export const { addMessage, clearMessages } = chatSlice.actions;
+export const { addMessage, clearChats, addResponse } = chatSlice.actions;
 
 export default chatSlice.reducer;

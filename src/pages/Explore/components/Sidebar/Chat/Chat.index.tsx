@@ -2,9 +2,10 @@ import { useEffect, useRef } from "react";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
 import { uniqueId } from "lodash-es";
 
-import { addMessage, clearMessages } from "pages/Explore/state/chatSlice";
+import { addMessage, addResponse, clearChats } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import {
+  setBulkLayers,
   setCollection,
   setCustomQueryBody,
   setIsCustomQuery,
@@ -26,18 +27,20 @@ import { MoreInfoCommand } from "./commands/MoreInfoCommand";
 
 const Chat = () => {
   const dispatch = useExploreDispatch();
-  const { messages } = useExploreSelector(state => state.chat);
+  const { messages, responses } = useExploreSelector(state => state.chat);
 
+  const history = messages.map(m => {
+    if (m.isUser) {
+      return { input: m.text };
+    }
+    return responses[m.id];
+  });
   const userMessages = messages.filter(m => m.isUser);
-  const lastUserMessage = userMessages[userMessages.length - 1]?.text;
-  const { isLoading, error, data } = useChatApi(lastUserMessage);
+  const lastUserMessage = userMessages[userMessages.length - 1];
+  const { isLoading, isError, data } = useChatApi(lastUserMessage, history);
 
   const { data: collections } = useCollections();
   const messageListRef = useRef<HTMLDivElement>(null);
-
-  if (error) {
-    console.error(error);
-  }
 
   useUrlStateV2();
 
@@ -55,7 +58,8 @@ const Chat = () => {
   };
 
   const handleReset = () => {
-    dispatch(clearMessages());
+    dispatch(clearChats());
+    dispatch(setBulkLayers({ layers: {}, layerOrder: [] }));
   };
 
   const handleClose = () => {
@@ -63,27 +67,48 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    if (isError) {
+      console.error(isError);
+
+      dispatch(
+        addMessage({
+          id: uniqueId("error_"),
+          timestamp: new Date().toISOString(),
+          text: "Sorry, I seem to be having trouble with that request. Please try again.",
+          isUser: false,
+          canRender: false,
+          hasLayers: false,
+        })
+      );
+    }
+  }, [dispatch, isError]);
+
+  useEffect(() => {
     const messageListEl = messageListRef.current;
     if (messageListEl) {
       messageListEl.scrollIntoView(false);
     }
 
-    const hasMessage = data && messages.map(m => m.id).includes(data.id);
+    if (!data) return;
+
+    const { enriched, raw } = data;
+    const hasMessage = data && messages.map(m => m.id).includes(enriched.id);
     if (data && !hasMessage) {
+      dispatch(addResponse(raw));
       dispatch(
         addMessage({
-          id: data.id,
+          id: enriched.id,
           timestamp: new Date().toISOString(),
-          text: data.response,
+          text: enriched.response,
           isUser: false,
-          canRender: data.layers.some(l => l.canRender),
-          hasLayers: data.layers.length > 0,
-          layers: data.layers,
-          collectionIds: data.collectionIds,
+          canRender: enriched.layers.some(l => l.canRender),
+          hasLayers: enriched.layers.length > 0,
+          layers: enriched.layers,
+          collectionIds: enriched.collectionIds,
         })
       );
 
-      data.layers.forEach(layer => {
+      enriched.layers.forEach(layer => {
         const collection = collections?.collections.find(
           c => c.id === layer.collectionId
         );
@@ -97,8 +122,10 @@ const Chat = () => {
         dispatch(setRenderOption(layer.renderOption));
       });
 
-      if (data.map) {
-        dispatch(setCamera({ center: data.map.center, zoom: data.map.zoom }));
+      if (enriched.map) {
+        dispatch(
+          setCamera({ center: enriched.map.center, zoom: enriched.map.zoom })
+        );
       }
     }
   }, [collections?.collections, data, dispatch, messages]);
@@ -109,11 +136,11 @@ const Chat = () => {
 
     const commands = (
       <Stack horizontal verticalAlign="center" tokens={tokens}>
+        {message.canRender && <ExploreCommand />}
+        {message.canRender && <PinCommand />}
         {message.collectionIds?.map(cid => (
           <MoreInfoCommand key={`infocmd-${message.id}-${cid}`} collectionId={cid} />
         ))}
-        {message.canRender && <ExploreCommand />}
-        {message.canRender && <PinCommand />}
       </Stack>
     );
 
