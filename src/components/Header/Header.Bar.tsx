@@ -1,8 +1,4 @@
-import { useSession } from "components/auth/hooks/SessionContext";
 import HeaderLink from "./components/HeaderLink";
-import Feature from "components/Feature";
-import Login from "components/auth/Login";
-import Logout from "components/auth/Logout";
 import {
   headerPipeStyle,
   innerHeaderStyle,
@@ -12,9 +8,9 @@ import {
   rightAligned,
 } from "./styles";
 import { Stack, Text } from "@fluentui/react";
+import { UserHeaderControl } from "components/auth/login";
 
 export const HeaderBar: React.FC = () => {
-  const { status } = useSession();
   return (
     <Stack
       className={innerHeaderStyle}
@@ -59,15 +55,7 @@ export const HeaderBar: React.FC = () => {
       </HeaderLink>
       <div className={rightAligned}>
         <Stack horizontal verticalAlign="center" tokens={authSectionTokens}>
-          {!status.isLoggedIn && (
-            <HeaderLink asButton to="/account/request">
-              Request access
-            </HeaderLink>
-          )}
-          <Feature name="login">
-            <Login />
-            <Logout />
-          </Feature>
+          <UserHeaderControl />
         </Stack>
       </div>
     </Stack>

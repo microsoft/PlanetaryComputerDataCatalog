@@ -10,15 +10,19 @@ import groups from "config/datasetGroups.yml";
 import featuredCollections from "config/datasetFeatured.yml";
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { SessionProvider } from "components/auth/hooks/SessionContext";
 import { DataConfigProvider } from "components/state/DataConfigProvider";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "utils/helpers/auth";
 
 const queryClient = new QueryClient();
 
+const msalInstance = new PublicClientApplication(msalConfig);
+
 ReactDOM.render(
   <ThemeProvider>
-    <QueryClientProvider client={queryClient}>
-      <SessionProvider>
+    <MsalProvider instance={msalInstance}>
+      <QueryClientProvider client={queryClient}>
         <DataConfigProvider
           collectionConfig={collections}
           storageCollectionConfig={storageCollections}
@@ -27,21 +31,8 @@ ReactDOM.render(
         >
           <App />
         </DataConfigProvider>
-      </SessionProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </MsalProvider>
   </ThemeProvider>,
   document.getElementById("root")
 );
-
-// An example of how to build just the header component for embedding in other apps
-
-// import Header from "./components/Header";
-// import { BrowserRouter } from "react-router-dom";
-// ReactDOM.render(
-//   <ThemeProvider>
-//     <BrowserRouter forceRefresh>
-//       <Header />
-//     </BrowserRouter>
-//   </ThemeProvider>,
-//   document.getElementById("root")
-// );

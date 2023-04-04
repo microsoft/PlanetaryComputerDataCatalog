@@ -1,4 +1,4 @@
-import { Link } from "@fluentui/react";
+import { Icon, Link, Stack } from "@fluentui/react";
 import { SidebarPanels } from "pages/Explore/enums";
 import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setSidebarPanel } from "pages/Explore/state/mapSlice";
@@ -13,7 +13,9 @@ const StartChatButton = () => {
 
   return (
     <Link onClick={activateChat} styles={buttonStyles}>
-      Chat
+      <Stack horizontal verticalAlign="center">
+        Chat <Icon iconName="ChatBot" style={{ paddingLeft: 2 }} />
+      </Stack>
     </Link>
   );
 };

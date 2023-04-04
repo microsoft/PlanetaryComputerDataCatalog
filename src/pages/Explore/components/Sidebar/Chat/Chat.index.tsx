@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import * as atlas from "azure-maps-control";
+import { useEffect, useRef } from "react";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
+import { uniqueId } from "lodash-es";
 
 import { addMessage, clearMessages } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
@@ -10,26 +10,30 @@ import {
   setIsCustomQuery,
   setRenderOption,
 } from "pages/Explore/state/mosaicSlice";
-import { useCollections } from "utils/requests";
-import { useChatApi } from "./api";
-import ChatBubble from "./ChatBubble";
-import { ChatInput } from "./Input";
-import { TypingIndicator } from "./TypingIndicator";
 import { setCamera, setSidebarPanel } from "pages/Explore/state/mapSlice";
 import { ExporterHeader } from "../exporters/BaseExporter/ExporterHeader";
 import { SidebarPanels } from "pages/Explore/enums";
-import { uniqueId } from "lodash-es";
 import { useUrlStateV2 } from "../selectors/hooks/useUrlStateV2";
+import { useCollections } from "utils/requests";
+import { useChatApi } from "./api";
+import { ChatBubble } from "./ChatBubble";
+import { ChatInput } from "./ChatInput";
+import { TypingIndicator } from "./TypingIndicator";
+import { ExploreCommand } from "./commands/ExploreCommand";
+import { PinCommand } from "./commands/PinCommand";
+import { AuthPage } from "components/auth";
+import { MoreInfoCommand } from "./commands/MoreInfoCommand";
 
 const Chat = () => {
   const dispatch = useExploreDispatch();
   const { messages } = useExploreSelector(state => state.chat);
 
   const userMessages = messages.filter(m => m.isUser);
-  const lastMessage = userMessages[userMessages.length - 1]?.text;
-  const { isLoading, error, data } = useChatApi(lastMessage);
+  const lastUserMessage = userMessages[userMessages.length - 1]?.text;
+  const { isLoading, error, data } = useChatApi(lastUserMessage);
 
   const { data: collections } = useCollections();
+  const messageListRef = useRef<HTMLDivElement>(null);
 
   if (error) {
     console.error(error);
@@ -40,10 +44,12 @@ const Chat = () => {
   const handleSend = (message: string) => {
     dispatch(
       addMessage({
-        id: uniqueId(),
+        id: uniqueId("user_"),
         timestamp: new Date().toISOString(),
         text: message,
         isUser: true,
+        canRender: false,
+        hasLayers: false,
       })
     );
   };
@@ -57,6 +63,11 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    const messageListEl = messageListRef.current;
+    if (messageListEl) {
+      messageListEl.scrollIntoView(false);
+    }
+
     const hasMessage = data && messages.map(m => m.id).includes(data.id);
     if (data && !hasMessage) {
       dispatch(
@@ -65,6 +76,10 @@ const Chat = () => {
           timestamp: new Date().toISOString(),
           text: data.response,
           isUser: false,
+          canRender: data.layers.some(l => l.canRender),
+          hasLayers: data.layers.length > 0,
+          layers: data.layers,
+          collectionIds: data.collectionIds,
         })
       );
 
@@ -82,18 +97,33 @@ const Chat = () => {
         dispatch(setRenderOption(layer.renderOption));
       });
 
-      if (data.boundary) {
-        const bbox = atlas.data.BoundingBox.fromData(data.boundary.geometry);
-        dispatch(setCamera({ bounds: bbox }));
+      if (data.map) {
+        dispatch(setCamera({ center: data.map.center, zoom: data.map.zoom }));
       }
     }
   }, [collections?.collections, data, dispatch, messages]);
 
   const chats = messages.map((message, index) => {
+    const isActiveLayerChat =
+      index > Math.max(messages.length - 3, 0) && !message.isUser;
+
+    const commands = (
+      <Stack horizontal verticalAlign="center" tokens={tokens}>
+        {message.collectionIds?.map(cid => (
+          <MoreInfoCommand collectionId={cid} />
+        ))}
+        {message.canRender && <ExploreCommand />}
+        {message.canRender && <PinCommand />}
+      </Stack>
+    );
+
     return (
-      <ChatBubble key={index} isUser={message.isUser}>
-        {message.text}
-      </ChatBubble>
+      <Stack tokens={{ childrenGap: 5 }} key={`chat-${message.id}`}>
+        <ChatBubble key={index} isUser={message.isUser}>
+          {message.text}
+        </ChatBubble>
+        {isActiveLayerChat && commands}
+      </Stack>
     );
   });
 
@@ -113,19 +143,21 @@ const Chat = () => {
           </Text>
         </ExporterHeader>
       </Stack.Item>
-      <Stack.Item grow styles={{ root: styles.body }}>
-        <Stack
-          styles={{ root: styles.bodyContentContainer }}
-          tokens={{ childrenGap: 10 }}
-        >
-          {chats}
-          {isLoading && loadingChat}
-        </Stack>
-      </Stack.Item>
-      <Stack.Item styles={{ root: styles.footer }}>
-        <Separator />
-        <ChatInput onSend={handleSend} onReset={handleReset} />
-      </Stack.Item>
+      <AuthPage>
+        <Stack.Item grow styles={{ root: styles.body }}>
+          <div
+            style={styles.bodyContentContainer as React.CSSProperties}
+            ref={messageListRef}
+          >
+            {chats}
+            {isLoading && loadingChat}
+          </div>
+        </Stack.Item>
+        <Stack.Item styles={{ root: styles.footer }}>
+          <Separator />
+          <ChatInput onSend={handleSend} onReset={handleReset} />
+        </Stack.Item>
+      </AuthPage>
     </Stack>
   );
 };
@@ -158,3 +190,5 @@ const styles = {
   },
   footer: {},
 };
+
+const tokens = { childrenGap: 10 };

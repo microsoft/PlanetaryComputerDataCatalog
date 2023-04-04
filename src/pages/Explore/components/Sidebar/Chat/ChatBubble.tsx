@@ -6,7 +6,10 @@ interface ChatBubbleProps {
   children: ReactNode;
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ isUser = false, children }) => {
+export const ChatBubble: React.FC<ChatBubbleProps> = ({
+  isUser = false,
+  children,
+}) => {
   const styles = getStyles(isUser);
 
   return (
@@ -18,8 +21,6 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ isUser = false, children }) => 
     </Stack>
   );
 };
-
-export default ChatBubble;
 
 const theme = getTheme();
 
@@ -38,6 +39,7 @@ const getStyles = (isUser: boolean) => {
       padding: 8,
       color: isUser ? "black" : "white",
       alignSelf: isUser ? "flex-end" : "flex-start",
+      margin: "5px 0",
     },
   };
 };

@@ -240,10 +240,14 @@ export const mosaicSlice = createSlice({
       }
     },
 
-    pinCurrentMosaic: state => {
+    pinCurrentMosaic: (state, action?: PayloadAction<boolean | undefined>) => {
       const mosaic = getCurrentMosaicDraft(state);
       mosaic.isPinned = true;
-      state.currentEditingLayerId = null;
+
+      // Override clearing the active edit layer
+      if (!action?.payload) {
+        state.currentEditingLayerId = null;
+      }
     },
 
     removeLayerById: (state, action: PayloadAction<string>) => {
