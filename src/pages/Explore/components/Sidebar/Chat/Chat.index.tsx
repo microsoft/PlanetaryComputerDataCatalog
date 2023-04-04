@@ -110,7 +110,7 @@ const Chat = () => {
     const commands = (
       <Stack horizontal verticalAlign="center" tokens={tokens}>
         {message.collectionIds?.map(cid => (
-          <MoreInfoCommand collectionId={cid} />
+          <MoreInfoCommand key={`infocmd-${message.id}-${cid}`} collectionId={cid} />
         ))}
         {message.canRender && <ExploreCommand />}
         {message.canRender && <PinCommand />}
