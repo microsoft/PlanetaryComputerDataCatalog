@@ -1,10 +1,9 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
-import { IStackTokens,  Stack } from "@fluentui/react";
+import { IStackTokens, Stack } from "@fluentui/react";
 import { PcPersona } from "./PcPersona";
 import { SignInButton } from "./SignInButton";
 
 export const UserHeaderControl: React.FC = () => {
-
   return (
     <Stack tokens={gapSmall} verticalAlign="center">
       <Stack horizontal tokens={gapRegular}>
@@ -18,7 +17,6 @@ export const UserHeaderControl: React.FC = () => {
     </Stack>
   );
 };
-
 
 export const gapRegular: IStackTokens = {
   childrenGap: 8,
