@@ -18,7 +18,9 @@ export const useChatApi = (message: ChatMessage | undefined, history: any) => {
   const client = useAuthApiClient();
   const id = `chat-message-${message?.id}`;
 
-  return useQuery([id, message?.text, []], getChat, {
+  console.log({ history, enabled: Boolean(message?.text) });
+
+  return useQuery([id, message?.text, history], getChat, {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -33,6 +35,7 @@ const getChat = async (
   >
 ): Promise<{ enriched: StateChatResponse; raw: any }> => {
   const [, message, history] = queryContext.queryKey;
+  console.log("making request");
   const client = queryContext.meta?.client as AxiosInstance;
   const { data: response } = await client.post<ServerChatResponse>("/chat", {
     input: message,

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
 import { uniqueId } from "lodash-es";
 
@@ -24,40 +24,44 @@ import { ExploreCommand } from "./commands/ExploreCommand";
 import { PinCommand } from "./commands/PinCommand";
 import { AuthPage } from "components/auth";
 import { MoreInfoCommand } from "./commands/MoreInfoCommand";
+import { ChatMessage } from "./types";
 
 const Chat = () => {
+  const [inputMessage, setInputMessage] = useState<ChatMessage>();
   const dispatch = useExploreDispatch();
   const { messages, responses } = useExploreSelector(state => state.chat);
-
-  const history = messages.map(m => {
-    if (m.isUser) {
-      return { input: m.text };
-    }
-    return responses[m.id];
-  });
-  const userMessages = messages.filter(m => m.isUser);
-  const lastUserMessage = userMessages[userMessages.length - 1];
-  const { isLoading, isError, data } = useChatApi(lastUserMessage, history);
-
   const { data: collections } = useCollections();
+
+  const history = messages
+    .filter(m => m.id !== inputMessage?.id)
+    .map(m => {
+      if (m.isUser) {
+        return { input: m.text };
+      }
+      return responses[m.id];
+    })
+    .filter(Boolean);
+
+  const { isLoading, isError, data } = useChatApi(inputMessage, history);
   const messageListRef = useRef<HTMLDivElement>(null);
 
   useUrlStateV2();
 
   const handleSend = (message: string) => {
-    dispatch(
-      addMessage({
-        id: uniqueId("user_"),
-        timestamp: new Date().toISOString(),
-        text: message,
-        isUser: true,
-        canRender: false,
-        hasLayers: false,
-      })
-    );
+    const userMessage = {
+      id: uniqueId("user_"),
+      timestamp: new Date().toISOString(),
+      text: message,
+      isUser: true,
+      canRender: false,
+      hasLayers: false,
+    };
+
+    setInputMessage(userMessage);
   };
 
   const handleReset = () => {
+    setInputMessage(undefined);
     dispatch(clearChats());
     dispatch(setBulkLayers({ layers: {}, layerOrder: [] }));
   };
@@ -65,6 +69,12 @@ const Chat = () => {
   const handleClose = () => {
     dispatch(setSidebarPanel(SidebarPanels.itemSearch));
   };
+
+  useEffect(() => {
+    if (inputMessage) {
+      dispatch(addMessage(inputMessage));
+    }
+  }, [dispatch, inputMessage]);
 
   useEffect(() => {
     if (isError) {
@@ -92,9 +102,12 @@ const Chat = () => {
     if (!data) return;
 
     const { enriched, raw } = data;
-    const hasMessage = data && messages.map(m => m.id).includes(enriched.id);
-    if (data && !hasMessage) {
-      dispatch(addResponse(raw));
+    const isMessageAlreadyInculded =
+      data && messages.map(m => m.id).includes(enriched.id);
+
+    if (data && !isMessageAlreadyInculded) {
+      setInputMessage(undefined);
+      dispatch(addResponse({ id: enriched.id, response: raw }));
       dispatch(
         addMessage({
           id: enriched.id,
@@ -128,7 +141,7 @@ const Chat = () => {
         );
       }
     }
-  }, [collections?.collections, data, dispatch, messages]);
+  }, [collections?.collections, data, messages, dispatch]);
 
   const chats = messages.map((message, index) => {
     const isActiveLayerChat =

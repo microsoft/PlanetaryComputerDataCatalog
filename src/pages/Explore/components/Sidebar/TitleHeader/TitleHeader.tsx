@@ -28,6 +28,8 @@ export const TitleHeader = () => {
       <AdvancedModeButton />
       <VerticalDivider styles={dividerStyles} />
       <ResetSelectors />
+      <VerticalDivider styles={dividerStyles} />
+      <StartChatButton />
     </Stack>
   );
   return (
