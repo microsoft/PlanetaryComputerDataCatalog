@@ -33,9 +33,9 @@ const getStyles = (isUser: boolean) => {
     },
     bubble: {
       fontSize: "1.1em",
-      // color: isUser ? "black" : "white",
+      color: isUser ? "white" : "inherit",
       backgroundColor: isUser
-        ? theme.palette.neutralLighterAlt
+        ? theme.palette.neutralSecondary
         : theme.palette.neutralLighter,
       border: "1px solid",
       borderColor: isUser

@@ -82,13 +82,15 @@ const getChat = async (
     );
 
     if (!renderOption) {
-      console.warn(`Render option not found ${l.renderOptionName}`);
+      console.warn(
+        `Render option not found ${l.renderOptionName}, using first one.`
+      );
     }
 
     return {
       collectionId: l.collectionId,
       mosaic: enrichedMosaics[i],
-      renderOption: renderOption,
+      renderOption: renderOption || mosaicInfos[i].renderOptions?.[0],
       canRender: l.canRender,
     };
   });

@@ -11,7 +11,7 @@ const initialState: ChatState = {
     {
       id: "initial",
       timestamp: new Date().toISOString(),
-      text: "Hi! I can help you find and visualize geospatial data within the Planetary Computer. What are you looking for?",
+      text: "Welcome to the Planetary Computer CoPilot 👋. I can help you find and visualize geospatial data within the Planetary Computer. What are you looking for?",
       isUser: false,
       canRender: false,
       hasLayers: false,

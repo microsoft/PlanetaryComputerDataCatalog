@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { ITextStyles, Separator, Stack, Text } from "@fluentui/react";
-import { uniqueId } from "lodash-es";
 
 import { addMessage, addResponse, clearChats } from "pages/Explore/state/chatSlice";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
@@ -22,7 +21,12 @@ import { TypingIndicator } from "./TypingIndicator";
 import { AuthPage } from "components/auth";
 import { ChatMessage } from "../types";
 import { ChatMessageList } from "./ChatMessageList";
-import { getMessageHistory } from "../helpers";
+import {
+  getMessageHistory,
+  makeBotMessage,
+  makeErrorMessage,
+  makeUserMessage,
+} from "../helpers";
 
 const Chat = () => {
   const dispatch = useExploreDispatch();
@@ -40,15 +44,7 @@ const Chat = () => {
   useUrlStateV2();
 
   const handleSend = (message: string) => {
-    const userMessage = {
-      id: uniqueId("user_"),
-      timestamp: new Date().toISOString(),
-      text: message,
-      isUser: true,
-      canRender: false,
-      hasLayers: false,
-    };
-
+    const userMessage = makeUserMessage(message);
     setInputMessage(userMessage);
   };
 
@@ -70,49 +66,22 @@ const Chat = () => {
 
   useEffect(() => {
     if (isError) {
-      console.error(isError);
-
-      dispatch(
-        addMessage({
-          id: uniqueId("error_"),
-          timestamp: new Date().toISOString(),
-          text: "Sorry, I seem to be having trouble with that request. Please try again.",
-          isUser: false,
-          canRender: false,
-          hasLayers: false,
-        })
-      );
+      dispatch(addMessage(makeErrorMessage()));
     }
   }, [dispatch, isError]);
 
   useEffect(() => {
-    const messageListEl = messageListRef.current;
-    if (messageListEl) {
-      messageListEl.scrollIntoView(false);
-    }
+    // Keep new message visible by scrolling to bottom of container
+    messageListRef.current?.scrollIntoView(false);
 
     if (!apiResponse) return;
 
     const { enriched, raw } = apiResponse;
-    const isMessageAlreadyInculded =
-      apiResponse && messages.map(m => m.id).includes(enriched.id);
 
-    console.log("message is already included", isMessageAlreadyInculded);
-    if (apiResponse && !isMessageAlreadyInculded) {
+    if (apiResponse) {
       setInputMessage(undefined);
       dispatch(addResponse({ id: enriched.id, response: raw }));
-      dispatch(
-        addMessage({
-          id: enriched.id,
-          timestamp: new Date().toISOString(),
-          text: enriched.response,
-          isUser: false,
-          canRender: enriched.layers.some(l => l.canRender),
-          hasLayers: enriched.layers.length > 0,
-          layers: enriched.layers,
-          collectionIds: enriched.collectionIds,
-        })
-      );
+      dispatch(addMessage(makeBotMessage(enriched)));
 
       enriched.layers.forEach(layer => {
         const collection = collections?.collections.find(
