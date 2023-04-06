@@ -17,33 +17,37 @@ export const useMsalToken = (): MsalTokenHookPropsReturn => {
   const [accessToken, setAccessToken] = React.useState<string>();
   const account = accounts[0];
 
-  const accessTokenRequest = {
-    ...tokenRequest,
-    account,
-  };
-
   useEffect(() => {
-    if (!accessToken && inProgress === InteractionStatus.None && account) {
-      instance
-        .acquireTokenSilent(accessTokenRequest)
-        .then(accessTokenResponse => {
-          setAccessToken(accessTokenResponse.accessToken);
-        })
-        .catch(error => {
-          if (error instanceof InteractionRequiredAuthError) {
-            instance
-              .acquireTokenPopup(accessTokenRequest)
-              .then(accessTokenResponse => {
-                setAccessToken(accessTokenResponse.accessToken);
-              })
-              .catch(function (error) {
-                console.error(error);
-              });
+    const accessTokenRequest = {
+      ...tokenRequest,
+      account,
+    };
+
+    const acquireToken = async () => {
+      try {
+        const accessTokenResponse = await instance.acquireTokenSilent(
+          accessTokenRequest
+        );
+        setAccessToken(accessTokenResponse.accessToken);
+      } catch (error) {
+        if (error instanceof InteractionRequiredAuthError) {
+          try {
+            const accessTokenResponse = await instance.acquireTokenPopup(
+              accessTokenRequest
+            );
+            setAccessToken(accessTokenResponse.accessToken);
+          } catch (popupError) {
+            console.error(popupError);
           }
+        } else {
           console.warn(error);
-        });
+        }
+      }
+    };
+    if (account && inProgress === InteractionStatus.None) {
+      acquireToken();
     }
-  });
+  }, [account, inProgress, instance]);
 
   return { accessToken, inProgress };
 };
