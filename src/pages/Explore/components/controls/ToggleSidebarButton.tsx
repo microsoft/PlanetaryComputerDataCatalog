@@ -2,11 +2,12 @@ import { IconButton, useTheme } from "@fluentui/react";
 import { useCallback } from "react";
 import { useExploreDispatch, useExploreSelector } from "../../state/hooks";
 import { toggleShowSidebar } from "../../state/mapSlice";
-import { SIDEBAR_WIDTH } from "../../utils/constants";
 
 const MinimizeButton = () => {
   const dispatch = useExploreDispatch();
-  const showSidebar = useExploreSelector(s => s.map.showSidebar);
+  const { showSidebar: isSidebarVisible, sidebarWidth } = useExploreSelector(
+    s => s.map
+  );
   const theme = useTheme();
   const bgColor = theme.semanticColors.bodyBackground;
 
@@ -14,8 +15,8 @@ const MinimizeButton = () => {
     dispatch(toggleShowSidebar());
   }, [dispatch]);
 
-  const direction = showSidebar ? "Left" : "Right";
-  const title = showSidebar ? "Hide" : "Show";
+  const direction = isSidebarVisible ? "Left" : "Right";
+  const title = isSidebarVisible ? "Hide" : "Show";
 
   return (
     <div
@@ -23,7 +24,7 @@ const MinimizeButton = () => {
       style={{
         position: "absolute",
         top: 175,
-        left: showSidebar ? SIDEBAR_WIDTH - 1 : 8,
+        left: isSidebarVisible ? sidebarWidth - 1 : 8,
         zIndex: 1,
         padding: "8px 1px",
         borderRadius: "0  4px 4px 0",

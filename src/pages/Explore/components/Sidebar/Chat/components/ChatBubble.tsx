@@ -32,12 +32,17 @@ const getStyles = (isUser: boolean) => {
       whiteSpace: "pre-wrap",
     },
     bubble: {
+      fontSize: "1.1em",
+      // color: isUser ? "black" : "white",
       backgroundColor: isUser
-        ? theme.palette.themeLighterAlt
-        : theme.palette.themePrimary,
+        ? theme.palette.neutralLighterAlt
+        : theme.palette.neutralLighter,
+      border: "1px solid",
+      borderColor: isUser
+        ? theme.palette.neutralLighter
+        : theme.palette.neutralLight,
       borderRadius: 5,
       padding: 8,
-      color: isUser ? "black" : "white",
       alignSelf: isUser ? "flex-end" : "flex-start",
       margin: "5px 0",
     },

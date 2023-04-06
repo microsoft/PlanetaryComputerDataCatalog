@@ -5,7 +5,6 @@ import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hook
 import { resetMosaic } from "pages/Explore/state/mosaicSlice";
 import { resetDetail } from "pages/Explore/state/detailSlice";
 import MinimizeButton from "../controls/ToggleSidebarButton";
-import { SIDEBAR_WIDTH } from "../../utils/constants";
 import AnimationExporter from "./exporters/AnimationExporter";
 import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilter";
 import ImageExporter from "./exporters/ImageExporter";
@@ -14,7 +13,9 @@ import Chat from "./Chat";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
-  const isSidebarVisible = useExploreSelector(s => s.map.showSidebar);
+  const { showSidebar: isSidebarVisible, sidebarWidth } = useExploreSelector(
+    s => s.map
+  );
   const { showSelectedItemAsLayer: isItemLayerVisible } = useExploreSelector(
     s => s.detail.display
   );
@@ -22,10 +23,10 @@ export const Sidebar = () => {
 
   const { width, sidebarVisibility } = useMemo(() => {
     return {
-      width: isSidebarVisible ? SIDEBAR_WIDTH : 0,
+      width: isSidebarVisible ? sidebarWidth : 0,
       sidebarVisibility: isSidebarVisible ? "visible" : "hidden",
     };
-  }, [isSidebarVisible]);
+  }, [isSidebarVisible, sidebarWidth]);
 
   useEffect(() => {
     return () => {

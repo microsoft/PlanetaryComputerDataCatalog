@@ -46,11 +46,9 @@ const useZoomEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
 
   // Zoom the map to the new level
   useEffect(() => {
-    console.log("recieved new zoom", zoom);
     if (!map) return;
 
     if (zoom !== map.getCamera().zoom) {
-      console.log("setting zoom and stuff");
       map.setCamera({
         zoom: zoom,
         center: center,

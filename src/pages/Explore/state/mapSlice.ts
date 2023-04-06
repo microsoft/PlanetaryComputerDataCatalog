@@ -8,6 +8,7 @@ import { IDrawnShape } from "../types";
 import { getCenterAndZoomQueryString } from "../utils";
 import { setItemQuickPreview, setShowItemAsDetailLayer } from "./detailSlice";
 import { isNull } from "lodash-es";
+import { DEFAULT_SIDEBAR_WIDTH } from "../utils/constants";
 
 const { center, zoom } = getCenterAndZoomQueryString();
 
@@ -18,6 +19,7 @@ export interface MapState {
   boundaryShape: GeoJsonObject | null;
   showCollectionOutline: boolean;
   showSidebar: boolean;
+  sidebarWidth: number;
   useHighDef: boolean;
   previousCenter: [number, number] | null;
   previousZoom: number | null;
@@ -33,6 +35,7 @@ const initialState: MapState = {
   boundaryShape: null,
   showCollectionOutline: true,
   showSidebar: true,
+  sidebarWidth: DEFAULT_SIDEBAR_WIDTH,
   useHighDef: true,
   previousCenter: null,
   previousZoom: null,
@@ -77,6 +80,9 @@ export const mapSlice = createSlice({
     setShowSidebar: (state, action: PayloadAction<boolean>) => {
       state.showSidebar = action.payload;
     },
+    setSidebarWidth: (state, action: PayloadAction<number>) => {
+      state.sidebarWidth = action.payload;
+    },
     toggleShowSidebar: state => {
       state.showSidebar = !state.showSidebar;
     },
@@ -88,6 +94,11 @@ export const mapSlice = createSlice({
     },
     setSidebarPanel: (state, action: PayloadAction<SidebarPanels>) => {
       state.sidebarPanel = action.payload;
+      if (action.payload === SidebarPanels.chat) {
+        state.sidebarWidth = DEFAULT_SIDEBAR_WIDTH + 100;
+      } else {
+        state.sidebarWidth = DEFAULT_SIDEBAR_WIDTH;
+      }
     },
     setBboxDrawMode: (state, action: PayloadAction<boolean>) => {
       state.isDrawBboxMode = action.payload;
@@ -137,6 +148,7 @@ export const {
   clearBoundaryShape,
   toggleShowSidebar,
   setShowSidebar,
+  setSidebarWidth,
   setSidebarPanel,
   setBboxDrawMode,
   setDrawnShape,

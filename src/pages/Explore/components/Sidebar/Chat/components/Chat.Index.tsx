@@ -12,37 +12,29 @@ import {
   setRenderOption,
 } from "pages/Explore/state/mosaicSlice";
 import { setCamera, setSidebarPanel } from "pages/Explore/state/mapSlice";
-import { ExporterHeader } from "../exporters/BaseExporter/ExporterHeader";
+import { ExporterHeader } from "../../exporters/BaseExporter/ExporterHeader";
 import { SidebarPanels } from "pages/Explore/enums";
-import { useUrlStateV2 } from "../selectors/hooks/useUrlStateV2";
+import { useUrlStateV2 } from "../../selectors/hooks/useUrlStateV2";
 import { useCollections } from "utils/requests";
-import { useChatApi } from "./api";
-import { ChatBubble } from "./ChatBubble";
+import { useChatApi } from "../api";
 import { ChatInput } from "./ChatInput";
 import { TypingIndicator } from "./TypingIndicator";
-import { ExploreCommand } from "./commands/ExploreCommand";
-import { PinCommand } from "./commands/PinCommand";
 import { AuthPage } from "components/auth";
-import { MoreInfoCommand } from "./commands/MoreInfoCommand";
-import { ChatMessage } from "./types";
+import { ChatMessage } from "../types";
+import { ChatMessageList } from "./ChatMessageList";
+import { getMessageHistory } from "../helpers";
 
 const Chat = () => {
-  const [inputMessage, setInputMessage] = useState<ChatMessage>();
   const dispatch = useExploreDispatch();
+  const [inputMessage, setInputMessage] = useState<ChatMessage>();
   const { messages, responses } = useExploreSelector(state => state.chat);
+  const history = getMessageHistory(messages, inputMessage, responses);
   const { data: collections } = useCollections();
-
-  const history = messages
-    .filter(m => m.id !== inputMessage?.id)
-    .map(m => {
-      if (m.isUser) {
-        return { input: m.text };
-      }
-      return responses[m.id];
-    })
-    .filter(Boolean);
-
-  const { isLoading, isError, data } = useChatApi(inputMessage, history);
+  const {
+    isLoading,
+    isError,
+    data: apiResponse,
+  } = useChatApi(inputMessage, history);
   const messageListRef = useRef<HTMLDivElement>(null);
 
   useUrlStateV2();
@@ -99,13 +91,14 @@ const Chat = () => {
       messageListEl.scrollIntoView(false);
     }
 
-    if (!data) return;
+    if (!apiResponse) return;
 
-    const { enriched, raw } = data;
+    const { enriched, raw } = apiResponse;
     const isMessageAlreadyInculded =
-      data && messages.map(m => m.id).includes(enriched.id);
+      apiResponse && messages.map(m => m.id).includes(enriched.id);
 
-    if (data && !isMessageAlreadyInculded) {
+    console.log("message is already included", isMessageAlreadyInculded);
+    if (apiResponse && !isMessageAlreadyInculded) {
       setInputMessage(undefined);
       dispatch(addResponse({ id: enriched.id, response: raw }));
       dispatch(
@@ -141,45 +134,15 @@ const Chat = () => {
         );
       }
     }
-  }, [collections?.collections, data, messages, dispatch]);
-
-  const chats = messages.map((message, index) => {
-    const isActiveLayerChat =
-      index > Math.max(messages.length - 3, 0) && !message.isUser;
-
-    const commands = (
-      <Stack horizontal verticalAlign="center" tokens={tokens}>
-        {message.canRender && <ExploreCommand />}
-        {message.canRender && <PinCommand />}
-        {message.collectionIds?.map(cid => (
-          <MoreInfoCommand key={`infocmd-${message.id}-${cid}`} collectionId={cid} />
-        ))}
-      </Stack>
-    );
-
-    return (
-      <Stack tokens={{ childrenGap: 5 }} key={`chat-${message.id}`}>
-        <ChatBubble key={index} isUser={message.isUser}>
-          {message.text}
-        </ChatBubble>
-        {isActiveLayerChat && commands}
-      </Stack>
-    );
-  });
-
-  const loadingChat = (
-    <ChatBubble>
-      <TypingIndicator />
-    </ChatBubble>
-  );
+  }, [collections?.collections, apiResponse, messages, dispatch]);
 
   return (
     <Stack styles={{ root: styles.container }}>
       <Stack.Item styles={{ root: styles.header }}>
-        <ExporterHeader title="Planetary Computer Chat" onClose={handleClose}>
+        <ExporterHeader title="Planetary Computer CoPilot" onClose={handleClose}>
           <Text styles={introStyle}>
             An experimental generative AI search and explore experience for the
-            Planetary Computer
+            Planetary Computer.
           </Text>
         </ExporterHeader>
       </Stack.Item>
@@ -189,11 +152,11 @@ const Chat = () => {
             style={styles.bodyContentContainer as React.CSSProperties}
             ref={messageListRef}
           >
-            {chats}
-            {isLoading && loadingChat}
+            <ChatMessageList messages={messages} />
+            <TypingIndicator visible={isLoading} />
           </div>
         </Stack.Item>
-        <Stack.Item styles={{ root: styles.footer }}>
+        <Stack.Item>
           <Separator />
           <ChatInput onSend={handleSend} onReset={handleReset} />
         </Stack.Item>
@@ -228,7 +191,4 @@ const styles = {
     flexDirection: "column",
     justifyContent: "flex-end",
   },
-  footer: {},
 };
-
-const tokens = { childrenGap: 10 };

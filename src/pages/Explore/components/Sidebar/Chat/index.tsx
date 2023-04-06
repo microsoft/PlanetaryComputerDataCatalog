@@ -1,1 +1,1 @@
-export { default } from "./Chat.index";
+export { default } from "./components/Chat.Index";

@@ -12,8 +12,8 @@ export const ChatCommand = ({ children }: ChatCommandProps) => {
 const theme = getTheme();
 
 const commandStyles: CSSProperties = {
-  border: `1px solid ${theme.palette.themePrimary}`,
-  backgroundColor: theme.palette.neutralLighter,
+  border: `1px dashed ${theme.palette.neutralQuaternary}`,
+  backgroundColor: theme.palette.neutralLighterAlt,
   padding: "1px 3px",
   borderRadius: 5,
   fontSize: 12,
