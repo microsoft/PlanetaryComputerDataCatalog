@@ -1,5 +1,7 @@
 import { Stack } from "@fluentui/react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { sanitize } from "dompurify";
+import { marked } from "marked";
 
 import { ChatMessage } from "../types";
 import { ChatBubble } from "./ChatBubble";
@@ -27,11 +29,16 @@ export const ChatMessageList = ({ messages }: ChatMessageListProps) => {
       </Stack>
     );
 
+    const renderedMsg = sanitize(
+      marked.parseInline(message.text, { smartypants: true })
+    );
+    const text = <div dangerouslySetInnerHTML={{ __html: renderedMsg }} />;
     const timeout = message.isUser ? 0 : 500;
+
     return (
       <CSSTransition key={`chat-${message.id}`} timeout={timeout} classNames="item">
         <Stack>
-          <ChatBubble isUser={message.isUser}>{message.text}</ChatBubble>
+          <ChatBubble isUser={message.isUser}>{text}</ChatBubble>
           {isActiveLayerChat && commands}
         </Stack>
       </CSSTransition>

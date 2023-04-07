@@ -52,6 +52,7 @@ export const ChatInput = ({ onSend, onReset }: ChatInputProps) => {
       </StackItem>
       <StackItem grow={1}>
         <TextField
+          autoFocus
           multiline
           autoAdjustHeight
           resizable={false}
