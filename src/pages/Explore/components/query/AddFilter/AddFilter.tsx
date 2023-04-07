@@ -16,16 +16,22 @@ import {
 import { CqlParser } from "pages/Explore/utils/cql";
 import { makeDefaultCqlExpression } from "pages/Explore/utils/cql/helpers";
 import { renderPlaceholder } from "pages/Explore/utils/dropdownRenderers";
+import {
+  getCurrentProperties,
+  getFilteredQueryables,
+  makeDropdownItems,
+} from "./helpers";
 
 interface AddAttributeProps {
-  queryable: JSONSchema | undefined;
+  queryables: JSONSchema | undefined;
   cql: CqlParser | null;
 }
 
-export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
+export const AddFilter = ({ queryables, cql }: AddAttributeProps) => {
   const dispatch = useExploreDispatch();
   const existingProperties = getCurrentProperties(cql);
-  const options = makeDropdownItems(queryable, existingProperties);
+  const filteredQueryables = getFilteredQueryables(queryables);
+  const options = makeDropdownItems(filteredQueryables, existingProperties);
 
   const handleChange = (_: any, item: IDropdownOption | undefined) => {
     const property = item?.key as string;
@@ -57,35 +63,6 @@ export const AddFilter = ({ queryable, cql }: AddAttributeProps) => {
       onChange={handleChange}
     />
   );
-};
-
-const getCurrentProperties = (cql: CqlParser | null) => {
-  const existing = cql?.expressions.map(exp => exp.property);
-  return existing || [];
-};
-
-const makeDropdownItems = (
-  queryable: JSONSchema | undefined,
-  existingProperties: string[]
-): IDropdownOption[] => {
-  const keys = Object.keys(queryable?.properties || {});
-  const fields = queryable?.properties;
-
-  return keys.map(key => {
-    const field = fields?.[key] as JSONSchema;
-    const exists = existingProperties.includes(key);
-    const isAcquired = key === "datetime";
-    const tooltip = isAcquired ? "This filter cannot be removed" : field.description;
-
-    return {
-      key,
-      text: field.title || "",
-      title: tooltip,
-      data: field,
-      checked: exists,
-      disabled: isAcquired,
-    };
-  });
 };
 
 const theme = getTheme();
