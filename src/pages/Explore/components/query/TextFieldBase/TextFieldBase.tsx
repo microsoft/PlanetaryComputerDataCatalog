@@ -20,6 +20,7 @@ import { useExploreDispatch } from "pages/Explore/state/hooks";
 import { setCustomCqlExpressions } from "pages/Explore/state/mosaicSlice";
 import DropdownLabel from "../components/DropdownLabel";
 import { CqlOperator } from "pages/Explore/utils/cql/types";
+import { getQueryableTitle } from "pages/Explore/utils/stac";
 
 interface TextFieldProps<T extends string | number> {
   field: CqlExpressionParser<T>;
@@ -48,7 +49,7 @@ export const TextFieldBase = ({
   const dispatch = useExploreDispatch();
 
   const { fieldSchema } = field;
-  const labelPrefix = fieldSchema?.title || field.property;
+  const labelPrefix = getQueryableTitle(fieldSchema, field.property);
   const formattedValue = onFormatValue(field.value);
   const keyPrefix = `textstringcontrol-${field.property}`;
 

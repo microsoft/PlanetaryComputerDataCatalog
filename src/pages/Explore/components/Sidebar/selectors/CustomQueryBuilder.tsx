@@ -55,7 +55,7 @@ const CustomQueryBuilder = () => {
       <Separator styles={separatorStyles} />
       <Stack horizontal tokens={customStackTokens} styles={customStackStyles}>
         <Text styles={textStyle}>Custom filters</Text>
-        <AddFilter queryable={queryable} cql={parsedCql} />
+        <AddFilter queryables={queryable} cql={parsedCql} />
       </Stack>
       {isLoading && loadingIndicator}
       {dateControl}

@@ -5,6 +5,8 @@ import { BBox } from "geojson";
 import { IStacCollection, IStacFilterCollection, IStacFilterGeom } from "types/stac";
 import { CqlDateRange } from "./cql/types";
 import { formatDatetime, getDayEnd } from "./time";
+import { JSONSchema } from "@apidevtools/json-schema-ref-parser";
+import { titleCase } from "utils";
 
 export const collectionFilter = (
   collectionId: string | undefined
@@ -42,4 +44,10 @@ export const rangeFromTemporalExtent = (
   const end = interval[0][1] || formatDatetime(getDayEnd(new Date()));
 
   return [start, end];
+};
+
+export const getQueryableTitle = (field: JSONSchema | undefined, key: string) => {
+  // Get the value after a possible colon
+  const unprefixed = key.split(":").pop() || key;
+  return (field && field.title) || titleCase(unprefixed, "_");
 };

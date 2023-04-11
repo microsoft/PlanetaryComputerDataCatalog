@@ -20,8 +20,8 @@ export const capitalize = (value: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-export const titleCase = (str: string) => {
-  return str.split(" ").map(capitalize).join(" ");
+export const titleCase = (str: string, splitChar: string = " ") => {
+  return str.split(splitChar).map(capitalize).join(" ");
 };
 
 export const isort = (a: string, b: string) =>
