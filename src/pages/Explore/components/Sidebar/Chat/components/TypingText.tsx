@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { sanitize } from "dompurify";
+import { marked } from "marked";
+
 import { useAnimationPlayed } from "./context/AnimationPlayedContext";
-import "../styles/typing-text.css";
 import { ChatMessage } from "../types";
 
 interface TypingTextProps {
+  typingEnabled: boolean;
   message: ChatMessage;
   typingSpeed?: number;
   onType: () => void;
 }
 
-const TypingText = ({ message, typingSpeed = 100, onType }: TypingTextProps) => {
+const TypingText = ({
+  typingEnabled,
+  message,
+  typingSpeed = 100,
+  onType,
+}: TypingTextProps) => {
   const [displayedText, setDisplayedText] = useState<string>("");
   const { addPlayedAnimation, isAnimationPlayed } = useAnimationPlayed();
   const animationStartedRef = React.useRef(false);
@@ -31,10 +39,10 @@ const TypingText = ({ message, typingSpeed = 100, onType }: TypingTextProps) => 
       }
     };
 
-    if (!isAnimationPlayed(message.id)) {
+    if (typingEnabled && !isAnimationPlayed(message.id)) {
       typeNextWord();
       addPlayedAnimation(message.id);
-    } else if (!animationStartedRef.current) {
+    } else if (!typingEnabled || !animationStartedRef.current) {
       setDisplayedText(message.text);
     }
   }, [
@@ -43,10 +51,15 @@ const TypingText = ({ message, typingSpeed = 100, onType }: TypingTextProps) => 
     message.id,
     message.text,
     onType,
+    typingEnabled,
     typingSpeed,
   ]);
 
-  return <div>{displayedText}</div>;
+  const renderedMsg = sanitize(
+    marked.parseInline(displayedText, { smartypants: true })
+  );
+
+  return <div dangerouslySetInnerHTML={{ __html: renderedMsg }} />;
 };
 
 export default TypingText;
