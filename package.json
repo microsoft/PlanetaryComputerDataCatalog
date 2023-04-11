@@ -1,6 +1,6 @@
 {
   "name": "pc-datacatalog",
-  "version": "2023.1.5",
+  "version": "2023.1.6",
   "private": true,
   "proxy": "http://api:7071/",
   "dependencies": {
