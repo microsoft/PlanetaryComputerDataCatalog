@@ -10,11 +10,13 @@ import { MoreInfoCommand } from "./commands/MoreInfoCommand";
 import { PinCommand } from "./commands/PinCommand";
 
 import "../styles/bubble-transitions.css";
+import TypingText from "./TypingText";
 
 interface ChatMessageListProps {
   messages: ChatMessage[];
+  onType: () => void;
 }
-export const ChatMessageList = ({ messages }: ChatMessageListProps) => {
+export const ChatMessageList = ({ messages, onType }: ChatMessageListProps) => {
   const chats = messages.map((message, index) => {
     const isActiveLayerChat =
       index > Math.max(messages.length - 3, 0) && !message.isUser;
@@ -32,13 +34,17 @@ export const ChatMessageList = ({ messages }: ChatMessageListProps) => {
     const renderedMsg = sanitize(
       marked.parseInline(message.text, { smartypants: true })
     );
-    const text = <div dangerouslySetInnerHTML={{ __html: renderedMsg }} />;
+    const staticText = <div dangerouslySetInnerHTML={{ __html: renderedMsg }} />;
+    const text = <TypingText message={message} onType={onType} />;
+
+    const textContent = isActiveLayerChat ? text : staticText;
+
     const timeout = message.isUser ? 0 : 500;
 
     return (
       <CSSTransition key={`chat-${message.id}`} timeout={timeout} classNames="item">
         <Stack>
-          <ChatBubble isUser={message.isUser}>{text}</ChatBubble>
+          <ChatBubble isUser={message.isUser}>{textContent}</ChatBubble>
           {isActiveLayerChat && commands}
         </Stack>
       </CSSTransition>

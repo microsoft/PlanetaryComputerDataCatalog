@@ -49,13 +49,17 @@ const Chat = () => {
   };
 
   const handleReset = () => {
-    setInputMessage(undefined);
     dispatch(clearChats());
+    setInputMessage(undefined);
     dispatch(setBulkLayers({ layers: {}, layerOrder: [] }));
   };
 
   const handleClose = () => {
     dispatch(setSidebarPanel(SidebarPanels.itemSearch));
+  };
+
+  const handleTyped = () => {
+    messageListRef.current?.scrollIntoView(false);
   };
 
   useEffect(() => {
@@ -71,8 +75,7 @@ const Chat = () => {
   }, [dispatch, isError]);
 
   useEffect(() => {
-    // Keep new message visible by scrolling to bottom of container
-    messageListRef.current?.scrollIntoView(false);
+    handleTyped();
 
     if (!apiResponse) return;
 
@@ -108,7 +111,7 @@ const Chat = () => {
   return (
     <Stack styles={{ root: styles.container }}>
       <Stack.Item styles={{ root: styles.header }}>
-        <ExporterHeader title="Planetary Computer CoPilot" onClose={handleClose}>
+        <ExporterHeader title="Planetary Computer Copilot" onClose={handleClose}>
           <Text styles={introStyle}>
             An experimental generative AI search and explore experience for the
             Planetary Computer.
@@ -121,7 +124,7 @@ const Chat = () => {
             style={styles.bodyContentContainer as React.CSSProperties}
             ref={messageListRef}
           >
-            <ChatMessageList messages={messages} />
+            <ChatMessageList messages={messages} onType={handleTyped} />
             <TypingIndicator visible={isLoading} />
           </div>
         </Stack.Item>

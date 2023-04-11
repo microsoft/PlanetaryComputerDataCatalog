@@ -10,6 +10,7 @@ import { CollectionItemFilter } from "./CollectionItemFilter/CollectionItemFilte
 import ImageExporter from "./exporters/ImageExporter";
 import { SidebarPanels } from "pages/Explore/enums";
 import Chat from "./Chat";
+import { AnimationPlayedProvider } from "./Chat/components/context/AnimationPlayedContext";
 
 export const Sidebar = () => {
   const dispatch = useExploreDispatch();
@@ -65,9 +66,11 @@ export const Sidebar = () => {
         styles={sidebarStyles}
         className={`explorer-sidebar ${visibilityClass}`}
       >
-        <Stack id="explorer-sidebar-content" styles={sidebarStackStyles}>
-          {registeredPanels[sidebarPanel]}
-        </Stack>
+        <AnimationPlayedProvider>
+          <Stack id="explorer-sidebar-content" styles={sidebarStackStyles}>
+            {registeredPanels[sidebarPanel]}
+          </Stack>
+        </AnimationPlayedProvider>
       </StackItem>
       <MinimizeButton />
     </>
