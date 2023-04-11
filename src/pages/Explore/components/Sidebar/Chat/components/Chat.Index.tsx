@@ -78,8 +78,15 @@ const Chat = () => {
   useEffect(() => {
     if (isError) {
       dispatch(addMessage(makeErrorMessage()));
+      setInputMessage(undefined);
     }
   }, [dispatch, isError]);
+
+  useEffect(() => {
+    if (isLoading) {
+      handleTyped();
+    }
+  });
 
   useEffect(() => {
     handleTyped();
