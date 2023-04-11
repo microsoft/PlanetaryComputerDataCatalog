@@ -19,7 +19,7 @@ import { useChatApi } from "../api";
 import { ChatInput } from "./ChatInput";
 import { TypingIndicator } from "./TypingIndicator";
 import { AuthPage } from "components/auth";
-import { ChatMessage } from "../types";
+import { ChatMessage, RequestMapDetails } from "../types";
 import { ChatMessageList } from "./ChatMessageList";
 import {
   getMessageHistory,
@@ -32,13 +32,20 @@ const Chat = () => {
   const dispatch = useExploreDispatch();
   const [inputMessage, setInputMessage] = useState<ChatMessage>();
   const { messages, responses } = useExploreSelector(state => state.chat);
+  const { center, zoom, bounds } = useExploreSelector(state => state.map);
   const history = getMessageHistory(messages, inputMessage, responses);
   const { data: collections } = useCollections();
+  const mapDetails: RequestMapDetails = {
+    center,
+    zoom,
+    bounds,
+  };
+
   const {
     isLoading,
     isError,
     data: apiResponse,
-  } = useChatApi(inputMessage, history);
+  } = useChatApi(inputMessage, history, mapDetails);
   const messageListRef = useRef<HTMLDivElement>(null);
 
   useUrlStateV2();

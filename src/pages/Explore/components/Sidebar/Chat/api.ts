@@ -7,6 +7,7 @@ import { registerStacFilter } from "utils/requests";
 import {
   ChatLayerState,
   ChatMessage,
+  RequestMapDetails,
   ServerChatResponse,
   StateChatResponse,
 } from "./types";
@@ -14,11 +15,15 @@ import {
 import { useAuthApiClient } from "components/auth/hooks/useApiClient";
 import { uniqueId } from "lodash-es";
 
-export const useChatApi = (message: ChatMessage | undefined, history: any) => {
+export const useChatApi = (
+  message: ChatMessage | undefined,
+  history: any,
+  map: RequestMapDetails
+) => {
   const client = useAuthApiClient();
   const id = `chat-message-${message?.id}`;
 
-  return useQuery([id, message?.text, history], getChat, {
+  return useQuery([id, message?.text, history, map], getChat, {
     retry: false,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -29,15 +34,16 @@ export const useChatApi = (message: ChatMessage | undefined, history: any) => {
 
 const getChat = async (
   queryContext: QueryFunctionContext<
-    [string, string | undefined, string[] | undefined]
+    [string, string | undefined, string[] | undefined, RequestMapDetails]
   >
 ): Promise<{ enriched: StateChatResponse; raw: any }> => {
-  const [, message, history] = queryContext.queryKey;
+  const [, message, history, map] = queryContext.queryKey;
 
   const client = queryContext.meta?.client as AxiosInstance;
   const { data: response } = await client.post<ServerChatResponse>("/chat", {
     input: message,
     history,
+    map,
   });
 
   const collectionIds = response.layers.map(l => l.collectionId);

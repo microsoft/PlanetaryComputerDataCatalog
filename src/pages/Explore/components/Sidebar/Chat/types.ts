@@ -1,5 +1,6 @@
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { ICqlExpressionList } from "pages/Explore/utils/cql/types";
+import * as atlas from "azure-maps-control";
 
 export type ChatMessage = {
   id: string;
@@ -43,4 +44,10 @@ export type ServerChatResponse = BaseChatResponse & {
 export type StateChatResponse = BaseChatResponse & {
   layers: ChatLayerState[];
   collectionIds: string[];
+};
+
+export type RequestMapDetails = {
+  bounds: atlas.data.BoundingBox | null;
+  center: [number, number];
+  zoom: number;
 };
