@@ -123,16 +123,6 @@ const Footer = ({ onGrid = true }) => {
                 {manageConsent}
               </li>
             )}
-
-            <li>
-              <a
-                href="https://planetarycomputer-status.microsoft.com"
-                title="Check current Planetary Computer health status and view past incidents."
-              >
-                Service Status
-              </a>
-            </li>
-
             <li className="x-hidden-focus">
               {" "}
               © Microsoft {new Date().getFullYear()}
