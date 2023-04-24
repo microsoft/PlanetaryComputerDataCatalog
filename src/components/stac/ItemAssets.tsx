@@ -24,12 +24,16 @@ const columnWidths: Record<string, { min?: number; max?: number }> = {
   "eo:bands": { max: 100 },
 };
 
+// TODO: Rather than collect all possible asset properties that are meant to be
+// displayed in a detail pane, we should instead inspect the asset object and
+// pluck out all that fit a criteria. Perhaps Objects and Lists of Objects?
 export const ASSET_DETAIL_KEYS = [
   "file:values",
   "raster:bands",
   "classification:classes",
   "classification:bitfields",
   "table:columns",
+  "s3:altimetry_bands",
 ];
 
 export const SUPRESSED_KEYS = ["xarray:open_kwargs"];
