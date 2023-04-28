@@ -82,14 +82,6 @@ nsrdb:
   thumbnailUrl: solar_radiation_small.jpg
   keywords: [United States, Solar, Radiation]
 
-noaa-cdr:
-  title: NOAA Climate Data Records
-  category: Climate/Weather
-  short_description: Historical global climate information
-  infoUrl: https://aka.ms/ai4edata-cdr
-  thumbnailUrl: global_weather_1.jpg
-  keywords: [Global, NOAA, Climate]
-
 noaa-cfs:
   title: NOAA Climate Forecast System
   category: Climate/Weather
