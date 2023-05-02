@@ -44,10 +44,22 @@ export const useMapDrawTools = (
   }
 
   const handleShapeAdded = (shape: atlas.Shape): void => {
+    const geometry = shape.toJson().geometry;
+    // getBounds does not reliable generate a valid bounding box
+    // for drawn polygons, so ensure the order is xmin, ymin, xmax, ymax
+    const [x1, y1, x2, y2] = shape.getBounds();
+    const bbox = [
+      Math.min(x1, x2),
+      Math.min(y1, y2),
+      Math.max(x1, x2),
+      Math.max(y1, y2),
+    ];
+
     const drawnShape: IDrawnShape = {
-      geometry: shape.toJson().geometry,
-      bbox: shape.getBounds(),
+      geometry,
+      bbox,
     };
+
     dispatch(setDrawnShape(drawnShape));
     dispatch(setBboxDrawMode(false));
 
