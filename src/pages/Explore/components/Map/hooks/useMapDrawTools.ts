@@ -47,12 +47,12 @@ export const useMapDrawTools = (
     const geometry = shape.toJson().geometry;
     // getBounds does not reliable generate a valid bounding box
     // for drawn polygons, so ensure the order is xmin, ymin, xmax, ymax
-    const bounds = shape.getBounds();
+    const [x1, y1, x2, y2] = shape.getBounds();
     const bbox = [
-      Math.min(bounds[0], bounds[2]),
-      Math.min(bounds[1], bounds[3]),
-      Math.max(bounds[0], bounds[2]),
-      Math.max(bounds[1], bounds[3]),
+      Math.min(x1, x2),
+      Math.min(y1, y2),
+      Math.max(x1, x2),
+      Math.max(y1, y2),
     ];
 
     const drawnShape: IDrawnShape = {
