@@ -1,39 +1,84 @@
 # Changelog
 
-This is the changelog for the Planetary Computer January 2023 release. See <a href="docs/changelogs/history">previous changelogs</a> for notes about previous releases.
+This is the changelog for the Planetary Computer May 2023 release. See <a href="docs/changelogs/history">previous changelogs</a> for notes about previous releases.
 
-This release brings a new datasets and features, including:
+This release brings new datasets, updates to existing datasets, and new features, including:
 
-- [Vector rendering](vector-tile-rendering)
-- [New datasets](new-datasets-jan-23)
-- [Dataset updates](dataset-updates-jan-23)
-- [Updates to our Terms of Use](terms-of-use-update-jan-23)
-- [Notices for upcoming release](future-release-notice-jan-23)
+- [New datasets](new-datasets-may-23)
+- [Dataset updates](dataset-updates-may-23)
+- [New features](new-features-may-23)
 
-(vector-tile-rendering)=
-## Vector Rendering
+(new-datasets-may-23)=
+## New datasets
 
-The Planetary Computer Data Catalog contains assets in a variety of common
-geospatial formats, but until now the Explorer has only supported visualizing
-raster data. With this release, we're introducing support for vector rendering
-for collections with GeoParquet data assets. We're showcasing this feature with
-the [MS Buildings](https://planetarycomputer.microsoft.com/dataset/ms-buildings)
-dataset, which contains over 1 billion building footprints across the world.
+This release includes several new datasets:
 
-For this, and future, GeoParquet vector datasets you'll find a new
-[collection-level asset](https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md#asset-object)
-with a role of `tilejson` that contains a [TileJSON](https://github.com/mapbox/tilejson-spec) endpoint that can be used to render the data as [Mapbox Vector Tiles](https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/).
+### NOAA Climate Data Records
 
-[Use the Explorer](https://planetarycomputer.microsoft.com/explore?c=-77.7333%2C39.4660&z=5.05&v=2&d=ms-buildings&m=Global&r=Default&s=true%3A%3A100%3A%3Atrue&sr=desc&ae=0)
-to quickly visualize the geographic coverage of the dataset:
 
-```{image} images/docs-explorer-vector-buildings-us-extent.png
+The <a href="dataset/group/noaa-cdr">NOAA Climate Data Records</a> (CDRs) datasets  offer reliable, comprehensive datasets that deliver insights into land, ocean, atmospheric, and ice sheet changes over time. The CDRs are generated using modern data analysis methods applied to historical and ongoing satellite data, allowing for the identification of climate trends and supporting various applications, such as natural resource management and policy development. The datasets include Sea Surface Temperature (WHOI CDR), Global Ocean Heat Content CDR, and Sea Surface Temperature - Optimum Interpolation CDR, among others.
+
+```{image} images/changelog-dataset-noaa-cdr.png
 :height: 500
-:name: MS Buildings dataset extent in the Eastern US
+:name: Sea Surface Temperature - WHOI CDR with GOES imagery
 :class: no-scaled-link
 ```
 
-Or overlay it with other layers to see how it fits into the broader context of the world. For example, to see villages in southern Nigeria that have very low nighttime light intensity:
+### Sentinel 3
+
+(TODO: Create dataset group and link here)
+
+```{image} images/changelog-dataset-sentinel-3.png
+:height: 500
+:name: TODO
+:class: no-scaled-link
+```
+
+### Sentinel 5P
+
+The Copernicus Sentinel-5 Precursor mission offers high-resolution measurements of Earth's atmosphere using the TROPOspheric Monitoring Instrument (TROPOMI) aboard a single satellite. This mission bridges the data gap between retired ENVISAT and AURA missions and the upcoming Sentinel-5 mission. The Level 2 data provided includes total columns of ozone, sulfur dioxide, nitrogen dioxide, carbon monoxide, and formaldehyde, along with tropospheric columns of ozone, vertical profiles of ozone, and cloud & aerosol information. These measurements are crucial for enhancing air quality forecasts and monitoring atmospheric constituents. The STAC Collection offers Sentinel-5 Precursor Level 2 data in NetCDF format, covering various products such as aerosol indices, methane total columns, cloud information, and more since April 2018.
+
+```{image} images/changelog-dataset-sentinel-5p.png
+:height: 500
+:name: TODO
+:class: no-scaled-link
+```
+
+### Biodiversity Intactness
+
+The <a href="dataset/io-biodiversity">Biodiversity Intactness</a> dataset provides 100-meter gridded maps estimating terrestrial biodiversity intactness for 2017-2020. These maps are essential tools for spatial planning, management, and monitoring global biodiversity, as well as identifying remaining intact habitats. This dataset is based on the PREDICTS database and employs contemporary global geospatial layers of human pressures to provide high-resolution monitoring. Biodiversity intactness is measured using two metrics: Abundance and Compositional Similarity.
+
+```{image} images/changelog-dataset-io-biodiversity.png
+:height: 500
+:name: TODO
+:class: no-scaled-link
+```
+
+(dataset-updates-may-23)=
+## Updates to existing datasets
+
+### ESA World Cover
+
+- Added 2021 data
+
+### Impact Observatory Land Cover
+
+- Added 2022 data
+
+### NAIP
+
+- Added 2021 and 2022 data
+
+### MS Buildings
+
+- Delta format (TODO: Tom fills out)
+
+(new-features-may-23)=
+## New features
+
+### Hillshade and contours
+
+This feature enables our elevation datasets to be rendered with hillshade and contour on the fly. This feature showcases new advance functionality in Titiler, the project used in our tile servers, that allows for arbitrary "focal operations" to be executed as part of the rendering process. (TODO: Matt expands)
 
 ```{image} images/docs-explorer-vector-buildings-at-light.png
 :height: 500
@@ -41,112 +86,26 @@ Or overlay it with other layers to see how it fits into the broader context of t
 :class: no-scaled-link
 ```
 
-Here's an example of building vectors rendered with a Sentinel-2 imagery product:
+### Improved support for STAC API specification
 
-<video controls style="height: 400px;">
-  <source src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4" type="video/mp4" />
-  <p>
-    Your browser doesn't support HTML video. Here is a
-    <a href="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4">link to the video</a> instead.
-  </p>
-</video>
+Improved our support for STAC API specification through better support of [queryables](https://github.com/stac-api-extensions/filter#queryables). Queryables let STAC clients know what properties can be searched over through our STAC API, and are based on the OGC API: Features specification. Our API has been updated to better support this part of the specification.
 
-<hr/>
-
-(new-datasets-jan-23)=
-## New datasets
-
-This release includes several new datasets:
-
-### ESA Climate Change Initiative Land Cover
-
-The <a href="dataset/group/esa-cci-lc">ESA Climate Change Initiative Land Cover</a> datasets consistent global annual land cover maps at 300m spatial resolution from 1992 to 2020. There are collections containing <a href="dataset/esa-cci-lc">Cloud Optimized GeoTIFFs</a> and <a href="dataset/esa-cci-lc-netcdf">NetCDF</a> files.
-
-This is a timelapse from 1992-2020 over <a href="/explore?c=-55.0498%2C-12.5996&z=5.29&v=2&d=esa-cci-lc&s=true%3A%3A100%3A%3Atrue&sr=desc&m=Most+recent+%282020%29&r=Classification&ae=0">the Amazon Rainforest in Brazil and Bolivia</a>:
-
-<img style="width: 600px;" src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/docs-esa-cci-lc-1992-2020-brazil.gif" alt="Timelapse ESA CCI LC 1992-2020 over Brazil"/>
-
-### NOAA Climate Normals
-
-The <a href="dataset/group/noaa-climate-normals">NOAA US Climate Normals</a> datasets provide information about typical climate conditions for thousands of weather station locations across the United States.
-
-The individual weather station data is contained in the <a href="dataset/noaa-climate-normals-tabular">noaa-climate-normals-tabular</a> colleciton, which contains tabular data in GeoParquet format.
-
-Additionally, there is gridded data provided in the collections <a href="dataset/noaa-climate-normals-gridded">noaa-climate-normals-gridded</a>, which contains Cloud Optimized GeoTIFFs, and <a href="dataset/noaa-climate-normals-netcdf">noaa-climate-normals-netcdf</a> which contains NetCDF files.
-
-Note that this dataset resides in the East US Azure region.
-
-```{image} https://ai4edatasetspublicassets.azureedge.net/assets/pc_thumbnails/noaa-climate-normals-gridded-thumb.png
-:width: 700
-:name: NOAA Climate Normals
+```{image} images/docs-explorer-vector-buildings-at-light.png
+:height: 500
+:name: MS Buildings dataset nighttime lights in Nigeria
 :class: no-scaled-link
 ```
 
-### Cropland Data Layer
+### Python environment update in the Hub
 
-The [USDA Cropland Data Layer](https://planetarycomputer.microsoft.com/dataset/usda-cdl) is a crop-specific land cover classification product of more than 100 crop categories grown in the United States.
-
-```{image} images/changelog-usda-cdl.png
-:width: 558
-:name: Compland Data Layer
-:class: no-scaled-link
-```
-
-### USGS Land Change Monitoring, Assessment, and Projection
-
-The <a href="dataset/group/usgs-lcmap">USGS Land Change Monitoring, Assessment, and Projection (LCMAP)</a> datasets provide land cover mapping and change monitoring from the U.S.
-
-There are two datasets; one containing "Collection 1.3" data for the Conterminous United States (<a href="dataset/usgs-lcmap-conus-v13">usgs-lcmap-conus-v13</a>) and another containing "Collection 1.0" data for Hawaii (<a href="dataset/usgs-lcmap-hawaii-v10">usgs-lcmap-hawaii-v10</a>)
-
-
-
-This is a timelapse from 1985-2021 over <a href="/explore?c=-121.2561%2C39.7589&z=8.36&v=2&d=usgs-lcmap-conus-v13%7C%7Cusgs-lcmap-conus-v13&s=false%3A%3A100%3A%3Atrue%7C%7Ctrue%3A%3A100%3A%3Atrue&sr=desc%7C%7Cdesc&m=1985%7C%7CMost+recent+%282021%29&r=Land+Cover%7C%7CLand+Cover&ae=0">California's Plumas National Forest</a>:
-
-<img style="width: 600px;" src="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_video/docs-usgs-lcmap-cali-1985-2021.gif" alt="Timelapse ESA CCI LC 1992-2020 over Brazil"/>
-
-### National Wetlands Inventory
-
-The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> collection contains more than 35 million wetland and deepwater features. This dataset covers the conterminous United States, Hawaii, Puerto Rico, the Virgin Islands, Guam, the major Northern Mariana Islands and Alaska.
-
-```{image} images/changelog-fws-nwi.png
-:height: 400
-:name: FWS National Wetlands Inventory
-:class: no-scaled-link
-```
-(dataset-updates-jan-23)=
-## Dataset updates
-
-### NOAA GOES updates
-- GOES-18 data is now available in the <a href="dataset/goes-cmi">Cloud Moisture Index (goes-cmi)</a> collection.
-- Additional data products for GOES that are not yet in the API are documented in the catalog: <a href="dataset/storage/goes-fdc">Fire Detection and Characterization (FDC)</a>, <a href="dataset/storage/goes-lst">Land Surface Temperature (LST)</a>, <a href="dataset/storage/goes-rrqpe">Rainfall Rate and Quantitative Precipitation Estimation (RRQPE)</a>, and <a href="dataset/storage/goes-sst">Sea Surface Temperature (SST)</a>
-- The goes-cmi collection now has a render configuration that utilizes infrared data to better visualize night-time scenes. See <a href="/explore?c=-92.2446%2C37.2474&z=3.64&v=2&d=goes-cmi&s=false%3A%3A100%3A%3Atrue&ae=0&sr=desc&m=cql%3A6ded4476e6da6a428e449b19bd25ab17&r=Infrared">this example</a> in the Explorer.
-
-### Other dataset updates
-
-- [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate) was updated to include the latest data from the producer, the [Climatology Lab](https://www.climatologylab.org/terraclimate.html). The dataset now covers 1958 - 2021. Note that some variables, such as the station influence variables, are no longer provided. The Zarr store linked from the STAC collection is at a new URL. The data at the old URL will be deleted sometime in the future. In addition, the STAC metadata now includes the latest updates from the [`xarray-assets`](https://github.com/stac-extensions/xarray-assets) STAC extension.
-- The <a href="dataset/storage/noaa-nws">NOAA National Water Model</a> data products, which are hosted but not yet fully integrated into the API, are now documented in the data catalog.
-- Using [new functionality in stactools](https://github.com/stac-utils/stactools/pull/307), the footprints in the <a href="dataset/aster">ASTER collection</a> have been update to better match the actual image data, rather than the full raster extent.
-- Collections now have an `msft:region` property, which indicates the Azure Region in which the data is hosted.
-- The <a href="dataset/ms-buildings">Microsoft Building Footprints</a> dataset can now be visualized in the Explorer, using the vector rendering feature described above.
+(TODO: Tom fills out)
 
 (future-release-notice-jan-23)=
+## Breaking changes
 
-## Documentation Improvements
+Please be advised that in this release, we upgraded the version of our raster tiling engine, TiTiler. This results in some changes to the way rendering parameters are specified when generating image tiles. These changes affect both the [Item Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/Item%20tile%20endpoints) and the [Mosaic Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/PgSTAC%20Mosaic%20endpoints).
 
-- Added a new [Sentinel-2 notebook](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Baseline-Change) demonstrating the Sentinel-2 L2A Baseline Change, and how to harmonize data across it.
-- Expanded the Data Catalog documentation to include a <a href="docs/concepts/data-catalog/#data-providers">new section</a> on how the Planetary Computer relates to data providers like the [NOAA Open Data Dissemination](https://www.noaa.gov/information-technology/open-data-dissemination) program.
-
-(terms-of-use-update-jan-23)=
-## Updates to our Terms of Use
-
-Our <a href="/terms">Terms of Use</a> has been updated to clarify terms about the data access tokens issued by the Planetary Computer for data access. No change in behavior or permissions has occurred. Please read the Terms of Use to get more information about the permitted utilization of data tokens for the Planetary Computer.
-
-## Notices for upcoming release
-
-
-Please be advised that in the next release, approximately in the April/May 2023 time frame, we will be upgrading the version of our raster tiling engine, TiTiler. This will result in some changes to the way rendering parameters are specified when generating image tiles. These changes will affect both the [Item Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/Item%20tile%20endpoints) and the [Mosaic Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/PgSTAC%20Mosaic%20endpoints).
-
-These changes will **not** affect how you use the Explorer or any links you've saved or shared via the Explorer. It will only affect certain query string parameters you may have generated that hit `/api/data/` endpoints directly.
+These changes do **not** affect how you use the Explorer or any links you've saved or shared via the Explorer. It only affect certain query string parameters you may have generated that hit `/api/data/` endpoints directly.
 
 Please see the upstream changes for more information:
 
