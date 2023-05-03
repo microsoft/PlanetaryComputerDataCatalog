@@ -71,7 +71,11 @@ The <a href="dataset/io-biodiversity">Biodiversity Intactness</a> dataset provid
 
 ### MS Buildings
 
-- Delta format (TODO: Tom fills out)
+- Added data from the 2023-04-25 processing batch.
+- Geoparquet files are available in Delta Table format.
+
+The [Delta](https://delta.io/) Table format provides scalable metadata handling, which will greatly speed up data access when you're loading a subset of the data. Filtering the global dataset by region name or quadkey is now extremely fast.
+The newly updated [example notebook](https://planetarycomputer.microsoft.com/dataset/ms-buildings/#Example-Notebook) goes into more detail.
 
 (new-features-may-23)=
 ## New features
@@ -96,9 +100,10 @@ Improved our support for STAC API specification through better support of [query
 :class: no-scaled-link
 ```
 
-### Python environment update in the Hub
+### Python environment update in the Planetary Computer Hub
 
-(TODO: Tom fills out)
+This release updates the Python environment to the 2023.5.3.0 release from [Planetary Computer Containers](https://github.com/microsoft/planetary-computer-containers).
+This includes `deltalake` for reading Delta Table files and updates to Dask that can greatly reduce the memory usage for some workloads, as described in [this post](https://blog.dask.org/2022/11/15/queuing) on the Dask blog.
 
 (future-release-notice-jan-23)=
 ## Breaking changes
