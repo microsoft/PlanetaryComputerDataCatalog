@@ -914,6 +914,22 @@ sentinel-2-l2a:
       src: baseline-change.html
       launch: datasets/sentinel-2-l2a/baseline-change.ipynb
 
+sentinel-3-olci-lfr-l2-netcdf:
+  category: Biomass/Vegetation
+  headerImg: ./images/sentinel-3-olci-lfr-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-olci-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-olci-example.ipynb
+
+sentinel-3-olci-wfr-l2-netcdf:
+  category: Water
+  headerImg: ./images/sentinel-3-olci-wfr-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-olci-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-olci-example.ipynb
+
 sentinel-3-slstr-frp-l2-netcdf:
   category: Fire
   headerImg: ./images/sentinel-3-slstr-frp-l2-netcdf-hero.png
