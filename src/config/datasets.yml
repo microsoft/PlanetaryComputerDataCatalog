@@ -914,9 +914,25 @@ sentinel-2-l2a:
       src: baseline-change.html
       launch: datasets/sentinel-2-l2a/baseline-change.ipynb
 
+sentinel-3-slstr-frp-l2-netcdf:
+  category: Fire
+  headerImg: ./images/sentinel-3-slstr-frp-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-slstr-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-slstr-example.ipynb
+
 sentinel-3-slstr-lst-l2-netcdf:
   category: Temperature
   headerImg: ./images/sentinel-3-slstr-lst-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-slstr-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-slstr-example.ipynb
+
+sentinel-3-slstr-wst-l2-netcdf:
+  category: Temperature
+  headerImg: ./images/sentinel-3-slstr-wst-l2-netcdf-hero.png
   tabs:
     - title: Example Notebook
       src: sentinel-3-slstr-example.html
@@ -930,8 +946,16 @@ sentinel-3-synergy-aod-l2-netcdf:
       src: sentinel-3-synergy-example.html
       launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
 
-sentinel-3-synergy-v10-l2-netcdf:
+sentinel-3-synergy-syn-l2-netcdf:
   category: Air Quality
+  headerImg: ./images/sentinel-3-synergy-syn-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-3-synergy-v10-l2-netcdf:
+  category: Biomass/Vegetation
   headerImg: ./images/sentinel-3-synergy-v10-l2-netcdf-hero.png
   tabs:
     - title: Example Notebook
@@ -939,7 +963,7 @@ sentinel-3-synergy-v10-l2-netcdf:
       launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
 
 sentinel-3-synergy-vg1-l2-netcdf:
-  category: Air Quality
+  category: Biomass/Vegetation
   headerImg: ./images/sentinel-3-synergy-vg1-l2-netcdf-hero.png
   tabs:
     - title: Example Notebook
@@ -947,7 +971,7 @@ sentinel-3-synergy-vg1-l2-netcdf:
       launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
 
 sentinel-3-synergy-vgp-l2-netcdf:
-  category: Air Quality
+  category: Imagery
   headerImg: ./images/sentinel-3-synergy-vgp-l2-netcdf-hero.png
   tabs:
     - title: Example Notebook
