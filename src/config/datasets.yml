@@ -962,6 +962,14 @@ sentinel-3-sral-lan-l2-netcdf:
       src: sentinel-3-sral-example.html
       launch: datasets/sentinel-3-l2/sentinel-3-sral-example.ipynb
 
+sentinel-3-sral-wat-l2-netcdf:
+  category: SAR
+  headerImg: ./images/sentinel-3-sral-wat-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-sral-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-sral-example.ipynb
+
 sentinel-3-synergy-aod-l2-netcdf:
   category: Air Quality
   headerImg: ./images/sentinel-3-synergy-aod-l2-netcdf-hero.png
