@@ -440,7 +440,7 @@ noaa-cdr:
     headerImg:
       href: ./images/noaa-cdr-sea-surface-temperature-optimum-interpolation-hero.png
     thumbnail:
-      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-cdr-sea-surface-temperature-optimium-interpolation-thumb.png
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-cdr-sea-surface-temperature-optimum-interpolation-thumb.png
   keywords: ["United States", "NOAA", "Climate", "Global"]
 
 noaa-nclimgrid:
