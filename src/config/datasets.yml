@@ -212,19 +212,9 @@ cil-gdpcir-cc-by:
       launch: datasets/cil-gdpcir/indicators.ipynb
 
 cil-gdpcir-cc-by-sa:
-  category: Climate/Weather
-  headerImg: ./images/cil-gdpcir.png
-  tabs:
-    - title: Example Notebook
-      src: cil-gdpcir-example.html
-      launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
-    - title: Ensemble example
-      src: ensemble.html
-      launch: datasets/cil-gdpcir/ensemble.ipynb
-    - title: Climate indicators
-      src: indicators.html
-      launch: datasets/cil-gdpcir/indicators.ipynb
-
+  # Merged into cil-gdpcir-cc-by
+  isHidden: true
+ 
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
