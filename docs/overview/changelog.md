@@ -122,7 +122,7 @@ Improved our support for STAC API specification through better support of [query
 
 ### Python environment update in the Planetary Computer Hub
 
-This release updates the Python environment to the 2023.5.3.0 release from [Planetary Computer Containers](https://github.com/microsoft/planetary-computer-containers).
+This release updates the Python environment to the 2023.5.4.0 release from [Planetary Computer Containers](https://github.com/microsoft/planetary-computer-containers).
 This includes `deltalake` for reading Delta Table files and updates to Dask that can greatly reduce the memory usage for some workloads, as described in [this post](https://blog.dask.org/2022/11/15/queuing) on the Dask blog.
 
 (future-release-notice-jan-23)=
