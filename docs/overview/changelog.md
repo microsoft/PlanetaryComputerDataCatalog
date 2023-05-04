@@ -80,13 +80,23 @@ The newly updated [example notebook](https://planetarycomputer.microsoft.com/dat
 (new-features-may-23)=
 ## New features
 
-### Hillshade and contours
+### Hillshade and contour lines
 
-This feature enables our elevation datasets to be rendered with hillshade and contour on the fly. This feature showcases new advance functionality in Titiler, the project used in our tile servers, that allows for arbitrary "focal operations" to be executed as part of the rendering process. (TODO: Matt expands)
+We're making use of new advanced [features in
+TiTiler](https://developmentseed.org/titiler/examples/notebooks/Working_with_Algorithm/),
+the open source project powering our raster visualizations in the Explorer. For
+any [DEM dataset](), we can now compute hillshades or contour lines on the fly. The
+default rendering for these datasets has been updated. In the future, we plan on
+using this new feature to allow users to apply other operations to a variety of dataset types.
 
-```{image} images/docs-explorer-vector-buildings-at-light.png
+By pinning an layer over a DEM hillshade layer, and adjusting the opacity, you
+can create a 3D effect providing more visual context to the terrain. See [this
+example](https://planetarycomputer.microsoft.com/explore?c=33.2568%2C-6.1073&z=7.79&v=2&d=io-lulc-9-class%7C%7Ccop-dem-glo-30&s=false%3A%3A62%3A%3Atrue%7C%7Ctrue%3A%3A100%3A%3Atrue&sr=desc%7C%7Cdesc&m=2021%7C%7CMost+recent&r=Default%7C%7CHillshade&ae=0)
+using our COP 30 DEM and IO LULC 9 Class datasets:
+
+```{image} images/docs-explorer-terrain-lulc.png
 :height: 500
-:name: MS Buildings dataset nighttime lights in Nigeria
+:name: COP 30 DEM hillshade with LULC
 :class: no-scaled-link
 ```
 
