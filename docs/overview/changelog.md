@@ -26,11 +26,11 @@ The <a href="dataset/group/noaa-cdr">NOAA Climate Data Records</a> (CDRs) datase
 
 ### Sentinel 3
 
-(TODO: Create dataset group and link here)
+The <a href="">Sentinel-3 Collections</a> offers comprehensive datasets delivering insights into land, ocean, and atmospheric changes over time. These datasets support various applications, such as environmental monitoring, disaster management, climate change, and policy development. The collection is generated using modern data analysis methods applied to historical and ongoing satellite data, enabling the identification of climate trends.
 
 ```{image} images/changelog-dataset-sentinel-3.png
 :height: 500
-:name: TODO
+:name: Sentinel 3 RGB composite of OLCI imagery from the Grand Canyon in 2019.
 :class: no-scaled-link
 ```
 
@@ -40,7 +40,7 @@ The Copernicus Sentinel-5 Precursor mission offers high-resolution measurements 
 
 ```{image} images/changelog-dataset-sentinel-5p.png
 :height: 500
-:name: TODO
+:name: Sentinel 5P data showing ozone concentration around East Atlantic longitudes on Jan 1, 2021.
 :class: no-scaled-link
 ```
 
@@ -50,7 +50,7 @@ The <a href="dataset/io-biodiversity">Biodiversity Intactness</a> dataset provid
 
 ```{image} images/changelog-dataset-io-biodiversity.png
 :height: 500
-:name: TODO
+:name: Biodiversity intactness over Brazil
 :class: no-scaled-link
 ```
 
@@ -59,15 +59,15 @@ The <a href="dataset/io-biodiversity">Biodiversity Intactness</a> dataset provid
 
 ### ESA World Cover
 
-- Added 2021 data
+Added 2021 data to the [ESA Worldcover](dataset/esa-worldcover) dataset. This data produced uses an updated version of the algorithm; see the dataset description for more information.
 
 ### Impact Observatory Land Cover
 
-- Added 2022 data
+Added 2022 data to the [10m Annual Land Use Land Cover (9-class)](dataset/io-lulc-9-class). The 2022 data is directly comparable to the 2017-2021 datasets.
 
 ### NAIP
 
-- Added 2021 and 2022 data
+Added imagery taken in 2021 to the NAIP collection.
 
 ### MS Buildings
 
@@ -100,15 +100,25 @@ using our COP 30 DEM and IO LULC 9 Class datasets:
 :class: no-scaled-link
 ```
 
+And with NAIP imagery:
+
+```{image} images/changelog-hillshade-imagery.png
+:height: 500
+:name: Hillshaded elevation and NAIP imagery
+:class: no-scaled-link
+```
+
+Here is a visualization with both hillshade and contours:
+
+```{image} images/changelog-hillshade-contours.png
+:height: 500
+:name: Hillshade and Contours
+:class: no-scaled-link
+```
+
 ### Improved support for STAC API specification
 
 Improved our support for STAC API specification through better support of [queryables](https://github.com/stac-api-extensions/filter#queryables). Queryables let STAC clients know what properties can be searched over through our STAC API, and are based on the OGC API: Features specification. Our API has been updated to better support this part of the specification.
-
-```{image} images/docs-explorer-vector-buildings-at-light.png
-:height: 500
-:name: MS Buildings dataset nighttime lights in Nigeria
-:class: no-scaled-link
-```
 
 ### Python environment update in the Planetary Computer Hub
 
