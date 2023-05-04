@@ -736,16 +736,16 @@ noaa-cdr-ocean-heat-content:
   headerImg: ./images/noaa-cdr-ocean-heat-content-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-ocean-heat-content-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-example.ipynb
+      src: noaa-cdr-sea-ocean-heat-content-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-ocean-heat-content-example.ipynb
 
 noaa-cdr-ocean-heat-content-netcdf:
   category: Water
   headerImg: ./images/noaa-cdr-ocean-heat-content-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-ocean-heat-content-netcdf-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-netcdf-example.ipynb
+      src: noaa-cdr-sea-ocean-heat-content-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-ocean-heat-content-example.ipynb
 
 noaa-cdr-sea-ice-concentration:
   category: Water
@@ -776,8 +776,8 @@ noaa-cdr-sea-surface-temperature-whoi-netcdf:
   headerImg: ./images/noaa-cdr-sea-surface-temperature-whoi-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-sea-surface-temperature-whoi-netcdf-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-netcdf-example.ipynb
+      src: noaa-cdr-sea-surface-temperature-whoi-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-example.ipynb
 
 noaa-climate-normals-tabular:
   category: Climate/Weather
