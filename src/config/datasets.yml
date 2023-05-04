@@ -920,7 +920,7 @@ sentinel-5p-l2-netcdf:
   tabs:
     - title: Example Notebook
       src: sentinel-5p-l2-netcdf.html
-      launch: datasets/sentinel-5p-l2/sentinel-5p-l2-netcdf.ipynb
+      launch: datasets/sentinel-5p-l2-netcdf/sentinel-5p-l2-netcdf.ipynb
 
 terraclimate:
   category: Climate/Weather
