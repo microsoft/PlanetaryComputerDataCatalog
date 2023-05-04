@@ -914,6 +914,14 @@ sentinel-2-l2a:
       src: baseline-change.html
       launch: datasets/sentinel-2-l2a/baseline-change.ipynb
 
+sentinel-5p-l2-netcdf:
+  category: Air Quality
+  headerImg: ./images/sentinel-5p-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-5p-l2-netcdf.html
+      launch: datasets/sentinel-5p-l2/sentinel-5p-l2-netcdf.ipynb
+
 terraclimate:
   category: Climate/Weather
   headerImg: ./images/terraclimate-hero.png
