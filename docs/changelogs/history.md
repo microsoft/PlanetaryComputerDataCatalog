@@ -2,11 +2,167 @@
 
 This document highlights the new features, datasets, and breaking changes between each release of the Planetary Computer.
 
+- [January 2023](jan-2023)
 - [October 2022](oct-2022)
 - [June 2022](june-2022)
 - [January 2022](jan-2022)
 - [August 2021](aug-2021)
 - [July 2021](july-2021)
+
+(jan-2023)=
+## January 2023
+
+This release brings a new datasets and features, including:
+
+- [Vector rendering](vector-tile-rendering-jan-23)
+- [New datasets](new-datasets-jan-23)
+- [Dataset updates](dataset-updates-jan-23)
+- [Updates to our Terms of Use](terms-of-use-update-jan-23)
+- [Notices for upcoming release](future-release-notice-jan-23)
+
+(vector-tile-rendering-jan-23)=
+### Vector Rendering
+
+The Planetary Computer Data Catalog contains assets in a variety of common
+geospatial formats, but until now the Explorer has only supported visualizing
+raster data. With this release, we're introducing support for vector rendering
+for collections with GeoParquet data assets. We're showcasing this feature with
+the [MS Buildings](https://planetarycomputer.microsoft.com/dataset/ms-buildings)
+dataset, which contains over 1 billion building footprints across the world.
+
+For this, and future, GeoParquet vector datasets you'll find a new
+[collection-level asset](https://github.com/radiantearth/stac-spec/blob/master/collection-spec/collection-spec.md#asset-object)
+with a role of `tilejson` that contains a [TileJSON](https://github.com/mapbox/tilejson-spec) endpoint that can be used to render the data as [Mapbox Vector Tiles](https://docs.mapbox.com/data/tilesets/guides/vector-tiles-standards/).
+
+[Use the Explorer](https://planetarycomputer.microsoft.com/explore?c=-77.7333%2C39.4660&z=5.05&v=2&d=ms-buildings&m=Global&r=Default&s=true%3A%3A100%3A%3Atrue&sr=desc&ae=0)
+to quickly visualize the geographic coverage of the dataset:
+
+```{image} images/docs-explorer-vector-buildings-us-extent.png
+:height: 500
+:name: MS Buildings dataset extent in the Eastern US
+:class: no-scaled-link
+```
+
+Or overlay it with other layers to see how it fits into the broader context of the world. For example, to see villages in southern Nigeria that have very low nighttime light intensity:
+
+```{image} images/docs-explorer-vector-buildings-at-light.png
+:height: 500
+:name: MS Buildings dataset nighttime lights in Nigeria
+:class: no-scaled-link
+```
+
+Here's an example of building vectors rendered with a Sentinel-2 imagery product:
+
+<video controls style="height: 400px;">
+  <source src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4" type="video/mp4" />
+  <p>
+    Your browser doesn't support HTML video. Here is a
+    <a href="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/vector-tile-ms-buildings-feature.mp4">link to the video</a> instead.
+  </p>
+</video>
+
+<hr/>
+
+(new-datasets-jan-23)=
+### New datasets
+
+This release includes several new datasets:
+
+#### ESA Climate Change Initiative Land Cover
+
+The <a href="dataset/group/esa-cci-lc">ESA Climate Change Initiative Land Cover</a> datasets consistent global annual land cover maps at 300m spatial resolution from 1992 to 2020. There are collections containing <a href="dataset/esa-cci-lc">Cloud Optimized GeoTIFFs</a> and <a href="dataset/esa-cci-lc-netcdf">NetCDF</a> files.
+
+This is a timelapse from 1992-2020 over <a href="/explore?c=-55.0498%2C-12.5996&z=5.29&v=2&d=esa-cci-lc&s=true%3A%3A100%3A%3Atrue&sr=desc&m=Most+recent+%282020%29&r=Classification&ae=0">the Amazon Rainforest in Brazil and Bolivia</a>:
+
+<img style="width: 600px;" src="https://ai4edatasetspublicassets.azureedge.net/assets/pc_video/docs-esa-cci-lc-1992-2020-brazil.gif" alt="Timelapse ESA CCI LC 1992-2020 over Brazil"/>
+
+#### NOAA Climate Normals
+
+The <a href="dataset/group/noaa-climate-normals">NOAA US Climate Normals</a> datasets provide information about typical climate conditions for thousands of weather station locations across the United States.
+
+The individual weather station data is contained in the <a href="dataset/noaa-climate-normals-tabular">noaa-climate-normals-tabular</a> colleciton, which contains tabular data in GeoParquet format.
+
+Additionally, there is gridded data provided in the collections <a href="dataset/noaa-climate-normals-gridded">noaa-climate-normals-gridded</a>, which contains Cloud Optimized GeoTIFFs, and <a href="dataset/noaa-climate-normals-netcdf">noaa-climate-normals-netcdf</a> which contains NetCDF files.
+
+Note that this dataset resides in the East US Azure region.
+
+```{image} https://ai4edatasetspublicassets.azureedge.net/assets/pc_thumbnails/noaa-climate-normals-gridded-thumb.png
+:width: 700
+:name: NOAA Climate Normals
+:class: no-scaled-link
+```
+
+#### Cropland Data Layer
+
+The [USDA Cropland Data Layer](https://planetarycomputer.microsoft.com/dataset/usda-cdl) is a crop-specific land cover classification product of more than 100 crop categories grown in the United States.
+
+```{image} images/changelog-usda-cdl.png
+:width: 558
+:name: Compland Data Layer
+:class: no-scaled-link
+```
+
+#### USGS Land Change Monitoring, Assessment, and Projection
+
+The <a href="dataset/group/usgs-lcmap">USGS Land Change Monitoring, Assessment, and Projection (LCMAP)</a> datasets provide land cover mapping and change monitoring from the U.S.
+
+There are two datasets; one containing "Collection 1.3" data for the Conterminous United States (<a href="dataset/usgs-lcmap-conus-v13">usgs-lcmap-conus-v13</a>) and another containing "Collection 1.0" data for Hawaii (<a href="dataset/usgs-lcmap-hawaii-v10">usgs-lcmap-hawaii-v10</a>)
+
+
+
+This is a timelapse from 1985-2021 over <a href="/explore?c=-121.2561%2C39.7589&z=8.36&v=2&d=usgs-lcmap-conus-v13%7C%7Cusgs-lcmap-conus-v13&s=false%3A%3A100%3A%3Atrue%7C%7Ctrue%3A%3A100%3A%3Atrue&sr=desc%7C%7Cdesc&m=1985%7C%7CMost+recent+%282021%29&r=Land+Cover%7C%7CLand+Cover&ae=0">California's Plumas National Forest</a>:
+
+<img style="width: 600px;" src="https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_video/docs-usgs-lcmap-cali-1985-2021.gif" alt="Timelapse ESA CCI LC 1992-2020 over Brazil"/>
+
+#### National Wetlands Inventory
+
+The  <a href="dataset/fws-nwi">FWS National Wetlands Inventory</a> collection contains more than 35 million wetland and deepwater features. This dataset covers the conterminous United States, Hawaii, Puerto Rico, the Virgin Islands, Guam, the major Northern Mariana Islands and Alaska.
+
+```{image} images/changelog-fws-nwi.png
+:height: 400
+:name: FWS National Wetlands Inventory
+:class: no-scaled-link
+```
+(dataset-updates-jan-23)=
+### Dataset updates
+
+#### NOAA GOES updates
+- GOES-18 data is now available in the <a href="dataset/goes-cmi">Cloud Moisture Index (goes-cmi)</a> collection.
+- Additional data products for GOES that are not yet in the API are documented in the catalog: <a href="dataset/storage/goes-fdc">Fire Detection and Characterization (FDC)</a>, <a href="dataset/storage/goes-lst">Land Surface Temperature (LST)</a>, <a href="dataset/storage/goes-rrqpe">Rainfall Rate and Quantitative Precipitation Estimation (RRQPE)</a>, and <a href="dataset/storage/goes-sst">Sea Surface Temperature (SST)</a>
+- The goes-cmi collection now has a render configuration that utilizes infrared data to better visualize night-time scenes. See <a href="/explore?c=-92.2446%2C37.2474&z=3.64&v=2&d=goes-cmi&s=false%3A%3A100%3A%3Atrue&ae=0&sr=desc&m=cql%3A6ded4476e6da6a428e449b19bd25ab17&r=Infrared">this example</a> in the Explorer.
+
+#### Other dataset updates
+
+- [TerraClimate](https://planetarycomputer.microsoft.com/dataset/terraclimate) was updated to include the latest data from the producer, the [Climatology Lab](https://www.climatologylab.org/terraclimate.html). The dataset now covers 1958 - 2021. Note that some variables, such as the station influence variables, are no longer provided. The Zarr store linked from the STAC collection is at a new URL. The data at the old URL will be deleted sometime in the future. In addition, the STAC metadata now includes the latest updates from the [`xarray-assets`](https://github.com/stac-extensions/xarray-assets) STAC extension.
+- The <a href="dataset/storage/noaa-nws">NOAA National Water Model</a> data products, which are hosted but not yet fully integrated into the API, are now documented in the data catalog.
+- Using [new functionality in stactools](https://github.com/stac-utils/stactools/pull/307), the footprints in the <a href="dataset/aster">ASTER collection</a> have been update to better match the actual image data, rather than the full raster extent.
+- Collections now have an `msft:region` property, which indicates the Azure Region in which the data is hosted.
+- The <a href="dataset/ms-buildings">Microsoft Building Footprints</a> dataset can now be visualized in the Explorer, using the vector rendering feature described above.
+
+### Documentation Improvements
+
+- Added a new [Sentinel-2 notebook](https://planetarycomputer.microsoft.com/dataset/sentinel-2-l2a#Baseline-Change) demonstrating the Sentinel-2 L2A Baseline Change, and how to harmonize data across it.
+- Expanded the Data Catalog documentation to include a <a href="docs/concepts/data-catalog/#data-providers">new section</a> on how the Planetary Computer relates to data providers like the [NOAA Open Data Dissemination](https://www.noaa.gov/information-technology/open-data-dissemination) program.
+
+(terms-of-use-update-jan-23)=
+### Updates to our Terms of Use
+
+Our <a href="/terms">Terms of Use</a> has been updated to clarify terms about the data access tokens issued by the Planetary Computer for data access. No change in behavior or permissions has occurred. Please read the Terms of Use to get more information about the permitted utilization of data tokens for the Planetary Computer.
+
+(future-release-notice-jan-23)=
+### Notices for upcoming release
+
+
+Please be advised that in the next release, approximately in the April/May 2023 time frame, we will be upgrading the version of our raster tiling engine, TiTiler. This will result in some changes to the way rendering parameters are specified when generating image tiles. These changes will affect both the [Item Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/Item%20tile%20endpoints) and the [Mosaic Tile endpoints](https://planetarycomputer.microsoft.com/api/data/v1/docs#/PgSTAC%20Mosaic%20endpoints).
+
+These changes will **not** affect how you use the Explorer or any links you've saved or shared via the Explorer. It will only affect certain query string parameters you may have generated that hit `/api/data/` endpoints directly.
+
+Please see the upstream changes for more information:
+
+- [pgstac-titiler changelog](https://github.com/stac-utils/titiler-pgstac/blob/master/CHANGES.md?plain=1#L55-L63)
+- [rio-tiler changelog](https://github.com/cogeotiff/rio-tiler/blob/main/docs/src/v4_migration.md#band-names)
+
+If you have any questions, please reach out to us on our [GitHub Discussions page](https://github.com/microsoft/planetarycomputer/discussions).
 
 (oct-2022)=
 ## October 2022
@@ -31,7 +187,7 @@ To help with this, we've added a new "Item Preview" mode to the map view. When a
 
 To activate, click the map icon button on the thumbnail image of any search result:
 
-```{image} ../overview/images/docs-explorer-activate-item-preview_c.jpg
+```{image} images/docs-explorer-activate-item-preview_c.jpg
 :height: 125
 :name: Activate item preview mode
 :class: no-scaled-link
@@ -54,7 +210,7 @@ Here's an example of using Item Preview mode to view sequential search result it
 
 Many of our datasets have a temporal component, and it can be interesting to see how the data changes over time. We've added a new feature to the Explorer app that allows you to generate a timelapse GIF for any dataset mosaic that has a temporal dimension. You can control the time increment, area of interest, and frame speed of the GIF. The timelapse export will use the current search parameters and render options to generate the GIF, so experiment with the settings to get a good result. To use the feature, open the overflow menu on the search results header and select "Generate timelapse animation"
 
-```{image} ../overview/images/docs-explorer-animation-screen_c.jpg
+```{image} images/docs-explorer-animation-screen_c.jpg
 :height: 500
 :name: Timelapse GIF settings
 :class: no-scaled-link
@@ -91,7 +247,7 @@ Similar to the timelapse export, you can also generate a static image of a datas
 
  Adjust the settings to control the area of interest and image size, then click "Generate image" to download the image.
 
-```{image} ../overview/images/docs-explorer-image-screen_c.jpg
+```{image} images/docs-explorer-image-screen_c.jpg
 :height: 500
 :name: Static snapshot image settings
 :class: no-scaled-link
@@ -106,7 +262,7 @@ You can also use this to create great Microsoft Teams backgrounds! Use the "Larg
 
 You can now specify time (in UTC) for date ranges in the Advanced date field filter. This is especially useful for frequently updating datasets like GOES-CMI, where you may want to filter for a specific time range. To use the feature, enable the Advanced filter and open the date field dropdown.
 
-```{image} ../overview/images/docs-explorer-time-filter_c.jpg
+```{image} images/docs-explorer-time-filter_c.jpg
 :height: 500
 :name: Datetime filter
 :class: no-scaled-link
@@ -121,7 +277,7 @@ Along with filtering on time, all search results now include the time in their d
 
 Last but now least, we've also added a sort direction selector for search results. You can now sort the results by date ascending or descending. This not only sorts the results list, but also the order of items applied to the mosaic on the map.
 
-```{image} ../overview/images/docs-explorer-sort-order_c.jpg
+```{image} images/docs-explorer-sort-order_c.jpg
 :height: 300
 :name: Sort order selector
 :class: no-scaled-link
@@ -136,7 +292,7 @@ This release includes several new datasets:
 [GOES-R Lightning Detection](https://planetarycomputer.microsoft.com/dataset/goes-glm):
 Continuous lightning detection over the Western Hemisphere from the Geostationary Lightning Mapper (GLM) instrument.
 
-```{image} ../overview/images/docs-data-glm_c.jpg
+```{image} images/docs-data-glm_c.jpg
 :width: 558
 :name: GLM screenshot
 :class: no-scaled-link
@@ -148,7 +304,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 - [NOAA MRMS QPE 1-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-1h-pass2): Integrated multi-sensor cumulative precipitation estimate for the past hour with a 2-hour latency.
 - [NOAA MRMS QPE 24-Hour Pass 2](https://planetarycomputer.microsoft.com/dataset/noaa-mrms-qpe-24h-pass2): Integrated multi-sensor cumulative precipitation estimate for the past 24 hours with a 2-hour latency.
 
-```{image} ../overview/images/docs-data-noaa-mrms-qpe_c.jpg
+```{image} images/docs-data-noaa-mrms-qpe_c.jpg
 :width: 558
 :name: NOAA MRMS QPE
 :class: no-scaled-link
@@ -164,7 +320,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Denver Regional Council of Governments Land Use Land Cover](https://planetarycomputer.microsoft.com/dataset/drcog-lulc): 1-ft resolution land use / land cover dataset around Denver, Colorado.
 
-```{image} ../overview/images/docs-data-denver-regional_c.jpg
+```{image} images/docs-data-denver-regional_c.jpg
 :width: 558
 :name: Denver Regional Council of Governments Land Use Land Cover
 :class: no-scaled-link
@@ -174,7 +330,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Cover (7-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-7): 1-meter land cover data product for the entire Chesapeake Bay watershed with a uniform set of 7 land cover classes.
 
-```{image} ../overview/images/docs-data-chesapeake-7_c.jpg
+```{image} images/docs-data-chesapeake-7_c.jpg
 :width: 558
 :name: Chesapeake Land Cover (7-class) thumbnail
 :class: no-scaled-link
@@ -182,7 +338,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Cover (13-class)](https://planetarycomputer.microsoft.com/dataset/chesapeake-lc-13): 1-meter land cover data product for the entire Chesapeake Bay watershed with 13 varying land cover classes.
 
-```{image} ../overview/images/docs-data-chesapeake-13_c.jpg
+```{image} images/docs-data-chesapeake-13_c.jpg
 :width: 558
 :name: Chesapeake Land Cover (13-class) thumbnail
 :class: no-scaled-link
@@ -190,7 +346,7 @@ Continuous lightning detection over the Western Hemisphere from the Geostationar
 
 [Chesapeake Land Use](https://planetarycomputer.microsoft.com/dataset/chesapeake-lu): 1-meter land use data product for the entire Chesapeake Bay watershed.
 
-```{image} ../overview/images/docs-data-chesapeake-lu_c.jpg
+```{image} images/docs-data-chesapeake-lu_c.jpg
 :width: 558
 :name: Chesapeake Land Use thumbnail
 :class: no-scaled-link

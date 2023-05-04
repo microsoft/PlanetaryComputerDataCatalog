@@ -77,29 +77,7 @@ StacFields.Registry.addMetadataField("xarray:open_kwargs", {
 
 StacFields.Registry.addMetadataField("raster:bands", {
   label: "Raster Info",
-  formatter: value => {
-    const values = Array.isArray(value) ? value : [value];
-    return values.map((band, idx) => {
-      const key = Object.entries(band)[0][1];
-      return (
-        <Stack key={`bandwrapper-${key}-${idx}`}>
-          <Text
-            as="h4"
-            styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
-          >
-            Raster Band {idx + 1}
-          </Text>
-          <div style={{ paddingLeft: 4 }}>
-            <SimpleKeyValueList
-              key={`rasterband-${key}-${idx}`}
-              object={band}
-              indent={true}
-            />
-          </div>
-        </Stack>
-      );
-    });
-  },
+  formatter: value => renderBandDetail(value),
 });
 
 StacFields.Registry.addMetadataField("file:values", {
@@ -469,6 +447,11 @@ StacFields.Registry.addMetadataField("s2:degraded_msi_data_percentage", {
   formatter: fixedPct,
 });
 
+StacFields.Registry.addMetadataField("s3:altimetry_bands", {
+  label: "Altimeter Bands",
+  formatter: value => renderBandDetail(value),
+});
+
 StacFields.Registry.addMetadataField("view:off_nadir", {
   label: "Off-Nadir Angle",
   formatter: fixedDeg,
@@ -598,6 +581,30 @@ export const cubeColumOrders = [
 ];
 
 export const tableColumnOrders = ["name", "description", "type"];
+
+const renderBandDetail = value => {
+  const values = Array.isArray(value) ? value : [value];
+  return values.map((band, idx) => {
+    const key = Object.entries(band)[0][1];
+    return (
+      <Stack key={`bandwrapper-${key}-${idx}`}>
+        <Text
+          as="h4"
+          styles={{ root: { fontWeight: 600, fontSize: "14px", margin: "2px 0" } }}
+        >
+          Band {idx + 1}
+        </Text>
+        <div style={{ paddingLeft: 4 }}>
+          <SimpleKeyValueList
+            key={`rasterband-${key}-${idx}`}
+            object={band}
+            indent={true}
+          />
+        </div>
+      </Stack>
+    );
+  });
+};
 
 export const getRelativeSelfPath = links => {
   const href = links.find(l => l.rel === "self").href;

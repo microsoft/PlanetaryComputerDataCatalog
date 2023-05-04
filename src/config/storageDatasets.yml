@@ -82,14 +82,6 @@ nsrdb:
   thumbnailUrl: solar_radiation_small.jpg
   keywords: [United States, Solar, Radiation]
 
-noaa-cdr:
-  title: NOAA Climate Data Records
-  category: Climate/Weather
-  short_description: Historical global climate information
-  infoUrl: https://aka.ms/ai4edata-cdr
-  thumbnailUrl: global_weather_1.jpg
-  keywords: [Global, NOAA, Climate]
-
 noaa-cfs:
   title: NOAA Climate Forecast System
   category: Climate/Weather
@@ -172,23 +164,6 @@ sentinel-1-slc:
   infoUrl: https://aka.ms/ai4edata-sentinel-1-slc
   thumbnailUrl: sentinel-1-sat.jpg
   keywords: [Global, Sentinel, Satellite, ESA, SAR]
-
-sentinel-3:
-  title: Sentinel-3 L2
-  category: Imagery
-  short_description:
-    Global multispectral imagery at a resolution of 300m-500m from 2016-present
-  infoUrl: https://aka.ms/ai4edata-sentinel-3
-  thumbnailUrl: sentinel-3-l2.png
-  keywords: [Global, Sentinel, Satellite, ESA, Temperature, SAR, Ocean, Imagery]
-
-sentinel-5p:
-  title: Sentinel-5P
-  category: Climate/Weather
-  short_description: Global atmospheric data from 2018-present
-  infoUrl: https://aka.ms/ai4edata-sentinel-5p
-  thumbnailUrl: sentinel-5.png
-  keywords: [Global, Sentinel, Satellite, ESA, Atmosphere]
 
 uk-met-20crds:
   title: UK Met Office CSSP China 20CRDS

@@ -212,19 +212,9 @@ cil-gdpcir-cc-by:
       launch: datasets/cil-gdpcir/indicators.ipynb
 
 cil-gdpcir-cc-by-sa:
-  category: Climate/Weather
-  headerImg: ./images/cil-gdpcir.png
-  tabs:
-    - title: Example Notebook
-      src: cil-gdpcir-example.html
-      launch: datasets/cil-gdpcir/cil-gdpcir-example.ipynb
-    - title: Ensemble example
-      src: ensemble.html
-      launch: datasets/cil-gdpcir/ensemble.ipynb
-    - title: Climate indicators
-      src: indicators.html
-      launch: datasets/cil-gdpcir/indicators.ipynb
-
+  # Merged into cil-gdpcir-cc-by
+  isHidden: true
+ 
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
@@ -746,16 +736,16 @@ noaa-cdr-ocean-heat-content:
   headerImg: ./images/noaa-cdr-ocean-heat-content-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-ocean-heat-content-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-example.ipynb
+      src: noaa-cdr-sea-ocean-heat-content-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-ocean-heat-content-example.ipynb
 
 noaa-cdr-ocean-heat-content-netcdf:
   category: Water
   headerImg: ./images/noaa-cdr-ocean-heat-content-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-ocean-heat-content-netcdf-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-ocean-heat-content-netcdf-example.ipynb
+      src: noaa-cdr-sea-ocean-heat-content-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-ocean-heat-content-example.ipynb
 
 noaa-cdr-sea-ice-concentration:
   category: Water
@@ -786,8 +776,8 @@ noaa-cdr-sea-surface-temperature-whoi-netcdf:
   headerImg: ./images/noaa-cdr-sea-surface-temperature-whoi-netcdf-hero.png
   tabs:
     - title: Example Notebook
-      src: noaa-cdr-sea-surface-temperature-whoi-netcdf-example.html
-      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-netcdf-example.ipynb
+      src: noaa-cdr-sea-surface-temperature-whoi-example.html
+      launch: datasets/noaa-cdr/noaa-cdr-sea-surface-temperature-whoi-example.ipynb
 
 noaa-climate-normals-tabular:
   category: Climate/Weather
@@ -913,6 +903,110 @@ sentinel-2-l2a:
     - title: Baseline Change
       src: baseline-change.html
       launch: datasets/sentinel-2-l2a/baseline-change.ipynb
+
+sentinel-3-olci-lfr-l2-netcdf:
+  category: Biomass/Vegetation
+  headerImg: ./images/sentinel-3-olci-lfr-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-olci-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-olci-example.ipynb
+
+sentinel-3-olci-wfr-l2-netcdf:
+  category: Water
+  headerImg: ./images/sentinel-3-olci-wfr-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-olci-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-olci-example.ipynb
+
+sentinel-3-slstr-frp-l2-netcdf:
+  category: Fire
+  headerImg: ./images/sentinel-3-slstr-frp-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-slstr-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-slstr-example.ipynb
+
+sentinel-3-slstr-lst-l2-netcdf:
+  category: Temperature
+  headerImg: ./images/sentinel-3-slstr-lst-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-slstr-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-slstr-example.ipynb
+
+sentinel-3-slstr-wst-l2-netcdf:
+  category: Temperature
+  headerImg: ./images/sentinel-3-slstr-wst-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-slstr-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-slstr-example.ipynb
+
+sentinel-3-sral-lan-l2-netcdf:
+  category: SAR
+  headerImg: ./images/sentinel-3-sral-lan-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-sral-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-sral-example.ipynb
+
+sentinel-3-sral-wat-l2-netcdf:
+  category: SAR
+  headerImg: ./images/sentinel-3-sral-wat-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-sral-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-sral-example.ipynb
+
+sentinel-3-synergy-aod-l2-netcdf:
+  category: Air Quality
+  headerImg: ./images/sentinel-3-synergy-aod-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-3-synergy-syn-l2-netcdf:
+  category: Air Quality
+  headerImg: ./images/sentinel-3-synergy-syn-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-3-synergy-v10-l2-netcdf:
+  category: Biomass/Vegetation
+  headerImg: ./images/sentinel-3-synergy-v10-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-3-synergy-vg1-l2-netcdf:
+  category: Biomass/Vegetation
+  headerImg: ./images/sentinel-3-synergy-vg1-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-3-synergy-vgp-l2-netcdf:
+  category: Imagery
+  headerImg: ./images/sentinel-3-synergy-vgp-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-3-synergy-example.html
+      launch: datasets/sentinel-3-l2/sentinel-3-synergy-example.ipynb
+
+sentinel-5p-l2-netcdf:
+  category: Air Quality
+  headerImg: ./images/sentinel-5p-l2-netcdf-hero.png
+  tabs:
+    - title: Example Notebook
+      src: sentinel-5p-l2-netcdf-example.html
+      launch: datasets/sentinel-5p-l2-netcdf/sentinel-5p-l2-netcdf-example.ipynb
 
 terraclimate:
   category: Climate/Weather
