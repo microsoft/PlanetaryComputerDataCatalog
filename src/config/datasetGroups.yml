@@ -261,7 +261,7 @@ sentinel-1:
   keywords: ["ESA", "Copernicus", "Sentinel", "C-Band", "SAR"]
 
 sentinel-3:
-  title: Sentinel-3 Collection
+  title: Sentinel-3
   short_description: >
     Sentinel-3 is a polar-orbiting satellite providing multispectral imagery and
     various geophysical products for land, ocean, and atmospheric monitoring.
