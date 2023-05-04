@@ -51,3 +51,9 @@
   content: >
     Vector rendering and new datasets! [Check out the latest features
     &rarr;](/docs/overview/changelog)
+- id: may-2023-release-notes
+  startDate: 2023-05-04
+  endDate: 2023-05-14
+  content: >
+    Hillshades and new datasets! [Check out the latest features
+    &rarr;](/docs/overview/changelog)

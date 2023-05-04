@@ -260,6 +260,44 @@ sentinel-1:
       href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/sentinel-1.png"
   keywords: ["ESA", "Copernicus", "Sentinel", "C-Band", "SAR"]
 
+sentinel-3:
+  title: Sentinel-3
+  short_description: >
+    Sentinel-3 is a polar-orbiting satellite providing multispectral imagery and
+    various geophysical products for land, ocean, and atmospheric monitoring.
+  description: >
+    The [Sentinel-3](https://sentinel.esa.int/web/sentinel/missions/sentinel-3) mission, part of the European Space Agency's
+    Copernicus Programme, consists of a series of polar-orbiting satellites that provide
+    multispectral imagery and a wide range of geophysical products for land, ocean, and
+    atmospheric monitoring. The datasets include Land Surface Temperature (SLSTR LST),
+    Sea Surface Temperature (SLSTR WST), Land Radar Altimetry (SRAL LAN), Fire Radiative
+    Power (SLSTR FRP), Ocean Radar Altimetry (SRAL WAT), Global Aerosol (SYNERGY AOD),
+    and various other products with different resolutions and applications.
+
+    This dataset group includes Sentinel-3 products that cover diverse areas such as
+    land and ocean monitoring, fire detection, vegetation indices, and atmospheric
+    geophysical properties. These datasets are valuable for research and applications in
+    environmental monitoring, disaster management, and climate studies.
+  assets:
+    headerImg:
+      href: ./images/sentinel-3-hero.png
+    thumbnail:
+      href: "https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/sentinel-3.png"
+  keywords:
+    [
+      "ESA",
+      "Copernicus",
+      "Sentinel",
+      "Multispectral",
+      "Imagery",
+      "Land",
+      "Ocean",
+      "Atmosphere",
+      "Geophysical",
+    ]
+  groupOnCatalog: false
+
+
 chesapeake-lulc:
   title: Chesapeake Land Use Land Cover
   short_description: >
@@ -323,34 +361,34 @@ cil-gdpcir:
 viirs:
   title: VIIRS Version 001 Products
   short_description: >
-    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument collects 
-    global observations of the land, atmosphere, cryosphere, and oceans in the 
-    visible and infrared wavelengths. The VIIRS sensor was designed to extend 
-    and improve upon the series of measurements initiated by its predecessors, 
+    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument collects
+    global observations of the land, atmosphere, cryosphere, and oceans in the
+    visible and infrared wavelengths. The VIIRS sensor was designed to extend
+    and improve upon the series of measurements initiated by its predecessors,
     including the Moderate Resolution Imaging Spectroradiometer (MODIS).
 
   description: >
-    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument is aboard 
-    the Suomi National Polar-orbiting Partnership (Suomi NPP) and National Oceanic 
-    and Atmospheric Administration-20 (NOAA-20) [satellites](https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/joint-polar-satellite-system/jpss-mission-and). 
-    The instrument has a swath width of 3,000 kilometers and observes the entire 
-    surface of the Earth twice each day. It has 22 channels ranging from 0.41 
-    micrometers to 12.01 micrometers, of which five are high-resolution image bands 
-    (I-bands, 375 meter resolution) and sixteen serve as moderate-resolution bands (M-bands, 
-    750 meter resolution). VIIRS also hosts a unique panchromatic Day/Night band 
-    (DNB), which is ultra-sensitive in low-light conditions and is used to generate 
-    the [VIIRS Black Marble](https://viirsland.gsfc.nasa.gov/Products/NASA/BlackMarble.html) 
-    product. Many of the VIIRS product algorithms are specifically designed to promote 
-    continuity with the heritage MODIS products, including spatial resampling 
-    from the sensor's native 375 and 750 meter ground sample distances to 500 
+    The Visible Infrared Imaging Radiometer Suite (VIIRS) instrument is aboard
+    the Suomi National Polar-orbiting Partnership (Suomi NPP) and National Oceanic
+    and Atmospheric Administration-20 (NOAA-20) [satellites](https://www.nesdis.noaa.gov/current-satellite-missions/currently-flying/joint-polar-satellite-system/jpss-mission-and).
+    The instrument has a swath width of 3,000 kilometers and observes the entire
+    surface of the Earth twice each day. It has 22 channels ranging from 0.41
+    micrometers to 12.01 micrometers, of which five are high-resolution image bands
+    (I-bands, 375 meter resolution) and sixteen serve as moderate-resolution bands (M-bands,
+    750 meter resolution). VIIRS also hosts a unique panchromatic Day/Night band
+    (DNB), which is ultra-sensitive in low-light conditions and is used to generate
+    the [VIIRS Black Marble](https://viirsland.gsfc.nasa.gov/Products/NASA/BlackMarble.html)
+    product. Many of the VIIRS product algorithms are specifically designed to promote
+    continuity with the heritage MODIS products, including spatial resampling
+    from the sensor's native 375 and 750 meter ground sample distances to 500
     meter, 1 kilometer, and 0.05 degree resolutions.
 
 
     The Planetary Computer currently hosts Version 001 Level 3 and 4 data from the
-    VIIRS instrument aboard the Suomi NPP satellite (product prefix 'VNP'). 
-    Level 3 and 4 data from the VIIRS instrument aboard the NOAA-20 satellite 
-    (product prefix 'VJ1') are not yet widely available. Additional product 
-    information is provided on each collection's homepage. 
+    VIIRS instrument aboard the Suomi NPP satellite (product prefix 'VNP').
+    Level 3 and 4 data from the VIIRS instrument aboard the NOAA-20 satellite
+    (product prefix 'VJ1') are not yet widely available. Additional product
+    information is provided on each collection's homepage.
   assets:
     headerImg:
       href: ./images/viirs-21a2-hero.png
@@ -410,27 +448,27 @@ noaa-nclimgrid:
   short_description: >
     Daily and Monthly NOAA U.S. Climate Gridded Dataset (NClimGrid)
   description: >
-    The [NOAA U.S. Climate Gridded Dataset](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
-    (NClimGrid) consists of four climate variables derived from the [Global 
-    Historical Climatology Network Daily](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily) 
-    (GHCN-D) dataset: maximum temperature, minimum temperature, average 
-    temperature, and precipitation. The data is provided in 1/24 degree lat/lon 
+    The [NOAA U.S. Climate Gridded Dataset](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332)
+    (NClimGrid) consists of four climate variables derived from the [Global
+    Historical Climatology Network Daily](https://www.ncei.noaa.gov/products/land-based-station/global-historical-climatology-network-daily)
+    (GHCN-D) dataset: maximum temperature, minimum temperature, average
+    temperature, and precipitation. The data is provided in 1/24 degree lat/lon
     (nominal 5x5 kilometer) grids for the Continental United States (CONUS).
 
 
-    NClimGrid data is available in monthly and daily temporal intervals, with 
-    the daily data further differentiated as "prelim" (preliminary) or 
-    "scaled". Preliminary daily data is available within approximately three 
-    days of collection. Once a calendar month of preliminary daily data has 
-    been collected, it is scaled to match the corresponding monthly value. 
-    Monthly data is available from 1895 to the present. Daily preliminary and 
+    NClimGrid data is available in monthly and daily temporal intervals, with
+    the daily data further differentiated as "prelim" (preliminary) or
+    "scaled". Preliminary daily data is available within approximately three
+    days of collection. Once a calendar month of preliminary daily data has
+    been collected, it is scaled to match the corresponding monthly value.
+    Monthly data is available from 1895 to the present. Daily preliminary and
     daily scaled data is available from 1951 to the present.
 
 
-    Users of all NClimGrid data product should be aware that [NOAA advertises](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332) 
-    that, "On an annual basis, approximately one year of 'final' NClimGrid data 
-    is submitted to replace the initially supplied 'preliminary' data for the same 
-    time period. Users should be sure to ascertain which level of data is required 
+    Users of all NClimGrid data product should be aware that [NOAA advertises](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ncdc:C00332)
+    that, "On an annual basis, approximately one year of 'final' NClimGrid data
+    is submitted to replace the initially supplied 'preliminary' data for the same
+    time period. Users should be sure to ascertain which level of data is required
     for their research."
   assets:
     headerImg:
@@ -443,27 +481,27 @@ noaa-nclimgrid:
 noaa-mrms-qpe:
   title: NOAA Multi-Radar Multi-Sensor Quantitative Precipitation Estimation
   short_description: >
-    Integrated multi-sensor cumulative precipation estimates for CONUS, Alaska, 
+    Integrated multi-sensor cumulative precipation estimates for CONUS, Alaska,
     Hawaii, the Caribbean, and Guam.
   description: >
-    The [Multi-Radar Multi-Sensor (MRMS)](https://mrms.nssl.noaa.gov/) 
-    [Quantitative Precipitation Estimation (QPE)](https://inside.nssl.noaa.gov/mrms/) 
-    products are seamless 1 km mosaics of precipitation accumulation covering the 
-    continental United States, Alaska, Hawaii, the Caribbean, and Guam. The products 
-    are automatically generated through integration of data from multiple radars 
-    and radar networks, surface and satellite observations, numerical weather 
-    prediction (NWP) models, and climatology. The products are updated hourly at 
+    The [Multi-Radar Multi-Sensor (MRMS)](https://mrms.nssl.noaa.gov/)
+    [Quantitative Precipitation Estimation (QPE)](https://inside.nssl.noaa.gov/mrms/)
+    products are seamless 1 km mosaics of precipitation accumulation covering the
+    continental United States, Alaska, Hawaii, the Caribbean, and Guam. The products
+    are automatically generated through integration of data from multiple radars
+    and radar networks, surface and satellite observations, numerical weather
+    prediction (NWP) models, and climatology. The products are updated hourly at
     the top of the hour.
 
 
-    MRMS QPE is available as a "Pass 1" or "Pass 2" product. The Pass 1 product 
-    is available with a 60-minute latency and includes 60-65% of gauges. The Pass 
-    2 product has a higher latency of 120 minutes, but includes 99% of gauges. 
-    The Pass 1 and Pass 2 products are broken into 1-, 3-, 6-, 12-, 24-, 48-, and 
+    MRMS QPE is available as a "Pass 1" or "Pass 2" product. The Pass 1 product
+    is available with a 60-minute latency and includes 60-65% of gauges. The Pass
+    2 product has a higher latency of 120 minutes, but includes 99% of gauges.
+    The Pass 1 and Pass 2 products are broken into 1-, 3-, 6-, 12-, 24-, 48-, and
     72-hour accumulation sub-products.
 
 
-    Further information about NOAA's MRMS QPE products can be found in the 
+    Further information about NOAA's MRMS QPE products can be found in the
     [technical product guide](https://vlab.noaa.gov/web/wdtd/-/multi-sensor-qpe-1?selectedFolder=9234881).
   assets:
     headerImg:
@@ -478,28 +516,28 @@ goes:
   short_description: >
     Geostationary Operational Environmental Satellite - R Series (GOES-R) Products.
   description: >
-    The [Geostationary Operational Environmental Satellite - R Series](https://www.goes-r.gov/) 
-    (GOES-R) is the current generation of United States geostationary weather satellites 
-    providing continuous views of the contiguous United States, neighboring environs of 
-    the Pacific and Atlantic Oceans, and Central and South America. GOES weather 
-    imagery and weather products provide a continuous stream of environmental 
-    information used to support weather forecasting, severe storm tracking, and 
-    meteorological research. 
+    The [Geostationary Operational Environmental Satellite - R Series](https://www.goes-r.gov/)
+    (GOES-R) is the current generation of United States geostationary weather satellites
+    providing continuous views of the contiguous United States, neighboring environs of
+    the Pacific and Atlantic Oceans, and Central and South America. GOES weather
+    imagery and weather products provide a continuous stream of environmental
+    information used to support weather forecasting, severe storm tracking, and
+    meteorological research.
 
 
-    The [Advanced Baseline Imager](https://www.goes-r.gov/spacesegment/abi.html) 
-    (ABI) is the primary instrument on the GOES-R series spacecraft for imaging 
-    Earth's weather, oceans, and environment. ABI views the Earth with 16 different 
-    spectral bands, including two visible channels, four near-infrared channels, 
-    and ten infrared channels. ABI's data enables meteorologists to pinpoint and 
+    The [Advanced Baseline Imager](https://www.goes-r.gov/spacesegment/abi.html)
+    (ABI) is the primary instrument on the GOES-R series spacecraft for imaging
+    Earth's weather, oceans, and environment. ABI views the Earth with 16 different
+    spectral bands, including two visible channels, four near-infrared channels,
+    and ten infrared channels. ABI's data enables meteorologists to pinpoint and
     track developing storms.
 
 
-    The GOES-R [Geostationary Lightning Mapper](https://www.goes-r.gov/spacesegment/glm.html) 
-    (GLM) instrument detects and maps total lightning (in-cloud and cloud-to-ground) 
-    activity continuously over the Americas and adjacent ocean regions. Used in 
-    combination with radar, data from the ABI instrument, and surface observations, 
-    GLM data has the potential to increase lead time for severe thunderstorm and 
+    The GOES-R [Geostationary Lightning Mapper](https://www.goes-r.gov/spacesegment/glm.html)
+    (GLM) instrument detects and maps total lightning (in-cloud and cloud-to-ground)
+    activity continuously over the Americas and adjacent ocean regions. Used in
+    combination with radar, data from the ABI instrument, and surface observations,
+    GLM data has the potential to increase lead time for severe thunderstorm and
     tornado warnings.
 
   assets:
@@ -515,20 +553,20 @@ noaa-climate-normals:
   short_description: >
     Tabular and gridded Climate Normals for the United States
   description: >
-    The [NOAA US Climate Normals](https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals) 
-    provide information about typical climate conditions for thousands of weather 
-    station locations across the United States. Normals act both as a ruler to 
-    compare current weather and as a predictor of conditions in the near future. 
-    The official normals are calculated for a uniform 30 year period for almost 
-    15,000 weather stations, and consist of annual/seasonal, monthly, daily, and 
-    hourly averages and statistics of temperature, precipitation, and other 
-    climatological variables for each weather station. 
+    The [NOAA US Climate Normals](https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals)
+    provide information about typical climate conditions for thousands of weather
+    station locations across the United States. Normals act both as a ruler to
+    compare current weather and as a predictor of conditions in the near future.
+    The official normals are calculated for a uniform 30 year period for almost
+    15,000 weather stations, and consist of annual/seasonal, monthly, daily, and
+    hourly averages and statistics of temperature, precipitation, and other
+    climatological variables for each weather station.
 
 
-    In addition to tabular Climate Normal data for each weather station location, 
-    gridded Climate Normals for temperature and precipitation variables are also 
-    available. Daily, monthly, seasonal, and annual gridded Climate Normals are 
-    provided in 1/24 degree lat/lon (nominal 5x5 kilometer) grids for the 
+    In addition to tabular Climate Normal data for each weather station location,
+    gridded Climate Normals for temperature and precipitation variables are also
+    available. Daily, monthly, seasonal, and annual gridded Climate Normals are
+    provided in 1/24 degree lat/lon (nominal 5x5 kilometer) grids for the
     contiguous United States.
   assets:
     headerImg:
@@ -543,34 +581,34 @@ usgs-lcmap:
   short_description: >
     Annual land cover and cover change maps for the conterminous United States and Hawaii
   description: >
-    The U.S. Geological Survey (USGS) [Land Change Monitoring, Assessment, and Projection](https://www.usgs.gov/special-topics/lcmap) 
-    (LCMAP) product provides land cover mapping and change monitoring from the 
-    USGS's [Earth Resources Observation and Science](https://www.usgs.gov/centers/eros) 
-    (EROS) Center. LCMAP's Science Products are developed by applying time-series 
-    modeling on a per-pixel basis to [Landsat Analysis Ready Data](https://www.usgs.gov/landsat-missions/landsat-us-analysis-ready-data) 
-    (ARD) using an implementation of the [Continuous Change Detection and Classification](https://doi.org/10.1016/j.rse.2014.01.011) 
-    (CCDC) algorithm. All available clear (non-cloudy) U.S. Landsat ARD 
-    observations are fit to a harmonic model to predict future Landsat-like 
-    surface reflectance. Where Landsat surface reflectance observations differ 
-    significantly from those predictions, a change is identified. Attributes of 
-    the resulting model sequences (e.g., start/end dates, residuals, model 
-    coefficients) are then used to produce a set of land surface change products 
-    and as inputs to the subsequent classification to thematic land cover. 
+    The U.S. Geological Survey (USGS) [Land Change Monitoring, Assessment, and Projection](https://www.usgs.gov/special-topics/lcmap)
+    (LCMAP) product provides land cover mapping and change monitoring from the
+    USGS's [Earth Resources Observation and Science](https://www.usgs.gov/centers/eros)
+    (EROS) Center. LCMAP's Science Products are developed by applying time-series
+    modeling on a per-pixel basis to [Landsat Analysis Ready Data](https://www.usgs.gov/landsat-missions/landsat-us-analysis-ready-data)
+    (ARD) using an implementation of the [Continuous Change Detection and Classification](https://doi.org/10.1016/j.rse.2014.01.011)
+    (CCDC) algorithm. All available clear (non-cloudy) U.S. Landsat ARD
+    observations are fit to a harmonic model to predict future Landsat-like
+    surface reflectance. Where Landsat surface reflectance observations differ
+    significantly from those predictions, a change is identified. Attributes of
+    the resulting model sequences (e.g., start/end dates, residuals, model
+    coefficients) are then used to produce a set of land surface change products
+    and as inputs to the subsequent classification to thematic land cover.
 
 
     Two LCMAP Collections are provided:
 
-    1. [LCMAP CONUS Collection 1.3](https://www.usgs.gov/special-topics/lcmap/collection-13-conus-science-products), 
+    1. [LCMAP CONUS Collection 1.3](https://www.usgs.gov/special-topics/lcmap/collection-13-conus-science-products),
     which was released in August 2022 for years 1985-2021.
 
-    2. [LCMAP Hawaii Collection 1.0](https://www.usgs.gov/special-topics/lcmap/collection-1-hawaii-science-products), 
+    2. [LCMAP Hawaii Collection 1.0](https://www.usgs.gov/special-topics/lcmap/collection-1-hawaii-science-products),
     which was released in January 2022 for years 2000-2020.
 
 
-    The data are tiled according to the Landsat ARD tile grid and consist of 
-    [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COGs) and corresponding 
-    metadata files. Note that the provided COGs differ slightly from those in 
-    the USGS source data. They have been reprocessed to add overviews, "nodata" 
+    The data are tiled according to the Landsat ARD tile grid and consist of
+    [Cloud Optimized GeoTIFFs](https://www.cogeo.org/) (COGs) and corresponding
+    metadata files. Note that the provided COGs differ slightly from those in
+    the USGS source data. They have been reprocessed to add overviews, "nodata"
     values where appropriate, and an updated projection definition.
   assets:
     headerImg:
@@ -585,12 +623,12 @@ esa-cci-lc:
   short_description: >
     Global annual land cover maps from 1992 to 2020 at 300m resolution
   description: >
-    The ESA Climate Change Initiative (CCI) [Land Cover dataset](https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview) 
-    provides consistent global annual land cover maps at 300m spatial resolution 
-    from 1992 to 2020. The land cover classes are defined using the United Nations 
-    Food and Agriculture Organization's (UN FAO) [Land Cover Classification System](https://www.fao.org/land-water/land/land-governance/land-resources-planning-toolbox/category/details/en/c/1036361/) 
-    (LCCS). In addition to the land cover maps, four quality flags are produced 
-    to document the reliability of the classification and change detection. 
+    The ESA Climate Change Initiative (CCI) [Land Cover dataset](https://cds.climate.copernicus.eu/cdsapp#!/dataset/satellite-land-cover?tab=overview)
+    provides consistent global annual land cover maps at 300m spatial resolution
+    from 1992 to 2020. The land cover classes are defined using the United Nations
+    Food and Agriculture Organization's (UN FAO) [Land Cover Classification System](https://www.fao.org/land-water/land/land-governance/land-resources-planning-toolbox/category/details/en/c/1036361/)
+    (LCCS). In addition to the land cover maps, four quality flags are produced
+    to document the reliability of the classification and change detection.
 
 
     The ESA CCI land cover data is provided in two forms:
