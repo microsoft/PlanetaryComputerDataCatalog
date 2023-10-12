@@ -215,10 +215,12 @@ $ az group create --name pangeo --location westeurope
 
 **Create an app registration**
 
-To authenticate users, we'll create an Azure AD app registration in the Azure Portal following [these instructions](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
-In this example, the *sign-in audience* will be **accounts in this organizational directory only**. This is appropriate when you are administering a Hub for other users within your Azure AD tenant. By default, all users with a directory will be able to log into your Hub. You can manage access using [Azure Active Directory groups](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-manage-groups).
+To authenticate users, we'll create app registration for the Microsoft Identity Platform in the Azure Portal following [these instructions](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app).
+In this example, the *sign-in audience* will be **accounts in this organizational directory only**. This is appropriate when you are administering a Hub for other users within your tenant. By default, all users with a directory will be able to log into your Hub. You can manage access using [Azure Active Directory groups](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-manage-groups).
 
 When creating a new app registration, you'll be asked for a redirect URI. This URI should match where your users will access the Hub. If your organization already has a DNS provider, use that. Alternatively, you can have Azure handle the DNS for your Hub service automatically, which is what we'll use in this guide. We're calling our cluster ``pangeo-hub`` and deploying it in West Europe, so the callback URL is ``https://pangeo-hub.westeurope.cloudapp.azure.com/hub/oauth_callback``.  In general the pattern is ``https://<hub-name>.<azure-region>.cloudapp.azure.com/hub/oauth_callback``.
+
+If you need to further customize the platform settings, do so under the "Web" platform. The JupyterHub server will be the web server in this context.
 
 Finally, create a client secret to pass to JupyterHub: Under the *Manage* section, select *Certificates and Secrets* then *New client secret*. We'll use the ``Value`` later on.
 You will also need the app registration's ``Client ID`` and ``Tenant ID``, which are available on the app registration's main page, under *Essentials*.
