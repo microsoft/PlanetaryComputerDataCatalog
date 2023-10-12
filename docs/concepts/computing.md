@@ -7,7 +7,7 @@ Regardless of how you compute on the data, to ensure maximum efficiency you shou
 ## Use our JupyterHub
 
 The [Planetary Computer Hub](https://planetarycomputer.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.
-That said, the Planetary Computer Hub is focused mainly on convenience. We recommend it for prototypes and exploration, but production workloads should use one of the compute options detailed below in [Use your own compute](#use-your-own-compute).
+That said, the Planetary Computer Hub is focused mainly on convenience. We recommend it for prototypes and exploration, but production workloads should use one of options using your own compute detailed below.
 
 
 ```{note} You'll need to [request access](https://planetarycomputer.microsoft.com/account/request) to use the Planetary Computer Hub.
