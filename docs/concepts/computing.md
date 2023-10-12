@@ -2,11 +2,13 @@
 
 The core components of the Planetary Computer are the datasets and APIs for querying them. This document provides an overview of the various ways you can compute on data hosted by the Planetary Computer.
 
-Regardless of how you compute on the data, to ensure maximum efficiency you should locate your compute as close to the data as possible.  The Planetary Computer Data Catalog is hosted in Azure's **West Europe** region, so your compute should be there too.
+Regardless of how you compute on the data, to ensure maximum efficiency you should locate your compute as close to the data as possible. Most of the Planetary Computer Data Catalog is hosted in Azure's **West Europe** region, so your compute should be there too.
 
 ## Use our JupyterHub
 
-The [Planetary Computer Hub](https://planetarycomputer.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.  
+The [Planetary Computer Hub](https://planetarycomputer.microsoft.com/compute) is a [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/) deployment in the West Europe Azure region. This is the easiest way to get started with computing on the Planetary Computer.
+That said, the Planetary Computer Hub is focused mainly on convenience. We recommend it for prototypes and exploration, but production workloads should use one of the compute options detailed below in [Use your own compute](#use-your-own-compute).
+
 
 ```{note} You'll need to [request access](https://planetarycomputer.microsoft.com/account/request) to use the Planetary Computer Hub.
 ```
@@ -34,10 +36,6 @@ See [Scaling with Dask](../quickstarts/scale-with-dask.md) for an introduction t
 ## Use VS Code to connect to a remote Jupyter Kernel
 
 See [Using VS Code](../overview/ui-vscode) for how to use Visual Studio Code as a user interface for the Planetary Computer's Compute.
-
-## Use GitHub Codespaces
-
-See [Use GitHub Codespaces](../overview/ui-codespaces) for how to use [GitHub Codespaces][codespaces] as a user interface and execution environment using data from the on the Planetary Computer catalog.
 
 ## Use our Dask Gateway
 
@@ -89,8 +87,12 @@ lower bandwidth between Azure and your local machine aren't a bottleneck.
 
 ## Use your own compute
 
-The previous two methods relied on compute provided by the Planetary Computer. If you have your own Azure resources you can use those to access the Planetary Computer's Datasets.  
-That said, make sure your resources are in the **West Europe** Azure Region.  Putting your compute in the same region as the data is the most efficient way to do your computation.
+The previous methods relied on compute provided by the Planetary Computer, which is a great way to get started with the Planetary Computer's APIs and Data.
+For production workloads, we recommend deploying your own compute, which gives you more control over the hardware and software environment.
+
+### Using GitHub Codespaces
+
+See [Use GitHub Codespaces](../overview/ui-codespaces) for how to use [GitHub Codespaces][codespaces] as a user interface and execution environment using data from the on the Planetary Computer catalog.
 
 ### Using Azure Machine Learning
 
