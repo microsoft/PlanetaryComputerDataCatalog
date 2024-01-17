@@ -33,7 +33,7 @@
     <div id="cookie-banner"></div>
     <div id="root"></div>
 
-    <script src="https://js.monitor.azure.com/scripts/c/ms.analytics-web-3.min.js"></script>
+    <script src="https://js.monitor.azure.com/scripts/c/ms.analytics-web-4.min.js"></script>
     <script src="https://consentdeliveryfd.azurefd.net/mscc/lib/v2/wcp-consent.js"></script>
     <script type="text/javascript">
       /*
@@ -49,6 +49,22 @@
         Cookie descriptions: https://osgwiki.com/wiki/JSLLv4#Cookies_Set.2FRead_by_JSLL
       */
 
+      function checkThirdPartyAdsOptOutCookie() {
+        try {
+          const ThirdPartyAdsOptOutCookieName = '3PAdsOptOut';
+          var cookieValue = getCookie(ThirdPartyAdsOptOutCookieName);
+
+          //for unauthenticated users
+          return cookieValue != 1;
+        } catch {
+          return true;
+        }
+      }
+
+      function getCookie(cookieName) {
+        var cookieValue = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
+        return (cookieValue) ? cookieValue[2] : '';
+      }
       // WCP initialization
       WcpConsent.init("en-US", "cookie-banner", function (err, siteConsent) {
         if (err != undefined) {
@@ -60,11 +76,18 @@
         }
       });
 
+      // Presence of the GPC indicates and opt-out of data sharing, mark the 1DS Analytics as such
+      var globalPrivacyControlEnabled = navigator.globalPrivacyControl;
+      // Set data sharing opt-in to false when GPC or AMC controls detected
+      var GPC_DataSharingOptIn = (globalPrivacyControlEnabled) ? false : checkThirdPartyAdsOptOutCookie();
+
       // 1DS initialization
       const analytics = new oneDS.ApplicationInsights();
       var config = {
         instrumentationKey: "%REACT_APP_ONEDS_TENANT_KEY%",
         propertyConfiguration: {
+          // From https://msasg.visualstudio.com/Shared%20Data/_git/1DS.JavaScript?path=%2Fextensions%2Fproperties%2FEUCC.md&_a=preview&anchor=npm-setup-analytics-web
+          gpcDataSharingOptIn: GPC_DataSharingOptIn,
           callback: {
             userConsentDetails: window.siteConsent
               ? window.siteConsent.getConsent
@@ -91,8 +114,10 @@
       };
 
       //Initialize SDK
-      if ("%NODE_ENV%" !== "development") {
+      if ("%NODE_ENV%" === "development") { // TODO CHANGE BACK
         analytics.initialize(config, []);
+
+
       }
     </script>
   </body>
