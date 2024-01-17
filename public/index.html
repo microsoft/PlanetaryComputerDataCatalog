@@ -114,10 +114,8 @@
       };
 
       //Initialize SDK
-      if ("%NODE_ENV%" === "development") { // TODO CHANGE BACK
+      if ("%NODE_ENV%" !== "development") { 
         analytics.initialize(config, []);
-
-
       }
     </script>
   </body>
