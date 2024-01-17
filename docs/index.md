@@ -25,6 +25,7 @@ Changelog <overview/changelog>
 :maxdepth: 1
 :caption: Quickstarts
 
+Warming up: What will you need going forward with PC Hub? <quickstarts/introduction>
 Reading from the STAC API <quickstarts/reading-stac>
 quickstarts/reading-stac-r
 quickstarts/reading-zarr-data
