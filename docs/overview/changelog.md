@@ -26,7 +26,7 @@ The <a href="dataset/group/noaa-cdr">NOAA Climate Data Records</a> (CDRs) datase
 
 ### Sentinel 3
 
-The <a href="">Sentinel-3 Collections</a> offers comprehensive datasets delivering insights into land, ocean, and atmospheric changes over time. These datasets support various applications, such as environmental monitoring, disaster management, climate change, and policy development. The collection is generated using modern data analysis methods applied to historical and ongoing satellite data, enabling the identification of climate trends.
+The <a href="dataset/group/sentinel-3">Sentinel-3 Collections</a> offers comprehensive datasets delivering insights into land, ocean, and atmospheric changes over time. These datasets support various applications, such as environmental monitoring, disaster management, climate change, and policy development. The collection is generated using modern data analysis methods applied to historical and ongoing satellite data, enabling the identification of climate trends.
 
 ```{image} images/changelog-dataset-sentinel-3.png
 :height: 500
