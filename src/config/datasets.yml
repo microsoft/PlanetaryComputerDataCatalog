@@ -480,6 +480,14 @@ io-lulc-9-class:
       src: io-lulc-9-class-example.html
       launch: datasets/io-lulc/io-lulc-9-class-example.ipynb
 
+io-lulc-annual-v02:
+  category: Land use/Land cover
+  headerImg: ./images/io-lulc-annual-v02-hero.png
+  tabs:
+    - title: Example Notebook
+      src: io-lulc-annual-v02-example.html
+      launch: datasets/io-lulc/io-lulc-annual-v02-example.ipynb
+
 io-biodiversity:
   category: Biodiversity
   headerImg: ./images/io-biodiversity-hero.png
