@@ -125,6 +125,14 @@ const Footer = ({ onGrid = true }) => {
             )}
             <li>
               <a
+                className="c-uhff-link"
+                href="https://go.microsoft.com/fwlink/?linkid=2259814"
+              >
+                Consumer Health Privacy
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://aka.ms/yourcaliforniaprivacychoices"
                 style={{ position: "relative", top: 4 }}
               >
