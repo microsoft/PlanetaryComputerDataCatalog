@@ -145,7 +145,6 @@ const Footer = ({ onGrid = true }) => {
                 </div>
               </a>
             </li>
-
             <li className="x-hidden-focus">
               {" "}
               © Microsoft {new Date().getFullYear()}
