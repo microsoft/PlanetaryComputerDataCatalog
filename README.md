@@ -68,12 +68,29 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 |`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the STAC API, either prod, staging or a local instance. If the URL ends in 'stac', this is a special case that is handled by replacing 'stac' with the target service, e.g. 'data' or 'sas'
 |`REACT_APP_TILER_ROOT`| Optional | The root URL for the data tiler API, if not hosted from the domain of the STAC API.
 |`REACT_APP_IMAGE_API_ROOT`| PC APIs pcfunc endpoint | The root URL for the image data API for animations.
-|`REACT_APP_AZMAPS_KEY`| Retrieve from Azure Portal | The key used to authenticate the Azure Maps inset map on a dataset detail page.
+|`REACT_APP_AZMAPS_CLIENT_ID`| Retrieve from Azure Portal | The Client ID used to authenticate against Azure Maps.
 |`REACT_APP_HUB_URL`| Optional. URL to root Hub instance | Used to enable a request to launch the Hub with a specific git hosted file.
 |`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 |`REACT_APP_AUTH_URL`| Optional. URL to root pc-session-api instance | Used to enable login work.
 
-Run `./scripts/server` to launch a development server.
+Run `./scripts/server --api` to launch a development server with a local Azure Functions host running.
+
+#### Azure Maps
+
+In the local development setups, the Azure Maps token is generated using the local developer identity. Be sure to
+`az login` and `az account set --subscription "Planetary Computer"` to ensure the correct token is generated. Your identity
+will also need the "Azure Maps Search and Render Data Reader" permission, which can be set with:
+
+```sh
+USER_NAME=$(az account show --query user.name -o tsv)
+az role assignment create \
+    --assignee "$USER_NAME" \
+    --role "Azure Maps Search and Render Data Reader" \
+    --scope "/subscriptions/9da7523a-cb61-4c3e-b1d4-afa5fc6d2da9/resourceGroups/pc-datacatalog-rg/providers/Microsoft.Maps/accounts/pc-datacatalog-azmaps" \
+    --subscription "Planetary Computer"
+```
+
+Note, you may need to assign this role via an identity that has JIT admin privileges enabled against the Planetary Computer subscription.
 
 #### Developing against local STAC assets
 

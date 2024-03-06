@@ -3,4 +3,5 @@
 # Manually managing azure-functions-worker may cause unexpected issues
 
 azure-functions==1.11.2
+azure-identity==1.15.0
 requests==2.31.0
