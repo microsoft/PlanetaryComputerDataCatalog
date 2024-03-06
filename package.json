@@ -6,7 +6,7 @@
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@craco/craco": "7.0.0-alpha.3",
-    "@fluentui/react": "^8.106.1",
+    "@fluentui/react": "^8.115.6",
     "@radiantearth/stac-fields": "1.0.0-beta.7",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
