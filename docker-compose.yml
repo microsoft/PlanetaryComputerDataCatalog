@@ -34,6 +34,7 @@ services:
       - "8000:8000"
     volumes:
       - ./api:/usr/src
+      - ~/.azure:/root/.azure
     networks:
       pcdc-network:
     command: func host start --script-root ./ --cors "*" --port 7071

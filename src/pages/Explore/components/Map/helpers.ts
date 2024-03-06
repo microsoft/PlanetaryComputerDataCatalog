@@ -1,4 +1,5 @@
 import * as atlas from "azure-maps-control";
+import axios from "axios";
 import { DATA_URL, REQUEST_ENTITY, X_REQUEST_ENTITY } from "utils/constants";
 import { IStacItem } from "types/stac";
 import { ILayerState } from "pages/Explore/types";
@@ -31,6 +32,43 @@ export const addEntityHeader = (
     };
   }
   return { headers: {}, url: url };
+};
+
+let cachedToken: string | null = null;
+let tokenExpiry: number | null = null;
+
+export const fetchMapToken = async (
+  resolve: (value: string) => void,
+  reject: (reason?: any) => void
+): Promise<void> => {
+  const nowInSeconds = Math.floor(Date.now() / 1000); // Current time in seconds since epoch
+
+  // Check if we have a valid token in the cache
+  if (cachedToken !== null && tokenExpiry !== null && nowInSeconds < tokenExpiry) {
+    resolve(cachedToken);
+    return;
+  }
+
+  // If no valid cached token, fetch a new one
+  try {
+    const resp = await axios.get<{ token: string; expires_on: number }>(
+      "./api/map-token"
+    );
+
+    if (resp.status === 200 && resp.data.token && resp.data.expires_on) {
+      cachedToken = resp.data.token;
+
+      // Subtract a small buffer (e.g., 5 minutes in seconds) to ensure
+      // we refresh the token before it actually expires
+      tokenExpiry = resp.data.expires_on - 5 * 60;
+
+      resolve(cachedToken);
+    } else {
+      reject(new Error("Failed to fetch map token"));
+    }
+  } catch (error) {
+    reject(error);
+  }
 };
 
 export const makeLayerId = (id: string) => `${mosaicLayerPrefix}${id}`;
