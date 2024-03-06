@@ -174,6 +174,11 @@ export const a11yPostProcessDom = (dom: Document) => {
   dom.querySelectorAll(".highlight pre").forEach(el => {
     el.setAttribute("tabindex", "0");
   });
+
+  // <p> tags with role="heading" need an aria-level attribute
+  dom
+    .querySelectorAll("p[role=heading]")
+    .forEach(el => el.setAttribute("aria-level", "3"));
 };
 
 export const scrollToHash = (
