@@ -52,7 +52,7 @@ export const fetchMapToken = async (
   // If no valid cached token, fetch a new one
   try {
     const resp = await axios.get<{ token: string; expires_on: number }>(
-      "./api/map-token"
+      `${DATA_URL}/config/map/token`
     );
 
     if (resp.status === 200 && resp.data.token && resp.data.expires_on) {
