@@ -11,6 +11,8 @@ on:
 
 jobs:
   build_and_deploy_job:
+    permissions:
+      pull_requests: write
     environment: test
     if:
       github.event_name == 'push' || (github.event_name == 'pull_request' &&
@@ -21,9 +23,7 @@ jobs:
       REACT_APP_API_ROOT: ${{ secrets.API_ROOT }}
       REACT_APP_IMAGE_API_ROOT: ${{ secrets.IMAGE_API_ROOT }}
       REACT_APP_ONEDS_TENANT_KEY: ${{ secrets.ONEDS_TENANT_KEY }}
-      REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
-      REACT_APP_AUTH_URL: ${{ secrets.AUTH_URL }}
     steps:
       - uses: actions/checkout@v3
         with:
