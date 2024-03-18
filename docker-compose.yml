@@ -6,17 +6,10 @@ services:
     ports:
       - "3000:3000"
       - "4280:4280"
+    env_file: .env
     environment:
       - CHOKIDAR_USEPOLLING=true
       - CHOKIDAR_INTERVAL=100
-
-      # Environments where .env is present will mount and use it. CI will need
-      # environment variables set via GH Actions to test and build.
-      - REACT_APP_API_ROOT
-      - REACT_APP_IMAGE_API_ROOT
-      - REACT_APP_AZMAPS_KEY
-      - REACT_APP_ONEDS_TENANT_KEY
-      - REACT_APP_HUB_URL
     volumes:
       - .:/usr/src
       - ~/.npm:/root/.npm
