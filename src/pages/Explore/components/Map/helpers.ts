@@ -1,10 +1,6 @@
 import * as atlas from "azure-maps-control";
 import axios from "axios";
-import {
-  DATA_URL,
-  REQUEST_ENTITY,
-  X_REQUEST_ENTITY,
-} from "utils/constants";
+import { DATA_URL, REQUEST_ENTITY, X_REQUEST_ENTITY } from "utils/constants";
 import { IStacItem } from "types/stac";
 import { ILayerState } from "pages/Explore/types";
 import { itemOutlineLayerName } from "pages/Explore/utils/layers";
