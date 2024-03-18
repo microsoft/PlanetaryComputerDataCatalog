@@ -22,6 +22,7 @@ jobs:
     env:
       REACT_APP_API_ROOT: ${{ secrets.API_ROOT }}
       REACT_APP_IMAGE_API_ROOT: ${{ secrets.IMAGE_API_ROOT }}
+      REACT_APP_AZMAPS_CLIENT_ID: ${{ secrets.AZMAPS_CLIENT_ID }}
       REACT_APP_ONEDS_TENANT_KEY: ${{ secrets.ONEDS_TENANT_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
     steps:
