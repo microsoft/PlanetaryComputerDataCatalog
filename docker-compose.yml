@@ -14,7 +14,7 @@ services:
       # environment variables set via GH Actions to test and build.
       - REACT_APP_API_ROOT
       - REACT_APP_IMAGE_API_ROOT
-      - REACT_APP_AZMAPS_KEY
+      - REACT_APP_AZMAPS_CLIENT_ID
       - REACT_APP_ONEDS_TENANT_KEY
       - REACT_APP_HUB_URL
     volumes:
@@ -34,6 +34,7 @@ services:
       - "8000:8000"
     volumes:
       - ./api:/usr/src
+      - ~/.azure:/root/.azure
     networks:
       pcdc-network:
     command: func host start --script-root ./ --cors "*" --port 7071

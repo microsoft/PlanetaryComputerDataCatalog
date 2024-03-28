@@ -28,8 +28,10 @@ import MapSettingsControl from "./components/MapSettingsControl";
 import { DEFAULT_MAP_STYLE } from "pages/Explore/utils/constants";
 import LegendControl from "./components/LegendControl";
 import { MobileViewSidebarButton } from "../MobileViewInMap/ViewInMap.index";
-import { addEntityHeader } from "./helpers";
+import { addEntityHeader, fetchMapToken } from "./helpers";
 import { PreviewMessage } from "./components/ItemPreview/PreviewMessage";
+import { AZMAPS_CLIENT_ID } from "utils/constants";
+import MapReadyIndicator from "./components/MapReadyIndicator";
 
 const mapContainerId: string = "viewer-map";
 
@@ -57,8 +59,9 @@ const ExploreMap = () => {
         style: DEFAULT_MAP_STYLE,
         renderWorldCopies: true,
         authOptions: {
-          authType: atlas.AuthenticationType.subscriptionKey,
-          subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
+          authType: atlas.AuthenticationType.anonymous,
+          clientId: AZMAPS_CLIENT_ID,
+          getToken: fetchMapToken,
         },
         transformRequest: addEntityHeader,
       });
@@ -122,7 +125,7 @@ const ExploreMap = () => {
     <ExtentMessage onClick={zoomToExtent} layerVisibility={nonVisibleLayers} />
   );
 
-  const loadingIndicator = (
+  const tileLoadingIndicator = (
     <ProgressIndicator
       aria-label="Map tile loading indicator"
       barHeight={1}
@@ -135,9 +138,10 @@ const ExploreMap = () => {
 
   return (
     <div className={`explorer-map ${visibilityClass}`} style={mapContainerStyle}>
-      {mapHandlers.areTilesLoading && loadingIndicator}
+      {mapHandlers.areTilesLoading && tileLoadingIndicator}
       {showZoomMsg && zoomMsg}
       {showExtentMsg && extentMsg}
+      <MapReadyIndicator isMapReady={mapReady} />
       <PreviewMessage mapRef={mapRef} />
       <PlaceSearchControl mapRef={mapRef} />
       <MapSettingsControl mapRef={mapRef} />
