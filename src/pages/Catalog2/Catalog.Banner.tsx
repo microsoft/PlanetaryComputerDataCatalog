@@ -18,8 +18,7 @@ export const CatalogBanner: React.FC<CatalogBannerProps> = ({
         <Text block as={"p"} styles={blurbStyles}>
           The Planetary Computer Data Catalog includes petabytes of environmental
           monitoring data, in consistent, analysis-ready formats. All of the datasets
-          below can be accessed via Azure Blob Storage, and can be used by developers
-          whether you're working within or outside of our Planetary Computer Hub.
+          below can be accessed via Azure Blob Storage.
         </Text>
         <CatalogFilter filterText={filterText} onFilterChange={onFilterChange} />
       </Stack>

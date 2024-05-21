@@ -1,5 +1,4 @@
 import { Link, Text } from "@fluentui/react";
-import { Link as RouterLink } from "react-router-dom";
 
 import ImageStrip from "./ImageStrip";
 
@@ -45,18 +44,7 @@ const BannerFooter = () => {
                 color: "#fff",
               }}
             >
-              The Planetary Computer API and Hub are currently available in preview.
-              If you're interested in developing on our platform,{" "}
-              <RouterLink
-                to="/account/request"
-                style={{
-                  color: "#fff",
-                  fontWeight: 600,
-                }}
-              >
-                request access now
-              </RouterLink>
-              .
+              The Planetary Computer API is currently available in preview.
               <p>
                 Learn more about Microsoft's{" "}
                 <Link

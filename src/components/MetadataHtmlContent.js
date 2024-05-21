@@ -3,7 +3,6 @@ import {
   DefaultButton,
   MessageBar,
   MessageBarType,
-  PrimaryButton,
   Spinner,
   SpinnerSize,
   Stack,
@@ -11,7 +10,7 @@ import {
 
 import { useStaticMetadata } from "../utils/requests";
 import "../styles/codefiles.css";
-import { a11yPostProcessDom, buildGitHubUrl, buildHubLaunchUrl } from "../utils";
+import { a11yPostProcessDom, buildGitHubUrl } from "../utils";
 import NewTabLink from "./controls/NewTabLink";
 import GeneratedInternalToc from "../pages/Docs/components/GeneratedInternalToc";
 
@@ -26,16 +25,6 @@ const MetadataHtmlContent = ({ src, launch }) => {
       title="Suggest edits to this document"
     >
       Edit
-    </NewTabLink>
-  ) : null;
-
-  const launcher = launch ? (
-    <NewTabLink
-      As={PrimaryButton}
-      href={buildHubLaunchUrl(launch)}
-      title="This example can be launched in the Planetary Computer Hub"
-    >
-      Launch in Hub
     </NewTabLink>
   ) : null;
 
@@ -76,7 +65,6 @@ const MetadataHtmlContent = ({ src, launch }) => {
       <Stack horizontalAlign="start">
         <div>
           <Stack horizontal tokens={{ childrenGap: 10 }}>
-            {launcher}
             {ghLink}
           </Stack>
         </div>

@@ -16,7 +16,7 @@ import ErrorFallback, { handleErrorBoundaryError } from "components/ErrorFallbac
 
 // TODO: track heights rather than hard code them
 const heights = {
-  header: 55,
+  header: 50,
   footer: 27,
   buffer: 1,
 };

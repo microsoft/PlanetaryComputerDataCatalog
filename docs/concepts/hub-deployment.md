@@ -1,14 +1,16 @@
-## Deploy your own Hub
+## Deploy your own JupyterHub
 
-The Planetary Computer Hub is a [JupyterHub] deployment configured with [Dask Gateway][gateway] for scalable computing.
-Deploying your own Hub is a good option for a team of users looking to work with data from the Planetary Computer. You might choose this instead of the [Planetary Computer Hub][hub] if you need to specialize the environment, require additional computation resources, or want to tie a Hub into a broader Azure deployment while still using data from the Planetary Computer.
+Deploying your own [JupyterHub] is a good option for a team of users looking to
+work with data from the Planetary Computer who need a specialized environment,
+require additional computation resources, or want to tie a compute environmnt into a broader
+Azure deployment while still using data from the Planetary Computer.
 
 In this guide you will:
 
 * Deploy an [AKS] cluster using the Azure CLI
 * Deploy JupyterHub and Dask Gateway using the [daskhub] Helm chart.
 
-We describe two deployment scenarios, a [simple](docs/concepts/hub-deployment/#simple-deployment) and a [recommended](docs/concepts/hub-deployment/#recommended-deployment) deployment. If you're new to Azure, Kubernetes, or JupyterHub, then you should try the simple deployment to verify that the basics work, before moving on to the more advanced recommended deployment. Finally, the configuration for the Planetary Computer's Hub is available on [GitHub](https://github.com/microsoft/planetary-computer-hub), which provides a reference for a real-world deployment.
+We describe two deployment scenarios, a [simple](docs/concepts/hub-deployment/#simple-deployment) and a [recommended](docs/concepts/hub-deployment/#recommended-deployment) deployment. If you're new to Azure, Kubernetes, or JupyterHub, then you should try the simple deployment to verify that the basics work, before moving on to the more advanced recommended deployment. Finally, the configuration for the Planetary Computer based JupyeteHub is available on [GitHub](https://github.com/microsoft/planetary-computer-hub), which provides a reference for a real-world deployment.
 
 For background, we recommend reading the [Zero to JupyterHub with Kubernetes][z2jh] guide and the [Dask Gateway on Kubernetes][gateway-k8s] documentation.
 
@@ -393,4 +395,3 @@ Your AKS cluster and JupyterHub deployments can be customized in various ways. V
 [JupyterHub]: https://jupyterhub.readthedocs.io/en/stable/
 [prerequisites]: https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#prerequisites
 [z2jh]: https://zero-to-jupyterhub.readthedocs.io/en/latest/index.html
-[hub]: ../overview/environment
