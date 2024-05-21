@@ -18,7 +18,6 @@ export const DATA_URL = apiRoot.endsWith("stac")
   : `${tilerRoot}/api/data/v1`;
 
 export const IMAGE_URL = process.env.REACT_APP_IMAGE_API_ROOT || "";
-export const HUB_URL = process.env.REACT_APP_HUB_URL || "";
 export const AUTH_URL = process.env.REACT_APP_AUTH_URL || apiRoot;
 
 export const AZMAPS_CLIENT_ID = process.env.REACT_APP_AZMAPS_CLIENT_ID;

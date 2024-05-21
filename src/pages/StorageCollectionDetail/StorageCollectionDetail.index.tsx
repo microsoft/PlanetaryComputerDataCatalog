@@ -1,5 +1,6 @@
 import {
   IStackTokens,
+  IMessageBarStyles,
   Link,
   MessageBar,
   MessageBarType,
@@ -18,7 +19,6 @@ import SEO from "components/Seo";
 import { useDataConfig } from "components/state/DataConfigProvider";
 import { nonApiDatasetToPcCollection } from "pages/Catalog2/helpers";
 import { useGitHubDatasetDescription } from "utils/requests";
-import { messageBarStyles } from "components/stac/RequiresAccount";
 
 export const StorageCollectionDetail: React.FC = () => {
   const { storageCollectionConfig } = useDataConfig();
@@ -91,3 +91,10 @@ const tokens: IStackTokens = {
 };
 
 export const highContrastLinkColor = { color: "#006cbe" };
+
+const messageBarStyles: IMessageBarStyles = {
+  root: {
+    padding: "4px 2px",
+    borderRadius: 4,
+  },
+};

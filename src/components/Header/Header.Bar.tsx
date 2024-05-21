@@ -1,20 +1,14 @@
-import { useSession } from "components/auth/hooks/SessionContext";
 import HeaderLink from "./components/HeaderLink";
-import Feature from "components/Feature";
-import Login from "components/auth/Login";
-import Logout from "components/auth/Logout";
 import {
   headerPipeStyle,
   innerHeaderStyle,
   logoImageStyle,
   logoLinkStyle,
   productNameStyle,
-  rightAligned,
 } from "./styles";
 import { Stack, Text } from "@fluentui/react";
 
 export const HeaderBar: React.FC = () => {
-  const { status } = useSession();
   return (
     <Stack
       className={innerHeaderStyle}
@@ -57,22 +51,8 @@ export const HeaderBar: React.FC = () => {
       <HeaderLink isNav to="/docs">
         Documentation
       </HeaderLink>
-      <div className={rightAligned}>
-        <Stack horizontal verticalAlign="center" tokens={authSectionTokens}>
-          {!status.isLoggedIn && (
-            <HeaderLink asButton to="/account/request">
-              Request access
-            </HeaderLink>
-          )}
-          <Feature name="login">
-            <Login />
-            <Logout />
-          </Feature>
-        </Stack>
-      </div>
     </Stack>
   );
 };
 
 const headerTokens = { childrenGap: "10px 21px" };
-const authSectionTokens = { childrenGap: 4 };

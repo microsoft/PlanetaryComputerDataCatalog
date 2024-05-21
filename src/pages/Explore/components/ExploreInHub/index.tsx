@@ -9,7 +9,7 @@ const ExploreInHub = () => {
   return (
     <Stack className="explorer-explore-in-hub" styles={sidebarBottomButtonStyles}>
       <PrimaryButton id={buttonId} onClick={toggle} data-cy="explore-in-hub">
-        Explore results in the Hub
+        Code snippet for search results
       </PrimaryButton>
 
       <SnippetCopyPanel

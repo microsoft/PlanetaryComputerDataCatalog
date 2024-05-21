@@ -49,18 +49,6 @@ nbsphinx_prolog = """
 .. raw:: html
 
     <div class="docs-launcher">
-        <a class="manual-ms-button manual-ms-primary"
-           href="https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/workspaces/{{ workspace }}/tree/PlanetaryComputerExamples/{{ docname }}&branch=main"
-           aria-label="Link will open in new tab" target="_blank" rel="noopener noreferrer"
-           title="This example can be launched in the Planetary Computer Hub"
-           target="_blank"
-           rel="noopener noreferrer"
-        >
-        <span class="flex-container">
-            <span>Launch in Hub</span>
-        </span>
-        </a>
-
         <a class="manual-ms-button manual-ms-secondary"
            href="https://github.com/microsoft/PlanetaryComputerExamples/blob/main/{{ docname }}"
            aria-label="Link will open in new tab" target="_blank" rel="noopener noreferrer"
@@ -69,7 +57,7 @@ nbsphinx_prolog = """
            rel="noopener noreferrer"
         >
         <span class="flex-container">
-            <span>Edit</span>
+            <span>View</span>
         </span>
         </a>
     </div>

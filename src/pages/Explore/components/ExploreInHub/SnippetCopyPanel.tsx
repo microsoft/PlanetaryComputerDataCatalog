@@ -4,7 +4,6 @@ import {
   DirectionalHint,
   FontWeights,
   FontSizes,
-  PrimaryButton,
   Stack,
   mergeStyleSets,
   getTheme,
@@ -15,7 +14,6 @@ import {
 import { useId } from "@fluentui/react-hooks";
 import { useCopyToClipboard } from "react-use";
 
-import { HUB_URL } from "utils/constants";
 import NewTabLink from "components/controls/NewTabLink";
 import { useCqlFormat } from "pages/Explore/utils/hooks/useStacFilter";
 import { createCqlPythonSnippet, createItemPythonSnippet } from "./pythonSnippet";
@@ -48,8 +46,8 @@ const SnippetCopyPanel = ({
     snippetType === "query" ? (
       <>
         <Text>
-          Use the code below to recreate this search in the Planetary Computer Hub or
-          other Python analytic environments. Read more about searching using the{" "}
+          Use the code below to recreate this search in any Python analytic
+          environments. Read more about searching using the{" "}
           <NewTabLink href="https://github.com/radiantearth/stac-api-spec/tree/master/fragments/filter#overview">
             STAC API
           </NewTabLink>
@@ -104,13 +102,6 @@ const SnippetCopyPanel = ({
             >
               Copy
             </DefaultButton>
-            <NewTabLink
-              As={PrimaryButton}
-              href={HUB_URL}
-              title="Open the Planetary Computer Hub"
-            >
-              Open Hub
-            </NewTabLink>
           </Stack>
         </StackItem>
         <StackItem>

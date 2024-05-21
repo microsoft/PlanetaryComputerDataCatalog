@@ -83,11 +83,6 @@ export const Home = () => {
             The Planetary Computer API makes it easy for users to find exactly the
             data they need, simplifying search and discovery across our Data Catalog.
           </Resource>
-          <Resource external title="Hub" iconName="TableComputed" href="/compute">
-            The Planetary Computer Hub is a development environment that makes our
-            data and APIs accessible through familiar, open-source tools, and allows
-            users to easily scale their analyses.
-          </Resource>
           <Resource
             title="Applications"
             iconName="WebAppBuilderFragmentCreate"
