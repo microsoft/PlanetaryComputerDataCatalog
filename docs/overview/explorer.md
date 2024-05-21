@@ -12,8 +12,7 @@ the datasets on the Planetary Computer are updated repeatedly over time, with
 data items overlapping geographically. Finding the right subset can be a time
 consuming process using programmatic tools, with a slow search-render-iterate
 feedback loop. The Explorer was designed to allow users to quickly find and
-visualize data, and easily recreate their searches in an analytic environment
-like our [Hub][pc-docs-hub].
+visualize data, and easily recreate their searches in an analytic environment.
 
 Additionally, it's a great tool for casual browsing to get more familiar with
 datasets, their spatiotemporal range, and to understand what types of
@@ -185,47 +184,29 @@ water extent of Lake Powell, UT.
 :class: no-scaled-link
 ```
 
-### Working with results in the Hub
+### Working with results with Python
 
 Finding and visualizing data items is likely only the first step in your data
 analysis workflow. The Explorer provides two options to move your search results
-into a compute environment like the [Planetary Computer Hub][pc-docs-hub]. By
-clicking "Explore results in the Hub" under the search results, you can generate
-a Python snippet to recreate your exact search covering the map
-viewport. This can be copied and launched into a new Hub notebook:
-
-```{image} images/explorer-hub.png
-:height: 500
-:name: Planetary Computer Explorer hub code
-:class: no-scaled-link
-```
+into a compute environment. By clicking "Code snippet for search results" under
+the search results, you can generate a Python snippet to recreate your exact
+search covering the map viewport.
 
 Or, if you're interested in working with a single item you've found, you can
 generate a Python snippet by clicking the "code" (`{ }`) button which will load
-that single item in the Hub:
+that single item.
 
-```{image} images/explorer-item-hub.png
-:height: 500
-:name: Planetary Computer Explorer hub item code
-:class: no-scaled-link
-```
-
-Since our data and APIs are accessible to anyone with or without a Hub account,
-these snippets can be run in other Python compute environments. Please refer to
+Since our data and APIs are accessible to anyone without an account,
+these snippets can be run in any compute environment. Please refer to
 our [data access documentation][pc-docs-sas] for more details.
 
 ## Coming soon
 
-We're constantly adding improvements to the Planetary Computer and the Explorer. Upcoming features include:
-
-- Visualization support for Zarr-backed datasets
-- Hub integration to build queries and visualize search results within a notebook
-- Layer comparison features
+We're constantly adding improvements to the Planetary Computer and the Explorer.
 
 Watch for future announcements, and [visit our GitHub Discussions](https://github.com/microsoft/PlanetaryComputer/discussions) for feedback or questions.
 
 [1]: https://planetarycomputer.microsoft.com/explore
-[pc-docs-hub]: https://planetarycomputer.microsoft.com/docs/overview/environment
 [pc-docs-api]: https://planetarycomputer.microsoft.com/docs/quickstarts/reading-stac/
 [pc-docs-sas]: https://planetarycomputer.microsoft.com/docs/concepts/sas/
 [pc-catalog]: https://planetarycomputer.microsoft.com/catalog

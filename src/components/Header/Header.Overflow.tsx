@@ -77,9 +77,6 @@ export const HeaderOverflow: React.FC = () => {
             <HeaderLink align="start" isNav to="/docs">
               Documentation
             </HeaderLink>
-            <HeaderLink align="start" isNav to="/account/request">
-              Request Access
-            </HeaderLink>
           </Stack>
         </Panel>
       </StackItem>

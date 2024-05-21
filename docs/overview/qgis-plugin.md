@@ -5,39 +5,12 @@ mapping, analysis, and visualization of spatial data. While much of the
 Planetary Computer is designed to support [cloud-native][cnative] workflows,
 it's easy to use our data in a traditional desktop clients, like QGIS, as well.
 
-## QGIS on the Hub
-
-Planetary Computer users can use a QGIS instance directly in the Hub. We offer
-an experimental Linux desktop image that is preloaded with QGIS and is located
-in the same data center that the Planetary Computer datasets and APIs are hosted
-in.  This proximity allows for the most efficient data access, but users can
-also use our QGIS tools and APIs in their own local or cloud-hosted
-QGIS environments.
-
-To launch a cloud QGIS session in your browser, go to the [Hub][hub], click the "QGIS
-(preview)" environment, and launch the instance.
-
-```{image} images/qgis-image-launch.png
-:height: 145
-:name: Planetary Computer qgis hub selection
-:class: no-scaled-link
-```
-
-It may take a few minutes for the instance to be ready, and will launch the QGIS
-application on startup. Like other Hub instances, the home directory (`/home/jovyan`) is persisted between sessions, so save important data within this directory.
-
-```{image} images/qgis-desktop.png
-:height: 500
-:name: Planetary Computer qgis hub
-:class: no-scaled-link
-```
-
 ## QGIS STAC API Plugin
 
 Since the Planetary Computer metadata API is built on the [STAC](https://stacspec.org/) standard, the easiest way
 to search for and add data to QGIS is by using the [STAC API Browser plugin][plugin-url]. Microsoft
 supported development of this plugin, with our partners [Kartoza][kartoza], to
-make accessing STAC APIs from QGIS easier. The Planetary Computer QGIS Hub image comes with this plugin pre-installed.
+make accessing STAC APIs from QGIS easier.
 
 For a general overview on plugin usage, the [official user guide][user-guide].
 
@@ -80,8 +53,7 @@ for your current zoom layer.
 **Note that assets added added as COG layers are signed using the SAS token
 mechanism, which expires by default after an hour.** You'll need to re-add the
 layer, though we're working on improvements to that workflow in the next version
-of the plugin. This option will perform well on the Hub instance of QGIS, but
-may be slower if you're working with a local QGIS instance.
+of the plugin. This option may be slower if you're working with a local QGIS instance.
 3. _Download the asset_. The plugin also allows you to download the asset directly, so you can
 work with the file itself. Be sure to set your download directory on the Settings tab to a path
 located within your home directory, so the data is preserved between launches.
@@ -94,7 +66,6 @@ located within your home directory, so the data is preserved between launches.
 
 [qgis-home]: https://qgis.org/en/site/about/index.html
 [cnative]: https://en.wikipedia.org/wiki/Cloud_native_computing
-[hub]: https://pccompute.westeurope.cloudapp.azure.com/compute/hub/
 [plugin-url]: https://stac-utils.github.io/qgis-stac-plugin/
 [kartoza]: https://kartoza.com/
 [user-guide]: https://stac-utils.github.io/qgis-stac-plugin/user-guide/

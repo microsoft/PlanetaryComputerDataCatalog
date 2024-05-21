@@ -74,7 +74,6 @@ describe("Explorer selector tests", () => {
     cy.getBySel("item-snippet-button").click();
     cy.contains("import planetary_computer");
     cy.contains("Copy");
-    cy.contains("Open Hub").focus().type("{esc}");
 
     // Typing escape has closed the dialog
     cy.contains("import planetary_computer").should("not.exist");

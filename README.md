@@ -69,7 +69,6 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 |`REACT_APP_TILER_ROOT`| Optional | The root URL for the data tiler API, if not hosted from the domain of the STAC API.
 |`REACT_APP_IMAGE_API_ROOT`| PC APIs pcfunc endpoint | The root URL for the image data API for animations.
 |`REACT_APP_AZMAPS_CLIENT_ID`| Retrieve from Azure Portal | The Client ID used to authenticate against Azure Maps.
-|`REACT_APP_HUB_URL`| Optional. URL to root Hub instance | Used to enable a request to launch the Hub with a specific git hosted file.
 |`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 |`REACT_APP_AUTH_URL`| Optional. URL to root pc-session-api instance | Used to enable login work.
 

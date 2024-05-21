@@ -47,28 +47,7 @@ The `sign` endpoint makes it easy to convert an unsigned blob URL to a signed UR
 
 The `href` field here contains the full, signed URL which may be used directly.
 
-### When an account is needed
-
-The STAC metatdata API is available to all users and does not require an account or a token to use. While all data assets require a token for accessing files on Azure Blob storage, some datasets also require an account key to be used when generating the token. This requirement is inidcated on the Data Catalog page of affected datasets. For these datasets, be sure to include your subscription key when requesting a token, as described below.
-
-### Supplying a subscription key
-
-When your Planetary Computer [account request](http://planetarycomputer.microsoft.com/account/request) was approved, a pair of subscription keys were automatically generated
-for you. You can view your keys by singing in to the [developer portal](https://planetarycomputer.developer.azure-api.net/).
-
-You can supply your subscription key in an HTTP request in two ways:
-
-* Supply it in an `Ocp-Apim-Subscription-Key` on request header, for example:
-
-```bash
-curl -H "Ocp-Apim-Subscription-Key: 123456789" https://planetarycomputer.microsoft.com/api/sas/v1/token/naip
-```
-
-* Supply it in a `subscription-key` query parameter, for example:
-
-```bash
-curl https://planetarycomputer.microsoft.com/api/sas/v1/token/naip?subscription-key=123456789
-```
+The STAC metatdata API is available to all users and does not require an account or a token to use. All data assets require a token for accessing files on Azure Blob storage.
 
 ### Rate limits and access restrictions
 
@@ -78,12 +57,9 @@ Rate limiting and token expiry are dependent on two aspects of each requests:
   * Whether or not the request is originating from within the same data center as the Planetary Computer service (West Europe)
   * Whether or not a valid API subscription key has been supplied on the request
 
-These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most un-throttled access, we recommend utilizing a Planetary Computer subscription key and doing your work in the West Europe Azure region.
+These two variables are used to determine the tier of rate limiting which is applied to requests, as well as the valid length of time for issued SAS tokens. For the most un-throttled access, we recommend doing your work in the West Europe Azure region.
 
-Most datasets in the Planetary Computer are anonymously accessible: you don't need to supply a subscription key to get a SAS token for downloading the data.
-Some datasets do require a subscription key, and some datasets are only available to certain approved users even if a subscription key is provided. This will be noted in
-the dataset detail page in the [data catalog](https://planetarycomputer.microsoft.com/catalog).
-
+Datasets in the Planetary Computer are anonymously accessible: you don't need to supply a subscription key to get a SAS token for downloading the data.
 
 ### `planetary-computer` Python package
 
@@ -130,4 +106,3 @@ planetarycomputer configure
 ```
 
 Or you can set the environment variable `PC_SDK_SUBSCRIPTION_KEY` to your API subscription key.
-Your subscription key is set automatically for you on the [Planetary Computer Hub](../overview/environment).

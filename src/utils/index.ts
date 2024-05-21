@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 
 import { IStacCollection, IStacItem } from "types/stac";
-import { DATA_URL, HUB_URL, QS_REQUEST_ENTITY, REQUEST_ENTITY } from "./constants";
+import { DATA_URL, QS_REQUEST_ENTITY, REQUEST_ENTITY } from "./constants";
 import * as qs from "query-string";
 import { IMosaic, IMosaicRenderOption } from "pages/Explore/types";
 import { DEFAULT_MIN_ZOOM } from "pages/Explore/utils/constants";
@@ -102,30 +102,6 @@ const configFromLauncher = (launcher: ILauncherConfig | string): ILauncherConfig
   }
   return config;
 };
-
-export function buildHubLaunchUrl(filePath: string): string;
-export function buildHubLaunchUrl(launchConfig: ILauncherConfig): string;
-export function buildHubLaunchUrl(launcher: ILauncherConfig | string): string {
-  const { repo, branch, filePath } = configFromLauncher(launcher);
-  const urlRepo = encodeURIComponent(repo);
-  const urlBranch = encodeURIComponent(branch);
-  const repoName = repo.split("/").pop();
-
-  // Get a unique but arbitrary string for the workspace path. This works
-  // around in issue where nbgitpuller workspace may conflict with JupyterHub.
-  // The workspace can't contain / so substitute a - for any.
-  const fileWorkspace = filePath
-    .substring(filePath.indexOf("/") + 1, filePath.lastIndexOf("."))
-    .replace(/\//g, "-");
-
-  const pathPrefix = filePath.endsWith(".ipynb")
-    ? `lab/workspaces/${fileWorkspace}/tree`
-    : "rstudio";
-
-  const urlPath = encodeURIComponent(`${pathPrefix}/${repoName}/${filePath}`);
-
-  return `${HUB_URL}/user-redirect/git-pull?repo=${urlRepo}&urlpath=${urlPath}&branch=${urlBranch}`;
-}
 
 export function buildGitHubUrl(launcher: ILauncherConfig): string;
 export function buildGitHubUrl(launcher: string): string;

@@ -5,7 +5,6 @@ import { initializeIcons } from "@uifabric/icons";
 import { initializeFeatures } from "utils/featureFlags";
 import { registerCustomIcons } from "utils/icons";
 import { usePrefetchContent } from "utils/requests";
-import AccountSurvey from "pages/AccountSurvey";
 import Applications from "pages/Applications";
 import Collection from "pages/Collection";
 import Catalog from "./pages/Catalog2";
@@ -48,7 +47,6 @@ function App() {
           <Route path="/dataset/group/:groupId" element={<CatalogGroup />} />
           <Route path="/dataset/storage/:id" element={<StorageCollectionDetail />} />
           <Route path="/dataset/:id" element={<Collection />} />
-          <Route path="/account/request" element={<AccountSurvey />} />
           <Route
             path="/explore"
             element={
