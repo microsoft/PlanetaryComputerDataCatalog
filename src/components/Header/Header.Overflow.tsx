@@ -68,9 +68,6 @@ export const HeaderOverflow: React.FC = () => {
             <HeaderLink align="start" isNav to="/catalog">
               Data Catalog
             </HeaderLink>
-            <HeaderLink align="start" external to="/compute">
-              Hub
-            </HeaderLink>
             <HeaderLink align="start" isNav to="/applications">
               Applications
             </HeaderLink>
