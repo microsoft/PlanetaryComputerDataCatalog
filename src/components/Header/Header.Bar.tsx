@@ -42,9 +42,6 @@ export const HeaderBar: React.FC = () => {
       <HeaderLink isNav to="/catalog">
         Data Catalog
       </HeaderLink>
-      <HeaderLink external to="/compute">
-        Hub
-      </HeaderLink>
       <HeaderLink isNav to="/applications">
         Applications
       </HeaderLink>
