@@ -9,6 +9,7 @@ import {
   Label,
   IStackStyles,
   ICalendarDayProps,
+  ICalendarMonthProps,
   ICalendarMonthStyles,
   ILabelStyles,
   MessageBar,
@@ -346,7 +347,7 @@ const calendarDayProps: Partial<ICalendarDayProps> = {
   },
 };
 
-const calendarMonthProps: Partial<ICalendarDayProps> = {
+const calendarMonthProps: Partial<ICalendarMonthProps> = {
   styles: monthStyles,
   navigationIcons: {
     leftNavigation: "ChevronLeft",
