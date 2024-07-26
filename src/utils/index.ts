@@ -151,6 +151,26 @@ export const a11yPostProcessDom = (dom: Document) => {
     el.setAttribute("tabindex", "0");
   });
 
+  // Function to handle keydown events with explicit type for event
+  function handleKeydown(event: Event) {
+    const keyboardEvent = event as KeyboardEvent;
+    if (keyboardEvent.key === "Enter" || keyboardEvent.key === "") {
+      keyboardEvent.preventDefault();
+      (keyboardEvent.target as HTMLElement).click();
+    }
+  }
+
+  // Set tabindex for output blocks
+  dom.querySelectorAll(".output_area").forEach(el => {
+    el.setAttribute("tabindex", "0");
+
+    // Set tabindex for all child elements within the output area
+    el.querySelectorAll("label").forEach(element => {
+      element.setAttribute("tabindex", "0");
+      element.addEventListener("keypress", handleKeydown);
+    });
+  });
+
   // <p> tags with role="heading" need an aria-level attribute
   dom
     .querySelectorAll("p[role=heading]")
