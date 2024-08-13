@@ -157,14 +157,6 @@ ooi-camhd:
   thumbnailUrl: RE4KiKZ.jpg
   keywords: [OOI, Video, Ocean, Pacific]
 
-sentinel-1-slc:
-  title: Sentinel-1 SLC
-  category: SAR
-  short_description: Global synthetic aperture radar data for the last 90 days
-  infoUrl: https://aka.ms/ai4edata-sentinel-1-slc
-  thumbnailUrl: sentinel-1-sat.jpg
-  keywords: [Global, Sentinel, Satellite, ESA, SAR]
-
 uk-met-20crds:
   title: UK Met Office CSSP China 20CRDS
   category: Climate/Weather
