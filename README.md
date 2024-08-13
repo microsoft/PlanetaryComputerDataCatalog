@@ -23,7 +23,6 @@ A homepage, data catalog, and visualizations for the Planetary Computer.
 ## Requirements
 
 - Docker
-- docker-compose
 
 ## Getting started
 

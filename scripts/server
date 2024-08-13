@@ -13,8 +13,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     elif [[ "${1:-}" == "--api" ]]; then
-        docker-compose up app api
+        docker compose up app api
     else
-        docker-compose up app
+        docker compose up app
     fi
 fi
