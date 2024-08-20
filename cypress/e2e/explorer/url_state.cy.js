@@ -101,7 +101,7 @@ describe("URL state is loaded to Explorer", () => {
         d: "sentinel-2-l2a",
         // Note: this search id must be registered in the backend
         // It can be replaced with any other search id that does exist
-        m: "cql:540763d2886e640eb1220ca949518ced",
+        m: "cql:ee3c35fe2906b21590b2153418b89570",
         r: "Color infrared",
       },
     });
