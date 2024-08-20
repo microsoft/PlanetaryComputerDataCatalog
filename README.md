@@ -130,7 +130,8 @@ to format all files. The CI system will check for formatting errors.
 ##### Cypress
 
 If you're on WSL2, be sure to set up your system to run the Cypress GUI:
-<https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/>
+<https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/>.
+On new-enough versions of WSL2, this step may be optional. Check [here](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps).
 
 You may also need to install cypress locally on your computer, with `npm install cypress`.
 
