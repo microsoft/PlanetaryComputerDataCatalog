@@ -14,16 +14,16 @@ Options:
 function run() {
 
     # Install JS dependencies on host
-    docker-compose \
+    docker compose \
         -f docker-compose.yml \
         run --rm --no-deps app \
         npm install
 
     # Ensure container images are current
-    docker-compose build
+    docker compose build
 
     # Run etl to build documentation and external notebook/md files
-    docker-compose run --rm --no-deps etl "${params[@]}"
+    docker compose run --rm --no-deps etl "${params[@]}"
 }
 
 params=()

@@ -97,7 +97,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
-    "cypress": "^10.1.0",
+    "cypress": "^10.11.0",
     "json-loader": "^0.5.7",
     "nock": "^13.2.7",
     "prettier": "^2.7.1",

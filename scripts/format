@@ -10,8 +10,8 @@ Run formatters on python and JS files
 
 function run() {
 
-    docker-compose run --rm --no-deps api black --check .
-    docker-compose run --rm --no-deps app npm run format-fix
+    docker compose run --rm --no-deps api black --check .
+    docker compose run --rm --no-deps app npm run format-fix
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

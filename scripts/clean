@@ -12,6 +12,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
-        docker-compose run --rm --entrypoint ./scripts/clean etl
+        docker compose run --rm --entrypoint ./scripts/clean etl
     fi
 fi

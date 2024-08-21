@@ -12,7 +12,6 @@ Read more about that build process in the [`docs README`](../docs/README.md).
 ## Dependencies
 
 - Docker
-- docker-compose
 
 ## Process notebook, markdown, and doc files
 
