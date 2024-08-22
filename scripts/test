@@ -12,15 +12,15 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     if [[ "${1:-}" == "--help" ]]; then
         usage
     else
-        docker-compose \
+        docker compose \
             run --rm --no-deps app \
             npm run lint
 
-        docker-compose \
+        docker compose \
             run --rm --no-deps app \
             npm run format
 
-        docker-compose \
+        docker compose \
             run --rm --no-deps \
             -e CI="${CI}" \
             app \
