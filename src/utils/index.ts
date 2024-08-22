@@ -151,7 +151,7 @@ export const a11yPostProcessDom = (dom: Document) => {
     el.setAttribute("tabindex", "0");
   });
 
-    // Begin: Keyboard navigation for xarray
+  // Begin: Keyboard navigation for xarray
   // The html display of xarray objects is not keyboard accessible. This
   // style does few things. It makes the input hidden checkbox elements
   // used to create the expand-collapse mecchanism render in DOM and focusable
