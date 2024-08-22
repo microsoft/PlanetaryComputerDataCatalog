@@ -163,12 +163,14 @@ export const a11yPostProcessDom = (dom: Document) => {
   .xr-section-item input {
     opacity: 0;
   }
-  `
+  `;
   // Add the style to the DOM
   var styleElement = document.createElement("style");
   styleElement.textContent = style;
-  dom.querySelector(".xr-wrap")?.insertBefore(styleElement, dom.querySelector(".xr-header"));
-  
+  dom.
+    querySelector(".xr-wrap")
+    ?.insertBefore(styleElement, dom.querySelector(".xr-header"));
+
   // Add role=checkbox to the xr-section-summary labels
   dom.querySelectorAll("label.xr-section-summary").forEach(el => {
     el.setAttribute("role", "checkbox");
@@ -179,10 +181,11 @@ export const a11yPostProcessDom = (dom: Document) => {
   });
   // The xr-sections grid layout will now have 8 columns (2 for hidden checkboxes)
   dom.querySelectorAll(".xr-sections").forEach(el => {
-    (el as HTMLElement).style.gridTemplateColumns = "150px auto auto 1fr 0 20px 0 20px";
+    (el as HTMLElement).style.gridTemplateColumns =
+      "150px auto auto 1fr 0 20px 0 20px";
   });
   // End: Keyboard navigation for xarray
-  
+
   // <p> tags with role="heading" need an aria-level attribute
   dom
     .querySelectorAll("p[role=heading]")
