@@ -151,6 +151,38 @@ export const a11yPostProcessDom = (dom: Document) => {
     el.setAttribute("tabindex", "0");
   });
 
+    // Begin: Keyboard navigation for xarray
+  // The html display of xarray objects is not keyboard accessible. This
+  // style does few things. It makes the input hidden checkbox elements
+  // used to create the expand-collapse mecchanism render in DOM and focusable
+  var style = `
+  .xr-section-item input:focus +label {
+    border: 2px solid var(--xr-font-color0);
+  }
+
+  .xr-section-item input {
+    opacity: 0;
+  }
+  `
+  // Add the style to the DOM
+  var styleElement = document.createElement("style");
+  styleElement.textContent = style;
+  dom.querySelector(".xr-wrap")?.insertBefore(styleElement, dom.querySelector(".xr-header"));
+  
+  // Add role=checkbox to the xr-section-summary labels
+  dom.querySelectorAll("label.xr-section-summary").forEach(el => {
+    el.setAttribute("role", "checkbox");
+  });
+  // Make the opaque checkbox focusable by changing the display style
+  dom.querySelectorAll(".xr-section-item input").forEach(el => {
+    (el as HTMLElement).style.display = "inline-block";
+  });
+  // The xr-sections grid layout will now have 8 columns (2 for hidden checkboxes)
+  dom.querySelectorAll(".xr-sections").forEach(el => {
+    (el as HTMLElement).style.gridTemplateColumns = "150px auto auto 1fr 0 20px 0 20px";
+  });
+  // End: Keyboard navigation for xarray
+  
   // <p> tags with role="heading" need an aria-level attribute
   dom
     .querySelectorAll("p[role=heading]")
