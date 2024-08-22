@@ -167,8 +167,8 @@ export const a11yPostProcessDom = (dom: Document) => {
   // Add the style to the DOM
   var styleElement = document.createElement("style");
   styleElement.textContent = style;
-  dom.
-    querySelector(".xr-wrap")
+  dom
+    .querySelector(".xr-wrap")
     ?.insertBefore(styleElement, dom.querySelector(".xr-header"));
 
   // Add role=checkbox to the xr-section-summary labels
