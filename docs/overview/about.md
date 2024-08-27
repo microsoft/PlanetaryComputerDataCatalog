@@ -12,7 +12,7 @@ The Planetary Computer consists of three major components:
 
 The Planetary Computer uses open source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open source community. For example, our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.
 
-Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.
+Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.  The various Planetary Computer GitHub repositories are listed below:
 
 | GitHub repository                                                                                     | Purpose                                                                                                                                                                                |
 |-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -20,6 +20,7 @@ Many of the Planetary Computer components are also open-source. These provide gu
 | [Microsoft/PlanetaryComputerExamples](https://github.com/microsoft/planetarycomputerexamples)         | Contains notebooks with examples for each dataset, quickstarts, and tutorials for using the Planetary Computer                                                                         |
 | [Microsoft/PlanetaryComputerDataCatalog](https://github.com/microsoft/PlanetaryComputerDataCatalog)         | Contains homepage, data catalog, docs, and visualizations for the Planetary Computer |
 | [Microsoft/PlanetaryComputer](https://github.com/microsoft/PlanetaryComputer)         | Hosts issues and discussions that users can use to provide feedback and get help in using the Planetary Computer |
+| [Microsoft/planetary-computer-sdk-for-python](https://github.com/microsoft/planetary-computer-sdk-for-python)         | A Python library for interacting with the Planetary Computer |
 
 ## About the Preview
 
