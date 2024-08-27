@@ -5,7 +5,7 @@ The Microsoft Planetary Computer is a platform that lets users leverage the powe
 The Planetary Computer consists of three major components:
 
 - The [Data Catalog](https://planetarycomputer.microsoft.com/catalog), which includes petabytes of data about Earth systems, hosted on Azure and made available to users for free.
-- [APIs](../concepts/stac.md) that allow users to search for the data they need across space and time.
+- [APIs](../reference/stac.md) that allow users to search for the data they need across space and time.
 - [Applications](https://planetarycomputer.microsoft.com/applications), built by our network of partners, that put the Planetary Computer platform to work for environmental sustainability.
 
 ## Built on Open
