@@ -19,6 +19,7 @@ Many of the Planetary Computer components are also open-source. These provide gu
 | [Microsoft/planetary-computer-apis](https://github.com/Microsoft/planetary-computer-apis)             | Deploys the [STAC](https://planetarycomputer.microsoft.com/docs/reference/stac/) and [data](https://planetarycomputer.microsoft.com/docs/reference/data/) APIs                         |
 | [Microsoft/PlanetaryComputerExamples](https://github.com/microsoft/planetarycomputerexamples)         | Contains notebooks with examples for each dataset, quickstarts, and tutorials for using the Planetary Computer                                                                         |
 | [Microsoft/PlanetaryComputerDataCatalog](https://github.com/microsoft/PlanetaryComputerDataCatalog)         | Contains homepage, data catalog, docs, and visualizations for the Planetary Computer |
+| [Microsoft/PlanetaryComputer](https://github.com/microsoft/PlanetaryComputer)         | Hosts issues and discussions that users can use to provide feedback and get help in using the Planetary Computer |
 
 ## About the Preview
 
