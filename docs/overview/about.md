@@ -27,8 +27,6 @@ The Planetary Computer data and APIs are publicly accessible and can be used wit
 - The [STAC API](../reference/stac) is public and can be accessed anonymously.
 - Most data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
 
-We're just getting started. Check back for updated documentation and new features!
-
 ```{tip} To report issues, ask questions, or engage in community discussions please visit our [GitHub repository](https://github.com/microsoft/PlanetaryComputer).
 ```
 
