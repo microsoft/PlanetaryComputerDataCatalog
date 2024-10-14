@@ -8,14 +8,16 @@ The Data Authentication API enables users to create access tokens that can be us
 
 A SAS token is needed whenever you want to access Planetary Computer data at an Azure Blob URL. For example, an Azure Blob URL looks like:
 
-<https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/141/045/LC08_L2SP_141045_20210329_20210402_02_T1/LC08_L2SP_141045_20210329_20210402_02_T1_SR_B1.TIF>
+```
+https://landsateuwest.blob.core.windows.net/landsat-c2/level-2/standard/oli-tirs/2021/141/045/LC08_L2SP_141045_20210329_20210402_02_T1/LC08_L2SP_141045_20210329_20210402_02_T1_SR_B1.TIF
+```
 
 ### Requesting a token
 
+The `token` endpoint allows for the generation of a SAS token for a given dataset identified by it's STAC collection ID. If you know the Azure Blob storage account and container where the data is located, you can also use the endpoint that takes that information in its path:
+
 > [https://planetarycomputer.microsoft.com/api/sas/v1/token/{collection_id}](../reference/sas.md)
 > [https://planetarycomputer.microsoft.com/api/sas/v1/token/{storage_account}/{container}](../reference/sas.md)
-
-The `token` endpoint allows for the generation of a SAS token for a given dataset identified by it's STAC collection ID. If you know the Azure Blob storage account and container where the data is located, you can also use the endpoint that takes that information in its path.
 
 The token generated with these endpoints can then be used for all requests for that same dataset. For example, to obtain a SAS token for the `naip` dataset, a request can be made to: <https://planetarycomputer.microsoft.com/api/sas/v1/token/naip>. If you click on that link, you should see something like:
 

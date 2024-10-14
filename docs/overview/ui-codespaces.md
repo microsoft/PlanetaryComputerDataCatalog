@@ -2,7 +2,7 @@
 
 [GitHub Codespaces][codespaces] is a development environment that's hosted in the cloud.
 
-The easiest way to get started is to [fork] the [Planetary Computer Examples][examples] repository and create a new Codespace (we recommend [setting a default region](#setting-a-default-region) first).
+The easiest way to get started is to [fork] the [Planetary Computer Examples][examples] repository and create a new Codespace (we recommend [setting a default region](#set-a-default-region) first).
 
 ![Start codespaces from the "Code" dropdown.](images/codespaces-start.png)
 
@@ -10,11 +10,11 @@ This will create a Codespace under your GitHub account that's configured to work
 
 ![A preview of GitHub Codespaces in the browser.](images/codespaces-browser.png)
 
-When you launch a notebook you'll be prompted to select a kernel. Choose the `'notebook': conda` kernel.
+When you launch a notebook, you'll be prompted to select a kernel. Choose the `'notebook': conda` kernel.
 
 ## Set a default region
 
-We recommend that you create your Codespaces in the West Europe. You can do this per-Codespace, or set a [default region][region].
+We recommend that you create your Codespaces in the West Europe region. You can do this per-Codespace, or set a [default region][region].
 
 ![Set the default region](images/codespaces-region.png)
 

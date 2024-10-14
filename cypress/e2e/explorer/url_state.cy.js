@@ -88,9 +88,7 @@ describe("URL state is loaded to Explorer", () => {
     cy.get("[title='Show oldest results first']").should("have.class", "is-checked");
   });
 
-  // There is a problem with /mosaic/<searchid>/info path, likely caused by update
-  // of titiler. https://github.com/microsoft/PlanetaryComputerDataCatalog/issues/476
-  it.skip("can specify a custom searchid", () => {
+  it("can specify a custom searchid", () => {
     cy.intercept("/api/stac/v1/collections/sentinel-2-l2a").as("getS2");
     cy.intercept("/api/data/v1/mosaic/info?collection=sentinel-2-l2a").as(
       "getS2mosaic"
