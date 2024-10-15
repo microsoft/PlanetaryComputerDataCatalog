@@ -35,6 +35,18 @@ export const logoImageStyle = mergeStyles({
   lineHeight: "1",
 });
 
+export const skipContentStyle = mergeStyles({
+  left: "50%",
+  position: "absolute",
+  transform: "translateY(-250%)",
+    padding: "8px",
+  transition: "transform 0.3s",
+
+  "&:focus": {
+    transform: "translateY(0%)",
+  },
+});
+
 export const headerPipeStyle = mergeStyles({
   marginTop: "0px !important",
   marginLeft: "7px !important",

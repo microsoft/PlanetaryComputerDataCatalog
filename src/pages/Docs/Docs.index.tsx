@@ -9,6 +9,7 @@ import DocsHtmlContent from "./components/DocsHtmlContent";
 import Topic from "./components/Topic";
 import { DATA_URL, SAS_URL, STAC_URL } from "../../utils/constants";
 import ScrollToTop from "../../components/ScrollToTop";
+import { skipContentStyle } from "components/Header/styles";
 
 const OpenApiSpec = React.lazy(() => import("./components/OpenApiSpec"));
 
@@ -59,6 +60,12 @@ const Docs = () => {
 
   const documentationPane = (
     <div className="grid-content" style={docPageStyle}>
+      <Link className={skipContentStyle} onClick={() => {
+        const urlWithoutHash = window.location.href.split('#')[0];
+        window.location.href = urlWithoutHash + "#generated-docs-content"
+      }} >
+        Skip to content
+      </Link>
       {tocComponent}
       <div style={docContentStyle}>
         {breadcrumb}
