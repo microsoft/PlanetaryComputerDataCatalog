@@ -39,7 +39,7 @@ export const skipContentStyle = mergeStyles({
   left: "50%",
   position: "absolute",
   transform: "translateY(-250%)",
-    padding: "8px",
+  padding: "8px",
   transition: "transform 0.3s",
 
   "&:focus": {

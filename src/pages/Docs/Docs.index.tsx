@@ -60,10 +60,13 @@ const Docs = () => {
 
   const documentationPane = (
     <div className="grid-content" style={docPageStyle}>
-      <Link className={skipContentStyle} onClick={() => {
-        const urlWithoutHash = window.location.href.split('#')[0];
-        window.location.href = urlWithoutHash + "#generated-docs-content"
-      }} >
+      <Link
+        className={skipContentStyle}
+        onClick={() => {
+          const urlWithoutHash = window.location.href.split("#")[0];
+          window.location.href = urlWithoutHash + "#generated-docs-content";
+        }}
+      >
         Skip to content
       </Link>
       {tocComponent}
