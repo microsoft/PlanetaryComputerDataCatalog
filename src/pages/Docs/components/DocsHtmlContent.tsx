@@ -9,12 +9,14 @@ import { a11yPostProcessDom } from "../../../utils";
 interface DocsHtmlContentProps {
   className: string;
   markupJson: any;
+  idText?: string;
 }
 
 const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
   className,
   markupJson,
   children,
+  idText,
 }) => {
   const navigate = useNavigate();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -114,7 +116,7 @@ const DocsHtmlContent: React.FC<DocsHtmlContentProps> = ({
     : DOMPurify.sanitize(bodyWithRoutedLinks);
 
   const content = processedMarkup ? (
-    <div className={className}>
+    <div className={className} id={idText}>
       {children}
       <div
         ref={contentRef}

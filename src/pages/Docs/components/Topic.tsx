@@ -27,6 +27,7 @@ const Topic: React.FC<TopicProps> = ({ topics }) => {
       <>
         <div style={bodyStyle}>
           <DocsHtmlContent
+            idText="generated-docs-content"
             className="generated-docs markdown-source"
             markupJson={doc}
           />
