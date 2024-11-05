@@ -37,7 +37,7 @@ In the catalog popup, you can view datasets by category and filter results again
 ```
 
 Datasets can also be opened in the Explorer directly from their
-[catalog][pc-catalog] page. These buttons will launch the Explorer at a
+[catalog][pc-catalog] page. The "Launch in Explorer" button will launch the Explorer at a
 location that has data availability and an interesting visualization.
 
 ```{image} images/explorer-launch.jpg
@@ -49,12 +49,10 @@ location that has data availability and an interesting visualization.
 After selecting a dataset, a pre-configured query and appropriate rendering
 options are automatically selected to get you started. Many datasets have
 several options for both, while others are best represented by a single query
-and rendering option. Customizing both of these presets is on our roadmap.
-While using the Explorer, the URL in your web browser will contain the relevant
+and rendering option. While using the Explorer, the URL in your web browser will contain the relevant
 selections, and can be bookmarked or shared.
 
-Currently, only datasets with GeoTiff data assets are available in the Explorer,
-but support for additional formats is planned.
+Currently, only datasets with GeoTIFF data assets are available in the Explorer.
 
 ## Viewing results
 
@@ -81,7 +79,7 @@ list, you will return to your original viewport and search results.
 ```
 
 Depending on how restrictive your query is, or the general availability of
-a dataset in a certain area, they may be "gaps" in the map layer. Since this is
+a dataset in a certain area, there may be "gaps" in the map layer. Since this is
 a mosaicked view, that is expected. Similarly, for imagery datasets, the images
 stitched together may be from different days, under different weather
 conditions, and won't necessarily be a seamless mosaic.
@@ -98,8 +96,8 @@ to direct you to the valid extent.
 
 ### Custom filters
 
-Each dataset is preconfigured with a set of filters that can be used to find
-representative items in a dataset quickly. The Explorer also has an Advanced mode
+Each dataset is preconfigured with a set of filters that can be used to quickly find
+representative items in a dataset. The Explorer also has an Advanced mode
 that allows you to customize the filters for your query. To activate Advanced mode, simply select the dataset you're interested in and click the "Advanced" link.
 
 ```{image} images/explorer-advanced.jpg
@@ -110,7 +108,7 @@ that allows you to customize the filters for your query. To activate Advanced mo
 
 The custom filter will start with a date-range filter by default, but you can
 click the "Select filters" link to select any number of attributes on the
-dataset to use in a custom filter. Selected attributes will be displayed in a
+dataset to use within your custom filter. Selected attributes will be displayed in a
 custom control relevant to its data type to help ensure that your filter is
 valid and will return results.
 
@@ -128,7 +126,7 @@ variable, each rendering option will be a single asset with an appropriate color
 map applied. For example, [Harmonized Global Biomass][hgb] has four assets, each
 representing a different measure of stored carbon. Imagery datasets on the other
 hand, list various rendering options that combine bands into well known RGB
-interpretations or expressions, like false color or NDVI. To see a description of the
+interpretations or expressions, like false color or Normalized Difference Vegetation Index (NDVI). To see a description of the
 selected rendering option, click the info button next to the search results.
 
 ```{image} images/explorer-queryinfo.png
@@ -184,15 +182,13 @@ water extent of Lake Powell, UT.
 :class: no-scaled-link
 ```
 
-### Working with results with Python
+### Working with results in Python
 
 Finding and visualizing data items is likely only the first step in your data
 analysis workflow. The Explorer provides two options to move your search results
 into a compute environment. By clicking "Code snippet for search results" under
 the search results, you can generate a Python snippet to recreate your exact
-search covering the map viewport.
-
-Or, if you're interested in working with a single item you've found, you can
+search covering the map viewport.  Or, if you're interested in working with a single item you've found, you can
 generate a Python snippet by clicking the "code" (`{ }`) button which will load
 that single item.
 
@@ -200,11 +196,9 @@ Since our data and APIs are accessible to anyone without an account,
 these snippets can be run in any compute environment. Please refer to
 our [data access documentation][pc-docs-sas] for more details.
 
-## Coming soon
+## Feedback
 
-We're constantly adding improvements to the Planetary Computer and the Explorer.
-
-Watch for future announcements, and [visit our GitHub Discussions](https://github.com/microsoft/PlanetaryComputer/discussions) for feedback or questions.
+[Visit our GitHub Discussions](https://github.com/microsoft/PlanetaryComputer/discussions) for feedback or questions.
 
 [1]: https://planetarycomputer.microsoft.com/explore
 [pc-docs-api]: https://planetarycomputer.microsoft.com/docs/quickstarts/reading-stac/

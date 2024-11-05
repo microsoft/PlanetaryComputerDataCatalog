@@ -65,9 +65,9 @@ First, copy `.env.sample` file to `.env`, and ensure the configuration values ar
 
 | Name | Value | Description |
 |------|-------|-------------|
-|`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the STAC API, either prod, staging or a local instance. If the URL ends in 'stac', this is a special case that is handled by replacing 'stac' with the target service, e.g. 'data' or 'sas'
+|`REACT_APP_API_ROOT`| <https://planetarycomputer-staging.microsoft.com> | The root URL for the STAC API, either prod, staging or a local instance using <http://localhost:8080/stac>. If the URL ends in 'stac', this is a special case that is handled by replacing 'stac' with the target service, e.g. 'data' or 'sas'
 |`REACT_APP_TILER_ROOT`| Optional | The root URL for the data tiler API, if not hosted from the domain of the STAC API.
-|`REACT_APP_IMAGE_API_ROOT`| PC APIs pcfunc endpoint | The root URL for the image data API for animations.
+|`REACT_APP_IMAGE_API_ROOT`| PC APIs pcfunc endpoint | The root URL for the image data API for animations.  For a local instance use <http://localhost:8080/f>.
 |`REACT_APP_AZMAPS_CLIENT_ID`| Retrieve from Azure Portal | The Client ID used to authenticate against Azure Maps.
 |`REACT_APP_ONEDS_TENANT_KEY`| Lookup at <https://1dswhitelisting.azurewebsites.net/> | Telemetry key (not needed for dev)
 |`REACT_APP_AUTH_URL`| Optional. URL to root pc-session-api instance | Used to enable login work.
@@ -94,7 +94,7 @@ Note, you may need to assign this role via an identity that has JIT admin privil
 #### Developing against local STAC assets
 
 The `REACT_APP_API_ROOT` can be set to a local instance of the Metadata API if you are
-prototyping changes to collections. However, as a shortcut, you can also run the
+prototyping changes to collections, e.g., <http://localhost:8080/stac>. However, as a shortcut, you can also run the
 `./scripts/mockstac` script in order to locally serve a static json file from
 `/mockstac/collections`. Simply alter the contents of the JSON file as you need,
 and set your `REACT_APP_API_ROOT` value to `http://localhost:8866` and restart
@@ -133,13 +133,15 @@ to format all files. The CI system will check for formatting errors.
 If you're on WSL2, be sure to set up your system to run the Cypress GUI:
 <https://wilcovanes.ch/articles/setting-up-the-cypress-gui-in-wsl2-ubuntu-for-windows-10/>
 
-You may also need to install cypress locally on your computer, with `npm install cypress`.
+You may also need to install cypress locally on your computer, with `npm install cypress` and `./node_modules/.bin/cypress install`.
 
 - Install Google Chrome in your WSL2 environment (Cypress ships with a chromium-based electron browser)
-- Run `npm cypress:open` to run the GUI and debug tests, or
-- Run `npm cypress:run` to run the headless version in the terminal
+- Run `npm run cypress:open` to run the GUI and debug tests, or
+- Run `npm run cypress:run` to run the headless version in the terminal
 
 Both test suites are run from CI.
+
+Note- the cypress tests currently involve the sentinel-2-l2a collection, but running the backend locally only comes out of the box with naip, so the tests will fail.
 
 ## Ports
 

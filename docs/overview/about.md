@@ -2,22 +2,25 @@
 
 The Microsoft Planetary Computer is a platform that lets users leverage the power of the cloud to accelerate environmental sustainability and Earth science.
 
-The Planetary Computer consists of four major components:
+The Planetary Computer consists of three major components:
 
 - The [Data Catalog](https://planetarycomputer.microsoft.com/catalog), which includes petabytes of data about Earth systems, hosted on Azure and made available to users for free.
-- [APIs](../concepts/stac.md) that allow users to search for the data they need across space and time.
+- [APIs](../reference/stac.md) that allow users to search for the data they need across space and time.
 - [Applications](https://planetarycomputer.microsoft.com/applications), built by our network of partners, that put the Planetary Computer platform to work for environmental sustainability.
 
 ## Built on Open
 
 The Planetary Computer uses open source tools and supports open standards. In fact, the foundation of the Planetary Computer is the incredible ecosystem of tools being developed in the open by our partners and the much broader open source community. For example, our API builds on the work done by the [STAC](https://stacspec.org/) community to streamline and standardize the cataloging and discovery of geospatial data.
 
-Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.
+Many of the Planetary Computer components are also open-source. These provide guidance on how to tie together open-source libraries on Azure for geospatial and environmental data analysis.  The various Planetary Computer GitHub repositories are listed below:
 
 | GitHub repository                                                                                     | Purpose                                                                                                                                                                                |
 |-------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Microsoft/planetary-computer-apis](https://github.com/Microsoft/planetary-computer-apis)             | Deploys the [STAC](https://planetarycomputer.microsoft.com/docs/reference/stac/) and [data](https://planetarycomputer.microsoft.com/docs/reference/data/) APIs                         |
 | [Microsoft/PlanetaryComputerExamples](https://github.com/microsoft/planetarycomputerexamples)         | Contains notebooks with examples for each dataset, quickstarts, and tutorials for using the Planetary Computer                                                                         |
+| [Microsoft/PlanetaryComputerDataCatalog](https://github.com/microsoft/PlanetaryComputerDataCatalog)         | Contains homepage, data catalog, docs, and visualizations for the Planetary Computer |
+| [Microsoft/PlanetaryComputer](https://github.com/microsoft/PlanetaryComputer)         | Hosts issues and discussions that users can use to provide feedback and get help in using the Planetary Computer |
+| [Microsoft/planetary-computer-sdk-for-python](https://github.com/microsoft/planetary-computer-sdk-for-python)         | A Python library for interacting with the Planetary Computer |
 
 ## About the Preview
 
@@ -25,8 +28,6 @@ The Planetary Computer data and APIs are publicly accessible and can be used wit
 
 - The [STAC API](../reference/stac) is public and can be accessed anonymously.
 - Most data can be downloaded anonymously, but will be throttled. See [Reading data from the STAC API](../quickstarts/reading-stac.ipynb) for an introduction and [Using Tokens for Data Access](../concepts/sas) for more background on accessing data.
-
-We're just getting started. Check back for updated documentation and new features!
 
 ```{tip} To report issues, ask questions, or engage in community discussions please visit our [GitHub repository](https://github.com/microsoft/PlanetaryComputer).
 ```
@@ -47,7 +48,7 @@ The Planetary Computer is just one component of Microsoft's commitment to enviro
 
 - Learn more about Microsoft's [environmental sustainability program](https://www.microsoft.com/en-us/corporate-responsibility/sustainability).
 - Learn more about the work done by AI for Earth grantees at the [AI for Earth grantee gallery](https://aka.ms/ai4egrantees).
-- Microsoft's [AI for Earth program](https://aka.ms/aiforearth) also provides open source technical resources for conservation work; check out our [machine learning APIs](https://aka.ms/ai4eapis), and read about our tools for [accelerating biodiversity surveys with AI](https://aka.ms/biodiversitysurveys) and [AI-accelerated land cover analysis](https://aka.ms/landcovermapping).
+- Read about our tools for [accelerating biodiversity surveys with AI](https://aka.ms/biodiversitysurveys) and [AI-accelerated land cover analysis](https://aka.ms/landcovermapping).
 
 ## Cite the Planetary Computer
 
