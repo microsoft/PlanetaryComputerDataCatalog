@@ -6,7 +6,9 @@ import {
   logoLinkStyle,
   productNameStyle,
 } from "./styles";
-import { Stack, Text } from "@fluentui/react";
+import { Link, Stack, Text } from "@fluentui/react";
+import { skipContentStyle } from "components/Header/styles";
+
 
 export const HeaderBar: React.FC = () => {
   return (
@@ -17,6 +19,15 @@ export const HeaderBar: React.FC = () => {
       verticalAlign="center"
       tokens={headerTokens}
     >
+      <Link
+        className={skipContentStyle}
+        onClick={() => {
+          const urlWithoutHash = window.location.href.split("#")[0];
+          window.location.href = urlWithoutHash + "#generated-docs-content";
+        }}
+      >
+        Skip to content
+      </Link>
       <a
         className={logoLinkStyle}
         href="https://www.microsoft.com"
