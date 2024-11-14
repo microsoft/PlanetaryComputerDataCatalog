@@ -9,7 +9,6 @@ import {
 import { Link, Stack, Text } from "@fluentui/react";
 import { skipContentStyle } from "components/Header/styles";
 
-
 export const HeaderBar: React.FC = () => {
   return (
     <Stack
