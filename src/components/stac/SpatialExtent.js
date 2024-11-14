@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
 import LabeledValue from "../controls/LabeledValue";
+import { AZMAPS_CLIENT_ID } from "utils/constants";
+import { fetchMapToken } from "pages/Explore/components/Map/helpers";
 
 const SpatialExtent = ({ extent }) => {
   const mapRef = useRef();
@@ -85,8 +87,9 @@ const SpatialExtent = ({ extent }) => {
         style: "grayscale_light",
         renderWorldCopies: true, // This setting may need adjustment for showing whole-world bounds
         authOptions: {
-          authType: "subscriptionKey",
-          subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
+          authType: atlas.AuthenticationType.anonymous,
+          clientId: AZMAPS_CLIENT_ID,
+          getToken: fetchMapToken,
         },
       });
 

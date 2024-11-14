@@ -1,12 +1,12 @@
 {
   "name": "pc-datacatalog",
-  "version": "2023.2.0",
+  "version": "2024.1.3",
   "private": true,
   "proxy": "http://api:7071/",
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
     "@craco/craco": "7.0.0-alpha.3",
-    "@fluentui/react": "^8.106.1",
+    "@fluentui/react": "^8.115.6",
     "@radiantearth/stac-fields": "1.0.0-beta.7",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -29,7 +29,7 @@
     "@types/react-router-hash-link": "^2.4.5",
     "@types/swagger-ui-react": "^4.11.0",
     "@uifabric/icons": "^7.7.2",
-    "axios": "^0.27.2",
+    "axios": "^0.28.0",
     "azure-maps-control": "^2.2.0",
     "azure-maps-drawing-tools": "^1.0.0",
     "buffer": "^6.0.3",
