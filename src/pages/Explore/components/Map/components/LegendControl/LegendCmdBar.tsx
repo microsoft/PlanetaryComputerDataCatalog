@@ -59,6 +59,7 @@ const LegendCmdBar = ({
       {btnVisible}
       {btnOpacity}
       <IconButton
+        role="menuitem"
         aria-label={expand.title}
         title={expand.title}
         disabled={isExpandDisabled}

@@ -5,7 +5,11 @@ const DefaultBanner = ({ children }) => {
     <div className="banner-item">{child}</div>
   ));
 
-  const banner = <div className="header-banner grid-content">{wrapped}</div>;
+  const banner = (
+    <div className="header-banner grid-content" id="generated-docs-content">
+      {wrapped}
+    </div>
+  );
 
   return banner;
 };
