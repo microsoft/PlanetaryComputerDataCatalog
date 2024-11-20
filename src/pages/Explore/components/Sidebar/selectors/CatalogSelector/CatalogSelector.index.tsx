@@ -128,7 +128,7 @@ export const CatalogSelector = () => {
   return (
     <>
       <DefaultButton
-        ariaLabel="Select a dataset to visualize"
+        ariaLabel={buttonText}
         title="Select a dataset to visualize"
         text={buttonText}
         onRenderText={renderText("GlobeLocation", buttonText)}
