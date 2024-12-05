@@ -183,7 +183,7 @@ Use [CalVer](https://calver.org/) versioning.
 If the latest release is `2024.2.3` then the next release will be `2024.2.4` if it's still february, otherwise `2024.3.1` or whatever month/year it happens to be when you are runnign releases.
 
 ```bash
-git tag | sort -r | head -n 3
+git tag | sort
 ```
 
 - Start a release
