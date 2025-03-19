@@ -668,7 +668,7 @@ hls2:
     [HLS Overview](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/harmonized-landsat-sentinel-2-hls-overview/).
   assets:
     headerImg:
-      href: ./images/hls2-hero.jpg
+      href: ./images/hls2-hero.webp
     thumbnail:
       href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hls2.webp
   keywords:
