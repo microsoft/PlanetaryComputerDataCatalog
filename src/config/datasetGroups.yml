@@ -668,9 +668,9 @@ hls2:
     [HLS Overview](https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/harmonized-landsat-sentinel-2-hls-overview/).
   assets:
     headerImg:
-      href: ./images/sentinel-hero.jpg
+      href: ./images/hls2-hero.jpg
     thumbnail:
-      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/landsat.png
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/hls2.webp
   keywords:
     ["Sentinel", "Landsat", "HLS", "Satellite", "Global", "Imagery"]
   groupOnCatalog: false
