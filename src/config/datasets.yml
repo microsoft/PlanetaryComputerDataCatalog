@@ -467,7 +467,6 @@ hgb:
 
 hls2-s30:
   category: Imagery
-  headerImg: ./images/hls2-s30-hero.webp
   tabs:
     - title: Example Notebook
       src: hls2-example.html
@@ -475,7 +474,6 @@ hls2-s30:
 
 hls2-l30:
   category: Imagery
-  headerImg: ./images/hls2-l30-hero.webp
   tabs:
     - title: Example Notebook
       src: hls2-example.html
