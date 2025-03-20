@@ -465,6 +465,20 @@ hgb:
       src: hgb-example.html
       launch: datasets/hgb/hgb-example.ipynb
 
+hls2-s30:
+  category: Imagery
+  tabs:
+    - title: Example Notebook
+      src: hls2-example.html
+      launch: datasets/hls2/hls2-example.ipynb
+
+hls2-l30:
+  category: Imagery
+  tabs:
+    - title: Example Notebook
+      src: hls2-example.html
+      launch: datasets/hls2/hls2-example.ipynb
+
 hrea:
   category: Infrastructure
   headerImg: ./images/hrea-hero.png
