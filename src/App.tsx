@@ -19,7 +19,10 @@ const Explore = React.lazy(() => import("pages/Explore"));
 const Docs = React.lazy(() => import("pages/Docs/Docs.index"));
 
 function App() {
-  initializeIcons(undefined, { disableWarnings: true });
+  initializeIcons(
+    "https://res.cdn.office.net/files/fabric-cdn-prod_20240129.001/assets/icons/",
+    { disableWarnings: true }
+  );
   registerCustomIcons();
   initializeFeatures();
   usePrefetchContent();

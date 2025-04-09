@@ -177,6 +177,15 @@ Opening a PR against either branch will also create an ephemeral staging environ
 
 The release process can be managed with git flow, initialized with the default settings. To bring forth a production release, pull local `develop` and `main` to latest, and follow these steps:
 
+- Identify the latest release
+
+Use [CalVer](https://calver.org/) versioning.
+If the latest release is `2024.2.3` then the next release will be `2024.2.4` if it's still february, otherwise `2024.3.1` or whatever month/year it happens to be when you are runnign releases.
+
+```bash
+git tag | sort
+```
+
 - Start a release
 
 ```bash
