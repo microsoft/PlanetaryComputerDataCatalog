@@ -2,6 +2,7 @@ import { headerStyle } from "./styles";
 import { gridContentStyle, offGridContentStyle } from "styles";
 import { HeaderBar } from "./Header.Bar";
 import { HeaderOverflow } from "./Header.Overflow";
+import { PlanetaryComputerProAnnouncement } from "./components/PlanetaryComputerProAnnouncement";
 
 const Header = ({ onGrid = true }) => {
   const navClass = onGrid ? gridContentStyle : offGridContentStyle;
@@ -12,6 +13,7 @@ const Header = ({ onGrid = true }) => {
         <HeaderBar />
         <HeaderOverflow />
       </nav>
+      <PlanetaryComputerProAnnouncement />
     </header>
   );
 };
