@@ -35,9 +35,7 @@ export const Home = () => {
             },
           }}
         >
-
           A Planetary Computer for a Sustainable Future
-
         </Text>
         <Text
           // block
@@ -51,11 +49,10 @@ export const Home = () => {
             },
           }}
         >
-          Announcing Microsoft Planetary Computer Pro - Bring the power of the Planetary Computer to your private geospatial data.
+          Announcing Microsoft Planetary Computer Pro - Bring the power of the
+          Planetary Computer to your private geospatial data.
           <br />
-          <Link
-            href="https://aka.ms/planetarycomputerpro"
-            target="_blank" underline>
+          <Link href="https://aka.ms/planetarycomputerpro" target="_blank" underline>
             Click here to learn more
           </Link>
         </Text>

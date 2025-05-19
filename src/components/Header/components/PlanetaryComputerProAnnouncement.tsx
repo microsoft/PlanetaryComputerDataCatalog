@@ -19,18 +19,19 @@ export function PlanetaryComputerProAnnouncement() {
   if (isDismissed) {
     return null;
   }
-  return <MessageBar
-    messageBarType={MessageBarType.success}
-    isMultiline={true}
-    dismissButtonAriaLabel="Close"
-    onDismiss={onDismiss}
-    className={messageBarStyle}
-  >
-    Announcing Microsoft Planetary Computer Pro - Bring the power of the Planetary Computer to your private geospatial data.
-    <Link
-      href="https://aka.ms/planetarycomputerpro"
-      target="_blank" underline>
-      Click here to learn more
-    </Link>
-  </MessageBar>;
+  return (
+    <MessageBar
+      messageBarType={MessageBarType.success}
+      isMultiline={true}
+      dismissButtonAriaLabel="Close"
+      onDismiss={onDismiss}
+      className={messageBarStyle}
+    >
+      Announcing Microsoft Planetary Computer Pro - Bring the power of the Planetary
+      Computer to your private geospatial data.
+      <Link href="https://aka.ms/planetarycomputerpro" target="_blank" underline>
+        Click here to learn more
+      </Link>
+    </MessageBar>
+  );
 }
