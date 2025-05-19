@@ -1,4 +1,4 @@
-import { Link, Text } from "@fluentui/react";
+import { Text } from "@fluentui/react";
 
 import Layout from "components/Layout";
 import SEO from "components/Seo";
@@ -36,25 +36,6 @@ export const Home = () => {
           }}
         >
           A Planetary Computer for a Sustainable Future
-        </Text>
-        <Text
-          // block
-          variant="large"
-          styles={{
-            root: {
-              color: "#fff",
-              maxWidth: 580,
-              marginBottom: 40,
-              fontWeight: 100,
-            },
-          }}
-        >
-          Announcing Microsoft Planetary Computer Pro - Bring the power of the
-          Planetary Computer to your private geospatial data.
-          <br />
-          <Link href="https://aka.ms/planetarycomputerpro" target="_blank" underline>
-            Click here to learn more
-          </Link>
         </Text>
       </div>
     </div>
