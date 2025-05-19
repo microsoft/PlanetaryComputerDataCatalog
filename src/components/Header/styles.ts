@@ -74,3 +74,7 @@ export const breakStyle = mergeStyles({
 export const rightAligned = mergeStyles({
   marginLeft: "auto !important",
 });
+
+export const messageBarStyle = mergeStyles({
+  margin: "10px 0",
+});
