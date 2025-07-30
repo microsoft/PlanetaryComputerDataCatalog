@@ -17,6 +17,7 @@ services:
       - REACT_APP_AZMAPS_CLIENT_ID
       - REACT_APP_ONEDS_TENANT_KEY
       - REACT_APP_HUB_URL
+      - REACT_APP_AZMAPS_KEY
     volumes:
       - .:/usr/src
       - ~/.npm:/root/.npm

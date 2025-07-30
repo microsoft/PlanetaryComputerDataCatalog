@@ -25,6 +25,7 @@ jobs:
       REACT_APP_AZMAPS_CLIENT_ID: ${{ secrets.AZMAPS_CLIENT_ID }}
       REACT_APP_ONEDS_TENANT_KEY: ${{ secrets.ONEDS_TENANT_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
+      REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
     steps:
       - uses: actions/checkout@v3
         with:
