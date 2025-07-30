@@ -59,9 +59,8 @@ const ExploreMap = () => {
         style: DEFAULT_MAP_STYLE,
         renderWorldCopies: true,
         authOptions: {
-          authType: atlas.AuthenticationType.anonymous,
-          clientId: AZMAPS_CLIENT_ID,
-          getToken: fetchMapToken,
+          authType: atlas.AuthenticationType.subscriptionKey,
+          subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
         },
         transformRequest: addEntityHeader,
       });
