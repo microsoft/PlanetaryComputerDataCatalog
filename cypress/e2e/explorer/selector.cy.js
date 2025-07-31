@@ -75,6 +75,8 @@ describe("Explorer selector tests", () => {
     cy.contains("import planetary_computer");
     cy.contains("Copy");
 
+    // Close the dialog with escape
+    cy.get("body").type("{esc}");
     // Typing escape has closed the dialog
     cy.contains("import planetary_computer").should("not.exist");
 
