@@ -32,6 +32,7 @@ quickstarts/scale-with-dask
 quickstarts/using-the-data-api
 quickstarts/using-radiant-mlhub-api
 quickstarts/storage
+quickstarts/hls2-copilot
 ```
 
 ```{toctree}
