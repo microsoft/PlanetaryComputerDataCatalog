@@ -553,6 +553,70 @@ landsat-c2-l2:
 landsat-8-c2-l2:
   isHidden: true
 
+met-office-global-deterministic-height-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-height-example.html
+      launch: datasets/met-office-global-deterministic-height-level.ipynb
+
+met-office-global-deterministic-near-surface-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-near-surface-example.html
+      launch: datasets/met-office-global-deterministic-near-surface-level.ipynb
+
+met-office-global-deterministic-pressure-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-pressure-example.html
+      launch: datasets/met-office-global-deterministic-pressure-level.ipynb
+
+met-office-global-deterministic-whole-atmosphere-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-whole-atmosphere-example.html
+      launch: datasets/met-office-global-deterministic-whole-atmosphere-level.ipynb
+
+met-office-uk-deterministic-height-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-height-example.html
+      launch: datasets/met-office-uk-deterministic-height-level.ipynb
+
+met-office-uk-deterministic-near-surface-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-near-surface-example.html
+      launch: datasets/met-office-uk-deterministic-near-surface-level.ipynb
+
+met-office-uk-deterministic-pressure-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-pressure-example.html
+      launch: datasets/met-office-uk-deterministic-pressure-level.ipynb
+
+met-office-uk-deterministic-whole-atmosphere-level:
+  category: Weather
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-whole-atmosphere-example.html
+      launch: datasets/met-office-uk-deterministic-whole-atmosphere-level.ipynb
+
 modis-09A1-061:
   category: Imagery
   headerImg: ./images/modis-09a1-hero.png
