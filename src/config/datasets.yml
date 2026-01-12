@@ -222,7 +222,7 @@ conus404:
     - title: Example Notebook
       src: conus404-example.html
       launch: datasets/conus404/conus404-example.ipynb
- 
+
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
@@ -466,7 +466,7 @@ hgb:
       launch: datasets/hgb/hgb-example.ipynb
 
 hls2-s30:
-  category: Imagery
+  category: Imagery!
   tabs:
     - title: Example Notebook
       src: hls2-example.html
