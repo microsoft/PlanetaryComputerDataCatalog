@@ -119,7 +119,8 @@ function update_package_json_version() {
     echo "Updated package.json to version $version"
 }
 
-funclocal custom_version="$1"
+function run_release() {
+    local custom_version="$1"
     
     echo "=== Planetary Computer Data Catalog Release Process ==="
     echo ""
@@ -159,8 +160,7 @@ funclocal custom_version="$1"
         echo "Step 3: Calculating next version..."
         next_version=$(calculate_next_version "$latest_tag")
         echo "Next version will be: $next_version"
-    fitest_tag")
-    echo "Next version will be: $next_version"
+    fi
     echo ""
     
     if ! confirm "Continue with version $next_version?"; then
@@ -256,6 +256,19 @@ After merging:
         error "Failed to create pull request. You may need to check your GitHub CLI authentication."
     fi
     
+    echo ""
+    echo "=== Pull request for release $next_version created successfully! ==="
+    echo ""
+    echo "Next steps:"
+    echo "  1. Review and merge the PR to main"
+    echo "  2. GitHub Actions will build and deploy to production"
+    echo "  3. After merge, the release will be tagged as $next_version"
+    echo "  4. Merge main back to develop to complete the release cycle"
+    echo ""
+    echo "View the PR with: gh pr view"
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     custom_version=""
     
     while [[ $# -gt 0 ]]; do
@@ -277,18 +290,5 @@ After merging:
         esac
     done
     
-    run_release "$custom_version"ho "  1. Review and merge the PR to main"
-    echo "  2. GitHub Actions will build and deploy to production"
-    echo "  3. After merge, the release will be tagged as $next_version"
-    echo "  4. Merge main back to develop to complete the release cycle"
-    echo ""
-    echo "View the PR with: gh pr view"
-}
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    if [[ "${1:-}" == "--help" ]]; then
-        usage
-    else
-        run_release
-    fi
+    run_release "$custom_version"
 fi
