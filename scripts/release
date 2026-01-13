@@ -42,6 +42,19 @@ function check_git_flow() {
     if ! command -v git-flow &> /dev/null; then
         error "git-flow is not installed. Please install it first: https://github.com/nvie/gitflow/wiki/Installation"
     fi
+    
+    # Check for macOS and ensure GNU getopt is available
+    if [[ "$(uname)" == "Darwin" ]]; then
+        if ! command -v /usr/local/opt/gnu-getopt/bin/getopt &> /dev/null && ! command -v /opt/homebrew/opt/gnu-getopt/bin/getopt &> /dev/null; then
+            error "On macOS, git-flow requires GNU getopt. Install it with: brew install gnu-getopt"
+        fi
+    fi
+}
+
+function check_gh_cli() {
+    if ! command -v gh &> /dev/null; then
+        error "GitHub CLI (gh) is not installed. Please install it first: https://cli.github.com/"
+    fi
 }
 
 function check_clean_working_directory() {
@@ -111,6 +124,7 @@ function run_release() {
     
     # Check prerequisites
     check_git_flow
+    check_gh_cli
     check_clean_working_directory
     
     # Step 1: Checkout develop branch
@@ -177,33 +191,43 @@ function run_release() {
     fi
     echo ""
     
-    # Step 7: Finish release
-    echo "Step 7: Finishing and pushing release..."
-    echo "You will be prompted for commit messages. Keep the defaults."
-    echo "Use '$next_version' as the tag message."
+    # Step 7: Create pull request to main
+    echo "Step 7: Creating pull request to main..."
     echo ""
     
-    if ! confirm "Ready to finish the release? This will merge to main and develop."; then
-        echo "Release not finished. The release branch has been published."
-        echo "To finish later, run: git flow release finish -p $next_version"
+    if ! confirm "Ready to create a pull request from release/$next_version to main?"; then
+        echo "Pull request not created. The release branch has been published."
+        echo "To create PR later, run: gh pr create --base main --head release/$next_version"
         exit 0
     fi
     
-    # Finish the release with push
-    # The -m flags provide default messages to avoid interactive prompts
-    if ! git flow release finish -p -m "Merge release $next_version" -m "$next_version" "$next_version"; then
-        error "Failed to finish git flow release. You may need to resolve conflicts manually."
+    # Create PR to main branch
+    echo "Creating pull request..."
+    if ! gh pr create \
+        --base main \
+        --head "release/$next_version" \
+        --title "Release $next_version" \
+        --body "Automated release $next_version
+
+This release includes all changes from the develop branch.
+
+After merging:
+- GitHub Actions will build and deploy to production
+- The release will be tagged as $next_version
+- Changes will need to be merged back to develop"; then
+        error "Failed to create pull request. You may need to check your GitHub CLI authentication."
     fi
     
     echo ""
-    echo "=== Release $next_version completed successfully! ==="
+    echo "=== Pull request for release $next_version created successfully! ==="
     echo ""
-    echo "The release has been:"
-    echo "  - Merged to main and develop branches"
-    echo "  - Tagged as $next_version"
-    echo "  - Pushed to origin"
+    echo "Next steps:"
+    echo "  1. Review and merge the PR to main"
+    echo "  2. GitHub Actions will build and deploy to production"
+    echo "  3. After merge, the release will be tagged as $next_version"
+    echo "  4. Merge main back to develop to complete the release cycle"
     echo ""
-    echo "GitHub Actions will now build and deploy to production."
+    echo "View the PR with: gh pr view"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
