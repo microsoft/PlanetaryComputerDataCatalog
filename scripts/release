@@ -158,8 +158,33 @@ function run_release() {
     
     # Step 4: Start git flow release
     echo "Step 4: Starting git flow release..."
-    if ! git flow release start "$next_version"; then
-        error "Failed to start git flow release"
+    if ! git flow release start "$next_version" 2>&1; then
+        # Check if there's an existing release branch
+        existing_release=$(git branch | grep "release/" | sed 's/^[ *]*//' | head -n 1)
+        if [[ -n "$existing_release" ]]; then
+            echo ""
+            echo "Found existing release branch: $existing_release"
+            if confirm "Delete the existing release branch and continue?"; then
+                echo "Deleting $existing_release..."
+                git checkout develop
+                git branch -D "$existing_release" || error "Failed to delete local branch $existing_release"
+                
+                # Try to delete remote branch if it exists
+                if git ls-remote --heads origin "$existing_release" | grep -q "$existing_release"; then
+                    echo "Deleting remote branch..."
+                    git push origin --delete "$existing_release" 2>/dev/null || echo "Note: Could not delete remote branch (may not exist or lack permissions)"
+                fi
+                
+                echo "Retrying release start..."
+                if ! git flow release start "$next_version"; then
+                    error "Failed to start git flow release after cleanup"
+                fi
+            else
+                error "Cannot proceed with existing release branch. Please finish or delete it manually."
+            fi
+        else
+            error "Failed to start git flow release"
+        fi
     fi
     echo ""
     
