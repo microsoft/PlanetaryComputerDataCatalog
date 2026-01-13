@@ -1,0 +1,215 @@
+#!/bin/bash
+
+set -e
+
+function usage() {
+    echo -n "Usage: $(basename "$0")
+Automate the release process using git flow and CalVer versioning.
+
+This script will:
+1. Checkout the develop branch
+2. Identify the latest release tag
+3. Calculate the next CalVer version
+4. Start a git flow release
+5. Bump version in package.json
+6. Publish and finish the release
+
+Options:
+--help: Display this help message
+"
+}
+
+function error() {
+    echo "Error: $1" >&2
+    exit 1
+}
+
+function confirm() {
+    local prompt="$1"
+    local response
+    read -r -p "$prompt [y/N]: " response
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}
+
+function check_git_flow() {
+    if ! command -v git-flow &> /dev/null; then
+        error "git-flow is not installed. Please install it first: https://github.com/nvie/gitflow/wiki/Installation"
+    fi
+}
+
+function check_clean_working_directory() {
+    if [[ -n $(git status --porcelain) ]]; then
+        error "Working directory is not clean. Please commit or stash your changes first."
+    fi
+}
+
+function get_latest_tag() {
+    git tag | sort -V | tail -n 1
+}
+
+function calculate_next_version() {
+    local latest_tag="$1"
+    local current_year=$(date +%Y)
+    local current_month=$(date +%-m)
+    
+    if [[ -z "$latest_tag" ]]; then
+        echo "${current_year}.${current_month}.1"
+        return
+    fi
+    
+    # Parse the latest tag (format: YYYY.M.P)
+    if [[ $latest_tag =~ ^([0-9]{4})\.([0-9]+)\.([0-9]+)$ ]]; then
+        local tag_year="${BASH_REMATCH[1]}"
+        local tag_month="${BASH_REMATCH[2]}"
+        local tag_patch="${BASH_REMATCH[3]}"
+        
+        # If same year and month, increment patch
+        if [[ "$tag_year" == "$current_year" ]] && [[ "$tag_month" == "$current_month" ]]; then
+            echo "${current_year}.${current_month}.$((tag_patch + 1))"
+        else
+            # New month or year, reset patch to 1
+            echo "${current_year}.${current_month}.1"
+        fi
+    else
+        error "Latest tag '$latest_tag' does not follow CalVer format (YYYY.M.P)"
+    fi
+}
+
+function update_package_json_version() {
+    local version="$1"
+    
+    if [[ ! -f "package.json" ]]; then
+        error "package.json not found in current directory"
+    fi
+    
+    # Use Node.js to update the version in package.json
+    if command -v node &> /dev/null; then
+        node -e "
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            pkg.version = '$version';
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n');
+        "
+    else
+        # Fallback to sed if node is not available
+        sed -i.bak 's/"version": ".*"/"version": "'$version'"/' package.json && rm package.json.bak
+    fi
+    
+    echo "Updated package.json to version $version"
+}
+
+function run_release() {
+    echo "=== Planetary Computer Data Catalog Release Process ==="
+    echo ""
+    
+    # Check prerequisites
+    check_git_flow
+    check_clean_working_directory
+    
+    # Step 1: Checkout develop branch
+    echo "Step 1: Checking out develop branch..."
+    git checkout develop
+    echo "Pulling latest changes from origin..."
+    git pull origin develop
+    echo ""
+    
+    # Step 2: Identify latest release
+    echo "Step 2: Identifying latest release..."
+    latest_tag=$(get_latest_tag)
+    if [[ -z "$latest_tag" ]]; then
+        echo "No existing tags found."
+    else
+        echo "Latest release tag: $latest_tag"
+    fi
+    echo ""
+    
+    # Step 3: Calculate next version
+    echo "Step 3: Calculating next version..."
+    next_version=$(calculate_next_version "$latest_tag")
+    echo "Next version will be: $next_version"
+    echo ""
+    
+    if ! confirm "Continue with version $next_version?"; then
+        echo "Release cancelled."
+        exit 0
+    fi
+    echo ""
+    
+    # Step 4: Start git flow release
+    echo "Step 4: Starting git flow release..."
+    if ! git flow release start "$next_version"; then
+        error "Failed to start git flow release"
+    fi
+    echo ""
+    
+    # Step 5: Bump version in package.json
+    echo "Step 5: Updating version in package.json..."
+    update_package_json_version "$next_version"
+    
+    if ! confirm "Version updated in package.json. Review the changes and continue?"; then
+        echo "Release cancelled. You are still on the release branch."
+        echo "To abort, run: git flow release delete $next_version"
+        exit 0
+    fi
+    
+    git add package.json
+    git commit -m "$next_version"
+    echo ""
+    
+    # Step 6: Publish release
+    echo "Step 6: Publishing release..."
+    if ! confirm "Publish release branch to origin?"; then
+        echo "Release not published. You are still on the release branch."
+        echo "To publish later, run: git flow release publish $next_version"
+        echo "To abort, run: git flow release delete $next_version"
+        exit 0
+    fi
+    
+    if ! git flow release publish "$next_version"; then
+        error "Failed to publish git flow release"
+    fi
+    echo ""
+    
+    # Step 7: Finish release
+    echo "Step 7: Finishing and pushing release..."
+    echo "You will be prompted for commit messages. Keep the defaults."
+    echo "Use '$next_version' as the tag message."
+    echo ""
+    
+    if ! confirm "Ready to finish the release? This will merge to main and develop."; then
+        echo "Release not finished. The release branch has been published."
+        echo "To finish later, run: git flow release finish -p $next_version"
+        exit 0
+    fi
+    
+    # Finish the release with push
+    # The -m flags provide default messages to avoid interactive prompts
+    if ! git flow release finish -p -m "Merge release $next_version" -m "$next_version" "$next_version"; then
+        error "Failed to finish git flow release. You may need to resolve conflicts manually."
+    fi
+    
+    echo ""
+    echo "=== Release $next_version completed successfully! ==="
+    echo ""
+    echo "The release has been:"
+    echo "  - Merged to main and develop branches"
+    echo "  - Tagged as $next_version"
+    echo "  - Pushed to origin"
+    echo ""
+    echo "GitHub Actions will now build and deploy to production."
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    if [[ "${1:-}" == "--help" ]]; then
+        usage
+    else
+        run_release
+    fi
+fi
