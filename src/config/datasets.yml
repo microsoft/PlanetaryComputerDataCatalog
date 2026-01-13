@@ -553,10 +553,16 @@ landsat-c2-l2:
 landsat-8-c2-l2:
   isHidden: true
 
+met-office-global-deterministic-whole-atmosphere:
+  isHidden: true
+
 met-office-global-deterministic-height:
   isHidden: true
 
 met-office-global-deterministic-pressure:
+  isHidden: true
+
+met-office-global-deterministic-near-surface:
   isHidden: true
 
 met-office-uk-deterministic-height:
@@ -572,9 +578,6 @@ met-office-uk-deterministic-whole-atmosphere-:
   isHidden: true
 
 met-office-uk-deterministic-near-surface:
-  isHidden: true
-
-met-office-global-deterministic-near-surface:
   isHidden: true
 
 modis-09A1-061:
