@@ -466,7 +466,7 @@ hgb:
       launch: datasets/hgb/hgb-example.ipynb
 
 hls2-s30:
-  category: Imagery!
+  category: Imagery
   tabs:
     - title: Example Notebook
       src: hls2-example.html
@@ -551,6 +551,33 @@ landsat-c2-l2:
       launch: datasets/landsat-c2/landsat-c2-example.ipynb
 
 landsat-8-c2-l2:
+  isHidden: true
+
+met-office-global-deterministic-whole-atmosphere:
+  isHidden: true
+
+met-office-global-deterministic-height:
+  isHidden: true
+
+met-office-global-deterministic-pressure:
+  isHidden: true
+
+met-office-global-deterministic-near-surface:
+  isHidden: true
+
+met-office-uk-deterministic-height:
+  isHidden: true
+
+met-office-uk-deterministic-whole-atmosphere:
+  isHidden: true
+
+met-office-uk-deterministic-pressure:
+  isHidden: true
+
+met-office-uk-deterministic-whole-atmosphere-:
+  isHidden: true
+
+met-office-uk-deterministic-near-surface:
   isHidden: true
 
 modis-09A1-061:
