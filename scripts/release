@@ -3,18 +3,19 @@
 set -e
 
 function usage() {
-    echo -n "Usage: $(basename "$0")
+    echo -n "Usage: $(basename "$0") [OPTIONS]
 Automate the release process using git flow and CalVer versioning.
 
 This script will:
 1. Checkout the develop branch
 2. Identify the latest release tag
-3. Calculate the next CalVer version
+3. Calculate the next CalVer version (or use provided version)
 4. Start a git flow release
 5. Bump version in package.json
 6. Publish and finish the release
 
 Options:
+--version VERSION: Specify a custom version instead of auto-calculating (format: YYYY.M.P)
 --help: Display this help message
 "
 }
@@ -118,7 +119,8 @@ function update_package_json_version() {
     echo "Updated package.json to version $version"
 }
 
-function run_release() {
+funclocal custom_version="$1"
+    
     echo "=== Planetary Computer Data Catalog Release Process ==="
     echo ""
     
@@ -144,9 +146,20 @@ function run_release() {
     fi
     echo ""
     
-    # Step 3: Calculate next version
-    echo "Step 3: Calculating next version..."
-    next_version=$(calculate_next_version "$latest_tag")
+    # Step 3: Determine next version
+    if [[ -n "$custom_version" ]]; then
+        echo "Step 3: Using custom version..."
+        # Validate custom version format
+        if [[ ! $custom_version =~ ^([0-9]{4})\.([0-9]+)\.([0-9]+)$ ]]; then
+            error "Custom version '$custom_version' does not follow CalVer format (YYYY.M.P)"
+        fi
+        next_version="$custom_version"
+        echo "Using version: $next_version"
+    else
+        echo "Step 3: Calculating next version..."
+        next_version=$(calculate_next_version "$latest_tag")
+        echo "Next version will be: $next_version"
+    fitest_tag")
     echo "Next version will be: $next_version"
     echo ""
     
@@ -243,11 +256,28 @@ After merging:
         error "Failed to create pull request. You may need to check your GitHub CLI authentication."
     fi
     
-    echo ""
-    echo "=== Pull request for release $next_version created successfully! ==="
-    echo ""
-    echo "Next steps:"
-    echo "  1. Review and merge the PR to main"
+    custom_version=""
+    
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --help)
+                usage
+                exit 0
+                ;;
+            --version)
+                if [[ -z "${2:-}" ]]; then
+                    error "Missing value for --version option"
+                fi
+                custom_version="$2"
+                shift 2
+                ;;
+            *)
+                error "Unknown option: $1"
+                ;;
+        esac
+    done
+    
+    run_release "$custom_version"ho "  1. Review and merge the PR to main"
     echo "  2. GitHub Actions will build and deploy to production"
     echo "  3. After merge, the release will be tagged as $next_version"
     echo "  4. Merge main back to develop to complete the release cycle"
