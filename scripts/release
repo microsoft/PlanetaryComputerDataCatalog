@@ -130,11 +130,23 @@ function run_release() {
     check_gh_cli
     check_clean_working_directory
     
-    # Step 1: Checkout develop branch
+    # Step 1: Checkout develop branch and sync with main
     echo "Step 1: Checking out develop branch..."
     git checkout develop
     echo "Pulling latest changes from origin..."
     git pull origin develop
+    
+    echo "Pulling latest changes from main..."
+    git fetch origin main
+    echo "Merging main into develop to ensure all changes are included..."
+    if ! git merge origin/main -m "Merge main into develop for release"; then
+        echo ""
+        echo "Merge conflict detected. Please resolve conflicts and run the script again."
+        error "Failed to merge main into develop"
+    fi
+    
+    echo "Pushing updated develop to origin..."
+    git push origin develop
     echo ""
     
     # Step 2: Identify latest release
