@@ -555,42 +555,34 @@ landsat-8-c2-l2:
 
 met-office-global-deterministic-height:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-global-deterministic-near-surface:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-global-deterministic-pressure:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-global-deterministic-whole-atmosphere:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-uk-deterministic-height:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-uk-deterministic-near-surface:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-uk-deterministic-pressure:
   category: Weather
-  isHidden: true
   headerImg:
 
 met-office-uk-deterministic-whole-atmosphere:
   category: Weather
-  isHidden: true
   headerImg:
 
 modis-09A1-061:
