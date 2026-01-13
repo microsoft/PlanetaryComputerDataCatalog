@@ -222,7 +222,7 @@ conus404:
     - title: Example Notebook
       src: conus404-example.html
       launch: datasets/conus404/conus404-example.ipynb
- 
+
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
@@ -551,6 +551,33 @@ landsat-c2-l2:
       launch: datasets/landsat-c2/landsat-c2-example.ipynb
 
 landsat-8-c2-l2:
+  isHidden: true
+
+met-office-global-deterministic-whole-atmosphere:
+  isHidden: true
+
+met-office-global-deterministic-height:
+  isHidden: true
+
+met-office-global-deterministic-pressure:
+  isHidden: true
+
+met-office-global-deterministic-near-surface:
+  isHidden: true
+
+met-office-uk-deterministic-height:
+  isHidden: true
+
+met-office-uk-deterministic-whole-atmosphere:
+  isHidden: true
+
+met-office-uk-deterministic-pressure:
+  isHidden: true
+
+met-office-uk-deterministic-whole-atmosphere-:
+  isHidden: true
+
+met-office-uk-deterministic-near-surface:
   isHidden: true
 
 modis-09A1-061:
