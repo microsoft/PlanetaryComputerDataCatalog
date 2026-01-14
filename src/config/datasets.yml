@@ -553,32 +553,37 @@ landsat-c2-l2:
 landsat-8-c2-l2:
   isHidden: true
 
-met-office-global-deterministic-whole-atmosphere:
-  isHidden: true
-
 met-office-global-deterministic-height:
-  isHidden: true
-
-met-office-global-deterministic-pressure:
-  isHidden: true
+  category: Weather
+  headerImg:
 
 met-office-global-deterministic-near-surface:
-  isHidden: true
+  category: Weather
+  headerImg:
+
+met-office-global-deterministic-pressure:
+  category: Weather
+  headerImg:
+
+met-office-global-deterministic-whole-atmosphere:
+  category: Weather
+  headerImg:
 
 met-office-uk-deterministic-height:
-  isHidden: true
-
-met-office-uk-deterministic-whole-atmosphere:
-  isHidden: true
-
-met-office-uk-deterministic-pressure:
-  isHidden: true
-
-met-office-uk-deterministic-whole-atmosphere-:
-  isHidden: true
+  category: Weather
+  headerImg:
 
 met-office-uk-deterministic-near-surface:
-  isHidden: true
+  category: Weather
+  headerImg:
+
+met-office-uk-deterministic-pressure:
+  category: Weather
+  headerImg:
+
+met-office-uk-deterministic-whole-atmosphere:
+  category: Weather
+  headerImg:
 
 modis-09A1-061:
   category: Imagery
