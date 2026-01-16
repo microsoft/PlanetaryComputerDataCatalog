@@ -222,7 +222,7 @@ conus404:
     - title: Example Notebook
       src: conus404-example.html
       launch: datasets/conus404/conus404-example.ipynb
-
+ 
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
@@ -553,37 +553,69 @@ landsat-c2-l2:
 landsat-8-c2-l2:
   isHidden: true
 
-met-office-global-deterministic-height:
+met-office-global-deterministic-height-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-height-example.html
+      launch: datasets/met-office/met-office-global-deterministic-height.ipynb
 
-met-office-global-deterministic-near-surface:
+met-office-global-deterministic-near-surface-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-near-surface-example.html
+      launch: datasets/met-office/met-office-global-deterministic-near-surface.ipynb
 
-met-office-global-deterministic-pressure:
+met-office-global-deterministic-pressure-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-pressure-example.html
+      launch: datasets/met-office/met-office-global-deterministic-pressure.ipynb
 
-met-office-global-deterministic-whole-atmosphere:
+met-office-global-deterministic-whole-atmosphere-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-global-whole-atmosphere-example.html
+      launch: datasets/met-office/met-office-global-deterministic-whole-atmosphere.ipynb
 
-met-office-uk-deterministic-height:
+met-office-uk-deterministic-height-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-height-example.html
+      launch: datasets/met-office/met-office-uk-deterministic-height.ipynb
 
-met-office-uk-deterministic-near-surface:
+met-office-uk-deterministic-near-surface-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-near-surface-example.html
+      launch: datasets/met-office/met-office-uk-deterministic-near-surface.ipynb
 
-met-office-uk-deterministic-pressure:
+met-office-uk-deterministic-pressure-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-pressure-example.html
+      launch: datasets/met-office/met-office-uk-deterministic-pressure.ipynb
 
-met-office-uk-deterministic-whole-atmosphere:
+met-office-uk-deterministic-whole-atmosphere-level:
   category: Weather
-  headerImg:
+  headerImg: 
+  tabs: 
+    - title: Example Notebook
+      src: met-office-uk-whole-atmosphere-example.html
+      launch: datasets/met-office/met-office-uk-deterministic-whole-atmosphere.ipynb
 
 modis-09A1-061:
   category: Imagery
