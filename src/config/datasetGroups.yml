@@ -152,9 +152,9 @@ met-office-global-deterministic:
       * Whole Atmosphere collection offers 14 parameters for the whole atmosphere.
   assets:
     headerImg:
-      href: 
+      href: ./images/met-office-global-deterministic-pressure-hero.jpg
     thumbnail:
-      href: 
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/met-office-global-deterministic-pressure.jpg
   keywords:
     [
       Met Office,
@@ -186,9 +186,9 @@ met-office-uk-deterministic:
       * Whole Atmosphere collection offers 11 parameters for the whole atmosphere.
   assets:
     headerImg:
-      href: 
+      href: ./images/met-office-uk-deterministic-near-surface-hero.jpg
     thumbnail:
-      href: 
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/met-office-uk-deterministic-near-surface.jpg
   keywords:
     [
       Met Office,
