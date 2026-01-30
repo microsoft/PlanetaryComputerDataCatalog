@@ -222,7 +222,7 @@ conus404:
     - title: Example Notebook
       src: conus404-example.html
       launch: datasets/conus404/conus404-example.ipynb
- 
+
 cop-dem-glo-30:
   category: DEMs
   headerImg: ./images/cop-dem-glo-30-hero.png
@@ -553,7 +553,7 @@ landsat-c2-l2:
 landsat-8-c2-l2:
   isHidden: true
 
-met-office-global-deterministic-height-level:
+met-office-global-deterministic-height:
   category: Weather
   headerImg: 
   tabs: 
