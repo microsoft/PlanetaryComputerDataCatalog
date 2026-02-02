@@ -137,58 +137,63 @@ gnatsgo:
 
 met-office-global-deterministic:
   title: Met Office Global 10km Deterministic Weather Forecast
+  short_description: >
+    Global numerical weather prediction forecast at 10km resolution from the Met
+    Office Unified Model.
   description: >
-    A numerical weather prediction forecast for the whole globe, with a resolution of approximately
-    0.09 degrees i.e. 10km (2,560 x 1,920 grid points). The data is available as NetCDF files.
-    
-    The global deterministic model is a global configuration of the Unified Model, which is the Met
-    Office’s flagship Numerical Weather Prediction model. The model’s initial state is kept close
-    to the real atmosphere using hybrid 4D-Var data assimilation. 
+    A numerical weather prediction forecast for the whole globe, with a resolution of
+    approximately 0.09 degrees i.e. 10km (2,560 x 1,920 grid points). The data is
+    available as NetCDF files.
 
-    You can choose from four different collections, each with its own set of parameters:
+    The global deterministic model is a global configuration of the Unified Model,
+    which is the Met Office’s flagship Numerical Weather Prediction model. The
+    model’s initial state is kept close to the real atmosphere using hybrid 4D-Var
+    data assimilation.
+
+    You can choose from four different collections, each with its own set of
+    parameters:
       * Near Surface collection offers 48 parameters
-      * Pressure level collection offers 9 parameters at 33 levels from 100000Pa to 1000Pa
+      * Pressure level collection offers 9 parameters at 33 levels from 100000Pa to
+    1000Pa
       * Height level collection offers 1 parameter at 33 levels from 5m to 6000m
       * Whole Atmosphere collection offers 14 parameters for the whole atmosphere.
   assets:
     headerImg:
-      href: 
+      href: ./images/met-office-global-deterministic-pressure-hero.jpg
     thumbnail:
-      href: 
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/met-office-global-deterministic-pressure.jpg
   keywords:
-    [
-      Met Office,
-      Weather,
-      Forecast,
-      Global,
-      Temperature,
-      Wind,
-      Humidity,
-      Cloud
-    ]
+    [Met Office, Weather, Forecast, Global, Temperature, Wind, Humidity, Cloud]
   groupOnCatalog: false
 
 met-office-uk-deterministic:
   title: Met Office UK 2km Deterministic Weather Forecast
+  short_description: >
+    High-resolution 2km gridded weather forecast for the UK from the Met Office UKV
+    model.
   description: >
-    A high-resolution gridded weather forecast for the UK, with a resolution of 0.018 degrees, 
-    projected on to a 2km horizontal grid. The data is available as NetCDF files.
-    
-    Based on the Met Office UKV model, which is a deterministic, numerical weather prediction 
-    model for the UK and Ireland. It is a UK configuration of the Unified Model, which is the 
-    Met Office’s flagship Numerical Weather Prediction model. The model’s initial state is kept 
-    close to the real atmosphere using hybrid 4D-Var data assimilation. 
-    
-    You can choose from four different collections, each with its own set of parameters: 
+    A high-resolution gridded weather forecast for the UK, with a resolution of 0.018
+    degrees, projected on to a 2km horizontal grid. The data is available as NetCDF
+    files.
+
+    Based on the Met Office UKV model, which is a deterministic, numerical weather
+    prediction model for the UK and Ireland. It is a UK configuration of the Unified
+    Model, which is the Met Office’s flagship Numerical Weather Prediction model. The
+    model’s initial state is kept close to the real atmosphere using hybrid 4D-Var
+    data assimilation.
+
+    You can choose from four different collections, each with its own set of
+    parameters:
       * Near Surface collection offers 35 parameters
-      * Pressure level collection offers 7 parameters at 33 levels from 100000Pa to 1000Pa
+      * Pressure level collection offers 7 parameters at 33 levels from 100000Pa to
+    1000Pa
       * Height level collection offers 4 parameter at 33 levels from 5m to 6000m
       * Whole Atmosphere collection offers 11 parameters for the whole atmosphere.
   assets:
     headerImg:
-      href: 
+      href: ./images/met-office-uk-deterministic-near-surface-hero.jpg
     thumbnail:
-      href: 
+      href: https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/met-office-uk-deterministic-near-surface.jpg
   keywords:
     [
       Met Office,

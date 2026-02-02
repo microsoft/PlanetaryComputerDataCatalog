@@ -555,35 +555,59 @@ landsat-8-c2-l2:
 
 met-office-global-deterministic-height:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-global-deterministic-height.html
+      launch: datasets/met-office/met-office-global-deterministic-height.ipynb
 
 met-office-global-deterministic-near-surface:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-global-deterministic-near-surface.html
+      launch: datasets/met-office/met-office-global-deterministic-near-surface.ipynb
 
 met-office-global-deterministic-pressure:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-global-deterministic-pressure.html
+      launch: datasets/met-office/met-office-global-deterministic-pressure.ipynb
 
 met-office-global-deterministic-whole-atmosphere:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-global-deterministic-whole-atmosphere.html
+      launch: datasets/met-office/met-office-global-deterministic-whole-atmosphere.ipynb
 
 met-office-uk-deterministic-height:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-uk-deterministic-height.html
+      launch: datasets/met-office/met-office-uk-deterministic-height.ipynb
 
 met-office-uk-deterministic-near-surface:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-uk-deterministic-near-surface.html
+      launch: datasets/met-office/met-office-uk-deterministic-near-surface.ipynb
 
 met-office-uk-deterministic-pressure:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-uk-deterministic-pressure.html
+      launch: datasets/met-office/met-office-uk-deterministic-pressure.ipynb
 
 met-office-uk-deterministic-whole-atmosphere:
   category: Weather
-  headerImg:
+  tabs:
+    - title: Example Notebook
+      src: met-office-uk-deterministic-whole-atmosphere.html
+      launch: datasets/met-office/met-office-uk-deterministic-whole-atmosphere.ipynb
 
 modis-09A1-061:
   category: Imagery
