@@ -557,56 +557,56 @@ met-office-global-deterministic-height:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-global-height-example.html
+      src: met-office-global-deterministic-height.html
       launch: datasets/met-office/met-office-global-deterministic-height.ipynb
 
 met-office-global-deterministic-near-surface:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-global-near-surface-example.html
+      src: met-office-global-deterministic-near-surface.html
       launch: datasets/met-office/met-office-global-deterministic-near-surface.ipynb
 
 met-office-global-deterministic-pressure:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-global-pressure-example.html
+      src: met-office-global-deterministic-pressure.html
       launch: datasets/met-office/met-office-global-deterministic-pressure.ipynb
 
 met-office-global-deterministic-whole-atmosphere:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-global-whole-atmosphere-example.html
+      src: met-office-global-deterministic-whole-atmosphere.html
       launch: datasets/met-office/met-office-global-deterministic-whole-atmosphere.ipynb
 
 met-office-uk-deterministic-height:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-uk-height-example.html
+      src: met-office-uk-deterministic-height.html
       launch: datasets/met-office/met-office-uk-deterministic-height.ipynb
 
 met-office-uk-deterministic-near-surface:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-uk-near-surface-example.html
+      src: met-office-uk-deterministic-near-surface.html
       launch: datasets/met-office/met-office-uk-deterministic-near-surface.ipynb
 
 met-office-uk-deterministic-pressure:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-uk-pressure-example.html
+      src: met-office-uk-deterministic-pressure.html
       launch: datasets/met-office/met-office-uk-deterministic-pressure.ipynb
 
 met-office-uk-deterministic-whole-atmosphere:
   category: Weather
   tabs:
     - title: Example Notebook
-      src: met-office-uk-whole-atmosphere-example.html
+      src: met-office-uk-deterministic-whole-atmosphere.html
       launch: datasets/met-office/met-office-uk-deterministic-whole-atmosphere.ipynb
 
 modis-09A1-061:
