@@ -51,15 +51,15 @@ jobs:
         id: builddeploy-test
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token:
-            ${{ secrets.AZURE_STATIC_WEB_APPS_API_WONDERFUL_STONE_06c70c70f }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_WONDERFUL_STONE_06C70C70F }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          skip_deploy_on_missing_secrets: true
           action: "upload"
           skip_app_build: true
           app_location: "build"
           api_location: "api"
           output_location: "build"
+        env:
+          SKIP_DEPLOY_ON_MISSING_SECRETS: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
