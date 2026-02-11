@@ -559,6 +559,9 @@ met-office-global-deterministic-height:
     - title: Example Notebook
       src: met-office-global-deterministic-height.html
       launch: datasets/met-office/met-office-global-deterministic-height.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-global-deterministic-near-surface:
   category: Weather
@@ -566,6 +569,9 @@ met-office-global-deterministic-near-surface:
     - title: Example Notebook
       src: met-office-global-deterministic-near-surface.html
       launch: datasets/met-office/met-office-global-deterministic-near-surface.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-global-deterministic-pressure:
   category: Weather
@@ -573,6 +579,9 @@ met-office-global-deterministic-pressure:
     - title: Example Notebook
       src: met-office-global-deterministic-pressure.html
       launch: datasets/met-office/met-office-global-deterministic-pressure.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-global-deterministic-whole-atmosphere:
   category: Weather
@@ -580,6 +589,9 @@ met-office-global-deterministic-whole-atmosphere:
     - title: Example Notebook
       src: met-office-global-deterministic-whole-atmosphere.html
       launch: datasets/met-office/met-office-global-deterministic-whole-atmosphere.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-uk-deterministic-height:
   category: Weather
@@ -587,6 +599,9 @@ met-office-uk-deterministic-height:
     - title: Example Notebook
       src: met-office-uk-deterministic-height.html
       launch: datasets/met-office/met-office-uk-deterministic-height.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-uk-deterministic-near-surface:
   category: Weather
@@ -594,6 +609,9 @@ met-office-uk-deterministic-near-surface:
     - title: Example Notebook
       src: met-office-uk-deterministic-near-surface.html
       launch: datasets/met-office/met-office-uk-deterministic-near-surface.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-uk-deterministic-pressure:
   category: Weather
@@ -601,6 +619,9 @@ met-office-uk-deterministic-pressure:
     - title: Example Notebook
       src: met-office-uk-deterministic-pressure.html
       launch: datasets/met-office/met-office-uk-deterministic-pressure.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 met-office-uk-deterministic-whole-atmosphere:
   category: Weather
@@ -608,6 +629,9 @@ met-office-uk-deterministic-whole-atmosphere:
     - title: Example Notebook
       src: met-office-uk-deterministic-whole-atmosphere.html
       launch: datasets/met-office/met-office-uk-deterministic-whole-atmosphere.ipynb
+    - title: Comprehensive Example
+      src: met-office-forecast-data.html
+      launch: datasets/met-office/met-office-forecast-data.ipynb
 
 modis-09A1-061:
   category: Imagery
