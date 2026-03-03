@@ -683,14 +683,22 @@ export const renderItemColumn = (item, _, column) => {
       if (Array.isArray(fieldContent)) {
         fieldContent = fieldContent.join(", ");
       } else if (isObject(fieldContent)) {
-        return (
-          <Revealer>
-            <SimpleKeyValueList object={fieldContent} />
-          </Revealer>
-        );
+        return formatObject(fieldContent);
       }
       return stacFormatter.format(fieldContent, column.fieldName);
   }
+};
+
+const formatValue = value => {
+  if (Array.isArray(value)) return value.join(", ");
+  if (isObject(value)) return formatObject(value);
+  return String(value);
+};
+
+const formatObject = obj => {
+  return Object.entries(obj)
+    .map(([k, v]) => `${stacFormatter.label(k)}: ${formatValue(v)}`)
+    .join(", ");
 };
 
 const boldStyle = { root: { fontWeight: "bold" } };

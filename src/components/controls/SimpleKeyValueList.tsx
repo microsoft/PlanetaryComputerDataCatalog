@@ -9,23 +9,7 @@ const SimpleKeyValueList = ({ object, indent = false }: Props) => {
   return (
     <div className="json-list">
       {Object.entries(object).map(([key, val]) => {
-        if (val == null) return null;
-
-        if (Array.isArray(val)) {
-          return (
-            <LabeledValue key={key} label={stacFormatter.label(key)} indent={indent}>
-              {val.join(", ")}
-            </LabeledValue>
-          );
-        }
-
-        if (typeof val === "object") {
-          return (
-            <LabeledValue key={key} label={stacFormatter.label(key)} indent={indent}>
-              <SimpleKeyValueList object={val} indent />
-            </LabeledValue>
-          );
-        }
+        if (Array.isArray(val) || typeof val === "object") return null;
 
         return (
           <LabeledValue key={key} label={stacFormatter.label(key)} indent={indent}>
