@@ -683,7 +683,7 @@ export const renderItemColumn = (item, _, column) => {
       if (Array.isArray(fieldContent)) {
         fieldContent = fieldContent.join(", ");
       } else if (isObject(fieldContent)) {
-        <Revealer>{Object.keys(fieldContent).join(", ")}</Revealer>;
+        return <Revealer>{Object.keys(fieldContent).join(", ")}</Revealer>;
       }
       return stacFormatter.format(fieldContent, column.fieldName);
   }
