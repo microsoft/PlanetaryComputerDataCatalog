@@ -523,6 +523,10 @@ StacFields.Registry.addMetadataField("ecmwf:types", {
 StacFields.Registry.addMetadataField("ecmwf:pressure_levels", {
   label: "Pressure levels",
 });
+StacFields.Registry.addMetadataField("grib:layer_definitions", {
+  label: "GRIB layer definitions",
+  formatter: value => ", ".join(Object.keys(value))
+})
 
 export const mediaTypeOverride = value => {
   switch (value) {
@@ -682,23 +686,8 @@ export const renderItemColumn = (item, _, column) => {
     default:
       if (Array.isArray(fieldContent)) {
         fieldContent = fieldContent.join(", ");
-      } else if (isObject(fieldContent)) {
-        return formatObject(fieldContent);
-      }
       return stacFormatter.format(fieldContent, column.fieldName);
   }
-};
-
-const formatValue = value => {
-  if (Array.isArray(value)) return value.join(", ");
-  if (isObject(value)) return formatObject(value);
-  return String(value);
-};
-
-const formatObject = obj => {
-  return Object.entries(obj)
-    .map(([k, v]) => `${stacFormatter.label(k)}: ${formatValue(v)}`)
-    .join(", ");
 };
 
 const boldStyle = { root: { fontWeight: "bold" } };
