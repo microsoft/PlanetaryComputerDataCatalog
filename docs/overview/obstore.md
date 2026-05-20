@@ -2,7 +2,7 @@
 
 [obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores (Azure Blob, Amazon S3, Google Cloud Storage) directly through their native APIs. Using obstore, SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
 
-A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main) · [View on GitHub](https://github.com/microsoft/PlanetaryComputerExamples/blob/main/quickstarts/obstore.ipynb)
+A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main)
 
 ## Install obstore
 
