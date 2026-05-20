@@ -2,7 +2,7 @@
 
 [obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores (Azure Blob, Amazon S3, Google Cloud Storage) directly through their native APIs. While much of the Planetary Computer ecosystem supports `planetary_computer.sign()` and fsspec, obstore offers a more modern path: SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
 
-A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub][nb-hub] · [Open in Colab][nb-colab] · [View on GitHub][nb-github]
+A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub][nb-hub] · [View on GitHub][nb-github]
 
 ## Install obstore
 
@@ -166,6 +166,5 @@ s3_store = S3Store(bucket="my-bucket", region="us-west-2")
 buf = obstore.get(s3_store, "path/to/object").bytes()
 ```
 
-[nb-hub]: # "TODO: link to notebook on Planetary Computer Hub"
-[nb-colab]: # "TODO: link to notebook on Colab"
-[nb-github]: # "TODO: link to notebook in companion repo"
+[nb-hub]: https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main
+[nb-github]: https://github.com/microsoft/PlanetaryComputerExamples/blob/main/quickstarts/obstore.ipynb
