@@ -1,18 +1,18 @@
 # Reading Planetary Computer data with obstore
 
-[obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores (Azure Blob, Amazon S3, Google Cloud Storage) directly through their native APIs. While much of the Planetary Computer ecosystem supports `planetary_computer.sign()` and fsspec, obstore offers a more modern path: SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
+[obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores (Azure Blob, Amazon S3, Google Cloud Storage) directly through their native APIs. Using obstore, SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
 
-A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub][nb-hub] · [View on GitHub][nb-github]
+A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main) · [View on GitHub](https://github.com/microsoft/PlanetaryComputerExamples/blob/main/quickstarts/obstore.ipynb)
 
 ## Install obstore
 
-obstore works in any Python project — a script, a Jupyter notebook, a FastAPI backend, a Dagster or Airflow pipeline. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its credential providers:
+obstore works in any Python project. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its credential providers:
 
 ```bash
 uv add obstore pystac-client requests aiohttp aiohttp_retry
 ```
 
-`requests` powers the sync credential provider; `aiohttp` and `aiohttp_retry` power the async one. Install both unless you know you only need one path. If you already have a project, you can substitute `pip install`, `poetry add`, or whatever your project uses.
+`requests` powers the sync credential provider; `aiohttp` and `aiohttp_retry` power the async one. Install both unless you know you only need one path.
 
 ## Connect to a Planetary Computer asset
 
@@ -45,15 +45,11 @@ The most common starting point is a STAC asset returned from a search. obstore's
    store = AzureStore(credential_provider=provider)
    ```
 
-That's the full setup. Every read, write, or library handoff below reuses the same `store`.
-
 ## Read bytes from the store
 
 Once you have a working store, obstore exposes three read operations that map directly to native Azure Blob API calls.
 
-A note before you read: `from_asset()` scopes the store to that *specific blob* — the asset URL becomes the store's prefix. Reads use `""` as the path. Passing the asset href on top of the prefix would double it up and fail with `BlobNotFound`.
-
-1. **Read a byte range.** Useful when you only need part of the file — for example, the first ~16 KB of a Cloud Optimized GeoTIFF (the header). Most libraries (async-geotiff, GDAL, rasterio) only need the header to start working.
+1. **Read a byte range.** Useful when you only need part of the file. For example, the first ~16 KB of a Cloud Optimized GeoTIFF. 
 
    ```python
    import obstore
@@ -69,7 +65,7 @@ A note before you read: `from_asset()` scopes the store to that *specific blob* 
    )
    ```
 
-3. **Read the entire file.** Avoid this for large rasters — NAIP scenes can be 100–500 MB and Azure caps single-stream downloads at ~8–15 MB/s. Range reads and async (below) exist precisely to avoid this scenario.
+3. **Read the entire file.** Avoid this for large rasters. Range reads and async (below) exist to avoid this scenario.
 
    ```python
    buf = obstore.get(store, "").bytes()
@@ -77,7 +73,7 @@ A note before you read: `from_asset()` scopes the store to that *specific blob* 
 
 ## Run reads in parallel
 
-For multi-file workloads — building a mosaic, fetching all bands across all scenes in an AOI — running reads in parallel is dramatically faster than serial. obstore exposes async equivalents of every read function (`get_async`, `get_range_async`, etc.) that you can compose with `asyncio.gather`.
+For multi-file workloads like building a mosaic or fetching all bands across all scenes in an AOI, running reads in parallel is faster. obstore exposes async equivalents of every read function (`get_async`, `get_range_async`, etc.) that you can compose with `asyncio.gather`.
 
 Async needs its own credential provider class, `PlanetaryComputerAsyncCredentialProvider`, backed by `aiohttp` instead of `requests`. Same `from_asset()` signature.
 
@@ -94,11 +90,11 @@ async def fetch(start, end):
 results = await asyncio.gather(*[fetch(i * 4096, (i + 1) * 4096) for i in range(8)])
 ```
 
-The companion notebook benchmarks the speedup against serial reads — typically 3–5× faster in practice.
+This is typically 3–5× faster in practice.
 
 ## List objects across a container
 
-The asset-scoped pattern above is the right default, but it doesn't grant `List` permission on the container. To enumerate objects under a prefix ("show me every NAIP scene in Montana in 2023"), build a fresh provider against the container URL instead.
+To enumerate objects under a prefix ("show me every NAIP scene in Montana in 2023"), build a fresh provider against the container URL instead.
 
 ```python
 container_provider = PlanetaryComputerCredentialProvider(
@@ -117,7 +113,7 @@ for batch in obstore.list(container_store, prefix="v002/mt/2023/"):
 
 ## Hand the store to other libraries
 
-obstore really shines as a foundation. Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using async-geotiff:
+Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using async-geotiff:
 
 ```python
 from async_geotiff import GeoTIFF
@@ -157,7 +153,7 @@ obstore handles re-signing on expiry, talks to Azure's native blob API instead o
 
 ## Use the same code against other clouds
 
-obstore implements the [obspec](https://github.com/developmentseed/obspec) protocol, so the same read and write calls work against S3 or GCS — only the store constructor changes. Any library built on obspec inherits this portability automatically.
+obstore implements the [obspec](https://github.com/developmentseed/obspec) protocol, so the same read and write calls work against S3 or GCS. Any library built on obspec inherits this portability automatically.
 
 ```python
 from obstore.store import S3Store
@@ -166,5 +162,3 @@ s3_store = S3Store(bucket="my-bucket", region="us-west-2")
 buf = obstore.get(s3_store, "path/to/object").bytes()
 ```
 
-[nb-hub]: https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main
-[nb-github]: https://github.com/microsoft/PlanetaryComputerExamples/blob/main/quickstarts/obstore.ipynb
