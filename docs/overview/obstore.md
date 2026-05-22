@@ -122,7 +122,7 @@ geotiff = await GeoTIFF.open("", store=async_store)
 print(geotiff.transform, geotiff.crs.name)
 ```
 
-The same pattern works for [Lonboard](https://developmentseed.org/lonboard/) visualization and [zarr-python](https://zarr.dev/) datasets. See the [obstore Zarr example](https://developmentseed.org/obstore/latest/examples/zarr/) for a Planetary Computer Daymet walkthrough.
+[zarr-python](https://zarr.dev/) works through a thin adapter (`zarr.storage.ObjectStore` wraps your obstore store). See the [obstore Zarr example](https://developmentseed.org/obstore/latest/examples/zarr/) for a Planetary Computer Daymet walkthrough.
 
 ## Migrate from `planetary_computer.sign()` + fsspec
 
