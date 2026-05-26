@@ -6,7 +6,7 @@ A companion notebook walks through every step end-to-end with live timings. [Ope
 
 ## Install obstore
 
-obstore works in any Python project. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its credential providers:
+obstore works in any Python project. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its [credential providers](https://developmentseed.org/obstore/latest/authentication/#credential-providers):
 
 ```bash
 uv add obstore pystac-client requests aiohttp aiohttp_retry
