@@ -73,7 +73,7 @@ Once you have a working store, obstore exposes three read operations that map di
 
 ## Run reads in parallel
 
-For multi-file workloads like building a mosaic or fetching all bands across all scenes in an AOI, running reads in parallel is faster. obstore exposes async equivalents of every read function (`get_async`, `get_range_async`, etc.) that you can compose with `asyncio.gather`.
+For multi-file workloads like building a mosaic or fetching all bands across all scenes in an AOI, making concurrent requests is faster. obstore exposes async equivalents of every read function (`get_async`, `get_range_async`, etc.) that you can compose with `asyncio.gather`.
 
 Async needs its own credential provider class, `PlanetaryComputerAsyncCredentialProvider`, backed by `aiohttp` instead of `requests`. Same `from_asset()` signature.
 
