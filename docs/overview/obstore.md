@@ -113,7 +113,7 @@ for batch in obstore.list(container_store, prefix="v002/mt/2023/"):
 
 ## Hand the store to other libraries
 
-Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using async-geotiff:
+Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using [async-geotiff](https://github.com/developmentseed/async-geotiff):
 
 ```python
 from async_geotiff import GeoTIFF
