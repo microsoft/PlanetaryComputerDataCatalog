@@ -1,12 +1,12 @@
 # Reading Planetary Computer data with obstore
 
-[obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores through a single, unified API that works the same across Azure Blob, Amazon S3, and Google Cloud Storage. Using obstore, SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
+[obstore](https://developmentseed.org/obstore/) is a Python library for reading and writing cloud object stores through a single, unified API that works the same across Azure Blob, Amazon S3, and Google Cloud Storage. Using obstore, Planetary Computer SAS tokens refresh automatically, async I/O is built in, and the same store you build for reading bytes can be handed to higher-level libraries like [async-geotiff](https://github.com/developmentseed/async-geotiff), [Lonboard](https://developmentseed.org/lonboard/), and [zarr-python](https://zarr.dev/) without re-authenticating.
 
 A companion notebook walks through every step end-to-end with live timings. [Open in Planetary Computer Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/obstore.ipynb&branch=main)
 
 ## Install obstore
 
-obstore works in any Python project. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its credential providers:
+obstore works in any Python project. To get started, install obstore alongside `pystac-client` (for searching the Planetary Computer's STAC API) and the HTTP libraries that power its [credential providers](https://developmentseed.org/obstore/latest/authentication/#credential-providers):
 
 ```bash
 uv add obstore pystac-client requests aiohttp aiohttp_retry
@@ -130,7 +130,7 @@ for batch in container_store.list(prefix="v002/mt/2023/"):
 
 ## Hand the store to other libraries
 
-Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using async-geotiff:
+Any library that accepts an [obspec](https://github.com/developmentseed/obspec)-compatible store reads through your authenticated connection without re-doing auth. Open the same NAIP scene as a Cloud Optimized GeoTIFF using [async-geotiff](https://github.com/developmentseed/async-geotiff):
 
 ```python
 from async_geotiff import GeoTIFF
