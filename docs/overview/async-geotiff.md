@@ -7,18 +7,10 @@ A companion notebook walks through every step end-to-end. [Open in Planetary Com
 ## Install async-geotiff
 
 ```bash
-uv add async-geotiff obstore planetary-computer pystac-client
+uv add async-geotiff obstore planetary-computer pystac-client lonboard matplotlib
 ```
 
 `async-geotiff` is the user-facing library. `async-tiff` is the lower-level Rust core — use it directly only if you're building library infrastructure on top.
-
-## What async-geotiff is *not*
-
-- No resampling.
-- No warping or reprojection.
-- No automatic overview selection.
-
-For any of those, read a window with async-geotiff, then hand the array to [rasterio](https://rasterio.readthedocs.io/) via an in-memory file. The split keeps the reader fast and the warping stack pluggable.
 
 ## Find a Sentinel-2 scene on the Planetary Computer
 
@@ -34,23 +26,24 @@ item = next(catalog.search(
     collections=["sentinel-2-l2a"],
     bbox=[-122.7, 45.5, -122.6, 45.6],
     datetime="2024-07-01/2024-08-01",
+    query={"eo:cloud_cover": {"lt": 10}},
     max_items=1,
 ).items())
 
-asset = item.assets["B04"]
+asset = item.assets["visual"]
 ```
 
 `planetary_computer.sign_inplace` signs every asset href as the search returns.
 
 ## Build an authenticated obstore store
 
-async-geotiff reads bytes through an [obstore](https://developmentseed.org/obstore/) store. `PlanetaryComputerCredentialProvider` handles SAS token acquisition and refresh — give it a signed asset and it figures out the account, container, and prefix:
+async-geotiff reads bytes through an [obstore](https://developmentseed.org/obstore/) store. `PlanetaryComputerCredentialProvider` handles SAS token acquisition and refresh. Give it a signed asset and it figures out the account and container and *mounts the store to that single blob* — so the COG is opened with an empty path below:
 
 ```python
 from obstore.auth.planetary_computer import PlanetaryComputerCredentialProvider
 from obstore.store import AzureStore
 
-provider = PlanetaryComputerCredentialProvider.from_asset(asset, async_=True)
+provider = PlanetaryComputerCredentialProvider.from_asset(asset)
 store = AzureStore(credential_provider=provider)
 ```
 
@@ -61,7 +54,7 @@ Set your Planetary Computer subscription key via the `PC_SDK_SUBSCRIPTION_KEY` e
 ```python
 from async_geotiff import GeoTIFF
 
-geotiff = await GeoTIFF.open(asset.href, store=store)
+geotiff = await GeoTIFF.open("", store=store)
 
 print(geotiff.transform)   # affine transform
 print(geotiff.crs)         # PyProj CRS
@@ -69,7 +62,7 @@ print(geotiff.nodata)
 print(geotiff.overviews)   # finest → coarsest
 ```
 
-The header read is a single range request — no pixel data is fetched yet. This is the same pattern the [obstore tutorial](./obstore.md) demonstrates, just behind a higher-level API.
+The header read is a single range request. This is the same pattern used by [obstore.](./obstore.md)
 
 ## Pick an overview
 
@@ -98,33 +91,50 @@ The returned `Array` has:
 - `array.transform` — affine transform for the windowed region.
 - `array.as_masked()` — convert to `numpy.ma.MaskedArray`.
 
-> **📷 Screenshot:** A Jupyter cell showing the `Array` repr alongside a small `matplotlib.imshow()` preview of `array.data[0]`. Anchors the reader on what they just loaded.
+The `visual` asset is 3-band RGB, so transpose to band-last before previewing:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.imshow(np.transpose(array.data, (1, 2, 0)))
+```
+
+```{image} images/async-geotiff-window-matplotlib.png
+:height: 360
+:name: async-geotiff window preview
+:class: no-scaled-link
+```
 
 ## Visualize the scene with Lonboard
 
-For an interactive map view of the same Sentinel-2 item, hand the signed STAC item to [Lonboard](https://developmentseed.org/lonboard/):
+For an interactive map view of the same Sentinel-2 item, stream its COG tiles through the Planetary Computer tiler into a [Lonboard](https://developmentseed.org/lonboard/) `BitmapTileLayer`:
 
 ```python
-from lonboard import Map
-from lonboard.experimental import RasterLayer
+import json
+import urllib.request
 
-Map(RasterLayer.from_stac([item]))
+from lonboard import BitmapTileLayer, Map
+
+tilejson = json.load(urllib.request.urlopen(
+    "https://planetarycomputer.microsoft.com/api/data/v1/item/tilejson.json"
+    f"?collection={item.collection_id}&item={item.id}&assets=visual"
+))
+lon, lat, _ = tilejson["center"]
+layer = BitmapTileLayer(
+    data=tilejson["tiles"][0],
+    min_zoom=int(tilejson["minzoom"]),
+    max_zoom=int(tilejson["maxzoom"]),
+    tile_size=256,
+)
+Map(layer, view_state={"longitude": lon, "latitude": lat, "zoom": 11})
 ```
 
-> **📷 Screenshot:** Side-by-side: the matplotlib preview of a single window, and the Lonboard map of the full scene. Shows the two surfaces playing together.
-
-## Walk the tile pyramid
-
-`generate_tms()` exposes the COG as a TileMatrixSet via [Morecantile](https://developmentseed.org/morecantile/):
-
-```python
-from async_geotiff import generate_tms
-
-tms = generate_tms(geotiff)
-tile = await tms.tile(x=1234, y=5678, z=12)
+```{image} images/async-geotiff-scene-lonboard.png
+:height: 500
+:name: async-geotiff Lonboard scene
+:class: no-scaled-link
 ```
-
-Useful when you want web-mercator tiles for a custom tile server.
 
 ## Read in parallel
 
