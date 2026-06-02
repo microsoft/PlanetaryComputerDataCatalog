@@ -80,7 +80,7 @@ Nothing is downloaded that isn't rendered.
 
 ## Add a MapLibre basemap
 
-`@deck.gl/mapbox`'s `MapboxOverlay` lets `Deck` layers ride on top of a MapLibre map, so the imagery sits over a basemap for context. Add the overlay as a control and feed it the layer:
+`@deck.gl/mapbox`'s `MapboxOverlay` adds `Deck` layers to a MapLibre map. With `interleaved: true`, deck draws into the same WebGL context as the basemap, so you can slot the imagery beneath the label layers with `beforeId` and keep place names legible on top. `COGLayer`'s `onGeoTIFFLoad` callback hands back the scene's bounds, so the map frames the COG once it loads:
 
 ```js
 import maplibregl from "maplibre-gl";
@@ -90,14 +90,30 @@ const map = new maplibregl.Map({
   container: "map",
   style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
   center: [-122.62, 45.52],
-  zoom: 13,
+  zoom: 11,
 });
 
-const overlay = new MapboxOverlay({ interleaved: false, layers: [] });
+const overlay = new MapboxOverlay({ interleaved: true, layers: [] });
 map.addControl(overlay);
 
-// call this whenever the imagery or its opacity changes
-overlay.setProps({ layers: [new COGLayer({ id: "naip", geotiff: signed.href, pool, opacity })] });
+map.on("load", () => {
+  // draw imagery below the first label layer so basemap text stays on top
+  const beforeId = map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+
+  overlay.setProps({
+    layers: [new COGLayer({
+      id: "naip",
+      geotiff: signed.href,
+      pool,
+      opacity,
+      beforeId,
+      onGeoTIFFLoad: (tiff, { geographicBounds }) => {
+        const { west, south, east, north } = geographicBounds;
+        map.fitBounds([[west, south], [east, north]], { padding: 40 });
+      },
+    })],
+  });
+});
 ```
 
 The [committed example](deckgl-raster-example/index.html) wires this together with a small control panel: an opacity slider and the active scene id:

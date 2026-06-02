@@ -8,8 +8,8 @@
     html, body { margin: 0; height: 100%; font-family: system-ui, sans-serif; }
     #map { position: absolute; inset: 0; }
     #panel {
-      position: absolute; top: 16px; left: 16px; z-index: 1; width: 240px;
-      background: #fffffff2; border-radius: 10px; padding: 16px 18px;
+      position: absolute; top: 16px; left: 16px; z-index: 2; width: 240px;
+      background: #ffffff; border-radius: 10px; padding: 16px 18px;
       box-shadow: 0 2px 14px #0003; font-size: 13px; color: #1a1a1a;
     }
     #panel h1 { font-size: 15px; margin: 0 0 6px; }
@@ -44,7 +44,7 @@
   <div id="map"></div>
   <div id="panel">
     <h1>NAIP over Portland</h1>
-    <div class="muted">A Cloud Optimized GeoTIFF, decoded and reprojected in your browser with <b>deck.gl-raster</b> — no tile server.</div>
+    <div class="muted">A Cloud Optimized GeoTIFF, decoded and reprojected in your browser with <b>deck.gl-raster</b>. No tile server.</div>
     <label>Imagery opacity</label>
     <input id="opacity" type="range" min="0" max="100" value="100" />
     <label>Scene</label>
@@ -64,7 +64,7 @@
       container: "map",
       style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
       center: [-122.62, 45.52],
-      zoom: 12,
+      zoom: 11,
     });
 
     // size: 0 keeps decoding on the main thread. The default pool spawns a
@@ -72,16 +72,34 @@
     // cross-origin (a CDN). Main-thread decoding sidesteps that for a
     // single-file app; add a same-origin worker if you need the throughput.
     const pool = new DecoderPool({ size: 0 });
-    const overlay = new MapboxOverlay({ interleaved: false, layers: [] });
+    const overlay = new MapboxOverlay({ interleaved: true, layers: [] });
     map.addControl(overlay);
 
     let opacity = 1;
     let geotiff = null;
+    let beforeId = null; // draw imagery beneath the basemap's labels
+    let styleReady = false;
+    let fitted = false;
 
     function render() {
-      if (!geotiff) return;
+      if (!geotiff || !styleReady) return;
       overlay.setProps({
-        layers: [new COGLayer({ id: "naip", geotiff, pool, opacity })],
+        layers: [
+          new COGLayer({
+            id: "naip",
+            geotiff,
+            pool,
+            opacity,
+            beforeId,
+            // Frame the map to the COG's own bounds once it has loaded.
+            onGeoTIFFLoad: (tiff, { geographicBounds }) => {
+              if (fitted) return;
+              fitted = true;
+              const { west, south, east, north } = geographicBounds;
+              map.fitBounds([[west, south], [east, north]], { padding: 40, duration: 0 });
+            },
+          }),
+        ],
       });
     }
 
@@ -90,8 +108,16 @@
       render();
     });
 
-    // Find a NAIP scene over Portland, then sign its asset href. The
-    // Planetary Computer signing endpoint is public — no key, no backend.
+    map.on("load", () => {
+      // Insert deck layers before the first label layer so basemap text
+      // (place names, roads) stays legible on top of the imagery.
+      beforeId = map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+      styleReady = true;
+      render();
+    });
+
+    // Find a NAIP scene over Portland, then sign its asset href. The Planetary
+    // Computer signing endpoint is public. No key, no backend.
     const search = await fetch(`${STAC}/search`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -107,11 +133,7 @@
     const signed = await fetch(SIGN + encodeURIComponent(item.assets.image.href)).then((r) => r.json());
     geotiff = signed.href;
     document.getElementById("scene").textContent = item.id;
-
-    const [w, s, e, n] = item.bbox;
-    map.jumpTo({ center: [(w + e) / 2, (s + n) / 2], zoom: 13.5 });
     render();
-    map.on("idle", render);
   </script>
 </body>
 </html>
