@@ -37,7 +37,7 @@ asset = item.assets["visual"]
 
 ## Build an authenticated obstore store
 
-async-geotiff reads bytes through an [obstore](https://developmentseed.org/obstore/) store. `PlanetaryComputerCredentialProvider` handles SAS token acquisition and refresh. Give it a signed asset and it figures out the account and container and *mounts the store to that single blob* — so the COG is opened with an empty path below:
+async-geotiff reads bytes through an [obstore](https://developmentseed.org/obstore/) store. `PlanetaryComputerCredentialProvider` handles SAS token acquisition and refresh. Give it a signed asset and it figures out the account and container and mounts the store to that single blob, so the COG is opened with an empty path below:
 
 ```python
 from obstore.auth.planetary_computer import PlanetaryComputerCredentialProvider
@@ -138,7 +138,9 @@ Map(layer, view_state={"longitude": lon, "latitude": lat, "zoom": 11})
 
 ## Read in parallel
 
-Each `read()` is independent. Fire many at once with `asyncio.gather` — async-geotiff issues range requests in parallel and decodes them on the Rust thread pool:
+Each `read()` is independent. Fire many at once with `asyncio.gather` 
+
+async-geotiff issues range requests in parallel and decodes them on the Rust thread pool:
 
 ```python
 import asyncio
@@ -156,4 +158,7 @@ This is the same speedup pattern the [obstore tutorial](./obstore.md) demonstrat
 
 ## Reach for something else when…
 
-For resampling, reprojection, or warping, hand the array to [rasterio](https://rasterio.readthedocs.io/) — async-geotiff deliberately doesn't do those. For interactive visualization, see [Lonboard](https://developmentseed.org/lonboard/). For the raw-bytes layer beneath async-geotiff, see [obstore](https://developmentseed.org/obstore/). For library authors building on the Rust core, drop to [async-tiff](https://github.com/developmentseed/async-tiff).
+- For resampling, reprojection, or warping, hand the array to [rasterio](https://rasterio.readthedocs.io/). 
+- For interactive visualization, see [Lonboard](https://developmentseed.org/lonboard/). 
+- For the raw-bytes layer beneath async-geotiff, see [obstore](https://developmentseed.org/obstore/). 
+- For library authors building on the Rust core, drop to [async-tiff](https://github.com/developmentseed/async-tiff).
