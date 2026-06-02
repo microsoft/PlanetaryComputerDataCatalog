@@ -1,6 +1,6 @@
 # Visualizing Planetary Computer data with Lonboard
 
-[Lonboard](https://developmentseed.org/lonboard/) is a Python library for interactive geospatial visualization in Jupyter. It renders large vector datasets on a GPU-accelerated WebGL map directly in the notebook, with no tile server in the loop — geometry streams to the browser as [Apache Arrow](https://arrow.apache.org/), so hundreds of thousands of features stay interactive. Layers compose: stack footprints, points, and analysis results in a single map.
+[Lonboard](https://developmentseed.org/lonboard/) is a Python library for interactive geospatial visualization in Jupyter. It renders large vector datasets on a GPU-accelerated WebGL map directly in the notebook, with no tile server in the loop. Geometry streams to the browser as [Apache Arrow](https://arrow.apache.org/), so hundreds of thousands of features stay interactive. Layers compose: stack footprints, points, and analysis results in a single map.
 
 A companion notebook walks through every step end-to-end with live maps. [Open in Planetary Computer Hub](https://pccompute.westeurope.cloudapp.azure.com/compute/hub/user-redirect/git-pull?repo=https://github.com/microsoft/PlanetaryComputerExamples&urlpath=lab/tree/PlanetaryComputerExamples/quickstarts/lonboard.ipynb&branch=main)
 
@@ -30,7 +30,7 @@ catalog = pystac_client.Client.open(
 
 ## Find the building-footprints partition for Portland
 
-We'll render [Microsoft Building Footprints](https://planetarycomputer.microsoft.com/dataset/ms-buildings) — a dataset partitioned by [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system). Compute the zoom-9 quadkey for a Portland coordinate and fetch the STAC item whose partition covers it:
+We'll render [Microsoft Building Footprints](https://planetarycomputer.microsoft.com/dataset/ms-buildings), a dataset partitioned by [quadkey](https://learn.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system). Compute the zoom-9 quadkey for a Portland coordinate and fetch the STAC item whose partition covers it:
 
 ```python
 import math
@@ -76,7 +76,7 @@ len(gdf)  # a few hundred thousand buildings
 
 ## Render the footprints
 
-`PolygonLayer.from_geopandas()` uploads the geometry to the GPU as Arrow. Drawing the footprints as outlines keeps every building legible at city scale — and the map stays fully interactive with no tile server in the loop:
+`PolygonLayer.from_geopandas()` uploads the geometry to the GPU as Arrow. Drawing the footprints as outlines keeps every building legible at city scale, and the map stays fully interactive with no tile server in the loop:
 
 ```python
 from lonboard import Map, PolygonLayer
@@ -98,7 +98,7 @@ Map(layer, view_state={"longitude": -122.66, "latitude": 45.52, "zoom": 12})
 
 ## Color by building height
 
-Each footprint carries a `meanHeight`. Map it through a continuous colormap and recolor the layer in place — data-driven styling across the whole dataset, evaluated on the GPU:
+Each footprint carries a `meanHeight`. Map it through a continuous colormap and recolor the layer in place: data-driven styling across the whole dataset, evaluated on the GPU:
 
 ```python
 import matplotlib as mpl
@@ -121,6 +121,6 @@ layer.line_width_min_pixels = 1.5
 :class: no-scaled-link
 ```
 
-## Reach for something else when…
+## When to use something else
 
 Lonboard's surface is the notebook. For pixel-level *raster* analysis in Python (window reads, overview traversal), use [async-geotiff](https://github.com/developmentseed/async-geotiff). For a standalone web app instead of a notebook, the [deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renderer is available in TypeScript. For shareable tile endpoints consumed by third-party frontends, see [titiler](https://developmentseed.org/titiler/).
