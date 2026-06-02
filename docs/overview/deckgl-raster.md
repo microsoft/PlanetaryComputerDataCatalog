@@ -1,141 +1,131 @@
 # Rendering Planetary Computer rasters in the browser with deck.gl-raster
 
-[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. The library reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, and renders in WebGL2. No tile server, no intermediate downloads — the same model as [Lonboard](https://developmentseed.org/lonboard/), but in TypeScript for standalone web apps.
+[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. Its `COGLayer` reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, reprojects, and renders in WebGL2. No tile server, no intermediate downloads — the same model as [Lonboard](./lonboard.md), but in TypeScript for standalone web apps.
 
-The full example built below lives at [planetary-computer/deckgl-raster-example](#) — `git clone`, `npm install`, `npm run dev` to see it running.
+The whole thing fits in **one HTML file with no build step**. The complete example is committed alongside this tutorial at [`deckgl-raster-example/index.html`](deckgl-raster-example/index.html) — save it locally and open it in a browser, or follow along below.
 
-## Scaffold a Vite + React + TypeScript app
+## No build: an import map
 
-```bash
-npm create vite@latest my-pc-viewer -- --template react-ts
-cd my-pc-viewer
-npm install @deck.gl/core @deck.gl/react @developmentseed/deck.gl-geotiff maplibre-gl
+Instead of npm and a bundler, an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) resolves every dependency from a CDN ([esm.sh](https://esm.sh)). Two rules make it work:
+
+- Every `@deck.gl/*` and `@luma.gl/core` entry must be the **same version** — mismatched patch versions throw `deck.gl - multiple versions detected`.
+- The `deck.gl-geotiff` entry marks deck, luma, and geotiff as `external` so they resolve to the singletons above rather than being bundled a second time.
+
+```html
+<script type="importmap">
+{
+  "imports": {
+    "maplibre-gl": "https://esm.sh/maplibre-gl@4.7.1",
+    "@deck.gl/core": "https://esm.sh/@deck.gl/core@9.3.2",
+    "@deck.gl/layers": "https://esm.sh/@deck.gl/layers@9.3.2",
+    "@deck.gl/geo-layers": "https://esm.sh/@deck.gl/geo-layers@9.3.2",
+    "@deck.gl/mesh-layers": "https://esm.sh/@deck.gl/mesh-layers@9.3.2",
+    "@deck.gl/mapbox": "https://esm.sh/@deck.gl/mapbox@9.3.2?external=@deck.gl/core,maplibre-gl",
+    "@luma.gl/core": "https://esm.sh/@luma.gl/core@9.3.2",
+    "@developmentseed/geotiff": "https://esm.sh/@developmentseed/geotiff@0.7.0",
+    "@developmentseed/deck.gl-geotiff": "https://esm.sh/@developmentseed/deck.gl-geotiff@0.7.0?external=@deck.gl/core,@deck.gl/layers,@deck.gl/geo-layers,@deck.gl/mesh-layers,@luma.gl/core,@developmentseed/geotiff"
+  }
+}
+</script>
 ```
 
-`@developmentseed/deck.gl-geotiff` is the high-level package used here. `@developmentseed/deck.gl-raster` provides lower-level primitives for custom render pipelines. The archived `@kylebarron/deck.gl-raster` repo is the predecessor — ignore it.
+## Sign Planetary Computer URLs in the browser
 
-## A minimal deck.gl mental model
+The Planetary Computer signing endpoint is public — no subscription key and no backend proxy. Search the STAC API for a scene, then sign the asset href client-side:
 
-deck.gl is a WebGL rendering engine built around composable *layers*. A `Deck` instance takes an array of layers and renders them against a viewport. Layers are cheap to recreate: deck.gl diffs props and reruns expensive work only on actual changes. You'll lean on this when swapping COG URLs in response to user input.
+```js
+const STAC = "https://planetarycomputer.microsoft.com/api/stac/v1";
+const SIGN = "https://planetarycomputer.microsoft.com/api/sas/v1/sign?href=";
 
-## Sign Planetary Computer URLs from a backend
+const search = await fetch(`${STAC}/search`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    collections: ["naip"],
+    bbox: [-122.70, 45.50, -122.55, 45.57],
+    datetime: "2022-01-01/2023-01-01",
+    limit: 1,
+  }),
+}).then((r) => r.json());
 
-The browser can't hold your Planetary Computer subscription key safely. Stand up a minimal proxy that signs asset URLs server-side:
-
-```ts
-// server/sign.ts (Node, Express)
-import express from "express";
-
-const app = express();
-const PC_KEY = process.env.PC_SDK_SUBSCRIPTION_KEY!;
-
-app.get("/sign", async (req, res) => {
-  const href = req.query.href as string;
-  const r = await fetch(
-    `https://planetarycomputer.microsoft.com/api/sas/v1/sign?href=${encodeURIComponent(href)}`,
-    { headers: { "Ocp-Apim-Subscription-Key": PC_KEY } }
-  );
-  res.json(await r.json());
-});
-
-app.listen(3001);
+const item = search.features[0];
+const signed = await fetch(SIGN + encodeURIComponent(item.assets.image.href)).then((r) => r.json());
 ```
 
-Cache signed URLs server-side until ~5 minutes before their expiry. Long-running browser sessions need to re-fetch when SAS tokens lapse (~60 min).
+A signed SAS URL lasts ~60 minutes. Long-running sessions should re-sign before expiry.
 
 ## Render a single NAIP COG
 
-```tsx
-// src/App.tsx
-import { Deck } from "@deck.gl/core";
+`COGLayer` takes the signed COG URL as its `geotiff` prop. One detail matters for a no-build app: the default tile decoder spawns a Web Worker from the package's own URL, and browsers block constructing a worker from a cross-origin (CDN) script. Passing a `DecoderPool` with `size: 0` decodes on the main thread and sidesteps that:
+
+```js
 import { COGLayer } from "@developmentseed/deck.gl-geotiff";
-import { useEffect, useRef } from "react";
+import { DecoderPool } from "@developmentseed/geotiff";
 
-const PORTLAND_VIEW = { longitude: -122.65, latitude: 45.55, zoom: 13 };
-
-export default function App() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    (async () => {
-      const r = await fetch("/sign?href=https://naipeuwest.blob.core.windows.net/naip/...tif");
-      const { href } = await r.json();
-
-      new Deck({
-        canvas: canvasRef.current!,
-        initialViewState: PORTLAND_VIEW,
-        controller: true,
-        layers: [new COGLayer({ id: "naip", url: href })],
-      });
-    })();
-  }, []);
-
-  return <canvas ref={canvasRef} style={{ width: "100vw", height: "100vh" }} />;
-}
+const pool = new DecoderPool({ size: 0 });
+const layer = new COGLayer({ id: "naip", geotiff: signed.href, pool });
 ```
 
-As the user pans and zooms, `COGLayer` walks the overview pyramid in the COG header and fetches only the tiles needed for the current viewport.
+As the user pans and zooms, `COGLayer` walks the overview pyramid in the COG header and fetches only the tiles the viewport needs. Watch the browser's Network tab and you'll see HTTP **range requests** (status `206`) — the first reads the header, the rest pull individual tiles:
 
-> **📷 Screenshot:** Browser DevTools Network tab filtered to the COG host, showing HTTP range requests (status 206) firing as the user zooms in. Proof that nothing is downloaded that isn't rendered.
-
-> **📷 Screenshot:** The rendered NAIP scene over Portland in the browser.
-
-## Render multiple scenes
-
-Bbox-search the Planetary Computer for NAIP items, sign each href via the proxy, then pass one `COGLayer` per scene:
-
-```tsx
-const layers = signedHrefs.map(
-  (href, i) => new COGLayer({ id: `naip-${i}`, url: href })
-);
-deck.setProps({ layers });
+```text
+206  bytes=0-65535          ← COG header
+206  bytes=1826859-2729978  ← tile
+206  bytes=2729987-3614432  ← tile
+206  bytes=3767796-4663213  ← tile
+…
 ```
 
-Browser memory is the practical limit. For larger mosaics, switch to a server-side tiler like [titiler](https://developmentseed.org/titiler/).
+Nothing is downloaded that isn't rendered.
 
 ## Add a MapLibre basemap
 
-`@deck.gl/react` wraps `Deck` so React owns the view state. Pair it with a MapLibre basemap so the user sees context outside your imagery:
+`@deck.gl/mapbox`'s `MapboxOverlay` lets `Deck` layers ride on top of a MapLibre map, so the imagery sits over a basemap for context. Add the overlay as a control and feed it the layer:
 
-```tsx
-import { DeckGL } from "@deck.gl/react";
-import Map from "react-map-gl/maplibre";
+```js
+import maplibregl from "maplibre-gl";
+import { MapboxOverlay } from "@deck.gl/mapbox";
 
-export default function App() {
-  return (
-    <DeckGL initialViewState={PORTLAND_VIEW} controller layers={layers}>
-      <Map mapStyle="https://demotiles.maplibre.org/style.json" />
-    </DeckGL>
-  );
-}
-```
-
-> **📷 Screenshot:** Final React app with NAIP imagery rendered over a MapLibre basemap, with a sidebar of date/filter controls (sketch the UI even if minimal). Anchors the "real app" feel.
-
-## Customize the render
-
-The auto-inferred pipeline covers most cases. For single-band data (NDVI, classification), pass a colormap:
-
-```tsx
-new COGLayer({
-  url: href,
-  colormap: "viridis",
-  rescale: [-1, 1],
+const map = new maplibregl.Map({
+  container: "map",
+  style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+  center: [-122.62, 45.52],
+  zoom: 13,
 });
+
+const overlay = new MapboxOverlay({ interleaved: false, layers: [] });
+map.addControl(overlay);
+
+// call this whenever the imagery or its opacity changes
+overlay.setProps({ layers: [new COGLayer({ id: "naip", geotiff: signed.href, pool, opacity })] });
 ```
 
-To compose render modules (e.g. add a sigmoidal contrast pass), reach into the lower-level `@developmentseed/deck.gl-raster` package.
+The [committed example](deckgl-raster-example/index.html) wires this together with a small control panel — an opacity slider and the active scene id:
+
+```{image} images/deckgl-raster-full-app.png
+:height: 460
+:name: deck.gl-raster NAIP over Portland with a MapLibre basemap
+:class: no-scaled-link
+```
+
+## Render multiple scenes
+
+Bbox-search returns many items. Sign each href and pass one `COGLayer` per scene — `overlay.setProps({ layers })` diffs them and only reloads what changed:
+
+```js
+const layers = signedHrefs.map((href, i) => new COGLayer({ id: `naip-${i}`, geotiff: href, pool }));
+overlay.setProps({ layers });
+```
+
+Browser memory is the practical limit. For large mosaics, reach for `MosaicLayer` / `MultiCOGLayer` from the same package, or fall back to a server-side tiler like [titiler](https://developmentseed.org/titiler/).
 
 ## Ship it
 
-A few things to confirm before the app leaves your laptop:
-
-- **Bundler.** Vite handles WebGL shaders out of the box. If you switch to webpack, configure `raw-loader` for `.glsl` files.
-- **Token refresh.** Re-fetch signed URLs from the proxy on a timer (or on layer remount) so SAS expiry doesn't break the map mid-session.
-- **Memory.** For >50 simultaneous COGs, profile in DevTools and consider falling back to server-side tiling.
-- **Failures.** Wrap layer construction in error boundaries — a 404 on one COG shouldn't break the whole map.
-- **Tests.** Playwright visual regression snapshots catch rendering issues that unit tests can't.
+- **Token refresh.** Re-sign asset URLs before SAS tokens expire (~60 min) so long sessions don't break mid-map.
+- **Throughput.** `size: 0` decodes on the main thread, which is fine for a few COGs. For heavier mosaics, give `DecoderPool` a `createWorker` factory backed by a *same-origin* worker so decoding moves off the main thread.
+- **Failures.** Guard layer construction — a 404 on one COG shouldn't break the whole map.
+- **Going to production.** The import map is ideal for a demo or internal tool. For a shipped app, move to a bundler (Vite) so dependencies are pinned and served from your own origin.
 
 ## Reach for something else when…
 
-deck.gl-raster is a renderer for standalone web apps. For interactive notebook work in Python, [Lonboard](https://developmentseed.org/lonboard/) wraps the same renderer. For pre-rendered tiles that any frontend can consume, see [titiler](https://developmentseed.org/titiler/). For pixel-level analysis in Python, reach for [async-geotiff](https://github.com/developmentseed/async-geotiff).
+deck.gl-raster is a renderer for standalone web apps. For interactive notebook work in Python, [Lonboard](./lonboard.md) wraps the same renderer. For pre-rendered tiles that any frontend can consume, see [titiler](https://developmentseed.org/titiler/). For pixel-level analysis in Python, reach for [async-geotiff](./async-geotiff.md).
