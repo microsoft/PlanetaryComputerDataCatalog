@@ -10,7 +10,7 @@ A companion notebook walks through every step end-to-end. [Open in Planetary Com
 uv add async-geotiff obstore planetary-computer pystac-client lonboard matplotlib
 ```
 
-`async-geotiff` is the user-facing library. `async-tiff` is the lower-level Rust core — use it directly only if you're building library infrastructure on top.
+`async-geotiff` is the user-facing library. `async-tiff` is the lower-level Rust core. Use it directly only if you're building library infrastructure on top.
 
 ## Find a Sentinel-2 scene on the Planetary Computer
 
@@ -86,10 +86,10 @@ array = await full_res.read(window=window)
 
 The returned `Array` has:
 
-- `array.data` — 3D NumPy array, band-first (`(bands, rows, cols)`).
-- `array.mask` — boolean mask, `True` where nodata.
-- `array.transform` — affine transform for the windowed region.
-- `array.as_masked()` — convert to `numpy.ma.MaskedArray`.
+- `array.data`: 3D NumPy array, band-first (`(bands, rows, cols)`).
+- `array.mask`: boolean mask, `True` where nodata.
+- `array.transform`: affine transform for the windowed region.
+- `array.as_masked()`: convert to `numpy.ma.MaskedArray`.
 
 The `visual` asset is 3-band RGB, so transpose to band-last before previewing:
 
@@ -156,7 +156,7 @@ arrays = await asyncio.gather(
 
 This is the same speedup pattern the [obstore tutorial](./obstore.md) demonstrates at the raw-bytes level, one layer up the stack.
 
-## Reach for something else when…
+## When to use something else
 
 - For resampling, reprojection, or warping, hand the array to [rasterio](https://rasterio.readthedocs.io/). 
 - For interactive visualization, see [Lonboard](https://developmentseed.org/lonboard/). 
