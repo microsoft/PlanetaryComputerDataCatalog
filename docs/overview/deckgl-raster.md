@@ -1,14 +1,14 @@
 # Rendering Planetary Computer rasters in the browser with deck.gl-raster
 
-[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. Its `COGLayer` reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, reprojects, and renders in WebGL2. No tile server, no intermediate downloads — the same model as [Lonboard](./lonboard.md), but in TypeScript for standalone web apps.
+[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. Its `COGLayer` reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, reprojects, and renders in WebGL2. No tile server, no intermediate downloads. It's the same model as [Lonboard](./lonboard.md), but in TypeScript for standalone web apps.
 
-The whole thing fits in **one HTML file with no build step**. The complete example is committed alongside this tutorial at [`deckgl-raster-example/index.html`](deckgl-raster-example/index.html) — save it locally and open it in a browser, or follow along below.
+The whole thing fits in **one HTML file with no build step**. The complete example is committed alongside this tutorial at [`deckgl-raster-example/index.html`](deckgl-raster-example/index.html). Save it locally and open it in a browser, or follow along below.
 
 ## No build: an import map
 
 Instead of npm and a bundler, an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) resolves every dependency from a CDN ([esm.sh](https://esm.sh)). Two rules make it work:
 
-- Every `@deck.gl/*` and `@luma.gl/core` entry must be the **same version** — mismatched patch versions throw `deck.gl - multiple versions detected`.
+- Every `@deck.gl/*` and `@luma.gl/core` entry must be the **same version**, since mismatched patch versions throw `deck.gl - multiple versions detected`.
 - The `deck.gl-geotiff` entry marks deck, luma, and geotiff as `external` so they resolve to the singletons above rather than being bundled a second time.
 
 ```html
@@ -31,7 +31,7 @@ Instead of npm and a bundler, an [import map](https://developer.mozilla.org/en-U
 
 ## Sign Planetary Computer URLs in the browser
 
-The Planetary Computer signing endpoint is public — no subscription key and no backend proxy. Search the STAC API for a scene, then sign the asset href client-side:
+The Planetary Computer signing endpoint is public, with no subscription key and no backend proxy. Search the STAC API for a scene, then sign the asset href client-side:
 
 ```js
 const STAC = "https://planetarycomputer.microsoft.com/api/stac/v1";
@@ -66,7 +66,7 @@ const pool = new DecoderPool({ size: 0 });
 const layer = new COGLayer({ id: "naip", geotiff: signed.href, pool });
 ```
 
-As the user pans and zooms, `COGLayer` walks the overview pyramid in the COG header and fetches only the tiles the viewport needs. Watch the browser's Network tab and you'll see HTTP **range requests** (status `206`) — the first reads the header, the rest pull individual tiles:
+As the user pans and zooms, `COGLayer` walks the overview pyramid in the COG header and fetches only the tiles the viewport needs. Watch the browser's Network tab and you'll see HTTP **range requests** (status `206`). The first reads the header, the rest pull individual tiles:
 
 ```text
 206  bytes=0-65535          ← COG header
@@ -100,7 +100,7 @@ map.addControl(overlay);
 overlay.setProps({ layers: [new COGLayer({ id: "naip", geotiff: signed.href, pool, opacity })] });
 ```
 
-The [committed example](deckgl-raster-example/index.html) wires this together with a small control panel — an opacity slider and the active scene id:
+The [committed example](deckgl-raster-example/index.html) wires this together with a small control panel: an opacity slider and the active scene id:
 
 ```{image} images/deckgl-raster-full-app.png
 :height: 460
@@ -110,7 +110,7 @@ The [committed example](deckgl-raster-example/index.html) wires this together wi
 
 ## Render multiple scenes
 
-Bbox-search returns many items. Sign each href and pass one `COGLayer` per scene — `overlay.setProps({ layers })` diffs them and only reloads what changed:
+Bbox-search returns many items. Sign each href and pass one `COGLayer` per scene. `overlay.setProps({ layers })` diffs them and only reloads what changed:
 
 ```js
 const layers = signedHrefs.map((href, i) => new COGLayer({ id: `naip-${i}`, geotiff: href, pool }));
@@ -123,9 +123,9 @@ Browser memory is the practical limit. For large mosaics, reach for `MosaicLayer
 
 - **Token refresh.** Re-sign asset URLs before SAS tokens expire (~60 min) so long sessions don't break mid-map.
 - **Throughput.** `size: 0` decodes on the main thread, which is fine for a few COGs. For heavier mosaics, give `DecoderPool` a `createWorker` factory backed by a *same-origin* worker so decoding moves off the main thread.
-- **Failures.** Guard layer construction — a 404 on one COG shouldn't break the whole map.
+- **Failures.** Guard layer construction, since a 404 on one COG shouldn't break the whole map.
 - **Going to production.** The import map is ideal for a demo or internal tool. For a shipped app, move to a bundler (Vite) so dependencies are pinned and served from your own origin.
 
-## Reach for something else when…
+## When to use something else
 
 deck.gl-raster is a renderer for standalone web apps. For interactive notebook work in Python, [Lonboard](./lonboard.md) wraps the same renderer. For pre-rendered tiles that any frontend can consume, see [titiler](https://developmentseed.org/titiler/). For pixel-level analysis in Python, reach for [async-geotiff](./async-geotiff.md).
