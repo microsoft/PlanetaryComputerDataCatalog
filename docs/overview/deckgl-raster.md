@@ -1,6 +1,6 @@
 # Rendering Planetary Computer rasters in the browser with deck.gl-raster
 
-[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. Its `COGLayer` reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, reprojects, and renders in WebGL2. No tile server, no intermediate downloads. It's the same model as [Lonboard](./lonboard.md), but in TypeScript for standalone web apps.
+[deck.gl-raster](https://github.com/developmentseed/deck.gl-raster) renders Cloud Optimized GeoTIFFs directly in the browser. Its `COGLayer` reads the COG header over HTTP, then streams only the tiles visible in the current viewport, decodes them client-side, reprojects, and renders in WebGL2. No tile server, no intermediate downloads. Like [Lonboard](./lonboard.md), it's built on deck.gl, but targets standalone web apps in TypeScript rather than Jupyter notebooks in Python.
 
 The whole thing fits in **one HTML file with no build step**. The complete example is committed alongside this tutorial at [`deckgl-raster-example/index.html`](deckgl-raster-example/index.html). Save it locally and open it in a browser, or follow along below.
 
@@ -23,6 +23,7 @@ Instead of npm and a bundler, an [import map](https://developer.mozilla.org/en-U
     "@deck.gl/mapbox": "https://esm.sh/@deck.gl/mapbox@9.3.2?external=@deck.gl/core,maplibre-gl",
     "@luma.gl/core": "https://esm.sh/@luma.gl/core@9.3.2",
     "@developmentseed/geotiff": "https://esm.sh/@developmentseed/geotiff@0.7.0",
+    "@developmentseed/deck.gl-raster/gpu-modules": "https://esm.sh/@developmentseed/deck.gl-raster@0.7.0/gpu-modules?external=@deck.gl/core,@luma.gl/core",
     "@developmentseed/deck.gl-geotiff": "https://esm.sh/@developmentseed/deck.gl-geotiff@0.7.0?external=@deck.gl/core,@deck.gl/layers,@deck.gl/geo-layers,@deck.gl/mesh-layers,@luma.gl/core,@developmentseed/geotiff"
   }
 }
@@ -61,9 +62,32 @@ A signed SAS URL lasts ~60 minutes. Long-running sessions should re-sign before 
 ```js
 import { COGLayer } from "@developmentseed/deck.gl-geotiff";
 import { DecoderPool } from "@developmentseed/geotiff";
+import { CreateTexture } from "@developmentseed/deck.gl-raster/gpu-modules";
+
+// NAIP COGs are 4-band (R, G, B, near-infrared). The default render pipeline
+// treats band 4 as alpha, which paints the imagery transparent where vegetation
+// is bright (NIR is high). Force alpha to 1 with a custom shader module:
+const SetAlpha1 = {
+  name: "set-alpha-1",
+  inject: { "fs:DECKGL_FILTER_COLOR": `color = vec4(color.rgb, 1.0);` },
+};
+
+function renderRGB(tileData) {
+  return {
+    renderPipeline: [
+      { module: CreateTexture, props: { textureName: tileData.texture } },
+      { module: SetAlpha1 },
+    ],
+  };
+}
 
 const pool = new DecoderPool({ size: 0 });
-const layer = new COGLayer({ id: "naip", geotiff: signed.href, pool });
+const layer = new COGLayer({
+  id: "naip",
+  geotiff: signed.href,
+  pool,
+  renderTile: renderRGB,
+});
 ```
 
 As the user pans and zooms, `COGLayer` walks the overview pyramid in the COG header and fetches only the tiles the viewport needs. Watch the browser's Network tab and you'll see HTTP **range requests** (status `206`). The first reads the header, the rest pull individual tiles:
@@ -97,8 +121,12 @@ const overlay = new MapboxOverlay({ interleaved: true, layers: [] });
 map.addControl(overlay);
 
 map.on("load", () => {
-  // draw imagery below the first label layer so basemap text stays on top
-  const beforeId = map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+  // Slot the imagery just above road/building geometry but beneath labels.
+  // In the positron style "boundary_country_outline" sits right below the
+  // first place-label symbol; fall back to the first symbol layer otherwise.
+  const beforeId = map.getLayer("boundary_country_outline")
+    ? "boundary_country_outline"
+    : map.getStyle().layers.find((l) => l.type === "symbol")?.id;
 
   overlay.setProps({
     layers: [new COGLayer({
@@ -107,6 +135,7 @@ map.on("load", () => {
       pool,
       opacity,
       beforeId,
+      renderTile: renderRGB,
       onGeoTIFFLoad: (tiff, { geographicBounds }) => {
         const { west, south, east, north } = geographicBounds;
         map.fitBounds([[west, south], [east, north]], { padding: 40 });
@@ -126,14 +155,20 @@ The [committed example](deckgl-raster-example/index.html) wires this together wi
 
 ## Render multiple scenes
 
-Bbox-search returns many items. Sign each href and pass one `COGLayer` per scene. `overlay.setProps({ layers })` diffs them and only reloads what changed:
+Bbox-search returns many items. Two patterns, depending on overlap and count:
+
+**A handful of scenes** (up to roughly 20): sign each href and pass one `COGLayer` per scene. `overlay.setProps({ layers })` diffs them and only reloads what changed:
 
 ```js
 const layers = signedHrefs.map((href, i) => new COGLayer({ id: `naip-${i}`, geotiff: href, pool }));
 overlay.setProps({ layers });
 ```
 
-Browser memory is the practical limit. For large mosaics, reach for `MosaicLayer` / `MultiCOGLayer` from the same package, or fall back to a server-side tiler like [titiler](https://developmentseed.org/titiler/).
+The practical cost isn't browser memory but COG-header fetches: every `COGLayer` reads its scene's header even when the scene is off-screen.
+
+**Many non-overlapping scenes** (a NAIP mosaic spanning a county or state): use [`MosaicLayer`](https://developmentseed.org/deck.gl-raster/api/deck-gl-geotiff/classes/MosaicLayer/) from the same package. It lazily instantiates a `COGLayer` only when its footprint intersects the current viewport, so off-screen scenes cost nothing. The [naip-mosaic example](https://developmentseed.org/deck.gl-raster/examples/naip-mosaic/) is a worked end-to-end demo.
+
+For *multi-asset composites* of a single scene (Landsat or Sentinel-2 bands rendered together), reach for `MultiCOGLayer` instead — different use case from mosaicking many scenes.
 
 ## Ship it
 

@@ -35,6 +35,7 @@
       "@deck.gl/mapbox": "https://esm.sh/@deck.gl/mapbox@9.3.2?external=@deck.gl/core,maplibre-gl",
       "@luma.gl/core": "https://esm.sh/@luma.gl/core@9.3.2",
       "@developmentseed/geotiff": "https://esm.sh/@developmentseed/geotiff@0.7.0",
+      "@developmentseed/deck.gl-raster/gpu-modules": "https://esm.sh/@developmentseed/deck.gl-raster@0.7.0/gpu-modules?external=@deck.gl/core,@luma.gl/core",
       "@developmentseed/deck.gl-geotiff": "https://esm.sh/@developmentseed/deck.gl-geotiff@0.7.0?external=@deck.gl/core,@deck.gl/layers,@deck.gl/geo-layers,@deck.gl/mesh-layers,@luma.gl/core,@developmentseed/geotiff"
     }
   }
@@ -56,9 +57,28 @@
     import { MapboxOverlay } from "@deck.gl/mapbox";
     import { COGLayer } from "@developmentseed/deck.gl-geotiff";
     import { DecoderPool } from "@developmentseed/geotiff";
+    import { CreateTexture } from "@developmentseed/deck.gl-raster/gpu-modules";
 
     const STAC = "https://planetarycomputer.microsoft.com/api/stac/v1";
     const SIGN = "https://planetarycomputer.microsoft.com/api/sas/v1/sign?href=";
+
+    // NAIP COGs are 4-band (R, G, B, near-infrared). The default render pipeline
+    // would treat band 4 as alpha and paint the imagery transparent where NIR is
+    // high (e.g. dense vegetation). Force alpha to 1 with a custom shader module
+    // and a two-step pipeline: upload the texture, then override alpha.
+    const SetAlpha1 = {
+      name: "set-alpha-1",
+      inject: { "fs:DECKGL_FILTER_COLOR": `color = vec4(color.rgb, 1.0);` },
+    };
+
+    function renderRGB(tileData) {
+      return {
+        renderPipeline: [
+          { module: CreateTexture, props: { textureName: tileData.texture } },
+          { module: SetAlpha1 },
+        ],
+      };
+    }
 
     const map = new maplibregl.Map({
       container: "map",
@@ -91,6 +111,7 @@
             pool,
             opacity,
             beforeId,
+            renderTile: renderRGB,
             // Frame the map to the COG's own bounds once it has loaded.
             onGeoTIFFLoad: (tiff, { geographicBounds }) => {
               if (fitted) return;
@@ -109,9 +130,13 @@
     });
 
     map.on("load", () => {
-      // Insert deck layers before the first label layer so basemap text
-      // (place names, roads) stays legible on top of the imagery.
-      beforeId = map.getStyle().layers.find((l) => l.type === "symbol")?.id;
+      // Slot the imagery just above road/building geometry but beneath labels.
+      // In the positron style, "boundary_country_outline" sits right below the
+      // first place-label symbol, giving a much better stacking than the first
+      // symbol layer (waterway_label), which leaves basemap features on top.
+      beforeId = map.getLayer("boundary_country_outline")
+        ? "boundary_country_outline"
+        : map.getStyle().layers.find((l) => l.type === "symbol")?.id;
       styleReady = true;
       render();
     });
