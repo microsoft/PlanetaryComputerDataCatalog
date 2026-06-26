@@ -987,6 +987,14 @@ planet-nicfi-analytic:
       src: planet-nicfi-example.html
       launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
+predicted-damage-venezuela-2026:
+  category: Infrastructure
+  # headerImg: ./images/conus404-hero.png
+  # tabs:
+  #   - title: Example Notebook
+  #     src: conus404-example.html
+  #     launch: datasets/conus404/conus404-example.ipynb
+
 sentinel-1-grd:
   category: SAR
   headerImg: ./images/sentinel-1-grd-hero.png
