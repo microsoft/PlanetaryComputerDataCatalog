@@ -989,11 +989,11 @@ planet-nicfi-analytic:
 
 predicted-damage-venezuela-2026:
   category: Infrastructure
-  # headerImg: ./images/conus404-hero.png
-  # tabs:
-  #   - title: Example Notebook
-  #     src: conus404-example.html
-  #     launch: datasets/conus404/conus404-example.ipynb
+  headerImg: ./images/venezuelabanner.webp
+  tabs:
+    - title: Example Notebook
+      src: venezuela-earthquake.html
+      launch: datasets/ai4good/venezuela-earthquake.ipynb
 
 sentinel-1-grd:
   category: SAR
