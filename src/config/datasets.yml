@@ -987,6 +987,14 @@ planet-nicfi-analytic:
       src: planet-nicfi-example.html
       launch: datasets/planet-nicfi/planet-nicfi-example.ipynb
 
+predicted-damage-colombia-2026:
+  category: Infrastructure
+  headerImg: ./images/colombiaearthquake2026.webp
+  tabs:
+    - title: Example Notebook
+      src: colombia-earthquake.html
+      launch: datasets/ai4good/colombia-earthquake.ipynb
+
 predicted-damage-venezuela-2026:
   category: Infrastructure
   headerImg: ./images/venezuelabanner.webp
