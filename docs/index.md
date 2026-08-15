@@ -16,6 +16,7 @@ Explorer <overview/explorer>
 Use VS Code <overview/ui-vscode>
 Use GitHub Codespaces <overview/ui-codespaces>
 Using QGIS <overview/qgis-plugin>
+Rendering rasters with deck.gl-raster <overview/deckgl-raster>
 Changelog <overview/changelog>
 ```
 
