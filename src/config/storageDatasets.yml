@@ -116,14 +116,6 @@ gfs-warm-start:
   thumbnailUrl: RE4MHyn.jpg
   keywords: [Global, NOAA, Weather, Temperature, Precipitation]
 
-noaa-hrrr:
-  title: NOAA High-Resolution Rapid Refresh (HRRR)
-  category: Climate/Weather
-  short_description: Weather forecasts for North America at 3km resolution
-  infoUrl: https://aka.ms/ai4edata-hrrr
-  thumbnailUrl: hrrr_small.jpg
-  keywords: [North America, NOAA, Weather, Forecast]
-
 noaa-isd:
   title: NOAA Integrated Surface Data
   category: Climate/Weather
