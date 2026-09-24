@@ -961,6 +961,20 @@ noaa-nclimgrid-monthly:
       src: noaa-nclimgrid-example.html
       launch: datasets/noaa-nclimgrid/noaa-nclimgrid-example.ipynb
 
+nested-eagle-global:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: nested-eagle-global.html
+      launch: datasets/nested-eagle/nested-eagle-global.ipynb
+
+nested-eagle-conus:
+  category: Climate/Weather
+  tabs:
+    - title: Example Notebook
+      src: nested-eagle-conus.html
+      launch: datasets/nested-eagle/nested-eagle-conus.ipynb
+
 nrcan-landcover:
   category: Land use/Land cover
   headerImg: ./images/nrcan-landcover-hero.png

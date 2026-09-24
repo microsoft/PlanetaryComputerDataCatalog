@@ -252,7 +252,7 @@ modis:
 landsat:
   title: Landsat Collection
   short_description: >
-    The Landsat program provides provides a comprehensive, continuous archive of
+    The Landsat program provides a comprehensive, continuous archive of
     multispectral imagery of the Earth's surface from 1972 to present.
   description: >
     The [Landsat](https://landsat.gsfc.nasa.gov/) program has been imaging the Earth
