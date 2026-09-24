@@ -175,7 +175,12 @@ initiate a build and deploy with the service framework:
 
 Opening a PR against either branch will also create an ephemeral staging environment, and a site link will be added to the PR comment section.
 
-The release process is orchestrated with the `scripts/release` script.
+To release:
+
+1. Checkout `main`
+1. Pull `main`
+1. Merge `origin/develop` into `main`
+1. Push `main`
 
 ## Contributing
 
